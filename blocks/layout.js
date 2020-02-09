@@ -1,19 +1,30 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.main`
-  min-height: 100vh;
-  padding: 60px 30px;
+  width: calc(100% - 60px);
+  margin: 60px auto 0;
 
   @media only screen and (min-width: 414px) {
-    padding: 50px;
+    width: calc(100% - 120px);
   }
 
   @media only screen and (min-width: 600px) {
-    padding: 90px 60px;
+    margin: 90px auto 0;
   }
 
   @media only screen and (min-width: 1024px) {
-    padding: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    margin: 0 auto;
+    width: calc(100% - 240px);
+  }
+`;
+
+export const IconSection = styled.section`
+  @media only screen and (min-width: 1024px) {
+    margin: 120px 0 0;
   }
 `;
 
@@ -31,10 +42,10 @@ export const CopySection = styled.section`
 `;
 
 export const ContactNavigation = styled.nav`
-  margin: 60px 0;
+  margin: 60px 0 0;
 
   @media only screen and (min-width: 1024px) {
-    margin: 90px 0;
+    margin: 0 0 120px;
   }
 `;
 

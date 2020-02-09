@@ -22,7 +22,7 @@ export const Headline2 = styled.h2`
 `;
 
 export const Caption = styled.p`
-  color: var(--secondaryText);
+  color: ${({ theme }) => theme.colors.secondaryText};
   font-size: 19px;
   line-height: 1.5;
   margin: 0;
@@ -35,7 +35,7 @@ export const Caption = styled.p`
 
 export const Link = styled.a`
   font-size: 19px;
-  color: var(--primaryColor);
+  color: ${({ theme }) => theme.colors.primaryColor};
   transition: all 0.15s ease;
   text-decoration: none;
 
@@ -51,7 +51,7 @@ export const Link = styled.a`
 
 export const DribbbleLink = styled.a`
   font-size: 19px;
-  color: var(--dribbbleColor);
+  color: ${({ theme }) => theme.colors.dribbbleColor};
   transition: all 0.15s ease;
   text-decoration: none;
 
@@ -67,7 +67,7 @@ export const DribbbleLink = styled.a`
 
 export const TwitterLink = styled.a`
   font-size: 19px;
-  color: var(--twitterColor);
+  color: ${({ theme }) => theme.colors.twitterColor};
   transition: all 0.15s ease;
   text-decoration: none;
 
