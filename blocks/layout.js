@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 export const Wrapper = styled.main`
   width: calc(100% - 60px);
-  margin: 60px auto 0;
+  margin: 60px auto;
 
   @media only screen and (min-width: 414px) {
     width: calc(100% - 120px);
   }
 
   @media only screen and (min-width: 600px) {
-    margin: 90px auto 0;
+    margin: 90px auto;
   }
 
   @media only screen and (min-width: 1024px) {
