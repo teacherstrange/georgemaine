@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -150,7 +150,7 @@ const ContactList = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.ul`
   margin: 0;
 
   li {
-    margin: 0 0 20px;
+    margin: 0 0 10px;
   }
 
   li:last-of-type {
@@ -259,7 +259,7 @@ const Link = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.a`
   text-decoration: none;
 
   &:hover {
-    color: var(--primaryColorHover);
+    text-decoration: underline;
   }
 
   @media only screen and (min-width: 600px) {
@@ -274,7 +274,7 @@ const DribbbleLink = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.a`
   text-decoration: none;
 
   &:hover {
-    color: var(--dribbbleColorHover);
+    text-decoration: underline;
   }
 
   @media only screen and (min-width: 600px) {
@@ -289,7 +289,7 @@ const TwitterLink = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.a`
   text-decoration: none;
 
   &:hover {
-    color: var(--twitterColorHover);
+    text-decoration: underline;
   }
 
   @media only screen and (min-width: 600px) {
@@ -311,130 +311,186 @@ const TwitterLink = styled_components__WEBPACK_IMPORTED_MODULE_0___default.a.a`
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _blocks_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../blocks/layout */ "./blocks/layout.js");
-/* harmony import */ var _blocks_logo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../blocks/logo */ "./blocks/logo.js");
-/* harmony import */ var _blocks_typograhy__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../blocks/typograhy */ "./blocks/typograhy.js");
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/head */ "next/head");
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _blocks_layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../blocks/layout */ "./blocks/layout.js");
+/* harmony import */ var _blocks_logo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../blocks/logo */ "./blocks/logo.js");
+/* harmony import */ var _blocks_typograhy__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../blocks/typograhy */ "./blocks/typograhy.js");
 var _jsxFileName = "/Users/georgemainelourens/Sites/georgemaine/pages/index.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = (() => {
-  return __jsx(_blocks_layout__WEBPACK_IMPORTED_MODULE_1__["Wrapper"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 19
-    },
-    __self: undefined
-  }, __jsx(_blocks_logo__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 20
-    },
-    __self: undefined
-  }), __jsx(_blocks_layout__WEBPACK_IMPORTED_MODULE_1__["CopySection"], {
+  return __jsx(_blocks_layout__WEBPACK_IMPORTED_MODULE_2__["Wrapper"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 21
     },
     __self: undefined
-  }, __jsx(_blocks_typograhy__WEBPACK_IMPORTED_MODULE_3__["Headline"], {
+  }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 22
     },
     __self: undefined
-  }, "Hello, my name is Georgemaine\xA0Lourens"), __jsx(_blocks_typograhy__WEBPACK_IMPORTED_MODULE_3__["Caption"], {
+  }, __jsx("title", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 23
     },
     __self: undefined
-  }, "I\u2019m currently designing financial products at", " ", __jsx(_blocks_typograhy__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-    href: "https://mollie.com",
-    target: "blank",
-    rel: "noopener norefererrer",
+  }, "Georgemaine Lourens"), __jsx("meta", {
+    charSet: "utf-8",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 24
+    },
+    __self: undefined
+  }), __jsx("meta", {
+    name: "viewport",
+    content: "initial-scale=1.0, width=device-width",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 25
     },
     __self: undefined
-  }, "Mollie"), " ", "in Amsterdam. Previously I was a designer at", " ", __jsx(_blocks_typograhy__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+  }), __jsx("meta", {
+    name: "description",
+    content: "I\u2019m currently designing financial products at Mollie in Amsterdam. Previously I was a designer at Framer, where I designed tools and resources for designers. My current areas of interest include well-crafted products, code, plants, and motion design.",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 26
+    },
+    __self: undefined
+  }), __jsx("link", {
+    rel: "shortcut icon",
+    href: "/favicon.ico",
+    type: "image/x-icon",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 31
+    },
+    __self: undefined
+  }), __jsx("link", {
+    rel: "icon",
+    href: "/favicon.ico",
+    type: "image/x-icon",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 32
+    },
+    __self: undefined
+  })), __jsx(_blocks_logo__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 34
+    },
+    __self: undefined
+  }), __jsx(_blocks_layout__WEBPACK_IMPORTED_MODULE_2__["CopySection"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 35
+    },
+    __self: undefined
+  }, __jsx(_blocks_typograhy__WEBPACK_IMPORTED_MODULE_4__["Headline"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 36
+    },
+    __self: undefined
+  }, "Hello, my name is Georgemaine\xA0Lourens"), __jsx(_blocks_typograhy__WEBPACK_IMPORTED_MODULE_4__["Caption"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 37
+    },
+    __self: undefined
+  }, "I\u2019m currently designing financial products at", " ", __jsx(_blocks_typograhy__WEBPACK_IMPORTED_MODULE_4__["Link"], {
+    href: "https://mollie.com",
+    target: "blank",
+    rel: "noopener norefererrer",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: undefined
+  }, "Mollie"), " ", "in Amsterdam. Previously I was a designer at", " ", __jsx(_blocks_typograhy__WEBPACK_IMPORTED_MODULE_4__["Link"], {
     href: "https://framer.com",
     target: "blank",
     rel: "noopener norefererrer",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
-    },
-    __self: undefined
-  }, "Framer"), ", where I designed tools and resources for designers. My current areas of interest include well-crafted products, code, plants, and motion design.")), __jsx(_blocks_layout__WEBPACK_IMPORTED_MODULE_1__["ContactNavigation"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 46
-    },
-    __self: undefined
-  }, __jsx(_blocks_layout__WEBPACK_IMPORTED_MODULE_1__["ContactList"], {
-    __source: {
-      fileName: _jsxFileName,
       lineNumber: 47
+    },
+    __self: undefined
+  }, "Framer"), ", where I designed tools and resources for designers. My current areas of interest include well-crafted products, code, plants, and motion design.")), __jsx(_blocks_layout__WEBPACK_IMPORTED_MODULE_2__["ContactNavigation"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 60
+    },
+    __self: undefined
+  }, __jsx(_blocks_layout__WEBPACK_IMPORTED_MODULE_2__["ContactList"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 61
     },
     __self: undefined
   }, __jsx("li", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 62
     },
     __self: undefined
-  }, __jsx(_blocks_typograhy__WEBPACK_IMPORTED_MODULE_3__["Headline2"], {
+  }, __jsx(_blocks_typograhy__WEBPACK_IMPORTED_MODULE_4__["Headline2"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 63
     },
     __self: undefined
   }, "Get in touch")), __jsx("li", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 65
     },
     __self: undefined
-  }, __jsx(_blocks_typograhy__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+  }, __jsx(_blocks_typograhy__WEBPACK_IMPORTED_MODULE_4__["Link"], {
     href: "mailto:georgemaine.lourens@gmail.com",
     target: "blank",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 66
     },
     __self: undefined
   }, "Email")), __jsx("li", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 70
     },
     __self: undefined
-  }, __jsx(_blocks_typograhy__WEBPACK_IMPORTED_MODULE_3__["DribbbleLink"], {
+  }, __jsx(_blocks_typograhy__WEBPACK_IMPORTED_MODULE_4__["DribbbleLink"], {
     href: "https://dribbble.com/georgemaine",
     target: "blank",
     rel: "noopener norefererrer",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 71
     },
     __self: undefined
   }, "Dribbble")), __jsx("li", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 79
     },
     __self: undefined
-  }, __jsx(_blocks_typograhy__WEBPACK_IMPORTED_MODULE_3__["TwitterLink"], {
+  }, __jsx(_blocks_typograhy__WEBPACK_IMPORTED_MODULE_4__["TwitterLink"], {
     href: "https://twitter.com/georgemaine",
     target: "blank",
     rel: "noopener norefererrer",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 66
+      lineNumber: 80
     },
     __self: undefined
   }, "Twitter")))));
@@ -442,7 +498,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
@@ -451,6 +507,17 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 module.exports = __webpack_require__(/*! /Users/georgemainelourens/Sites/georgemaine/pages/index.js */"./pages/index.js");
 
+
+/***/ }),
+
+/***/ "next/head":
+/*!****************************!*\
+  !*** external "next/head" ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("next/head");
 
 /***/ }),
 

@@ -14,19 +14,19 @@ export default createGlobalStyle`
     font-family:"Söhne";
     font-weight: 500;
     font-style: normal;
-    src: url('../assets/Söhne-Kräftig.woff');
+    src: url('../assets/Sohne-Kraftig.woff');
   }
   @font-face {
     font-family:"Söhne";
     font-weight: normal;
     font-style: normal;
-    src: url('../assets/Söhne-Kräftig.woff');
+    src: url('../assets/Sohne-Kraftig.woff');
   }
   @font-face {
     font-family:"Söhne";
     font-weight: 700;
     font-style: normal;
-    src: url('../assets/Söhne-Fett.woff');
+    src: url('../assets/Sohne-Fett.woff');
   }
   body {
     font-family: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,

@@ -40,7 +40,7 @@ export const Link = styled.a`
   text-decoration: none;
 
   &:hover {
-    color: var(--primaryColorHover);
+    text-decoration: underline;
   }
 
   @media only screen and (min-width: 600px) {
@@ -56,7 +56,7 @@ export const DribbbleLink = styled.a`
   text-decoration: none;
 
   &:hover {
-    color: var(--dribbbleColorHover);
+    text-decoration: underline;
   }
 
   @media only screen and (min-width: 600px) {
@@ -72,7 +72,7 @@ export const TwitterLink = styled.a`
   text-decoration: none;
 
   &:hover {
-    color: var(--twitterColorHover);
+    text-decoration: underline;
   }
 
   @media only screen and (min-width: 600px) {

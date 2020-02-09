@@ -44,7 +44,7 @@ export const ContactList = styled.ul`
   margin: 0;
 
   li {
-    margin: 0 0 20px;
+    margin: 0 0 10px;
   }
 
   li:last-of-type {

@@ -175,19 +175,19 @@ __webpack_require__.r(__webpack_exports__);
     font-family:"Söhne";
     font-weight: 500;
     font-style: normal;
-    src: url('../assets/Söhne-Kräftig.woff');
+    src: url('../assets/Sohne-Kraftig.woff');
   }
   @font-face {
     font-family:"Söhne";
     font-weight: normal;
     font-style: normal;
-    src: url('../assets/Söhne-Kräftig.woff');
+    src: url('../assets/Sohne-Kraftig.woff');
   }
   @font-face {
     font-family:"Söhne";
     font-weight: 700;
     font-style: normal;
-    src: url('../assets/Söhne-Fett.woff');
+    src: url('../assets/Sohne-Fett.woff');
   }
   body {
     font-family: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -226,11 +226,8 @@ __webpack_require__.r(__webpack_exports__);
     --primaryText: #FFF;
     --secondaryText: #CCC;
     --primaryColor: #FFC1A9;
-    --primaryColorHover: #FCA;
     --dribbbleColor: #FAC;
-    --dribbbleColorHover: #FCE;
     --twitterColor: #6CF;
-    --twitterColorHover: #0CF;
     }
 `);
 
