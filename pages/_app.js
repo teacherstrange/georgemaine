@@ -1,5 +1,4 @@
-import Global from "../styles/global.css";
-import { ThemeProvider } from "styled-components";
+import Global from "../black-mamba/global.css";
 import React from "react";
 import Head from "next/head";
 import Router from "next/router";
@@ -7,23 +6,12 @@ import { GA_TRACKING_ID } from "../lib/gtag";
 
 import * as gtag from "../lib/gtag";
 
-Router.events.on("routeChangeComplete", url => gtag.pageview(url));
-
-const theme = {
-  colors: {
-    background: "#0F0F0F",
-    primaryText: "#FFF",
-    secondaryText: "#CCC",
-    primaryColor: "#FFC1A9",
-    dribbbleColor: "#FAC",
-    twitterColor: "#6CF"
-  }
-};
+Router.events.on("routeChangeComplete", (url) => gtag.pageview(url));
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Head>
         <title>Georgemaine Lourens</title>
         <meta charSet="utf-8" />
@@ -69,11 +57,11 @@ export default function MyApp({ Component, pageProps }) {
             gtag('config', '${GA_TRACKING_ID}', {
               page_path: window.location.pathname,
             });
-          `
+          `,
           }}
         />
       </Head>
       <Component {...pageProps} />
-    </ThemeProvider>
+    </>
   );
 }
