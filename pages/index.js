@@ -1,4 +1,4 @@
-import { H1, Caption } from "../black-mamba/Typograhy";
+import { H1, Caption, InlineLink } from "../black-mamba/Typograhy";
 import { InterpolatingLogo } from "../black-mamba/components/InterpolatingLogo";
 import { Link } from "../black-mamba/components/Link";
 import { Header } from "../black-mamba/components/Header";
@@ -11,10 +11,25 @@ export default () => {
         <InterpolatingLogo />
         <H1>Hello, my name is Georgemaine</H1>
         <Caption>
-          I’m currently designing financial products at Mollie in Amsterdam.
-          Previously I was a designer at Framer, where I designed tools and
-          resources for designers. My current areas of interest include
-          well-crafted products, code, plants, and motion design.
+          I’m currently designing financial products at{" "}
+          <InlineLink
+            href="https://mollie.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Mollie
+          </InlineLink>{" "}
+          in Amsterdam. Previously I was a designer at{" "}
+          <InlineLink
+            href="https://framer.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Framer
+          </InlineLink>
+          , where I designed tools and resources for designers. My current areas
+          of interest include well-crafted products, code, plants, and motion
+          design.
         </Caption>
         <Link
           href="mailto:georgemaine.lourens@gmail.com?Subject=Hello!"
