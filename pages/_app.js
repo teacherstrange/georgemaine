@@ -40,8 +40,8 @@ export default function MyApp({ Component, pageProps }) {
           content="Product designer at Mollie."
         />
         <meta name="twitter:creator" content="@georgemaine" />
-        <link rel="icon" type="image/png" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/favicon.ico" />
+        <link rel="icon" href="/favico.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/favico.svg" />
         {/* Global Site Tag (gtag.js) - Google Analytics */}
         <script
           async

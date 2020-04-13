@@ -11,15 +11,23 @@ export default () => {
         <InterpolatingLogo />
         <H1>Hello, my name is Georgemaine</H1>
         <Caption>
-          I’m currently designing financial products at{" "}
+          I’m a product designer living in Amsterdam. I like reading and growing
+          my plants in my little urban jungle.
+        </Caption>
+        <Caption>
+          Right now I'm designing payment experiences at{" "}
           <InlineLink
             href="https://mollie.com"
             target="_blank"
             rel="noopener noreferrer"
           >
             Mollie
-          </InlineLink>{" "}
-          in Amsterdam. Previously I was a designer at{" "}
+          </InlineLink>
+          , working on products like the dashboard, checkout, mobile apps and
+          the website.
+        </Caption>
+        <Caption>
+          Before Mollie, I designed tools and resources for designers at{" "}
           <InlineLink
             href="https://framer.com"
             target="_blank"
@@ -27,9 +35,8 @@ export default () => {
           >
             Framer
           </InlineLink>
-          , where I designed tools and resources for designers. My current areas
-          of interest include well-crafted products, code, plants, and motion
-          design.
+          . My current areas of interest include design systems, interaction
+          design, plants, and motion design.
         </Caption>
         <Link
           href="mailto:georgemaine.lourens@gmail.com?Subject=Hello!"
