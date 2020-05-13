@@ -79,3 +79,20 @@ export const InlineLink = styled.a`
     border-bottom-color: var(--varPrimaryText);
   }
 `;
+
+export const A = styled.a`
+  color: var(--primaryText);
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  line-height: 1.125rem;
+  padding: 6px;
+  border-radius: 13px;
+  font-size: 15px;
+  font-weight: var(--fontWeightPrimary);
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.14);
+    cursor: pointer;
+  }
+`;
