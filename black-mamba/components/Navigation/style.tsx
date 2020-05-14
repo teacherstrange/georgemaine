@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { P } from "../../Typograhy";
 
 export const Container = styled.header`
   display: flex;
@@ -16,11 +15,4 @@ export const Container = styled.header`
 export const LogoContainer = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const NavigationHeadline = styled(P)`
-  font-weight: var(--fontWeightPrimary);
-  font-size: 1.3em;
-  color: #fff;
-  margin: 0 0 0 8px;
 `;

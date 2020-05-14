@@ -25,7 +25,7 @@ const NavigationLogoContainer = styled.div`
 
 const NavigationHeadline = styled(P)`
   font-weight: var(--fontWeightPrimary);
-  font-size: 1.3em;
+  font-size: var(--fontSizeQuaternary);
   color: #fff;
   margin: 0 0 0 8px;
 `;

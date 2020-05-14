@@ -4,7 +4,7 @@ const base = css`
   -webkit-appearance: none;
   display: flex;
   align-items: center;
-  font-size: 1.3em;
+  font-size: var(--fontSizeQuaternary);
   font-weight: var(--fontWeightTertiary);
   justify-content: center;
   padding: 4px 12px;
