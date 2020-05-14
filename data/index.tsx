@@ -3,6 +3,10 @@ type LinkData = {
   url: string;
 };
 
+type MenuData = {
+  name: string;
+};
+
 export const ContactListData: LinkData[] = [
   // Twitter
   {
@@ -26,21 +30,9 @@ export const ContactListData: LinkData[] = [
   },
 ];
 
-export const MenuListData: LinkData[] = [
-  {
-    name: "Mollie Mobile",
-    url: "/mollie-mobile",
-  },
-  {
-    name: "Mollie Promo Video",
-    url: "/mollie-promo-video",
-  },
-  {
-    name: "Mollie Checkout",
-    url: "/mollie-checkout",
-  },
-  {
-    name: "Apple Pay Video",
-    url: "/mollie-apple-pay",
-  },
+export const MenuListData = [
+  "Mollie Mobile",
+  "Mollie Promo Video",
+  "Mollie Checkout",
+  "Apple Pay Video",
 ];

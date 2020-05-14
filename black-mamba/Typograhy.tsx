@@ -64,22 +64,6 @@ export const P = styled.p`
   margin: 0 0 var(--spaceM);
 `;
 
-export const InlineLink = styled.a`
-  color: var(--secondaryText);
-  font-size: inherit;
-  text-decoration: none;
-  line-height: 1.5294117647;
-  letter-spacing: 0.004em;
-  margin: 0 0 var(--spaceS);
-  border-bottom: 2px solid var(--containerBackgroundHover);
-  transition: all 0.11s ease-out;
-
-  &:hover {
-    color: var(--primaryText);
-    border-bottom-color: var(--varPrimaryText);
-  }
-`;
-
 export const A = styled.a`
   color: var(--primaryText);
   display: flex;

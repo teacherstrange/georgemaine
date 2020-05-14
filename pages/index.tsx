@@ -26,8 +26,8 @@ export default () => {
     <>
       <Wrapper>
         <Navigation
-          BtnOnClick={() => setIconRotateState(!iconRotateState)}
-          IconRotateState={iconRotateState}
+          ButtonOnClick={() => setIconRotateState(!iconRotateState)}
+          ButtonIsAnimated={iconRotateState}
         />
       </Wrapper>
       {iconRotateState && (
