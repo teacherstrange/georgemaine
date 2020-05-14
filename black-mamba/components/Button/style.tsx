@@ -12,6 +12,7 @@ const base = css`
   transition: color 200ms ease;
   border: none;
   line-height: 1.5384615385;
+  margin: 0;
 
   &:hover,
   &:focus {
