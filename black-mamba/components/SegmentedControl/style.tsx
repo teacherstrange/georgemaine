@@ -71,6 +71,10 @@ export const MobileTabsContainer = styled.div`
   animation: ${slideIn} 1.1s 1.3s ease 1 forwards;
   height: 36px;
 
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   @media only screen and (min-width: 648px) {
     margin: 0 auto;
   }
