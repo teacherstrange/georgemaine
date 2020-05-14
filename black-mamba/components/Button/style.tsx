@@ -57,4 +57,7 @@ export const PopUpButtonChevron = styled.span`
   transform: ${(props) => (props.animated ? "rotate(180deg)" : "")};
   margin: 0 0 0 8px;
   transition: transform 100ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
