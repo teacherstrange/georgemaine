@@ -48,6 +48,8 @@ export const OpaqueButton = styled.button`
   z-index: 2;
   flex: 1;
   background-color: transparent;
+  white-space: nowrap;
+  min-width: 148px;
 
 `;
 

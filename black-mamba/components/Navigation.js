@@ -1,11 +1,9 @@
 import styled from "styled-components";
 import Logo from "./Logo";
 import { P } from "../Typograhy";
-import { Button, OpaqueButton } from "./Button";
-
 import { MenuListData } from "../../data";
 import { useState } from "react";
-import SegmentedControl from "./SegmentedControl";
+import { SegmentedControl } from "./SegmentedControl";
 import PopUpButton from "./Button/PopUpButton";
 
 const NavigationContainer = styled.nav`
@@ -13,7 +11,7 @@ const NavigationContainer = styled.nav`
   justify-content: space-between;
   max-width: 100%;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 24px;
   height: 34px;
   position: sticky;
   top: 20px;
