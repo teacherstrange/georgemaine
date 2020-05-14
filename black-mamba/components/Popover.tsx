@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { A } from "../Typograhy";
 import Icon from "./Icon";
 import { ContactListData } from "../../data/index";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
 
 export const MenuBlocker = styled.div`
   top: 0;
@@ -12,7 +14,7 @@ export const MenuBlocker = styled.div`
   z-index: 99;
 `;
 
-const PopoverList = styled.ul`
+const PopoverList = styled(motion.ul)`
   padding: 6px;
   overflow: hidden;
   border-radius: 19px;
@@ -23,6 +25,7 @@ const PopoverList = styled.ul`
   top: 50px;
   right: 20px;
   min-width: 156px;
+  margin: 0;
 `;
 
 const PopoverListItem = styled.li`
@@ -36,23 +39,31 @@ const PopoverListItemLabel = styled.span`
   margin-left: 10px;
 `;
 
-export default function Popover() {
+export default function Popover({ isVisible }) {
   return (
-    <PopoverList>
-      {ContactListData.map((data, index) => {
-        return (
-          <PopoverListItem key={index}>
-            <A
-              href={data.url}
-              target="_blank"
-              rel="nofollow noopener noreferrer"
-            >
-              <Icon glyph={data.name} />
-              <PopoverListItemLabel>{data.name}</PopoverListItemLabel>
-            </A>
-          </PopoverListItem>
-        );
-      })}
-    </PopoverList>
+    <AnimatePresence>
+      {isVisible && (
+        <PopoverList
+          initial={{ y: -8, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -8, opacity: 0 }}
+        >
+          {ContactListData.map((data, index) => {
+            return (
+              <PopoverListItem key={index} tabindex={index}>
+                <A
+                  href={data.url}
+                  target="_blank"
+                  rel="nofollow noopener noreferrer"
+                >
+                  <Icon glyph={data.name} />
+                  <PopoverListItemLabel>{data.name}</PopoverListItemLabel>
+                </A>
+              </PopoverListItem>
+            );
+          })}
+        </PopoverList>
+      )}
+    </AnimatePresence>
   );
 }

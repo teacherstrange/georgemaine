@@ -1,9 +1,9 @@
-type ContactData = {
+type LinkData = {
   name: string;
   url: string;
 };
 
-export const ContactListData: ContactData[] = [
+export const ContactListData: LinkData[] = [
   // Twitter
   {
     name: "Twitter",
@@ -23,5 +23,24 @@ export const ContactListData: ContactData[] = [
   {
     name: "Dribbble",
     url: "https://dribbble.com/georgemaine",
+  },
+];
+
+export const MenuListData: LinkData[] = [
+  {
+    name: "Mollie Mobile",
+    url: "/mollie-mobile",
+  },
+  {
+    name: "Mollie Promo Video",
+    url: "/mollie-promo-video",
+  },
+  {
+    name: "Mollie Checkout",
+    url: "/mollie-checkout",
+  },
+  {
+    name: "Apple Pay Video",
+    url: "/mollie-apple-pay",
   },
 ];

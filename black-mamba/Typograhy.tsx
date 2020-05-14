@@ -91,8 +91,10 @@ export const A = styled.a`
   font-size: 15px;
   font-weight: var(--fontWeightPrimary);
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: rgba(255, 255, 255, 0.14);
     cursor: pointer;
+    outline: none;
   }
 `;

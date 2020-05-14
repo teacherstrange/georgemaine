@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import Logo from "./Logo";
-import { P } from "../Typograhy";
+import { P, A } from "../Typograhy";
 import { Btn } from "./Button";
+import { MenuListData } from "../../data";
 
 const NavigationContainer = styled.nav`
   display: flex;
-  width: 100%;
+  max-width: 100%;
   align-items: center;
   padding: 0 20px;
   height: 56px;
@@ -17,6 +18,12 @@ const NavigationContainer = styled.nav`
 const NavigationLogoContainer = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const NavigationList = styled.ul`
+  display: flex;
+  justify-content: center;
+  flex: 1;
 `;
 
 const NavigationHeadline = styled(P)`
@@ -39,6 +46,15 @@ export default ({ BtnOnClick, IconRotateState }) => {
         <Logo />
         <NavigationHeadline>Georgemaine</NavigationHeadline>
       </NavigationLogoContainer>
+      <NavigationList>
+        {MenuListData.map((item, index) => {
+          return (
+            <A key={index} url={item.url}>
+              {item.name}
+            </A>
+          );
+        })}
+      </NavigationList>
       <Btn onClick={BtnOnClick}>
         Get in touch
         <IconContainer
@@ -51,9 +67,9 @@ export default ({ BtnOnClick, IconRotateState }) => {
           <path
             d="M2 4.5l4 4 4-4"
             fill="transparent"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
-            stroke-linecap="round"
+            strokeLinecap="round"
           ></path>
         </IconContainer>
       </Btn>
