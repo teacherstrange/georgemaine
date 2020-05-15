@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 interface Props {
-  svgWrappersvgWrapperSize: number;
-  svgWrapperMargin: string;
+  svgWrappersvgWrapperSize?: number;
+  svgWrapperMargin?: string;
 }
 
 export const SvgWrapper = styled.div<Props>`

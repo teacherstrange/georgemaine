@@ -78,8 +78,8 @@ export const Glyph = ({ glyph }: GlyphProps): any => {
 };
 
 interface Props {
-  size: number;
-  margin: string;
+  size?: number;
+  margin?: string;
   glyph: string;
 }
 
