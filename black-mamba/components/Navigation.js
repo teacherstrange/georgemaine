@@ -3,7 +3,7 @@ import Logo from "./Logo";
 import { P } from "./Typograhy";
 import { MenuList } from "../../data";
 import { SegmentedControl } from "./SegmentedControl";
-import PopUpButton from "./Button";
+import { PopUpButton } from "./Button";
 
 const NavigationContainer = styled.nav`
   display: flex;
