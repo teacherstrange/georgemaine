@@ -1,4 +1,4 @@
-import { Wrapper, Hero } from "../black-mamba/components/Layouts/";
+import { Wrapper } from "../black-mamba/components/Layouts/";
 import Navigation from "../black-mamba/components/Navigation";
 import { useState, useEffect } from "react";
 import Popover, { MenuBlocker } from "../black-mamba/components/Popover";
@@ -20,6 +20,7 @@ export default () => {
     }
   }
   useEffect(() => {
+    console.log(activeMenuItem);
     if (iconRotateState) {
       window.addEventListener("keydown", onKeyDown);
     } else {
@@ -37,14 +38,14 @@ export default () => {
           onIndexChange={handleIndexChange}
           activeIndex={activeMenuItem}
         />
-        <Hero>
-          <Gallery
-            currentGalleryItem={activeMenuItem}
-            galleryList={galleryListData}
-          />
-        </Hero>
+
+        <Gallery
+          currentGalleryItem={activeMenuItem}
+          galleryList={galleryListData}
+        />
+
         <MobileSegmentedControl
-          activeItem={activeMenuItem}
+          activeMenuItem={activeMenuItem}
           menuList={MenuList}
           onClick={setActiveMenuItem}
         />

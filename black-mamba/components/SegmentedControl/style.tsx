@@ -80,25 +80,30 @@ export const MobileTabsContainer = styled.div`
   }
 `;
 
-export const ActiveItemBackground = styled.div`
+interface Props {
+  currentPosition: number;
+  menuList: number;
+}
+
+export const ActiveItemBackground = styled.div<Props>`
   ${ItemBase}
   width: 25%;
   left: ${(props) =>
     props.currentPosition === 0
       ? "4px"
-      : props.currentPosition === props.maxItems - 1
+      : props.currentPosition === props.menuList - 1
       ? "calc(75% - 4px)"
       : `calc(${props.currentPosition} * 25%)`};
 `;
 
-export const MobileActiveItemBackground = styled.div`
+export const MobileActiveItemBackground = styled.div<Props>`
   ${ItemBase}
   width: 152px;
 
   left: ${(props) =>
     props.currentPosition === 0
       ? "4px"
-      : props.currentPosition === props.maxItems - 1
-      ? "calc(100% -160px)"
+      : props.currentPosition === props.menuList - 1
+      ? `calc(${props.currentPosition} * 152px - 4px)`
       : `calc(${props.currentPosition} * 152px)`};
 `;

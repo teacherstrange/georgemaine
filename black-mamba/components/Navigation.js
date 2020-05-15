@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Logo from "./Logo";
 import { P } from "./Typograhy";
 import { MenuList } from "../../data";
-import { useState } from "react";
 import { SegmentedControl } from "./SegmentedControl";
 import PopUpButton from "./Button/PopUpButton";
 
@@ -47,7 +46,7 @@ export default ({
         <NavigationHeadline>Georgemaine</NavigationHeadline>
       </NavigationLogoContainer>
       <SegmentedControl
-        activeItem={activeIndex}
+        activeMenuItem={activeIndex}
         menuList={MenuList}
         onClick={handleSegmentedControlClick}
       />

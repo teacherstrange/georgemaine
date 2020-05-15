@@ -8,7 +8,7 @@ export const H1 = styled.h1`
   margin: 0 0 var(--spaceS);
   letter-spacing: -0.005em;
 
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 768px) {
     font-size: var(--fontSizePrimary);
     line-height: 1;
   }
@@ -22,7 +22,7 @@ export const H2 = styled.h2`
   letter-spacing: 0;
   margin: 0 0 var(--spaceM);
 
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 768px) {
     font-size: var(--fontSizeSecondary);
     line-height: 1.3125;
     letter-spacing: -0.005em;
@@ -37,7 +37,7 @@ export const H3 = styled.h3`
   letter-spacing: 0.004em;
   margin: 0 0 var(--spaceM);
 
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 768px) {
     font-size: var(--fontSizeTertiary);
     line-height: 1.18181818;
   }
@@ -45,10 +45,14 @@ export const H3 = styled.h3`
 
 export const Caption = styled.p`
   color: var(--secondaryText);
-  font-size: 2.1em;
+  font-size: 1.4em;
   font-weight: var(--fontSizeTertiary);
-  line-height: 1.5294117647;
+  line-height: 2.1538461538;
   margin: 0;
+
+  @media only screen and (min-width: 768px) {
+    font-size: 2.1em;
+  }
 `;
 
 export const P = styled.p`

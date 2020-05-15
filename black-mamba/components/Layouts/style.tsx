@@ -5,7 +5,3 @@ export const Wrapper = styled.main`
   height: 100%;
   min-height: 100vh;
 `;
-
-export const Hero = styled.section`
-  position: relative;
-`;

@@ -1,3 +1,3 @@
-import { Wrapper, Hero } from "./style";
+import { Wrapper } from "./style";
 
-export { Wrapper, Hero };
+export { Wrapper };

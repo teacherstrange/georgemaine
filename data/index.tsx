@@ -21,33 +21,56 @@ export const galleryListData: GalleryItemType[] = [
     headline: "Mollie Mobile",
     details: [
       {
-        metaData: "Product Design",
+        metaData: "Product Design, Front-end",
       },
       {
-        metaData: "iOS & Android app",
-      },
-      {
-        metaData: "Landing pages",
+        metaData: "iOS, Android and Web page",
       },
       {
         metaData: "2019",
       },
     ],
   },
+
   {
     headline: "Mollie Promo Video",
     details: [
       {
-        metaData: "Design",
+        metaData: "Design, Animation",
       },
       {
-        metaData: "Animation",
-      },
-      {
-        metaData: "Promo Video",
+        metaData: "Promotion Video",
       },
       {
         metaData: "2020",
+      },
+    ],
+  },
+  {
+    headline: "Mollie Checkout",
+    details: [
+      {
+        metaData: "Product Design, Front-end",
+      },
+      {
+        metaData: "Web App",
+      },
+      {
+        metaData: "2020",
+      },
+    ],
+  },
+  {
+    headline: "Mollie Apple Pay",
+    details: [
+      {
+        metaData: "Product Design, Animation",
+      },
+      {
+        metaData: "Web App, Promotion Video",
+      },
+      {
+        metaData: "2019",
       },
     ],
   },

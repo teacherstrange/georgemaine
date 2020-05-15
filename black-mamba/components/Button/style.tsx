@@ -44,7 +44,8 @@ export const Button = styled.button`
 
 export const OpaqueButton = styled.button`
   ${base}
-    color: ${(props) => (props.isAnimated ? "#111" : "var(--primaryText)")};
+    color: ${(props: { isAnimated: Boolean }) =>
+      props.isAnimated ? "#111" : "var(--primaryText)"};
   border-radius: 18px;
   position: relative;
   z-index: 2;
@@ -56,7 +57,8 @@ export const OpaqueButton = styled.button`
 `;
 
 export const PopUpButtonChevron = styled.span`
-  transform: ${(props) => (props.animated ? "rotate(180deg)" : "")};
+  transform: ${(props: { animated: boolean }) =>
+    props.animated ? "rotate(180deg)" : ""};
   margin: 0 0 0 8px;
   transition: transform 100ms ease;
   display: flex;

@@ -4,26 +4,26 @@ import { OpaqueButton } from "../Button";
 import { MenuItem } from "../../../data";
 
 interface Props {
-  activeItem: number;
+  activeMenuItem: number;
   menuList: MenuItem[];
   onClick?: Function;
 }
 
 export default function SegmentedControl({
-  activeItem,
+  activeMenuItem,
   menuList,
   onClick,
 }: Props) {
   return (
     <Container>
       <ActiveItemBackground
-        currentPosition={activeItem}
-        itemCount={menuList.length}
+        currentPosition={activeMenuItem}
+        menuList={menuList.length}
       />
       {menuList.map((menuItem, index) => {
         return (
           <OpaqueButton
-            isAnimated={index === activeItem}
+            isAnimated={index === activeMenuItem}
             key={index}
             onClick={() => onClick(index)}
           >

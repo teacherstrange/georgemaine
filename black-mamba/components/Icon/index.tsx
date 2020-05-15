@@ -20,14 +20,20 @@ export const InlineSvg = styled.svg`
 
 export const SvgWrapper = styled.div`
   display: inline-block;
-  flex: 0 0 ${(props) => (props.size ? `${props.size}px` : "18px")};
-  width: ${(props) => (props.size ? `${props.size}px` : "18px")};
-  height: ${(props) => (props.size ? `${props.size}px` : "18px")};
-  min-width: ${(props) => (props.size ? `${props.size}px` : "18px")};
-  min-height: ${(props) => (props.size ? `${props.size}px` : "18px")};
+  flex: 0 0
+    ${(props: { size: number }) => (props.size ? `${props.size}px` : "18px")};
+  width: ${(props: { size: number }) =>
+    props.size ? `${props.size}px` : "18px"};
+  height: ${(props: { size: number }) =>
+    props.size ? `${props.size}px` : "18px"};
+  min-width: ${(props: { size: number }) =>
+    props.size ? `${props.size}px` : "18px"};
+  min-height: ${(props: { size: number }) =>
+    props.size ? `${props.size}px` : "18px"};
   position: relative;
   color: inherit;
-  margin: ${(props) => (props.margin ? `${props.margin}` : "0")};
+  margin: ${(props: { margin: string }) =>
+    props.margin ? `${props.margin}` : "0"};
 `;
 
 type GlyphProps = {
