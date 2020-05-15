@@ -1,16 +1,16 @@
 import React from "react";
-import { ButtonProps } from "./types";
-import * as Styled from "./style";
+
+import { Button, PopUpButtonChevron } from "./style";
 import Icon from "../Icon";
 
-export default function PopUpButton(props: ButtonProps) {
-  const { children, isAnimated } = props;
+export default function PopUpButton(props) {
+  const { children, onClick, animated } = props;
   return (
-    <Styled.Button {...props}>
+    <Button onClick={onClick}>
       {children}
-      <Styled.PopUpButtonChevron animated={isAnimated}>
+      <PopUpButtonChevron animated={animated}>
         <Icon glyph={"ChevronDown"} size={12} />
-      </Styled.PopUpButtonChevron>
-    </Styled.Button>
+      </PopUpButtonChevron>
+    </Button>
   );
 }

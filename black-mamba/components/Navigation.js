@@ -3,7 +3,7 @@ import Logo from "./Logo";
 import { P } from "./Typograhy";
 import { MenuList } from "../../data";
 import { SegmentedControl } from "./SegmentedControl";
-import PopUpButton from "./Button/PopUpButton";
+import PopUpButton from "./Button";
 
 const NavigationContainer = styled.nav`
   display: flex;
@@ -50,7 +50,7 @@ export default ({
         menuList={MenuList}
         onClick={handleSegmentedControlClick}
       />
-      <PopUpButton onClick={buttonOnClick} isAnimated={buttonIsAnimated}>
+      <PopUpButton onClick={buttonOnClick} animated={buttonIsAnimated}>
         Get in touch
       </PopUpButton>
     </NavigationContainer>

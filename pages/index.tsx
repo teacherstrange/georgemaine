@@ -20,7 +20,6 @@ export default () => {
     }
   }
   useEffect(() => {
-    console.log(activeMenuItem);
     if (iconRotateState) {
       window.addEventListener("keydown", onKeyDown);
     } else {
@@ -29,6 +28,7 @@ export default () => {
 
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [onKeyDown, iconRotateState]);
+
   return (
     <>
       <Wrapper>

@@ -1,4 +1,4 @@
-import Button from "./Button";
-import OpaqueButton from "./OpaqueButton";
+import { Button, OpaqueButton } from "./style";
+import PopUpButton from "./PopUpButton";
 
-export { Button, OpaqueButton };
+export { Button, OpaqueButton, PopUpButton };
