@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import { A } from "../Typograhy";
+import { A } from "./Typograhy";
 import Icon from "./Icon";
 import { ContactListData } from "../../data/index";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
 
 export const MenuBlocker = styled.div`
   top: 0;

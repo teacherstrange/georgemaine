@@ -1,13 +1,17 @@
-import { Wrapper } from "../black-mamba/components/Layout";
+import { Wrapper, Hero } from "../black-mamba/components/Layouts/";
 import Navigation from "../black-mamba/components/Navigation";
 import { useState, useEffect } from "react";
 import Popover, { MenuBlocker } from "../black-mamba/components/Popover";
-import { MenuListData } from "../data/index";
+import { MenuList, galleryListData } from "../data/index";
 import MobileSegmentedControl from "../black-mamba/components/SegmentedControl/MobileSegmentedControl";
+import Gallery from "../black-mamba/components/Gallery";
 
 export default () => {
   const [iconRotateState, setIconRotateState] = useState(false);
   const [activeMenuItem, setActiveMenuItem] = useState(0);
+  function handleIndexChange(index: number) {
+    setActiveMenuItem(index);
+  }
   function onKeyDown(event) {
     switch (event.code) {
       case "Escape": {
@@ -28,12 +32,20 @@ export default () => {
     <>
       <Wrapper>
         <Navigation
-          ButtonOnClick={() => setIconRotateState(!iconRotateState)}
-          ButtonIsAnimated={iconRotateState}
+          buttonOnClick={() => setIconRotateState(!iconRotateState)}
+          buttonIsAnimated={iconRotateState}
+          onIndexChange={handleIndexChange}
+          activeIndex={activeMenuItem}
         />
+        <Hero>
+          <Gallery
+            currentGalleryItem={activeMenuItem}
+            galleryList={galleryListData}
+          />
+        </Hero>
         <MobileSegmentedControl
           activeItem={activeMenuItem}
-          itemCount={MenuListData}
+          menuList={MenuList}
           onClick={setActiveMenuItem}
         />
       </Wrapper>

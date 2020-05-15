@@ -5,13 +5,14 @@ const base = css`
   display: flex;
   align-items: center;
   font-size: var(--fontSizeQuaternary);
-  font-weight: var(--fontWeightTertiary);
+  font-weight: var(--fontWeightPrimary);
   justify-content: center;
   padding: 4px 12px;
   border-radius: 13px;
   transition: color 200ms ease;
+  letter-spacing: -0.08px;
   border: none;
-  line-height: 1.5384615385;
+  line-height: 1.4285714286;
   margin: 0;
 
   &:hover,
@@ -50,7 +51,7 @@ export const OpaqueButton = styled.button`
   flex: 1;
   background-color: transparent;
   white-space: nowrap;
-  min-width: 148px;
+  min-width: 152px;
 
 `;
 

@@ -62,12 +62,12 @@
 }
 
 :root {
-  --blue: hsl(199, 100%, 50%);
+  --blue: hsl(216, 100%, 50%);
   --green: hsl(161, 100%, 39%);
   --purple: hsl(290, 100%, 60%);
   --red: hsl(13, 100%, 46%);
   --yellow: hsl(42, 100%, 50%);
-  --fontSizePrimary: 4em;
+  --fontSizePrimary: 6.8em;
   --fontSizeSecondary: 3.2em;
   --fontSizeTertiary: 2.2em;
   --fontSizeQuaternary: 1.4em;
@@ -76,12 +76,12 @@
   --fontWeightTertiary: 500;
   --fontWeightQuaternary: 400;
   --spaceXXL: 120px;
-  --spaceXL: 90px;
-  --spaceL: 60px;
-  --spaceM: 30px;
-  --spaceS: 15px;
-  --spaceXS: 10px;
-  --spaceXXS: 5px;
+  --spaceXL: 92px;
+  --spaceL: 64px;
+  --spaceM: 32px;
+  --spaceS: 16px;
+  --spaceXS: 8px;
+  --spaceXXS: 4px;
 }
 
 body {

@@ -1,32 +1,33 @@
 import React from "react";
 import { Container, ActiveItemBackground } from "./style";
 import { OpaqueButton } from "../Button";
+import { MenuItem } from "../../../data";
 
 interface Props {
   activeItem: number;
-  itemCount: Array<string>;
+  menuList: MenuItem[];
   onClick?: Function;
 }
 
 export default function SegmentedControl({
   activeItem,
-  itemCount,
+  menuList,
   onClick,
 }: Props) {
   return (
     <Container>
       <ActiveItemBackground
         currentPosition={activeItem}
-        itemCount={itemCount.length}
+        itemCount={menuList.length}
       />
-      {itemCount.map((item, index) => {
+      {menuList.map((menuItem, index) => {
         return (
           <OpaqueButton
             isAnimated={index === activeItem}
             key={index}
             onClick={() => onClick(index)}
           >
-            {item}
+            {menuItem.name}
           </OpaqueButton>
         );
       })}

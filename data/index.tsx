@@ -3,10 +3,55 @@ type LinkData = {
   url: string;
 };
 
-type MenuData = {
+export type MenuItem = {
   name: string;
 };
 
+export type GalleryItemType = {
+  headline: string;
+  details: GalleryMetaDataType[];
+};
+
+type GalleryMetaDataType = {
+  metaData: string;
+};
+
+export const galleryListData: GalleryItemType[] = [
+  {
+    headline: "Mollie Mobile",
+    details: [
+      {
+        metaData: "Product Design",
+      },
+      {
+        metaData: "iOS & Android app",
+      },
+      {
+        metaData: "Landing pages",
+      },
+      {
+        metaData: "2019",
+      },
+    ],
+  },
+  {
+    headline: "Mollie Promo Video",
+    details: [
+      {
+        metaData: "Design",
+      },
+      {
+        metaData: "Animation",
+      },
+      {
+        metaData: "Promo Video",
+      },
+      {
+        metaData: "2020",
+      },
+    ],
+  },
+];
 export const ContactListData: LinkData[] = [
   // Twitter
   {
@@ -30,9 +75,9 @@ export const ContactListData: LinkData[] = [
   },
 ];
 
-export const MenuListData = [
-  "Mollie Mobile",
-  "Mollie Promo Video",
-  "Mollie Checkout",
-  "Apple Pay Video",
+export const MenuList: MenuItem[] = [
+  { name: "Mollie Mobile" },
+  { name: "Mollie Promo Video" },
+  { name: "Mollie Checkout" },
+  { name: "Apple Pay Video" },
 ];

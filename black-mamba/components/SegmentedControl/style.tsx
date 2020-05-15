@@ -33,7 +33,7 @@ export const Container = styled.ul`
   justify-content: center;
   position: relative;
   flex: 1;
-  max-width: 620px;
+  max-width: 636px;
   justify-content: center;
   align-items: center;
   padding: 4px;
@@ -93,12 +93,12 @@ export const ActiveItemBackground = styled.div`
 
 export const MobileActiveItemBackground = styled.div`
   ${ItemBase}
-  width: 148px;
+  width: 152px;
 
   left: ${(props) =>
     props.currentPosition === 0
       ? "4px"
       : props.currentPosition === props.maxItems - 1
-      ? "calc(100% -152px)"
-      : `calc(${props.currentPosition} * 148px)`};
+      ? "calc(100% -160px)"
+      : `calc(${props.currentPosition} * 152px)`};
 `;

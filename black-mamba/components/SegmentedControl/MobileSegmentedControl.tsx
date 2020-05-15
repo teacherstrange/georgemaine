@@ -5,16 +5,17 @@ import {
   MobileTabsContainer,
 } from "./style";
 import { OpaqueButton } from "../Button";
+import { MenuItem } from "../../../data";
 
 interface Props {
   activeItem: number;
-  itemCount: Array<string>;
+  menuList?: MenuItem[];
   onClick?: Function;
 }
 
 export default function MobileSegmentedControl({
   activeItem,
-  itemCount,
+  menuList,
   onClick,
 }: Props) {
   return (
@@ -22,16 +23,16 @@ export default function MobileSegmentedControl({
       <MobileTabsContainer>
         <MobileActiveItemBackground
           currentPosition={activeItem}
-          itemCount={itemCount.length}
+          menuList={menuList.length}
         />
-        {itemCount.map((item, index) => {
+        {menuList.map((menuItem, index) => {
           return (
             <OpaqueButton
               isAnimated={index === activeItem}
               key={index}
               onClick={() => onClick(index)}
             >
-              {item}
+              {menuItem.name}
             </OpaqueButton>
           );
         })}

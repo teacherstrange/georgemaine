@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Logo from "./Logo";
-import { P } from "../Typograhy";
-import { MenuListData } from "../../data";
+import { P } from "./Typograhy";
+import { MenuList } from "../../data";
 import { useState } from "react";
 import { SegmentedControl } from "./SegmentedControl";
 import PopUpButton from "./Button/PopUpButton";
@@ -9,11 +9,11 @@ import PopUpButton from "./Button/PopUpButton";
 const NavigationContainer = styled.nav`
   display: flex;
   justify-content: space-between;
-  max-width: 100%;
+  width: calc(100% - 48px);
   align-items: center;
   padding: 0 24px;
   height: 34px;
-  position: sticky;
+  position: fixed;
   top: 20px;
   z-index: 10;
 `;
@@ -30,8 +30,15 @@ const NavigationHeadline = styled(P)`
   margin: 0 0 0 8px;
 `;
 
-export default ({ ButtonOnClick, ButtonIsAnimated }) => {
-  const [activeMenuItem, setActiveMenuItem] = useState(0);
+export default ({
+  buttonOnClick,
+  buttonIsAnimated,
+  onIndexChange,
+  activeIndex,
+}) => {
+  function handleSegmentedControlClick(index) {
+    onIndexChange(index);
+  }
 
   return (
     <NavigationContainer>
@@ -40,11 +47,11 @@ export default ({ ButtonOnClick, ButtonIsAnimated }) => {
         <NavigationHeadline>Georgemaine</NavigationHeadline>
       </NavigationLogoContainer>
       <SegmentedControl
-        activeItem={activeMenuItem}
-        itemCount={MenuListData}
-        onClick={setActiveMenuItem}
+        activeItem={activeIndex}
+        menuList={MenuList}
+        onClick={handleSegmentedControlClick}
       />
-      <PopUpButton onClick={ButtonOnClick} isAnimated={ButtonIsAnimated}>
+      <PopUpButton onClick={buttonOnClick} isAnimated={buttonIsAnimated}>
         Get in touch
       </PopUpButton>
     </NavigationContainer>
