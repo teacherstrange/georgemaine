@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface Props {
-  svgWrappersvgWrapperSize?: number;
+  svgWrapperSize?: number;
   svgWrapperMargin?: string;
 }
 
@@ -21,4 +21,16 @@ export const SvgWrapper = styled.div<Props>`
   color: inherit;
   margin: ${(props) =>
     props.svgWrapperMargin ? `${props.svgWrapperMargin}` : "0"};
+`;
+
+export const InlineSvg = styled.svg`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  color: inherit;
+  fill: currentColor;
 `;
