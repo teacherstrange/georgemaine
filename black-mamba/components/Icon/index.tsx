@@ -1,10 +1,13 @@
 import * as React from "react";
 import styled from "styled-components";
+import { SvgWrapper } from "./style";
 
-type Props = {
-  glyph: string;
+interface SvgWrapperProps {
   size?: number;
-};
+  margin?: string;
+  glyph: string;
+  children: React.ReactNode;
+}
 
 export const InlineSvg = styled.svg`
   position: absolute;
@@ -16,24 +19,6 @@ export const InlineSvg = styled.svg`
   width: 100%;
   color: inherit;
   fill: currentColor;
-`;
-
-export const SvgWrapper = styled.div`
-  display: inline-block;
-  flex: 0 0
-    ${(props: { size: number }) => (props.size ? `${props.size}px` : "18px")};
-  width: ${(props: { size: number }) =>
-    props.size ? `${props.size}px` : "18px"};
-  height: ${(props: { size: number }) =>
-    props.size ? `${props.size}px` : "18px"};
-  min-width: ${(props: { size: number }) =>
-    props.size ? `${props.size}px` : "18px"};
-  min-height: ${(props: { size: number }) =>
-    props.size ? `${props.size}px` : "18px"};
-  position: relative;
-  color: inherit;
-  margin: ${(props: { margin: string }) =>
-    props.margin ? `${props.margin}` : "0"};
 `;
 
 type GlyphProps = {
@@ -92,11 +77,15 @@ export const Glyph = ({ glyph }: GlyphProps): any => {
   }
 };
 
-export default function Icon(props: Props) {
-  const { size = 18, glyph } = props;
+interface Props {
+  size: number;
+  margin: string;
+  glyph: string;
+}
 
+export default function Icon({ size, margin, glyph }: Props) {
   return (
-    <SvgWrapper size={size} className="icon">
+    <SvgWrapper svgWrappersvgWrapperSize={size} svgWrapperMargin={margin}>
       <InlineSvg
         fillRule="evenodd"
         clipRule="evenodd"
@@ -106,7 +95,6 @@ export default function Icon(props: Props) {
         aria-label={glyph}
         viewBox="0 0 18 18"
         preserveAspectRatio="xMidYMid meet"
-        fit
       >
         <title>{glyph}</title>
         <Glyph glyph={glyph} />
