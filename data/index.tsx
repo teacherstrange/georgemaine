@@ -22,10 +22,10 @@ export const galleryListData: GalleryItemType[] = [
     headline: "Mollie Mobile",
     details: [
       {
-        metaData: "Design, Front end",
+        metaData: "Design, Front End",
       },
       {
-        metaData: "iOS, Android and Web page",
+        metaData: "iOS, Android, Landing Page",
       },
       {
         metaData: "2019",
@@ -53,7 +53,7 @@ export const galleryListData: GalleryItemType[] = [
     headline: "Mollie Checkout",
     details: [
       {
-        metaData: "Design, Front end",
+        metaData: "Design, Front End",
       },
       {
         metaData: "Web App",

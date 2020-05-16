@@ -38,13 +38,17 @@ export const VideoCaption = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  padding: 0px 0px 88px 0px;
-  position: absolute;
+  padding: 0px 0px 104px 0px;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 2;
+
+  @media only screen and (min-width: 1024px) {
+    padding: 0 0 48px 0;
+  }
 `;
 
 export const VideoCaptionList = styled.ul`
@@ -64,7 +68,7 @@ export const VideoCaptionListItem = styled.li`
   list-style: none;
 
   :not(:last-of-type) {
-    margin-right: 28px;
+    margin-right: var(--spaceS);
   }
 
   :not(:last-of-type)::after {
@@ -73,10 +77,16 @@ export const VideoCaptionListItem = styled.li`
     position: absolute;
     top: calc(50% - 1px);
     bottom: 0;
-    right: -16px;
+    right: -10px;
     width: 4px;
     height: 4px;
     border-radius: 6px;
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(235, 235, 245, 0.6);
+  }
+
+  @media only screen and (min-width: 768px) {
+    :not(:last-of-type)::after {
+      top: 50%;
+    }
   }
 `;

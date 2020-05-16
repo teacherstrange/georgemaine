@@ -11,7 +11,8 @@ export const H1 = styled.h1`
 
   @media only screen and (min-width: 768px) {
     font-size: var(--fontSizePrimary);
-    line-height: 1;
+    line-height: 1.0410958904;
+    margin: 0 0 var(--spaceS);
   }
 `;
 
@@ -46,9 +47,9 @@ export const H3 = styled.h3`
 
 export const Caption = styled.p`
   color: rgba(235, 235, 245, 0.6);
-  font-size: 1.2em;
+  font-size: 1.3em;
   font-weight: var(--fontSizeTertiary);
-  line-height: 2.1538461538;
+  line-height: 1.2307692308;
   margin: 0;
 
   @media only screen and (min-width: 768px) {
@@ -63,7 +64,6 @@ export const P = styled.p`
   letter-spacing: 0.004em;
   margin: 0 0 var(--spaceM);
 `;
-
 export const A = styled.a`
   color: var(--primaryText);
   display: flex;
