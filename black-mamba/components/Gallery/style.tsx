@@ -1,34 +1,25 @@
 import styled from "styled-components";
 
-export const ContentGalleryContainer = styled.div`
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-  background-color: #000;
-`;
-
 export const GalleryItem = styled.div`
   opacity: ${(props: { currentGalleryItem: boolean }) =>
     props.currentGalleryItem ? "1" : "0"};
   pointer-events: ${(props: { currentGalleryItem: boolean }) =>
     props.currentGalleryItem && "none"};
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  bottom: 0;
   transition: opacity 0.6s;
 
   &::after {
     content: "";
-    width: 100%;
-    height: 100%;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 1;
-
     background: linear-gradient(
       to bottom,
       transparent 50%,
