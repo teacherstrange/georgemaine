@@ -15,9 +15,7 @@ export default function Gallery(props: Props) {
         return (
           <GalleryItem
             currentGalleryItem={currentGalleryItem === index}
-            pressedMenuItem={currentGalleryItem}
             key={index}
-            galleryItemIndex={index}
             galleryItem={galleryItem}
           />
         );

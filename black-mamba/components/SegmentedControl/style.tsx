@@ -10,21 +10,29 @@ const slideIn = keyframes`
 `;
 
 const Base = css`
-  background-color: rgba(38, 38, 38, 0.73);
+  background-color: var(--blurBg);
   border-radius: 18px;
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  -webkit-filter: saturate(140%);
-  filter: saturate(140%);
+  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur);
+  -webkit-filter: var(--saturate);
+  filter: var(--saturate);
 `;
 
 const ItemBase = css`
   position: absolute;
   height: 28px;
-  background-color: #fff;
+
   border-radius: 14px;
   transition: left 0.3s cubic-bezier(0.1, 0, 0, 1);
   z-index: 1;
+
+  @media screen and (prefers-color-scheme: dark) {
+    background-color: var(--white);
+  }
+
+  @media screen and (prefers-color-scheme: light) {
+    background-color: var(--black);
+  }
 `;
 
 export const Container = styled.ul`
@@ -36,7 +44,7 @@ export const Container = styled.ul`
   max-width: 636px;
   justify-content: center;
   align-items: center;
-  padding: 4px;
+  padding: var(--spaceXXS);
   overflow: hidden;
 
   @media (min-width: 1024px) {

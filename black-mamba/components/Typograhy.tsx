@@ -8,6 +8,7 @@ export const H1 = styled.h1`
   margin: 0 0 var(--spaceXS);
   letter-spacing: -0.04em;
   text-align: center;
+  color: var(--primaryTextLight);
 
   @media only screen and (min-width: 768px) {
     font-size: var(--fontSizePrimary);
@@ -46,14 +47,14 @@ export const H3 = styled.h3`
 `;
 
 export const Caption = styled.p`
-  color: rgba(235, 235, 245, 0.6);
-  font-size: 1.3em;
+  color: rgba(235, 235, 245, 0.65);
+  font-size: var(--fontSizeQuaternary);
   font-weight: var(--fontSizeTertiary);
   line-height: 1.2307692308;
   margin: 0;
 
   @media only screen and (min-width: 768px) {
-    font-size: 2.1em;
+    font-size: var(--fontSizeTertiary);
   }
 `;
 
@@ -64,16 +65,17 @@ export const P = styled.p`
   letter-spacing: 0.004em;
   margin: 0 0 var(--spaceM);
 `;
+
 export const A = styled.a`
-  color: var(--primaryText);
+  color: var(--primaryBlurText);
   display: flex;
   text-decoration: none;
   align-items: center;
-  line-height: 1.125rem;
+  line-height: 1.2307692308;
   padding: 6px;
   border-radius: 13px;
-  font-size: 15px;
-  font-weight: var(--fontWeightPrimary);
+  font-size: var(--fontSizeQuaternary);
+  font-weight: var(--fontWeightSecondary);
 
   &:hover,
   &:focus {

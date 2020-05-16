@@ -1,42 +1,8 @@
-import styled from "styled-components";
-import { A } from "./Typograhy";
-import Icon from "./Icon";
-import { ContactListData } from "../../data/index";
-import { motion, AnimatePresence } from "framer-motion";
-
-export const MenuBlocker = styled.div`
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  position: fixed;
-  z-index: 99;
-`;
-
-const PopoverList = styled(motion.ul)`
-  padding: 6px;
-  overflow: hidden;
-  border-radius: 19px;
-  box-shadow: 0px 20px 40px -12px rgba(0, 0, 0, 0.25);
-  background-color: #333;
-  position: absolute;
-  z-index: 100;
-  top: 50px;
-  right: 20px;
-  min-width: 156px;
-  margin: 0;
-`;
-
-const PopoverListItem = styled.li`
-  :not(:first-child) {
-    margin-top: 6px;
-  }
-`;
-
-const PopoverListItemLabel = styled.span`
-  display: flex;
-  margin-left: 10px;
-`;
+import { A } from "../Typograhy";
+import Icon from "../Icon";
+import { ContactListData } from "../../../data/index";
+import { AnimatePresence } from "framer-motion";
+import { PopoverList, PopoverListItem, PopoverListItemLabel } from "./style";
 
 export default function Popover({ isVisible }) {
   return (

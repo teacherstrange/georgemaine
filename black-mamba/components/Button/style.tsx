@@ -7,7 +7,7 @@ const base = css`
   font-size: var(--fontSizeQuaternary);
   font-weight: var(--fontWeightSecondary);
   justify-content: center;
-  padding: 4px 12px;
+  padding: var(--spaceXXS) 12px;
   border-radius: 13px;
   transition: color 200ms ease;
   letter-spacing: -0.08px;
@@ -24,13 +24,13 @@ const base = css`
 
 export const Button = styled.button`
   ${base}
-  color: var(--primaryText);
+  color: var(--primaryTextLight);
   background-color: var(--blue);
   width: max-content;
   text-align: center;
 
   &:hover {
-    background-color: #08f;
+    background-color: var(--darkerBlue);
   }
 
   &:active,
@@ -44,8 +44,6 @@ export const Button = styled.button`
 
 export const OpaqueButton = styled.button`
   ${base}
-    color: ${(props: { isAnimated: Boolean }) =>
-      props.isAnimated ? "#111" : "var(--primaryText)"};
   border-radius: 18px;
   position: relative;
   z-index: 2;
@@ -54,12 +52,21 @@ export const OpaqueButton = styled.button`
   white-space: nowrap;
   min-width: 152px;
 
+  @media screen and (prefers-color-scheme: dark) {
+    color: ${(props: { isAnimated: Boolean }) =>
+      props.isAnimated ? "var(--primaryTextDark)" : "var(--primaryTextLight)"};
+  }
+
+  @media screen and (prefers-color-scheme: light) {
+    color: ${(props: { isAnimated: Boolean }) =>
+      props.isAnimated ? "var(--primaryTextLight)" : "var(--primaryTextDark)"};
+  }
 `;
 
 export const PopUpButtonChevron = styled.span`
   transform: ${(props: { animated: boolean }) =>
     props.animated ? "rotate(180deg)" : ""};
-  margin: 0 0 0 8px;
+  margin: 0 0 0 var(--spaceXS);
   transition: transform 100ms ease;
   display: flex;
   align-items: center;

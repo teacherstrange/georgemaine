@@ -81,7 +81,7 @@ export const VideoCaptionListItem = styled.li`
     width: 4px;
     height: 4px;
     border-radius: 6px;
-    background: rgba(235, 235, 245, 0.6);
+    background: var(--secondaryTextLight);
   }
 
   @media only screen and (min-width: 768px) {

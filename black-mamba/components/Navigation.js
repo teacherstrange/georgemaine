@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Logo from "./Logo";
+import Icon from "./Icon";
 import { P } from "./Typograhy";
 import { MenuList } from "../../data";
 import { SegmentedControl } from "./SegmentedControl";
@@ -25,8 +25,8 @@ const NavigationLogoContainer = styled.div`
 const NavigationHeadline = styled(P)`
   font-weight: var(--fontWeightPrimary);
   font-size: var(--fontSizeQuaternary);
-  color: #fff;
-  margin: 0 0 0 8px;
+  color: var(--white);
+  margin: 0 0 0 var(--spaceXXS);
 `;
 
 export default ({
@@ -42,7 +42,7 @@ export default ({
   return (
     <NavigationContainer>
       <NavigationLogoContainer>
-        <Logo />
+        <Icon glyph="Logo" />
         <NavigationHeadline>Georgemaine</NavigationHeadline>
       </NavigationLogoContainer>
       <SegmentedControl

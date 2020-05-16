@@ -5,10 +5,10 @@ export const Container = styled.header`
   justify-content: space-between;
   max-width: 100%;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 24px;
   height: 34px;
   position: sticky;
-  top: 20px;
+  top: 24px;
   z-index: 10;
 `;
 

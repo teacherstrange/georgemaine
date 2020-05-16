@@ -42,42 +42,23 @@
   src: url("/fonts/Sohne-Fett.woff");
 }
 
-@media screen and (prefers-color-scheme: dark) {
-  body {
-    --background: hsl(0, 0%, 9%);
-    --blendingBackground: darken;
-    --blendingBackgroundFill: hsl(0, 0%, 95%);
-    --primaryText: hsl(0, 0%, 95%);
-    --secondaryText: hsl(0, 0%, 60%);
-    --containerBackground: hsla(0, 0%, 67%, 0.16);
-    --containerBackgroundHover: hsla(0, 0%, 67%, 0.32);
-    --borderRule: hsla(0, 0%, 0%, 0.28);
-  }
-}
-
-@media screen and (prefers-color-scheme: light) {
-  body {
-    --background: hsl(0, 0%, 95%);
-    --blendingBackground: lighten;
-    --blendingBackgroundFill: hsl(0, 0%, 9%);
-    --primaryText: hsl(0, 0%, 9%);
-    --secondaryText: hsl(0, 0%, 40%);
-    --containerBackground: hsl(0, 0%, 100%);
-    --containerBackgroundHover: hsl(0, 0%, 100%);
-    --borderRule: hsla(0, 0%, 0%, 0.07);
-  }
-}
-
 :root {
+  --white: #fff;
+  --black: #000;
   --blue: hsl(216, 100%, 50%);
+  --darkerBlue: hsl(220, 100%, 50%);
   --green: hsl(161, 100%, 39%);
   --purple: hsl(290, 100%, 60%);
   --red: hsl(13, 100%, 46%);
   --yellow: hsl(42, 100%, 50%);
+  --primaryTextLight: hsla(0, 0%, 100%, 95%);
+  --primaryTextDark: hsla(0, 0%, 0%, 96%);
+  --secondaryTextLight: hsla(0, 0%, 100%, 65%);
+  --blur: blur(16px);
   --fontSizePrimary: 7.3em;
   --fontSizeSecondary: 3.6em;
-  --fontSizeTertiary: 2.2em;
-  --fontSizeQuaternary: 1.4em;
+  --fontSizeTertiary: 2.1em;
+  --fontSizeQuaternary: 1.3em;
   --fontWeightPrimary: 800;
   --fontWeightSecondary: 600;
   --fontWeightTertiary: 500;
@@ -91,6 +72,21 @@
   --spaceXXS: 4px;
 }
 
+@media screen and (prefers-color-scheme: dark) {
+  body {
+    --blurBg: rgba(38, 38, 38, 0.73);
+    --primaryBlurText: var(--primaryTextLight);
+    --saturate: saturate(160%);
+  }
+}
+
+@media screen and (prefers-color-scheme: light) {
+  body {
+    --blurBg: hsla(0, 0%, 99%, 80%);
+    --primaryBlurText: var(--primaryTextDark);
+    --saturate: saturate(110%);
+  }
+}
 body {
   font-family: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
