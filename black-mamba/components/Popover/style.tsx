@@ -14,7 +14,7 @@ export const PopoverList = styled(motion.ul)`
   padding: 6px;
   overflow: hidden;
   border-radius: 19px;
-  box-shadow: 0px 20px 40px -12px rgba(0, 0, 0, 0.35);
+  box-shadow: 0px 10px 100px 0px rgba(0, 0, 0, 0.35);
   background-color: var(--blurBg);
   -webkit-backdrop-filter: var(--blur);
   backdrop-filter: var(--blur);

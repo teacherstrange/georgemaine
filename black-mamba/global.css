@@ -1,12 +1,3 @@
-::selection {
-  color: #fff;
-  background: #ffc1a9;
-}
-
-::-moz-selection {
-  background: #ffc1a9;
-}
-
 @font-face {
   font-family: "Söhne";
   font-weight: normal;

@@ -47,7 +47,7 @@ export const H3 = styled.h3`
 `;
 
 export const Caption = styled.p`
-  color: rgba(235, 235, 245, 0.65);
+  color: var(--primaryTextLight);
   font-size: var(--fontSizeQuaternary);
   font-weight: var(--fontSizeTertiary);
   line-height: 1.2307692308;
@@ -77,10 +77,23 @@ export const A = styled.a`
   font-size: var(--fontSizeQuaternary);
   font-weight: var(--fontWeightSecondary);
 
-  &:hover,
-  &:focus {
-    background-color: rgba(255, 255, 255, 0.14);
-    cursor: pointer;
-    outline: none;
+  @media screen and (prefers-color-scheme: light) {
+    &:hover,
+    &:focus {
+      background-color: var(--black);
+      color: var(--primaryTextLight);
+      cursor: pointer;
+      outline: none;
+    }
+  }
+
+  @media screen and (prefers-color-scheme: dark) {
+    &:hover,
+    &:focus {
+      background-color: hsl(0, 0%, 21%);
+      color: var(--primaryTextLight);
+      cursor: pointer;
+      outline: none;
+    }
   }
 `;
