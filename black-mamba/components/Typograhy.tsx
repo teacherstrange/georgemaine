@@ -5,8 +5,9 @@ export const H1 = styled.h1`
   font-weight: var(--fontWeightPrimary);
   font-size: var(--fontSizeSecondary);
   line-height: 1.125;
-  margin: 0 0 var(--spaceS);
-  letter-spacing: -0.005em;
+  margin: 0 0 var(--spaceXS);
+  letter-spacing: -0.04em;
+  text-align: center;
 
   @media only screen and (min-width: 768px) {
     font-size: var(--fontSizePrimary);
@@ -44,8 +45,8 @@ export const H3 = styled.h3`
 `;
 
 export const Caption = styled.p`
-  color: var(--secondaryText);
-  font-size: 1.4em;
+  color: rgba(235, 235, 245, 0.6);
+  font-size: 1.2em;
   font-weight: var(--fontSizeTertiary);
   line-height: 2.1538461538;
   margin: 0;

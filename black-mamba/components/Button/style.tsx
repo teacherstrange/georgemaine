@@ -5,7 +5,7 @@ const base = css`
   display: flex;
   align-items: center;
   font-size: var(--fontSizeQuaternary);
-  font-weight: var(--fontWeightPrimary);
+  font-weight: var(--fontWeightSecondary);
   justify-content: center;
   padding: 4px 12px;
   border-radius: 13px;

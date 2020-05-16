@@ -10,6 +10,7 @@ export type MenuItem = {
 export type GalleryItemType = {
   headline: string;
   details: GalleryMetaDataType[];
+  video: string;
 };
 
 type GalleryMetaDataType = {
@@ -30,6 +31,7 @@ export const galleryListData: GalleryItemType[] = [
         metaData: "2019",
       },
     ],
+    video: "/videos/mollie-mobile-video.mp4",
   },
 
   {
@@ -39,12 +41,13 @@ export const galleryListData: GalleryItemType[] = [
         metaData: "Design, Animation",
       },
       {
-        metaData: "Promotion Video",
+        metaData: "Promo Video",
       },
       {
         metaData: "2020",
       },
     ],
+    video: "/videos/mollie-promo-video.mp4",
   },
   {
     headline: "Mollie Checkout",
@@ -59,6 +62,7 @@ export const galleryListData: GalleryItemType[] = [
         metaData: "2020",
       },
     ],
+    video: "/videos/mollie-checkout-video.mp4",
   },
   {
     headline: "Mollie Apple Pay",
@@ -67,12 +71,13 @@ export const galleryListData: GalleryItemType[] = [
         metaData: "Design, Animation",
       },
       {
-        metaData: "Web App, Promotion Video",
+        metaData: "Web App, Promo Video",
       },
       {
         metaData: "2019",
       },
     ],
+    video: "/videos/mollie-apple-pay-video.mp4",
   },
 ];
 export const ContactListData: LinkData[] = [

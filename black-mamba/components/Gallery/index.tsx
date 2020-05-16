@@ -1,6 +1,7 @@
 import { ContentGalleryContainer } from "./style";
 import { GalleryItem } from "./GalleryItem";
 import { GalleryItemType } from "../../../data";
+import { useEffect } from "react";
 
 interface Props {
   galleryList: GalleryItemType[];
@@ -16,7 +17,9 @@ export default function Gallery(props: Props) {
         return (
           <GalleryItem
             currentGalleryItem={currentGalleryItem === index}
+            pressedMenuItem={currentGalleryItem}
             key={index}
+            galleryItemIndex={index}
             galleryItem={galleryItem}
           />
         );

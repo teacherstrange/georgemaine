@@ -35,6 +35,13 @@
   src: url("/fonts/Sohne-Dreiviertelfett.woff");
 }
 
+@font-face {
+  font-family: "Söhne";
+  font-weight: 800;
+  font-style: normal;
+  src: url("/fonts/Sohne-Fett.woff");
+}
+
 @media screen and (prefers-color-scheme: dark) {
   body {
     --background: hsl(0, 0%, 9%);
@@ -67,11 +74,11 @@
   --purple: hsl(290, 100%, 60%);
   --red: hsl(13, 100%, 46%);
   --yellow: hsl(42, 100%, 50%);
-  --fontSizePrimary: 6.8em;
-  --fontSizeSecondary: 3.2em;
+  --fontSizePrimary: 7.3em;
+  --fontSizeSecondary: 3.6em;
   --fontSizeTertiary: 2.2em;
   --fontSizeQuaternary: 1.4em;
-  --fontWeightPrimary: 700;
+  --fontWeightPrimary: 800;
   --fontWeightSecondary: 600;
   --fontWeightTertiary: 500;
   --fontWeightQuaternary: 400;

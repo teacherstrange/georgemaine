@@ -5,6 +5,7 @@ export const ContentGalleryContainer = styled.div`
   height: 100vh;
   overflow: hidden;
   position: relative;
+  background-color: #000;
 `;
 
 export const GalleryItem = styled.div`
@@ -18,6 +19,23 @@ export const GalleryItem = styled.div`
   width: 100%;
   height: 100%;
   transition: opacity 0.6s;
+
+  &::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    background: linear-gradient(
+      to bottom,
+      transparent 50%,
+      rgba(0, 0, 0, 0.1) 60%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+  }
 `;
 
 export const VideoCaption = styled.div`
@@ -35,6 +53,7 @@ export const VideoCaption = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 10;
 `;
 
 export const VideoCaptionList = styled.ul`
@@ -67,6 +86,6 @@ export const VideoCaptionListItem = styled.li`
     width: 4px;
     height: 4px;
     border-radius: 6px;
-    background: #999;
+    background: rgba(255, 255, 255, 0.35);
   }
 `;
