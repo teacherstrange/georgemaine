@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-export const GalleryContainer = styled.div`
-  background-color: #000;
-`;
-
 export const GalleryItem = styled.div`
   opacity: ${(props: { currentGalleryItem: boolean }) =>
     props.currentGalleryItem ? "1" : "0"};

@@ -1,4 +1,3 @@
-import { GalleryContainer } from "./style";
 import { GalleryItem } from "./GalleryItem";
 import { GalleryItemType } from "../../../data";
 
@@ -11,7 +10,7 @@ export default function Gallery(props: Props) {
   const { galleryList, currentGalleryItem } = props;
 
   return (
-    <GalleryContainer>
+    <section>
       {galleryList.map((galleryItem, index) => {
         return (
           <GalleryItem
@@ -23,6 +22,6 @@ export default function Gallery(props: Props) {
           />
         );
       })}
-    </GalleryContainer>
+    </section>
   );
 }
