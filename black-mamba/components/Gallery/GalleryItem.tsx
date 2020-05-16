@@ -1,5 +1,5 @@
 import * as style from "./style";
-import { H1, Caption } from "../Typograhy";
+import { H1, Caption } from "../Typography";
 import { GalleryItemType } from "../../../data";
 import { Video } from "../Video";
 

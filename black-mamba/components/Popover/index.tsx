@@ -1,4 +1,4 @@
-import { A } from "../Typograhy";
+import { A } from "../Typography";
 import Icon from "../Icon";
 import { ContactListData } from "../../../data/index";
 import { AnimatePresence } from "framer-motion";
