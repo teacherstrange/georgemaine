@@ -1,7 +1,6 @@
-import { ContentGalleryContainer } from "./style";
+import { GalleryContainer } from "./style";
 import { GalleryItem } from "./GalleryItem";
 import { GalleryItemType } from "../../../data";
-import { useEffect } from "react";
 
 interface Props {
   galleryList: GalleryItemType[];
@@ -12,7 +11,7 @@ export default function Gallery(props: Props) {
   const { galleryList, currentGalleryItem } = props;
 
   return (
-    <ContentGalleryContainer>
+    <GalleryContainer>
       {galleryList.map((galleryItem, index) => {
         return (
           <GalleryItem
@@ -24,6 +23,6 @@ export default function Gallery(props: Props) {
           />
         );
       })}
-    </ContentGalleryContainer>
+    </GalleryContainer>
   );
 }
