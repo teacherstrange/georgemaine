@@ -48,7 +48,7 @@ export const VideoCaption = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 10;
+  z-index: 2;
 `;
 
 export const VideoCaptionList = styled.ul`
