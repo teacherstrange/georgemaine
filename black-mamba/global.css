@@ -1,38 +1,3 @@
-@font-face {
-  font-family: "Söhne";
-  font-weight: normal;
-  font-style: normal;
-  src: url("/fonts/Sohne-Buch.woff");
-}
-
-@font-face {
-  font-family: "Söhne";
-  font-weight: 500;
-  font-style: normal;
-  src: url("/fonts/Sohne-Kraftig.woff");
-}
-
-@font-face {
-  font-family: "Söhne";
-  font-weight: 600;
-  font-style: normal;
-  src: url("/fonts/Sohne-Halbfett.woff");
-}
-
-@font-face {
-  font-family: "Söhne";
-  font-weight: 700;
-  font-style: normal;
-  src: url("/fonts/Sohne-Dreiviertelfett.woff");
-}
-
-@font-face {
-  font-family: "Söhne";
-  font-weight: 800;
-  font-style: normal;
-  src: url("/fonts/Sohne-Fett.woff");
-}
-
 :root {
   --white: #fff;
   --black: #000;
@@ -50,10 +15,6 @@
   --fontSizeSecondary: 3.6em;
   --fontSizeTertiary: 2.1em;
   --fontSizeQuaternary: 1.3em;
-  --fontWeightPrimary: 800;
-  --fontWeightSecondary: 600;
-  --fontWeightTertiary: 500;
-  --fontWeightQuaternary: 400;
   --spaceXXL: 120px;
   --spaceXL: 92px;
   --spaceL: 64px;
@@ -61,6 +22,57 @@
   --spaceS: 16px;
   --spaceXS: 8px;
   --spaceXXS: 4px;
+}
+
+/* Typefaces */
+
+@font-face {
+  font-family: "Interphases";
+  font-weight: 400;
+  font-style: normal;
+  src: url("/fonts/InterphasesRegular.woff") format("woff"),
+    url("/fonts/InterphasesRegular.woff2") format("woff2"),
+    url("/fonts/InterphasesRegular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Interphases";
+  font-weight: 400;
+  font-style: italic;
+  src: url("/fonts/InterphasesItalic.woff") format("woff"),
+    url("/fonts/InterphasesItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Interphases";
+  font-weight: 600;
+  font-style: normal;
+  src: url("/fonts/InterphasesDemiBold.woff") format("woff"),
+    url("/fonts/InterphasesDemiBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Interphases";
+  font-weight: 600;
+  font-style: italic;
+  src: url("/fonts/InterphasesDemiBoldItalic.woff") format("woff"),
+    url("/fonts/InterphasesDemiBoldItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Interphases";
+  font-weight: 700;
+  font-style: normal;
+  src: url("/fonts/InterphasesBold.woff") format("woff"),
+    url("/fonts/InterphasesBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Interphases";
+  font-weight: 700;
+  font-style: italic;
+  src: url("/fonts/InterphasesBoldItalic.woff") format("woff"),
+    url("/fonts/InterphasesBoldItalic.woff2") format("woff2");
 }
 
 @media screen and (prefers-color-scheme: dark) {
@@ -78,17 +90,19 @@
     --saturate: saturate(110%);
   }
 }
+
 body {
-  font-family: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
+  font-family: "Interphases", sans-serif;
   background: var(--background);
   color: var(--primaryText);
+  font-weight: 400;
   font-size: 62.5%;
   -webkit-font-kerning: normal;
   font-kerning: normal;
   -ms-font-feature-settings: "kern", "liga", "clig", "calt";
   font-feature-settings: "kern", "liga", "clig", "calt";
+  text-rendering: optimizelegibility;
+  font-variant-ligatures: common-ligatures;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;

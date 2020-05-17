@@ -4,8 +4,9 @@ const base = css`
   -webkit-appearance: none;
   display: flex;
   align-items: center;
+  font-family: "Interphases";
   font-size: var(--fontSizeQuaternary);
-  font-weight: var(--fontWeightSecondary);
+  font-weight: 600;
   justify-content: center;
   padding: var(--spaceXXS) 12px;
   border-radius: 13px;

@@ -16,6 +16,8 @@ const Base = css`
   backdrop-filter: var(--blur);
   -webkit-filter: var(--saturate);
   filter: var(--saturate);
+  font-family: inherit;
+  font-weight: var(--fontWeightQuaternary);
 `;
 
 const ItemBase = css`

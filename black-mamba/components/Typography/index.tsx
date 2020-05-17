@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const H1 = styled.h1`
   color: var(--primaryText);
-  font-weight: var(--fontWeightPrimary);
+  font-weight: 700;
   font-size: var(--fontSizeSecondary);
   line-height: 1.125;
   margin: 0 0 var(--spaceXS);
-  letter-spacing: -0.04em;
+  letter-spacing: -0.025em;
   text-align: center;
   color: var(--primaryTextLight);
 
@@ -19,7 +19,7 @@ export const H1 = styled.h1`
 
 export const H2 = styled.h2`
   color: var(--primaryText);
-  font-weight: var(--fontWeightPrimary);
+  font-weight: 700;
   font-size: var(--fontSizeTertiary);
   line-height: 1.18181818;
   letter-spacing: 0;
@@ -34,7 +34,7 @@ export const H2 = styled.h2`
 
 export const H3 = styled.h3`
   color: var(--primaryText);
-  font-weight: var(--fontWeightSecondary);
+  font-weight: 700;
   font-size: var(--fontSizeQuaternary);
   line-height: 1.5294117647;
   letter-spacing: 0.004em;
@@ -47,9 +47,9 @@ export const H3 = styled.h3`
 `;
 
 export const Caption = styled.p`
-  color: var(--primaryTextLight);
+  color: var(--secondaryTextLight);
   font-size: var(--fontSizeQuaternary);
-  font-weight: var(--fontSizeTertiary);
+  font-weight: 400;
   line-height: 1.2307692308;
   margin: 0;
 
@@ -61,6 +61,7 @@ export const Caption = styled.p`
 export const P = styled.p`
   color: var(--secondaryText);
   font-size: var(--fontSizeQuaternary);
+  font-weight: var(--regular);
   line-height: 1.5294117647;
   letter-spacing: 0.004em;
   margin: 0 0 var(--spaceM);
@@ -68,6 +69,8 @@ export const P = styled.p`
 
 export const A = styled.a`
   color: var(--primaryBlurText);
+  font-weight: 600;
+  font-family: inherit;
   display: flex;
   text-decoration: none;
   align-items: center;
@@ -75,7 +78,7 @@ export const A = styled.a`
   padding: 6px;
   border-radius: 13px;
   font-size: var(--fontSizeQuaternary);
-  font-weight: var(--fontWeightSecondary);
+  font-weight: 600;
 
   @media screen and (prefers-color-scheme: light) {
     &:hover,
