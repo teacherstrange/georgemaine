@@ -25,7 +25,7 @@ export const MobileActiveItemVariants = {
     width: 132,
   },
   fourth: {
-    x: 404,
+    x: 403,
     width: 154,
   },
 };
