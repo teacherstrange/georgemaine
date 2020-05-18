@@ -43,7 +43,7 @@ export const Container = styled.ul`
   justify-content: center;
   position: relative;
   flex: 1;
-  max-width: 636px;
+  max-width: 672px;
   justify-content: center;
   align-items: center;
   padding: var(--spaceXXS);

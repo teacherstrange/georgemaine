@@ -11,7 +11,6 @@ export type GalleryItemType = {
   headline: string;
   details: GalleryMetaDataType[];
   video: string;
-  retinaVideo?: string;
   poster?: string;
 };
 
@@ -33,8 +32,7 @@ export const galleryListData: GalleryItemType[] = [
         metaData: "2020",
       },
     ],
-    video: "/videos/mollie-mobile.mp4",
-    retinaVideo: "/videos/mollie-mobile-2x.mp4",
+    video: "/videos/mollie-mobile-2x.mp4",
     poster: "/images/mollie-mobile-poster.jpg",
   },
 
