@@ -25,7 +25,7 @@ export const galleryListData: GalleryItemType[] = [
         metaData: "Designed iOS & Android apps",
       },
       {
-        metaData: "Designed and built landing page",
+        metaData: "Designed and built web page",
       },
       {
         metaData: "2020",
@@ -38,7 +38,7 @@ export const galleryListData: GalleryItemType[] = [
     headline: "Mollie Promo Video",
     details: [
       {
-        metaData: "Designed and animated promo video for events",
+        metaData: "Designed and animated promo video",
       },
       {
         metaData: "2020",

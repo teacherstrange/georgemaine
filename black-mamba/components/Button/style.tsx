@@ -6,12 +6,12 @@ const base = css`
   align-items: center;
   font-family: "GT Haptik";
   font-size: var(--fontSizeQuaternary);
-  font-weight: 600;
+  font-weight: 700;
   justify-content: center;
   padding: var(--spaceXXS) 12px;
   border-radius: 13px;
-  transition: color 200ms ease;
-  letter-spacing: -0.08px;
+  transition: color 0.2s;
+  letter-spacing: 0.012em;
   border: none;
   line-height: 1.5384615385;
   margin: 0;
