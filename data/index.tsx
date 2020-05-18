@@ -11,6 +11,8 @@ export type GalleryItemType = {
   headline: string;
   details: GalleryMetaDataType[];
   video: string;
+  retinaVideo?: string;
+  poster?: string;
 };
 
 type GalleryMetaDataType = {
@@ -31,7 +33,9 @@ export const galleryListData: GalleryItemType[] = [
         metaData: "2020",
       },
     ],
-    video: "/videos/mollie-mobile-video.mp4",
+    video: "/videos/mollie-mobile.mp4",
+    retinaVideo: "/videos/mollie-mobile-2x.mp4",
+    poster: "/images/mollie-mobile-poster.jpg",
   },
 
   {
@@ -45,6 +49,7 @@ export const galleryListData: GalleryItemType[] = [
       },
     ],
     video: "/videos/mollie-promo-video.mp4",
+    poster: "",
   },
   {
     headline: "Mollie Checkout",
@@ -57,6 +62,7 @@ export const galleryListData: GalleryItemType[] = [
       },
     ],
     video: "/videos/mollie-checkout-video.mp4",
+    poster: "",
   },
   {
     headline: "Mollie & Apple Pay",
@@ -69,6 +75,7 @@ export const galleryListData: GalleryItemType[] = [
       },
     ],
     video: "/videos/mollie-apple-pay-video.mp4",
+    poster: "",
   },
 ];
 export const ContactListData: LinkData[] = [

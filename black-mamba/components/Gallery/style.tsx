@@ -20,6 +20,7 @@ export const GalleryItem = styled.div`
     right: 0;
     bottom: 0;
     z-index: 1;
+    webkit-mask-image: linear-gradient(to bottom, transparent 50%, #000 75%);
     background: linear-gradient(
       to bottom,
       transparent 50%,
