@@ -1,13 +1,34 @@
 import styled, { css, keyframes } from "styled-components";
+import { OpaqueButton } from "../Button";
+import { motion } from "framer-motion";
 
 const slideIn = keyframes`
   from {
     max-width: 0;
   }
   to {
-    max-width: 608px;
+    max-width: 562px;
   }
 `;
+
+export const MobileActiveItemVariants = {
+  first: {
+    x: 4,
+    width: 116,
+  },
+  second: {
+    x: 120,
+    width: 158,
+  },
+  third: {
+    x: 278,
+    width: 132,
+  },
+  fourth: {
+    x: 404,
+    width: 154,
+  },
+};
 
 const Base = css`
   background-color: var(--blurBg);
@@ -62,7 +83,7 @@ export const MobileContainer = styled.footer`
   overflow: hidden;
   bottom: 32px;
   height: 36px;
-  padding: 0 var(--spaceXS);
+  padding: 0 24px;
 
   @media (min-width: 1024px) {
     display: none;
@@ -74,7 +95,6 @@ export const MobileTabsContainer = styled.div`
   -webkit-overflow-scrolling: touch;
   position: relative;
   display: flex;
-  /* justify-content: flex-end; */
   overflow-x: scroll;
   align-items: center;
   width: 100%;
@@ -107,14 +127,11 @@ export const ActiveItemBackground = styled.div<Props>`
       : `calc(${props.currentPosition} * 25%)`};
 `;
 
-export const MobileActiveItemBackground = styled.div<Props>`
+export const MobileActiveItemBackground = styled(motion.div)`
   ${ItemBase}
-  width: 152px;
+`;
 
-  left: ${(props) =>
-    props.currentPosition === 0
-      ? "4px"
-      : props.currentPosition === props.menuList - 1
-      ? `calc(${props.currentPosition} * 152px - 4px)`
-      : `calc(${props.currentPosition} * 152px)`};
+export const MobileOpaqueButton = styled(OpaqueButton)`
+  padding: 0 12px;
+  min-width: initial;
 `;

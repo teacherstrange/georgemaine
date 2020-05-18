@@ -13,7 +13,7 @@ const base = css`
   transition: color 0.2s;
   letter-spacing: 0.012em;
   border: none;
-  line-height: 1.5384615385;
+  line-height: 1.4285714286;
   margin: 0;
 
   &:hover,
@@ -30,7 +30,7 @@ export const Button = styled.button`
   width: max-content;
   text-align: center;
   transition: all 0.2s;
-  line-height: 2.1538461538;
+  line-height: 2;
   border-radius: 24px;
   padding: var(--spaceXXS) 16px;
 
