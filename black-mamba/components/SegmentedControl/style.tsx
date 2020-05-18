@@ -5,7 +5,7 @@ const slideIn = keyframes`
     max-width: 0;
   }
   to {
-    max-width: 600px;
+    max-width: 608px;
   }
 `;
 
@@ -62,7 +62,7 @@ export const MobileContainer = styled.footer`
   overflow: hidden;
   bottom: 32px;
   height: 36px;
-  padding: 0 24px;
+  padding: 0 var(--spaceXS);
 
   @media (min-width: 1024px) {
     display: none;
@@ -74,6 +74,7 @@ export const MobileTabsContainer = styled.div`
   -webkit-overflow-scrolling: touch;
   position: relative;
   display: flex;
+  /* justify-content: flex-end; */
   overflow-x: scroll;
   align-items: center;
   width: 100%;

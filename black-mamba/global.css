@@ -1,7 +1,7 @@
 :root {
   --white: #fff;
   --black: #000;
-  --blue: hsl(216, 100%, 50%);
+  --blue: hsl(212, 100%, 50%);
   --darkerBlue: hsl(220, 100%, 50%);
   --green: hsl(161, 100%, 39%);
   --purple: hsl(290, 100%, 60%);
@@ -10,11 +10,11 @@
   --primaryTextLight: hsla(0, 0%, 100%, 95%);
   --primaryTextDark: hsla(0, 0%, 0%, 96%);
   --secondaryTextLight: hsla(0, 0%, 100%, 65%);
-  --blur: blur(16px);
+  --blur: blur(20px);
   --fontSizePrimary: 7.3em;
   --fontSizeSecondary: 3.6em;
   --fontSizeTertiary: 2.1em;
-  --fontSizeQuaternary: 1.3em;
+  --fontSizeQuaternary: 1.4em;
   --spaceXXL: 120px;
   --spaceXL: 92px;
   --spaceL: 64px;
@@ -27,72 +27,65 @@
 /* Typefaces */
 
 @font-face {
-  font-family: "Interphases";
+  font-family: "GT Haptik";
   font-weight: 400;
   font-style: normal;
-  src: url("/fonts/InterphasesRegular.woff") format("woff"),
-    url("/fonts/InterphasesRegular.woff2") format("woff2"),
-    url("/fonts/InterphasesRegular.ttf") format("truetype");
+  src: url("/fonts/GT-Haptik-Regular.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Interphases";
+  font-family: "GT Haptik";
   font-weight: 400;
-  font-style: italic;
-  src: url("/fonts/InterphasesItalic.woff") format("woff"),
-    url("/fonts/InterphasesItalic.woff2") format("woff2");
+  font-style: oblique;
+  src: url("/fonts/GT-Haptik-Regular-Oblique.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Interphases";
+  font-family: "GT Haptik";
   font-weight: 600;
   font-style: normal;
-  src: url("/fonts/InterphasesDemiBold.woff") format("woff"),
-    url("/fonts/InterphasesDemiBold.woff2") format("woff2");
+  src: url("/fonts/GT-Haptik-Medium.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Interphases";
+  font-family: "GT Haptik";
   font-weight: 600;
-  font-style: italic;
-  src: url("/fonts/InterphasesDemiBoldItalic.woff") format("woff"),
-    url("/fonts/InterphasesDemiBoldItalic.woff2") format("woff2");
+  font-style: oblique;
+  src: url("/fonts/GT-Haptik-Medium-Oblique.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Interphases";
+  font-family: "GT Haptik";
   font-weight: 700;
   font-style: normal;
-  src: url("/fonts/InterphasesBold.woff") format("woff"),
-    url("/fonts/InterphasesBold.woff2") format("woff2");
+  src: url("/fonts/GT-Haptik-Bold.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Interphases";
+  font-family: "GT Haptik";
   font-weight: 700;
-  font-style: italic;
-  src: url("/fonts/InterphasesBoldItalic.woff") format("woff"),
-    url("/fonts/InterphasesBoldItalic.woff2") format("woff2");
+  font-style: oblique;
+  src: url("/fonts/GT-Haptik-Bold-Oblique.woff2") format("woff2");
 }
 
 @media screen and (prefers-color-scheme: dark) {
   body {
     --blurBg: rgba(38, 38, 38, 0.73);
     --primaryBlurText: var(--primaryTextLight);
-    --saturate: saturate(160%);
+    --saturate: saturate(180%);
   }
 }
 
 @media screen and (prefers-color-scheme: light) {
   body {
-    --blurBg: hsla(0, 0%, 99%, 80%);
+    --blurBg: hsla(0, 0%, 100%, 60%);
     --primaryBlurText: var(--primaryTextDark);
-    --saturate: saturate(110%);
+    --saturate: saturate(180%);
   }
 }
 
 body {
-  font-family: "Interphases", sans-serif;
+  font-family: "GT Haptik", sans-serif;
   background: var(--background);
   color: var(--primaryText);
   font-weight: 400;

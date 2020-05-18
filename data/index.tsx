@@ -22,13 +22,13 @@ export const galleryListData: GalleryItemType[] = [
     headline: "Mollie Mobile",
     details: [
       {
-        metaData: "Design, Front End",
+        metaData: "Designed iOS & Android apps",
       },
       {
-        metaData: "iOS, Android, Landing Page",
+        metaData: "Designed and built landing page",
       },
       {
-        metaData: "2019",
+        metaData: "2020",
       },
     ],
     video: "/videos/mollie-mobile-video.mp4",
@@ -38,10 +38,7 @@ export const galleryListData: GalleryItemType[] = [
     headline: "Mollie Promo Video",
     details: [
       {
-        metaData: "Design, Animation",
-      },
-      {
-        metaData: "Promo Video",
+        metaData: "Designed and animated promo video for events",
       },
       {
         metaData: "2020",
@@ -53,10 +50,7 @@ export const galleryListData: GalleryItemType[] = [
     headline: "Mollie Checkout",
     details: [
       {
-        metaData: "Design, Front End",
-      },
-      {
-        metaData: "Web App",
+        metaData: "Redesigned and built the Mollie Checkout",
       },
       {
         metaData: "2020",
@@ -65,13 +59,10 @@ export const galleryListData: GalleryItemType[] = [
     video: "/videos/mollie-checkout-video.mp4",
   },
   {
-    headline: "Mollie Apple Pay",
+    headline: "Mollie & Apple Pay",
     details: [
       {
-        metaData: "Design, Animation",
-      },
-      {
-        metaData: "Web App, Promo Video",
+        metaData: "Designed and animated the promo video",
       },
       {
         metaData: "2019",
@@ -107,5 +98,5 @@ export const MenuList: MenuItem[] = [
   { name: "Mollie Mobile" },
   { name: "Mollie Promo Video" },
   { name: "Mollie Checkout" },
-  { name: "Apple Pay Video" },
+  { name: "Mollie & Apple Pay" },
 ];

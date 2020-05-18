@@ -5,8 +5,8 @@ export const H1 = styled.h1`
   font-weight: 700;
   font-size: var(--fontSizeSecondary);
   line-height: 1.125;
-  margin: 0 0 var(--spaceXS);
-  letter-spacing: -0.025em;
+  margin: 0 0 var(--spaceXXS);
+  letter-spacing: -0.0325em;
   text-align: center;
   color: var(--primaryTextLight);
 
@@ -50,7 +50,8 @@ export const Caption = styled.p`
   color: var(--secondaryTextLight);
   font-size: var(--fontSizeQuaternary);
   font-weight: 400;
-  line-height: 1.2307692308;
+  line-height: 1.5714285714;
+  letter-spacing: 0.012em;
   margin: 0;
 
   @media only screen and (min-width: 768px) {

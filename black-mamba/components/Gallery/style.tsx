@@ -33,7 +33,7 @@ export const VideoCaption = styled.div`
   margin-left: auto;
   margin-right: auto;
   width: calc(100% - 48px);
-  max-width: 620px;
+  max-width: 680px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

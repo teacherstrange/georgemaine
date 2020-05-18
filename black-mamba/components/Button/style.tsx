@@ -4,7 +4,7 @@ const base = css`
   -webkit-appearance: none;
   display: flex;
   align-items: center;
-  font-family: "Interphases";
+  font-family: "GT Haptik";
   font-size: var(--fontSizeQuaternary);
   font-weight: 600;
   justify-content: center;
@@ -13,7 +13,7 @@ const base = css`
   transition: color 200ms ease;
   letter-spacing: -0.08px;
   border: none;
-  line-height: 1.4285714286;
+  line-height: 1.5384615385;
   margin: 0;
 
   &:hover,
@@ -29,15 +29,20 @@ export const Button = styled.button`
   background-color: var(--blue);
   width: max-content;
   text-align: center;
+  transition: all 0.2s;
+  line-height: 2.1538461538;
+  border-radius: 24px;
+  padding: var(--spaceXXS) 16px;
 
   &:hover {
     background-color: var(--darkerBlue);
+    transform: scale(0.96);
   }
 
   &:active,
   &:focus {
     color: var(--blue);
-    background-color: var(--containerBackground);
+    background-color: var(--blurBg);
     transform: scale(1);
     box-shadow: none;
   }
