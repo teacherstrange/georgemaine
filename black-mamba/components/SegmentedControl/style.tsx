@@ -7,25 +7,25 @@ const slideIn = keyframes`
     max-width: 0;
   }
   to {
-    max-width: 562px;
+    max-width: 558px;
   }
 `;
 
 export const MobileActiveItemVariants = {
   first: {
-    x: 4,
+    x: 0,
     width: 116,
   },
   second: {
-    x: 120,
+    x: 118,
     width: 158,
   },
   third: {
-    x: 278,
+    x: 276,
     width: 132,
   },
   fourth: {
-    x: 403,
+    x: 404,
     width: 154,
   },
 };
@@ -100,7 +100,8 @@ export const MobileTabsContainer = styled.div`
   width: 100%;
   max-width: 0;
   animation: ${slideIn} 1.1s 1.3s ease 1 forwards;
-  height: 36px;
+  height: 28px;
+  padding: var(--spaceXXS);
 
   ::-webkit-scrollbar {
     display: none;
