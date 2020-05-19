@@ -7,25 +7,25 @@ const slideIn = keyframes`
     max-width: 0;
   }
   to {
-    max-width: 558px;
+    max-width: 561px;
   }
 `;
 
 export const MobileActiveItemVariants = {
   first: {
     x: 0,
-    width: 116,
+    width: 116.81,
   },
   second: {
-    x: 118,
-    width: 158,
+    x: 116.81,
+    width: 158.09,
   },
   third: {
-    x: 276,
-    width: 132,
+    x: 274.9,
+    width: 132.22,
   },
   fourth: {
-    x: 404,
+    x: 407.12,
     width: 154,
   },
 };
