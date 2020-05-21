@@ -14,13 +14,12 @@ export const PopoverList = styled(motion.ul)`
   padding: 6px;
   overflow: hidden;
   border-radius: 19px;
-  box-shadow: 0px 10px 100px 0px rgba(0, 0, 0, 0.35);
   background-color: var(--blurBg);
   -webkit-backdrop-filter: var(--blur);
   backdrop-filter: var(--blur);
   -webkit-filter: var(--saturate);
   filter: var(--saturate);
-  position: absolute;
+  position: fixed;
   z-index: 11;
   top: 50px;
   right: 20px;

@@ -42,7 +42,7 @@ export const Glyph = ({ glyph }: GlyphProps): any => {
         <path
           d="M 5 7.5 L 9 11.5 L 13 7.5"
           fill="transparent"
-          strokeWidth="1.5"
+          strokeWidth="2"
           stroke="currentColor"
           strokeLinecap="round"
           strokeMiterlimit="10"

@@ -59,7 +59,7 @@ export const galleryListData: GalleryItemType[] = [
         metaData: "2020",
       },
     ],
-    video: "/videos/mollie-checkout-video.mp4",
+    video: "/videos/mollie-checkout.mp4",
     poster: "",
   },
   {
@@ -76,6 +76,7 @@ export const galleryListData: GalleryItemType[] = [
     poster: "",
   },
 ];
+
 export const ContactListData: LinkData[] = [
   // Twitter
   {
