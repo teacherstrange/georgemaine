@@ -26,7 +26,7 @@ export const MobileActiveItemVariants = {
   },
   fourth: {
     x: 469,
-    width: 176,
+    width: 159,
   },
 };
 
@@ -100,8 +100,8 @@ export const MobileTabsContainer = styled.div`
   width: 100%;
   max-width: 0;
   animation: ${slideIn} 1.1s 1.3s ease 1 forwards;
-  height: 28px;
-  padding: var(--spaceXXS);
+  height: 32px;
+  padding: 2px;
 
   ::-webkit-scrollbar {
     display: none;
@@ -130,6 +130,9 @@ export const ActiveItemBackground = styled.div<Props>`
 
 export const MobileActiveItemBackground = styled(motion.div)`
   ${ItemBase}
+
+  height: 32px;
+  border-radius: 16px;
 `;
 
 export const MobileOpaqueButton = styled(OpaqueButton)`
