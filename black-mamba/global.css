@@ -2,7 +2,7 @@
   --white: #fff;
   --black: #000;
   --blue: hsl(212, 100%, 50%);
-  --darkerBlue: hsl(220, 100%, 50%);
+  --blueOnHover: hsl(217, 100%, 43%);
   --green: hsl(161, 100%, 39%);
   --purple: hsl(290, 100%, 60%);
   --red: hsl(13, 100%, 46%);
@@ -14,8 +14,8 @@
   --h1: 6.8em;
   --h2: 4.2em;
   --h3: 3.4em;
-  --h4: 2.8em;
-  --h5: 2em;
+  --h4: 2.4em;
+  --h5: 1.9em;
   --h6: 1.7em;
   --spaceXXL: 120px;
   --spaceXL: 92px;
@@ -98,8 +98,7 @@ body {
   font-size: 62.5%;
   -webkit-font-kerning: normal;
   font-kerning: normal;
-
-  font-feature-settings: "kern", "liga", "clig", "calt";
+  font-feature-settings: "kern" 1;
   text-rendering: optimizelegibility;
   font-variant-ligatures: common-ligatures;
   margin: 0;

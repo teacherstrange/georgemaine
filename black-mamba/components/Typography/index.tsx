@@ -83,7 +83,7 @@ export const Caption = styled.p`
   color: var(--secondaryTextLight);
   font-size: var(--h5);
   font-weight: 400;
-  line-height: 1.4;
+  line-height: 1.3;
   letter-spacing: 0.012em;
   margin: 0;
 `;
@@ -100,10 +100,11 @@ export const P = styled.p`
 export const A = styled.a`
   color: var(--primaryText);
   font-size: var(--h6);
-  line-height: 2.1176470588;
+  line-height: 1.6470588235;
   font-weight: 600;
   font-family: inherit;
   display: flex;
+  justify-content: space-between;
   text-decoration: none;
   align-items: center;
   padding: var(--spaceXXS) 20px;

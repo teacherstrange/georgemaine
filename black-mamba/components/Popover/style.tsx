@@ -10,30 +10,38 @@ export const MenuBlocker = styled.div`
   z-index: 10;
 `;
 
-export const PopoverList = styled(motion.ul)`
-  padding: 6px;
+export const PopOverContainer = styled.div`
+  position: fixed;
+  z-index: 11;
+  top: 72px;
+  margin: 0;
+  left: var(--spaceS);
+  right: var(--spaceS);
   overflow: hidden;
-  border-radius: 19px;
+  border-radius: 26px;
+  box-shadow: 0px var(--spaceS) var(--spaceL) 0px rgba(0, 0, 0, 0.65);
+
+  @media only screen and (min-width: 600px) {
+    width: 100%;
+    max-width: 179px;
+    left: unset;
+  }
+`;
+
+export const PopoverList = styled(motion.ul)`
+  margin: 0;
+  padding: var(--spaceXS);
   background-color: var(--blurBg);
   -webkit-backdrop-filter: var(--blur);
   backdrop-filter: var(--blur);
   -webkit-filter: var(--saturate);
   filter: var(--saturate);
-  position: fixed;
   z-index: 11;
-  top: 50px;
-  right: 20px;
   min-width: 156px;
-  margin: 0;
 `;
 
 export const PopoverListItem = styled.li`
   :not(:first-child) {
-    margin-top: 6px;
+    margin-top: var(--spaceXS);
   }
-`;
-
-export const PopoverListItemLabel = styled.span`
-  display: flex;
-  margin-left: 10px;
 `;
