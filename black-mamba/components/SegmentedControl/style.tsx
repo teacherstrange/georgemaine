@@ -38,7 +38,7 @@ const Base = css`
   -webkit-filter: var(--saturate);
   filter: var(--saturate);
   font-family: inherit;
-  font-weight: var(--fontWeightQuaternary);
+  font-weight: 600;
 `;
 
 const ItemBase = css`

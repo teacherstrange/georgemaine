@@ -5,7 +5,7 @@ const base = css`
   display: flex;
   align-items: center;
   font-family: "GT Haptik";
-  font-size: var(--fontSizeQuaternary);
+  font-size: var(--h6);
   font-weight: 700;
   justify-content: center;
   padding: var(--spaceXXS) 12px;
@@ -57,16 +57,6 @@ export const OpaqueButton = styled.button`
   background-color: transparent;
   white-space: nowrap;
   min-width: 152px;
-
-  @media screen and (prefers-color-scheme: dark) {
-    color: ${(props: { isAnimated: Boolean }) =>
-      props.isAnimated ? "var(--primaryTextDark)" : "var(--primaryTextLight)"};
-  }
-
-  @media screen and (prefers-color-scheme: light) {
-    color: ${(props: { isAnimated: Boolean }) =>
-      props.isAnimated ? "var(--primaryTextLight)" : "var(--primaryTextDark)"};
-  }
 `;
 
 export const PopUpButtonChevron = styled.span`

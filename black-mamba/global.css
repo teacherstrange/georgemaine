@@ -11,10 +11,12 @@
   --primaryTextDark: hsla(0, 0%, 0%, 96%);
   --secondaryTextLight: hsla(0, 0%, 100%, 65%);
   --blur: blur(20px);
-  --fontSizePrimary: 7.3em;
-  --fontSizeSecondary: 3.6em;
-  --fontSizeTertiary: 2.1em;
-  --fontSizeQuaternary: 1.4em;
+  --h1: 6.8em;
+  --h2: 4.2em;
+  --h3: 3.4em;
+  --h4: 2.8em;
+  --h5: 2em;
+  --h6: 1.7em;
   --spaceXXL: 120px;
   --spaceXL: 92px;
   --spaceL: 64px;
@@ -71,16 +73,20 @@
 @media screen and (prefers-color-scheme: dark) {
   body {
     --blurBg: rgba(38, 38, 38, 0.73);
-    --primaryBlurText: var(--primaryTextLight);
+    --primaryText: hsla(0, 0%, 100%, 95%);
+    --secondaryText: hsla(0, 0%, 100%, 65%);
     --saturate: saturate(180%);
+    --opaqueHover: hsla(0, 0%, 100%, 14%);
   }
 }
 
 @media screen and (prefers-color-scheme: light) {
   body {
     --blurBg: hsla(0, 0%, 100%, 60%);
-    --primaryBlurText: var(--primaryTextDark);
+    --primaryText: hsla(0, 0%, 0%, 95%);
+    --secondaryText: hsla(0, 0%, 0%, 65%);
     --saturate: saturate(180%);
+    --opaqueHover: hsla(0, 0%, 0%, 7%);
   }
 }
 

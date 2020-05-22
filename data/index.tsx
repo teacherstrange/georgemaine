@@ -63,7 +63,7 @@ export const galleryListData: GalleryItemType[] = [
     poster: "",
   },
   {
-    headline: "Mollie & Apple Pay",
+    headline: "Mollie Apple Pay",
     details: [
       {
         metaData: "Designed and animated the promo video",
