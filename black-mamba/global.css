@@ -92,7 +92,7 @@ body {
   font-size: 62.5%;
   -webkit-font-kerning: normal;
   font-kerning: normal;
-  -ms-font-feature-settings: "kern", "liga", "clig", "calt";
+
   font-feature-settings: "kern", "liga", "clig", "calt";
   text-rendering: optimizelegibility;
   font-variant-ligatures: common-ligatures;
