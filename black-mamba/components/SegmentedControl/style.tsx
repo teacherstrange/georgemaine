@@ -14,19 +14,19 @@ const slideIn = keyframes`
 export const MobileActiveItemVariants = {
   first: {
     x: 0,
-    width: 116.81,
+    width: 134,
   },
   second: {
-    x: 116.81,
-    width: 158.09,
+    x: 134,
+    width: 183,
   },
   third: {
-    x: 274.9,
-    width: 132.22,
+    x: 317,
+    width: 152,
   },
   fourth: {
-    x: 407.12,
-    width: 154,
+    x: 469,
+    width: 176,
   },
 };
 
