@@ -6,14 +6,14 @@ const base = css`
   align-items: center;
   font-family: "GT Haptik";
   font-size: var(--h6);
-  font-weight: 700;
+  line-height: 1.1764705882;
+  font-weight: 600;
   justify-content: center;
-  padding: var(--spaceXXS) 12px;
-  border-radius: 13px;
-  transition: color 0.2s;
-  letter-spacing: 0.012em;
+  padding: var(--spaceXS) 20px;
+  border-radius: 18px;
+  transition: all 0.2s;
+  letter-spacing: 0.005em;
   border: none;
-  line-height: 1.4285714286;
   margin: 0;
 
   &:hover,
@@ -30,33 +30,26 @@ export const Button = styled.button`
   width: max-content;
   text-align: center;
   transition: all 0.2s;
-  line-height: 2;
-  border-radius: 24px;
-  padding: var(--spaceXXS) 16px;
 
   &:hover {
-    background-color: var(--darkerBlue);
-    transform: scale(0.96);
+    background-color: var(--blueOnHover);
   }
 
   &:active,
   &:focus {
     color: var(--blue);
     background-color: var(--blurBg);
-    transform: scale(1);
-    box-shadow: none;
   }
 `;
 
 export const OpaqueButton = styled.button`
   ${base}
-  border-radius: 18px;
   position: relative;
   z-index: 2;
   flex: 1;
   background-color: transparent;
   white-space: nowrap;
-  min-width: 152px;
+  line-height: 1.6470588235;
 `;
 
 export const PopUpButtonChevron = styled.span`

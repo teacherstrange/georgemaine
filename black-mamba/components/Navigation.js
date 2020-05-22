@@ -11,7 +11,7 @@ const NavigationContainer = styled.nav`
   width: calc(100% - 48px);
   align-items: center;
   padding: 0 24px;
-  height: 34px;
+  height: 36px;
   position: fixed;
   top: 20px;
   z-index: 10;

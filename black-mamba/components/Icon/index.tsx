@@ -18,7 +18,7 @@ export default function Icon({ size, margin, glyph }: Props) {
         strokeMiterlimit="1.414"
         xmlns="http://www.w3.org/2000/svg"
         aria-label={glyph}
-        viewBox="0 0 18 18"
+        viewBox={`0 0 20 20`}
         preserveAspectRatio="xMidYMid meet"
       >
         <title>{glyph}</title>
