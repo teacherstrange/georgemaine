@@ -50,6 +50,7 @@ export const OpaqueButton = styled.button`
   background-color: transparent;
   white-space: nowrap;
   line-height: 1.6470588235;
+  color: var(--primaryText);
 `;
 
 export const PopUpButtonChevron = styled.span`

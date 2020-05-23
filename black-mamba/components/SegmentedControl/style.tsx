@@ -2,31 +2,22 @@ import styled, { css, keyframes } from "styled-components";
 import { OpaqueButton } from "../Button";
 import { motion } from "framer-motion";
 
-const slideIn = keyframes`
-  from {
-    max-width: 0;
-  }
-  to {
-    max-width: 561px;
-  }
-`;
-
 export const MobileActiveItemVariants = {
   first: {
     x: 0,
-    width: 134,
+    width: 150,
   },
   second: {
-    x: 134,
-    width: 183,
+    x: 150,
+    width: 199,
   },
   third: {
-    x: 317,
-    width: 152,
+    x: 349,
+    width: 168,
   },
   fourth: {
-    x: 469,
-    width: 159,
+    x: 517,
+    width: 175,
   },
 };
 
@@ -98,8 +89,6 @@ export const MobileTabsContainer = styled.div`
   overflow-x: scroll;
   align-items: center;
   width: 100%;
-  max-width: 0;
-  animation: ${slideIn} 1.1s 1.3s ease 1 forwards;
   height: 32px;
   padding: 2px;
 
@@ -136,6 +125,15 @@ export const MobileActiveItemBackground = styled(motion.div)`
 `;
 
 export const MobileOpaqueButton = styled(OpaqueButton)`
-  padding: 0 12px;
   min-width: initial;
+
+  @media screen and (prefers-color-scheme: light) {
+    color: ${(props) =>
+      props.isAnimated ? "var(--primaryTextLight)" : "primaryTextDark"};
+  }
+
+  @media screen and (prefers-color-scheme: dark) {
+    color: ${(props) =>
+      props.isAnimated ? "var(--primaryTextDark)" : "var(--primaryTextLight)"};
+  }
 `;
