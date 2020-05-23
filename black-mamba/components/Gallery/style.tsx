@@ -56,7 +56,6 @@ export const VideoCaptionList = styled.div`
 `;
 
 export const VideoCaptionListItem = styled.li`
-  position: relative;
   list-style: none;
   text-align: center;
 `;
