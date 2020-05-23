@@ -35,9 +35,7 @@ const Base = css`
 const ItemBase = css`
   position: absolute;
   height: 28px;
-
   border-radius: 14px;
-  transition: left 0.3s cubic-bezier(0.1, 0, 0, 1);
   z-index: 1;
 
   @media screen and (prefers-color-scheme: dark) {
@@ -52,14 +50,13 @@ const ItemBase = css`
 export const Container = styled.ul`
   ${Base}
   display: none;
-  justify-content: center;
   position: relative;
-  flex: 1;
-  max-width: 672px;
-  justify-content: center;
   align-items: center;
+  flex: 1;
+  max-width: 684px;
   padding: var(--spaceXXS);
   overflow: hidden;
+  height: 28px;
 
   @media (min-width: 1024px) {
     display: flex;
@@ -102,20 +99,11 @@ export const MobileTabsContainer = styled.div`
   }
 `;
 
-interface Props {
-  currentPosition: number;
-  menuList: number;
-}
-
-export const ActiveItemBackground = styled.div<Props>`
+export const ActiveItemBackground = styled(motion.div)`
   ${ItemBase}
-  width: 25%;
-  left: ${(props) =>
-    props.currentPosition === 0
-      ? "4px"
-      : props.currentPosition === props.menuList - 1
-      ? "calc(75% - 4px)"
-      : `calc(${props.currentPosition} * 25%)`};
+
+  height: 32px;
+  border-radius: 16px;
 `;
 
 export const MobileActiveItemBackground = styled(motion.div)`
@@ -123,6 +111,20 @@ export const MobileActiveItemBackground = styled(motion.div)`
 
   height: 32px;
   border-radius: 16px;
+`;
+
+export const DesktopOpaqueButton = styled(OpaqueButton)`
+  max-width: fit-content;
+  line-height: 1.1764705882;
+  @media screen and (prefers-color-scheme: light) {
+    color: ${(props) =>
+      props.isAnimated ? "var(--primaryTextLight)" : "primaryTextDark"};
+  }
+
+  @media screen and (prefers-color-scheme: dark) {
+    color: ${(props) =>
+      props.isAnimated ? "var(--primaryTextDark)" : "var(--primaryTextLight)"};
+  }
 `;
 
 export const MobileOpaqueButton = styled(OpaqueButton)`

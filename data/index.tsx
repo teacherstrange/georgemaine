@@ -23,10 +23,7 @@ export const galleryListData: GalleryItemType[] = [
     headline: "Mollie Mobile",
     details: [
       {
-        metaData: "Designed iOS & Android apps",
-      },
-      {
-        metaData: "Designed and built web page",
+        metaData: "Designed apps for iOS and Android—and build landing page",
       },
       {
         metaData: "2020",

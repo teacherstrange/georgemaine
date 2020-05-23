@@ -67,18 +67,19 @@ export const VideoCaptionList = styled.ul`
 export const VideoCaptionListItem = styled.li`
   position: relative;
   list-style: none;
+  text-align: center;
 
   :not(:last-of-type) {
-    margin-right: var(--spaceS);
+    margin-left: var(--spaceS);
   }
 
-  :not(:last-of-type)::after {
+  :not(:first-of-type)::before {
     content: "";
     display: block;
     position: absolute;
     top: calc(50% - 1px);
     bottom: 0;
-    right: -10px;
+    left: -10px;
     width: 4px;
     height: 4px;
     border-radius: 6px;
@@ -86,7 +87,7 @@ export const VideoCaptionListItem = styled.li`
   }
 
   @media only screen and (min-width: 768px) {
-    :not(:last-of-type)::after {
+    :not(:first-of-type)::after {
       top: 50%;
     }
   }
