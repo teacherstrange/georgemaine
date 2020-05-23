@@ -3,7 +3,7 @@ import Navigation from "../black-mamba/components/Navigation";
 import { useState, useEffect } from "react";
 import { PopOverMenuBlocker, PopOver } from "../black-mamba/components/Popover";
 import { MenuList, galleryListData } from "../data/index";
-import MobileSegmentedControl from "../black-mamba/components/SegmentedControl/MobileSegmentedControl";
+import MobileSegmentedControl from "../black-mamba/components/SegmentedNav/MobileSegmentedNav";
 import Gallery from "../black-mamba/components/Gallery";
 
 export default () => {

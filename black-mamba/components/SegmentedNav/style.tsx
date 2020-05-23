@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { css } from "styled-components";
 import { OpaqueButton } from "../Button";
 import { motion } from "framer-motion";
 
@@ -65,6 +65,8 @@ export const SegmentNavContainer = styled.footer`
   bottom: 24px;
   height: 32px;
   padding: 0 24px;
+  display: flex;
+  justify-content: center;
 
   @media (min-width: 1024px) {
     display: none;
@@ -78,7 +80,7 @@ export const SegmentNavTabList = styled.div`
   overflow-x: auto;
   overflow-y: hidden;
   align-items: center;
-  width: 100%;
+  max-width: 570px;
 
   ::-webkit-scrollbar {
     display: none;
