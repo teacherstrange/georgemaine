@@ -86,7 +86,8 @@ export const MobileTabsContainer = styled.div`
   -webkit-overflow-scrolling: touch;
   position: relative;
   display: flex;
-  overflow-x: scroll;
+  overflow-x: auto;
+  overflow-y: hidden;
   align-items: center;
   width: 100%;
   height: 32px;
