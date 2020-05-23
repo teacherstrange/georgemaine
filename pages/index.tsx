@@ -1,8 +1,7 @@
 import { Wrapper } from "../black-mamba/components/Layouts/";
 import Navigation from "../black-mamba/components/Navigation";
 import { useState, useEffect } from "react";
-import Popover from "../black-mamba/components/Popover";
-import { MenuBlocker } from "../black-mamba/components/Popover/style";
+import { PopOverMenuBlocker, PopOver } from "../black-mamba/components/Popover";
 import { MenuList, galleryListData } from "../data/index";
 import MobileSegmentedControl from "../black-mamba/components/SegmentedControl/MobileSegmentedControl";
 import Gallery from "../black-mamba/components/Gallery";
@@ -51,10 +50,13 @@ export default () => {
           onClick={setActiveMenuItem}
         />
       </Wrapper>
-      {iconRotateState && (
-        <MenuBlocker onClick={() => setIconRotateState(!iconRotateState)} />
-      )}
-      <Popover isVisible={iconRotateState} />
+
+      <PopOverMenuBlocker
+        isVisible={iconRotateState}
+        onClick={() => setIconRotateState(!iconRotateState)}
+      />
+
+      <PopOver isVisible={iconRotateState} />
     </>
   );
 };
