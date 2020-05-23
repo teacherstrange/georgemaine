@@ -6,7 +6,7 @@ const base = css`
   align-items: center;
   font-family: "GT Haptik";
   font-size: var(--h6);
-  line-height: 1.1764705882;
+  line-height: 1.2307692308;
   font-weight: 600;
   justify-content: center;
   padding: var(--spaceXS) 20px;

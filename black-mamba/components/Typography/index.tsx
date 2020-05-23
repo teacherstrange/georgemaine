@@ -100,7 +100,7 @@ export const P = styled.p`
 export const A = styled.a`
   color: var(--primaryText);
   font-size: var(--h6);
-  line-height: 1.6470588235;
+  line-height: 1.5384615385;
   font-weight: 600;
   font-family: inherit;
   display: flex;

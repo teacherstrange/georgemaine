@@ -2,22 +2,31 @@ import styled, { css, keyframes } from "styled-components";
 import { OpaqueButton } from "../Button";
 import { motion } from "framer-motion";
 
-export const MobileActiveItemVariants = {
+const segmentNavItemHeight = "28px";
+const segmentNavItemWidth = [124, 161, 138, 143];
+const segmentNavItemXPosition = [
+  0,
+  segmentNavItemWidth[0],
+  segmentNavItemWidth[0] + segmentNavItemWidth[1],
+  segmentNavItemWidth[0] + segmentNavItemWidth[1] + segmentNavItemWidth[2],
+];
+
+export const SegmentNavSelectionBackgroundVariants = {
   first: {
-    x: 0,
-    width: 150,
+    x: segmentNavItemXPosition[0],
+    width: segmentNavItemWidth[0],
   },
   second: {
-    x: 150,
-    width: 199,
+    x: segmentNavItemXPosition[1],
+    width: segmentNavItemWidth[1],
   },
   third: {
-    x: 349,
-    width: 168,
+    x: segmentNavItemXPosition[2],
+    width: segmentNavItemWidth[2],
   },
   fourth: {
-    x: 517,
-    width: 175,
+    x: segmentNavItemXPosition[3],
+    width: segmentNavItemWidth[3],
   },
 };
 
@@ -30,40 +39,24 @@ const Base = css`
   filter: var(--saturate);
   font-family: inherit;
   font-weight: 600;
+  height: ${segmentNavItemHeight};
+  border: 2px solid transparent;
+  display: flex;
 `;
 
-const ItemBase = css`
-  position: absolute;
-  height: 28px;
-  border-radius: 14px;
-  z-index: 1;
-
-  @media screen and (prefers-color-scheme: dark) {
-    background-color: var(--white);
-  }
-
-  @media screen and (prefers-color-scheme: light) {
-    background-color: var(--black);
-  }
-`;
-
-export const Container = styled.ul`
-  ${Base}
+export const SegmentNavDesktopTabList = styled.ul`
   display: none;
-  position: relative;
-  align-items: center;
-  flex: 1;
-  max-width: 684px;
-  padding: var(--spaceXXS);
-  overflow: hidden;
-  height: 28px;
 
   @media (min-width: 1024px) {
-    display: flex;
+    ${Base}
+    position: relative;
+    align-items: center;
+    padding: 0;
+    overflow: hidden;
   }
 `;
 
-export const MobileContainer = styled.footer`
+export const SegmentNavContainer = styled.footer`
   position: fixed;
   z-index: 2;
   left: 0;
@@ -78,17 +71,14 @@ export const MobileContainer = styled.footer`
   }
 `;
 
-export const MobileTabsContainer = styled.div`
+export const SegmentNavTabList = styled.div`
   ${Base}
   -webkit-overflow-scrolling: touch;
   position: relative;
-  display: flex;
   overflow-x: auto;
   overflow-y: hidden;
   align-items: center;
   width: 100%;
-  height: 32px;
-  padding: 2px;
 
   ::-webkit-scrollbar {
     display: none;
@@ -99,23 +89,29 @@ export const MobileTabsContainer = styled.div`
   }
 `;
 
-export const ActiveItemBackground = styled(motion.div)`
-  ${ItemBase}
-
-  height: 32px;
+export const SegmentNavSelectionBackground = styled(motion.div)`
+  position: absolute;
+  z-index: 1;
+  height: ${segmentNavItemHeight};
   border-radius: 16px;
+
+  @media screen and (prefers-color-scheme: dark) {
+    background-color: var(--white);
+  }
+
+  @media screen and (prefers-color-scheme: light) {
+    background-color: var(--black);
+  }
+
+  @media only screen and (min-width: 1024px) {
+    height: ${segmentNavItemHeight};
+  }
 `;
 
-export const MobileActiveItemBackground = styled(motion.div)`
-  ${ItemBase}
-
-  height: 32px;
-  border-radius: 16px;
-`;
-
-export const DesktopOpaqueButton = styled(OpaqueButton)`
+export const SegmentNavDesktopItem = styled(OpaqueButton)`
   max-width: fit-content;
-  line-height: 1.1764705882;
+  line-height: 1.2307692308;
+
   @media screen and (prefers-color-scheme: light) {
     color: ${(props) =>
       props.isAnimated ? "var(--primaryTextLight)" : "primaryTextDark"};
@@ -127,8 +123,9 @@ export const DesktopOpaqueButton = styled(OpaqueButton)`
   }
 `;
 
-export const MobileOpaqueButton = styled(OpaqueButton)`
+export const SegmentNavMobileItem = styled(OpaqueButton)`
   min-width: initial;
+  line-height: 1.2307692308;
 
   @media screen and (prefers-color-scheme: light) {
     color: ${(props) =>

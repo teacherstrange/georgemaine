@@ -30,7 +30,7 @@ export const PopOverContainer = styled(motion.div)`
 
 export const PopoverList = styled.ul`
   margin: 0;
-  padding: var(--spaceXS);
+  padding: 2px;
   background-color: var(--blurBg);
   -webkit-backdrop-filter: var(--blur);
   backdrop-filter: var(--blur);
@@ -42,6 +42,6 @@ export const PopoverList = styled.ul`
 
 export const PopoverListItem = styled.li`
   :not(:first-child) {
-    margin-top: var(--spaceXS);
+    margin-top: var(--spaceXXS);
   }
 `;

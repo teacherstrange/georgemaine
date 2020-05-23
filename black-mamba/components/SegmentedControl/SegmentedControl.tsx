@@ -1,10 +1,9 @@
 import React from "react";
 import {
-  Container,
-  MobileTabsContainer,
-  MobileActiveItemVariants,
-  DesktopOpaqueButton,
-  MobileActiveItemBackground,
+  SegmentNavDesktopTabList,
+  SegmentNavSelectionBackgroundVariants,
+  SegmentNavDesktopItem,
+  SegmentNavSelectionBackground,
 } from "./style";
 import { MenuItem } from "../../../data";
 
@@ -20,11 +19,11 @@ export default function SegmentedControl({
   onClick,
 }: Props) {
   return (
-    <Container>
-      <MobileActiveItemBackground
+    <SegmentNavDesktopTabList>
+      <SegmentNavSelectionBackground
         menuList={menuList.length}
         initial="first"
-        variants={MobileActiveItemVariants}
+        variants={SegmentNavSelectionBackgroundVariants}
         animate={
           activeMenuItem === 1
             ? "second"
@@ -41,15 +40,15 @@ export default function SegmentedControl({
       />
       {menuList.map((menuItem, index) => {
         return (
-          <DesktopOpaqueButton
+          <SegmentNavDesktopItem
             isAnimated={index === activeMenuItem}
             key={index}
             onClick={() => onClick(index)}
           >
             {menuItem.name}
-          </DesktopOpaqueButton>
+          </SegmentNavDesktopItem>
         );
       })}
-    </Container>
+    </SegmentNavDesktopTabList>
   );
 }
