@@ -1,3 +1,8 @@
+import MobileData from "./MobileData.mdx";
+import MolliePromoVideoData from "./MolliePromoVideoData.mdx";
+import MollieCheckoutData from "./MollieCheckoutData.mdx";
+import MollieApplePayData from "./MollieApplePayData.mdx";
+
 type LinkData = {
   name: string;
   url: string;
@@ -9,66 +14,34 @@ export type MenuItem = {
 
 export type GalleryItemType = {
   headline: string;
-  details: GalleryMetaDataType[];
+  details: React.ReactNode;
   video: string;
   poster?: string;
-};
-
-type GalleryMetaDataType = {
-  metaData: string;
 };
 
 export const galleryListData: GalleryItemType[] = [
   {
     headline: "Mollie Mobile",
-    details: [
-      {
-        metaData: "Designed apps for iOS and Android—and build landing page",
-      },
-      {
-        metaData: "2020",
-      },
-    ],
+    details: <MobileData />,
     video: "/videos/mollie-mobile-2x.mp4",
     poster: "/images/mollie-mobile-poster.jpg",
   },
 
   {
     headline: "Mollie Promo Video",
-    details: [
-      {
-        metaData: "Designed and animated promo video",
-      },
-      {
-        metaData: "2020",
-      },
-    ],
+    details: <MolliePromoVideoData />,
     video: "/videos/mollie-promo-video.mp4",
     poster: "",
   },
   {
     headline: "Mollie Checkout",
-    details: [
-      {
-        metaData: "Redesigned and built the Mollie Checkout",
-      },
-      {
-        metaData: "2020",
-      },
-    ],
+    details: <MollieCheckoutData />,
     video: "/videos/mollie-checkout.mp4",
     poster: "",
   },
   {
     headline: "Mollie Apple Pay",
-    details: [
-      {
-        metaData: "Designed and animated the promo video",
-      },
-      {
-        metaData: "2019",
-      },
-    ],
+    details: <MollieApplePayData />,
     video: "/videos/mollie-apple-pay-video.mp4",
     poster: "",
   },

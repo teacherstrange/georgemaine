@@ -3,8 +3,6 @@ import styled from "styled-components";
 export const GalleryItem = styled.div`
   opacity: ${(props: { currentGalleryItem: boolean }) =>
     props.currentGalleryItem ? "1" : "0"};
-  pointer-events: ${(props: { currentGalleryItem: boolean }) =>
-    props.currentGalleryItem && "none"};
   position: fixed;
   top: 0;
   left: 0;
@@ -39,8 +37,9 @@ export const VideoCaption = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  padding: 0px 0px 104px 0px;
+  padding: 0px 0px 80px 0px;
   position: fixed;
+  color: var(--white);
   top: 0;
   left: 0;
   right: 0;
@@ -52,43 +51,11 @@ export const VideoCaption = styled.div`
   }
 `;
 
-export const VideoCaptionList = styled.ul`
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+export const VideoCaptionList = styled.div`
+  text-align: center;
 `;
 
 export const VideoCaptionListItem = styled.li`
-  position: relative;
   list-style: none;
   text-align: center;
-
-  :not(:last-of-type) {
-    margin-left: var(--spaceS);
-  }
-
-  :not(:first-of-type)::before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: calc(50% - 1px);
-    bottom: 0;
-    left: -10px;
-    width: 4px;
-    height: 4px;
-    border-radius: 6px;
-    background: var(--secondaryTextLight);
-  }
-
-  @media only screen and (min-width: 768px) {
-    :not(:first-of-type)::after {
-      top: 50%;
-    }
-  }
 `;

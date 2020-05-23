@@ -49,12 +49,7 @@ export const H2 = styled.h2`
 `;
 
 export const H3 = styled.h3`
-  ${h4Style}
-  color: var(--primaryText);
-
-  @media only screen and (min-width: 768px) {
-    ${h3Style}
-  }
+  ${h3Style}
 `;
 
 export const H4 = styled.h4`
@@ -81,7 +76,7 @@ export const H6 = styled.h6`
 
 export const Caption = styled.p`
   color: var(--secondaryTextLight);
-  font-size: var(--h5);
+  font-size: 1.5em;
   font-weight: 400;
   line-height: 1.3;
   letter-spacing: 0.012em;
@@ -115,5 +110,19 @@ export const A = styled.a`
     cursor: pointer;
     outline: none;
     background-color: var(--opaqueHover);
+  }
+`;
+
+export const InlineA = styled.a`
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.2s;
+  opacity: 1;
+
+  &:hover {
+    opacity: 0.5;
+    cursor: pointer;
+    text-decoration: underline;
   }
 `;

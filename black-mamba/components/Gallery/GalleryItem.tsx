@@ -1,5 +1,5 @@
 import * as style from "./style";
-import { H1, Caption } from "../Typography";
+import { H3 } from "../Typography";
 import { GalleryItemType } from "../../../data";
 import { Video } from "../Video";
 
@@ -26,16 +26,8 @@ export function GalleryItem(props: Props) {
       )}
 
       <style.VideoCaption>
-        <H1>{galleryItem.headline}</H1>
-        <style.VideoCaptionList>
-          {galleryItem.details.map((detail, index) => {
-            return (
-              <style.VideoCaptionListItem key={index}>
-                <Caption>{detail.metaData}</Caption>
-              </style.VideoCaptionListItem>
-            );
-          })}
-        </style.VideoCaptionList>
+        <H3>{galleryItem.headline}</H3>
+        <style.VideoCaptionList>{galleryItem.details}</style.VideoCaptionList>
       </style.VideoCaption>
     </style.GalleryItem>
   );
