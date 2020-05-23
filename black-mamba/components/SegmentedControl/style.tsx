@@ -62,8 +62,8 @@ export const SegmentNavContainer = styled.footer`
   left: 0;
   right: 0;
   overflow: hidden;
-  bottom: 32px;
-  height: 36px;
+  bottom: 24px;
+  height: 32px;
   padding: 0 24px;
 
   @media (min-width: 1024px) {
