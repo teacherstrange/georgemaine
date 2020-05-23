@@ -13,7 +13,7 @@ interface Props {
   onClick?: Function;
 }
 
-export default function SegmentedControl({
+export default function SegmentedNav({
   activeMenuItem,
   menuList,
   onClick,

@@ -3,6 +3,8 @@ import styled from "styled-components";
 export const GalleryItem = styled.div`
   opacity: ${(props: { currentGalleryItem: boolean }) =>
     props.currentGalleryItem ? "1" : "0"};
+  pointer-events: ${(props: { currentGalleryItem: boolean }) =>
+    props.currentGalleryItem ? "" : "none"};
   position: fixed;
   top: 0;
   left: 0;
@@ -21,9 +23,9 @@ export const GalleryItem = styled.div`
     webkit-mask-image: linear-gradient(to bottom, transparent 50%, #000 75%);
     background: linear-gradient(
       to bottom,
-      transparent 50%,
-      rgba(0, 0, 0, 0.1) 60%,
-      rgba(0, 0, 0, 0.5) 100%
+      transparent 65%,
+      rgba(0, 0, 0, 0.1) 75%,
+      rgba(0, 0, 0, 0.6) 100%
     );
   }
 `;

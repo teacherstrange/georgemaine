@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Icon from "./Icon";
 import { P } from "./Typography";
 import { MenuList } from "../../data";
-import { SegmentedControl } from "./SegmentedControl";
+import { SegmentedNav } from "./SegmentedNav";
 import { PopUpButton } from "./Button";
 
 const NavigationContainer = styled.nav`
@@ -45,7 +45,7 @@ export default ({
         <Icon glyph="Logo" />
         <NavigationHeadline>Georgemaine</NavigationHeadline>
       </NavigationLogoContainer>
-      <SegmentedControl
+      <SegmentedNav
         activeMenuItem={activeIndex}
         menuList={MenuList}
         onClick={handleSegmentedControlClick}
