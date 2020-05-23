@@ -10,7 +10,7 @@ export const MenuBlocker = styled.div`
   z-index: 10;
 `;
 
-export const PopOverContainer = styled.div`
+export const PopOverContainer = styled(motion.div)`
   position: fixed;
   z-index: 11;
   top: 72px;
@@ -28,7 +28,7 @@ export const PopOverContainer = styled.div`
   }
 `;
 
-export const PopoverList = styled(motion.ul)`
+export const PopoverList = styled.ul`
   margin: 0;
   padding: var(--spaceXS);
   background-color: var(--blurBg);

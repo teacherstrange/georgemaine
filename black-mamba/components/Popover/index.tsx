@@ -8,12 +8,12 @@ export default function Popover({ isVisible }) {
   return (
     <AnimatePresence>
       {isVisible && (
-        <PopOverContainer>
-          <PopoverList
-            initial={{ y: -8, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -8, opacity: 0 }}
-          >
+        <PopOverContainer
+          initial={{ y: -8, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -8, opacity: 0 }}
+        >
+          <PopoverList>
             {ContactListData.map((data, index) => {
               return (
                 <PopoverListItem key={index} tabindex={index}>
