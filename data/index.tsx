@@ -17,6 +17,8 @@ export type GalleryItemType = {
   details: React.ReactNode;
   video: string;
   poster?: string;
+  mobileVideo?: string;
+  mobilePoster?: string;
 };
 
 export const galleryListData: GalleryItemType[] = [
@@ -25,6 +27,8 @@ export const galleryListData: GalleryItemType[] = [
     details: <MobileData />,
     video: "/videos/mollie-mobile-2x.mp4",
     poster: "/images/mollie-mobile-poster.jpg",
+    mobileVideo: "/videos/mollie-mobile-mobile.mp4",
+    mobilePoster: "/images/mollie-mobile-mobile-poster.jpg",
   },
 
   {

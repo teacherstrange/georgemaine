@@ -17,7 +17,7 @@ const h3Style = css`
   font-size: var(--h3);
   line-height: 1.1764705882;
   letter-spacing: -0.04em;
-  margin: 0 0 var(--spaceXXS);
+  margin: 0 0 var(--spaceXS);
   font-weight: 700;
 `;
 
