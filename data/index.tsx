@@ -1,5 +1,5 @@
 import MobileData from "./MobileData.mdx";
-import MolliePromoVideoData from "./MolliePromoVideoData.mdx";
+import MollieVideoData from "./MollieVideoData.mdx";
 import MollieCheckoutData from "./MollieCheckoutData.mdx";
 import MollieApplePayData from "./MollieApplePayData.mdx";
 
@@ -33,8 +33,8 @@ export const galleryListData: GalleryItemType[] = [
 
   {
     headline: "Mollie Video",
-    details: <MolliePromoVideoData />,
-    video: "/videos/mollie-promo-video.mp4",
+    details: <MollieVideoData />,
+    video: "/videos/mollie-video.mp4",
     poster: "",
   },
   {
@@ -48,7 +48,7 @@ export const galleryListData: GalleryItemType[] = [
   {
     headline: "Mollie Apple Pay",
     details: <MollieApplePayData />,
-    video: "/videos/mollie-apple-pay-video.mp4",
+    video: "/videos/mollie-apple-pay.mp4",
     poster: "",
   },
 ];
