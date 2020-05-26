@@ -8,7 +8,7 @@ interface Props {
   glyph: string;
 }
 
-export default function Icon({ size, margin, glyph }: Props) {
+export default function Icon({ size = 18, margin, glyph }: Props) {
   return (
     <SvgWrapper svgWrapperSize={size} svgWrapperMargin={margin}>
       <InlineSvg
@@ -18,7 +18,7 @@ export default function Icon({ size, margin, glyph }: Props) {
         strokeMiterlimit="1.414"
         xmlns="http://www.w3.org/2000/svg"
         aria-label={glyph}
-        viewBox={`0 0 18 18`}
+        viewBox={`0 0 ${size} ${size}`}
         preserveAspectRatio="xMidYMid meet"
       >
         <title>{glyph}</title>

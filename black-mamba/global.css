@@ -33,42 +33,48 @@
   font-family: "GT Haptik";
   font-weight: 400;
   font-style: normal;
-  src: url("/fonts/GT-Haptik-Regular.woff2") format("woff2");
+  src: url("/fonts/GT-Haptik-Regular.woff") format("woff"),
+    url("/fonts/GT-Haptik-Regular.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "GT Haptik";
   font-weight: 400;
   font-style: oblique;
-  src: url("/fonts/GT-Haptik-Regular-Oblique.woff2") format("woff2");
+  src: url("/fonts/GT-Haptik-Regular-Oblique.woff") format("woff"),
+    url("/fonts/GT-Haptik-Regular-Oblique.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "GT Haptik";
   font-weight: 600;
   font-style: normal;
-  src: url("/fonts/GT-Haptik-Medium.woff2") format("woff2");
+  src: url("/fonts/GT-Haptik-Medium.woff") format("woff"),
+    rl("/fonts/GT-Haptik-Medium.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "GT Haptik";
   font-weight: 600;
   font-style: oblique;
-  src: url("/fonts/GT-Haptik-Medium-Oblique.woff2") format("woff2");
+  src: url("/fonts/GT-Haptik-Medium-Oblique.woff") format("woff"),
+    url("/fonts/GT-Haptik-Medium-Oblique.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "GT Haptik";
   font-weight: 700;
   font-style: normal;
-  src: url("/fonts/GT-Haptik-Bold.woff2") format("woff2");
+  src: url("/fonts/GT-Haptik-Bold.woff") format("woff"),
+    url("/fonts/GT-Haptik-Bold.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "GT Haptik";
   font-weight: 700;
   font-style: oblique;
-  src: url("/fonts/GT-Haptik-Bold-Oblique.woff2") format("woff2");
+  src: url("/fonts/GT-Haptik-Bold-Oblique.woff") format("woff"),
+    url("/fonts/GT-Haptik-Bold-Oblique.woff2") format("woff2");
 }
 
 @media screen and (prefers-color-scheme: dark) {

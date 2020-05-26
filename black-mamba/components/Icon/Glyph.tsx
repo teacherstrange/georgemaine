@@ -61,13 +61,13 @@ export const Glyph = ({ glyph }: GlyphProps): any => {
     case "ChevronDown":
       return (
         <path
-          d="M 6 8.5 L 10 12.5 L 14 8.5"
+          d="M 6.8 8.8 L 10 12 L 13.2 8.8"
           fill="transparent"
           strokeWidth="2"
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
-        />
+        ></path>
       );
 
     case "Logo":

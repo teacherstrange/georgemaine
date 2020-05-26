@@ -9,7 +9,7 @@ export default function PopUpButton(props) {
     <Button onClick={onClick}>
       {children}
       <PopUpButtonChevron animated={animated}>
-        <Icon glyph={"ChevronDown"} size={16} />
+        <Icon glyph={"ChevronDown"} />
       </PopUpButtonChevron>
     </Button>
   );
