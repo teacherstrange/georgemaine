@@ -3,13 +3,15 @@ import { H3 } from "../Typography";
 import { GalleryItemType } from "../../../data";
 import { Video, MobileVideo } from "../Video";
 
-interface Props {
+interface alleryItemProps {
   galleryItem: GalleryItemType;
   currentGalleryItem: boolean;
 }
-export function GalleryItem(props: Props) {
-  const { galleryItem, currentGalleryItem } = props;
 
+export function GalleryItem({
+  galleryItem,
+  currentGalleryItem,
+}: alleryItemProps) {
   return (
     <style.GalleryItem currentGalleryItem={currentGalleryItem}>
       {currentGalleryItem && (

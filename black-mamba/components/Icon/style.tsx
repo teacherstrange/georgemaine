@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-interface Props {
+interface svgWrapperProps {
   svgWrapperSize?: number;
   svgWrapperMargin?: string;
 }
 
-export const SvgWrapper = styled.div<Props>`
+export const SvgWrapper = styled.div<svgWrapperProps>`
   display: inline-block;
   flex: 0 0
     ${(props) => (props.svgWrapperSize ? `${props.svgWrapperSize}px` : "18px")};

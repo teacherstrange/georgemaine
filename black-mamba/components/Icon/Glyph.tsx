@@ -1,8 +1,8 @@
-type GlyphProps = {
+type glyphProps = {
   glyph: string;
 };
 
-export const Glyph = ({ glyph }: GlyphProps): any => {
+export const Glyph = ({ glyph }: glyphProps): any => {
   switch (glyph) {
     case "Twitter":
       return (

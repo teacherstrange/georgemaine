@@ -3,8 +3,17 @@ import React from "react";
 import { Button, PopUpButtonChevron } from "./style";
 import Icon from "../Icon";
 
-export default function PopUpButton(props) {
-  const { children, onClick, animated } = props;
+interface PopUpButtonProps {
+  children: React.ReactNode;
+  onClick: Function;
+  animated: boolean;
+}
+
+export default function PopUpButton({
+  children,
+  onClick,
+  animated,
+}: PopUpButtonProps) {
   return (
     <Button onClick={onClick}>
       {children}

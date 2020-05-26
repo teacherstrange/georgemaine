@@ -1,14 +1,13 @@
-import * as React from "react";
 import { SvgWrapper, InlineSvg } from "./style";
 import { Glyph } from "./Glyph";
 
-interface Props {
+interface iconProps {
   size?: number;
   margin?: string;
   glyph: string;
 }
 
-export default function Icon({ size = 20, margin, glyph }: Props) {
+export default function Icon({ size = 20, margin, glyph }: iconProps) {
   return (
     <SvgWrapper svgWrapperSize={size} svgWrapperMargin={margin}>
       <InlineSvg

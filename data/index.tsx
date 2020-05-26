@@ -25,7 +25,7 @@ export const galleryListData: GalleryItemType[] = [
   {
     headline: "Mollie Mobile",
     details: <MobileData />,
-    video: "/videos/mollie-mobile-2x.mp4",
+    video: "/videos/mollie-mobile.mp4",
     poster: "/images/mollie-mobile-poster.jpg",
     mobileVideo: "/videos/mollie-mobile-mobile.mp4",
     mobilePoster: "/images/mollie-mobile-mobile-poster.jpg",

@@ -1,14 +1,15 @@
 import { GalleryItem } from "./GalleryItem";
 import { GalleryItemType } from "../../../data";
 
-interface Props {
+interface galleryProps {
   galleryList: GalleryItemType[];
   currentGalleryItem: number;
 }
 
-export default function Gallery(props: Props) {
-  const { galleryList, currentGalleryItem } = props;
-
+export default function Gallery({
+  galleryList,
+  currentGalleryItem,
+}: galleryProps) {
   return (
     <section>
       {galleryList.map((galleryItem, index) => {
