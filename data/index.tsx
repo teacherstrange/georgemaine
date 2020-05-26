@@ -41,8 +41,9 @@ export const galleryListData: GalleryItemType[] = [
     headline: "Mollie Checkout",
     details: <MollieCheckoutData />,
     video: "/videos/mollie-checkout.mp4",
-    poster: "",
+    poster: "/images/mollie-checkout-poster.jpg",
     mobileVideo: "/videos/mollie-checkout-mobile.mp4",
+    mobilePoster: "/images/mollie-checkout-mobile-poster.jpg",
   },
   {
     headline: "Mollie Apple Pay",
