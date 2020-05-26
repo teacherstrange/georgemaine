@@ -3,7 +3,7 @@ import { OpaqueButton } from "../Button";
 import { motion } from "framer-motion";
 
 const segmentNavItemHeight = "28px";
-const segmentNavItemWidth = [124, 117, 138, 143];
+const segmentNavItemWidth = [125, 119, 139, 144];
 const segmentNavMaxWidth =
   segmentNavItemWidth[0] +
   segmentNavItemWidth[1] +
