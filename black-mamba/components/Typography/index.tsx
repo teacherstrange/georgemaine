@@ -76,7 +76,7 @@ export const H6 = styled.h6`
 
 export const Caption = styled.p`
   color: var(--secondaryTextLight);
-  font-size: 1.5em;
+  font-size: 1.8em;
   font-weight: 400;
   line-height: 1.3;
   letter-spacing: 0.012em;

@@ -32,7 +32,7 @@ export const galleryListData: GalleryItemType[] = [
   },
 
   {
-    headline: "Mollie Promo Video",
+    headline: "Mollie Video",
     details: <MolliePromoVideoData />,
     video: "/videos/mollie-promo-video.mp4",
     poster: "",
@@ -42,6 +42,7 @@ export const galleryListData: GalleryItemType[] = [
     details: <MollieCheckoutData />,
     video: "/videos/mollie-checkout.mp4",
     poster: "",
+    mobileVideo: "/videos/mollie-checkout-mobile.mp4",
   },
   {
     headline: "Mollie Apple Pay",
