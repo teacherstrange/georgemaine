@@ -3,6 +3,7 @@ import React from "react";
 import Head from "next/head";
 import Router from "next/router";
 import { GA_TRACKING_ID } from "../lib/gtag";
+import "react-awesome-slider/dist/styles.css";
 
 import * as gtag from "../lib/gtag";
 
