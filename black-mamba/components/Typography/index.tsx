@@ -81,6 +81,12 @@ export const Caption = styled.p`
   line-height: 1.3;
   letter-spacing: 0.012em;
   margin: 0;
+  max-width: ${(props: { maxWidth: number }) =>
+    props.maxWidth ? `${props.maxWidth}px` : ""};
+
+  @media only screen and (min-width: 768px) {
+    max-width: initial;
+  }
 `;
 
 export const P = styled.p`
