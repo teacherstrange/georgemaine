@@ -91,6 +91,7 @@ export const Caption = styled.p`
 
   @media only screen and (min-width: 768px) {
     max-width: initial;
+    font-size: 1.9em;
   }
 `;
 

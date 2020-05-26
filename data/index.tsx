@@ -78,7 +78,7 @@ export const ContactListData: LinkData[] = [
 
 export const MenuList: MenuItem[] = [
   { name: "Mollie Mobile" },
-  { name: "Mollie Promo Video" },
+  { name: "Mollie Video" },
   { name: "Mollie Checkout" },
   { name: "Mollie Apple Pay" },
 ];
