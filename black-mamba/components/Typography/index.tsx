@@ -17,7 +17,7 @@ const h3Style = css`
   font-size: var(--h3);
   line-height: 1.1764705882;
   letter-spacing: -0.04em;
-  margin: 0 0 var(--spaceXS);
+  margin: 0 0 var(--spaceXXS);
   font-weight: 700;
 `;
 
@@ -76,7 +76,7 @@ export const H6 = styled.h6`
 
 export const Caption = styled.p`
   color: var(--secondaryTextLight);
-  font-size: 1.8em;
+  font-size: 1.5em;
   font-weight: 400;
   line-height: 1.3;
   letter-spacing: 0.012em;
