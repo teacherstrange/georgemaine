@@ -8,7 +8,7 @@ interface Props {
   glyph: string;
 }
 
-export default function Icon({ size = 18, margin, glyph }: Props) {
+export default function Icon({ size = 20, margin, glyph }: Props) {
   return (
     <SvgWrapper svgWrapperSize={size} svgWrapperMargin={margin}>
       <InlineSvg
