@@ -10,6 +10,7 @@
   --primaryTextLight: hsla(0, 0%, 100%, 95%);
   --primaryTextDark: hsla(0, 0%, 0%, 96%);
   --secondaryTextLight: hsla(0, 0%, 100%, 65%);
+  --secondaryTextDark: hsla(240, 4%, 68%, 100%);
   --blur: blur(20px);
   --h1: 6.8em;
   --h2: 4.2em;

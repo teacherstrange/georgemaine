@@ -50,6 +50,11 @@ export const H2 = styled.h2`
 
 export const H3 = styled.h3`
   ${h3Style}
+
+  @media only screen and (min-width: 768px) {
+    font-size: 4.8em;
+    margin: 0 0 var(--spaceXS);
+  }
 `;
 
 export const H4 = styled.h4`

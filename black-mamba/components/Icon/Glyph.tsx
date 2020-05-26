@@ -77,12 +77,12 @@ export const Glyph = ({ glyph }: GlyphProps): any => {
             d="M 15 3 L 9 3 C 5.686 3 3 5.686 3 9 L 3 9.375 C 3 12.481 5.519 15 8.625 15 L 8.625 15 C 11.731 15 14.25 12.481 14.25 9.375 L 14.25 6 L 9 6 C 7.343 6 6 7.343 6 9 L 6 9.375 C 6 10.825 7.175 12 8.625 12 L 8.625 12 C 10.075 12 11.25 10.825 11.25 9.375 L 11.25 9 L 9 9"
             fill="transparent"
             strokeWidth="1.5"
-            stroke="var(--white)"
+            stroke="currentColor"
             strokeMiterlimit="10"
           ></path>
           <path
             d="M 9 8.25 C 9.414 8.25 9.75 8.586 9.75 9 C 9.75 9.414 9.414 9.75 9 9.75 C 8.586 9.75 8.25 9.414 8.25 9 C 8.25 8.586 8.586 8.25 9 8.25 Z"
-            fill="var(--white)"
+            fill="currentColor"
           ></path>
         </>
       );
