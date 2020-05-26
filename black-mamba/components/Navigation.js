@@ -15,6 +15,7 @@ const NavigationContainer = styled.nav`
   position: fixed;
   top: 20px;
   z-index: 10;
+  color: var(--secondaryTextDark);
 `;
 
 const NavigationLogoContainer = styled.div`
@@ -25,7 +26,7 @@ const NavigationLogoContainer = styled.div`
 const NavigationHeadline = styled(P)`
   font-weight: 600;
   font-size: var(--h6);
-  color: var(--white);
+  color: inherit;
   margin: 0 0 0 var(--spaceXXS);
 `;
 

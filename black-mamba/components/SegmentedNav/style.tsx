@@ -3,7 +3,12 @@ import { OpaqueButton } from "../Button";
 import { motion } from "framer-motion";
 
 const segmentNavItemHeight = "28px";
-const segmentNavItemWidth = [124, 161, 138, 143];
+const segmentNavItemWidth = [124, 117, 138, 143];
+const segmentNavMaxWidth =
+  segmentNavItemWidth[0] +
+  segmentNavItemWidth[1] +
+  segmentNavItemWidth[2] +
+  segmentNavItemWidth[3];
 const segmentNavItemXPosition = [
   0,
   segmentNavItemWidth[0],
@@ -80,7 +85,7 @@ export const SegmentNavTabList = styled.div`
   overflow-x: auto;
   overflow-y: hidden;
   align-items: center;
-  max-width: 570px;
+  max-width: ${segmentNavMaxWidth};
 
   ::-webkit-scrollbar {
     display: none;

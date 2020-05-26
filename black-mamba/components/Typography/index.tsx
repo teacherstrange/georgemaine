@@ -50,6 +50,11 @@ export const H2 = styled.h2`
 
 export const H3 = styled.h3`
   ${h3Style}
+
+  @media only screen and (min-width: 768px) {
+    font-size: 4.8em;
+    margin: 0 0 var(--spaceXS);
+  }
 `;
 
 export const H4 = styled.h4`
@@ -81,6 +86,12 @@ export const Caption = styled.p`
   line-height: 1.3;
   letter-spacing: 0.012em;
   margin: 0;
+  max-width: ${(props: { maxWidth: number }) =>
+    props.maxWidth ? `${props.maxWidth}px` : ""};
+
+  @media only screen and (min-width: 768px) {
+    max-width: initial;
+  }
 `;
 
 export const P = styled.p`

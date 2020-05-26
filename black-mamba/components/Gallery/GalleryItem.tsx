@@ -1,7 +1,7 @@
 import * as style from "./style";
 import { H3 } from "../Typography";
 import { GalleryItemType } from "../../../data";
-import { Video } from "../Video";
+import { Video, MobileVideo } from "../Video";
 
 interface Props {
   galleryItem: GalleryItemType;
@@ -13,16 +13,31 @@ export function GalleryItem(props: Props) {
   return (
     <style.GalleryItem currentGalleryItem={currentGalleryItem}>
       {currentGalleryItem && (
-        <Video
-          autoPlay
-          loop
-          muted
-          playsInline
-          poster={galleryItem.poster && galleryItem.poster}
-          preload="auto"
-        >
-          <source src={galleryItem.video} type="video/mp4" />
-        </Video>
+        <>
+          <MobileVideo
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster={galleryItem.mobilePoster || galleryItem.poster || ""}
+            preload="auto"
+          >
+            <source
+              src={galleryItem.mobileVideo || galleryItem.video}
+              type="video/mp4"
+            />
+          </MobileVideo>
+          <Video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster={galleryItem.poster || ""}
+            preload="auto"
+          >
+            <source src={galleryItem.video} type="video/mp4" />
+          </Video>
+        </>
       )}
 
       <style.VideoCaption>

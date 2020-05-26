@@ -17,6 +17,8 @@ export type GalleryItemType = {
   details: React.ReactNode;
   video: string;
   poster?: string;
+  mobileVideo?: string;
+  mobilePoster?: string;
 };
 
 export const galleryListData: GalleryItemType[] = [
@@ -25,10 +27,12 @@ export const galleryListData: GalleryItemType[] = [
     details: <MobileData />,
     video: "/videos/mollie-mobile-2x.mp4",
     poster: "/images/mollie-mobile-poster.jpg",
+    mobileVideo: "/videos/mollie-mobile-mobile.mp4",
+    mobilePoster: "/images/mollie-mobile-mobile-poster.jpg",
   },
 
   {
-    headline: "Mollie Promo Video",
+    headline: "Mollie Video",
     details: <MolliePromoVideoData />,
     video: "/videos/mollie-promo-video.mp4",
     poster: "",
@@ -37,7 +41,9 @@ export const galleryListData: GalleryItemType[] = [
     headline: "Mollie Checkout",
     details: <MollieCheckoutData />,
     video: "/videos/mollie-checkout.mp4",
-    poster: "",
+    poster: "/images/mollie-checkout-poster.jpg",
+    mobileVideo: "/videos/mollie-checkout-mobile.mp4",
+    mobilePoster: "/images/mollie-checkout-mobile-poster.jpg",
   },
   {
     headline: "Mollie Apple Pay",
@@ -72,7 +78,7 @@ export const ContactListData: LinkData[] = [
 
 export const MenuList: MenuItem[] = [
   { name: "Mollie Mobile" },
-  { name: "Mollie Promo Video" },
+  { name: "Mollie Video" },
   { name: "Mollie Checkout" },
   { name: "Mollie Apple Pay" },
 ];
