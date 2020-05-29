@@ -26,6 +26,7 @@ export default function MyApp({ Component, pageProps }) {
           property="og:title"
           content="Georgemaine Lourens"
         />
+        <meta key="og:image" name="og:image" content="/images/og-image.jpg" />
         <meta
           name="og:description"
           property="og:description"

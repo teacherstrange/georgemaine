@@ -27,7 +27,7 @@ export default function PopOver({ isVisible }: PopOverProps) {
                 <PopoverListItem key={index} tabindex={index}>
                   <PopOverMenuItem
                     href={data.url}
-                    target="_blank"
+                    target={index === 2 ? undefined : "_blank"}
                     rel="nofollow noopener noreferrer"
                   >
                     {data.name}
