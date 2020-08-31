@@ -32,6 +32,8 @@ export default function MobileSegmentedControl({
               ? "third"
               : activeMenuItem === 3
               ? "fourth"
+              : activeMenuItem === 4
+              ? "fifth"
               : "first"
           }
           transition={{
@@ -55,10 +57,3 @@ export default function MobileSegmentedControl({
     </SegmentNavContainer>
   );
 }
-
-// left: ${(props) =>
-//   props.currentPosition === 0
-//     ? "4px"
-//     : props.currentPosition === props.menuList - 1
-//     ? `calc(${props.currentPosition} * 152px - 4px)`
-//     : `calc(${props.currentPosition} * 152px)`};

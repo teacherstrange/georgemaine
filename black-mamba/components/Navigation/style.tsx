@@ -9,9 +9,15 @@ export const NavigationContainer = styled.nav`
   padding: 0 24px;
   height: 36px;
   position: fixed;
-  top: 20px;
+  top: 24px;
   z-index: 10;
   color: var(--secondaryTextDark);
+
+  @media (min-width: 1024px) {
+    padding: 0 60px;
+    width: calc(100% - 120px);
+    top: 60px;
+  }
 `;
 
 export const NavigationLogoContainer = styled.div`

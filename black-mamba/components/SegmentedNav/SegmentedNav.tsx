@@ -31,6 +31,8 @@ export default function SegmentedNav({
             ? "third"
             : activeMenuItem === 3
             ? "fourth"
+            : activeMenuItem === 4
+            ? "fifth"
             : "first"
         }
         transition={{

@@ -81,4 +81,5 @@ export const MenuList: MenuItem[] = [
   { name: "Mollie Video" },
   { name: "Mollie Checkout" },
   { name: "Mollie Apple Pay" },
+  { name: "Icons" },
 ];

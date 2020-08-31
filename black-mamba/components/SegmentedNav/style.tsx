@@ -2,18 +2,23 @@ import styled, { css } from "styled-components";
 import { OpaqueButton } from "../Button";
 import { motion } from "framer-motion";
 
-const segmentNavItemHeight = "28px";
-const segmentNavItemWidth = [125, 119, 139, 144];
+const segmentNavItemHeight = "32px";
+const segmentNavItemWidth = [125, 119, 139, 144, 72];
 const segmentNavMaxWidth =
   segmentNavItemWidth[0] +
   segmentNavItemWidth[1] +
   segmentNavItemWidth[2] +
-  segmentNavItemWidth[3];
+  segmentNavItemWidth[3] +
+  segmentNavItemWidth[4];
 const segmentNavItemXPosition = [
   0,
   segmentNavItemWidth[0],
   segmentNavItemWidth[0] + segmentNavItemWidth[1],
   segmentNavItemWidth[0] + segmentNavItemWidth[1] + segmentNavItemWidth[2],
+  segmentNavItemWidth[0] +
+    segmentNavItemWidth[1] +
+    segmentNavItemWidth[2] +
+    segmentNavItemWidth[3],
 ];
 
 export const SegmentNavSelectionBackgroundVariants = {
@@ -32,6 +37,10 @@ export const SegmentNavSelectionBackgroundVariants = {
   fourth: {
     x: segmentNavItemXPosition[3],
     width: segmentNavItemWidth[3],
+  },
+  fifth: {
+    x: segmentNavItemXPosition[4],
+    width: segmentNavItemWidth[4],
   },
 };
 
@@ -68,7 +77,7 @@ export const SegmentNavContainer = styled.footer`
   right: 0;
   overflow: hidden;
   bottom: 24px;
-  height: 32px;
+  height: 36px;
   padding: 0 24px;
   display: flex;
   justify-content: center;

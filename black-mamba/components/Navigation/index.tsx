@@ -1,6 +1,4 @@
-import styled from "styled-components";
 import Icon from "../Icon";
-import { P } from "../Typography";
 import { MenuList } from "../../../data";
 import { SegmentedNav } from "../SegmentedNav";
 import { PopUpButton } from "../Button";
