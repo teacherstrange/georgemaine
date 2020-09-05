@@ -7,7 +7,7 @@ const base = css`
   font-family: "TT Interphases";
   font-size: 1.5rem;
   line-height: 1.2307692308;
-  font-weight: var(--medium);
+  font-weight: 600;
   justify-content: center;
   padding: var(--spaceXS) var(--spaceM);
   border-radius: var(--spaceL);

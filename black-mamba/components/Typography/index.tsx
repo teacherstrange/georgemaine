@@ -87,7 +87,7 @@ export const A = styled.a`
   color: var(--primaryText);
   font-size: var(--h6);
   line-height: 1.5384615385;
-  font-weight: var(--medium);
+  font-weight: 600;
   font-family: inherit;
   display: flex;
   justify-content: space-between;
@@ -107,7 +107,7 @@ export const A = styled.a`
 export const InlineA = styled.a`
   color: var(--white);
   text-decoration: none;
-  font-weight: var(--medium);
+  font-weight: 500;
   transition: opacity 0.2s;
   opacity: 1;
 

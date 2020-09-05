@@ -53,7 +53,7 @@ const Base = css`
   filter: var(--saturate);
   font-size: var(--h6);
   font-family: inherit;
-  font-weight: var(--medium);
+  font-weight: 500;
   height: ${segmentNavItemHeight};
   border: 2px solid transparent;
   display: flex;
