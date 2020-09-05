@@ -1,4 +1,4 @@
-import { Wrapper } from "../black-mamba/components/Layouts/";
+import { Wrapper } from "../components/Layouts/";
 import {
   H1,
   H2,
@@ -9,7 +9,7 @@ import {
   P,
   A,
   InlineA,
-} from "../black-mamba/components/Typography/index";
+} from "../components/Typography/index";
 
 export default () => {
   return (
