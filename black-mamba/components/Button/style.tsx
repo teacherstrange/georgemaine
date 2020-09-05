@@ -4,13 +4,13 @@ const base = css`
   -webkit-appearance: none;
   display: flex;
   align-items: center;
-  font-family: "GT Haptik";
-  font-size: var(--h6);
+  font-family: "TT Interphases";
+  font-size: 1.5rem;
   line-height: 1.2307692308;
-  font-weight: 600;
+  font-weight: var(--medium);
   justify-content: center;
-  padding: var(--spaceXS) 20px;
-  border-radius: 18px;
+  padding: var(--spaceXS) var(--spaceM);
+  border-radius: var(--spaceL);
   transition: all 0.2s;
   letter-spacing: 0.005em;
   border: none;
@@ -26,18 +26,18 @@ const base = css`
 export const Button = styled.button`
   ${base}
   color: var(--primaryTextLight);
-  background-color: var(--blue);
+  background-color: var(--red);
   width: max-content;
   text-align: center;
   transition: all 0.2s;
 
   &:hover {
-    background-color: var(--blueOnHover);
+    background-color: var(--redOnHover);
   }
 
   &:active,
   &:focus {
-    color: var(--blue);
+    color: var(--red);
     background-color: var(--blurBg);
   }
 `;

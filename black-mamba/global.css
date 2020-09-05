@@ -1,80 +1,75 @@
 :root {
   --white: #fff;
   --black: #000;
-  --blue: hsl(212, 100%, 50%);
-  --blueOnHover: hsl(217, 100%, 43%);
-  --green: hsl(161, 100%, 39%);
-  --purple: hsl(290, 100%, 60%);
-  --red: hsl(13, 100%, 46%);
-  --yellow: hsl(42, 100%, 50%);
+  --red: hsl(349, 92%, 59%);
+  --redOnHover: hsl(349, 78%, 55%);
   --primaryTextLight: hsla(0, 0%, 100%, 95%);
   --primaryTextDark: hsla(0, 0%, 0%, 96%);
   --secondaryTextLight: hsla(0, 0%, 100%, 65%);
   --secondaryTextDark: hsla(240, 4%, 68%, 100%);
   --blur: blur(20px);
-  --h1: 6.8em;
-  --h2: 4.2em;
-  --h3: 4em;
-  --h4: 2.4em;
-  --h5: 1.9em;
-  --h6: 1.3em;
+  --h1: 6.6rem;
+  --h2: 4.4rem;
+  --h3: 3.6rem;
+  --h4: 2.8rem;
+  --h5: 1.9rem;
+  --h6: 1.5rem;
   --spaceXXL: 120px;
-  --spaceXL: 92px;
-  --spaceL: 64px;
-  --spaceM: 32px;
-  --spaceS: 16px;
-  --spaceXS: 8px;
-  --spaceXXS: 4px;
+  --spaceXL: 60px;
+  --spaceL: 30px;
+  --spaceM: 24px;
+  --spaceS: 18px;
+  --spaceXS: 12px;
+  --spaceXXS: 6px;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: TTInterphases, sans-serif;
+  background: var(--background);
+  color: var(--primaryText);
+  font-weight: 400;
+  -webkit-font-kerning: normal;
+  font-kerning: normal;
+  font-feature-settings: "kern" 1;
+  text-rendering: optimizelegibility;
+  font-variant-ligatures: common-ligatures;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Typefaces */
 
 @font-face {
-  font-family: "GT Haptik";
+  font-family: TTInterphases;
   font-weight: 400;
-  font-style: normal;
-  src: url("/fonts/GT-Haptik-Regular.woff") format("woff"),
-    url("/fonts/GT-Haptik-Regular.woff2") format("woff2");
+  src: url("/fonts/TTInterphasesRegular.woff") format("woff"),
+    url("/fonts/TTInterphasesRegular.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "GT Haptik";
-  font-weight: 400;
-  font-style: oblique;
-  src: url("/fonts/GT-Haptik-Regular-Oblique.woff") format("woff"),
-    url("/fonts/GT-Haptik-Regular-Oblique.woff2") format("woff2");
+  font-family: TTInterphases;
+  font-weight: 500;
+  src: url("/fonts/TTInterphasesMedium.woff") format("woff"),
+    url("/fonts/TTInterphasesMedium.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "GT Haptik";
+  font-family: TTInterphases;
   font-weight: 600;
-  font-style: normal;
-  src: url("/fonts/GT-Haptik-Medium.woff") format("woff"),
-    rl("/fonts/GT-Haptik-Medium.woff2") format("woff2");
+  src: url("/fonts/TTInterphasesDemiBold.woff") format("woff"),
+    url("/fonts/TTInterphasesDemiBold.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "GT Haptik";
-  font-weight: 600;
-  font-style: oblique;
-  src: url("/fonts/GT-Haptik-Medium-Oblique.woff") format("woff"),
-    url("/fonts/GT-Haptik-Medium-Oblique.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "GT Haptik";
+  font-family: TTInterphases;
   font-weight: 700;
-  font-style: normal;
-  src: url("/fonts/GT-Haptik-Bold.woff") format("woff"),
-    url("/fonts/GT-Haptik-Bold.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "GT Haptik";
-  font-weight: 700;
-  font-style: oblique;
-  src: url("/fonts/GT-Haptik-Bold-Oblique.woff") format("woff"),
-    url("/fonts/GT-Haptik-Bold-Oblique.woff2") format("woff2");
+  src: url("/fonts/TTInterphasesBold.woff") format("woff"),
+    url("/fonts/TTInterphasesBold.woff2") format("woff2");
 }
 
 @media screen and (prefers-color-scheme: dark) {
@@ -97,20 +92,4 @@
     --saturate: saturate(180%);
     --opaqueHover: hsla(0, 0%, 0%, 7%);
   }
-}
-
-body {
-  font-family: "GT Haptik", sans-serif;
-  background: var(--background);
-  color: var(--primaryText);
-  font-weight: 400;
-  font-size: 62.5%;
-  -webkit-font-kerning: normal;
-  font-kerning: normal;
-  font-feature-settings: "kern" 1;
-  text-rendering: optimizelegibility;
-  font-variant-ligatures: common-ligatures;
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: antialiased;
 }

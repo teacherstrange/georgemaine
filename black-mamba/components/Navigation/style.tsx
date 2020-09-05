@@ -27,7 +27,7 @@ export const NavigationLogoContainer = styled.div`
 
 export const NavigationHeadline = styled(P)`
   font-weight: 600;
-  font-size: var(--h6);
+  font-size: var(--h5);
   color: inherit;
   margin: 0 0 0 var(--spaceXXS);
 `;

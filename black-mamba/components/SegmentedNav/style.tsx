@@ -51,8 +51,9 @@ const Base = css`
   backdrop-filter: var(--blur);
   -webkit-filter: var(--saturate);
   filter: var(--saturate);
+  font-size: var(--h6);
   font-family: inherit;
-  font-weight: 600;
+  font-weight: var(--medium);
   height: ${segmentNavItemHeight};
   border: 2px solid transparent;
   display: flex;
