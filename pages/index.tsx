@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { Button } from "../components/Button";
 import React from "react";
 import { motion, useViewportScroll, useTransform } from "framer-motion";
-import { RSA_PSS_SALTLEN_AUTO } from "constants";
 
 export default () => {
   return (
@@ -46,15 +45,17 @@ export default () => {
         style={{
           width: "100%",
           position: "relative",
+          background: "#131313",
         }}
       >
         <Project
           src="/videos/mollie-mobile.mp4"
-          yOpacityRange={[0.19, 0.3]}
+          yOpacityRange={[0.18, 0.2, 0.29, 0.34]}
           yScaleRange={[0, 0.3]}
-          opacityRange={[0.8, 0]}
+          opacityRange={[1, 0.3, 0.3, 0]}
           scaleRange={[1, 1.25]}
           headline="Q4 2020"
+          copyMarginTop="0"
           caption="Designed Mollie’s iOS and Android apps to make your phone a place where you can quickly manage payments and watch your business grow."
           mobile
         />
@@ -183,7 +184,7 @@ function Router(props) {
         />
         <Manifesto
           style={{
-            color: "var(--primaryTextLight)",
+            color: "var(--primaryText)",
             marginBottom: 36,
           }}
         >
@@ -232,15 +233,51 @@ function Project(props) {
           height: "100vh",
           position: "sticky",
           overflow: "hidden",
-          opacity,
           display: "flex",
           alignItems: "center",
         }}
       >
+        <motion.div
+          style={{
+            width: "100%",
+            height: "100%",
+            top: 0,
+            left: 0,
+            position: "absolute",
+            backdropFilter: "blur(18px)",
+            WebkitBackdropFilter: "blur(18px)",
+            opacity: "0",
+            zIndex: 3,
+          }}
+        />
+        <motion.div
+          style={{
+            width: "100%",
+            height: "100%",
+            top: 0,
+            left: 0,
+            position: "absolute",
+            background: "rgba(255,255,255)",
+            opacity: "0",
+            zIndex: 3,
+          }}
+        />
+        <motion.div
+          style={{
+            opacity: 0,
+            width: "100%",
+            height: "100%",
+            top: 0,
+            left: 0,
+            position: "absolute",
+            background: "rgba(255,255,255,0.4)",
+            zIndex: 0,
+          }}
+        />
         {mobile && (
           <motion.div
             style={{
-              boxSizing: "border-box",
+              opacity,
               position: "relative",
               width: 365,
               height: 736,
@@ -333,33 +370,10 @@ function Project(props) {
             top: 0,
             left: 0,
             position: "absolute",
-            backgroundColor: "rgba(42, 42, 42, 0.42)",
-            WebkitBackdropFilter: "blur(90px)",
-            backdropFilter: "blur(90px)",
-            WebkitFilter: "saturate(200%)",
-            filter: "saturate(200%)",
+            backgroundColor: "#fafafa",
             zIndex: 0,
           }}
         ></div>
-        <motion.video
-          autoPlay
-          muted
-          playsInline
-          preload="auto"
-          style={{
-            width: "100%",
-            height: "100%",
-            position: "absolute",
-            top: 0,
-            left: 0,
-            verticalAlign: "middle",
-            userSelect: "none",
-            objectFit: "cover",
-            zIndex: -1,
-          }}
-        >
-          <source src={src} type="video/mp4" />
-        </motion.video>
       </motion.div>
       <div
         style={{
@@ -377,7 +391,7 @@ function Project(props) {
         <Label>{headline}</Label>
         <Manifesto
           style={{
-            color: "var(--primaryTextLight)",
+            color: "#666",
           }}
         >
           {caption}
