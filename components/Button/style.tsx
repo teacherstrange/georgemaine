@@ -4,12 +4,11 @@ const base = css`
   -webkit-appearance: none;
   display: flex;
   align-items: center;
-  font-family: "TT Interphases";
-  font-size: 1.5rem;
-  line-height: 1.2307692308;
+  font-size: 1.9rem;
+  line-height: 1.3;
   font-weight: 600;
   justify-content: center;
-  padding: var(--spaceXS) var(--spaceM);
+  padding: var(--spaceS) var(--spaceM);
   border-radius: var(--spaceL);
   transition: all 0.2s;
   letter-spacing: 0.005em;

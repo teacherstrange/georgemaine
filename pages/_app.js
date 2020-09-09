@@ -1,4 +1,4 @@
-import Global from "../black-mamba/global.css";
+import Global from "../components/global.css";
 import React from "react";
 import Head from "next/head";
 import Router from "next/router";

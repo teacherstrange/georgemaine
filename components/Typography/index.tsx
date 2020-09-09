@@ -18,16 +18,16 @@ const h3Style = css`
   font-size: var(--h3);
   font-weight: 700;
   line-height: 1.25;
-  letter-spacing: 0.002em;
+  letter-spacing: 0.004em;
   margin: 0 0 var(--spaceXXS);
 `;
 
 const h4Style = css`
   font-size: var(--h4);
-  line-height: 1.1428571429;
+  line-height: 1.29;
   font-weight: 700;
+  letter-spacing: 0.004em;
   margin: 0 0 var(--spaceXXS);
-  letter-spacing: -0.01em;
 `;
 
 export const H1 = styled.h1`
@@ -75,12 +75,43 @@ export const H6 = styled.h6`
   letter-spacing: 0.005em;
 `;
 
+export const Manifesto = styled.p`
+  font-size: 3em;
+  font-weight: 600;
+  line-height: 42px;
+  letter-spacing: 0.006 em;
+  margin: 0;
+`;
+
+export const Caption = styled.p`
+  font-size: 2.4em;
+  line-height: 1.25;
+  font-weight: 500;
+  letter-spacing: 0.002em;
+  margin: 0 auto var(--spaceS);
+`;
+
 export const P = styled.p`
-  color: var(--secondaryText);
+  color: var(--primaryTextLight);
   font-weight: 400;
   font-size: 1.9em;
   line-height: 1.58;
   margin: 0 0 var(--spaceXS);
+`;
+
+export const Label = styled.p`
+  text-align: center;
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--red);
+  letter-spacing: 0.009em;
+  line-height: 1.39;
+  margin: 0 auto var(--spaceXS);
+
+  strong {
+    font-size: 1.7rem;
+    color: var(--red);
+  }
 `;
 
 export const A = styled.a`
@@ -104,15 +135,19 @@ export const A = styled.a`
   }
 `;
 
-export const InlineA = styled.a`
-  color: var(--white);
+interface Props {
+  color: string;
+}
+
+export const InlineA = styled.a<Pick<Props, "color">>`
+  color: ${(props) => (props.color ? props.color : "var(--white)")};
   text-decoration: none;
   font-weight: 500;
   transition: opacity 0.2s;
   opacity: 1;
 
   &:hover {
-    opacity: 0.5;
+    opacity: 0.65;
     cursor: pointer;
     text-decoration: underline;
   }
