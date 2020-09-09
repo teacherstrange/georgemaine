@@ -1,10 +1,9 @@
 import { Wrapper } from "../components/Layouts/";
-import { InlineA, Manifesto, Label } from "../components/Typography/index";
+import { InlineA, Manifesto, Caption } from "../components/Typography/index";
 import styled from "styled-components";
 import { Button } from "../components/Button";
 import React from "react";
 import { motion, useViewportScroll, useTransform } from "framer-motion";
-import { RSA_PSS_SALTLEN_AUTO } from "constants";
 
 export default () => {
   return (
@@ -50,25 +49,30 @@ export default () => {
       >
         <Project
           src="/videos/mollie-mobile.mp4"
-          yOpacityRange={[0.19, 0.3]}
-          yScaleRange={[0, 0.3]}
-          opacityRange={[0.8, 0]}
+          yOpacityRange={[0.18, 0.2, 0.29, 0.34]}
+          opacityRange={[1, 0.7, 0.7, 0]}
+          yScaleRange={[0, 0.34]}
           scaleRange={[1, 1.25]}
-          headline="Q4 2020"
+          copyMarginTop="0"
+          headline="Q4 2020. "
           caption="Designed Mollie’s iOS and Android apps to make your phone a place where you can quickly manage payments and watch your business grow."
           mobile
+          yVibrancyOpacityRange={[0.18, 0.2]}
+          vibrancyOpacityRange={[0, 1]}
         />
         <Project
           copyMarginTop={"0"}
           mollieVideo
           zIndex={5}
           src="/videos/mollie-video.mp4"
-          yOpacityRange={[0.3, 0.34, 0.4, 0.48]}
-          yScaleRange={[0.3, 0.48]}
-          opacityRange={[0, 0.8, 0.8, 0]}
+          yOpacityRange={[0.34, 0.36, 0.4, 0.48]}
+          opacityRange={[0, 1, 1, 0]}
+          yScaleRange={[0.34, 0.48]}
           scaleRange={[1, 1.25]}
           marginTop="-100vh"
           headline="Q3 2020"
+          yVibrancyOpacityRange={[0.18, 0.2]}
+          vibrancyOpacityRange={[0, 1]}
           caption="To help Marketing showcase Mollie at events, I created an engaging video that shows how Mollie works in a website."
         />
         <Project
@@ -82,6 +86,8 @@ export default () => {
           scaleRange={[1, 1.25]}
           marginTop="-100vh"
           headline="Q2 2019"
+          yVibrancyOpacityRange={[0.18, 0.2]}
+          vibrancyOpacityRange={[0, 1]}
           caption="Redesigned and developed the Mollie Checkout so that people can efficiently pay for products with confidence."
         />
         <Project
@@ -95,6 +101,8 @@ export default () => {
           scaleRange={[1, 1.25]}
           marginTop="-100vh"
           headline="Q1 2019"
+          yVibrancyOpacityRange={[0.18, 0.2]}
+          vibrancyOpacityRange={[0, 1]}
           caption="To help launch Apple Pay at Mollie, I created an engaging promotional video that inspired merchants to integrate Apple Pay."
         />
       </section>
@@ -102,6 +110,8 @@ export default () => {
         yOpacityRange={[0.9, 1]}
         opacityRange={[0, 1]}
         marginTop="-100vh"
+        yVibrancyOpacityRange={[0.18, 0.2]}
+        vibrancyOpacityRange={[0, 1]}
         manifesto={
           "In my spare time, I enjoy tinkering on software projects. If you have one and think I can help—or—want to have a chat? Reach out!"
         }
@@ -210,11 +220,18 @@ function Project(props) {
     marginTop,
     zIndex,
     copyMarginTop,
+    yVibrancyOpacityRange,
+    vibrancyOpacityRange,
   } = props;
   const { scrollYProgress } = useViewportScroll();
 
   const scale = useTransform(scrollYProgress, yScaleRange, scaleRange);
   const opacity = useTransform(scrollYProgress, yOpacityRange, opacityRange);
+  const vibrancyOpacity = useTransform(
+    scrollYProgress,
+    yVibrancyOpacityRange,
+    vibrancyOpacityRange
+  );
 
   return (
     <div
@@ -237,6 +254,20 @@ function Project(props) {
           alignItems: "center",
         }}
       >
+        <motion.div
+          style={{
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100vh",
+            position: "absolute",
+            opacity: vibrancyOpacity,
+            backgroundColor: "rgba(255,255,255,0.3)",
+            backdropFilter: "blur(6px)",
+            WebkitBackdropFilter: "blur(6px)",
+            zIndex: 3,
+          }}
+        ></motion.div>
         {mobile && (
           <motion.div
             style={{
@@ -325,63 +356,21 @@ function Project(props) {
             <motion.img style={{ width: "100%" }} src="/images/Browser.jpg" />
           </motion.div>
         )}
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            overflow: "visible",
-            top: 0,
-            left: 0,
-            position: "absolute",
-            backgroundColor: "rgba(42, 42, 42, 0.42)",
-            WebkitBackdropFilter: "blur(90px)",
-            backdropFilter: "blur(90px)",
-            WebkitFilter: "saturate(200%)",
-            filter: "saturate(200%)",
-            zIndex: 0,
-          }}
-        ></div>
-        <motion.video
-          autoPlay
-          muted
-          playsInline
-          preload="auto"
-          style={{
-            width: "100%",
-            height: "100%",
-            position: "absolute",
-            top: 0,
-            left: 0,
-            verticalAlign: "middle",
-            userSelect: "none",
-            objectFit: "cover",
-            zIndex: -1,
-          }}
-        >
-          <source src={src} type="video/mp4" />
-        </motion.video>
       </motion.div>
       <div
         style={{
           position: "relative",
           zIndex: 10,
           marginTop: copyMarginTop ? copyMarginTop : "-20vh",
-          textAlign: "center",
           paddingBottom: "100vh",
           width: "100%",
           marginLeft: "auto",
           marginRight: "auto",
-          maxWidth: 570,
+          maxWidth: 480,
         }}
       >
-        <Label>{headline}</Label>
-        <Manifesto
-          style={{
-            color: "var(--primaryTextLight)",
-          }}
-        >
-          {caption}
-        </Manifesto>
+        <Caption>{headline}</Caption>
+        <Manifesto>{caption}</Manifesto>
       </div>
     </div>
   );

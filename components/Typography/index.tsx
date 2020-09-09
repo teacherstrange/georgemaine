@@ -76,19 +76,23 @@ export const H6 = styled.h6`
 `;
 
 export const Manifesto = styled.p`
-  font-size: 3em;
+  font-size: 2.4em;
   font-weight: 600;
-  line-height: 42px;
-  letter-spacing: 0.006 em;
+  line-height: 30px;
+  letter-spacing: 0.006em;
+  display: inline;
+  color: #000;
   margin: 0;
 `;
 
 export const Caption = styled.p`
+  display: inline;
   font-size: 2.4em;
-  line-height: 1.25;
-  font-weight: 500;
+  line-height: 30px;
+  font-weight: 600;
   letter-spacing: 0.002em;
-  margin: 0 auto var(--spaceS);
+  color: var(--red);
+  margin: 0;
 `;
 
 export const P = styled.p`
