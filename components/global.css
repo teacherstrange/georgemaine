@@ -1,21 +1,6 @@
 :root {
-  --white: #fff;
-  --black: #000;
   --red: hsl(349, 92%, 59%);
   --redOnHover: hsl(349, 78%, 55%);
-  --primaryTextLight: hsla(0, 0%, 100%, 95%);
-  --primaryTextDark: hsla(0, 0%, 0%, 96%);
-  --secondaryTextLight: hsla(0, 0%, 100%, 65%);
-  --secondaryTextDark: hsla(240, 4%, 68%, 100%);
-  --blur: blur(20px);
-  --h1: 6.6rem;
-  --h2: 4.4rem;
-  --h3: 3.6rem;
-  --h4: 2.9rem;
-  --h5: 1.9rem;
-  --h6: 1.5rem;
-  --spaceXXL: 120px;
-  --spaceXL: 60px;
   --spaceL: 30px;
   --spaceM: 24px;
   --spaceS: 18px;
@@ -63,33 +48,4 @@ body {
   font-weight: 600;
   src: url("/fonts/TTInterphasesDemiBold.woff") format("woff"),
     url("/fonts/TTInterphasesDemiBold.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: TTInterphases;
-  font-weight: 700;
-  src: url("/fonts/TTInterphasesBold.woff") format("woff"),
-    url("/fonts/TTInterphasesBold.woff2") format("woff2");
-}
-
-@media screen and (prefers-color-scheme: dark) {
-  body {
-    --blurBg: rgba(38, 38, 38, 0.73);
-    --overlayBg: hsla(0, 0%, 0%, 60%);
-    --primaryText: hsla(0, 0%, 100%, 95%);
-    --secondaryText: hsla(0, 0%, 100%, 65%);
-    --saturate: saturate(180%);
-    --opaqueHover: hsla(0, 0%, 100%, 14%);
-  }
-}
-
-@media screen and (prefers-color-scheme: light) {
-  body {
-    --blurBg: hsla(0, 0%, 100%, 60%);
-    --overlayBg: hsla(0, 0%, 0%, 40%);
-    --primaryText: hsla(0, 0%, 0%, 95%);
-    --secondaryText: hsla(0, 0%, 0%, 65%);
-    --saturate: saturate(180%);
-    --opaqueHover: hsla(0, 0%, 0%, 7%);
-  }
 }

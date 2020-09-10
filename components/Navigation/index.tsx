@@ -1,44 +1,51 @@
-import Icon from "../Icon";
-import { MenuList } from "../../../data";
-import { SegmentedNav } from "../SegmentedNav";
-import { PopUpButton } from "../Button";
-import {
-  NavigationContainer,
-  NavigationLogoContainer,
-  NavigationHeadline,
-} from "./style";
+import { StickyNavList, StickyNav } from "./style";
+import { Label } from "../Typography";
+import { Button, RedButton } from "../Button";
 
-interface navigationProps {
-  buttonOnClick: Function;
-  buttonIsAnimated: boolean;
-  onIndexChange: Function;
-  activeIndex: number;
+// Declare Props
+interface StickyNavProps {
+  name: string;
+  role: string;
+  list: string[];
+  button: string;
+  onClick: Function;
+  active: number;
 }
 
-export default ({
-  buttonOnClick,
-  buttonIsAnimated,
-  onIndexChange,
-  activeIndex,
-}: navigationProps) => {
-  function handleSegmentedControlClick(index) {
-    onIndexChange(index);
-  }
-
+// Create Function
+export function StickyNavigation({
+  name,
+  role,
+  list,
+  button,
+  onClick,
+  active,
+}: StickyNavProps) {
   return (
-    <NavigationContainer>
-      <NavigationLogoContainer>
-        <Icon glyph="Logo" />
-        <NavigationHeadline>Georgemaine</NavigationHeadline>
-      </NavigationLogoContainer>
-      <SegmentedNav
-        activeMenuItem={activeIndex}
-        menuList={MenuList}
-        onClick={handleSegmentedControlClick}
-      />
-      <PopUpButton onClick={buttonOnClick} animated={buttonIsAnimated}>
-        Get in touch
-      </PopUpButton>
-    </NavigationContainer>
+    <StickyNav>
+      <div>
+        <Label color="#111" align="left">
+          {name}
+        </Label>
+        <Label color="#bbb" align="left">
+          {role}
+        </Label>
+      </div>
+      <StickyNavList
+        whileHover={{ backgroundColor: "#f7f7f7" }}
+        whileTap={{ backgroundColor: "#e5e5e5" }}
+      >
+        {list.map((ListItem, index) => {
+          return (
+            <li key={index} onClick={() => onClick(index)}>
+              <Button style={{ opacity: index != active && 0.6 }}>
+                {ListItem}
+              </Button>
+            </li>
+          );
+        })}
+      </StickyNavList>
+      <RedButton>{button}</RedButton>
+    </StickyNav>
   );
-};
+}
