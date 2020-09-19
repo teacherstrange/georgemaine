@@ -26,15 +26,6 @@ export const Caption = styled.p`
   margin: 0;
 `;
 
-export const Label = styled.p<Props>`
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: ${(props) => (props.color ? props.color : "#333")};
-  letter-spacing: -0.022em;
-  line-height: 1.2;
-  margin: 0;
-`;
-
 export const InlineA = styled.a<Props>`
   color: ${(props) => (props.color ? props.color : "var(--white)")};
   text-decoration: none;

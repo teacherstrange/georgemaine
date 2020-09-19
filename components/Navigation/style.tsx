@@ -2,11 +2,8 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 export const StickyNav = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  position: fixed as fixed;
-  margin: 60px 60px 0;
-  width: calc(100% - 120px);
+  max-width: 290px;
+  margin: 60px auto 0;
 `;
 
 export const StickyNavList = styled(motion.ul)`

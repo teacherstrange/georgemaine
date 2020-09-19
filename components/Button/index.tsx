@@ -24,13 +24,3 @@ export const Button = styled.button`
     cursor: pointer;
   }
 `;
-
-export const RedButton = styled(Button)`
-  background: var(--red);
-  color: #fff;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1.6;
-  padding: var(--spaceXXS) var(--spaceS);
-  border-radius: var(--spaceL);
-`;

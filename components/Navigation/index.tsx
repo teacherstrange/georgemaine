@@ -1,6 +1,6 @@
 import { StickyNavList, StickyNav } from "./style";
-import { Label } from "../Typography";
-import { Button, RedButton } from "../Button";
+import { Button } from "../Button";
+import React from "react";
 
 // Declare Props
 interface StickyNavProps {
@@ -13,39 +13,35 @@ interface StickyNavProps {
 }
 
 // Create Function
-export function StickyNavigation({
-  name,
-  role,
-  list,
-  button,
-  onClick,
-  active,
-}: StickyNavProps) {
+export function StickyNavigation({ list, onClick, active }: StickyNavProps) {
+  const convertedActive =
+    active >= 1 && active <= 4
+      ? 1
+      : active === 5
+      ? 2
+      : active === 6
+      ? 3
+      : active;
+
   return (
     <StickyNav>
-      <div>
-        <Label color="#111" align="left">
-          {name}
-        </Label>
-        <Label color="#bbb" align="left">
-          {role}
-        </Label>
-      </div>
       <StickyNavList
         whileHover={{ backgroundColor: "#f7f7f7" }}
         whileTap={{ backgroundColor: "#e5e5e5" }}
       >
         {list.map((ListItem, index) => {
           return (
-            <li key={index} onClick={() => onClick(index)}>
-              <Button style={{ opacity: index != active && 0.6 }}>
+            <li
+              key={index}
+              onClick={() => onClick(index === 2 ? 5 : index === 3 ? 6 : index)}
+            >
+              <Button style={{ opacity: index != convertedActive && 0.6 }}>
                 {ListItem}
               </Button>
             </li>
           );
         })}
       </StickyNavList>
-      <RedButton>{button}</RedButton>
     </StickyNav>
   );
 }
