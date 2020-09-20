@@ -13,17 +13,25 @@ const Pages = [
 ];
 const MenuItems = ["About me", "Work", "Icons", "Get in touch"];
 export default () => {
+  // Create hooks for handling page switches
   const [page, setPage] = useState(0);
+
+  // Wrap pages so that you can always navigate between pages without hitting a dead end
   const pageIndex = wrap(0, Pages.length, page);
+
+  // Nest hook so that it can be passed on to nested components
   function handleIndexChange(index: number) {
     setPage(index);
   }
 
+  // Create helper for keyboard navigation
   function paginate(direction: number) {
     setPage(page + direction);
   }
   const ArrowRightDown = useKeyPress("ArrowRight");
   const ArrowLeftDown = useKeyPress("ArrowLeft");
+
+  // Trigger for keyboard navigation
   useEffect(() => {
     ArrowRightDown && paginate(1);
     ArrowLeftDown && paginate(-1);
@@ -38,7 +46,7 @@ export default () => {
         active={pageIndex}
         onClick={handleIndexChange}
       />
-      <Slides active={pageIndex} list={Pages} />
+      <Slides onDragEndHelper={paginate} active={pageIndex} list={Pages} />
     </Wrapper>
   );
 };
@@ -46,6 +54,7 @@ export default () => {
 interface SlidesProps {
   list: string[];
   active: number;
+  onDragEndHelper: Function;
 }
 
 const wrap = (min: number, max: number, v: number) => {
@@ -54,7 +63,7 @@ const wrap = (min: number, max: number, v: number) => {
 };
 
 export function useKeyPress(
-  targetKey,
+  targetKey: string,
   onPressDown = () => {},
   onPressUp = () => {}
 ) {
@@ -92,7 +101,7 @@ export function useKeyPress(
   return keyPressed;
 }
 
-function Slides({ list, active }: SlidesProps) {
+function Slides({ list, active, onDragEndHelper }: SlidesProps) {
   return (
     <motion.ul
       style={{
@@ -118,8 +127,20 @@ function Slides({ list, active }: SlidesProps) {
             key={index}
             transition={{
               type: "spring",
-              damping: 74,
-              stiffness: 120,
+              damping: 200,
+              stiffness: 300,
+            }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1}
+            onDragEnd={(e, { offset, velocity }) => {
+              const swipe = swipePower(offset.x, velocity.x);
+
+              if (swipe < -swipeConfidenceThreshold) {
+                onDragEndHelper(1);
+              } else if (swipe > swipeConfidenceThreshold) {
+                onDragEndHelper(-1);
+              }
             }}
             style={{
               cursor: "grab",
@@ -150,3 +171,15 @@ export const Wrapper = styled.main`
   background-color: #fafafa;
   color: #111;
 `;
+
+/**
+ * Experimenting with distilling swipe offset and velocity into a single variable, so the
+ * less distance a user has swiped, the more velocity they need to register as a swipe.
+ * Should accomodate longer swipes and short flicks without having binary checks on
+ * just distance thresholds and velocity > 0.
+ */
+
+const swipeConfidenceThreshold = 10000;
+const swipePower = (offset: number, velocity: number) => {
+  return Math.abs(offset) * velocity;
+};

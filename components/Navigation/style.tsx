@@ -10,7 +10,6 @@ export const StickyNav = styled.nav`
 
   @media only screen and (max-width: 599px) {
     position: absolute;
-
     margin-top: 0;
     left: 0;
     right: 0;
