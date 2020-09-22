@@ -8,7 +8,7 @@ export const Button = styled.button`
   line-height: 1.2;
   font-weight: 500;
   justify-content: center;
-  padding: 3px var(--spaceXXS);
+  padding: 3px 9px;
   background: transparent;
   transition: opacity 0.15s;
   letter-spacing: -0.022em;
@@ -18,6 +18,7 @@ export const Button = styled.button`
   color: inherit;
   font-weight: 500;
   text-align: center;
+  white-space: nowrap;
 
   &:hover,
   &:focus {

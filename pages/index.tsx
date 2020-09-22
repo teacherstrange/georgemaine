@@ -11,7 +11,36 @@ const Pages = [
   "Icons",
   "Get in touch",
 ];
-const MenuItems = ["About me", "Work", "Icons", "Get in touch"];
+const MenuItems = [
+  {
+    name: "About me",
+    value: 0,
+  },
+
+  { name: "Work", value: 1 },
+
+  { name: "Icons", value: 2 },
+
+  { name: "Get in touch", value: 3 },
+];
+const MenuItemsExpanded = [
+  {
+    name: "About me",
+    value: 0,
+  },
+
+  { name: "Mollie Mobile", value: 1 },
+
+  { name: "Mollie Event Video", value: 2 },
+
+  { name: "Mollie Checkout", value: 3 },
+
+  { name: "Mollie Apple Pay Video", value: 4 },
+
+  { name: "Icons", value: 5 },
+
+  { name: "Get in touch", value: 6 },
+];
 export default () => {
   // Create hooks for handling page switches
   const [page, setPage] = useState(0);
@@ -41,7 +70,7 @@ export default () => {
       <StickyNavigation
         name="Georgemaine Lourens"
         role="Product Designer"
-        list={MenuItems}
+        list={page >= 1 && page <= 4 ? MenuItemsExpanded : MenuItems}
         button="Get in touch"
         active={pageIndex}
         onClick={handleIndexChange}
