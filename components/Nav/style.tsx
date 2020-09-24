@@ -25,4 +25,8 @@ export const NavList = styled(motion.ul)`
   border-radius: var(--spaceL);
   background-color: #f2f2f2;
   transition: background-color 0.15s;
+
+  li {
+    list-style: none;
+  }
 `;
