@@ -2,44 +2,28 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { StickyNavigation } from "../components/Navigation";
+const Tabs = [
+  { name: "About me" },
+  { name: "Work" },
+  { name: "Icons" },
+  { name: "Get in touch" },
+];
 const Pages = [
-  "About me",
-  "Mollie Mobile",
-  "Mollie Event Video",
-  "Mollie Checkout",
-  "Mollie Apple Pay Video",
-  "Icons",
-  "Get in touch",
-];
-const MenuItems = [
   {
     name: "About me",
-    value: 0,
   },
 
-  { name: "Work", value: 1 },
+  { name: "Mollie Mobile" },
 
-  { name: "Icons", value: 2 },
+  { name: "Mollie Event Video" },
 
-  { name: "Get in touch", value: 3 },
-];
-const MenuItemsExpanded = [
-  {
-    name: "About me",
-    value: 0,
-  },
+  { name: "Mollie Checkout" },
 
-  { name: "Mollie Mobile", value: 1 },
+  { name: "Mollie Apple Pay Video" },
 
-  { name: "Mollie Event Video", value: 2 },
+  { name: "Icons" },
 
-  { name: "Mollie Checkout", value: 3 },
-
-  { name: "Mollie Apple Pay Video", value: 4 },
-
-  { name: "Icons", value: 5 },
-
-  { name: "Get in touch", value: 6 },
+  { name: "Get in touch" },
 ];
 export default () => {
   // Create hooks for handling page switches
@@ -70,12 +54,15 @@ export default () => {
       <StickyNavigation
         name="Georgemaine Lourens"
         role="Product Designer"
-        list={page >= 1 && page <= 4 ? MenuItemsExpanded : MenuItems}
+        list={Tabs}
         button="Get in touch"
         active={pageIndex}
         onClick={handleIndexChange}
       />
       <Slides onDragEndHelper={paginate} active={pageIndex} list={Pages} />
+      {pageIndex >= 1 && pageIndex <= 4 && (
+        <PageList current={pageIndex} pages={Tabs} />
+      )}
     </Wrapper>
   );
 };
@@ -128,6 +115,52 @@ export function useKeyPress(
   });
 
   return keyPressed;
+}
+
+function PageList({ pages, current }) {
+  const convertedActive =
+    current === 1
+      ? 0
+      : current === 2
+      ? 1
+      : current === 3
+      ? 2
+      : current === 4
+      ? 3
+      : current;
+  return (
+    <ul
+      style={{
+        position: "fixed",
+        display: "flex",
+        bottom: 60,
+        left: 0,
+        right: 0,
+        zIndex: 10,
+        listStyle: "none",
+        justifyContent: "center",
+        margin: 0,
+        padding: 0,
+      }}
+    >
+      {pages.map((Page, index) => {
+        return (
+          <li
+            key={index}
+            style={{
+              listStyle: "none",
+              margin: "6px 9px",
+              width: 9,
+              height: 9,
+              background: "#86868B",
+              borderRadius: "50%",
+              opacity: index != convertedActive && 0.4,
+            }}
+          />
+        );
+      })}
+    </ul>
+  );
 }
 
 function Slides({ list, active, onDragEndHelper }: SlidesProps) {
@@ -183,7 +216,7 @@ function Slides({ list, active, onDragEndHelper }: SlidesProps) {
               background: "var(--red)",
             }}
           >
-            <h1>{listItem}</h1>
+            <h1>{listItem.name}</h1>
           </motion.li>
         );
       })}
