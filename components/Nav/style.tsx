@@ -1,13 +1,10 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-export const StickyNav = styled.nav`
+export const NavContainer = styled.nav`
   max-width: 314px;
   margin: 60px auto 0;
-  margin-left: auto;
-  margin-right: auto;
   z-index: 10;
-  transition: max-width 0.15s ease;
   overflow: hidden;
 
   @media only screen and (max-width: 599px) {
@@ -19,7 +16,7 @@ export const StickyNav = styled.nav`
   }
 `;
 
-export const StickyNavList = styled(motion.ul)`
+export const NavList = styled(motion.ul)`
   display: flex;
   align-items: center;
   overflow: hidden;

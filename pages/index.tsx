@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { StickyNavigation } from "../components/Navigation";
-const Tabs = [
+import { Nav } from "../components/Nav";
+import { IndicatorList } from "../components/IndicatorList";
+const navItems = [
   { name: "About me" },
   { name: "Work" },
   { name: "Icons" },
   { name: "Get in touch" },
 ];
-const Pages = [
+const slideItems = [
   {
     name: "About me",
   },
@@ -27,19 +28,19 @@ const Pages = [
 ];
 export default () => {
   // Create hooks for handling page switches
-  const [page, setPage] = useState(0);
+  const [slide, setSlide] = useState(0);
 
   // Wrap pages so that you can always navigate between pages without hitting a dead end
-  const pageIndex = wrap(0, Pages.length, page);
+  const slideIndex = wrap(0, slideItems.length, slide);
 
   // Nest hook so that it can be passed on to nested components
   function handleIndexChange(index: number) {
-    setPage(index);
+    setSlide(index);
   }
 
   // Create helper for keyboard navigation
   function paginate(direction: number) {
-    setPage(page + direction);
+    setSlide(slide + direction);
   }
   const ArrowRightDown = useKeyPress("ArrowRight");
   const ArrowLeftDown = useKeyPress("ArrowLeft");
@@ -51,25 +52,26 @@ export default () => {
   }, [ArrowRightDown, ArrowLeftDown]);
   return (
     <Wrapper>
-      <StickyNavigation
-        name="Georgemaine Lourens"
-        role="Product Designer"
-        list={Tabs}
-        button="Get in touch"
-        active={pageIndex}
-        onClick={handleIndexChange}
+      <Nav list={navItems} current={slideIndex} onClick={handleIndexChange} />
+      <Slides
+        onDragEndHelper={paginate}
+        current={slideIndex}
+        list={slideItems}
       />
-      <Slides onDragEndHelper={paginate} active={pageIndex} list={Pages} />
-      {pageIndex >= 1 && pageIndex <= 4 && (
-        <PageList current={pageIndex} pages={Tabs} />
+      {slideIndex >= 1 && slideIndex <= 4 && (
+        <IndicatorList current={slideIndex} list={navItems} />
       )}
     </Wrapper>
   );
 };
 
+type SlideItemProps = {
+  name: string;
+};
+
 interface SlidesProps {
-  list: string[];
-  active: number;
+  list: SlideItemProps[];
+  current: number;
   onDragEndHelper: Function;
 }
 
@@ -117,53 +119,7 @@ export function useKeyPress(
   return keyPressed;
 }
 
-function PageList({ pages, current }) {
-  const convertedActive =
-    current === 1
-      ? 0
-      : current === 2
-      ? 1
-      : current === 3
-      ? 2
-      : current === 4
-      ? 3
-      : current;
-  return (
-    <ul
-      style={{
-        position: "fixed",
-        display: "flex",
-        bottom: 60,
-        left: 0,
-        right: 0,
-        zIndex: 10,
-        listStyle: "none",
-        justifyContent: "center",
-        margin: 0,
-        padding: 0,
-      }}
-    >
-      {pages.map((Page, index) => {
-        return (
-          <li
-            key={index}
-            style={{
-              listStyle: "none",
-              margin: "6px 9px",
-              width: 9,
-              height: 9,
-              background: "#86868B",
-              borderRadius: "50%",
-              opacity: index != convertedActive && 0.4,
-            }}
-          />
-        );
-      })}
-    </ul>
-  );
-}
-
-function Slides({ list, active, onDragEndHelper }: SlidesProps) {
+function Slides({ list, current, onDragEndHelper }: SlidesProps) {
   return (
     <motion.ul
       style={{
@@ -175,16 +131,16 @@ function Slides({ list, active, onDragEndHelper }: SlidesProps) {
         return (
           <motion.li
             animate={{
-              opacity: index === active ? 1 : 0,
+              opacity: index === current ? 1 : 0,
               x:
-                active === index
+                current === index
                   ? `0vw`
-                  : index < active
+                  : index < current
                   ? `-100vw`
-                  : index > active
-                  ? `calc(${index - active} * 100vw)`
+                  : index > current
+                  ? `calc(${index - current} * 100vw)`
                   : `calc(${index} * 100vw)`,
-              scale: index === active ? 1 : 0.8,
+              scale: index === current ? 1 : 0.8,
             }}
             key={index}
             transition={{
