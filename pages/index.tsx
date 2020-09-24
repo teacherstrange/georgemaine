@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import { wrap, useKeyPress, swipePower } from "../components/Helpers";
 import { motion } from "framer-motion";
 import { Nav } from "../components/Nav";
 import { IndicatorList } from "../components/IndicatorList";
@@ -42,6 +43,7 @@ export default () => {
   function paginate(direction: number) {
     setSlide(slide + direction);
   }
+
   const ArrowRightDown = useKeyPress("ArrowRight");
   const ArrowLeftDown = useKeyPress("ArrowLeft");
 
@@ -73,50 +75,6 @@ interface SlidesProps {
   list: SlideItemProps[];
   current: number;
   onDragEndHelper: Function;
-}
-
-const wrap = (min: number, max: number, v: number) => {
-  const rangeSize = max - min;
-  return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
-};
-
-export function useKeyPress(
-  targetKey: string,
-  onPressDown = () => {},
-  onPressUp = () => {}
-) {
-  // State for keeping track of whether key is pressed
-  const [keyPressed, setKeyPressed] = useState(false);
-
-  useEffect(() => {
-    // If pressed key is our target key then set to true
-    function downHandler({ key }) {
-      if (key === targetKey) {
-        setKeyPressed(true);
-        onPressDown();
-      }
-    }
-
-    // If released key is our target key then set to false
-    const upHandler = ({ key }) => {
-      if (key === targetKey) {
-        setKeyPressed(false);
-        onPressUp();
-      }
-    };
-
-    // Add event listeners
-    window.addEventListener("keydown", downHandler);
-    window.addEventListener("keyup", upHandler);
-
-    // Remove event listeners on cleanup
-    return () => {
-      window.removeEventListener("keydown", downHandler);
-      window.removeEventListener("keyup", upHandler);
-    };
-  });
-
-  return keyPressed;
 }
 
 function Slides({ list, current, onDragEndHelper }: SlidesProps) {
@@ -154,9 +112,9 @@ function Slides({ list, current, onDragEndHelper }: SlidesProps) {
             onDragEnd={(e, { offset, velocity }) => {
               const swipe = swipePower(offset.x, velocity.x);
 
-              if (swipe < -swipeConfidenceThreshold) {
+              if (swipe < -100000) {
                 onDragEndHelper(1);
-              } else if (swipe > swipeConfidenceThreshold) {
+              } else if (swipe > 10000) {
                 onDragEndHelper(-1);
               }
             }}
@@ -189,15 +147,3 @@ export const Wrapper = styled.main`
   background-color: #fafafa;
   color: #111;
 `;
-
-/**
- * Experimenting with distilling swipe offset and velocity into a single variable, so the
- * less distance a user has swiped, the more velocity they need to register as a swipe.
- * Should accomodate longer swipes and short flicks without having binary checks on
- * just distance thresholds and velocity > 0.
- */
-
-const swipeConfidenceThreshold = 10000;
-const swipePower = (offset: number, velocity: number) => {
-  return Math.abs(offset) * velocity;
-};
