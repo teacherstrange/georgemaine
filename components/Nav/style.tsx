@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 export const NavContainer = styled.nav`
-  max-width: 314px;
+  max-width: 177px;
   margin: 60px auto 0;
   z-index: 10;
   overflow: hidden;
@@ -23,7 +23,7 @@ export const NavList = styled(motion.ul)`
   padding: var(--spaceXXS) var(--spaceXS);
   margin: 0 auto;
   border-radius: var(--spaceL);
-  background-color: #f2f2f2;
+  background-color: #fff;
   transition: background-color 0.15s;
 
   li {

@@ -4,8 +4,8 @@ export const Button = styled.button`
   -webkit-appearance: none;
   display: flex;
   align-items: center;
-  font-size: 1.5rem;
-  line-height: 1.2;
+  font-size: 1.3rem;
+  line-height: 1.38;
   font-weight: 500;
   justify-content: center;
   padding: 3px 9px;
@@ -16,7 +16,6 @@ export const Button = styled.button`
   margin: 0;
   outline: none;
   color: inherit;
-  font-weight: 500;
   text-align: center;
   white-space: nowrap;
 
