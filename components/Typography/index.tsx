@@ -19,7 +19,7 @@ export const Manifesto = styled.h1<Props>`
   margin: 0 auto;
   width: 100%;
 
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 768px) {
     font-size: 2.1rem;
     line-height: 3rem;
     width: ${(props) => (props.width ? props.width : "initial")};
@@ -42,10 +42,10 @@ export const Caption = styled.p<Props>`
     display: inline;
   }
 
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 768px) {
     font-size: 1.7rem;
     line-height: 2.6rem;
-    width: ${(props) => (props.width ? props.width : "initial")};
+    max-width: ${(props) => (props.width ? props.width : "initial")};
     margin: ${(props) => (props.margin ? props.margin : "0 auto")};
   }
 `;

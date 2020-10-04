@@ -222,7 +222,7 @@ function Slides({ list, current, onDragEndHelper }: SlidesProps) {
                 <Caption
                   mobileWidth={"300px"}
                   width={"390px"}
-                  margin={"-66px auto 30px"}
+                  margin={"-48px auto 96px"}
                 >
                   <strong>2020. </strong>Designed Mollie’s iOS and Android apps
                   to make your phone a place where you can quickly manage
@@ -269,7 +269,10 @@ export const MobileImg = styled.figure`
   padding: 0;
   height: 100%;
   width: 100%;
-  max-height: 1344px;
+
+  @media only screen and (min-width: 600px) {
+    margin: 126px 0 0;
+  }
 `;
 
 export const MemojiImg = styled.img`
@@ -294,7 +297,7 @@ export const Li = styled(motion.li)`
   text-align: center;
   opacity: 0;
 
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 768px) {
     top: 72;
   }
 `;
