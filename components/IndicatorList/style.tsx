@@ -18,15 +18,15 @@ export const IndicatorListContainer = styled.ul`
   padding: 0;
 
   @media only screen and (max-width: 599px) {
-    bottom: 90px;
+    bottom: 72px;
   }
 `;
 
 export const IndicatorListItem = styled.li<Props>`
   list-style: none;
-  margin: 6px 9px;
-  width: 9px;
-  height: 9px;
+  margin: 12px 9px;
+  width: 6px;
+  height: 6px;
   background: #86868b;
   border-radius: 50%;
   opacity: ${(props) => props.index != props.current && 0.4};

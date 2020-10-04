@@ -217,18 +217,8 @@ function Slides({ list, current, onDragEndHelper }: SlidesProps) {
                   justifyContent: "center",
                 }}
               >
-                <MollieMobileFigure
-                  style={{
-                    margin: "0 auto",
-                  }}
-                >
-                  <MobileImg
-                    src={"images/mollie-mobile-mockup.png"}
-                    alt={
-                      "Image that show's the Mobile app Georgemaine designed for Mollie."
-                    }
-                  />
-                </MollieMobileFigure>
+                <MobileImg />
+
                 <Caption
                   mobileWidth={"300px"}
                   width={"390px"}
@@ -253,7 +243,7 @@ export const Wrapper = styled.main`
   right: 0;
   bottom: 0;
   top: 0;
-  background-color: #f8f5f1;
+  background-color: #f5f5f5;
   color: #111;
 `;
 
@@ -270,9 +260,18 @@ export const IconList = styled.ul`
   }
 `;
 
-export const MobileImg = styled.img`
-  width: calc(384px * 0.75);
+export const MobileImg = styled.figure`
+  background-image: url("images/mollie-mobile-mockup.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 60px 0 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  max-height: 1344px;
 `;
+
 export const MemojiImg = styled.img`
   width: calc(186px * 0.75);
   margin: 0 auto 24px;
@@ -281,25 +280,6 @@ export const MemojiImg = styled.img`
   @media only screen and (min-width: 600px) {
     width: 186px;
     margin: 0 auto 36px;
-  }
-`;
-
-export const MollieMobileFigure = styled.figure`
-  width: 150px;
-  height: 294px;
-  pointer-events: none;
-
-  img {
-    width: 188px;
-  }
-
-  @media only screen and (min-width: 375px) {
-    width: 224px;
-    height: 440px;
-
-    img {
-      width: 288px;
-    }
   }
 `;
 
@@ -312,6 +292,7 @@ export const Li = styled(motion.li)`
   left: 0;
   bottom: 0;
   text-align: center;
+  opacity: 0;
 
   @media only screen and (min-width: 600px) {
     top: 72;
