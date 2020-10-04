@@ -33,7 +33,7 @@ export const Caption = styled.p<Props>`
   letter-spacing: 0.002rem;
   color: ${(props) => (props.color ? props.color : "inherit")};
   text-align: ${(props) => (props.align ? props.align : "left")};
-  margin: 0 auto 120px;
+  margin: 0 auto;
   max-width: ${(props) => (props.mobileWidth ? props.mobileWidth : "initial")};
 
   strong,
@@ -46,7 +46,6 @@ export const Caption = styled.p<Props>`
     font-size: 1.5rem;
     line-height: 2rem;
     max-width: ${(props) => (props.width ? props.width : "initial")};
-    margin: ${(props) => (props.margin ? props.margin : "0 auto")};
   }
 `;
 
