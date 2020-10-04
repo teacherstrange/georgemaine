@@ -278,7 +278,7 @@ export const MobileImg = styled.img`
   max-width: 216px;
 
   @media only screen and (min-width: 375px) {
-    max-width: 288px;
+    max-width: 270px;
   }
 `;
 
