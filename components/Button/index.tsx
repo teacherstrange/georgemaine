@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
+  font-family: TTInterphases, sans-serif;
   -webkit-appearance: none;
   display: flex;
   align-items: center;
