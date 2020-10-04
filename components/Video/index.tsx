@@ -8,7 +8,6 @@ interface videoProps {
 }
 
 export const Video = styled.video<videoProps>`
-  max-width: 100%;
   vertical-align: middle;
   user-select: none;
   object-fit: contain;
@@ -23,17 +22,4 @@ export const Video = styled.video<videoProps>`
     12px 12px 12px rgba(0, 0, 0, 0.06), 18px 24px 24px rgba(0, 0, 0, 0.06),
     24px 30px 30px rgba(0, 0, 0, 0.05);
   border-radius: 2px;
-`;
-
-export const MobileVideo = styled.video<videoProps>`
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  vertical-align: middle;
-  user-select: none;
-  object-fit: cover;
-
-  @media only screen and (min-width: 768px) {
-    display: none;
-  }
 `;
