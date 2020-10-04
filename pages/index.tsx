@@ -275,10 +275,18 @@ export const IconList = styled.ul`
 
 export const MobileImg = styled.img`
   width: 100%;
-  max-width: 216px;
+  max-width: 120px;
 
-  @media only screen and (min-width: 375px) {
+  @media only screen and (min-height: 620px) {
+    max-width: 210px;
+  }
+
+  @media only screen and (min-height: 720px) {
     max-width: 270px;
+  }
+
+  @media only screen and (min-height: 816px) {
+    max-width: 330px;
   }
 `;
 
