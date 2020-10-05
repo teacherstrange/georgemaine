@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { wrap, useKeyPress, swipePower } from "../components/Helpers";
 import { motion } from "framer-motion";
 import { Nav } from "../components/Nav";
@@ -47,28 +47,6 @@ export default () => {
     ArrowLeftDown && paginate(-1);
   }, [ArrowRightDown, ArrowLeftDown]);
 
-  // Video
-  useEffect(() => {
-    const video = document.getElementById("video");
-    const videoControls = document.getElementById("video-controls");
-    // Hide the default controls
-    video.controls = false;
-    const playpause = document.getElementById("playpause");
-    const mute = document.getElementById("mute");
-
-    // Display the user defined video controls
-    videoControls.style.display = "block";
-
-    playpause.addEventListener("click", function (e) {
-      if (video.paused || video.ended) video.play();
-      else video.pause();
-    });
-
-    mute.addEventListener("click", function (e) {
-      video.muted = !video.muted;
-    });
-  });
-
   return (
     <Wrapper>
       <Nav list={navItems} current={slideIndex} onClick={handleIndexChange} />
@@ -95,6 +73,19 @@ interface SlidesProps {
 }
 
 function Slides({ list, current, onDragEndHelper }: SlidesProps) {
+  const applePayVideoRef = useRef(null);
+  const [applePayVideoMuted, setApplePayVideoMuted] = useState(true);
+  const mollieEventsVideoRef = useRef(null);
+  const [mollieEventsVideoMuted, setMollieEventsVideoMuted] = useState(true);
+
+  function setPlay(video) {
+    video.paused || video.ended ? video.play() : video.pause();
+  }
+  useEffect(() => {
+    // Hide the default controls
+    applePayVideoRef.current.controls = false;
+    mollieEventsVideoRef.current.controls = false;
+  });
   return (
     <motion.ul
       style={{
@@ -239,18 +230,31 @@ function Slides({ list, current, onDragEndHelper }: SlidesProps) {
                     margin: 0,
                   }}
                 >
-                  <Video id="video" controls={true} preload="metadata">
+                  <Video
+                    ref={applePayVideoRef}
+                    muted={applePayVideoMuted ? true : false}
+                    controls={true}
+                    preload="metadata"
+                  >
                     <source src="videos/mollie-video.mp4" type="video/mp4" />
                   </Video>
-                  <ul id="video-controls" className="controls">
+                  <ul>
                     <li>
-                      <button id="playpause" type="button">
+                      <button
+                        onClick={() => setPlay(applePayVideoRef.current)}
+                        type="button"
+                      >
                         Play/Pause
                       </button>
                     </li>
 
                     <li>
-                      <button id="mute" type="button">
+                      <button
+                        onClick={() =>
+                          setApplePayVideoMuted(!applePayVideoMuted)
+                        }
+                        type="button"
+                      >
                         Mute/Unmute
                       </button>
                     </li>
@@ -267,27 +271,39 @@ function Slides({ list, current, onDragEndHelper }: SlidesProps) {
             {index === 4 && (
               <div style={{ alignSelf: "center" }}>
                 <figure
-                  id="videoContainer"
                   style={{
                     padding: 0,
                     margin: 0,
                   }}
                 >
-                  <Video id="video" controls={true} preload="metadata">
+                  <Video
+                    controls={true}
+                    preload="metadata"
+                    ref={mollieEventsVideoRef}
+                    muted={mollieEventsVideoMuted ? true : false}
+                  >
                     <source
                       src="videos/mollie-apple-pay.mp4"
                       type="video/mp4"
                     />
                   </Video>
-                  <ul id="video-controls" className="controls">
+                  <ul>
                     <li>
-                      <button id="playpause" type="button">
+                      <button
+                        onClick={() => setPlay(mollieEventsVideoRef.current)}
+                        type="button"
+                      >
                         Play/Pause
                       </button>
                     </li>
 
                     <li>
-                      <button id="mute" type="button">
+                      <button
+                        onClick={() =>
+                          setMollieEventsVideoMuted(!mollieEventsVideoMuted)
+                        }
+                        type="button"
+                      >
                         Mute/Unmute
                       </button>
                     </li>
