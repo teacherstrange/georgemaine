@@ -7,6 +7,7 @@ import { Caption, Manifesto } from "../components/Typography";
 import { IndicatorList } from "../components/IndicatorList";
 import { A } from "../components/Link/style";
 import { Video } from "../components/Video";
+import { Button } from "../components/Button";
 const navItems = [{ name: "About" }, { name: "Work" }, { name: "Icons" }];
 const workItems = [
   { name: "Mollie Mobile" },
@@ -78,9 +79,6 @@ function Slides({ list, current, onDragEndHelper }: SlidesProps) {
   const mollieEventsVideoRef = useRef(null);
   const [mollieEventsVideoMuted, setMollieEventsVideoMuted] = useState(true);
 
-  function setPlay(video) {
-    video.paused || video.ended ? video.play() : video.pause();
-  }
   useEffect(() => {
     // Hide the default controls
     applePayVideoRef.current.controls = false;
@@ -228,37 +226,92 @@ function Slides({ list, current, onDragEndHelper }: SlidesProps) {
                   style={{
                     padding: 0,
                     margin: 0,
+                    position: "relative",
                   }}
                 >
                   <Video
-                    ref={applePayVideoRef}
-                    muted={applePayVideoMuted ? true : false}
+                    ref={mollieEventsVideoRef}
+                    muted={mollieEventsVideoMuted ? true : false}
                     controls={true}
-                    preload="metadata"
+                    autoPlay
+                    loop
+                    playsInline
                   >
                     <source src="videos/mollie-video.mp4" type="video/mp4" />
                   </Video>
-                  <ul>
-                    <li>
-                      <button
-                        onClick={() => setPlay(applePayVideoRef.current)}
-                        type="button"
+                  <Button
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      position: "absolute",
+                      marginLeft: "auto",
+                      marginRight: "auto",
+                      bottom: 18,
+                      left: 0,
+                      right: 0,
+                    }}
+                    onClick={() =>
+                      setMollieEventsVideoMuted(!mollieEventsVideoMuted)
+                    }
+                    type="button"
+                  >
+                    {mollieEventsVideoMuted && (
+                      <svg
+                        width="30"
+                        height="30"
+                        viewBox="0 0 30 30"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
-                        Play/Pause
-                      </button>
-                    </li>
-
-                    <li>
-                      <button
-                        onClick={() =>
-                          setApplePayVideoMuted(!applePayVideoMuted)
-                        }
-                        type="button"
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M9.71716 11.8385C9.31646 11.9836 9 12.3677 9 12.831V17.1142C9 17.7276 9.51656 18.1796 10.0762 18.1796H13.3047L17.2543 21.731C17.4264 21.9031 17.6417 22 17.8569 22C17.9645 22 18.0614 21.9785 18.1582 21.9462C18.4811 21.817 18.6856 21.5157 18.6856 21.1821V20.8069L9.71716 11.8385ZM18.6856 16.5642V8.81687C18.6963 8.48326 18.4919 8.17117 18.169 8.05279C17.8569 7.93441 17.5018 8.0205 17.265 8.25726L13.6187 11.4974L18.6856 16.5642Z"
+                          fill="#000"
+                        />
+                        <path
+                          d="M9.5 9.5L20.5 20.5"
+                          stroke="#000"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M15 1C17.7689 1 20.4757 1.82109 22.778 3.35942C25.0803 4.89776 26.8747 7.08426 27.9343 9.64243C28.9939 12.2006 29.2712 15.0155 28.731 17.7313C28.1908 20.447 26.8574 22.9416 24.8995 24.8995C22.9416 26.8574 20.447 28.1908 17.7313 28.731C15.0155 29.2712 12.2006 28.9939 9.64243 27.9343C7.08426 26.8747 4.89776 25.0803 3.35942 22.778C1.82109 20.4757 1 17.7689 1 15C1 11.287 2.475 7.72601 5.1005 5.1005C7.72601 2.475 11.287 1 15 1V1Z"
+                          stroke="#000"
+                          strokeOpacity="0.3"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
+                    {!mollieEventsVideoMuted && (
+                      <svg
+                        width="30"
+                        height="30"
+                        viewBox="0 0 30 30"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
-                        Mute/Unmute
-                      </button>
-                    </li>
-                  </ul>
+                        <path
+                          d="M17.265 8.25726L13.3047 11.7763H10.0654C9.51656 11.7763 9 12.2391 9 12.831V17.1142C9 17.7276 9.51656 18.1796 10.0762 18.1796H13.3047L17.2543 21.731C17.4264 21.9031 17.6417 22 17.8569 22C17.9645 22 18.0614 21.9785 18.1582 21.9462C18.4811 21.817 18.6856 21.5157 18.6856 21.1821V8.81687C18.6963 8.48326 18.4919 8.17117 18.169 8.05279C17.8569 7.93441 17.5018 8.0205 17.265 8.25726Z"
+                          fill="#000"
+                        />
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M15 1C17.7689 1 20.4757 1.82109 22.778 3.35942C25.0803 4.89776 26.8747 7.08426 27.9343 9.64243C28.9939 12.2006 29.2712 15.0155 28.731 17.7313C28.1908 20.447 26.8574 22.9416 24.8995 24.8995C22.9416 26.8574 20.447 28.1908 17.7313 28.731C15.0155 29.2712 12.2006 28.9939 9.64243 27.9343C7.08426 26.8747 4.89776 25.0803 3.35942 22.778C1.82109 20.4757 1 17.7689 1 15C1 11.287 2.475 7.72601 5.1005 5.1005C7.72601 2.475 11.287 1 15 1V1Z"
+                          stroke="#000"
+                          strokeOpacity="0.3"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
+                  </Button>
                 </figure>
 
                 <Caption mobileWidth={"300px"} width={"336px"}>
@@ -274,40 +327,94 @@ function Slides({ list, current, onDragEndHelper }: SlidesProps) {
                   style={{
                     padding: 0,
                     margin: 0,
+                    position: "relative",
                   }}
                 >
                   <Video
                     controls={true}
-                    preload="metadata"
-                    ref={mollieEventsVideoRef}
-                    muted={mollieEventsVideoMuted ? true : false}
+                    playsInline
+                    autoPlay
+                    loop
+                    ref={applePayVideoRef}
+                    muted={applePayVideoMuted ? true : false}
                   >
                     <source
                       src="videos/mollie-apple-pay.mp4"
                       type="video/mp4"
                     />
                   </Video>
-                  <ul>
-                    <li>
-                      <button
-                        onClick={() => setPlay(mollieEventsVideoRef.current)}
-                        type="button"
-                      >
-                        Play/Pause
-                      </button>
-                    </li>
 
-                    <li>
-                      <button
-                        onClick={() =>
-                          setMollieEventsVideoMuted(!mollieEventsVideoMuted)
-                        }
-                        type="button"
+                  <Button
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      position: "absolute",
+                      marginLeft: "auto",
+                      marginRight: "auto",
+                      bottom: 18,
+                      left: 0,
+                      right: 0,
+                    }}
+                    onClick={() => setApplePayVideoMuted(!applePayVideoMuted)}
+                    type="button"
+                  >
+                    {applePayVideoMuted && (
+                      <svg
+                        width="30"
+                        height="30"
+                        viewBox="0 0 30 30"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
-                        Mute/Unmute
-                      </button>
-                    </li>
-                  </ul>
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M9.71716 11.8385C9.31646 11.9836 9 12.3677 9 12.831V17.1142C9 17.7276 9.51656 18.1796 10.0762 18.1796H13.3047L17.2543 21.731C17.4264 21.9031 17.6417 22 17.8569 22C17.9645 22 18.0614 21.9785 18.1582 21.9462C18.4811 21.817 18.6856 21.5157 18.6856 21.1821V20.8069L9.71716 11.8385ZM18.6856 16.5642V8.81687C18.6963 8.48326 18.4919 8.17117 18.169 8.05279C17.8569 7.93441 17.5018 8.0205 17.265 8.25726L13.6187 11.4974L18.6856 16.5642Z"
+                          fill="#000"
+                        />
+                        <path
+                          d="M9.5 9.5L20.5 20.5"
+                          stroke="#000"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M15 1C17.7689 1 20.4757 1.82109 22.778 3.35942C25.0803 4.89776 26.8747 7.08426 27.9343 9.64243C28.9939 12.2006 29.2712 15.0155 28.731 17.7313C28.1908 20.447 26.8574 22.9416 24.8995 24.8995C22.9416 26.8574 20.447 28.1908 17.7313 28.731C15.0155 29.2712 12.2006 28.9939 9.64243 27.9343C7.08426 26.8747 4.89776 25.0803 3.35942 22.778C1.82109 20.4757 1 17.7689 1 15C1 11.287 2.475 7.72601 5.1005 5.1005C7.72601 2.475 11.287 1 15 1V1Z"
+                          stroke="#000"
+                          strokeOpacity="0.3"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
+                    {!applePayVideoMuted && (
+                      <svg
+                        width="30"
+                        height="30"
+                        viewBox="0 0 30 30"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M17.265 8.25726L13.3047 11.7763H10.0654C9.51656 11.7763 9 12.2391 9 12.831V17.1142C9 17.7276 9.51656 18.1796 10.0762 18.1796H13.3047L17.2543 21.731C17.4264 21.9031 17.6417 22 17.8569 22C17.9645 22 18.0614 21.9785 18.1582 21.9462C18.4811 21.817 18.6856 21.5157 18.6856 21.1821V8.81687C18.6963 8.48326 18.4919 8.17117 18.169 8.05279C17.8569 7.93441 17.5018 8.0205 17.265 8.25726Z"
+                          fill="#000"
+                        />
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M15 1C17.7689 1 20.4757 1.82109 22.778 3.35942C25.0803 4.89776 26.8747 7.08426 27.9343 9.64243C28.9939 12.2006 29.2712 15.0155 28.731 17.7313C28.1908 20.447 26.8574 22.9416 24.8995 24.8995C22.9416 26.8574 20.447 28.1908 17.7313 28.731C15.0155 29.2712 12.2006 28.9939 9.64243 27.9343C7.08426 26.8747 4.89776 25.0803 3.35942 22.778C1.82109 20.4757 1 17.7689 1 15C1 11.287 2.475 7.72601 5.1005 5.1005C7.72601 2.475 11.287 1 15 1V1Z"
+                          stroke="#000"
+                          strokeOpacity="0.3"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
+                  </Button>
                 </figure>
 
                 <Caption mobileWidth={"300px"} width={"302px"}>

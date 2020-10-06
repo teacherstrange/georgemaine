@@ -24,4 +24,10 @@ export const Button = styled.button`
   &:focus {
     cursor: pointer;
   }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    margin-left: 6px;
+  }
 `;
