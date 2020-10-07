@@ -35,9 +35,14 @@ export default () => {
     setSlide(index);
   }
 
+  const [applePayVideoMuted, setApplePayVideoMuted] = useState(true);
+  const [mollieEventsVideoMuted, setMollieEventsVideoMuted] = useState(true);
+
   // Keyboard navigation helper
   function paginate(direction: number) {
     setSlide(slide + direction);
+    setApplePayVideoMuted(true);
+    setMollieEventsVideoMuted(true);
   }
   const ArrowRightDown = useKeyPress("ArrowRight");
   const ArrowLeftDown = useKeyPress("ArrowLeft");
@@ -52,6 +57,10 @@ export default () => {
     <Wrapper>
       <Nav list={navItems} current={slideIndex} onClick={handleIndexChange} />
       <Slides
+        applePayMuteButtonOnClick={setApplePayVideoMuted}
+        applePayVideoMuted={applePayVideoMuted}
+        mollieEventsVideoMuted={mollieEventsVideoMuted}
+        mollieEventsMuteButtonOnClick={setMollieEventsVideoMuted}
         onDragEndHelper={paginate}
         current={slideIndex}
         list={slideItems}
@@ -70,14 +79,25 @@ type SlideItemProps = {
 interface SlidesProps {
   list: SlideItemProps[];
   current: number;
+  applePayMuteButtonOnClick: Function;
+  mollieEventsMuteButtonOnClick: Function;
   onDragEndHelper: Function;
+  applePayVideoMuted: Boolean;
+  mollieEventsVideoMuted: Boolean;
 }
 
-function Slides({ list, current, onDragEndHelper }: SlidesProps) {
+function Slides({
+  list,
+  current,
+  applePayMuteButtonOnClick,
+  applePayVideoMuted,
+  mollieEventsMuteButtonOnClick,
+  mollieEventsVideoMuted,
+  onDragEndHelper,
+}: SlidesProps) {
   const applePayVideoRef = useRef(null);
-  const [applePayVideoMuted, setApplePayVideoMuted] = useState(true);
+
   const mollieEventsVideoRef = useRef(null);
-  const [mollieEventsVideoMuted, setMollieEventsVideoMuted] = useState(true);
 
   useEffect(() => {
     // Hide the default controls
@@ -117,7 +137,8 @@ function Slides({ list, current, onDragEndHelper }: SlidesProps) {
             dragElastic={1}
             onDragEnd={(e, { offset, velocity }) => {
               const swipe = swipePower(offset.x, velocity.x);
-
+              mollieEventsMuteButtonOnClick(true),
+                applePayMuteButtonOnClick(true);
               if (swipe < -100000) {
                 onDragEndHelper(1);
               } else if (swipe > 10000) {
@@ -252,7 +273,7 @@ function Slides({ list, current, onDragEndHelper }: SlidesProps) {
                       right: 0,
                     }}
                     onClick={() =>
-                      setMollieEventsVideoMuted(!mollieEventsVideoMuted)
+                      mollieEventsMuteButtonOnClick(!mollieEventsVideoMuted)
                     }
                     type="button"
                   >
@@ -332,9 +353,9 @@ function Slides({ list, current, onDragEndHelper }: SlidesProps) {
                 >
                   <Video
                     controls={true}
-                    playsInline
                     autoPlay
                     loop
+                    playsInline
                     ref={applePayVideoRef}
                     muted={applePayVideoMuted ? true : false}
                   >
@@ -356,7 +377,9 @@ function Slides({ list, current, onDragEndHelper }: SlidesProps) {
                       left: 0,
                       right: 0,
                     }}
-                    onClick={() => setApplePayVideoMuted(!applePayVideoMuted)}
+                    onClick={() =>
+                      applePayMuteButtonOnClick(!applePayVideoMuted)
+                    }
                     type="button"
                   >
                     {applePayVideoMuted && (
