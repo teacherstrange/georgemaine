@@ -33,6 +33,8 @@ export default () => {
   // Wrap hook so that it can be shared
   function handleIndexChange(index: number) {
     setSlide(index);
+    !applePayVideoMuted && setApplePayVideoMuted(true);
+    !mollieEventsVideoMuted && setMollieEventsVideoMuted(true);
   }
 
   const [applePayVideoMuted, setApplePayVideoMuted] = useState(true);
@@ -41,8 +43,8 @@ export default () => {
   // Keyboard navigation helper
   function paginate(direction: number) {
     setSlide(slide + direction);
-    setApplePayVideoMuted(true);
-    setMollieEventsVideoMuted(true);
+    !applePayVideoMuted && setApplePayVideoMuted(true);
+    !mollieEventsVideoMuted && setMollieEventsVideoMuted(true);
   }
   const ArrowRightDown = useKeyPress("ArrowRight");
   const ArrowLeftDown = useKeyPress("ArrowLeft");
@@ -137,8 +139,8 @@ function Slides({
             dragElastic={1}
             onDragEnd={(e, { offset, velocity }) => {
               const swipe = swipePower(offset.x, velocity.x);
-              mollieEventsMuteButtonOnClick(true),
-                applePayMuteButtonOnClick(true);
+              !mollieEventsVideoMuted && mollieEventsMuteButtonOnClick(true),
+                !applePayVideoMuted && applePayMuteButtonOnClick(true);
               if (swipe < -100000) {
                 onDragEndHelper(1);
               } else if (swipe > 10000) {
