@@ -7,7 +7,7 @@ export const NavContainer = styled.nav`
   z-index: 10;
   overflow: hidden;
 
-  @media only screen and (max-width: 599px) {
+  @media only screen and (max-width: 767px) {
     position: absolute;
     margin-top: 0;
     left: 0;
