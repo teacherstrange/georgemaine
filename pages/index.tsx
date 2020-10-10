@@ -332,6 +332,17 @@ function Slides({
                 </Caption>
               </SlideDiv>
             )}
+            {index === 3 && (
+              <div
+                style={{ alignSelf: "center", width: "100%", height: "100%" }}
+              >
+                <CheckoutImg />
+
+                <Caption mobileWidth={"300px"} width={"330px"}>
+                  <strong>2019. </strong>Redesigned and developed Mollie’s Checkout, so European customers feel confident while making secure purchases on the web.
+                </Caption>
+              </div>
+            )}
             {index === 4 && (
               <SlideDiv>
                 <Video
@@ -473,6 +484,20 @@ export const MobileImg = styled.figure`
   background-repeat: no-repeat;
   background-position: center;
   background-image: url("images/mollie-mobile-mockup.png");
+
+  @media only screen and (min-width: 375px) {
+    height: calc(100% - 60px);
+  }
+`;
+export const CheckoutImg = styled.figure`
+  width: 100%;
+  height: calc(100% - 72px);
+  padding: 0;
+  margin: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("images/mollie-checkout-mockup.png");
 
   @media only screen and (min-width: 375px) {
     height: calc(100% - 60px);
