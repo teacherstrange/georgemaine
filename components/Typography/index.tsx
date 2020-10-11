@@ -35,6 +35,7 @@ export const Caption = styled.p<Props>`
   text-align: ${(props) => (props.align ? props.align : "left")};
   margin: 0 auto;
   max-width: ${(props) => (props.mobileWidth ? props.mobileWidth : "initial")};
+  bottom: -78px;
 
   strong,
   a {
@@ -46,6 +47,7 @@ export const Caption = styled.p<Props>`
     font-size: 1.5rem;
     line-height: 2rem;
     max-width: ${(props) => (props.width ? props.width : "initial")};
+    bottom: -90px;
   }
 `;
 

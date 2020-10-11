@@ -24,7 +24,7 @@ export const IndicatorListContainer = styled.ul`
 
 export const IndicatorListItem = styled.li<Props>`
   list-style: none;
-  margin: 12px 9px;
+  margin: 15px 9px;
   width: 6px;
   height: 6px;
   background: #86868b;

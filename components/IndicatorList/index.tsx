@@ -13,9 +13,7 @@ export function IndicatorList({ list, current }) {
       : current === 4
       ? 3
       : current;
-  useEffect(() => {
-    console.log(convertedCurrent);
-  });
+
   return (
     <IndicatorListContainer>
       {list.map((Page, index) => {
