@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { wrap, useKeyPress, swipePower } from "../components/Helpers";
 import { motion } from "framer-motion";
 import { Nav } from "../components/Nav";
@@ -23,7 +23,21 @@ const slideItems = [
   { name: "Mollie Apple Pay Video" },
   { name: "Icons" },
 ];
+
+// var viewportWidth = 0;
+// var viewportHeight = 0;
+
+var imageWidths = [1556, 2190];
+var imageHeights = [2076, 1264];
+const captionBottomEdges = [376, 587];
+const shadowTopOffset = 0;
+const shadowBottomOffset = 0;
+const shadowOffset = shadowTopOffset + shadowBottomOffset;
+
 export default () => {
+  const slideRef = useRef(null);
+  const [viewportHeight, setviewportHeight] = useState(0);
+  const [viewportWidth, setviewportWidth] = useState(0);
   // Handle page switches
   const [slide, setSlide] = useState(0);
 
@@ -49,6 +63,22 @@ export default () => {
   const ArrowRightDown = useKeyPress("ArrowRight");
   const ArrowLeftDown = useKeyPress("ArrowLeft");
 
+  function calculateContentScaleForIndex(i) {
+    var contentWidth = imageWidths[i];
+    var contentHeight = imageHeights[i];
+
+    var scale =
+      viewportWidth / viewportHeight > contentWidth / contentHeight
+        ? viewportHeight / contentHeight
+        : viewportWidth / contentWidth;
+    return scale;
+  }
+
+  useEffect(() => {
+    setviewportHeight(slideRef.current.clientHeight);
+    setviewportWidth(slideRef.current.clientWidth);
+  }, [setviewportHeight, setviewportWidth]);
+
   // Keyboard navigation trigger
   useEffect(() => {
     ArrowRightDown && paginate(1);
@@ -66,6 +96,10 @@ export default () => {
         onDragEndHelper={paginate}
         current={slideIndex}
         list={slideItems}
+        slideRef={slideRef}
+        viewportHeight={viewportHeight}
+        viewportWidth={viewportWidth}
+        calculateContentScaleForIndex={calculateContentScaleForIndex}
       />
       {slideIndex >= 1 && slideIndex <= 4 && (
         <IndicatorList current={slideIndex} list={workItems} />
@@ -86,6 +120,10 @@ interface SlidesProps {
   onDragEndHelper: Function;
   applePayVideoMuted: Boolean;
   mollieEventsVideoMuted: Boolean;
+  slideRef: any;
+  viewportHeight: number;
+  viewportWidth: number;
+  calculateContentScaleForIndex: Function;
 }
 
 function Slides({
@@ -96,13 +134,61 @@ function Slides({
   mollieEventsMuteButtonOnClick,
   mollieEventsVideoMuted,
   onDragEndHelper,
+  slideRef,
+  viewportWidth,
+  viewportHeight,
+  calculateContentScaleForIndex,
 }: SlidesProps) {
   const applePayVideoRef = useRef(null);
-
   const mollieEventsVideoRef = useRef(null);
+  const mollieMobileFigureRef = useRef(null);
+  const mollieMobileCaptionRef = useRef(null);
+  const mollieCheckoutCaptionRef = useRef(null);
+  const mollieCheckoutFigureRef = useRef(null);
+
+  function renderCaptionRefs() {
+    return (
+      mollieMobileFigureRef.current,
+      mollieCheckoutFigureRef.current,
+      mollieMobileCaptionRef.current,
+      mollieCheckoutCaptionRef.current
+    );
+  }
+
+  const figures = [mollieMobileFigureRef, mollieCheckoutFigureRef];
+  const captions = [mollieMobileCaptionRef, mollieCheckoutCaptionRef];
+
+  function layoutFigures() {
+    captions.forEach(function (caption, i) {
+      const scale = calculateContentScaleForIndex(i);
+      const viewportHeightHalved = viewportHeight / 2.0;
+      const captionEdge = captionBottomEdges[i] * scale;
+      const y = (viewportHeightHalved - captionEdge) * -1;
+      const yPos = Math.round(y) + shadowOffset;
+      console.log("scale:", scale);
+      console.log("captionBottomEdges[i]:", captionBottomEdges[i]);
+      console.log("viewportHeight:", viewportHeight);
+      console.log("scale:", scale);
+
+      caption.current.style["webkitTransform"] =
+        "translate3d(" + 0 + "px, " + yPos + "px, 0)";
+      caption.current.style["MozTransform"] =
+        "translate3d(" + 0 + "px, " + yPos + "px, 0)";
+      caption.current.style.paddingBottom = 30 + "px";
+    });
+  }
 
   useEffect(() => {
-    // Hide the default controls
+    layoutFigures();
+  }, [layoutFigures]);
+
+  // Render refs so there's no error on load
+  useEffect(() => {
+    renderCaptionRefs();
+  }, [renderCaptionRefs]);
+
+  // Hide the default controls
+  useEffect(() => {
     applePayVideoRef.current.controls = false;
     mollieEventsVideoRef.current.controls = false;
   });
@@ -116,6 +202,7 @@ function Slides({
       {list.map((listItem, index) => {
         return (
           <Li
+            ref={slideRef}
             animate={{
               x:
                 current === index
@@ -125,7 +212,7 @@ function Slides({
                   : index > current
                   ? `calc(${index - current} * 100vw)`
                   : `calc(${index} * 100vw)`,
-              scale: index === current ? 1 : 0.8,
+              // scale: index === current ? 1 : 0.8,
               opacity: index === current ? 1 : 0,
             }}
             key={index}
@@ -230,17 +317,23 @@ function Slides({
               </div>
             )}
             {index === 1 && (
-              <div
-                style={{ alignSelf: "center", width: "100%", height: "100%" }}
-              >
-                <MobileImg />
-
-                <Caption mobileWidth={"300px"} width={"330px"}>
+              <MobileImg ref={mollieMobileFigureRef}>
+                <Caption
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                  }}
+                  ref={mollieMobileCaptionRef}
+                  mobileWidth={"300px"}
+                  width={"330px"}
+                >
                   <strong>2020. </strong>Designed Mollie’s iOS and Android apps
                   to make your phone a place where you can quickly manage
                   payments and watch your business grow.
                 </Caption>
-              </div>
+              </MobileImg>
             )}
             {index === 2 && (
               <SlideDiv>
@@ -333,15 +426,23 @@ function Slides({
               </SlideDiv>
             )}
             {index === 3 && (
-              <div
-                style={{ alignSelf: "center", width: "100%", height: "100%" }}
-              >
-                <CheckoutImg />
-
-                <Caption mobileWidth={"300px"} width={"330px"}>
-                  <strong>2019. </strong>Redesigned and developed Mollie’s Checkout, so European customers feel confident while making secure purchases on the web.
+              <CheckoutImg ref={mollieCheckoutFigureRef}>
+                <Caption
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                  }}
+                  ref={mollieCheckoutCaptionRef}
+                  mobileWidth={"300px"}
+                  width={"330px"}
+                >
+                  <strong>2019. </strong>Redesigned and developed Mollie’s
+                  Checkout, so European customers feel confident while making
+                  secure purchases on the web.
                 </Caption>
-              </div>
+              </CheckoutImg>
             )}
             {index === 4 && (
               <SlideDiv>
@@ -439,11 +540,24 @@ function Slides({
   );
 }
 
+const BrandonSlide = styled(motion.li)`
+  display: inline-block;
+  background-size: contain;
+  position: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  top: 20px;
+  right: 0;
+  bottom: 50px;
+  left: 0;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+`;
 export const SlideDiv = styled.div`
   align-self: center;
   height: 100%;
   width: 100%;
-  
 
   @media only screen and (max-width: 767px) {
     display: flex;
@@ -476,32 +590,30 @@ export const IconList = styled.ul`
 `;
 
 export const MobileImg = styled.figure`
-  width: 100%;
-  height: calc(100% - 72px);
   padding: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
   margin: 0;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   background-image: url("images/mollie-mobile-mockup.png");
-
-  @media only screen and (min-width: 375px) {
-    height: calc(100% - 60px);
-  }
 `;
 export const CheckoutImg = styled.figure`
-  width: 100%;
-  height: calc(100% - 72px);
   padding: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
   margin: 0;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   background-image: url("images/mollie-checkout-mockup.png");
-
-  @media only screen and (min-width: 375px) {
-    height: calc(100% - 60px);
-  }
 `;
 
 export const MemojiImg = styled.img`
@@ -523,12 +635,12 @@ export const Li = styled(motion.li)`
   top: 30px;
   right: 30px;
   left: 30px;
-  bottom: 102px;
+  bottom: 120px;
   text-align: center;
   opacity: 0;
 
   @media only screen and (min-width: 768px) {
-    top: 126px;
-    bottom: 120px;
+    top: 96px;
+    bottom: 96px;
   }
 `;
