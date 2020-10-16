@@ -183,6 +183,10 @@ function Slides({
           <Li
             ref={slideRef}
             style={{
+              display: index === 2 || index === 4 ? "flex" : "",
+              flexDirection: index === 2 || index === 4 ? "column" : "",
+              justifyContent: index === 2 || index === 4 ? "center" : "",
+              alignItems: index === 2 || index === 4 ? "center" : "",
               backgroundImage: `url(images/slide-${
                 index === 1 ? "apps" : index === 3 ? "checkout" : null
               }.jpg)`,
