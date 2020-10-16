@@ -12,7 +12,7 @@ export const Video = styled.video<videoProps>`
   user-select: none;
   object-fit: contain;
   height: calc(100% - 142px);
-  margin-top: 42px;
+  margin-top: 90px;
   margin-bottom: 18px;
   background: #111;
   border: 3px solid #111;
