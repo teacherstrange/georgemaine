@@ -184,7 +184,6 @@ function Slides({
             ref={slideRef}
             style={{
               display: index === 2 || index === 4 ? "flex" : "",
-              flexDirection: index === 2 || index === 4 ? "column" : "",
               justifyContent: index === 2 || index === 4 ? "center" : "",
               alignItems: index === 2 || index === 4 ? "center" : "",
               backgroundImage: `url(images/slide-${
@@ -539,6 +538,7 @@ export const Li = styled(motion.li)`
   z-index: 0;
   opacity: 0;
   text-align: center;
+  flex-direction: column;
 
   @media only screen and (min-width: 768px) {
     top: 96px;
