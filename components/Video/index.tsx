@@ -12,6 +12,7 @@ export const Video = styled.video<videoProps>`
   user-select: none;
   object-fit: contain;
   height: calc(100% - 142px);
+  margin-top: 36px;
   margin-bottom: 18px;
   background: #111;
   border: 3px solid #111;
@@ -22,7 +23,8 @@ export const Video = styled.video<videoProps>`
   width: initial;
 
   @media only screen and (max-width: 767px) {
-    width: 100%;
+    width: calc(100% - 60px);
     height: initial;
+    margin-top: 84px;
   }
 `;

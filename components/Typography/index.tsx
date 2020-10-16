@@ -11,15 +11,17 @@ interface Props {
 
 // Define styles
 export const Manifesto = styled.h1<Props>`
-  font-size: 1.5rem;
-  letter-spacing: 0.012rem;
+  font-size: 1.3rem;
+  letter-spacing: 0.002rem;
   font-weight: 600;
-  line-height: 2rem;
+  line-height: 1.8rem;
   color: ${(props) => (props.color ? props.color : "inherit")};
   margin: 0 auto;
   width: 100%;
+  text-align: center;
 
   @media only screen and (min-width: 768px) {
+    letter-spacing: 0.012rem;
     font-size: 1.9rem;
     line-height: 2.7rem;
     width: ${(props) => (props.width ? props.width : "initial")};
@@ -32,7 +34,7 @@ export const Caption = styled.p<Props>`
   font-weight: 400;
   letter-spacing: 0.002rem;
   color: ${(props) => (props.color ? props.color : "inherit")};
-  text-align: ${(props) => (props.align ? props.align : "left")};
+  text-align: ${(props) => (props.align ? props.align : "center")};
   margin: 0 auto;
   max-width: ${(props) => (props.mobileWidth ? props.mobileWidth : "initial")};
   bottom: -78px;
