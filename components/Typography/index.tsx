@@ -11,10 +11,10 @@ interface Props {
 
 // Define styles
 export const Manifesto = styled.h1<Props>`
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   letter-spacing: 0.002rem;
   font-weight: 600;
-  line-height: 1.8rem;
+  line-height: 2rem;
   color: ${(props) => (props.color ? props.color : "inherit")};
   margin: 24px auto 42px;
   width: calc(100% - 60px);
