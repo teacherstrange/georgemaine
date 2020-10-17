@@ -569,10 +569,11 @@ export const IconList = styled.ul`
 export const MemojiImg = styled.img`
   max-height: calc(186px * 0.75);
   height: 100%;
-  margin: 60px auto 0;
+  margin: 68px auto 0;
   pointer-events: none;
 
   @media only screen and (min-width: 600px) {
     max-height: 186px;
+    margin: 30px auto 0;
   }
 `;
