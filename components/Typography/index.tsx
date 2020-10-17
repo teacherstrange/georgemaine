@@ -16,14 +16,15 @@ export const Manifesto = styled.h1<Props>`
   font-weight: 600;
   line-height: 1.8rem;
   color: ${(props) => (props.color ? props.color : "inherit")};
-  margin: 0 auto;
-  width: 100%;
+  margin: 24px auto 42px;
+  width: calc(100% - 60px);
   text-align: center;
 
   @media only screen and (min-width: 768px) {
     letter-spacing: 0.012rem;
     font-size: 1.9rem;
     line-height: 2.7rem;
+    margin: 24px auto 60px;
     width: ${(props) => (props.width ? props.width : "initial")};
   }
 `;

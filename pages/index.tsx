@@ -547,18 +547,6 @@ export const Li = styled(motion.li)`
   }
 `;
 
-export const SlideDiv = styled.div`
-  align-self: center;
-  height: 100%;
-  width: 100%;
-
-  @media only screen and (max-width: 767px) {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-  }
-`;
-
 export const Wrapper = styled.main`
   position: fixed;
   left: 0;
@@ -581,7 +569,7 @@ export const IconList = styled.ul`
 export const MemojiImg = styled.img`
   max-height: calc(186px * 0.75);
   height: 100%;
-  margin: 0 auto;
+  margin: 60px auto 0;
   pointer-events: none;
 
   @media only screen and (min-width: 600px) {
