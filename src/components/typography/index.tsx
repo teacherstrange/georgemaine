@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 const largeTitleStyle = css`
   font-size: 2.6rem;
@@ -27,7 +27,7 @@ const bodyStyle = css`
 export const Manifesto = styled.h1`
   ${smallTitleStyle}
   text-align: center;
-  margin-top: 20px 0 24px;
+  margin: 20px 0 24px;
   transition: all 0.15s ease;
 
   @media only screen and (min-width: 540px) {
@@ -72,6 +72,65 @@ export const Link = styled.a`
     padding-right: 4px;
     margin-left: -4px;
     margin-right: -4px;
+    cursor: pointer;
+  }
+`;
+
+const slideIn = keyframes`
+   0% {
+        opacity:0
+    }
+
+    30% {
+        opacity:0
+    }
+
+    80% {
+        opacity: 1;
+        visibility:visible
+    }
+
+    to {
+        opacity: 1;
+        visibility: visible;
+        transform:translateX(0)
+    }
+`;
+
+export const SocialLink = styled.a`
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  background-color: var(--red);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translatex(-100%);
+  margin-left: 16px;
+
+  :first-of-type {
+    margin-left: 0;
+    animation: ${slideIn} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+    animation-delay: 0.04s;
+  }
+
+  :nth-of-type(2) {
+    animation: ${slideIn} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+    animation-delay: 0.08s;
+  }
+  :nth-of-type(3) {
+    animation: ${slideIn} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+    animation-delay: 0.12s;
+  }
+  :nth-of-type(4) {
+    animation: ${slideIn} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+    animation-delay: 0.16s;
+  }
+
+  &:hover {
     cursor: pointer;
   }
 `;
