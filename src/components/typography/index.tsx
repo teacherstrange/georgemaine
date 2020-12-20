@@ -76,13 +76,13 @@ export const Link = styled.a`
   }
 `;
 
-const slideIn = keyframes`
-   0% {
-        opacity:0
+const woosh = keyframes`
+    0% {
+        opacity: 0;
     }
 
     30% {
-        opacity:0
+        opacity: 0;
     }
 
     80% {
@@ -113,20 +113,20 @@ export const SocialLink = styled.a`
 
   :first-of-type {
     margin-left: 0;
-    animation: ${slideIn} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+    animation: ${woosh} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
     animation-delay: 0.04s;
   }
 
   :nth-of-type(2) {
-    animation: ${slideIn} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+    animation: ${woosh} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
     animation-delay: 0.08s;
   }
   :nth-of-type(3) {
-    animation: ${slideIn} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+    animation: ${woosh} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
     animation-delay: 0.12s;
   }
   :nth-of-type(4) {
-    animation: ${slideIn} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+    animation: ${woosh} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
     animation-delay: 0.16s;
   }
 
