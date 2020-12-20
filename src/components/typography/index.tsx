@@ -28,7 +28,6 @@ export const Manifesto = styled.h1`
   ${smallTitleStyle}
   text-align: center;
   margin: 20px 0 24px;
-  transition: all 0.15s ease;
 
   @media only screen and (min-width: 540px) {
     ${titleStyle}
