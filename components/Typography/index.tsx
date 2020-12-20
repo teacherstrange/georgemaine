@@ -10,22 +10,34 @@ interface Props {
 }
 
 // Define styles
+
+export const Year = styled.h1`
+  font-size: 51.8rem;
+  letter-spacing: -0.04rem;
+  text-align: center;
+  line-height: 61.8rem;
+  color: rgba(122, 122, 122, 0.19);
+  margin: 0 auto;
+`;
+
 export const Manifesto = styled.h1<Props>`
   font-size: 1.5rem;
-  letter-spacing: 0.002rem;
   font-weight: 600;
   line-height: 2rem;
-  color: ${(props) => (props.color ? props.color : "inherit")};
   margin: 24px auto 42px;
   width: calc(100% - 60px);
-  text-align: center;
+  text-align: left;
 
   @media only screen and (min-width: 768px) {
-    letter-spacing: 0.012rem;
-    font-size: 1.9rem;
-    line-height: 2.7rem;
-    margin: 24px auto 60px;
+    font-size: 2.1rem;
+    line-height: 2.8rem;
+    margin: 0 auto;
     width: ${(props) => (props.width ? props.width : "initial")};
+  }
+
+  strong {
+    display: inline;
+    color: #000;
   }
 `;
 
@@ -38,33 +50,11 @@ export const Caption = styled.p<Props>`
   text-align: ${(props) => (props.align ? props.align : "center")};
   margin: 0 auto;
   max-width: ${(props) => (props.mobileWidth ? props.mobileWidth : "initial")};
-  bottom: -78px;
 
   strong,
   a {
     font-weight: 600;
     display: inline;
-  }
-
-  @media only screen and (min-width: 768px) {
-    font-size: 1.5rem;
-    line-height: 2rem;
-    max-width: ${(props) => (props.width ? props.width : "initial")};
-    bottom: -90px;
-  }
-`;
-
-export const InlineA = styled.a<Props>`
-  color: ${(props) => (props.color ? props.color : "var(--white)")};
-  text-decoration: none;
-  font-weight: 500;
-  font-size: inherit;
-  transition: opacity 0.2s;
-  opacity: 1;
-
-  &:hover {
-    opacity: 0.65;
-    cursor: pointer;
-    text-decoration: underline;
+    color: #000;
   }
 `;

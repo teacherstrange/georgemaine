@@ -1,49 +1,23 @@
 import { NavList, NavContainer } from "./style";
-import { Button } from "../Button";
-import { motion } from "framer-motion";
-
-// Declare Props
-type NavItemProps = {
-  name: string;
-};
-
-interface NavProps {
-  list: NavItemProps[];
-  onClick: Function;
-  current: number;
-}
+import { Link } from "../Link";
+import React from "react";
 
 // Create Function
-export function Nav({ list, onClick, current }: NavProps) {
-  const convertedCurrent =
-    current >= 1 && current <= 4
-      ? 1
-      : current === 5
-      ? 2
-      : current === 6
-      ? 3
-      : current;
-
+export function Nav({ NavItems }) {
   return (
     <NavContainer>
       <NavList
         whileHover={{ backgroundColor: "#f7f7f7" }}
         whileTap={{ backgroundColor: "#e5e5e5" }}
       >
-        {list.map((NavItem, index) => {
+        {NavItems.map((NavItem: any, index: React.ReactText) => {
+          React.useEffect(() => {
+            console.log("NavItem:", NavItem);
+          });
           return (
-            <motion.li
-              key={index}
-              onClick={() => onClick(index === 2 ? 5 : index === 3 ? 6 : index)}
-            >
-              <Button
-                style={{
-                  opacity: index != convertedCurrent && 0.6,
-                }}
-              >
-                {NavItem.name}
-              </Button>
-            </motion.li>
+            <li key={index}>
+              <a href={NavItem.id}>{NavItem.name}</a>
+            </li>
           );
         })}
       </NavList>

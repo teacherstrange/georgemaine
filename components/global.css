@@ -15,11 +15,11 @@ html {
 body {
   font-family: TTInterphases, sans-serif;
   background: var(--background);
-  color: var(--primaryText);
+  color: #7a7a7a;
   font-weight: 400;
   -webkit-font-kerning: normal;
   font-kerning: normal;
-  font-feature-settings: "kern" 1;
+  font-feature-settings: "tnum" on, "lnum" on;
   text-rendering: optimizelegibility;
   font-variant-ligatures: common-ligatures;
   margin: 0;

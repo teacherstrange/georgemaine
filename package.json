@@ -9,7 +9,7 @@
     "babel-plugin-styled-components": "^1.11.1",
     "core-js": "^3.6.4",
     "elliptic": "^6.5.2",
-    "framer-motion": "^2.0.0-beta.42",
+    "framer-motion": "^2.9.4",
     "lodash": "4.17.19",
     "next": "^9.3.4",
     "node-fetch": "^2.6.1",
