@@ -139,6 +139,7 @@ body {
   font-variant-ligatures: common-ligatures;
   margin: 0;
   padding: 0;
+  background-color: var(--gray1);
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
