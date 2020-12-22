@@ -204,7 +204,10 @@ function WorkSection() {
           ref={ZoomBoxRef}
           className={isZoomed ? "is-zoomed" : ""}
         >
-          <ZoomBoxButton className={isZoomed ? "is-zoomed" : ""}>
+          <ZoomBoxButton
+            onClick={() => setIsZoomed(false)}
+            className={isZoomed ? "is-zoomed" : ""}
+          >
             <svg
               width="20"
               height="20"
