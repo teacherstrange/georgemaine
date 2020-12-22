@@ -39,6 +39,7 @@ export const Manifesto = styled.h1`
 
 export const Headline = styled.h2`
   ${smallTitleStyle}
+  margin-bottom: 60px;
 
   @media only screen and (min-width: 540px) {
     ${titleStyle}
@@ -54,6 +55,10 @@ export const Caption = styled.p`
 
   strong {
     color: var(--primaryText);
+  }
+
+  &:nth-child(2) {
+    margin-top: 24px;
   }
 `;
 

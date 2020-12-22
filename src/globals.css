@@ -139,7 +139,7 @@ body {
   font-variant-ligatures: common-ligatures;
   margin: 0;
   padding: 0;
-  background-color: var(--gray1);
+  background-color: var(--primaryFill);
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
@@ -163,9 +163,11 @@ body {
 /* Variables */
 :root {
   --primaryText: #1d1d1f;
-  --gray1: #f1f1f1;
-  --gray2: hsla(240, 6%, 25%, 0.12);
-  --gray3: #86868b;
+  --primaryFill: hsla(240, 3%, 49%, 0.08);
+  --secondaryFill: hsla(240, 3%, 49%, 0.12);
+  --tertiaryFill: hsla(0, 0%, 98%, 0.72);
+  --primaryLabelFill: hsla(240, 6%, 25%, 0.3);
+  --secondaryLabelFill: hsla(240, 6%, 25%, 0.6);
   --red: #d5344d;
   --white: #fff;
 }
