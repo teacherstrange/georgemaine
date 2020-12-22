@@ -10,7 +10,12 @@ import { Header } from "../src/components/header";
 import { SocialLinks } from "../src/components/social-links";
 function HomePage() {
   return (
-    <main>
+    <main
+      style={{
+        overflow: "hidden",
+        width: "100%",
+      }}
+    >
       <Header>
         <img
           style={{
