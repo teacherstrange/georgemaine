@@ -111,7 +111,7 @@ const ZoomBox = styled.li`
 const ZoomButton = styled.button`
   margin: 0;
   padding: 0;
-  background: none;
+  background: transparent;
   border: 0;
   cursor: pointer;
   display: block;
@@ -120,7 +120,9 @@ const ZoomButton = styled.button`
   z-index: 1;
   position: relative;
   outline: none;
-  color: none;
+  color: inherit;
+  font: inherit;
+  -webkit-appearance: none;
 
   ::focus,
   ::visited,
