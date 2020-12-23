@@ -86,10 +86,11 @@ const ZoomBox = styled.li`
   z-index: 0;
   position: absolute;
   overflow: hidden;
-  transition: width 0.5s cubic-bezier(0.52, 0.16, 0.24, 1),
-    height 0.5s cubic-bezier(0.52, 0.16, 0.24, 1),
-    left 0.5s cubic-bezier(0.52, 0.16, 0.24, 1),
-    top 0.5s cubic-bezier(0.52, 0.16, 0.24, 1);
+  transition: width 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
+    height 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
+    background-color 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
+    left 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
+    top 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
   background-color: hsla(0, 0%, 98%, 0);
 
   &.is-zoomed {
