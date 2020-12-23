@@ -128,6 +128,8 @@ const ZoomButton = styled.button`
   ::visited,
   ::active {
     border-style: outset;
+    outline: none;
+    border: none;
   }
 `;
 
