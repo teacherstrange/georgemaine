@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import {
-  Caption,
+  FigCaption,
   Manifesto,
   Link,
   Headline,
@@ -8,6 +8,7 @@ import {
 import styled from "styled-components";
 import { Header } from "../src/components/header";
 import { SocialLinks } from "../src/components/social-links";
+
 function HomePage() {
   return (
     <main
@@ -60,25 +61,32 @@ const StyledSection = styled.section`
   }
 `;
 
-const StyledImage = styled.img`
+const MorphBox = styled.figure`
   width: 100%;
-  height: auto;
-  display: block;
-  max-width: 100%;
-  transition: margin 0.5s cubic-bezier(0.52, 0.16, 0.24, 1);
+  height: 250px;
+  transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
+  overflow: hidden;
+
+  img {
+    width: auto;
+    height: 100%;
+    max-height: 250px;
+    transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
+  }
 
   &.is-zoomed {
-    margin-top: 52px;
+    height: calc((100vh / 2) + 165px);
+
+    img {
+      max-height: calc(100vh / 2);
+    }
   }
 `;
 
-const ZoomBox = styled.div`
+const ZoomBox = styled.li`
   height: 322px;
   width: 100%;
-  max-width: 440px;
   text-align: center;
-  top: 0px;
-  left: 0px;
   z-index: 0;
   position: absolute;
   overflow: hidden;
@@ -93,6 +101,10 @@ const ZoomBox = styled.div`
     height: 100vh;
     background-color: var(--tertiaryFill);
     backdrop-filter: blur(20px) saturate(50%);
+  }
+
+  @media only screen and (min-width: 980px) {
+    width: 50%;
   }
 `;
 
@@ -109,20 +121,6 @@ const ZoomButton = styled.button`
   position: relative;
 `;
 
-const ZoomBoxCaption = styled.div`
-  transform: scale(0.32);
-  opacity: 0;
-  padding: 24px;
-  text-align: left;
-  transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
-    opacity 0.37s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
-
-  &.is-zoomed {
-    opacity: 1;
-    transform: scale(1);
-  }
-`;
-
 const ZoomBoxButton = styled.button`
   position: absolute;
   right: 16px;
@@ -136,14 +134,13 @@ const ZoomBoxButton = styled.button`
   margin: 0;
   padding: 0;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  place-items: center;
   opacity: 0;
-  transition: opacity 0.37s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
 
   &.is-zoomed {
     opacity: 1;
+    transition: opacity 0.37s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
   }
 `;
 
@@ -181,9 +178,8 @@ function WorkSection() {
   return (
     <StyledSection>
       <Headline>Work</Headline>
-      <div
+      <ul
         style={{
-          width: "100%",
           height: 314,
           position: "relative",
         }}
@@ -229,25 +225,23 @@ function WorkSection() {
               />
             </svg>
           </ZoomBoxButton>
-
-          <StyledImage
-            className={isZoomed ? "is-zoomed" : ""}
-            src="/images/mollie-mobile.png"
-          />
-          <ZoomBoxCaption className={isZoomed ? "is-zoomed" : ""}>
-            <Caption>
+          <MorphBox className={isZoomed ? "is-zoomed" : ""}>
+            <img
+              width="250px"
+              src="/images/mollie-mobile.png"
+              alt="Memoji portait of me"
+            />
+            <FigCaption>
               <strong>Mollie’s Mobile Apps.</strong> During the last quarter of
               2019 I designed Mollie’s mobile apps to enable people to quickly
-              manage payments and watch their business grow .{" "}
-            </Caption>
-            <Caption>
+              manage payments and watch their business grow .{"\n"}
               <strong>
                 Enjoy managing payments on mobile. Download Mollie for Mobile ↗
               </strong>
-            </Caption>
-          </ZoomBoxCaption>
+            </FigCaption>
+          </MorphBox>
         </ZoomBox>
-      </div>
+      </ul>
     </StyledSection>
   );
 }

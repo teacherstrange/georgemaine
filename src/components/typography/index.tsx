@@ -62,6 +62,23 @@ export const Caption = styled.p`
   }
 `;
 
+export const FigCaption = styled.figcaption`
+  ${bodyStyle}
+  color: var(--gray3);
+  max-width: 275px;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+
+  strong {
+    color: var(--primaryText);
+  }
+
+  &:nth-child(2) {
+    margin-top: 24px;
+  }
+`;
+
 export const Link = styled.a`
   font-size: inherit;
   line-height: inherit;
