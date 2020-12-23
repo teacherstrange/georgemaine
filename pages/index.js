@@ -18,13 +18,7 @@ function HomePage() {
       }}
     >
       <Header>
-        <img
-          style={{
-            width: 120,
-          }}
-          src="/images/memoji.png"
-          alt="Memoji portait of me"
-        />
+        <img width={120} src="/images/memoji.png" alt="Memoji portait of me" />
         <Manifesto>
           Hi, I’m Georgemaine—A product designer currently working on{" "}
           <Link
@@ -56,7 +50,7 @@ const StyledSection = styled.section`
   max-width: 414px;
 
   @media only screen and (min-width: 980px) {
-    width: calc(100% -100px);
+    width: calc(100% - 100px);
     max-width: 960px;
   }
 `;
@@ -75,7 +69,9 @@ const MorphBox = styled.figure`
   }
 
   &.is-zoomed {
-    height: calc((100vh / 2) + 165px);
+    height: calc(50vh + 165px);
+    margin: auto;
+    transform: translateY(calc((50vh - 165px) / 2));
 
     img {
       max-height: calc(100vh / 2);
@@ -98,6 +94,7 @@ const ZoomBox = styled.li`
 
   &.is-zoomed {
     width: 100vw;
+
     height: 100vh;
     background-color: var(--tertiaryFill);
     backdrop-filter: blur(20px) saturate(50%);
@@ -214,14 +211,14 @@ function WorkSection() {
               <path
                 d="M4.05273 4L15.9881 15.9485"
                 stroke="var(--secondaryLabelFill)"
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
               />
               <path
                 d="M16 4.05176L4 16.0002"
                 stroke="var(--secondaryLabelFill)"
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
               />
             </svg>
           </ZoomBoxButton>
