@@ -119,6 +119,10 @@ const ZoomButton = styled.button`
   height: 100%;
   z-index: 1;
   position: relative;
+
+  :active {
+    border-style: outset;
+  }
 `;
 
 const ZoomBoxButton = styled.button`
