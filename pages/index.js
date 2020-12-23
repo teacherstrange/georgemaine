@@ -112,25 +112,13 @@ const ZoomButton = styled.button`
   margin: 0;
   padding: 0;
   background: transparent;
-  border: 0;
+  border: none;
   cursor: pointer;
   display: block;
   width: 440px;
   height: 100%;
   z-index: 1;
   position: relative;
-  outline: none;
-  color: inherit;
-  font: inherit;
-  -webkit-appearance: none;
-
-  ::focus,
-  ::visited,
-  ::active {
-    border-style: outset;
-    outline: none;
-    border: none;
-  }
 `;
 
 const ZoomBoxButton = styled.button`
