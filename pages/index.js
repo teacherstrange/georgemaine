@@ -120,7 +120,9 @@ const ZoomButton = styled.button`
   z-index: 1;
   position: relative;
 
-  :active {
+  ::focus,
+  ::visited,
+  ::active {
     border-style: outset;
   }
 `;
