@@ -27,6 +27,7 @@ const bodyStyle = css`
 export const Manifesto = styled.h1`
   ${smallTitleStyle}
   text-align: center;
+  color: var(--primaryText);
   margin: 20px 0 24px;
 
   @media only screen and (min-width: 540px) {
@@ -40,6 +41,7 @@ export const Manifesto = styled.h1`
 export const Headline = styled.h2`
   ${smallTitleStyle}
   margin-bottom: 60px;
+  color: var(--primaryText);
 
   @media only screen and (min-width: 540px) {
     ${titleStyle}
@@ -51,7 +53,6 @@ export const Headline = styled.h2`
 
 export const Caption = styled.p`
   ${bodyStyle}
-  color: var(--gray3);
 
   strong {
     color: var(--primaryText);
@@ -64,7 +65,6 @@ export const Caption = styled.p`
 
 export const FigCaption = styled.figcaption`
   ${bodyStyle}
-  color: var(--gray3);
   max-width: 275px;
   text-align: left;
   margin-left: auto;
@@ -75,7 +75,7 @@ export const FigCaption = styled.figcaption`
   }
 
   &:nth-child(2) {
-    margin-top: 24px;
+    margin-top: 8px;
   }
 `;
 
@@ -85,14 +85,14 @@ export const Link = styled.a`
   text-decoration: none;
   display: inline-block;
   transition: all 0.15s ease;
+  border-radius: 16px;
 
   &:hover {
-    border-radius: 6px;
-    background-color: var(--gray2);
-    padding-left: 4px;
-    padding-right: 4px;
-    margin-left: -4px;
-    margin-right: -4px;
+    background-color: var(--secondaryFill);
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-left: -8px;
+    margin-right: -8px;
     cursor: pointer;
   }
 `;
@@ -124,9 +124,8 @@ export const SocialLink = styled.a`
   height: 36px;
   background-color: var(--red);
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  place-items: center;
   opacity: 0;
   visibility: hidden;
   transform: translatex(-100%);

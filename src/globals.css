@@ -152,7 +152,7 @@ body {
   letter-spacing: -0.023rem;
   font-size: 1.5rem;
   line-height: 2rem;
-  color: var(--primaryText);
+  color: var(--secondaryText);
 }
 
 /* Typefaces */
@@ -166,7 +166,8 @@ body {
 
 /* Variables */
 :root {
-  --primaryText: #1d1d1f;
+  --primaryText: hsla(0, 0%, 8%, 0.96);
+  --secondaryText: hsla(0, 0%, 8%, 0.5);
   --primaryFill: hsla(240, 3%, 49%, 0.08);
   --secondaryFill: hsla(240, 3%, 49%, 0.12);
   --tertiaryFill: hsla(0, 0%, 98%, 0.72);

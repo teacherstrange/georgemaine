@@ -14,6 +14,7 @@ function HomePage() {
     <main
       style={{
         overflow: "hidden",
+        minHeight: "100vh",
       }}
     >
       <Header>
@@ -68,8 +69,8 @@ const MorphBox = styled.figure`
   }
 
   &.is-zoomed {
-    height: calc(50vh + 165px);
-    transform: translateY(calc((50vh - 165px) / 2));
+    height: calc(50vh + 176px);
+    transform: translateY(calc((50vh - 176px) / 2));
 
     img {
       max-height: calc(100vh / 2);
@@ -110,7 +111,7 @@ const ZoomButton = styled.button`
   border: none;
   cursor: pointer;
   display: block;
-  width: 440px;
+  width: 311px;
   height: 100%;
   z-index: 1;
   position: relative;
@@ -229,10 +230,18 @@ function WorkSection() {
             <FigCaption>
               <strong>Mollie’s Mobile Apps.</strong> During the last quarter of
               2019 I designed Mollie’s mobile apps to enable people to quickly
-              manage payments and watch their business grow .{"\n"}
-              <strong>
-                Enjoy managing payments on mobile. Download Mollie for Mobile ↗
-              </strong>
+              manage payments and watch their business grow.
+              <br></br>
+              <br></br>
+              <strong>Enjoy managing payments on mobile. </strong>
+              <Link
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "var(--red)" }}
+                href="https://apps.apple.com/us/app/mollie/id1473455257?ls=1"
+              >
+                Download Mollie for Mobile ↗
+              </Link>
             </FigCaption>
           </MorphBox>
         </ZoomBox>
