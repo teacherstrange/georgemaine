@@ -11,12 +11,7 @@ import { SocialLinks } from "../src/components/social-links";
 
 function HomePage() {
   return (
-    <main
-      style={{
-        overflow: "hidden",
-        width: "100%",
-      }}
-    >
+    <main>
       <Header>
         <img width={120} src="/images/memoji.png" alt="Memoji portait of me" />
         <Manifesto>
@@ -70,7 +65,6 @@ const MorphBox = styled.figure`
 
   &.is-zoomed {
     height: calc(50vh + 165px);
-    margin: auto;
     transform: translateY(calc((50vh - 165px) / 2));
 
     img {
@@ -95,7 +89,6 @@ const ZoomBox = styled.li`
 
   &.is-zoomed {
     width: 100vw;
-
     height: 100vh;
     background-color: var(--tertiaryFill);
     backdrop-filter: blur(20px) saturate(50%);
@@ -227,7 +220,7 @@ function WorkSection() {
             <img
               width="250px"
               src="/images/mollie-mobile.png"
-              alt="Memoji portait of me"
+              alt="Showcase of Mollie's Mobile apps"
             />
             <FigCaption>
               <strong>Mollie’s Mobile Apps.</strong> During the last quarter of

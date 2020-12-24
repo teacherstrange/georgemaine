@@ -123,6 +123,10 @@ table {
   border-spacing: 0;
 }
 
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Settings */
 html {
   font-size: 62.5%;
