@@ -11,7 +11,11 @@ import { SocialLinks } from "../src/components/social-links";
 
 function HomePage() {
   return (
-    <main>
+    <main
+      style={{
+        width: "100%",
+      }}
+    >
       <Header>
         <img width={120} src="/images/memoji.png" alt="Memoji portait of me" />
         <Manifesto>
