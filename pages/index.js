@@ -75,7 +75,7 @@ const MorphVideo = styled.div`
     transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
   }
 
-  &.is-zoomed {
+  &.is-morphed {
     top: 10vh;
     left: 3vh;
     right: 3vh;
@@ -83,7 +83,7 @@ const MorphVideo = styled.div`
   }
 
   @media only screen and (min-width: 980px) {
-    &.is-zoomed {
+    &.is-morphed {
       left: 10vh;
       right: 50vh;
       top: 10vh;
@@ -92,7 +92,7 @@ const MorphVideo = styled.div`
   }
 `;
 
-const MorphBox = styled.figure`
+const MorphImage = styled.figure`
   overflow: hidden;
   background-size: contain;
   background-position: center;
@@ -103,7 +103,7 @@ const MorphBox = styled.figure`
   left: 0;
   bottom: 72px;
 
-  &.is-zoomed {
+  &.is-morphed {
     top: 16vh;
     bottom: 42vh;
     left: 4vh;
@@ -112,7 +112,7 @@ const MorphBox = styled.figure`
   }
 
   @media only screen and (min-width: 980px) {
-    &.is-zoomed {
+    &.is-morphed {
       left: 10vh;
       right: 40vh;
       top: 10vh;
@@ -123,7 +123,7 @@ const MorphBox = styled.figure`
   transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 `;
 
-const ZoomBox = styled.li`
+const MorphBox = styled.li`
   display: inline-block;
   height: 322px;
   width: 100%;
@@ -132,7 +132,7 @@ const ZoomBox = styled.li`
   overflow: hidden;
   background-color: hsla(0, 0%, 98%, 0);
 
-  &.is-zoomed {
+  &.is-morphed {
     width: 100vw;
     height: 100vh;
     background-color: var(--tertiaryFill);
@@ -159,7 +159,7 @@ const ZoomButton = styled.button`
   z-index: 1;
 `;
 
-const ZoomBoxButton = styled.button`
+const MorphBoxButton = styled.button`
   position: absolute;
   right: 16px;
   top: 16px;
@@ -176,7 +176,7 @@ const ZoomBoxButton = styled.button`
   place-items: center;
   opacity: 0;
 
-  &.is-zoomed {
+  &.is-morphed {
     opacity: 1;
     transition: opacity 0.37s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
   }
@@ -191,9 +191,9 @@ function WorkSection() {
   var captionBottomEdges = [751, 580];
 
   // Create helpers
-  const [isZoomed, setIsZoomed] = useState(false);
-  const [zoomBoxTop, setZoomBoxTop] = useState(0);
-  const [zoomBoxLeft, setZoomBoxLeft] = useState(0);
+  const [isMorphed, setIsMorphed] = useState(false);
+  const [morphBoxTop, setMorphBoxTop] = useState(0);
+  const [morphBoxLeft, setMorphBoxLeft] = useState(0);
 
   const morphImageRef = useRef(null);
   const captionRef = useRef(null);
@@ -229,11 +229,11 @@ function WorkSection() {
     return morphBoxRef.current, morphImageRef.current, captionRef.current;
   }
 
-  // Helper to set Zoombox coordinates
-  function handleIsZoomed(top, left) {
-    setIsZoomed(!isZoomed);
-    setZoomBoxTop(-top);
-    setZoomBoxLeft(-left);
+  // Helper to set MorphBox coordinates
+  function handleIsMorphed(top, left) {
+    setIsMorphed(!isMorphed);
+    setMorphBoxTop(-top);
+    setMorphBoxLeft(-left);
   }
 
   // Render ref to avoid error
@@ -249,7 +249,7 @@ function WorkSection() {
   // Disable modal on resize
   useEffect(() => {
     const updateWindowDimensions = () => {
-      setIsZoomed(false);
+      setIsMorphed(false);
     };
     window.addEventListener("resize", updateWindowDimensions);
     return () => window.removeEventListener("resize", updateWindowDimensions);
@@ -264,17 +264,17 @@ function WorkSection() {
           position: "relative",
         }}
       >
-        <ZoomBox
+        <MorphBox
           style={{
-            top: isZoomed ? zoomBoxTop : 0,
-            left: isZoomed ? zoomBoxLeft : 0,
+            top: isMorphed ? morphBoxTop : 0,
+            left: isMorphed ? morphBoxLeft : 0,
           }}
           ref={morphBoxRef}
-          className={isZoomed ? "is-zoomed" : ""}
+          className={isMorphed ? "is-morphed" : ""}
         >
-          <ZoomBoxButton
-            onClick={() => setIsZoomed(false)}
-            className={isZoomed ? "is-zoomed" : ""}
+          <MorphBoxButton
+            onClick={() => setIsMorphed(false)}
+            className={isMorphed ? "is-morphed" : ""}
           >
             <svg
               width="20"
@@ -296,13 +296,13 @@ function WorkSection() {
                 strokeLinecap="round"
               />
             </svg>
-          </ZoomBoxButton>
-          <MorphBox
+          </MorphBoxButton>
+          <MorphImage
             ref={morphImageRef}
             style={{
               backgroundImage: `url(/images/mobile.png)`,
             }}
-            className={isZoomed ? "is-zoomed" : ""}
+            className={isMorphed ? "is-morphed" : ""}
           >
             <FigCaption ref={captionRef}>
               <strong>Mollie’s Mobile Apps.</strong> During the last quarter of
@@ -320,7 +320,7 @@ function WorkSection() {
                 Download Mollie for Mobile ↗
               </Link>
             </FigCaption>
-          </MorphBox>
+          </MorphImage>
           {/* <MorphVideo ref={morphImageRef} className={isZoomed ? "is-zoomed" : ""}>
             <video
               playsInline
@@ -339,13 +339,13 @@ function WorkSection() {
           /> */}
           <ZoomButton
             onClick={() =>
-              handleIsZoomed(
-                morphBoxRef.current.getBoundingClientRect().top,
-                morphBoxRef.current.getBoundingClientRect().left
+              handleIsMorphed(
+                morphImageRef.current.getBoundingClientRect().top,
+                morphImageRef.current.getBoundingClientRect().left
               )
             }
           />
-        </ZoomBox>
+        </MorphBox>
       </ul>
     </StyledSection>
   );
