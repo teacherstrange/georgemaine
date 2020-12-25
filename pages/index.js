@@ -216,7 +216,7 @@ function WorkSection() {
     const scale = calculateContentScaleForIndex(0);
     const yPos = (viewportHeight / 2.0 - captionBottomEdges[0] * scale) * -1;
 
-    const y = captionRef.current.clientHeight + 16 + Math.round(yPos);
+    const y = captionRef.current.clientHeight + 32 + Math.round(yPos);
     console.log("this is scale:", scale);
 
     captionRef.current.style["webkitTransform"] =
