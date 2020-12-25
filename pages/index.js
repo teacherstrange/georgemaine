@@ -106,9 +106,10 @@ const MorphBox = styled.figure`
 
   &.is-zoomed {
     top: 10vh;
-    bottom: 30vh;
+    bottom: 32vh;
     left: 0;
     right: 0;
+    overflow: visible;
   }
 
   @media only screen and (min-width: 980px) {
@@ -117,6 +118,7 @@ const MorphBox = styled.figure`
       right: 40vh;
       top: 10vh;
       bottom: 10vh;
+      overflow: visible;
     }
   }
 `;
@@ -181,17 +183,50 @@ const ZoomBoxButton = styled.button`
 `;
 
 function WorkSection() {
+  const [viewportHeight, setViewportHeight] = useState(0);
+  const [viewportWidth, setViewportWidth] = useState(0);
+  var imageWidths = [1492, 968];
+  var imageHeights = [1636, 1864];
+
+  var captionBottomEdges = [751, 580];
+
   // Create helpers
   const [isZoomed, setIsZoomed] = useState(false);
   const [zoomBoxTop, setZoomBoxTop] = useState(0);
   const [zoomBoxLeft, setZoomBoxLeft] = useState(0);
 
-  const morphboxRef = useRef(null);
+  const morphImageRef = useRef(null);
   const captionRef = useRef(null);
-  const ZoomBoxRef = useRef(null);
+  const morphBoxRef = useRef(null);
+
+  //
+  function calculateContentScaleForIndex(i) {
+    var contentWidth = imageWidths[i];
+    var contentHeight = imageHeights[i];
+    console.log("contentWidth", contentWidth);
+
+    var scale =
+      viewportWidth / viewportHeight > contentWidth / contentHeight
+        ? viewportHeight / contentHeight
+        : viewportWidth / contentWidth;
+    return scale;
+  }
+
+  function layoutCaptions() {
+    const scale = calculateContentScaleForIndex(0);
+    const yPos = (viewportHeight / 2.0 - captionBottomEdges[0] * scale) * -1;
+
+    const y = captionRef.current.clientHeight + 24 + Math.round(yPos);
+    console.log("this is scale:", scale);
+
+    captionRef.current.style["webkitTransform"] =
+      "translate3d(0px, " + y + "px, 0)";
+    captionRef.current.style["MozTransform"] =
+      "translate3d(0px, " + y + "px, 0)";
+  }
 
   function renderRefs() {
-    return ZoomBoxRef.current, morphboxRef.current, captionRef.current;
+    return morphBoxRef.current, morphImageRef.current, captionRef.current;
   }
 
   // Helper to set Zoombox coordinates
@@ -204,7 +239,13 @@ function WorkSection() {
   // Render ref to avoid error
   useEffect(() => {
     renderRefs();
+    setViewportHeight(morphImageRef.current.clientHeight);
+    setViewportWidth(morphImageRef.current.clientWidth);
+    layoutCaptions();
+    console.log("viewportHeight:", viewportHeight);
+    console.log("viewportWidth:", viewportWidth);
   }, [renderRefs]);
+
   // Disable modal on resize
   useEffect(() => {
     const updateWindowDimensions = () => {
@@ -228,7 +269,7 @@ function WorkSection() {
             top: isZoomed ? zoomBoxTop : 0,
             left: isZoomed ? zoomBoxLeft : 0,
           }}
-          ref={ZoomBoxRef}
+          ref={morphBoxRef}
           className={isZoomed ? "is-zoomed" : ""}
         >
           <ZoomBoxButton
@@ -257,13 +298,13 @@ function WorkSection() {
             </svg>
           </ZoomBoxButton>
           <MorphBox
-            ref={morphboxRef}
+            ref={morphImageRef}
             style={{
-              backgroundImage: `url(/images/mollie-mobile.png)`,
+              backgroundImage: `url(/images/mobile.png)`,
             }}
             className={isZoomed ? "is-zoomed" : ""}
-          />
-          {/* <FigCaption style={{ opacity: 0 }} ref={captionRef}>
+          >
+            <FigCaption ref={captionRef}>
               <strong>Mollie’s Mobile Apps.</strong> During the last quarter of
               2019 I designed Mollie’s mobile apps to enable people to quickly
               manage payments and watch their business grow.
@@ -278,9 +319,9 @@ function WorkSection() {
               >
                 Download Mollie for Mobile ↗
               </Link>
-            </FigCaption> */}
-          {/* </MorphBox> */}
-          {/* <MorphVideo ref={morphboxRef} className={isZoomed ? "is-zoomed" : ""}>
+            </FigCaption>
+          </MorphBox>
+          {/* <MorphVideo ref={morphImageRef} className={isZoomed ? "is-zoomed" : ""}>
             <video
               playsInline
               muted
@@ -290,7 +331,7 @@ function WorkSection() {
             />
           </MorphVideo> */}
           {/* <MorphBox
-            ref={morphboxRef}
+            ref={morphImageRef}
             style={{
               backgroundImage: `url(/images/checkout.png)`,
             }}
@@ -299,8 +340,8 @@ function WorkSection() {
           <ZoomButton
             onClick={() =>
               handleIsZoomed(
-                ZoomBoxRef.current.getBoundingClientRect().top,
-                ZoomBoxRef.current.getBoundingClientRect().left
+                morphBoxRef.current.getBoundingClientRect().top,
+                morphBoxRef.current.getBoundingClientRect().left
               )
             }
           />
