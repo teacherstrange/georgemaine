@@ -243,15 +243,16 @@ function WorkSection() {
 
   function layoutCaptions() {
     const scale = calculateContentScaleForIndex(0);
+    const morphedScale = isMorphed ? 1 : 0.8;
     const yPos = (viewportHeight / 2.0 - captionBottomEdges[0] * scale) * -1;
 
     const y = captionRef.current.clientHeight + 32 + Math.round(yPos);
     console.log("this is scale:", scale);
 
     captionRef.current.style["webkitTransform"] =
-      "translate3d(0px, " + y + "px, 0)";
+      "translate3d(0px, " + y + "px, 0) scale(" + morphedScale + ")";
     captionRef.current.style["MozTransform"] =
-      "translate3d(0px, " + y + "px, 0)";
+      "translate3d(0px, " + y + "px, 0) scale(" + morphedScale + ")";
   }
 
   function renderRefs() {
