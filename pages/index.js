@@ -124,9 +124,9 @@ const MorphBox = styled.figure`
 `;
 
 const ZoomBox = styled.li`
+  display: inline-block;
   height: 322px;
   width: 100%;
-  text-align: center;
   z-index: 0;
   position: absolute;
   overflow: hidden;
