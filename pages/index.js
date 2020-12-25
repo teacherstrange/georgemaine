@@ -91,6 +91,7 @@ const MorphVideo = styled.div`
     }
   }
 `;
+
 const MorphBox = styled.figure`
   transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
   overflow: hidden;
@@ -148,11 +149,12 @@ const ZoomButton = styled.button`
   background: transparent;
   border: none;
   cursor: pointer;
-  display: block;
-  width: 311px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
   z-index: 1;
-  position: relative;
 `;
 
 const ZoomBoxButton = styled.button`
@@ -179,8 +181,6 @@ const ZoomBoxButton = styled.button`
 `;
 
 function WorkSection() {
-  var viewportWidth = 0;
-  var viewportHeight = 0;
   // Create helpers
   const [isZoomed, setIsZoomed] = useState(false);
   const [zoomBoxTop, setZoomBoxTop] = useState(0);
@@ -189,17 +189,6 @@ function WorkSection() {
   const morphboxRef = useRef(null);
   const captionRef = useRef(null);
   const ZoomBoxRef = useRef(null);
-
-  function calculateContentScaleForIndex() {
-    var contentWidth = 1580;
-    var contentHeight = 1640;
-
-    var scale =
-      viewportWidth / viewportHeight > contentWidth / contentHeight
-        ? viewportHeight / contentHeight
-        : viewportWidth / contentWidth;
-    return scale;
-  }
 
   function renderRefs() {
     return ZoomBoxRef.current, morphboxRef.current, captionRef.current;
@@ -234,14 +223,6 @@ function WorkSection() {
           position: "relative",
         }}
       >
-        <ZoomButton
-          onClick={() =>
-            handleIsZoomed(
-              ZoomBoxRef.current.getBoundingClientRect().top,
-              ZoomBoxRef.current.getBoundingClientRect().left
-            )
-          }
-        />
         <ZoomBox
           style={{
             top: isZoomed ? zoomBoxTop : 0,
@@ -275,13 +256,13 @@ function WorkSection() {
               />
             </svg>
           </ZoomBoxButton>
-          {/* <MorphBox
+          <MorphBox
             ref={morphboxRef}
             style={{
               backgroundImage: `url(/images/mollie-mobile.png)`,
             }}
             className={isZoomed ? "is-zoomed" : ""}
-          > */}
+          />
           {/* <FigCaption style={{ opacity: 0 }} ref={captionRef}>
               <strong>Mollie’s Mobile Apps.</strong> During the last quarter of
               2019 I designed Mollie’s mobile apps to enable people to quickly
@@ -299,7 +280,7 @@ function WorkSection() {
               </Link>
             </FigCaption> */}
           {/* </MorphBox> */}
-          <MorphVideo ref={morphboxRef} className={isZoomed ? "is-zoomed" : ""}>
+          {/* <MorphVideo ref={morphboxRef} className={isZoomed ? "is-zoomed" : ""}>
             <video
               playsInline
               muted
@@ -307,7 +288,7 @@ function WorkSection() {
                 "https://www.apple.com/105/media/us/apple-tv-4k/2018/cb4271b6_0F8b_4c21_a567_73f8699d143c/animation/dolby/small.mp4"
               }
             />
-          </MorphVideo>
+          </MorphVideo> */}
           {/* <MorphBox
             ref={morphboxRef}
             style={{
@@ -315,6 +296,14 @@ function WorkSection() {
             }}
             className={isZoomed ? "is-zoomed" : ""}
           /> */}
+          <ZoomButton
+            onClick={() =>
+              handleIsZoomed(
+                ZoomBoxRef.current.getBoundingClientRect().top,
+                ZoomBoxRef.current.getBoundingClientRect().left
+              )
+            }
+          />
         </ZoomBox>
       </ul>
     </StyledSection>
