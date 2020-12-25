@@ -79,7 +79,7 @@ const MorphVideo = styled.div`
     top: 10vh;
     left: 3vh;
     right: 3vh;
-    bottom: 30vh;
+    bottom: 35vh;
   }
 
   @media only screen and (min-width: 980px) {
@@ -93,10 +93,6 @@ const MorphVideo = styled.div`
 `;
 
 const MorphBox = styled.figure`
-  transition: top 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
-    left 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
-    right 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
-    bottom 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
   overflow: hidden;
   background-size: contain;
   background-position: center;
@@ -108,10 +104,10 @@ const MorphBox = styled.figure`
   bottom: 72px;
 
   &.is-zoomed {
-    top: 10vh;
-    bottom: 32vh;
-    left: 0;
-    right: 0;
+    top: 16vh;
+    bottom: 42vh;
+    left: 4vh;
+    right: 4vh;
     overflow: visible;
   }
 
@@ -124,6 +120,7 @@ const MorphBox = styled.figure`
       overflow: visible;
     }
   }
+  transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 `;
 
 const ZoomBox = styled.li`
@@ -133,10 +130,6 @@ const ZoomBox = styled.li`
   z-index: 0;
   position: absolute;
   overflow: hidden;
-  transition: width 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
-    height 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
-    top 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
-    left 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
   background-color: hsla(0, 0%, 98%, 0);
 
   &.is-zoomed {
@@ -149,6 +142,7 @@ const ZoomBox = styled.li`
   @media only screen and (min-width: 980px) {
     width: 50%;
   }
+  transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 `;
 
 const ZoomButton = styled.button`
@@ -222,7 +216,7 @@ function WorkSection() {
     const scale = calculateContentScaleForIndex(0);
     const yPos = (viewportHeight / 2.0 - captionBottomEdges[0] * scale) * -1;
 
-    const y = captionRef.current.clientHeight + 24 + Math.round(yPos);
+    const y = captionRef.current.clientHeight + 16 + Math.round(yPos);
     console.log("this is scale:", scale);
 
     captionRef.current.style["webkitTransform"] =
