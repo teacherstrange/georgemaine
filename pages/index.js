@@ -93,7 +93,6 @@ const MorphVideo = styled.div`
 `;
 
 const MorphImage = styled.figure`
-  overflow: hidden;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -101,14 +100,13 @@ const MorphImage = styled.figure`
   top: 0;
   right: 0;
   left: 0;
-  bottom: 72px;
+  bottom: 0;
 
   &.is-morphed {
     top: 16vh;
     bottom: 42vh;
     left: 4vh;
     right: 4vh;
-    overflow: visible;
   }
 
   @media only screen and (min-width: 980px) {
@@ -145,7 +143,38 @@ const MorphBox = styled.li`
   transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 `;
 
-const ZoomButton = styled.button`
+const MorphContentContainer = styled.div`
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 72px;
+  transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
+
+  figcaption {
+    transform: scale(0.93);
+  }
+
+  &.is-morphed {
+    bottom: 0;
+
+    figcaption {
+      transform: scale(1);
+    }
+  }
+
+  @media only screen and (min-width: 980px) {
+    &.is-morphed {
+      left: 10vh;
+      right: 40vh;
+      top: 10vh;
+      bottom: 10vh;
+    }
+  }
+`;
+
+const MorphButton = styled.button`
   margin: 0;
   padding: 0;
   background: transparent;
@@ -297,30 +326,32 @@ function WorkSection() {
               />
             </svg>
           </MorphBoxButton>
-          <MorphImage
-            ref={morphImageRef}
-            style={{
-              backgroundImage: `url(/images/mobile.png)`,
-            }}
-            className={isMorphed ? "is-morphed" : ""}
-          >
-            <FigCaption ref={captionRef}>
-              <strong>Mollie’s Mobile Apps.</strong> During the last quarter of
-              2019 I designed Mollie’s mobile apps to enable people to quickly
-              manage payments and watch their business grow.
-              <br></br>
-              <br></br>
-              <strong>Enjoy managing payments on mobile. </strong>
-              <Link
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "var(--red)" }}
-                href="https://apps.apple.com/us/app/mollie/id1473455257?ls=1"
-              >
-                Download Mollie for Mobile ↗
-              </Link>
-            </FigCaption>
-          </MorphImage>
+          <MorphContentContainer className={isMorphed ? "is-morphed" : ""}>
+            <MorphImage
+              ref={morphImageRef}
+              style={{
+                backgroundImage: `url(/images/mobile.png)`,
+              }}
+              className={isMorphed ? "is-morphed" : ""}
+            >
+              <FigCaption ref={captionRef}>
+                <strong>Mollie’s Mobile Apps.</strong> During the last quarter
+                of 2019 I designed Mollie’s mobile apps to enable people to
+                quickly manage payments and watch their business grow.
+                <br></br>
+                <br></br>
+                <strong>Enjoy managing payments on mobile. </strong>
+                <Link
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "var(--red)" }}
+                  href="https://apps.apple.com/us/app/mollie/id1473455257?ls=1"
+                >
+                  Download Mollie for Mobile ↗
+                </Link>
+              </FigCaption>
+            </MorphImage>
+          </MorphContentContainer>
           {/* <MorphVideo ref={morphImageRef} className={isZoomed ? "is-zoomed" : ""}>
             <video
               playsInline
@@ -337,7 +368,7 @@ function WorkSection() {
             }}
             className={isZoomed ? "is-zoomed" : ""}
           /> */}
-          <ZoomButton
+          <MorphButton
             onClick={() =>
               handleIsMorphed(
                 morphImageRef.current.getBoundingClientRect().top,
