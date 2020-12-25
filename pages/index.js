@@ -54,7 +54,43 @@ const StyledSection = styled.section`
     max-width: 960px;
   }
 `;
+const MorphVideo = styled.div`
+  height: auto;
+  position: absolute;
+  left: calc((100% - 240px) / 2);
+  top: 0;
+  right: calc((100% - 240px) / 2);
+  bottom: 72px;
+  transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    right: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
+  }
+
+  &.is-zoomed {
+    top: 10vh;
+    left: 3vh;
+    right: 3vh;
+    bottom: 30vh;
+  }
+
+  @media only screen and (min-width: 980px) {
+    &.is-zoomed {
+      left: 10vh;
+      right: 50vh;
+      top: 10vh;
+      bottom: 10vh;
+    }
+  }
+`;
 const MorphBox = styled.figure`
   transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
   overflow: hidden;
@@ -239,14 +275,14 @@ function WorkSection() {
               />
             </svg>
           </ZoomBoxButton>
-          <MorphBox
+          {/* <MorphBox
             ref={morphboxRef}
             style={{
               backgroundImage: `url(/images/mollie-mobile.png)`,
             }}
             className={isZoomed ? "is-zoomed" : ""}
-          >
-            {/* <FigCaption style={{ opacity: 0 }} ref={captionRef}>
+          > */}
+          {/* <FigCaption style={{ opacity: 0 }} ref={captionRef}>
               <strong>Mollie’s Mobile Apps.</strong> During the last quarter of
               2019 I designed Mollie’s mobile apps to enable people to quickly
               manage payments and watch their business grow.
@@ -262,7 +298,23 @@ function WorkSection() {
                 Download Mollie for Mobile ↗
               </Link>
             </FigCaption> */}
-          </MorphBox>
+          {/* </MorphBox> */}
+          <MorphVideo ref={morphboxRef} className={isZoomed ? "is-zoomed" : ""}>
+            <video
+              playsInline
+              muted
+              src={
+                "https://www.apple.com/105/media/us/apple-tv-4k/2018/cb4271b6_0F8b_4c21_a567_73f8699d143c/animation/dolby/small.mp4"
+              }
+            />
+          </MorphVideo>
+          {/* <MorphBox
+            ref={morphboxRef}
+            style={{
+              backgroundImage: `url(/images/checkout.png)`,
+            }}
+            className={isZoomed ? "is-zoomed" : ""}
+          /> */}
         </ZoomBox>
       </ul>
     </StyledSection>
