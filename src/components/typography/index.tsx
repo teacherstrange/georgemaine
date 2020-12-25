@@ -73,14 +73,10 @@ export const FigCaption = styled.figcaption`
   bottom: 0;
   left: 0;
   right: 0;
-  transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
+  transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 
   strong {
     color: var(--primaryText);
-  }
-
-  &:nth-child(2) {
-    margin-top: 8px;
   }
 `;
 

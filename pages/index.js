@@ -93,7 +93,10 @@ const MorphVideo = styled.div`
 `;
 
 const MorphBox = styled.figure`
-  transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
+  transition: top 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
+    left 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
+    right 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
+    bottom 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
   overflow: hidden;
   background-size: contain;
   background-position: center;
@@ -130,7 +133,10 @@ const ZoomBox = styled.li`
   z-index: 0;
   position: absolute;
   overflow: hidden;
-  transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
+  transition: width 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
+    height 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
+    top 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
+    left 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
   background-color: hsla(0, 0%, 98%, 0);
 
   &.is-zoomed {
