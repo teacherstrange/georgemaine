@@ -69,6 +69,8 @@ export const FigCaption = styled.figcaption`
   text-align: left;
   margin-left: auto;
   margin-right: auto;
+  position: absolute;
+  bottom: 0;
 
   strong {
     color: var(--primaryText);

@@ -56,24 +56,30 @@ const StyledSection = styled.section`
 `;
 
 const MorphBox = styled.figure`
-  width: 100%;
-  height: 250px;
   transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
   overflow: hidden;
-
-  img {
-    width: auto;
-    height: 100%;
-    max-height: 250px;
-    transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
-  }
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 72px;
 
   &.is-zoomed {
-    height: calc(50vh + 176px);
-    transform: translateY(calc((50vh - 176px) / 2));
+    top: 10vh;
+    bottom: 30vh;
+    left: 0;
+    right: 0;
+  }
 
-    img {
-      max-height: calc(100vh / 2);
+  @media only screen and (min-width: 980px) {
+    &.is-zoomed {
+      left: 10vh;
+      right: 40vh;
+      top: 10vh;
+      bottom: 10vh;
     }
   }
 `;
@@ -85,11 +91,7 @@ const ZoomBox = styled.li`
   z-index: 0;
   position: absolute;
   overflow: hidden;
-  transition: width 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
-    height 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
-    background-color 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
-    left 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
-    top 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
+  transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
   background-color: hsla(0, 0%, 98%, 0);
 
   &.is-zoomed {
@@ -141,13 +143,30 @@ const ZoomBoxButton = styled.button`
 `;
 
 function WorkSection() {
+  var viewportWidth = 0;
+  var viewportHeight = 0;
   // Create helpers
   const [isZoomed, setIsZoomed] = useState(false);
   const [zoomBoxTop, setZoomBoxTop] = useState(0);
   const [zoomBoxLeft, setZoomBoxLeft] = useState(0);
+
+  const morphboxRef = useRef(null);
+  const captionRef = useRef(null);
   const ZoomBoxRef = useRef(null);
-  function renderZoomBoxRef() {
-    return ZoomBoxRef.current;
+
+  function calculateContentScaleForIndex() {
+    var contentWidth = 1580;
+    var contentHeight = 1640;
+
+    var scale =
+      viewportWidth / viewportHeight > contentWidth / contentHeight
+        ? viewportHeight / contentHeight
+        : viewportWidth / contentWidth;
+    return scale;
+  }
+
+  function renderRefs() {
+    return ZoomBoxRef.current, morphboxRef.current, captionRef.current;
   }
 
   // Helper to set Zoombox coordinates
@@ -159,9 +178,8 @@ function WorkSection() {
 
   // Render ref to avoid error
   useEffect(() => {
-    renderZoomBoxRef();
-  }, [ZoomBoxRef]);
-
+    renderRefs();
+  }, [renderRefs]);
   // Disable modal on resize
   useEffect(() => {
     const updateWindowDimensions = () => {
@@ -221,13 +239,14 @@ function WorkSection() {
               />
             </svg>
           </ZoomBoxButton>
-          <MorphBox className={isZoomed ? "is-zoomed" : ""}>
-            <img
-              width="250px"
-              src="/images/mollie-mobile.png"
-              alt="Showcase of Mollie's Mobile apps"
-            />
-            <FigCaption>
+          <MorphBox
+            ref={morphboxRef}
+            style={{
+              backgroundImage: `url(/images/mollie-mobile.png)`,
+            }}
+            className={isZoomed ? "is-zoomed" : ""}
+          >
+            {/* <FigCaption style={{ opacity: 0 }} ref={captionRef}>
               <strong>Mollie’s Mobile Apps.</strong> During the last quarter of
               2019 I designed Mollie’s mobile apps to enable people to quickly
               manage payments and watch their business grow.
@@ -242,7 +261,7 @@ function WorkSection() {
               >
                 Download Mollie for Mobile ↗
               </Link>
-            </FigCaption>
+            </FigCaption> */}
           </MorphBox>
         </ZoomBox>
       </ul>
