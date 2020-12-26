@@ -18,13 +18,13 @@ function HomePage() {
       }}
     >
       <Header>
-        <img width={120} src="/images/memoji.png" alt="Memoji portait of me" />
+        <img width={120} src='/images/memoji.png' alt='Memoji portait of me' />
         <Manifesto>
           Hi, I’m Georgemaine—A product designer currently working on{" "}
           <Link
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://pitch.com/"
+            target='_blank'
+            rel='noopener noreferrer'
+            href='https://pitch.com/'
             style={{ color: "var(--red)" }}
           >
             Pitch
@@ -92,35 +92,6 @@ const MorphVideo = styled.div`
   }
 `;
 
-const MorphImage = styled.figure`
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-
-  &.is-morphed {
-    top: 16vh;
-    bottom: 42vh;
-    left: 4vh;
-    right: 4vh;
-  }
-
-  @media only screen and (min-width: 980px) {
-    &.is-morphed {
-      left: 10vh;
-      right: 40vh;
-      top: 10vh;
-      bottom: 10vh;
-      overflow: visible;
-    }
-  }
-  transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
-`;
-
 const MorphBox = styled.li`
   display: inline-block;
   height: 322px;
@@ -174,6 +145,27 @@ const MorphContentContainer = styled.div`
   }
 `;
 
+const MorphImage = styled.figure`
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+
+  @media only screen and (max-width: 979px) {
+    &.is-morphed {
+      top: 16vh;
+      bottom: 42vh;
+      left: 4vh;
+      right: 4vh;
+    }
+  }
+  transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
+`;
+
 const MorphButton = styled.button`
   margin: 0;
   padding: 0;
@@ -192,8 +184,8 @@ const MorphButton = styled.button`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-
   padding: 10px;
+
   strong {
     color: var(--primaryText);
   }
@@ -224,21 +216,17 @@ const MorphBoxButton = styled.button`
 `;
 
 function WorkSection() {
-  const [viewportHeight, setViewportHeight] = useState(0);
-  const [viewportWidth, setViewportWidth] = useState(0);
-  var imageWidths = [1492, 968];
-  var imageHeights = [1636, 1864];
-
-  var captionBottomEdges = [751, 580];
-
-  // Create helpers
-  const [isMorphed, setIsMorphed] = useState(false);
-  const [morphBoxTop, setMorphBoxTop] = useState(0);
-  const [morphBoxLeft, setMorphBoxLeft] = useState(0);
-
+  const imageWidths = [1492, 968];
+  const imageHeights = [1636, 1864];
+  const captionBottomEdges = [751, 580];
   const morphImageRef = useRef(null);
   const captionRef = useRef(null);
   const morphBoxRef = useRef(null);
+  const [viewportHeight, setViewportHeight] = useState(0);
+  const [viewportWidth, setViewportWidth] = useState(0);
+  const [isMorphed, setIsMorphed] = useState(false);
+  const [morphBoxTop, setMorphBoxTop] = useState(0);
+  const [morphBoxLeft, setMorphBoxLeft] = useState(0);
 
   //
   function calculateContentScaleForIndex(i) {
@@ -250,6 +238,12 @@ function WorkSection() {
         ? viewportHeight / contentHeight
         : viewportWidth / contentWidth;
     return scale;
+  }
+
+  function handleIsMorphed(top, left) {
+    setIsMorphed(!isMorphed);
+    setMorphBoxTop(-top);
+    setMorphBoxLeft(-left);
   }
 
   function layoutCaptions() {
@@ -270,24 +264,14 @@ function WorkSection() {
     return morphBoxRef.current, morphImageRef.current, captionRef.current;
   }
 
-  // Helper to set MorphBox coordinates
-  function handleIsMorphed(top, left) {
-    setIsMorphed(!isMorphed);
-    setMorphBoxTop(-top);
-    setMorphBoxLeft(-left);
-  }
-
   // Render ref to avoid error
   useEffect(() => {
     renderRefs();
     setViewportHeight(morphImageRef.current.clientHeight);
     setViewportWidth(morphImageRef.current.clientWidth);
     layoutCaptions();
-    console.log("viewportHeight:", viewportHeight);
-    console.log("viewportWidth:", viewportWidth);
   }, [renderRefs]);
 
-  // Disable modal on resize
   useEffect(() => {
     const updateWindowDimensions = () => {
       setIsMorphed(false);
@@ -318,23 +302,23 @@ function WorkSection() {
             className={isMorphed ? "is-morphed" : ""}
           >
             <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+              width='20'
+              height='20'
+              viewBox='0 0 20 20'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
             >
               <path
-                d="M4.05273 4L15.9881 15.9485"
-                stroke="var(--secondaryLabelFill)"
-                strokeWidth="2"
-                strokeLinecap="round"
+                d='M4.05273 4L15.9881 15.9485'
+                stroke='var(--secondaryLabelFill)'
+                strokeWidth='2'
+                strokeLinecap='round'
               />
               <path
-                d="M16 4.05176L4 16.0002"
-                stroke="var(--secondaryLabelFill)"
-                strokeWidth="2"
-                strokeLinecap="round"
+                d='M16 4.05176L4 16.0002'
+                stroke='var(--secondaryLabelFill)'
+                strokeWidth='2'
+                strokeLinecap='round'
               />
             </svg>
           </MorphBoxButton>
@@ -354,22 +338,22 @@ function WorkSection() {
                 <br></br>
                 <strong>Enjoy managing payments on mobile. </strong>
                 <Link
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target='_blank'
+                  rel='noopener noreferrer'
                   style={{ color: "var(--red)" }}
-                  href="https://apps.apple.com/us/app/mollie/id1473455257?ls=1"
+                  href='https://apps.apple.com/us/app/mollie/id1473455257?ls=1'
                 >
                   Download Mollie for Mobile ↗
                 </Link>
               </FigCaption>
             </MorphImage>
           </MorphContentContainer>
-          {/* <MorphVideo ref={morphImageRef} className={isZoomed ? "is-zoomed" : ""}>
+          {/* <MorphVideo ref={morphImageRef} className={isZoomed ? 'is-zoomed' : ''}>
             <video
               playsInline
               muted
               src={
-                "https://www.apple.com/105/media/us/apple-tv-4k/2018/cb4271b6_0F8b_4c21_a567_73f8699d143c/animation/dolby/small.mp4"
+                'https://www.apple.com/105/media/us/apple-tv-4k/2018/cb4271b6_0F8b_4c21_a567_73f8699d143c/animation/dolby/small.mp4'
               }
             />
           </MorphVideo> */}
@@ -378,7 +362,7 @@ function WorkSection() {
             style={{
               backgroundImage: `url(/images/checkout.png)`,
             }}
-            className={isZoomed ? "is-zoomed" : ""}
+            className={isZoomed ? 'is-zoomed' : ''}
           /> */}
           {!isMorphed && (
             <MorphButton
