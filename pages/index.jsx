@@ -19,43 +19,43 @@ const StyledSection = styled.section`
     max-width: 960px;
   }
 `;
-const MorphVideo = styled.div`
-  height: auto;
-  position: absolute;
-  left: calc((100% - 240px) / 2);
-  top: 0;
-  right: calc((100% - 240px) / 2);
-  bottom: 72px;
-  transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
+// const MorphVideo = styled.div`
+//   height: auto;
+//   position: absolute;
+//   left: calc((100% - 240px) / 2);
+//   top: 0;
+//   right: calc((100% - 240px) / 2);
+//   bottom: 72px;
+//   transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 
-  video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    right: 0;
-    bottom: 0;
-    margin-top: auto;
-    margin-bottom: auto;
-    transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
-  }
+//   video {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     right: 0;
+//     bottom: 0;
+//     margin-top: auto;
+//     margin-bottom: auto;
+//     transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
+//   }
 
-  &.is-morphed {
-    top: 10vh;
-    left: 3vh;
-    right: 3vh;
-    bottom: 35vh;
-  }
+//   &.is-morphed {
+//     top: 10vh;
+//     left: 3vh;
+//     right: 3vh;
+//     bottom: 35vh;
+//   }
 
-  @media only screen and (min-width: 980px) {
-    &.is-morphed {
-      left: 10vh;
-      right: 50vh;
-      top: 10vh;
-      bottom: 10vh;
-    }
-  }
-`;
+//   @media only screen and (min-width: 980px) {
+//     &.is-morphed {
+//       left: 10vh;
+//       right: 50vh;
+//       top: 10vh;
+//       bottom: 10vh;
+//     }
+//   }
+// `;
 
 const MorphBox = styled.li`
   display: inline-block;
@@ -101,12 +101,12 @@ const MorphContentContainer = styled.div`
   }
 
   @media only screen and (min-width: 980px) {
-    &.is-morphed {
+    /* &.is-morphed {
       left: 10vh;
-      right: 40vh;
+      right: 10vh;
       top: 10vh;
       bottom: 10vh;
-    }
+    } */
   }
 `;
 
@@ -120,6 +120,13 @@ const MorphImage = styled.figure`
   left: 0;
   bottom: 0;
 
+  &.is-morphed {
+    left: 10vh;
+    right: 40vh;
+    top: 10vh;
+    bottom: 10vh;
+  }
+
   @media only screen and (max-width: 979px) {
     &.is-morphed {
       top: 16vh;
@@ -128,6 +135,7 @@ const MorphImage = styled.figure`
       right: 4vh;
     }
   }
+
   transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 `;
 
@@ -181,9 +189,10 @@ const MorphBoxButton = styled.button`
 `;
 
 function WorkSection() {
-  const imageWidths = [1492, 968];
+  const imageWidths = [1582, 968];
   const imageHeights = [1636, 1864];
   const captionBottomEdges = [751, 580];
+  const captionRightEdges = [728, 580];
   const morphImageRef = useRef(null);
   const captionRef = useRef(null);
   const morphBoxRef = useRef(null);
@@ -194,6 +203,38 @@ function WorkSection() {
   const [morphBoxLeft, setMorphBoxLeft] = useState(0);
 
   //
+
+  function handleIsMorphed(top, left) {
+    setIsMorphed(true);
+    setMorphBoxTop(-top);
+    setMorphBoxLeft(-left);
+  }
+
+  function layoutCaptions() {
+    const scale = calculateContentScaleForIndex(0);
+    const morphedScale = isMorphed ? 1 : 0.8;
+    const xPos = viewportWidth / 2.0 + captionRightEdges[0] * scale;
+    const yPos = (viewportHeight / 2.0 - captionBottomEdges[0] * scale) * -1;
+    const x = Math.round(xPos);
+    const y = 32 + Math.round(yPos);
+    // console.log(`this is viewportWidth:${viewportWidth}`);
+    // console.log(`this is viewportHeight:${viewportHeight}`);
+
+    captionRef.current.style.webkitTransform = `translate3d(${x}px, ${y}px, 0) scale(${morphedScale})`;
+    captionRef.current.style.MozTransform = `translate3d(${x}px, ${y}px, 0) scale(${morphedScale})`;
+  }
+
+  function renderRefs() {
+    morphBoxRef.current, morphImageRef.current, captionRef.current;
+  }
+
+  function getViewportSizes() {
+    console.log(`this is viewportWidth:${viewportWidth}`);
+    console.log(`this is viewportHeight:${viewportHeight}`);
+    setViewportHeight(morphImageRef.current.getBoundingClientRect().height);
+    setViewportWidth(morphImageRef.current.getBoundingClientRect().width);
+  }
+
   function calculateContentScaleForIndex(i) {
     const contentWidth = imageWidths[i];
     const contentHeight = imageHeights[i];
@@ -205,36 +246,22 @@ function WorkSection() {
     return scale;
   }
 
-  function handleIsMorphed(top, left) {
-    setIsMorphed(!isMorphed);
-    setMorphBoxTop(-top);
-    setMorphBoxLeft(-left);
-  }
-
-  function layoutCaptions() {
-    const scale = calculateContentScaleForIndex(0);
-    const morphedScale = isMorphed ? 1 : 0.8;
-    const yPos = (viewportHeight / 2.0 - captionBottomEdges[0] * scale) * -1;
-    const y = captionRef.current.clientHeight + 32 + Math.round(yPos);
-
-    captionRef.current.style.webkitTransform = `translate3d(0px, ${y}px, 0) scale(${morphedScale})`;
-    captionRef.current.style.MozTransform = `translate3d(0px, ${y}px, 0) scale(${morphedScale})`;
-  }
-
-  function renderRefs() {
-    return morphBoxRef.current, morphImageRef.current, captionRef.current;
-  }
-
   // Render ref to avoid error
   useEffect(() => {
     renderRefs();
-    setViewportHeight(morphImageRef.current.clientHeight);
-    setViewportWidth(morphImageRef.current.clientWidth);
-  }, [renderRefs]);
+  }, []);
+
+  useEffect(() => {
+    getViewportSizes();
+  }, [getViewportSizes]);
 
   useEffect(() => {
     layoutCaptions();
   }, [layoutCaptions]);
+
+  useEffect(() => {
+    layoutCaptions();
+  }, [viewportWidth, viewportHeight]);
 
   useEffect(() => {
     const updateWindowDimensions = () => {

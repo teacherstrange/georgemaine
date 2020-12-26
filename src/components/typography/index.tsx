@@ -67,12 +67,8 @@ export const FigCaption = styled.figcaption`
   ${bodyStyle}
   max-width: 275px;
   text-align: left;
-  margin-left: auto;
-  margin-right: auto;
   position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
   transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 
   strong {
