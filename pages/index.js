@@ -186,6 +186,17 @@ const MorphButton = styled.button`
   width: 100%;
   height: 100%;
   z-index: 1;
+  font: inherit;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+
+  padding: 10px;
+  strong {
+    color: var(--primaryText);
+  }
 `;
 
 const MorphBoxButton = styled.button`
@@ -203,6 +214,7 @@ const MorphBoxButton = styled.button`
   cursor: pointer;
   display: grid;
   place-items: center;
+  z-index: 1;
   opacity: 0;
 
   &.is-morphed {
@@ -232,7 +244,6 @@ function WorkSection() {
   function calculateContentScaleForIndex(i) {
     var contentWidth = imageWidths[i];
     var contentHeight = imageHeights[i];
-    console.log("contentWidth", contentWidth);
 
     var scale =
       viewportWidth / viewportHeight > contentWidth / contentHeight
@@ -369,14 +380,19 @@ function WorkSection() {
             }}
             className={isZoomed ? "is-zoomed" : ""}
           /> */}
-          <MorphButton
-            onClick={() =>
-              handleIsMorphed(
-                morphImageRef.current.getBoundingClientRect().top,
-                morphImageRef.current.getBoundingClientRect().left
-              )
-            }
-          />
+          {!isMorphed && (
+            <MorphButton
+              onClick={() =>
+                handleIsMorphed(
+                  morphImageRef.current.getBoundingClientRect().top,
+                  morphImageRef.current.getBoundingClientRect().left
+                )
+              }
+            >
+              <strong>Mollie Mobile Apps</strong>
+              Learn more
+            </MorphButton>
+          )}
         </MorphBox>
       </ul>
     </StyledSection>
