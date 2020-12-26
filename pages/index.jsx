@@ -1,48 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
 import {
   FigCaption,
   Manifesto,
   Link,
   Headline,
-} from "../src/components/typography";
-import styled from "styled-components";
-import { Header } from "../src/components/header";
-import { SocialLinks } from "../src/components/social-links";
-
-function HomePage() {
-  return (
-    <main
-      style={{
-        overflow: "hidden",
-        minHeight: "100vh",
-      }}
-    >
-      <Header>
-        <img width={120} src='/images/memoji.png' alt='Memoji portait of me' />
-        <Manifesto>
-          Hi, I’m Georgemaine—A product designer currently working on{" "}
-          <Link
-            target='_blank'
-            rel='noopener noreferrer'
-            href='https://pitch.com/'
-            style={{ color: "var(--red)" }}
-          >
-            Pitch
-          </Link>
-          , the next-gen presentation tool. I enjoy making digital tools so
-          simple and fun to use that you'll want to use them all the time. I
-          also like tinkering with software projects and animation videos on the
-          side. If you have one and think I can help or simply want to
-          chat—reach out.
-        </Manifesto>
-        <SocialLinks />
-      </Header>
-      <WorkSection />
-    </main>
-  );
-}
-
-export default HomePage;
+} from "../src/components/typography/index.tsx";
+import { Header } from "../src/components/header/index.tsx";
+import { SocialLinks } from "../src/components/social-links/index.tsx";
 
 const StyledSection = styled.section`
   margin: 60px auto 0;
@@ -230,10 +195,10 @@ function WorkSection() {
 
   //
   function calculateContentScaleForIndex(i) {
-    var contentWidth = imageWidths[i];
-    var contentHeight = imageHeights[i];
+    const contentWidth = imageWidths[i];
+    const contentHeight = imageHeights[i];
 
-    var scale =
+    const scale =
       viewportWidth / viewportHeight > contentWidth / contentHeight
         ? viewportHeight / contentHeight
         : viewportWidth / contentWidth;
@@ -250,14 +215,10 @@ function WorkSection() {
     const scale = calculateContentScaleForIndex(0);
     const morphedScale = isMorphed ? 1 : 0.8;
     const yPos = (viewportHeight / 2.0 - captionBottomEdges[0] * scale) * -1;
-
     const y = captionRef.current.clientHeight + 32 + Math.round(yPos);
-    console.log("this is scale:", scale);
 
-    captionRef.current.style["webkitTransform"] =
-      "translate3d(0px, " + y + "px, 0) scale(" + morphedScale + ")";
-    captionRef.current.style["MozTransform"] =
-      "translate3d(0px, " + y + "px, 0) scale(" + morphedScale + ")";
+    captionRef.current.style.webkitTransform = `translate3d(0px, ${y}px, 0) scale(${morphedScale})`;
+    captionRef.current.style.MozTransform = `translate3d(0px, ${y}px, 0) scale(${morphedScale})`;
   }
 
   function renderRefs() {
@@ -269,8 +230,11 @@ function WorkSection() {
     renderRefs();
     setViewportHeight(morphImageRef.current.clientHeight);
     setViewportWidth(morphImageRef.current.clientWidth);
-    layoutCaptions();
   }, [renderRefs]);
+
+  useEffect(() => {
+    layoutCaptions();
+  }, [layoutCaptions]);
 
   useEffect(() => {
     const updateWindowDimensions = () => {
@@ -326,7 +290,7 @@ function WorkSection() {
             <MorphImage
               ref={morphImageRef}
               style={{
-                backgroundImage: `url(/images/mobile.png)`,
+                backgroundImage: "url(/images/mobile.png)",
               }}
               className={isMorphed ? "is-morphed" : ""}
             >
@@ -334,8 +298,8 @@ function WorkSection() {
                 <strong>Mollie’s Mobile Apps.</strong> During the last quarter
                 of 2019 I designed Mollie’s mobile apps to enable people to
                 quickly manage payments and watch their business grow.
-                <br></br>
-                <br></br>
+                <br />
+                <br />
                 <strong>Enjoy managing payments on mobile. </strong>
                 <Link
                   target='_blank'
@@ -382,3 +346,38 @@ function WorkSection() {
     </StyledSection>
   );
 }
+
+function HomePage() {
+  return (
+    <main
+      style={{
+        overflow: "hidden",
+        minHeight: "100vh",
+      }}
+    >
+      <Header>
+        <img width={120} src='/images/memoji.png' alt='Memoji portait of me' />
+        <Manifesto>
+          Hi, I’m Georgemaine—A product designer currently working on{" "}
+          <Link
+            target='_blank'
+            rel='noopener noreferrer'
+            href='https://pitch.com/'
+            style={{ color: "var(--red)" }}
+          >
+            Pitch
+          </Link>
+          , the next-gen presentation tool. I enjoy making digital tools so
+          simple and fun to use that you'll want to use them all the time. I
+          also like tinkering with software projects and animation videos on the
+          side. If you have one and think I can help or simply want to
+          chat—reach out.
+        </Manifesto>
+        <SocialLinks />
+      </Header>
+      <WorkSection />
+    </main>
+  );
+}
+
+export default HomePage;
