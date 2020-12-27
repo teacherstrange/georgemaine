@@ -65,14 +65,38 @@ export const Caption = styled.p`
 
 export const FigCaption = styled.figcaption`
   ${bodyStyle}
-  max-width: 275px;
+  width: 275px;
   text-align: left;
   position: absolute;
-  bottom: 0;
-  transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
-
+  transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
+    opacity 0.229s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.03s;
+  top: 100%;
+  left: calc((100% - 275px) / 2);
   strong {
     color: var(--primaryText);
+  }
+
+  @media only screen and (min-width: 980px) {
+    left: calc(50% + 128px);
+    opacity: 0;
+    top: calc((100% - 160px) / 2);
+
+    &.is-morphed {
+      left: 100%;
+      opacity: 1;
+      transition: opacity 0.3345s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.15s;
+    }
+  }
+
+  @media only screen and (min-width: 1440px) {
+    ${titleStyle}
+    width: 360px;
+    top: calc((100% - 234px) / 2);
+    left: 90%;
+  }
+
+  @media only screen and (min-width: 1792px) {
+    left: 80%;
   }
 `;
 

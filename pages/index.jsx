@@ -88,24 +88,15 @@ const MorphContentContainer = styled.div`
   bottom: 72px;
   transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 
-  figcaption {
+  /* figcaption {
     transform: scale(0.93);
-  }
+  } */
 
   &.is-morphed {
     bottom: 0;
 
-    figcaption {
+    /* figcaption {
       transform: scale(1);
-    }
-  }
-
-  @media only screen and (min-width: 980px) {
-    /* &.is-morphed {
-      left: 10vh;
-      right: 10vh;
-      top: 10vh;
-      bottom: 10vh;
     } */
   }
 `;
@@ -122,7 +113,7 @@ const MorphImage = styled.figure`
 
   &.is-morphed {
     left: 10vh;
-    right: 40vh;
+    right: 50vh;
     top: 10vh;
     bottom: 10vh;
   }
@@ -210,41 +201,37 @@ function WorkSection() {
     setMorphBoxLeft(-left);
   }
 
-  function layoutCaptions() {
-    const scale = calculateContentScaleForIndex(0);
-    const morphedScale = isMorphed ? 1 : 0.8;
-    const xPos = viewportWidth / 2.0 + captionRightEdges[0] * scale;
-    const yPos = (viewportHeight / 2.0 - captionBottomEdges[0] * scale) * -1;
-    const x = Math.round(xPos);
-    const y = 32 + Math.round(yPos);
-    // console.log(`this is viewportWidth:${viewportWidth}`);
-    // console.log(`this is viewportHeight:${viewportHeight}`);
+  // function layoutCaptions() {
+  //   const scale = calculateContentScaleForIndex(0);
+  //   const morphedScale = isMorphed ? 1 : 0.8;
+  //   const xPos = viewportWidth / 2.0 + captionRightEdges[0] * scale;
+  //   const yPos = (viewportHeight / 2.0 - captionBottomEdges[0] * scale) * -1;
+  //   const x = Math.round(xPos);
+  //   const y = 32 + Math.round(yPos);
 
-    captionRef.current.style.webkitTransform = `translate3d(${x}px, ${y}px, 0) scale(${morphedScale})`;
-    captionRef.current.style.MozTransform = `translate3d(${x}px, ${y}px, 0) scale(${morphedScale})`;
-  }
+  //   captionRef.current.style.webkitTransform = `translate3d(${x}px, ${y}px, 0) scale(${morphedScale})`;
+  //   captionRef.current.style.MozTransform = `translate3d(${x}px, ${y}px, 0) scale(${morphedScale})`;
+  // }
 
   function renderRefs() {
     morphBoxRef.current, morphImageRef.current, captionRef.current;
   }
 
   function getViewportSizes() {
-    console.log(`this is viewportWidth:${viewportWidth}`);
-    console.log(`this is viewportHeight:${viewportHeight}`);
     setViewportHeight(morphImageRef.current.getBoundingClientRect().height);
     setViewportWidth(morphImageRef.current.getBoundingClientRect().width);
   }
 
-  function calculateContentScaleForIndex(i) {
-    const contentWidth = imageWidths[i];
-    const contentHeight = imageHeights[i];
+  // function calculateContentScaleForIndex(i) {
+  //   const contentWidth = imageWidths[i];
+  //   const contentHeight = imageHeights[i];
 
-    const scale =
-      viewportWidth / viewportHeight > contentWidth / contentHeight
-        ? viewportHeight / contentHeight
-        : viewportWidth / contentWidth;
-    return scale;
-  }
+  //   const scale =
+  //     viewportWidth / viewportHeight > contentWidth / contentHeight
+  //       ? viewportHeight / contentHeight
+  //       : viewportWidth / contentWidth;
+  //   return scale;
+  // }
 
   // Render ref to avoid error
   useEffect(() => {
@@ -255,13 +242,9 @@ function WorkSection() {
     getViewportSizes();
   }, [getViewportSizes]);
 
-  useEffect(() => {
-    layoutCaptions();
-  }, [layoutCaptions]);
-
-  useEffect(() => {
-    layoutCaptions();
-  }, [viewportWidth, viewportHeight]);
+  // useEffect(() => {
+  //   layoutCaptions();
+  // }, [layoutCaptions]);
 
   useEffect(() => {
     const updateWindowDimensions = () => {
@@ -321,10 +304,13 @@ function WorkSection() {
               }}
               className={isMorphed ? "is-morphed" : ""}
             >
-              <FigCaption ref={captionRef}>
-                <strong>Mollie’s Mobile Apps.</strong> During the last quarter
-                of 2019 I designed Mollie’s mobile apps to enable people to
-                quickly manage payments and watch their business grow.
+              <FigCaption
+                ref={captionRef}
+                className={isMorphed ? "is-morphed" : ""}
+              >
+                <strong>Mollie Mobile, 2019.</strong> During the last quarter of
+                2019 I designed Mollie’s mobile apps to enable people to quickly
+                manage payments and watch their business grow.
                 <br />
                 <br />
                 <strong>Enjoy managing payments on mobile. </strong>
@@ -364,7 +350,7 @@ function WorkSection() {
                 )
               }
             >
-              <strong>Mollie Mobile Apps</strong>
+              <strong>Mollie Mobile</strong>
               Learn more
             </MorphButton>
           )}
