@@ -88,16 +88,16 @@ const MorphContentContainer = styled.div`
   bottom: 72px;
   transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 
-  /* figcaption {
+  figcaption {
     transform: scale(0.93);
-  } */
+  }
 
   &.is-morphed {
     bottom: 0;
 
-    /* figcaption {
+    figcaption {
       transform: scale(1);
-    } */
+    }
   }
 `;
 
@@ -157,8 +157,8 @@ const MorphButton = styled.button`
 
 const MorphBoxButton = styled.button`
   position: absolute;
-  right: 16px;
-  top: 16px;
+  right: 9px;
+  top: 9px;
   height: 36px;
   width: 36px;
   border-radius: 32px;
