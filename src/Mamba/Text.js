@@ -30,10 +30,10 @@ export const Manifesto = styled.h1`
   color: var(--headline);
   margin: 20px 0 24px;
 
-  @media only screen and (min-width: 540px) {
+  @media (min-width: 540px) {
     ${titleStyle}
   }
-  @media only screen and (min-width: 980px) {
+  @media (min-width: 980px) {
     ${largeTitleStyle}
   }
 `;
@@ -43,10 +43,10 @@ export const Headline = styled.h2`
   margin-bottom: 60px;
   color: var(--headline);
 
-  @media only screen and (min-width: 540px) {
+  @media (min-width: 540px) {
     ${titleStyle}
   }
-  @media only screen and (min-width: 980px) {
+  @media (min-width: 980px) {
     ${largeTitleStyle}
   }
 `;
@@ -83,7 +83,7 @@ export const FigCaption = styled.figcaption`
     opacity: 1;
   }
 
-  @media only screen and (min-width: 980px) {
+  @media (min-width: 980px) {
     left: unset;
     top: 0;
     bottom: 0;
@@ -100,7 +100,7 @@ export const FigCaption = styled.figcaption`
     }
   }
 
-  @media only screen and (max-width: 979px) {
+  @media (max-width: 979px) {
     transform: scale(0.93) !important;
     padding-top: 24px;
 

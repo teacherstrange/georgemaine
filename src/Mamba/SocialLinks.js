@@ -8,11 +8,11 @@ export const SocialLinksContainer = styled.div`
 `;
 
 export function SocialLinks() {
-  const [socialLinksVisible, setSocialLinksVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
-    <div>
-      {socialLinksVisible ? (
+    <>
+      {isVisible ? (
         <SocialLinksContainer>
           <SocialLink
             href='mailto:georgemaine.lourens@gmail.com?subject=Hello 👋'
@@ -87,10 +87,8 @@ export function SocialLinks() {
           </SocialLink>
         </SocialLinksContainer>
       ) : (
-        <Button onClick={() => setSocialLinksVisible(!socialLinksVisible)}>
-          Get in touch
-        </Button>
+        <Button onClick={() => setIsVisible(!isVisible)}>Get in touch</Button>
       )}
-    </div>
+    </>
   );
 }

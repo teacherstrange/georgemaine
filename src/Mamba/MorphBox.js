@@ -48,7 +48,7 @@ const MorphContainer = styled.li`
     backdrop-filter: blur(20px) saturate(50%);
   }
 
-  @media only screen and (min-width: 980px) {
+  @media (min-width: 980px) {
     width: 50%;
   }
 `;
@@ -71,7 +71,7 @@ const MorphImage = styled.figure`
     bottom: 10vh;
   }
 
-  @media only screen and (max-width: 979px) {
+  @media (max-width: 979px) {
     &.is-morphed {
       top: 16vh;
       bottom: 42vh;
@@ -135,7 +135,7 @@ const MorphOpenButton = styled.button`
     height: 314px;
   }
 
-  @media only screen and (max-width: 979px) {
+  @media (max-width: 979px) {
     &.is-morphed {
       bottom: 42vh;
       left: 4vh;
@@ -249,14 +249,14 @@ export function MorphBox(props) {
           }}
           className={isMorphed && "is-morphed"}
         >
-          {props.figCaption}
+          {props.caption}
           <Link
             target='_blank'
             rel='noopener noreferrer'
             style={{ color: "var(--red)" }}
             href={props.href}
           >
-            {props.linkText}
+            {props.label}
           </Link>
         </FigCaption>
       </MorphImage>
@@ -266,7 +266,7 @@ export function MorphBox(props) {
         className={isMorphed && "is-morphed"}
       >
         <MorphCaption className={isMorphed && "is-morphed"}>
-          <strong>{props.projectName}</strong>
+          <strong>{props.project}</strong>
           <br />
           Learn more
         </MorphCaption>
