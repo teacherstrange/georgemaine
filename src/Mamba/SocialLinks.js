@@ -1,14 +1,18 @@
-import { useState } from "react";
-import { CTAContainer, SocialLinksContainer } from "./style";
-import { SocialLink } from "../typography";
-import { Button } from "../button";
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Button, SocialLink } from ".";
+
+export const SocialLinksContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 export function SocialLinks() {
-  const [socialLinksVisible, setSocialLinksVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
-    <CTAContainer>
-      {socialLinksVisible ? (
+    <>
+      {isVisible ? (
         <SocialLinksContainer>
           <SocialLink
             href='mailto:georgemaine.lourens@gmail.com?subject=Hello 👋'
@@ -83,10 +87,8 @@ export function SocialLinks() {
           </SocialLink>
         </SocialLinksContainer>
       ) : (
-        <Button onClick={() => setSocialLinksVisible(!socialLinksVisible)}>
-          Get in touch
-        </Button>
+        <Button onClick={() => setIsVisible(!isVisible)}>Get in touch</Button>
       )}
-    </CTAContainer>
+    </>
   );
 }
