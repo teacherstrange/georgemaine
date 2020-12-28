@@ -103,7 +103,7 @@ const NextButton = styled.button`
   z-index: 1;
   transition: background-color 0.25s linear, opacity 0.25s linear;
 
-  svg path {
+  path {
     color: var(--primaryLabelFill);
     transition: stroke 0.25s linear;
   }
@@ -112,7 +112,7 @@ const NextButton = styled.button`
     background-color: var(--tertiaryFill);
     color: var(--secondaryLabelFill);
 
-    svg path {
+    path {
       stroke: var(--secondaryLabelFill);
     }
   }
