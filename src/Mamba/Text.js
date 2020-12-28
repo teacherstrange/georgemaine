@@ -27,7 +27,7 @@ const bodyStyle = css`
 export const Manifesto = styled.h1`
   ${smallTitleStyle}
   text-align: center;
-  color: var(--primaryText);
+  color: var(--headline);
   margin: 20px 0 24px;
 
   @media only screen and (min-width: 540px) {
@@ -41,7 +41,7 @@ export const Manifesto = styled.h1`
 export const Headline = styled.h2`
   ${smallTitleStyle}
   margin-bottom: 60px;
-  color: var(--primaryText);
+  color: var(--headline);
 
   @media only screen and (min-width: 540px) {
     ${titleStyle}
@@ -55,7 +55,7 @@ export const Caption = styled.p`
   ${bodyStyle}
 
   strong {
-    color: var(--primaryText);
+    color: var(--headline);
   }
 
   &:nth-child(2) {
@@ -71,32 +71,42 @@ export const FigCaption = styled.figcaption`
   transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
     opacity 0.229s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.03s;
   top: 100%;
+
   left: calc((100% - 275px) / 2);
+  opacity: 0;
+
   strong {
-    color: var(--primaryText);
+    color: var(--headline);
+  }
+
+  &.is-morphed {
+    opacity: 1;
   }
 
   @media only screen and (min-width: 980px) {
-    left: calc(50% + 128px);
-    opacity: 0;
-    top: calc((100% - 160px) / 2);
+    left: unset;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: opacity 0.32244s cubic-bezier(0.32, 0.08, 0.24, 1) 0.05s,
+      transform cubic-bezier(0.52, 0.16, 0.24, 1);
 
     &.is-morphed {
-      left: 100%;
-      opacity: 1;
-      transition: opacity 0.3345s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.15s;
+      left: unset;
+      transition: opacity 0.3345s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.15s,
+        transform cubic-bezier(0.52, 0.16, 0.24, 1);
     }
   }
 
-  @media only screen and (min-width: 1440px) {
-    ${titleStyle}
-    width: 360px;
-    top: calc((100% - 234px) / 2);
-    left: 90%;
-  }
+  @media only screen and (max-width: 979px) {
+    transform: scale(0.93) !important;
+    padding-top: 24px;
 
-  @media only screen and (min-width: 1792px) {
-    left: 80%;
+    &.is-morphed {
+      transform: scale(1) !important;
+    }
   }
 `;
 
