@@ -163,6 +163,12 @@ const MorphCaption = styled(Caption)`
 export function MorphBox(props) {
   const contentWidth = props.width;
   const contentHeight = props.height;
+  const currentIndex = props.currentIndex;
+  const transformedIndex = props.currentIndex - props.pageIndex;
+  const wrapperWidth = 414;
+  const galleryPadding = 64;
+  const morphOffset = wrapperWidth - galleryPadding;
+  const sendMorphstate = props.sendMorphstate;
 
   // Distance between the center of the image and its optical right edge in the coordinate system of the native image resolution
   const captionRightEdges = props.captionRightEdge;
@@ -189,8 +195,11 @@ export function MorphBox(props) {
 
   function handleMorph(ref) {
     setIsMorphed(!isMorphed);
+    sendMorphstate(!isMorphed);
     setMorphTop(-ref.current.getBoundingClientRect().top);
-    setMorphLeft(-ref.current.getBoundingClientRect().left);
+    setMorphLeft(
+      -ref.current.getBoundingClientRect().left + currentIndex * -morphOffset
+    );
   }
 
   useEffect(() => {
@@ -225,11 +234,14 @@ export function MorphBox(props) {
       style={{
         top: isMorphed && morphTop,
         left: isMorphed && morphLeft,
+        transform: `translate3d( ${100 * currentIndex}%, 0, 0)`,
+        opacity: transformedIndex === 0 ? 1 : 0,
+        zIndex: isMorphed && 20,
       }}
       className={isMorphed && "is-morphed"}
     >
       <MorphCloseButton
-        onClick={() => setIsMorphed(!isMorphed)}
+        onClick={() => (setIsMorphed(!isMorphed), sendMorphstate(!isMorphed))}
         className={isMorphed && "is-morphed"}
       >
         <CloseIcon />
