@@ -25,7 +25,7 @@ function WorkSection() {
           height={1638}
           captionRightEdge={820}
           figCaption={[
-            <strong>Mollie Mobile, 2019. </strong>,
+            <strong>Mollie Apps.</strong>,
             "During the last quarter of 2019 I designed Mollie’s mobile apps to enable people to quickly manage payments and watch their business grow.",
             <br />,
             <br />,
