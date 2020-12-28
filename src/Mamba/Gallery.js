@@ -140,7 +140,7 @@ export function Gallery() {
                   height={1638}
                   captionRightEdge={820}
                   pageIndex={pageIndex}
-                  currentIndex={index}
+                  galleryIndex={index}
                   sendMorphstate={sendMorphstate}
                   caption={[
                     <strong>Mollie Apps.</strong>,
