@@ -211,25 +211,3 @@ class MyApp extends App {
 }
 
 export default MyApp;
-
-// export default function App({ Component, pageProps }) {
-
-//   static async getInitialProps({ Component, ctx }) {
-//     let pageProps = {}
-
-//     if (Component.getInitialProps) {
-//       pageProps = await Component.getInitialProps(ctx)
-//     }
-
-//     return { pageProps }
-//   };
-
-//   return (
-//     <>
-//       <GlobalStyle />
-//       <ThemeProvider theme={theme}>
-//         <Component {...pageProps} />
-//       </ThemeProvider>
-//     </>
-//   );
-// }
