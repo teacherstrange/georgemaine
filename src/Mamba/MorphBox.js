@@ -106,27 +106,18 @@ const MorphOpenButton = styled.button`
   border: none;
   cursor: pointer;
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  width: 100%;
   height: 100%;
+  outline: none;
   z-index: 1;
   font: inherit;
   color: inherit;
-  transition: ${MorphTransition},
-    opacity 0.37s cubic-bezier(0.52, 0.16, 0.24, 1) 0.2s;
+  transition: opacity 0.229s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
   opacity: 1;
 
   &.is-morphed {
     opacity: 0;
-    left: 10vh;
-    right: 50vh;
-    transition: ${MorphTransition},
-      opacity 0.24s cubic-bezier(0.52, 0.16, 0.24, 1);
-  }
-
-  @media (min-width: 1060px) {
-    height: 314px;
+    transition: opacity 0.129s cubic-bezier(0.52, 0.16, 0.24, 1);
   }
 
   @media (max-width: 979px) {
@@ -230,11 +221,11 @@ export function SmallMorphBox(props) {
   return (
     <MorphContainer
       style={{
-        top: isMorphed && morphTop,
-        left: isMorphed && morphLeft,
+        top: isMorphed ? morphTop : "",
+        left: isMorphed ? morphLeft : "",
         transform: `translate3d( ${100 * galleryIndex}%, 0, 0)`,
         opacity: transformedIndex === 0 ? 1 : 0,
-        zIndex: isMorphed && 20,
+        zIndex: isMorphed ? 20 : "",
       }}
       className={isMorphed && "is-morphed"}
     >
@@ -360,10 +351,10 @@ export function LargeMorphBox(props) {
   return (
     <MorphContainer
       style={{
-        top: isMorphed && morphTop,
-        left: isMorphed && morphLeft,
+        top: isMorphed ? morphTop : "",
+        left: isMorphed ? morphLeft : "",
         transform: `translate3d( ${100 * galleryIndex}%, 0, 0)`,
-        zIndex: isMorphed && 20,
+        zIndex: isMorphed ? 20 : "",
       }}
       className={isMorphed && "is-morphed"}
     >
