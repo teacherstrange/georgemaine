@@ -9,15 +9,6 @@ import {
   Gallery,
 } from "../src/Mamba";
 
-function WorkSection() {
-  return (
-    <Section>
-      <Headline>Work</Headline>
-      <Gallery />
-    </Section>
-  );
-}
-
 export default function Home() {
   return (
     <main
@@ -46,7 +37,10 @@ export default function Home() {
         </Manifesto>
         <SocialLinks />
       </Header>
-      <WorkSection />
+      <Section>
+        <Headline>Work</Headline>
+        <Gallery />
+      </Section>
     </main>
   );
 }
