@@ -12,8 +12,7 @@ const MorphContainer = styled.li`
   z-index: 0;
   position: absolute;
   overflow: hidden;
-  background-color: transparent;
-  transition: ${MorphTransition}, ${fadeIn};
+  background-color: none;
   top: 0;
   left: 0;
 
@@ -22,6 +21,7 @@ const MorphContainer = styled.li`
     height: 100vh;
     background-color: var(--overlay);
     backdrop-filter: blur(20px) saturate(50%);
+    transition: ${MorphTransition}, ${fadeIn};
   }
 
   @media (min-width: 980px) {

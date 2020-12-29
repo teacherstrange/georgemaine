@@ -46,7 +46,6 @@ const GalleryLargeItem = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
-  opacity: 1;
   transition: ${fade};
 `;
 
