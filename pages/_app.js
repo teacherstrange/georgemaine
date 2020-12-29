@@ -181,6 +181,20 @@ body {
   --red: #d5344d;
   --white: #fff;
 }
+@supports (color: color(display-p3 1 1 1)) {
+  :root {
+    --headline: color(display-p3 0.08 0.08 0.08 / 0.96);
+    --caption: color(display-p3 0.08 0.08 0.08 / 0.5);
+    --primaryFill: color(display-p3 0.4753 0.4753 0.5021 / 0.08);
+    --secondaryFill: color(display-p3 0.4753 0.4753 0.5021 / 0.12);
+    --tertiaryFill: color(display-p3 0.4753 0.4753 0.5021 / 0.2);
+    --overlay: color(display-p3 0.9801 0.98 0.9799 / 0.92);
+    --primaryLabelFill: color(display-p3 0.235 0.235 0.2624 / 0.3);
+    --secondaryLabelFill: color(display-p3 0.235 0.235 0.2624 / 0.6);
+    --red: color(display-p3 0.7695 0.2608 0.316);
+    --white: color(display-p3 1.0001 1 0.9999);
+  }
+}
 `;
 
 class MyApp extends App {
