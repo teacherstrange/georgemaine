@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { SmallMorphBox, LargeMorphBox } from "./index";
+import {
+  SmallMorphBox,
+  LargeMorphBox,
+  PreviousArrowIcon,
+  NextArrowIcon,
+} from "./index";
+
+const galleryHeight = 314;
+const fade = "opacity 0.3s ease 0.5s";
+const imageHeight = 250;
 
 const GalleryWrapper = styled.div`
   width: 100%;
@@ -8,22 +17,18 @@ const GalleryWrapper = styled.div`
 
 const GallerySmall = styled.div`
   width: 100%;
-  height: 314px;
-  display: none;
+  height: ${galleryHeight}px;
+  position: relative;
 
-  @media (max-width: 979px) {
-    display: flex;
-    position: relative;
-    flex-direction: column;
+  @media (min-width: 980px) {
+    display: none;
   }
 `;
 
 const GalleryLarge = styled.div`
   width: 100%;
-  height: 314px;
-  display: block;
+  height: ${galleryHeight}px;
   position: relative;
-  flex-direction: column;
 
   @media (max-width: 979px) {
     display: none;
@@ -32,8 +37,7 @@ const GalleryLarge = styled.div`
 
 const ItemContainer = styled.ul`
   height: 100%;
-  transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1),
-    opacity 0.3s ease 0.5s;
+  transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1), ${fade};
 `;
 
 const GalleryLargeItem = styled.div`
@@ -42,13 +46,13 @@ const GalleryLargeItem = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: space-around;
-  transition: opacity 0.3s ease 0.5s;
+  opacity: 1;
+  transition: ${fade};
 `;
 
 const PreviousButton = styled.button`
   position: absolute;
-  top: calc(250px / 2 - 20px);
+  top: calc(${imageHeight}px / 2 - 20px);
   left: -20px;
   height: 52px;
   width: 52px;
@@ -82,37 +86,9 @@ const PreviousButton = styled.button`
   }
 `;
 
-function PreviousArrowIcon() {
-  return (
-    <svg width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'>
-      <path
-        d='M13.5 2.5l-8 9.5 8 9.5'
-        stroke='var(--primaryLabelFill)'
-        strokeWidth='3'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-      />
-    </svg>
-  );
-}
-
-function NextArrowIcon() {
-  return (
-    <svg width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'>
-      <path
-        d='M10.5 2.5l8 9.5-8 9.5'
-        stroke='var(--primaryLabelFill)'
-        strokeWidth='3'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-      />
-    </svg>
-  );
-}
-
 const NextButton = styled.button`
   position: absolute;
-  top: calc(250px / 2 - 20px);
+  top: calc(${imageHeight}px / 2 - 20px);
   right: -20px;
   height: 52px;
   width: 52px;
@@ -216,9 +192,6 @@ function LargeGallery() {
   const [pageIndex, setPageIndex] = useState(0);
   const [morphstate, sendMorphstate] = useState();
 
-  React.useEffect(() => {
-    console.log(pageIndex);
-  });
   return (
     <GalleryLarge>
       <ItemContainer

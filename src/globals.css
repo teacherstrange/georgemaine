@@ -171,7 +171,7 @@ body {
   --primaryFill: hsla(240, 3%, 49%, 0.08);
   --secondaryFill: hsla(240, 3%, 49%, 0.12);
   --tertiaryFill: hsla(240, 3%, 49%, 0.2);
-  --overlay: hsla(0, 0%, 98%, 0.72);
+  --overlay: hsla(0, 0%, 98%, 0.92);
   --primaryLabelFill: hsla(240, 6%, 25%, 0.3);
   --secondaryLabelFill: hsla(240, 6%, 25%, 0.6);
   --red: #d5344d;

@@ -1,34 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { Caption, FigCaption, Link } from "./index";
+import { Caption, FigCaption, Link, CloseIcon } from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
 const fadeIn = "opacity .3s ease .5s";
-
-function CloseIcon() {
-  return (
-    <svg
-      width='20'
-      height='20'
-      viewBox='0 0 20 20'
-      fill='none'
-      xmlns='http://www.w3.org/2000/svg'
-    >
-      <path
-        d='M4.05273 4L15.9881 15.9485'
-        stroke='var(--secondaryLabelFill)'
-        strokeWidth='2'
-        strokeLinecap='round'
-      />
-      <path
-        d='M16 4.05176L4 16.0002'
-        stroke='var(--secondaryLabelFill)'
-        strokeWidth='2'
-        strokeLinecap='round'
-      />
-    </svg>
-  );
-}
 
 const MorphContainer = styled.li`
   display: inline-block;
@@ -47,10 +22,6 @@ const MorphContainer = styled.li`
     height: 100vh;
     background-color: var(--overlay);
     backdrop-filter: blur(20px) saturate(50%);
-  }
-
-  &.is-large {
-    opacity: 1 !important;
   }
 
   @media (min-width: 980px) {

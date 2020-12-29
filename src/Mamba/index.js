@@ -1,5 +1,6 @@
-export * from "./Button";
 export * from "./Text";
+export * from "./Icon";
+export * from "./Button";
 export * from "./CloseButton";
 export * from "./Gallery";
 export * from "./Header";
