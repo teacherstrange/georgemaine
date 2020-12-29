@@ -145,17 +145,17 @@ function SmallGallery() {
                 pageIndex={pageIndex}
                 galleryIndex={index}
                 sendMorphstate={sendMorphstate}
-                caption={[
-                  <strong>Mollie Apps.</strong>,
-                  "During the last quarter of 2019 I designed Mollie’s mobile apps to enable people to quickly manage payments and watch their business grow.",
-                  <br />,
-                  <br />,
-                  <strong>Enjoy managing payments on mobile. </strong>,
-                ]}
                 href={"https://apps.apple.com/us/app/mollie/id1473455257?ls=1"}
                 label={"Download Mollie for Mobile ↗"}
                 project={"Mollie Apps"}
-              />
+              >
+                <strong>Mollie Apps. </strong>During the last quarter of 2019 I
+                designed Mollie’s mobile apps to enable people to quickly manage
+                payments and watch their business grow.
+                <br />
+                <br />
+                <strong>Enjoy managing payments on mobile. </strong>
+              </SmallMorphBox>
             );
           })}
       </ItemContainer>
@@ -203,6 +203,7 @@ function LargeGallery() {
           .map(function (value, index) {
             return (
               <GalleryLargeItem
+                key={index}
                 style={{
                   transform: `translate3d( ${(0 + index) * 100}%, 0, 0)`,
                   opacity: index - pageIndex === 0 ? 1 : 0,
@@ -221,19 +222,19 @@ function LargeGallery() {
                         pageIndex={pageIndex}
                         galleryIndex={index}
                         sendMorphstate={sendMorphstate}
-                        caption={[
-                          <strong>Mollie Apps.</strong>,
-                          "During the last quarter of 2019 I designed Mollie’s mobile apps to enable people to quickly manage payments and watch their business grow.",
-                          <br />,
-                          <br />,
-                          <strong>Enjoy managing payments on mobile. </strong>,
-                        ]}
                         href={
                           "https://apps.apple.com/us/app/mollie/id1473455257?ls=1"
                         }
                         label={"Download Mollie for Mobile ↗"}
                         project={"Mollie Apps"}
-                      />
+                      >
+                        <strong>Mollie Apps. </strong>During the last quarter of
+                        2019 I designed Mollie’s mobile apps to enable people to
+                        quickly manage payments and watch their business grow
+                        <br />
+                        <br />
+                        <strong>Enjoy managing payments on mobile. </strong>,
+                      </LargeMorphBox>
                     );
                   })}
               </GalleryLargeItem>

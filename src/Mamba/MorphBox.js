@@ -195,7 +195,7 @@ export function SmallMorphBox(props) {
   }
 
   useEffect(() => {
-    return imageRef.current, captionRef.current;
+    imageRef.current, captionRef.current;
   }, []);
 
   useEffect(() => {
@@ -253,7 +253,7 @@ export function SmallMorphBox(props) {
           }}
           className={isMorphed && "is-morphed"}
         >
-          {props.caption}
+          {props.children}
           <Link
             target='_blank'
             rel='noopener noreferrer'
@@ -319,7 +319,7 @@ export function LargeMorphBox(props) {
   }
 
   useEffect(() => {
-    return imageRef.current, captionRef.current;
+    imageRef.current, captionRef.current;
   }, []);
 
   useEffect(() => {
@@ -334,7 +334,6 @@ export function LargeMorphBox(props) {
   }, []);
 
   useEffect(() => {
-    console.log(`This is viewportWidth: ${viewportWidth}`);
     layoutCaptions();
   }, [layoutCaptions]);
 
@@ -377,7 +376,7 @@ export function LargeMorphBox(props) {
           }}
           className={isMorphed && "is-morphed"}
         >
-          {props.caption}
+          {props.children}
           <Link
             target='_blank'
             rel='noopener noreferrer'
