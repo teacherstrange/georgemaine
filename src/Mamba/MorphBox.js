@@ -211,7 +211,7 @@ export function SmallMorphBox(props) {
 
   useEffect(() => {
     layoutCaptions();
-  }, []);
+  }, [layoutCaptions]);
 
   useEffect(() => {
     const dissmissModal = () => {
@@ -220,6 +220,10 @@ export function SmallMorphBox(props) {
     window.addEventListener("resize", dissmissModal);
     return () => window.removeEventListener("resize", dissmissModal);
   }, []);
+
+  useEffect(() => {
+    isMorphed && (document.body.style = "overflow: hidden");
+  }, [isMorphed]);
 
   return (
     <MorphContainer
