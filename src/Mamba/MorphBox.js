@@ -222,7 +222,9 @@ export function SmallMorphBox(props) {
   }, []);
 
   useEffect(() => {
-    isMorphed && (document.body.style = "overflow: hidden");
+    isMorphed
+      ? (document.body.style = "overflow: hidden")
+      : (document.body.style = `overflow: ""`);
   }, [isMorphed]);
 
   return (
@@ -350,7 +352,9 @@ export function LargeMorphBox(props) {
   }, []);
 
   useEffect(() => {
-    isMorphed && (document.body.style = "overflow: hidden");
+    isMorphed
+      ? (document.body.style = "overflow: hidden")
+      : (document.body.style = `overflow: ""`);
   }, [isMorphed]);
 
   return (
