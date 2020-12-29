@@ -345,6 +345,10 @@ export function LargeMorphBox(props) {
     return () => window.removeEventListener("resize", dissmissModal);
   }, []);
 
+  useEffect(() => {
+    isMorphed && (document.body.style = "overflow: hidden");
+  }, [isMorphed]);
+
   return (
     <MorphContainer
       style={{
