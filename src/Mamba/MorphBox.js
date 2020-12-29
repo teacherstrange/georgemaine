@@ -38,13 +38,13 @@ const MorphImage = styled.figure`
   right: 0;
   left: 0;
   bottom: 64px;
-  transition: ${MorphTransition};
 
   &.is-morphed {
     left: 10vh;
     right: 50vh;
     top: 10vh;
     bottom: 10vh;
+    transition: ${MorphTransition};
   }
 
   @media (max-width: 979px) {
@@ -53,6 +53,7 @@ const MorphImage = styled.figure`
       bottom: 42vh;
       left: 4vh;
       right: 4vh;
+      transition: ${MorphTransition};
     }
   }
 `;
@@ -208,10 +209,6 @@ export function SmallMorphBox(props) {
 
     myObserver.observe(imageRef.current);
   }, []);
-
-  useEffect(() => {
-    console.log(`This is isMorphed: ${isMorphed}`);
-  });
 
   useEffect(() => {
     layoutCaptions();
