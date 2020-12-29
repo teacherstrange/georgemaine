@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Caption, FigCaption, Link } from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
+const fadeIn = "opacity .3s ease .5s";
 
 function CloseIcon() {
   return (
@@ -37,7 +38,7 @@ const MorphContainer = styled.li`
   position: absolute;
   overflow: hidden;
   background-color: transparent;
-  transition: ${MorphTransition};
+  transition: ${MorphTransition}, ${fadeIn};
   top: 0;
   left: 0;
 
