@@ -49,6 +49,10 @@ const MorphContainer = styled.li`
     backdrop-filter: blur(20px) saturate(50%);
   }
 
+  &.is-large {
+    opacity: 1 !important;
+  }
+
   @media (min-width: 980px) {
     width: 50%;
   }
@@ -99,10 +103,28 @@ const MorphCloseButton = styled.button`
   align-items: center;
   z-index: 1;
   opacity: 0;
+  transition: background-color 0.25s linear;
+
+  path {
+    color: var(--primaryLabelFill);
+    transition: stroke 0.25s linear;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: var(--tertiaryFill);
+    color: var(--secondaryLabelFill);
+
+    path {
+      stroke: var(--secondaryLabelFill);
+    }
+  }
 
   &.is-morphed {
     opacity: 1;
-    transition: opacity 0.37s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
+    transition: opacity 0.37s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s,
+      background-color 0.25s linear;
   }
 `;
 
@@ -161,7 +183,7 @@ const MorphCaption = styled(Caption)`
   }
 `;
 
-export function MorphBox(props) {
+export function SmallMorphBox(props) {
   const contentWidth = props.width;
   const contentHeight = props.height;
   const galleryIndex = props.galleryIndex;
@@ -217,6 +239,10 @@ export function MorphBox(props) {
   }, []);
 
   useEffect(() => {
+    console.log(`This is isMorphed: ${isMorphed}`);
+  });
+
+  useEffect(() => {
     layoutCaptions();
   }, [layoutCaptions]);
 
@@ -235,6 +261,130 @@ export function MorphBox(props) {
         left: isMorphed && morphLeft,
         transform: `translate3d( ${100 * galleryIndex}%, 0, 0)`,
         opacity: transformedIndex === 0 ? 1 : 0,
+        zIndex: isMorphed && 20,
+      }}
+      className={isMorphed && "is-morphed"}
+    >
+      <MorphCloseButton
+        onClick={() => (setIsMorphed(!isMorphed), sendMorphstate(!isMorphed))}
+        className={isMorphed && "is-morphed"}
+      >
+        <CloseIcon />
+      </MorphCloseButton>
+
+      <MorphImage
+        ref={imageRef}
+        style={{
+          backgroundImage: props.backgroundImage,
+        }}
+        className={isMorphed && "is-morphed"}
+      >
+        <FigCaption
+          ref={captionRef}
+          style={{
+            transform: `translate3d(${captionX}px, 0, 0)`,
+          }}
+          className={isMorphed && "is-morphed"}
+        >
+          {props.caption}
+          <Link
+            target='_blank'
+            rel='noopener noreferrer'
+            style={{ color: "var(--red)" }}
+            href={props.href}
+          >
+            {props.label}
+          </Link>
+        </FigCaption>
+      </MorphImage>
+
+      <MorphOpenButton
+        onClick={() => handleMorph(imageRef)}
+        className={isMorphed && "is-morphed"}
+      >
+        <MorphCaption className={isMorphed && "is-morphed"}>
+          <strong>{props.project}</strong>
+          <br />
+          Learn more
+        </MorphCaption>
+      </MorphOpenButton>
+    </MorphContainer>
+  );
+}
+
+export function LargeMorphBox(props) {
+  const contentWidth = props.width;
+  const contentHeight = props.height;
+  const galleryIndex = props.galleryIndex;
+  const sendMorphstate = props.sendMorphstate;
+
+  // Distance between the center of the image and its optical right edge in the coordinate system of the native image resolution
+  const captionRightEdges = props.captionRightEdge;
+
+  const imageRef = useRef(null);
+  const captionRef = useRef(null);
+
+  const [viewportHeight, setViewportHeight] = useState(0);
+  const [viewportWidth, setViewportWidth] = useState(0);
+  const [isMorphed, setIsMorphed] = useState(false);
+  const [morphTop, setMorphTop] = useState(0);
+  const [morphLeft, setMorphLeft] = useState(0);
+  const [captionX, setCaptionX] = useState(0);
+
+  function layoutCaptions() {
+    const scale =
+      viewportWidth / viewportHeight > contentWidth / contentHeight
+        ? viewportHeight / contentHeight
+        : viewportWidth / contentWidth;
+    const xPos = viewportWidth / 2.0 + captionRightEdges * scale;
+    const x = Math.round(xPos);
+    setCaptionX(x);
+  }
+
+  function handleMorph(ref) {
+    setIsMorphed(!isMorphed);
+    sendMorphstate(!isMorphed);
+    const screenWidth = window.innerWidth;
+    const screenOffset = screenWidth - viewportWidth;
+    const galleryOffset = galleryIndex * screenOffset;
+    setMorphTop(-ref.current.getBoundingClientRect().top);
+    setMorphLeft(-ref.current.getBoundingClientRect().left - galleryOffset);
+  }
+
+  useEffect(() => {
+    return imageRef.current, captionRef.current;
+  }, []);
+
+  useEffect(() => {
+    const myObserver = new ResizeObserver((entries) => {
+      entries.forEach((entry) => {
+        setViewportWidth(entry.contentRect.width);
+        setViewportHeight(entry.contentRect.height);
+      });
+    });
+
+    myObserver.observe(imageRef.current);
+  }, []);
+
+  useEffect(() => {
+    console.log(`This is viewportWidth: ${viewportWidth}`);
+    layoutCaptions();
+  }, [layoutCaptions]);
+
+  useEffect(() => {
+    const dissmissModal = () => {
+      setIsMorphed(false);
+    };
+    window.addEventListener("resize", dissmissModal);
+    return () => window.removeEventListener("resize", dissmissModal);
+  }, []);
+
+  return (
+    <MorphContainer
+      style={{
+        top: isMorphed && morphTop,
+        left: isMorphed && morphLeft,
+        transform: `translate3d( ${100 * galleryIndex}%, 0, 0)`,
         zIndex: isMorphed && 20,
       }}
       className={isMorphed && "is-morphed"}

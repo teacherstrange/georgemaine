@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { MorphBox } from "./index";
+import { SmallMorphBox, LargeMorphBox } from "./index";
 
 const GalleryWrapper = styled.div`
   width: 100%;
@@ -18,10 +18,32 @@ const GallerySmall = styled.div`
   }
 `;
 
+const GalleryLarge = styled.div`
+  width: 100%;
+  height: 314px;
+  display: block;
+  position: relative;
+  flex-direction: column;
+
+  @media (max-width: 979px) {
+    display: none;
+  }
+`;
+
 const ItemContainer = styled.ul`
   height: 100%;
   transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1),
     opacity 0.3s ease 0.5s;
+`;
+
+const GalleryLargeItem = styled.div`
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  transition: opacity 0.3s ease 0.5s;
 `;
 
 const PreviousButton = styled.button`
@@ -41,13 +63,16 @@ const PreviousButton = styled.button`
   align-items: center;
   z-index: 1;
   transition: 0.25s background-color linear, 0.25s opacity linear;
+  outline: none;
 
   svg path {
     color: var(--primaryLabelFill);
     transition: stroke 0.25s linear;
   }
 
-  &:hover {
+  &:hover,
+  &:focus,
+  &:active {
     background-color: var(--tertiaryFill);
     color: var(--secondaryLabelFill);
 
@@ -96,6 +121,7 @@ const NextButton = styled.button`
   border: none;
   margin: 0;
   padding: 0;
+  outline: none;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -108,7 +134,9 @@ const NextButton = styled.button`
     transition: stroke 0.25s linear;
   }
 
-  &:hover {
+  &:hover,
+  &:focus,
+  &:active {
     background-color: var(--tertiaryFill);
     color: var(--secondaryLabelFill);
 
@@ -118,71 +146,161 @@ const NextButton = styled.button`
   }
 `;
 
-export function Gallery() {
+function SmallGallery() {
+  const [pageIndex, setPageIndex] = useState(0);
+  const [morphstate, sendMorphstate] = useState(false);
+
+  return (
+    <GallerySmall>
+      <ItemContainer
+        style={{
+          transform: `translate3d( ${(0 - pageIndex) * 100}%, 0, 0)`,
+        }}
+      >
+        {Array(4)
+          .fill("")
+          .map(function (value, index) {
+            return (
+              <SmallMorphBox
+                key={index}
+                backgroundImage={"url(/images/mobile.png)"}
+                width={1582}
+                height={1638}
+                captionRightEdge={820}
+                pageIndex={pageIndex}
+                galleryIndex={index}
+                sendMorphstate={sendMorphstate}
+                caption={[
+                  <strong>Mollie Apps.</strong>,
+                  "During the last quarter of 2019 I designed Mollie’s mobile apps to enable people to quickly manage payments and watch their business grow.",
+                  <br />,
+                  <br />,
+                  <strong>Enjoy managing payments on mobile. </strong>,
+                ]}
+                href={"https://apps.apple.com/us/app/mollie/id1473455257?ls=1"}
+                label={"Download Mollie for Mobile ↗"}
+                project={"Mollie Apps"}
+              />
+            );
+          })}
+      </ItemContainer>
+
+      <PreviousButton
+        style={{
+          opacity: pageIndex >= 1 ? 1 : 0,
+          zIndex: morphstate && -1,
+        }}
+        onClick={() => {
+          setPageIndex(pageIndex - 1);
+        }}
+      >
+        <PreviousArrowIcon />
+      </PreviousButton>
+
+      <NextButton
+        style={{
+          opacity: pageIndex <= 2 ? 1 : 0,
+          zIndex: morphstate && -1,
+        }}
+        onClick={() => {
+          setPageIndex(pageIndex + 1);
+        }}
+      >
+        <NextArrowIcon />
+      </NextButton>
+    </GallerySmall>
+  );
+}
+
+function LargeGallery() {
   const [pageIndex, setPageIndex] = useState(0);
   const [morphstate, sendMorphstate] = useState();
+
+  React.useEffect(() => {
+    console.log(pageIndex);
+  });
+  return (
+    <GalleryLarge>
+      <ItemContainer
+        style={{
+          transform: `translate3d( ${(0 - pageIndex) * 100}%, 0, 0)`,
+        }}
+      >
+        {Array(2)
+          .fill("")
+          .map(function (value, index) {
+            return (
+              <GalleryLargeItem
+                style={{
+                  transform: `translate3d( ${(0 + index) * 100}%, 0, 0)`,
+                  opacity: index - pageIndex === 0 ? 1 : 0,
+                }}
+              >
+                {Array(2)
+                  .fill("")
+                  .map(function (value, index) {
+                    return (
+                      <LargeMorphBox
+                        key={index}
+                        backgroundImage={"url(/images/mobile.png)"}
+                        width={1582}
+                        height={1638}
+                        captionRightEdge={820}
+                        pageIndex={pageIndex}
+                        galleryIndex={index}
+                        sendMorphstate={sendMorphstate}
+                        caption={[
+                          <strong>Mollie Apps.</strong>,
+                          "During the last quarter of 2019 I designed Mollie’s mobile apps to enable people to quickly manage payments and watch their business grow.",
+                          <br />,
+                          <br />,
+                          <strong>Enjoy managing payments on mobile. </strong>,
+                        ]}
+                        href={
+                          "https://apps.apple.com/us/app/mollie/id1473455257?ls=1"
+                        }
+                        label={"Download Mollie for Mobile ↗"}
+                        project={"Mollie Apps"}
+                      />
+                    );
+                  })}
+              </GalleryLargeItem>
+            );
+          })}
+      </ItemContainer>
+      <PreviousButton
+        style={{
+          opacity: pageIndex === 1 ? 1 : 0,
+          zIndex: morphstate && -1,
+          left: -44,
+        }}
+        onClick={() => {
+          setPageIndex(pageIndex - 1);
+        }}
+      >
+        <PreviousArrowIcon />
+      </PreviousButton>
+      <NextButton
+        style={{
+          opacity: pageIndex === 0 ? 1 : 0,
+          zIndex: morphstate && -1,
+          right: -44,
+        }}
+        onClick={() => {
+          setPageIndex(pageIndex + 1);
+        }}
+      >
+        <NextArrowIcon />
+      </NextButton>
+    </GalleryLarge>
+  );
+}
+
+export function Gallery() {
   return (
     <GalleryWrapper>
-      <GallerySmall>
-        <ItemContainer
-          style={{
-            transform: `translate3d( ${(0 - pageIndex) * 100}%, 0, 0)`,
-          }}
-        >
-          {Array(4)
-            .fill("")
-            .map(function (value, index) {
-              return (
-                <MorphBox
-                  key={index}
-                  backgroundImage={"url(/images/mobile.png)"}
-                  width={1582}
-                  height={1638}
-                  captionRightEdge={820}
-                  pageIndex={pageIndex}
-                  galleryIndex={index}
-                  sendMorphstate={sendMorphstate}
-                  caption={[
-                    <strong>Mollie Apps.</strong>,
-                    "During the last quarter of 2019 I designed Mollie’s mobile apps to enable people to quickly manage payments and watch their business grow.",
-                    <br />,
-                    <br />,
-                    <strong>Enjoy managing payments on mobile. </strong>,
-                  ]}
-                  href={
-                    "https://apps.apple.com/us/app/mollie/id1473455257?ls=1"
-                  }
-                  label={"Download Mollie for Mobile ↗"}
-                  project={"Mollie Apps"}
-                />
-              );
-            })}
-        </ItemContainer>
-
-        <PreviousButton
-          style={{
-            opacity: pageIndex >= 1 ? 1 : 0,
-            zIndex: morphstate && -1,
-          }}
-          onClick={() => {
-            setPageIndex(pageIndex - 1);
-          }}
-        >
-          <PreviousArrowIcon />
-        </PreviousButton>
-
-        <NextButton
-          style={{
-            opacity: pageIndex <= 2 ? 1 : 0,
-            zIndex: morphstate && -1,
-          }}
-          onClick={() => {
-            setPageIndex(pageIndex + 1);
-          }}
-        >
-          <NextArrowIcon />
-        </NextButton>
-      </GallerySmall>
+      <SmallGallery />
+      <LargeGallery />
     </GalleryWrapper>
   );
 }
