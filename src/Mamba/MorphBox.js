@@ -12,7 +12,10 @@ const MorphContainer = styled.li`
   z-index: 0;
   position: absolute;
   overflow: hidden;
-  background-color: none;
+  background-color: transparent;
+  transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
+    left 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
+    top 0.56s cubic-bezier(0.52, 0.16, 0.24, 1), ${fadeIn};
   top: 0;
   left: 0;
 
@@ -21,7 +24,6 @@ const MorphContainer = styled.li`
     height: 100vh;
     background-color: var(--overlay);
     backdrop-filter: blur(20px) saturate(50%);
-    transition: ${MorphTransition}, ${fadeIn};
   }
 
   @media (min-width: 980px) {
@@ -38,13 +40,13 @@ const MorphImage = styled.figure`
   right: 0;
   left: 0;
   bottom: 64px;
+  transition: ${MorphTransition};
 
   &.is-morphed {
     left: 10vh;
     right: 50vh;
     top: 10vh;
     bottom: 10vh;
-    transition: ${MorphTransition};
   }
 
   @media (max-width: 979px) {
@@ -53,7 +55,6 @@ const MorphImage = styled.figure`
       bottom: 42vh;
       left: 4vh;
       right: 4vh;
-      transition: ${MorphTransition};
     }
   }
 `;
@@ -209,6 +210,10 @@ export function SmallMorphBox(props) {
 
     myObserver.observe(imageRef.current);
   }, []);
+
+  useEffect(() => {
+    console.log(`This is isMorphed: ${isMorphed}`);
+  });
 
   useEffect(() => {
     layoutCaptions();
