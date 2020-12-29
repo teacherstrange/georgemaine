@@ -13,9 +13,7 @@ const MorphContainer = styled.li`
   position: absolute;
   overflow: hidden;
   background-color: transparent;
-  transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
-    left 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
-    top 0.56s cubic-bezier(0.52, 0.16, 0.24, 1), ${fadeIn};
+  transition: ${MorphTransition}, ${fadeIn};
   top: 0;
   left: 0;
 
@@ -212,12 +210,8 @@ export function SmallMorphBox(props) {
   }, []);
 
   useEffect(() => {
-    console.log(`This is isMorphed: ${isMorphed}`);
-  });
-
-  useEffect(() => {
     layoutCaptions();
-  }, [layoutCaptions]);
+  }, []);
 
   useEffect(() => {
     const dissmissModal = () => {

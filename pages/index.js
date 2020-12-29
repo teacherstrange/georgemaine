@@ -18,7 +18,7 @@ function WorkSection() {
   );
 }
 
-function HomePage() {
+export default function Home() {
   return (
     <main
       style={{
@@ -50,5 +50,3 @@ function HomePage() {
     </main>
   );
 }
-
-export default HomePage;
