@@ -33,7 +33,7 @@ export const Manifesto = styled.h1`
   @media (min-width: 540px) {
     ${titleStyle}
   }
-  @media (min-width: 980px) {
+  @media (min-width: 1060px) {
     ${largeTitleStyle}
   }
 `;
@@ -46,7 +46,7 @@ export const Headline = styled.h2`
   @media (min-width: 540px) {
     ${titleStyle}
   }
-  @media (min-width: 980px) {
+  @media (min-width: 1060px) {
     ${largeTitleStyle}
   }
 `;
@@ -83,7 +83,7 @@ export const FigCaption = styled.figcaption`
     opacity: 1;
   }
 
-  @media (min-width: 980px) {
+  @media (min-width: 1060px) {
     left: unset;
     top: 0;
     bottom: 0;
@@ -100,7 +100,7 @@ export const FigCaption = styled.figcaption`
     }
   }
 
-  @media (max-width: 979px) {
+  @media (max-width: 1059px) {
     transform: scale(0.93) !important;
     padding-top: 24px;
 

@@ -24,7 +24,7 @@ const MorphContainer = styled.li`
     backdrop-filter: blur(20px) saturate(50%);
   }
 
-  @media (min-width: 980px) {
+  @media (min-width: 1060px) {
     width: 50%;
   }
 `;
@@ -45,7 +45,7 @@ const MorphContent = styled.figure`
     bottom: 10vh;
   }
 
-  @media (max-width: 979px) {
+  @media (max-width: 1059px) {
     &.is-morphed {
       top: 16vh;
       bottom: 42vh;
@@ -118,7 +118,7 @@ const MorphOpenButton = styled.button`
     transition: opacity 0.129s cubic-bezier(0.52, 0.16, 0.24, 1);
   }
 
-  @media (max-width: 979px) {
+  @media (max-width: 1059px) {
     &.is-morphed {
       bottom: 42vh;
       left: 4vh;

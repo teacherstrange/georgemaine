@@ -5,7 +5,7 @@ export const Section = styled.section`
   width: calc(100% - 64px);
   max-width: 414px;
 
-  @media (min-width: 980px) {
+  @media (min-width: 1060px) {
     width: 960px;
     max-width: unset;
   }

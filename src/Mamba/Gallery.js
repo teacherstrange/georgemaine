@@ -20,7 +20,7 @@ const GallerySmall = styled.div`
   height: ${galleryHeight}px;
   position: relative;
 
-  @media (min-width: 980px) {
+  @media (min-width: 1060px) {
     display: none;
   }
 `;
@@ -30,7 +30,7 @@ const GalleryLarge = styled.div`
   height: ${galleryHeight}px;
   position: relative;
 
-  @media (max-width: 979px) {
+  @media (max-width: 1059px) {
     display: none;
   }
 `;
