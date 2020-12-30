@@ -1,46 +1,15 @@
 import React from "react";
 import {
   Manifesto,
-  MorphBox,
   Link,
   Headline,
   Header,
   Section,
   SocialLinks,
+  Gallery,
 } from "../src/Mamba";
 
-function WorkSection() {
-  return (
-    <Section>
-      <Headline>Work</Headline>
-      <ul
-        style={{
-          height: 314,
-          position: "relative",
-        }}
-      >
-        <MorphBox
-          backgroundImage={"url(/images/mobile.png)"}
-          width={1582}
-          height={1638}
-          captionRightEdge={820}
-          caption={[
-            <strong>Mollie Apps.</strong>,
-            "During the last quarter of 2019 I designed Mollie’s mobile apps to enable people to quickly manage payments and watch their business grow.",
-            <br />,
-            <br />,
-            <strong>Enjoy managing payments on mobile. </strong>,
-          ]}
-          href={"https://apps.apple.com/us/app/mollie/id1473455257?ls=1"}
-          label={"Download Mollie for Mobile ↗"}
-          project={"Mollie Apps"}
-        />
-      </ul>
-    </Section>
-  );
-}
-
-function HomePage() {
+export default function Home() {
   return (
     <main
       style={{
@@ -68,9 +37,10 @@ function HomePage() {
         </Manifesto>
         <SocialLinks />
       </Header>
-      <WorkSection />
+      <Section>
+        <Headline>Work</Headline>
+        <Gallery />
+      </Section>
     </main>
   );
 }
-
-export default HomePage;

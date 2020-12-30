@@ -15,6 +15,7 @@ export const CloseButton = styled.button`
   display: grid;
   place-items: center;
   z-index: 1;
+  outline: none;
   opacity: 0;
 
   &.is-morphed {

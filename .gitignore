@@ -28,5 +28,5 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 /.editorconfig
-/.yarn
+/.yarn/releases/yarn-1.22.10.cjs
 /.yarnrc
