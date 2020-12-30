@@ -5,5 +5,6 @@ export * from "./CloseButton";
 export * from "./Gallery";
 export * from "./Header";
 export * from "./MorphBox";
+export * from "./MorphVideo";
 export * from "./Section";
 export * from "./SocialLinks";

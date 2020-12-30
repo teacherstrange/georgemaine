@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import {
   SmallMorphBox,
-  LargeMorphBox,
+  LargeMorphVideo,
   PreviousArrowIcon,
   NextArrowIcon,
 } from "./index";
@@ -213,12 +213,11 @@ function LargeGallery() {
                   .fill("")
                   .map(function (value, index) {
                     return (
-                      <LargeMorphBox
+                      <LargeMorphVideo
                         key={index}
-                        backgroundImage={"url(/images/mobile.png)"}
-                        width={1582}
-                        height={1638}
-                        captionRightEdge={820}
+                        width={2880}
+                        height={1800}
+                        captionRightEdge={1590}
                         pageIndex={pageIndex}
                         galleryIndex={index}
                         sendMorphstate={sendMorphstate}
@@ -233,8 +232,8 @@ function LargeGallery() {
                         quickly manage payments and watch their business grow
                         <br />
                         <br />
-                        <strong>Enjoy managing payments on mobile. </strong>,
-                      </LargeMorphBox>
+                        <strong>Enjoy managing payments on mobile.</strong>
+                      </LargeMorphVideo>
                     );
                   })}
               </GalleryLargeItem>
