@@ -11,12 +11,7 @@ const galleryHeight = 314;
 const fade = "opacity 0.3s ease 0.5s";
 const imageHeight = 250;
 
-const GalleryWrapper = styled.div`
-  width: 100%;
-`;
-
 const GallerySmall = styled.div`
-  width: 100%;
   height: ${galleryHeight}px;
   position: relative;
 
@@ -26,7 +21,6 @@ const GallerySmall = styled.div`
 `;
 
 const GalleryLarge = styled.div`
-  width: 100%;
   height: ${galleryHeight}px;
   position: relative;
 
@@ -36,14 +30,12 @@ const GalleryLarge = styled.div`
 `;
 
 const ItemContainer = styled.ul`
-  height: 100%;
   transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1), ${fade};
 `;
 
 const GalleryLargeItem = styled.div`
   position: absolute;
   top: 0;
-  height: 100%;
   width: 100%;
   display: flex;
   transition: ${fade};
@@ -121,7 +113,7 @@ const NextButton = styled.button`
   }
 `;
 
-function SmallGallery() {
+export function SmallGallery() {
   const [pageIndex, setPageIndex] = useState(0);
   const [morphstate, sendMorphstate] = useState(false);
 
@@ -187,7 +179,7 @@ function SmallGallery() {
   );
 }
 
-function LargeGallery() {
+export function LargeGallery() {
   const [pageIndex, setPageIndex] = useState(0);
   const [morphstate, sendMorphstate] = useState();
 
@@ -265,14 +257,5 @@ function LargeGallery() {
         <NextArrowIcon />
       </NextButton>
     </GalleryLarge>
-  );
-}
-
-export function Gallery() {
-  return (
-    <GalleryWrapper>
-      <SmallGallery />
-      <LargeGallery />
-    </GalleryWrapper>
   );
 }

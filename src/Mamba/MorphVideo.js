@@ -6,7 +6,6 @@ const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
 const fadeIn = "opacity .3s ease .5s";
 
 const MorphContainer = styled.li`
-  display: inline-block;
   height: 314px;
   width: 100%;
   z-index: 0;
@@ -120,11 +119,7 @@ const MorphOpenButton = styled.button`
 
   @media (max-width: 1059px) {
     &.is-morphed {
-      bottom: 42vh;
-      left: 4vh;
-      right: 4vh;
-      transition: ${MorphTransition},
-        opacity 0.24s cubic-bezier(0.52, 0.16, 0.24, 1);
+      transition: opacity 0.24s cubic-bezier(0.52, 0.16, 0.24, 1);
     }
   }
 `;
@@ -223,10 +218,10 @@ export function LargeMorphVideo(props) {
   return (
     <MorphContainer
       style={{
-        top: isMorphed ? morphTop : "",
-        left: isMorphed ? morphLeft : "",
+        top: isMorphed ? morphTop : null,
+        left: isMorphed ? morphLeft : null,
         transform: `translate3d( ${100 * galleryIndex}%, 0, 0)`,
-        zIndex: isMorphed ? 20 : "",
+        zIndex: isMorphed ? 20 : null,
       }}
       className={isMorphed && "is-morphed"}
     >
