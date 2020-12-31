@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Caption, FigCaption, Link, CloseIcon } from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
 const fadeIn = "opacity .3s ease .5s";
 
-const MorphContainer = styled.li`
+const Container = styled.li`
   height: 314px;
   width: 100%;
   z-index: 0;
@@ -28,10 +28,15 @@ const MorphContainer = styled.li`
   }
 `;
 
-const MorphImage = styled.figure`
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+const Body = styled.figure`
+  ${(props) =>
+    props.image &&
+    css`
+      background-image: ${props.image};
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    `}
   position: absolute;
   top: 0;
   right: 0;
@@ -46,7 +51,7 @@ const MorphImage = styled.figure`
     bottom: 10vh;
   }
 
-  @media (max-width: 1059px) {
+  @media (max-width: 1023px) {
     &.is-morphed {
       top: 16vh;
       bottom: 42vh;
@@ -56,7 +61,7 @@ const MorphImage = styled.figure`
   }
 `;
 
-const MorphCloseButton = styled.button`
+const CloseButton = styled.button`
   position: absolute;
   right: 16px;
   top: 16px;
@@ -98,7 +103,7 @@ const MorphCloseButton = styled.button`
   }
 `;
 
-const MorphOpenButton = styled.button`
+const OpenButton = styled.button`
   margin: 0;
   padding: 0;
   background: transparent;
@@ -119,14 +124,14 @@ const MorphOpenButton = styled.button`
     transition: opacity 0.129s cubic-bezier(0.52, 0.16, 0.24, 1);
   }
 
-  @media (max-width: 1059px) {
+  @media (max-width: 1023px) {
     &.is-morphed {
       transition: opacity 0.24s cubic-bezier(0.52, 0.16, 0.24, 1);
     }
   }
 `;
 
-const MorphCaption = styled(Caption)`
+const Label = styled(Caption)`
   position: absolute;
   bottom: 0;
   left: calc((100% - 90px) / 2);
@@ -140,17 +145,20 @@ const MorphCaption = styled(Caption)`
   }
 `;
 
-export function SmallMorphBox(props) {
+export function MorphBox(props) {
+  const gallerySize = props.gallerySize;
   const contentWidth = props.width;
   const contentHeight = props.height;
   const galleryIndex = props.galleryIndex;
+
+  // Difference — Get index to determine LTR layout
   const transformedIndex = props.galleryIndex - props.pageIndex;
   const sendMorphstate = props.sendMorphstate;
 
-  // Distance between the center of the image and its optical right edge in the coordinate system of the native image resolution
+  // Distance between the center of the body and its optical right edge in the coordinate system of the native image resolution
   const captionRightEdges = props.captionRightEdge;
 
-  const imageRef = useRef(null);
+  const bodyRef = useRef(null);
   const captionRef = useRef(null);
 
   const [viewportHeight, setViewportHeight] = useState(0);
@@ -181,7 +189,7 @@ export function SmallMorphBox(props) {
   }
 
   useEffect(() => {
-    imageRef.current, captionRef.current;
+    bodyRef.current, captionRef.current;
   }, []);
 
   useEffect(() => {
@@ -192,7 +200,7 @@ export function SmallMorphBox(props) {
       });
     });
 
-    myObserver.observe(imageRef.current);
+    myObserver.observe(bodyRef.current);
   }, []);
 
   useEffect(() => {
@@ -214,30 +222,50 @@ export function SmallMorphBox(props) {
   }, [isMorphed]);
 
   return (
-    <MorphContainer
+    <Container
       style={{
         top: isMorphed ? morphTop : null,
         left: isMorphed ? morphLeft : null,
         transform: `translate3d( ${100 * galleryIndex}%, 0, 0)`,
-        opacity: transformedIndex === 0 ? 1 : 0,
+        // Hide elements on mobile otherwise you'll see overflow
+        opacity:
+          gallerySize === "small" ? (transformedIndex === 0 ? 1 : 0) : null,
         zIndex: isMorphed ? 20 : null,
       }}
       className={isMorphed && "is-morphed"}
     >
-      <MorphCloseButton
+      <CloseButton
         onClick={() => (setIsMorphed(!isMorphed), sendMorphstate(!isMorphed))}
         className={isMorphed && "is-morphed"}
       >
         <CloseIcon />
-      </MorphCloseButton>
+      </CloseButton>
 
-      <MorphImage
-        ref={imageRef}
-        style={{
-          backgroundImage: props.backgroundImage,
-        }}
+      <Body
+        ref={bodyRef}
+        image={props.image}
         className={isMorphed && "is-morphed"}
       >
+        {props.video && (
+          <div
+            style={{
+              width: isMorphed ? "100%" : "calc(100% - 48px)",
+              borderRadius: 4,
+              margin: "auto",
+              border: "3px solid #111",
+              transition: MorphTransition,
+            }}
+          >
+            <MorphVideo
+              controls
+              preload='metadata'
+              poster={props.poster}
+              className={isMorphed && "is-morphed"}
+            >
+              <source src={props.href} />
+            </MorphVideo>
+          </div>
+        )}
         <FigCaption
           ref={captionRef}
           style={{
@@ -245,7 +273,10 @@ export function SmallMorphBox(props) {
           }}
           className={isMorphed && "is-morphed"}
         >
-          {props.children}
+          <strong>{props.project}. </strong>
+          {props.description}
+          <br />
+          <br />
           <Link
             target='_blank'
             rel='noopener noreferrer'
@@ -255,147 +286,18 @@ export function SmallMorphBox(props) {
             {props.label}
           </Link>
         </FigCaption>
-      </MorphImage>
+      </Body>
 
-      <MorphOpenButton
-        onClick={() => handleMorph(imageRef)}
+      <OpenButton
+        onClick={() => handleMorph(bodyRef)}
         className={isMorphed && "is-morphed"}
       >
-        <MorphCaption className={isMorphed && "is-morphed"}>
+        <Label className={isMorphed && "is-morphed"}>
           <strong>{props.project}</strong>
           <br />
           Learn more
-        </MorphCaption>
-      </MorphOpenButton>
-    </MorphContainer>
-  );
-}
-
-export function LargeMorphBox(props) {
-  const contentWidth = props.width;
-  const contentHeight = props.height;
-  const galleryIndex = props.galleryIndex;
-  const sendMorphstate = props.sendMorphstate;
-
-  // Distance between the center of the image and its optical right edge in the coordinate system of the native image resolution
-  const captionRightEdges = props.captionRightEdge;
-
-  const imageRef = useRef(null);
-  const captionRef = useRef(null);
-
-  const [viewportHeight, setViewportHeight] = useState(0);
-  const [viewportWidth, setViewportWidth] = useState(0);
-  const [isMorphed, setIsMorphed] = useState(false);
-  const [morphTop, setMorphTop] = useState(0);
-  const [morphLeft, setMorphLeft] = useState(0);
-  const [captionX, setCaptionX] = useState(0);
-
-  function layoutCaptions() {
-    const scale =
-      viewportWidth / viewportHeight > contentWidth / contentHeight
-        ? viewportHeight / contentHeight
-        : viewportWidth / contentWidth;
-    const xPos = viewportWidth / 2.0 + captionRightEdges * scale;
-    const x = Math.round(xPos);
-    setCaptionX(x);
-  }
-
-  function handleMorph(ref) {
-    setIsMorphed(!isMorphed);
-    sendMorphstate(!isMorphed);
-    const screenWidth = window.innerWidth;
-    const screenOffset = screenWidth - viewportWidth;
-    const galleryOffset = galleryIndex * screenOffset;
-    setMorphTop(-ref.current.getBoundingClientRect().top);
-    setMorphLeft(-ref.current.getBoundingClientRect().left - galleryOffset);
-  }
-
-  useEffect(() => {
-    imageRef.current, captionRef.current;
-  }, []);
-
-  useEffect(() => {
-    const myObserver = new ResizeObserver((entries) => {
-      entries.forEach((entry) => {
-        setViewportWidth(entry.contentRect.width);
-        setViewportHeight(entry.contentRect.height);
-      });
-    });
-
-    myObserver.observe(imageRef.current);
-  }, []);
-
-  useEffect(() => {
-    layoutCaptions();
-  }, [layoutCaptions]);
-
-  useEffect(() => {
-    const dissmissModal = () => {
-      setIsMorphed(false);
-    };
-    window.addEventListener("resize", dissmissModal);
-    return () => window.removeEventListener("resize", dissmissModal);
-  }, []);
-
-  useEffect(() => {
-    isMorphed
-      ? (document.body.style = "overflow: hidden")
-      : (document.body.style = `overflow: ""`);
-  }, [isMorphed]);
-
-  return (
-    <MorphContainer
-      style={{
-        top: isMorphed ? morphTop : "",
-        left: isMorphed ? morphLeft : "",
-        transform: `translate3d( ${100 * galleryIndex}%, 0, 0)`,
-        zIndex: isMorphed ? 20 : "",
-      }}
-      className={isMorphed && "is-morphed"}
-    >
-      <MorphCloseButton
-        onClick={() => (setIsMorphed(!isMorphed), sendMorphstate(!isMorphed))}
-        className={isMorphed && "is-morphed"}
-      >
-        <CloseIcon />
-      </MorphCloseButton>
-
-      <MorphImage
-        ref={imageRef}
-        style={{
-          backgroundImage: props.backgroundImage,
-        }}
-        className={isMorphed && "is-morphed"}
-      >
-        <FigCaption
-          ref={captionRef}
-          style={{
-            transform: `translate3d(${captionX}px, 0, 0)`,
-          }}
-          className={isMorphed && "is-morphed"}
-        >
-          {props.children}
-          <Link
-            target='_blank'
-            rel='noopener noreferrer'
-            style={{ color: "var(--red)" }}
-            href={props.href}
-          >
-            {props.label}
-          </Link>
-        </FigCaption>
-      </MorphImage>
-
-      <MorphOpenButton
-        onClick={() => handleMorph(imageRef)}
-        className={isMorphed && "is-morphed"}
-      >
-        <MorphCaption className={isMorphed && "is-morphed"}>
-          <strong>{props.project}</strong>
-          <br />
-          Learn more
-        </MorphCaption>
-      </MorphOpenButton>
-    </MorphContainer>
+        </Label>
+      </OpenButton>
+    </Container>
   );
 }

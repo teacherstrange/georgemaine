@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import {
-  SmallMorphBox,
+  MorphBox,
+  SmallMorphVideo,
   LargeMorphVideo,
   PreviousArrowIcon,
+  PreviousButton,
   NextArrowIcon,
+  NextButton,
 } from "./index";
+import { Apps, MollieVideo, Checkout, ApplePay } from "../Data";
 
+// Variables
 const galleryHeight = 314;
 const fade = "opacity 0.3s ease 0.5s";
-const imageHeight = 250;
 
 const GallerySmall = styled.div`
   height: ${galleryHeight}px;
@@ -41,78 +45,6 @@ const GalleryLargeItem = styled.div`
   transition: ${fade};
 `;
 
-const PreviousButton = styled.button`
-  position: absolute;
-  top: calc(${imageHeight}px / 2 - 20px);
-  left: -20px;
-  height: 52px;
-  width: 52px;
-  border-radius: 32px;
-  background-color: var(--secondaryFill);
-  border: none;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-  transition: 0.25s background-color linear, 0.25s opacity linear;
-  outline: none;
-
-  svg path {
-    color: var(--primaryLabelFill);
-    transition: stroke 0.25s linear;
-  }
-
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: var(--tertiaryFill);
-    color: var(--secondaryLabelFill);
-
-    svg path {
-      stroke: var(--secondaryLabelFill);
-    }
-  }
-`;
-
-const NextButton = styled.button`
-  position: absolute;
-  top: calc(${imageHeight}px / 2 - 20px);
-  right: -20px;
-  height: 52px;
-  width: 52px;
-  border-radius: 32px;
-  background-color: var(--secondaryFill);
-  border: none;
-  margin: 0;
-  padding: 0;
-  outline: none;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-  transition: background-color 0.25s linear, opacity 0.25s linear;
-
-  path {
-    color: var(--primaryLabelFill);
-    transition: stroke 0.25s linear;
-  }
-
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: var(--tertiaryFill);
-    color: var(--secondaryLabelFill);
-
-    path {
-      stroke: var(--secondaryLabelFill);
-    }
-  }
-`;
-
 export function SmallGallery() {
   const [pageIndex, setPageIndex] = useState(0);
   const [morphstate, sendMorphstate] = useState(false);
@@ -124,32 +56,28 @@ export function SmallGallery() {
           transform: `translate3d( ${(0 - pageIndex) * 100}%, 0, 0)`,
         }}
       >
-        {Array(4)
-          .fill("")
-          .map(function (value, index) {
-            return (
-              <SmallMorphBox
-                key={index}
-                backgroundImage={"url(/images/mobile.png)"}
-                width={1582}
-                height={1638}
-                captionRightEdge={820}
-                pageIndex={pageIndex}
-                galleryIndex={index}
-                sendMorphstate={sendMorphstate}
-                href={"https://apps.apple.com/us/app/mollie/id1473455257?ls=1"}
-                label={"Download Mollie for Mobile ↗"}
-                project={"Mollie Apps"}
-              >
-                <strong>Mollie Apps. </strong>During the last quarter of 2019 I
-                designed Mollie’s mobile apps to enable people to quickly manage
-                payments and watch their business grow.
-                <br />
-                <br />
-                <strong>Enjoy managing payments on mobile. </strong>
-              </SmallMorphBox>
-            );
-          })}
+        <MorphBox
+          gallerySize='small'
+          pageIndex={pageIndex}
+          sendMorphstate={sendMorphstate}
+          {...Apps}
+        />
+        <SmallMorphVideo
+          pageIndex={pageIndex}
+          sendMorphstate={sendMorphstate}
+          {...MollieVideo}
+        />
+        <MorphBox
+          gallerySize='small'
+          pageIndex={pageIndex}
+          sendMorphstate={sendMorphstate}
+          {...Checkout}
+        />
+        <SmallMorphVideo
+          pageIndex={pageIndex}
+          sendMorphstate={sendMorphstate}
+          {...ApplePay}
+        />
       </ItemContainer>
 
       <PreviousButton

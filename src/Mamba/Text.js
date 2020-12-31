@@ -71,8 +71,6 @@ export const FigCaption = styled.figcaption`
   transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
     opacity 0.229s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.03s;
   top: 100%;
-
-  left: calc((100% - 275px) / 2);
   opacity: 0;
 
   strong {
@@ -83,8 +81,7 @@ export const FigCaption = styled.figcaption`
     opacity: 1;
   }
 
-  @media (min-width: 1060px) {
-    left: unset;
+  @media (min-width: 1024px) {
     top: 0;
     bottom: 0;
     display: flex;
@@ -94,13 +91,13 @@ export const FigCaption = styled.figcaption`
       transform cubic-bezier(0.52, 0.16, 0.24, 1);
 
     &.is-morphed {
-      left: unset;
       transition: opacity 0.3345s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.15s,
         transform cubic-bezier(0.52, 0.16, 0.24, 1);
     }
   }
 
-  @media (max-width: 1059px) {
+  @media (max-width: 1023px) {
+    left: calc((100% - 275px) / 2);
     transform: scale(0.93) !important;
     padding-top: 24px;
 
