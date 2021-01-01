@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const imageHeight = 250;
 
@@ -27,16 +27,35 @@ export const CloseButton = styled.button`
   margin: 0;
   padding: 0;
   cursor: pointer;
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 1;
-  outline: none;
   opacity: 0;
+  transition: background-color 0.25s linear;
 
-  &.is-morphed {
-    opacity: 1;
-    transition: opacity 0.37s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
+  path {
+    color: var(--primaryLabelFill);
+    transition: stroke 0.25s linear;
   }
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: var(--tertiaryFill);
+    color: var(--secondaryLabelFill);
+
+    path {
+      stroke: var(--secondaryLabelFill);
+    }
+  }
+  ${(props) =>
+    props.isMorphed &&
+    css`
+      opacity: 1;
+      transition: opacity 0.37s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s,
+        background-color 0.25s linear;
+    `}
 `;
 
 export const PreviousButton = styled.button`
@@ -58,7 +77,7 @@ export const PreviousButton = styled.button`
   transition: 0.25s background-color linear, 0.25s opacity linear;
   outline: none;
 
-  svg path {
+  path {
     color: var(--primaryLabelFill);
     transition: stroke 0.25s linear;
   }
@@ -69,7 +88,7 @@ export const PreviousButton = styled.button`
     background-color: var(--tertiaryFill);
     color: var(--secondaryLabelFill);
 
-    svg path {
+    path {
       stroke: var(--secondaryLabelFill);
     }
   }
@@ -109,4 +128,32 @@ export const NextButton = styled.button`
       stroke: var(--secondaryLabelFill);
     }
   }
+`;
+
+export const OpenButton = styled.button`
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  z-index: 1;
+  font: inherit;
+  color: inherit;
+  transition: opacity 0.229s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
+  opacity: 1;
+
+  ${(props) =>
+    props.isMorphed &&
+    css`
+      opacity: 0;
+      transition: opacity 0.129s cubic-bezier(0.52, 0.16, 0.24, 1);
+
+      @media (max-width: 1023px) {
+        transition: opacity 0.24s cubic-bezier(0.52, 0.16, 0.24, 1);
+      }
+    `}
 `;

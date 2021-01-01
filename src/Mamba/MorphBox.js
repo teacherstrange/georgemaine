@@ -1,6 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
-import { Caption, FigCaption, Link, CloseIcon } from "./index";
+import {
+  Caption,
+  FigCaption,
+  Link,
+  CloseIcon,
+  CloseButton,
+  OpenButton,
+} from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
 const fadeIn = "opacity .3s ease .5s";
@@ -12,20 +19,30 @@ const Container = styled.li`
   position: absolute;
   overflow: hidden;
   background-color: transparent;
-  transition: ${MorphTransition}, ${fadeIn};
   top: 0;
   left: 0;
+  transform: translate3d(${(props) => 100 * props.galleryIndex}%, 0, 0);
+  ${(props) =>
+    props.isMorphed &&
+    css`
+      top: ${props.isMorphedTop}px;
+      left: ${props.isMorphedLeft}px;
+      z-index: 2;
+      width: 100vw;
+      height: 100vh;
+      background-color: var(--overlay);
+      backdrop-filter: blur(20px) saturate(50%);
+    `}
 
-  &.is-morphed {
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--overlay);
-    backdrop-filter: blur(20px) saturate(50%);
-  }
-
+  ${(props) =>
+    props.gallerySize &&
+    css`
+      opacity: ${props.activeIndex === 0 ? 1 : 0};
+    `}
   @media (min-width: 1060px) {
     width: 50%;
   }
+  transition: ${MorphTransition}, ${fadeIn};
 `;
 
 const Body = styled.figure`
@@ -44,91 +61,21 @@ const Body = styled.figure`
   bottom: 64px;
   transition: ${MorphTransition};
 
-  &.is-morphed {
-    left: 10vh;
-    right: 50vh;
-    top: 10vh;
-    bottom: 10vh;
-  }
+  ${(props) =>
+    props.isMorphed &&
+    css`
+      left: 10vh;
+      right: 50vh;
+      top: 10vh;
+      bottom: 10vh;
 
-  @media (max-width: 1023px) {
-    &.is-morphed {
-      top: 16vh;
-      bottom: 42vh;
-      left: 4vh;
-      right: 4vh;
-    }
-  }
-`;
-
-const CloseButton = styled.button`
-  position: absolute;
-  right: 16px;
-  top: 16px;
-  height: 36px;
-  width: 36px;
-  border-radius: 32px;
-  background-color: var(--secondaryFill);
-  border: none;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-  opacity: 0;
-  transition: background-color 0.25s linear;
-
-  path {
-    color: var(--primaryLabelFill);
-    transition: stroke 0.25s linear;
-  }
-
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: var(--tertiaryFill);
-    color: var(--secondaryLabelFill);
-
-    path {
-      stroke: var(--secondaryLabelFill);
-    }
-  }
-
-  &.is-morphed {
-    opacity: 1;
-    transition: opacity 0.37s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s,
-      background-color 0.25s linear;
-  }
-`;
-
-const OpenButton = styled.button`
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  outline: none;
-  z-index: 1;
-  font: inherit;
-  color: inherit;
-  transition: opacity 0.229s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
-  opacity: 1;
-
-  &.is-morphed {
-    opacity: 0;
-    transition: opacity 0.129s cubic-bezier(0.52, 0.16, 0.24, 1);
-  }
-
-  @media (max-width: 1023px) {
-    &.is-morphed {
-      transition: opacity 0.24s cubic-bezier(0.52, 0.16, 0.24, 1);
-    }
-  }
+      @media (max-width: 1023px) {
+        top: 16vh;
+        bottom: 42vh;
+        left: 4vh;
+        right: 4vh;
+      }
+    `}
 `;
 
 const Label = styled(Caption)`
@@ -145,6 +92,25 @@ const Label = styled(Caption)`
   }
 `;
 
+const VideoContainer = styled.div`
+  width: calc(100% - 48px);
+  border-radius: 4px;
+  margin: auto;
+  border: 3px solid #111;
+  transition: ${MorphTransition};
+
+  ${(props) =>
+    props.isMorphed &&
+    css`
+      width: 100%;
+    `}
+`;
+
+const Video = styled.video`
+  width: 100%;
+  display: block;
+`;
+
 export function MorphBox(props) {
   const gallerySize = props.gallerySize;
   const contentWidth = props.width;
@@ -152,7 +118,7 @@ export function MorphBox(props) {
   const galleryIndex = props.galleryIndex;
 
   // Difference — Get index to determine LTR layout
-  const transformedIndex = props.galleryIndex - props.pageIndex;
+  const activeIndex = props.galleryIndex - props.pageIndex;
   const sendMorphstate = props.sendMorphstate;
 
   // Distance between the center of the body and its optical right edge in the coordinate system of the native image resolution
@@ -164,8 +130,8 @@ export function MorphBox(props) {
   const [viewportHeight, setViewportHeight] = useState(0);
   const [viewportWidth, setViewportWidth] = useState(0);
   const [isMorphed, setIsMorphed] = useState(false);
-  const [morphTop, setMorphTop] = useState(0);
-  const [morphLeft, setMorphLeft] = useState(0);
+  const [isMorphedTop, setIsMorphedTop] = useState(0);
+  const [isMorphedLeft, setisMorphedLeft] = useState(0);
   const [captionX, setCaptionX] = useState(0);
 
   function layoutCaptions() {
@@ -184,8 +150,8 @@ export function MorphBox(props) {
     const screenWidth = window.innerWidth;
     const screenOffset = screenWidth - viewportWidth;
     const galleryOffset = galleryIndex * screenOffset;
-    setMorphTop(-ref.current.getBoundingClientRect().top);
-    setMorphLeft(-ref.current.getBoundingClientRect().left - galleryOffset);
+    setisMorphedLeft(-ref.current.getBoundingClientRect().left - galleryOffset);
+    setIsMorphedTop(-ref.current.getBoundingClientRect().top);
   }
 
   useEffect(() => {
@@ -223,48 +189,27 @@ export function MorphBox(props) {
 
   return (
     <Container
-      style={{
-        top: isMorphed ? morphTop : null,
-        left: isMorphed ? morphLeft : null,
-        transform: `translate3d( ${100 * galleryIndex}%, 0, 0)`,
-        // Hide elements on mobile otherwise you'll see overflow
-        opacity:
-          gallerySize === "small" ? (transformedIndex === 0 ? 1 : 0) : null,
-        zIndex: isMorphed ? 20 : null,
-      }}
-      className={isMorphed && "is-morphed"}
+      isMorphed={isMorphed}
+      isMorphedTop={isMorphedTop}
+      isMorphedLeft={isMorphedLeft}
+      galleryIndex={galleryIndex}
+      gallerySize={gallerySize}
+      activeIndex={activeIndex}
     >
       <CloseButton
         onClick={() => (setIsMorphed(!isMorphed), sendMorphstate(!isMorphed))}
-        className={isMorphed && "is-morphed"}
+        isMorphed={isMorphed}
       >
         <CloseIcon />
       </CloseButton>
 
-      <Body
-        ref={bodyRef}
-        image={props.image}
-        className={isMorphed && "is-morphed"}
-      >
+      <Body ref={bodyRef} image={props.image} isMorphed={isMorphed}>
         {props.video && (
-          <div
-            style={{
-              width: isMorphed ? "100%" : "calc(100% - 48px)",
-              borderRadius: 4,
-              margin: "auto",
-              border: "3px solid #111",
-              transition: MorphTransition,
-            }}
-          >
-            <MorphVideo
-              controls
-              preload='metadata'
-              poster={props.poster}
-              className={isMorphed && "is-morphed"}
-            >
-              <source src={props.href} />
-            </MorphVideo>
-          </div>
+          <VideoContainer isMorphed={isMorphed}>
+            <Video controls preload='metadata' poster={props.poster}>
+              <source src={props.video} />
+            </Video>
+          </VideoContainer>
         )}
         <FigCaption
           ref={captionRef}
@@ -288,10 +233,7 @@ export function MorphBox(props) {
         </FigCaption>
       </Body>
 
-      <OpenButton
-        onClick={() => handleMorph(bodyRef)}
-        className={isMorphed && "is-morphed"}
-      >
+      <OpenButton onClick={() => handleMorph(bodyRef)} isMorphed={isMorphed}>
         <Label className={isMorphed && "is-morphed"}>
           <strong>{props.project}</strong>
           <br />

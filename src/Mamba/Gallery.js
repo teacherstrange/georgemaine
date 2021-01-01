@@ -62,17 +62,18 @@ export function SmallGallery() {
           sendMorphstate={sendMorphstate}
           {...Apps}
         />
-        <SmallMorphVideo
-          pageIndex={pageIndex}
-          sendMorphstate={sendMorphstate}
-          {...MollieVideo}
-        />
         <MorphBox
           gallerySize='small'
           pageIndex={pageIndex}
           sendMorphstate={sendMorphstate}
           {...Checkout}
         />
+        <SmallMorphVideo
+          pageIndex={pageIndex}
+          sendMorphstate={sendMorphstate}
+          {...MollieVideo}
+        />
+
         <SmallMorphVideo
           pageIndex={pageIndex}
           sendMorphstate={sendMorphstate}

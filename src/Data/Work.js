@@ -19,7 +19,7 @@ export const MollieVideo = {
   width: 2880,
   height: 1800,
   captionRightEdge: 1600,
-  href: "videos/airpods-max.mp4",
+  video: "videos/airpods-max.mp4",
   poster: "images/airpods-max.jpg",
   label: "Enjoy managing payments on mobile. ↗",
   project: "Mollie Video",
