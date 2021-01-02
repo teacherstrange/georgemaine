@@ -10,6 +10,7 @@ export const VideoContainer = styled.div`
   margin: auto;
   border: 3px solid #111;
   transition: ${MorphTransition};
+  position: relative;
 
   ${(props) =>
     props.isMorphed &&
@@ -22,7 +23,20 @@ export const VideoContainer = styled.div`
     display: block;
   }
 `;
-
+const ControlsContainer = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  overflow: hidden;
+  background: linear-gradient(rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.56));
+  opacity: ${(props) => (props.isVisible ? 1 : 0)};
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.6, 1);
+`;
 const VideoControls = styled.ul`
   display: none;
 `;
@@ -43,6 +57,7 @@ export function Video(props) {
   const [currentTime, setCurrentTime] = useState("00:00");
   const [duration, setDuration] = useState("00:00");
   const [userHover, setUserHover] = useState(false);
+  const [controlsHover, setControlsHover] = useState(false);
 
   function SetVolume(e) {
     videoRef.current.volume = e.target.value / 100;
@@ -175,53 +190,57 @@ export function Video(props) {
   return (
     <VideoContainer ref={containerRef} isMorphed={props.isMorphed}>
       <video ref={videoRef} {...props} />
-      <VideoControls ref={controlsRef}>
-        <li>
-          <PlayPauseButton
-            type='button'
-            onClick={() =>
-              videoRef.current.paused || videoRef.current.ended
-                ? videoRef.current.play()
-                : videoRef.current.pause()
-            }
-          ></PlayPauseButton>
-        </li>
-        <li>
-          <Progress
-            ref={progressRef}
-            value='0'
-            min='0'
-            onClick={(event) => skipAhead(event)}
+      <ControlsContainer
+        isVisible={controlsHover}
+        onMouseOver={() => setControlsHover(true)}
+        onMouseLeave={() => setControlsHover(false)}
+      >
+        <PlayPauseButton
+          type='button'
+          onClick={() =>
+            videoRef.current.paused || videoRef.current.ended
+              ? videoRef.current.play()
+              : videoRef.current.pause()
+          }
+        ></PlayPauseButton>
+        <VideoControls ref={controlsRef}>
+          <li
+            onMouseOver={() => setUserHover(true)}
+            onMouseLeave={() => setUserHover(false)}
           >
-            <ProgressBar ref={progressBarRef} />
-          </Progress>
-        </li>
-        <li>
-          <SmallCaption>
-            {currentTime}/{duration}
-          </SmallCaption>
-        </li>
-        <li
-          onMouseOver={() => setUserHover(true)}
-          onMouseLeave={() => setUserHover(false)}
-        >
-          <MuteButton type='button'>Mute/Unmute</MuteButton>
-          {userHover && (
-            <VolumeControl
-              onMouseOver={(event) => event.stopPropagation()}
-              onMouseLeave={(event) => event.stopPropagation()}
-              onInput={(event) => SetVolume(event)}
-              onChange={(event) => SetVolume(event)}
-            />
-          )}
-        </li>
-
-        <li>
-          <FullScreenButton ref={fullscreenRef} type='button'>
-            Fullscreen
-          </FullScreenButton>
-        </li>
-      </VideoControls>
+            <MuteButton type='button'>Mute/Unmute</MuteButton>
+            {userHover && (
+              <VolumeControl
+                onMouseOver={(event) => event.stopPropagation()}
+                onMouseLeave={(event) => event.stopPropagation()}
+                onInput={(event) => SetVolume(event)}
+                onChange={(event) => SetVolume(event)}
+              />
+            )}
+          </li>
+          <li>
+            <SmallCaption>{currentTime}</SmallCaption>
+          </li>
+          <li>
+            <Progress
+              ref={progressRef}
+              value='0'
+              min='0'
+              onClick={(event) => skipAhead(event)}
+            >
+              <ProgressBar ref={progressBarRef} />
+            </Progress>
+          </li>
+          <li>
+            <SmallCaption>{duration}</SmallCaption>
+          </li>
+          <li>
+            <FullScreenButton ref={fullscreenRef} type='button'>
+              Fullscreen
+            </FullScreenButton>
+          </li>
+        </VideoControls>
+      </ControlsContainer>
     </VideoContainer>
   );
 }
