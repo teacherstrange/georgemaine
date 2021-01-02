@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
-import { SmallCaption } from "./index";
+import { SmallCaption, VolumeControl } from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
 
@@ -34,95 +34,21 @@ const IncreaseVolumeButton = styled.button``;
 const DecreaseVolumeButton = styled.button``;
 const FullScreenButton = styled.button``;
 
-const VolumeContainer = styled.div`
-  padding: 40px 0px;
-  margin: 0px 20px;
-`;
-const VolumeRange = styled.div`
-  height: 5px;
-  width: 250px;
-  background: #555;
-  border-radius: 15px;
-`;
-const Volume = styled.div`
-  height: 5px;
-  width: 50px;
-  background: #2ecc71;
-  border: none;
-  border-radius: 10px;
-  outline: none;
-  position: relative;
-`;
-const VolumeButton = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 20px;
-  background: #fff;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  outline: none;
-`;
-
 export function Video(props) {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
   const controlsRef = useRef(null);
-  const playPauseRef = useRef(null);
-  const stopRef = useRef(null);
-  const muteRef = useRef(null);
-  const increaseVolumeRef = useRef(null);
-  const decreaseVolumeRef = useRef(null);
   const progressRef = useRef(null);
   const progressBarRef = useRef(null);
   const fullscreenRef = useRef(null);
-  const volume = useRef(null);
-  const volumeRange = useRef(null);
-  const volumeContainer = useRef(null);
-  const volumeButton = useRef(null);
 
   const [currentTime, setCurrentTime] = useState("00:00");
   const [duration, setDuration] = useState(0);
 
-  useEffect(() => {
-    volumeContainer.current;
-    let mouseIsDown = false;
-
-    volumeContainer.current.addEventListener("mouseup", up);
-    volumeButton.current.addEventListener("mousedown", down);
-    volumeContainer.current.addEventListener("mousemove", volumeSlide, true);
-
-    function down() {
-      mouseIsDown = true;
-    }
-    function up() {
-      mouseIsDown = false;
-    }
-
-    const volumeRangeWidth = volumeRange.current.getBoundingClientRect().width; // This will be the volume limit (100%)
-    function volumeSlide(event) {
-      if (mouseIsDown) {
-        const offsetX = event.offsetX;
-
-        if (event.target == volumeContainer.current) {
-          let x = Math.floor(offsetX);
-          if (x > volumeRangeWidth) x = volumeRangeWidth; // check if it's too high
-          volume.current.style.width = x + 10 + "px";
-        }
-      }
-    }
-  }, []);
-
-  function alterVolume(direction) {
-    var currentVolume = Math.floor(videoRef.current.volume * 10) / 10;
-    if (direction === "+") {
-      if (currentVolume < 1) videoRef.current.volume += 0.1;
-    } else if (direction === "-") {
-      if (currentVolume > 0) videoRef.current.volume -= 0.1;
-    }
+  function SetVolume(e) {
+    videoRef.current.volume = e.target.value / 100;
   }
+
   function skipAhead(e) {
     const position =
       (e.pageX - progressRef.current.offsetLeft) /
@@ -279,13 +205,10 @@ export function Video(props) {
           <MuteButton type='button'>Mute/Unmute</MuteButton>
         </li>
         <li>
-          <VolumeContainer ref={volumeContainer}>
-            <VolumeRange ref={volumeRange}>
-              <Volume ref={volume}>
-                <VolumeButton ref={volumeButton} />
-              </Volume>
-            </VolumeRange>
-          </VolumeContainer>
+          <VolumeControl
+            onInput={(e) => SetVolume(e)}
+            onChange={(e) => SetVolume(e)}
+          />
         </li>
         {/* <li>
           <IncreaseVolumeButton type='button' onClick={() => alterVolume("+")}>

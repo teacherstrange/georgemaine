@@ -29,7 +29,7 @@ export default function Home() {
         controls
         preload='metadata'
         poster={"images/airpods-max.jpg"}
-        src={"videos/airpods-max.mp4"}
+        src={"videos/mollie-video.mp4"}
       />
 
       {/* <Header>

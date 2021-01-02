@@ -251,7 +251,7 @@ export function LargeMorphVideo(props) {
             poster='images/airpods-max.jpg'
             className={isMorphed && "is-morphed"}
           >
-            <source src='videos/airpods-max.mp4' />
+            <source src='videos/mollie-video.mp4' />
           </MorphVideo>
         </div>
 

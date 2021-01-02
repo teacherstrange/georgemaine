@@ -5,6 +5,7 @@ export * from "./Gallery";
 export * from "./Header";
 export * from "./MorphBox";
 export * from "./MorphVideo";
-export * from "./Video";
 export * from "./Section";
 export * from "./SocialLinks";
+export * from "./Video";
+export * from "./VolumeControl";
