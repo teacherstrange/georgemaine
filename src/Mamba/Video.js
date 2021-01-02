@@ -1,6 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
-import { SmallCaption, VolumeControl } from "./index";
+import {
+  SmallCaption,
+  VolumeControl,
+  PlayIcon,
+  PauseIcon,
+  PlayPauseButton,
+} from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
 
@@ -23,6 +29,7 @@ export const VideoContainer = styled.div`
     display: block;
   }
 `;
+
 const ControlsContainer = styled.div`
   position: absolute;
   display: flex;
@@ -37,10 +44,20 @@ const ControlsContainer = styled.div`
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   transition: opacity 1s cubic-bezier(0.4, 0, 0.6, 1);
 `;
+
+const PlayPauseButtonContainer = styled.div`
+  opacity: ${(props) => (props.isVisible ? 1 : 0)};
+  transform: translate3d(0, ${(props) => (props.isVisible ? 0 : "24px")}, 0);
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.6, 1) 0.05s,
+    transform 0.5s cubic-bezier(0.4, 0, 0.6, 1),
+    -webkit-transform 0.5s cubic-bezier(0.4, 0, 0.6, 1);
+`;
 const VideoControls = styled.ul`
   display: none;
 `;
-const PlayPauseButton = styled.button``;
+
 const Progress = styled.progress``;
 const ProgressBar = styled.span``;
 const MuteButton = styled.button``;
@@ -58,14 +75,12 @@ export function Video(props) {
   const [duration, setDuration] = useState("00:00");
   const [userHover, setUserHover] = useState(false);
   const [controlsHover, setControlsHover] = useState(false);
+  const [videoIsPlaying, setVideoIsPlaying] = useState(false);
 
   function SetVolume(e) {
     videoRef.current.volume = e.target.value / 100;
   }
-  function handleUserHover(event) {
-    event.stopPropagation();
-    setUserHover(!userHover);
-  }
+
   function skipAhead(e) {
     const position =
       (e.pageX - progressRef.current.offsetLeft) /
@@ -73,10 +88,11 @@ export function Video(props) {
     videoRef.current.currentTime = position * videoRef.current.duration;
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     var supportsVideo = !!document.createElement("video").canPlayType;
     if (supportsVideo) {
       // Hide the default controls
+
       videoRef.current.controls = false;
       // Display the user defined video controls
       controlsRef.current.style.display = "block";
@@ -189,20 +205,32 @@ export function Video(props) {
   });
   return (
     <VideoContainer ref={containerRef} isMorphed={props.isMorphed}>
-      <video ref={videoRef} {...props} />
+      <video
+        onPlaying={() => setVideoIsPlaying(true)}
+        onPause={() => setVideoIsPlaying(false)}
+        onEnded={() => setVideoIsPlaying(false)}
+        onPlay={() => setVideoIsPlaying(true)}
+        ref={videoRef}
+        {...props}
+      />
       <ControlsContainer
         isVisible={controlsHover}
         onMouseOver={() => setControlsHover(true)}
         onMouseLeave={() => setControlsHover(false)}
       >
-        <PlayPauseButton
-          type='button'
-          onClick={() =>
-            videoRef.current.paused || videoRef.current.ended
-              ? videoRef.current.play()
-              : videoRef.current.pause()
-          }
-        ></PlayPauseButton>
+        <PlayPauseButtonContainer isVisible={controlsHover}>
+          <PlayPauseButton
+            type='button'
+            onClick={() =>
+              videoRef.current.paused || videoRef.current.ended
+                ? videoRef.current.play()
+                : videoRef.current.pause()
+            }
+          >
+            {videoIsPlaying ? <PauseIcon /> : <PlayIcon />}
+          </PlayPauseButton>
+        </PlayPauseButtonContainer>
+
         <VideoControls ref={controlsRef}>
           <li
             onMouseOver={() => setUserHover(true)}

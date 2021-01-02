@@ -13,6 +13,12 @@ export const Button = styled.button`
   border: none;
   margin: 0;
   cursor: pointer;
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  transition: transform 0.2s ease;
 `;
 
 export const CloseButton = styled.button`
@@ -32,11 +38,15 @@ export const CloseButton = styled.button`
   align-items: center;
   z-index: 1;
   opacity: 0;
-  transition: background-color 0.25s linear;
+  transition: transform 0.2s ease, background-color 0.25s linear;
 
   path {
     color: var(--primaryLabelFill);
     transition: stroke 0.25s linear;
+  }
+
+  &:active {
+    transform: scale(0.9);
   }
 
   &:hover,
@@ -74,12 +84,17 @@ export const PreviousButton = styled.button`
   justify-content: center;
   align-items: center;
   z-index: 1;
-  transition: 0.25s background-color linear, 0.25s opacity linear;
+  transition: transform 0.2s ease, 0.25s background-color linear,
+    0.25s opacity linear;
   outline: none;
 
   path {
     color: var(--primaryLabelFill);
     transition: stroke 0.25s linear;
+  }
+
+  &:active {
+    transform: scale(0.9);
   }
 
   &:hover,
@@ -111,11 +126,16 @@ export const NextButton = styled.button`
   justify-content: center;
   align-items: center;
   z-index: 1;
-  transition: background-color 0.25s linear, opacity 0.25s linear;
+  transition: transform 0.2s ease, background-color 0.25s linear,
+    opacity 0.25s linear;
 
   path {
     color: var(--primaryLabelFill);
     transition: stroke 0.25s linear;
+  }
+
+  &:active {
+    transform: scale(0.9);
   }
 
   &:hover,
@@ -156,4 +176,25 @@ export const OpenButton = styled.button`
         transition: opacity 0.24s cubic-bezier(0.52, 0.16, 0.24, 1);
       }
     `}
+`;
+
+export const PlayPauseButton = styled.button`
+  width: 52px;
+  height: 52px;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate3d(-50%, -50%, 0);
+  transform-origin: 0 0;
+  transition: transform 0.2s ease, opacity 0.3s ease;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: none;
+  outline: none;
+  cursor: pointer;
+
+  &:active {
+    transform: scale(0.9) translate3d(-50%, -50%, 0);
+  }
 `;
