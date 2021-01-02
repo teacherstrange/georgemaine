@@ -176,6 +176,7 @@ export function MorphBox(props) {
       activeIndex={activeIndex}
     >
       <CloseButton
+        type='button'
         onClick={() => (setIsMorphed(!isMorphed), sendMorphstate(!isMorphed))}
         isMorphed={isMorphed}
       >
@@ -212,7 +213,11 @@ export function MorphBox(props) {
         </FigCaption>
       </Body>
 
-      <OpenButton onClick={() => handleMorph(bodyRef)} isMorphed={isMorphed}>
+      <OpenButton
+        type='button'
+        onClick={() => handleMorph(bodyRef)}
+        isMorphed={isMorphed}
+      >
         <Label>
           <strong>{props.project}</strong>
           <br />

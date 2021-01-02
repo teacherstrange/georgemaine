@@ -228,6 +228,7 @@ export function LargeMorphVideo(props) {
       className={isMorphed && "is-morphed"}
     >
       <MorphCloseButton
+        type='button'
         onClick={() => (setIsMorphed(!isMorphed), sendMorphstate(!isMorphed))}
         className={isMorphed && "is-morphed"}
       >
@@ -277,6 +278,7 @@ export function LargeMorphVideo(props) {
       </MorphContent>
 
       <MorphOpenButton
+        type='button'
         onClick={() => handleMorph(contentRef)}
         className={isMorphed && "is-morphed"}
       >
@@ -375,6 +377,7 @@ export function SmallMorphVideo(props) {
       className={isMorphed && "is-morphed"}
     >
       <MorphCloseButton
+        type='button'
         onClick={() => (setIsMorphed(!isMorphed), sendMorphstate(!isMorphed))}
         className={isMorphed && "is-morphed"}
       >
@@ -414,6 +417,7 @@ export function SmallMorphVideo(props) {
       </MorphContent>
 
       <MorphOpenButton
+        type='button'
         onClick={() => handleMorph(contentRef)}
         className={isMorphed && "is-morphed"}
       >

@@ -162,6 +162,7 @@ export function LargeGallery() {
           })}
       </ItemContainer>
       <PreviousButton
+        type='button'
         style={{
           opacity: pageIndex === 1 ? 1 : 0,
           zIndex: morphstate && -1,
@@ -174,6 +175,7 @@ export function LargeGallery() {
         <PreviousArrowIcon />
       </PreviousButton>
       <NextButton
+        type='button'
         style={{
           opacity: pageIndex === 0 ? 1 : 0,
           zIndex: morphstate && -1,
