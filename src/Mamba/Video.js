@@ -30,8 +30,6 @@ const PlayPauseButton = styled.button``;
 const Progress = styled.progress``;
 const ProgressBar = styled.span``;
 const MuteButton = styled.button``;
-const IncreaseVolumeButton = styled.button``;
-const DecreaseVolumeButton = styled.button``;
 const FullScreenButton = styled.button``;
 
 export function Video(props) {
@@ -43,12 +41,16 @@ export function Video(props) {
   const fullscreenRef = useRef(null);
 
   const [currentTime, setCurrentTime] = useState("00:00");
-  const [duration, setDuration] = useState(0);
+  const [duration, setDuration] = useState("00:00");
+  const [userHover, setUserHover] = useState(false);
 
   function SetVolume(e) {
     videoRef.current.volume = e.target.value / 100;
   }
-
+  function handleUserHover(event) {
+    event.stopPropagation();
+    setUserHover(!userHover);
+  }
   function skipAhead(e) {
     const position =
       (e.pageX - progressRef.current.offsetLeft) /
@@ -182,16 +184,14 @@ export function Video(props) {
                 ? videoRef.current.play()
                 : videoRef.current.pause()
             }
-          >
-            Play/Pause
-          </PlayPauseButton>
+          ></PlayPauseButton>
         </li>
         <li>
           <Progress
             ref={progressRef}
             value='0'
             min='0'
-            onClick={(e) => skipAhead(e)}
+            onClick={(event) => skipAhead(event)}
           >
             <ProgressBar ref={progressBarRef} />
           </Progress>
@@ -201,25 +201,21 @@ export function Video(props) {
             {currentTime}/{duration}
           </SmallCaption>
         </li>
-        <li>
+        <li
+          onMouseOver={() => setUserHover(true)}
+          onMouseLeave={() => setUserHover(false)}
+        >
           <MuteButton type='button'>Mute/Unmute</MuteButton>
+          {userHover && (
+            <VolumeControl
+              onMouseOver={(event) => event.stopPropagation()}
+              onMouseLeave={(event) => event.stopPropagation()}
+              onInput={(event) => SetVolume(event)}
+              onChange={(event) => SetVolume(event)}
+            />
+          )}
         </li>
-        <li>
-          <VolumeControl
-            onInput={(e) => SetVolume(e)}
-            onChange={(e) => SetVolume(e)}
-          />
-        </li>
-        {/* <li>
-          <IncreaseVolumeButton type='button' onClick={() => alterVolume("+")}>
-            Vol+
-          </IncreaseVolumeButton>
-        </li>
-        <li>
-          <DecreaseVolumeButton type='button' onClick={() => alterVolume("-")}>
-            Vol-
-          </DecreaseVolumeButton>
-        </li> */}
+
         <li>
           <FullScreenButton ref={fullscreenRef} type='button'>
             Fullscreen

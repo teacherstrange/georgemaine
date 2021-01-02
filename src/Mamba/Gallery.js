@@ -136,9 +136,9 @@ export function LargeGallery() {
                     return (
                       <LargeMorphVideo
                         key={index}
-                        width={2880}
-                        height={1800}
-                        captionRightEdge={1590}
+                        width={1920}
+                        height={1080}
+                        captionRightEdge={980}
                         pageIndex={pageIndex}
                         galleryIndex={index}
                         sendMorphstate={sendMorphstate}
