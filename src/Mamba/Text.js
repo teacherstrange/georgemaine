@@ -24,6 +24,12 @@ const bodyStyle = css`
   letter-spacing: -0.023rem;
 `;
 
+const smallBodyStyle = css`
+  font-size: 1.3rem;
+  line-height: 1.6rem;
+  letter-spacing: -0.008rem;
+`;
+
 export const Manifesto = styled.h1`
   ${smallTitleStyle}
   text-align: center;
@@ -61,6 +67,10 @@ export const Caption = styled.p`
   &:nth-child(2) {
     margin-top: 24px;
   }
+`;
+
+export const SmallCaption = styled.p`
+  ${smallBodyStyle}
 `;
 
 export const FigCaption = styled.figcaption`

@@ -8,6 +8,8 @@ import {
   SocialLinks,
   SmallGallery,
   LargeGallery,
+  Video,
+  VideoContainer,
 } from "../src/Mamba";
 
 export default function Home() {
@@ -16,9 +18,21 @@ export default function Home() {
       style={{
         overflow: "hidden",
         minHeight: "100vh",
+        paddingLeft: 80,
+        paddingRight: 80,
+        display: "flex",
+        alignItems: "center",
       }}
     >
-      <Header>
+      <Video
+        isMorphed={true}
+        controls
+        preload='metadata'
+        poster={"images/airpods-max.jpg"}
+        src={"videos/airpods-max.mp4"}
+      />
+
+      {/* <Header>
         <img width={120} src='/images/memoji.png' alt='Memoji portait of me' />
         <Manifesto>
           Hi, I’m Georgemaine—A product designer currently working on{" "}
@@ -42,7 +56,7 @@ export default function Home() {
         <Headline>Work</Headline>
         <SmallGallery />
         <LargeGallery />
-      </Section>
+      </Section> */}
     </main>
   );
 }

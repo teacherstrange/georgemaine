@@ -7,6 +7,8 @@ import {
   CloseIcon,
   CloseButton,
   OpenButton,
+  Video,
+  VideoContainer,
 } from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
@@ -92,25 +94,6 @@ const Label = styled(Caption)`
   }
 `;
 
-const VideoContainer = styled.div`
-  width: calc(100% - 48px);
-  border-radius: 4px;
-  margin: auto;
-  border: 3px solid #111;
-  transition: ${MorphTransition};
-
-  ${(props) =>
-    props.isMorphed &&
-    css`
-      width: 100%;
-    `}
-`;
-
-const Video = styled.video`
-  width: 100%;
-  display: block;
-`;
-
 export function MorphBox(props) {
   const gallerySize = props.gallerySize;
   const contentWidth = props.width;
@@ -153,10 +136,6 @@ export function MorphBox(props) {
     setisMorphedLeft(-ref.current.getBoundingClientRect().left - galleryOffset);
     setIsMorphedTop(-ref.current.getBoundingClientRect().top);
   }
-
-  useEffect(() => {
-    bodyRef.current, captionRef.current;
-  }, []);
 
   useEffect(() => {
     const myObserver = new ResizeObserver((entries) => {
@@ -234,7 +213,7 @@ export function MorphBox(props) {
       </Body>
 
       <OpenButton onClick={() => handleMorph(bodyRef)} isMorphed={isMorphed}>
-        <Label className={isMorphed && "is-morphed"}>
+        <Label>
           <strong>{props.project}</strong>
           <br />
           Learn more
