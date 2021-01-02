@@ -30,7 +30,7 @@ export const VideoContainer = styled.div`
   }
 `;
 
-const ControlsContainer = styled.div`
+const VideoControlsContainer = styled.div`
   position: absolute;
   display: flex;
   align-items: center;
@@ -51,11 +51,25 @@ const PlayPauseButtonContainer = styled.div`
   width: 100%;
   height: 100%;
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.6, 1) 0.05s,
-    transform 0.5s cubic-bezier(0.4, 0, 0.6, 1),
-    -webkit-transform 0.5s cubic-bezier(0.4, 0, 0.6, 1);
+    transform 0.5s cubic-bezier(0.4, 0, 0.6, 1);
 `;
-const VideoControls = styled.ul`
+const MainControlsContainer = styled.ul`
   display: none;
+  height: 44px;
+  width: 100%;
+  max-width: 360px;
+  padding: 0 0 16px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 3;
+  opacity: ${(props) => (props.isVisible ? 1 : 0)};
+  transform: translate3d(0, ${(props) => (props.isVisible ? 0 : "24px")}, 0);
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.6, 1) 0.05s,
+    transform 0.5s cubic-bezier(0.4, 0, 0.6, 1);
 `;
 
 const Progress = styled.progress``;
@@ -213,7 +227,7 @@ export function Video(props) {
         ref={videoRef}
         {...props}
       />
-      <ControlsContainer
+      <VideoControlsContainer
         isVisible={controlsHover}
         onMouseOver={() => setControlsHover(true)}
         onMouseLeave={() => setControlsHover(false)}
@@ -231,7 +245,7 @@ export function Video(props) {
           </PlayPauseButton>
         </PlayPauseButtonContainer>
 
-        <VideoControls ref={controlsRef}>
+        <MainControlsContainer isVisible={controlsHover} ref={controlsRef}>
           <li
             onMouseOver={() => setUserHover(true)}
             onMouseLeave={() => setUserHover(false)}
@@ -267,8 +281,8 @@ export function Video(props) {
               Fullscreen
             </FullScreenButton>
           </li>
-        </VideoControls>
-      </ControlsContainer>
+        </MainControlsContainer>
+      </VideoControlsContainer>
     </VideoContainer>
   );
 }
