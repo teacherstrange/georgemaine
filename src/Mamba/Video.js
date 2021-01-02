@@ -34,6 +34,38 @@ const IncreaseVolumeButton = styled.button``;
 const DecreaseVolumeButton = styled.button``;
 const FullScreenButton = styled.button``;
 
+const VolumeContainer = styled.div`
+  padding: 40px 0px;
+  margin: 0px 20px;
+`;
+const VolumeRange = styled.div`
+  height: 5px;
+  width: 250px;
+  background: #555;
+  border-radius: 15px;
+`;
+const Volume = styled.div`
+  height: 5px;
+  width: 50px;
+  background: #2ecc71;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  position: relative;
+`;
+const VolumeButton = styled.div`
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background: #fff;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  outline: none;
+`;
+
 export function Video(props) {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
@@ -46,8 +78,42 @@ export function Video(props) {
   const progressRef = useRef(null);
   const progressBarRef = useRef(null);
   const fullscreenRef = useRef(null);
+  const volume = useRef(null);
+  const volumeRange = useRef(null);
+  const volumeContainer = useRef(null);
+  const volumeButton = useRef(null);
+
   const [currentTime, setCurrentTime] = useState("00:00");
   const [duration, setDuration] = useState(0);
+
+  useEffect(() => {
+    volumeContainer.current;
+    let mouseIsDown = false;
+
+    volumeContainer.current.addEventListener("mouseup", up);
+    volumeButton.current.addEventListener("mousedown", down);
+    volumeContainer.current.addEventListener("mousemove", volumeSlide, true);
+
+    function down() {
+      mouseIsDown = true;
+    }
+    function up() {
+      mouseIsDown = false;
+    }
+
+    const volumeRangeWidth = volumeRange.current.getBoundingClientRect().width; // This will be the volume limit (100%)
+    function volumeSlide(event) {
+      if (mouseIsDown) {
+        const offsetX = event.offsetX;
+
+        if (event.target == volumeContainer.current) {
+          let x = Math.floor(offsetX);
+          if (x > volumeRangeWidth) x = volumeRangeWidth; // check if it's too high
+          volume.current.style.width = x + 10 + "px";
+        }
+      }
+    }
+  }, []);
 
   function alterVolume(direction) {
     var currentVolume = Math.floor(videoRef.current.volume * 10) / 10;
@@ -177,7 +243,6 @@ export function Video(props) {
       const currentTime = formatTime(videoRef.current.currentTime);
       setCurrentTime(currentTime);
     });
-    // videoRef.current.seekable.end(0); // Returns the ending time (in seconds)
   });
   return (
     <VideoContainer ref={containerRef} isMorphed={props.isMorphed}>
@@ -214,6 +279,15 @@ export function Video(props) {
           <MuteButton type='button'>Mute/Unmute</MuteButton>
         </li>
         <li>
+          <VolumeContainer ref={volumeContainer}>
+            <VolumeRange ref={volumeRange}>
+              <Volume ref={volume}>
+                <VolumeButton ref={volumeButton} />
+              </Volume>
+            </VolumeRange>
+          </VolumeContainer>
+        </li>
+        {/* <li>
           <IncreaseVolumeButton type='button' onClick={() => alterVolume("+")}>
             Vol+
           </IncreaseVolumeButton>
@@ -222,7 +296,7 @@ export function Video(props) {
           <DecreaseVolumeButton type='button' onClick={() => alterVolume("-")}>
             Vol-
           </DecreaseVolumeButton>
-        </li>
+        </li> */}
         <li>
           <FullScreenButton ref={fullscreenRef} type='button'>
             Fullscreen
