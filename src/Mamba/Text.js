@@ -26,8 +26,9 @@ const bodyStyle = css`
 
 const smallBodyStyle = css`
   font-size: 1.3rem;
-  line-height: 1.6rem;
+  line-height: 3.6rem;
   letter-spacing: -0.008rem;
+  color: var(--white);
 `;
 
 export const Manifesto = styled.h1`

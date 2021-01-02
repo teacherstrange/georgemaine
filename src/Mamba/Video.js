@@ -1,11 +1,13 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
+import { MutedIcon, SpeakerIcon } from "./Icon";
 import {
   SmallCaption,
   VolumeControl,
   PlayIcon,
   PauseIcon,
   PlayPauseButton,
+  MuteButton,
 } from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
@@ -33,7 +35,6 @@ export const VideoContainer = styled.div`
 const VideoControlsContainer = styled.div`
   position: absolute;
   display: flex;
-  align-items: center;
   top: 0;
   left: 0;
   width: 100%;
@@ -55,10 +56,11 @@ const PlayPauseButtonContainer = styled.div`
 `;
 const MainControlsContainer = styled.ul`
   display: none;
-  height: 44px;
+  align-items: flex-end;
+  height: 36px;
   width: 100%;
   max-width: 360px;
-  padding: 0 0 16px;
+  padding: 0 0 24px;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -74,7 +76,7 @@ const MainControlsContainer = styled.ul`
 
 const Progress = styled.progress``;
 const ProgressBar = styled.span``;
-const MuteButton = styled.button``;
+
 const FullScreenButton = styled.button``;
 
 export function Video(props) {
@@ -90,9 +92,12 @@ export function Video(props) {
   const [userHover, setUserHover] = useState(false);
   const [controlsHover, setControlsHover] = useState(false);
   const [videoIsPlaying, setVideoIsPlaying] = useState(false);
+  const [videoIsMuted, setVideoIsMuted] = useState(false);
 
-  function SetVolume(e) {
-    videoRef.current.volume = e.target.value / 100;
+  function SetVolume(event) {
+    videoRef.current.volume = event.target.value / 100;
+    let percentage = event.target.value;
+    event.target.style.background = `linear-gradient(to right,var(--white),var(--white) ${percentage}%, rgba(255, 255, 255, 0.32) ${percentage}%)`;
   }
 
   function skipAhead(e) {
@@ -109,7 +114,7 @@ export function Video(props) {
 
       videoRef.current.controls = false;
       // Display the user defined video controls
-      controlsRef.current.style.display = "block";
+      controlsRef.current.style.display = "flex";
       videoRef.current.addEventListener("loadedmetadata", function () {
         progressRef.current.setAttribute("max", videoRef.current.duration);
       });
@@ -224,15 +229,16 @@ export function Video(props) {
         onPause={() => setVideoIsPlaying(false)}
         onEnded={() => setVideoIsPlaying(false)}
         onPlay={() => setVideoIsPlaying(true)}
+        muted={videoIsMuted}
         ref={videoRef}
         {...props}
       />
       <VideoControlsContainer
-        isVisible={controlsHover}
+        isVisible={true}
         onMouseOver={() => setControlsHover(true)}
         onMouseLeave={() => setControlsHover(false)}
       >
-        <PlayPauseButtonContainer isVisible={controlsHover}>
+        <PlayPauseButtonContainer isVisible={true}>
           <PlayPauseButton
             type='button'
             onClick={() =>
@@ -245,22 +251,36 @@ export function Video(props) {
           </PlayPauseButton>
         </PlayPauseButtonContainer>
 
-        <MainControlsContainer isVisible={controlsHover} ref={controlsRef}>
+        <MainControlsContainer isVisible={true} ref={controlsRef}>
           <li
+            style={{
+              width: 36,
+              height: 108,
+              position: "relative",
+            }}
             onMouseOver={() => setUserHover(true)}
             onMouseLeave={() => setUserHover(false)}
           >
-            <MuteButton type='button'>Mute/Unmute</MuteButton>
-            {userHover && (
-              <VolumeControl
-                onMouseOver={(event) => event.stopPropagation()}
-                onMouseLeave={(event) => event.stopPropagation()}
-                onInput={(event) => SetVolume(event)}
-                onChange={(event) => SetVolume(event)}
-              />
-            )}
+            <MuteButton
+              type='button'
+              onClick={() => setVideoIsMuted(!videoIsMuted)}
+            >
+              {videoIsMuted ? <MutedIcon /> : <SpeakerIcon />}
+            </MuteButton>
+
+            <VolumeControl
+              isVisible={true}
+              onMouseOver={(event) => event.stopPropagation()}
+              onMouseLeave={(event) => event.stopPropagation()}
+              onInput={(event) => SetVolume(event)}
+              onChange={(event) => SetVolume(event)}
+            />
           </li>
-          <li>
+          <li
+            style={{
+              margin: "0 16px",
+            }}
+          >
             <SmallCaption>{currentTime}</SmallCaption>
           </li>
           <li>

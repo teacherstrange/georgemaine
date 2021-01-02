@@ -2,17 +2,24 @@ import styled, { css } from "styled-components";
 
 const imageHeight = 250;
 
-export const Button = styled.button`
+const baseStyle = css`
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: none;
+  outline: none;
+  cursor: pointer;
   font: inherit;
+`;
+
+export const Button = styled.button`
+  ${baseStyle}
   letter-spacing: -0.023rem;
   padding: 8px 24px;
   border-radius: 32px;
   text-align: center;
   color: var(--white);
   background-color: var(--red);
-  border: none;
-  margin: 0;
-  cursor: pointer;
 
   &:active {
     transform: scale(0.9);
@@ -22,6 +29,7 @@ export const Button = styled.button`
 `;
 
 export const CloseButton = styled.button`
+  ${baseStyle}
   position: absolute;
   right: 16px;
   top: 16px;
@@ -29,10 +37,6 @@ export const CloseButton = styled.button`
   width: 36px;
   border-radius: 32px;
   background-color: var(--secondaryFill);
-  border: none;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,6 +73,7 @@ export const CloseButton = styled.button`
 `;
 
 export const PreviousButton = styled.button`
+  ${baseStyle}
   position: absolute;
   top: calc(${imageHeight}px / 2 - 20px);
   left: -20px;
@@ -76,17 +81,12 @@ export const PreviousButton = styled.button`
   width: 52px;
   border-radius: 32px;
   background-color: var(--secondaryFill);
-  border: none;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1;
   transition: transform 0.2s ease, 0.25s background-color linear,
     0.25s opacity linear;
-  outline: none;
 
   path {
     color: var(--primaryLabelFill);
@@ -110,6 +110,7 @@ export const PreviousButton = styled.button`
 `;
 
 export const NextButton = styled.button`
+  ${baseStyle}
   position: absolute;
   top: calc(${imageHeight}px / 2 - 20px);
   right: -20px;
@@ -117,11 +118,6 @@ export const NextButton = styled.button`
   width: 52px;
   border-radius: 32px;
   background-color: var(--secondaryFill);
-  border: none;
-  margin: 0;
-  padding: 0;
-  outline: none;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -151,17 +147,12 @@ export const NextButton = styled.button`
 `;
 
 export const OpenButton = styled.button`
-  margin: 0;
-  padding: 0;
+  ${baseStyle}
   background: transparent;
-  border: none;
-  cursor: pointer;
   position: absolute;
   width: 100%;
   height: 100%;
-  outline: none;
   z-index: 1;
-  font: inherit;
   color: inherit;
   transition: opacity 0.229s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
   opacity: 1;
@@ -179,6 +170,7 @@ export const OpenButton = styled.button`
 `;
 
 export const PlayPauseButton = styled.button`
+  ${baseStyle}
   width: 52px;
   height: 52px;
   top: 50%;
@@ -187,14 +179,30 @@ export const PlayPauseButton = styled.button`
   transform: translate3d(-50%, -50%, 0);
   transform-origin: 0 0;
   transition: transform 0.2s ease, opacity 0.3s ease;
-  border: 0;
-  padding: 0;
-  margin: 0;
   background: none;
-  outline: none;
-  cursor: pointer;
 
   &:active {
     transform: scale(0.9) translate3d(-50%, -50%, 0);
+  }
+`;
+
+export const MuteButton = styled.button`
+  ${baseStyle}
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  width: 36px;
+  height: 36px;
+  opacity: 0.8;
+  transition: transform 0.2s ease, opacity 0.5s ease;
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  &:hover {
+    opacity: 1;
   }
 `;
