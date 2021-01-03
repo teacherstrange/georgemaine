@@ -2,7 +2,18 @@ import styled, { css } from "styled-components";
 
 const imageHeight = 250;
 
+const baseStyle = css`
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: none;
+  outline: none;
+  cursor: pointer;
+  font: inherit;
+`;
+
 export const Button = styled.button`
+  ${baseStyle}
   font: inherit;
   letter-spacing: -0.023rem;
   padding: 8px 24px;
@@ -10,12 +21,10 @@ export const Button = styled.button`
   text-align: center;
   color: var(--white);
   background-color: var(--red);
-  border: none;
-  margin: 0;
-  cursor: pointer;
 `;
 
 export const CloseButton = styled.button`
+  ${baseStyle}
   position: absolute;
   right: 16px;
   top: 16px;
@@ -23,10 +32,6 @@ export const CloseButton = styled.button`
   width: 36px;
   border-radius: 32px;
   background-color: var(--secondaryFill);
-  border: none;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,6 +64,7 @@ export const CloseButton = styled.button`
 `;
 
 export const PreviousButton = styled.button`
+  ${baseStyle}
   position: absolute;
   top: calc(${imageHeight}px / 2 - 20px);
   left: -20px;
@@ -66,10 +72,6 @@ export const PreviousButton = styled.button`
   width: 52px;
   border-radius: 32px;
   background-color: var(--secondaryFill);
-  border: none;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,6 +97,7 @@ export const PreviousButton = styled.button`
 `;
 
 export const NextButton = styled.button`
+  ${baseStyle}
   position: absolute;
   top: calc(${imageHeight}px / 2 - 20px);
   right: -20px;
@@ -102,11 +105,6 @@ export const NextButton = styled.button`
   width: 52px;
   border-radius: 32px;
   background-color: var(--secondaryFill);
-  border: none;
-  margin: 0;
-  padding: 0;
-  outline: none;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -131,17 +129,12 @@ export const NextButton = styled.button`
 `;
 
 export const OpenButton = styled.button`
-  margin: 0;
-  padding: 0;
+  ${baseStyle}
   background: transparent;
-  border: none;
-  cursor: pointer;
   position: absolute;
   width: 100%;
   height: 100%;
-  outline: none;
   z-index: 1;
-  font: inherit;
   color: inherit;
   transition: opacity 0.229s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
   opacity: 1;
@@ -156,4 +149,24 @@ export const OpenButton = styled.button`
         transition: opacity 0.24s cubic-bezier(0.52, 0.16, 0.24, 1);
       }
     `}
+`;
+
+export const MuteButton = styled.button`
+  ${baseStyle}
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  opacity: 0.8;
+  transition: transform 0.2s ease, opacity 0.5s ease;
+  transform: scale(1);
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  &:hover {
+    opacity: 1;
+  }
 `;
