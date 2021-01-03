@@ -9,3 +9,4 @@ export * from "./Section";
 export * from "./SocialLinks";
 export * from "./Video";
 export * from "./VolumeControl";
+export * from "./Utils";

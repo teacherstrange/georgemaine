@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
-import { SmallCaption, VolumeControl } from "./index";
+import { SmallCaption, formatTime } from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
 
@@ -23,204 +23,104 @@ export const VideoContainer = styled.div`
   }
 `;
 
-const VideoControls = styled.ul`
-  display: none;
-`;
+const VideoControls = styled.div``;
 const PlayPauseButton = styled.button``;
-const Progress = styled.progress``;
-const ProgressBar = styled.span``;
+const SeekBar = styled.input``;
+const VolumeBar = styled.input``;
 const MuteButton = styled.button``;
 const FullScreenButton = styled.button``;
 
 export function Video(props) {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
-  const controlsRef = useRef(null);
-  const progressRef = useRef(null);
-  const progressBarRef = useRef(null);
-  const fullscreenRef = useRef(null);
+  const [seekBarValue, setSeekbarValue] = useState(0);
+  const [videoCurrentTime, setVideoCurrentTime] = useState("00:00");
+  const [videoDuration, setVideoDuration] = useState("00:00");
 
-  const [currentTime, setCurrentTime] = useState("00:00");
-  const [duration, setDuration] = useState("00:00");
-  const [userHover, setUserHover] = useState(false);
-
-  function SetVolume(e) {
-    videoRef.current.volume = e.target.value / 100;
+  function updateVideoCurrentTime(seconds) {
+    const currentTime = formatTime(seconds);
+    setVideoCurrentTime(currentTime);
   }
-  function handleUserHover(event) {
-    event.stopPropagation();
-    setUserHover(!userHover);
+  function updateVideoDuration(seconds) {
+    const currentTime = formatTime(seconds);
+    setVideoDuration(currentTime);
   }
-  function skipAhead(e) {
-    const position =
-      (e.pageX - progressRef.current.offsetLeft) /
-      progressRef.current.offsetWidth;
-    videoRef.current.currentTime = position * videoRef.current.duration;
+  function playPauseVideo() {
+    videoRef.current.paused
+      ? videoRef.current.play()
+      : videoRef.current.pause();
   }
 
-  useEffect(() => {
-    var supportsVideo = !!document.createElement("video").canPlayType;
-    if (supportsVideo) {
-      // Hide the default controls
-      videoRef.current.controls = false;
-      // Display the user defined video controls
-      controlsRef.current.style.display = "block";
-      videoRef.current.addEventListener("loadedmetadata", function () {
-        progressRef.current.setAttribute("max", videoRef.current.duration);
-      });
-
-      // Progress
-      videoRef.current.addEventListener("timeupdate", function () {
-        if (!progressRef.current.getAttribute("max"))
-          progressRef.current.setAttribute("max", videoRef.current.duration);
-        progressRef.current.value = videoRef.current.currentTime;
-        progressBarRef.current.style.width =
-          Math.floor(
-            (videoRef.current.currentTime / videoRef.current.duration) * 100
-          ) + "%";
-      });
+  function muteVideo() {
+    !videoRef.current.muted
+      ? (videoRef.current.muted = true)
+      : (videoRef.current.muted = false);
+  }
+  function maximizeVideo() {
+    if (videoRef.current.requestFullscreen) {
+      videoRef.current.requestFullscreen();
+    } else if (videoRef.current.mozRequestFullScreen) {
+      videoRef.current.mozRequestFullScreen(); // Firefox
+    } else if (videoRef.current.webkitRequestFullscreen) {
+      videoRef.current.webkitRequestFullscreen(); // Chrome and Safari
     }
+  }
+
+  function updateVideoTime(event) {
+    const time = videoRef.current.duration * (event.target.value / 100);
+
+    // Update the video time
+    videoRef.current.currentTime = time;
+  }
+
+  function updateSeekBarValue(event) {
+    // Calculate the slider value
+    const value = (100 / event.target.duration) * event.target.currentTime;
+
+    // Update the slider value
+    setSeekbarValue(value);
+  }
+
+  function updateVideoVolume(event) {
+    // Update the video volume
+    videoRef.current.volume = event.target.value;
+  }
+
+  useLayoutEffect(() => {
+    videoRef.current.removeAttribute("controls");
+    updateVideoDuration(videoRef.current.duration);
   }, []);
-
-  // Fullscreen
-  useEffect(() => {
-    containerRef.current;
-    // Detect if broswer supports Fullscreen API
-    const fullScreenEnabled = !!(
-      document.fullscreenEnabled ||
-      document.mozFullScreenEnabled ||
-      document.msFullscreenEnabled ||
-      document.webkitSupportsFullscreen ||
-      document.webkitFullscreenEnabled ||
-      document.createElement("video").webkitRequestFullScreen
-    );
-
-    // Visibility of button
-    if (!fullScreenEnabled) {
-      fullscreenRef.current.style.display = "none";
-    }
-
-    fullscreenRef.current.addEventListener("click", function (e) {
-      handleFullscreen();
-    });
-    function handleFullscreen() {
-      if (isFullScreen()) {
-        if (document.exitFullscreen) document.exitFullscreen();
-        else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
-        else if (document.webkitCancelFullScreen)
-          document.webkitCancelFullScreen();
-        else if (document.msExitFullscreen) document.msExitFullscreen();
-        setFullscreenData(false);
-      } else {
-        if (containerRef.current.requestFullscreen)
-          containerRef.current.requestFullscreen();
-        else if (containerRef.current.mozRequestFullScreen)
-          containerRef.current.mozRequestFullScreen();
-        else if (containerRef.current.webkitRequestFullScreen)
-          containerRef.current.webkitRequestFullScreen();
-        else if (containerRef.current.msRequestFullscreen)
-          containerRef.current.msRequestFullscreen();
-        setFullscreenData(true);
-      }
-    }
-
-    // Check if the browser is already in fullscreen mode
-    function isFullScreen() {
-      return !!(
-        document.webkitIsFullScreen ||
-        document.mozFullScreen ||
-        document.msFullscreenElement ||
-        document.fullscreenElement
-      );
-    }
-
-    function setFullscreenData(state) {
-      containerRef.current.setAttribute("data-fullscreen", !!state);
-    }
-    document.addEventListener("fullscreenchange", function (e) {
-      setFullscreenData(!!document.fullscreenElement);
-    });
-    document.addEventListener("webkitfullscreenchange", function () {
-      setFullscreenData(!!document.webkitIsFullScreen);
-    });
-    document.addEventListener("mozfullscreenchange", function () {
-      setFullscreenData(!!document.mozFullScreen);
-    });
-    document.addEventListener("msfullscreenchange", function () {
-      setFullscreenData(!!document.msFullscreenElement);
-    });
-  });
-
-  // Format time
-  function formatTime(time) {
-    const totalTime = time;
-    const hours = Math.floor(totalTime / 60 / 60);
-    const minutes = Math.floor(totalTime / 60 - hours * 60);
-    const seconds = Math.floor(totalTime % 60);
-    const formattedTime =
-      minutes.toString().padStart(2, "0") +
-      ":" +
-      seconds.toString().padStart(2, "0");
-
-    return formattedTime;
-  }
-  useEffect(() => {
-    const duration = formatTime(videoRef.current.duration);
-    setDuration(duration);
-    videoRef.current.addEventListener("timeupdate", function () {
-      const currentTime = formatTime(videoRef.current.currentTime);
-      setCurrentTime(currentTime);
-    });
-  });
   return (
     <VideoContainer ref={containerRef} isMorphed={props.isMorphed}>
-      <video ref={videoRef} {...props} />
-      <VideoControls ref={controlsRef}>
-        <li>
-          <PlayPauseButton
-            type='button'
-            onClick={() =>
-              videoRef.current.paused || videoRef.current.ended
-                ? videoRef.current.play()
-                : videoRef.current.pause()
-            }
-          ></PlayPauseButton>
-        </li>
-        <li>
-          <Progress
-            ref={progressRef}
-            value='0'
-            min='0'
-            onClick={(event) => skipAhead(event)}
-          >
-            <ProgressBar ref={progressBarRef} />
-          </Progress>
-        </li>
-        <li>
-          <SmallCaption>
-            {currentTime}/{duration}
-          </SmallCaption>
-        </li>
-        <li
-          onMouseOver={() => setUserHover(true)}
-          onMouseLeave={() => setUserHover(false)}
-        >
-          <MuteButton type='button'>Mute/Unmute</MuteButton>
-          {userHover && (
-            <VolumeControl
-              onMouseOver={(event) => event.stopPropagation()}
-              onMouseLeave={(event) => event.stopPropagation()}
-              onInput={(event) => SetVolume(event)}
-              onChange={(event) => SetVolume(event)}
-            />
-          )}
-        </li>
-
-        <li>
-          <FullScreenButton ref={fullscreenRef} type='button'>
-            Fullscreen
-          </FullScreenButton>
-        </li>
+      <video
+        ref={videoRef}
+        onTimeUpdate={(e) => (
+          updateSeekBarValue(e), updateVideoCurrentTime(e.target.currentTime)
+        )}
+        {...props}
+      />
+      <VideoControls>
+        <PlayPauseButton type='button' onClick={() => playPauseVideo()}>
+          Play
+        </PlayPauseButton>
+        <SmallCaption>{videoCurrentTime}</SmallCaption>
+        <SeekBar
+          value={seekBarValue}
+          onChange={(e) => updateVideoTime(e)}
+          onMouseDown={() => videoRef.current.pause()}
+          onMouseUp={() => videoRef.current.play()}
+          type='range'
+        />
+        <SmallCaption>{videoDuration}</SmallCaption>
+        <MuteButton onClick={() => muteVideo()}>Mute</MuteButton>
+        <VolumeBar
+          type='range'
+          min='0'
+          max='1'
+          step='0.1'
+          onInput={(e) => updateVideoVolume(e)}
+        />
+        <FullScreenButton onClick={() => maximizeVideo()} />
       </VideoControls>
     </VideoContainer>
   );
