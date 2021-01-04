@@ -224,7 +224,11 @@ export function Video(props) {
 
   useEffect(() => {
     volumeBarRef.current.value = 1;
-    updateVideoDuration(videoRef.current.duration);
+    const video = videoRef.current;
+    video.onloadedmetadata = () => {
+      updateVideoDuration(video.duration);
+    };
+
     updateVolumeSlider(volumeBarRef.current.value);
     updateSeekBarFill(seekBarValue);
   }, []);
