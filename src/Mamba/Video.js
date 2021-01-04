@@ -35,6 +35,29 @@ export const VideoContainer = styled.div`
   }
 `;
 
+const MainControls = styled.div`
+  width: 500px;
+  display: flex;
+  align-items: flex-end;
+  height: 36px;
+  padding-bottom: 24px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.6, 1) 0.05s,
+    transform 0.5s cubic-bezier(0.4, 0, 0.6, 1);
+`;
+
+const PlayButtonButtonContainer = styled.div`
+  height: calc(100% - 60px);
+  width: 100%;
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.6, 1) 0.05s,
+    transform 0.5s cubic-bezier(0.4, 0, 0.6, 1);
+`;
+
 const VideoControls = styled.div`
   background: linear-gradient(rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.56));
   width: 100%;
@@ -43,22 +66,25 @@ const VideoControls = styled.div`
   bottom: 0;
   left: 0;
   z-index: 1;
-  opacity: 1;
+  opacity: 0;
   transition: opacity 1s cubic-bezier(0.4, 0, 0.6, 1);
-`;
+  cursor: pointer;
 
-const MainControls = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 500px;
-  display: flex;
-  align-items: flex-end;
-  height: 36px;
-  padding-bottom: 24px;
-  margin-left: auto;
-  margin-right: auto;
+  &:hover {
+    opacity: 1;
+
+    ${PlayButtonButtonContainer} {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.6, 1) 0.05s,
+        transform 0.5s cubic-bezier(0.4, 0, 0.6, 1);
+    }
+
+    ${MainControls} {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
 `;
 
 const ProgressTime = styled.div`
@@ -208,9 +234,11 @@ export function Video(props) {
         {...props}
       />
       <VideoControls>
-        <PlayPauseButton type='button' onClick={() => playPauseVideo()}>
-          {videoIsPlaying ? <PauseIcon /> : <PlayIcon />}
-        </PlayPauseButton>
+        <PlayButtonButtonContainer>
+          <PlayPauseButton type='button' onClick={() => playPauseVideo()}>
+            {videoIsPlaying ? <PauseIcon /> : <PlayIcon />}
+          </PlayPauseButton>
+        </PlayButtonButtonContainer>
         <MainControls>
           <VolumeSlider
             volumeFillRef={volumeFillRef}

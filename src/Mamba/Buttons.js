@@ -193,16 +193,20 @@ export const ExpandButton = styled.button`
 
 export const PlayPauseButton = styled.button`
   ${baseStyle}
-  width: 52px;
-  height: 52px;
-  top: 50%;
-  left: 50%;
-  position: absolute;
-  transform: translate3d(-50%, -50%, 0);
-  transform-origin: 0 0;
-  transition: transform 0.2s ease, opacity 0.3s ease;
+  width: 100%;
+  height: calc(100% + 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-origin: center;
+  opacity: 0.75;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+
+  &:hover {
+    opacity: 1;
+  }
 
   &:active {
-    transform: scale(0.9) translate3d(-50%, -50%, 0);
+    transform: scale(0.9);
   }
 `;
