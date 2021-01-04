@@ -8,6 +8,9 @@ import {
   ExpandButton,
   SeekBar,
   VolumeSlider,
+  PlayIcon,
+  PauseIcon,
+  PlayPauseButton,
 } from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
@@ -58,8 +61,6 @@ const MainControls = styled.div`
   margin-right: auto;
 `;
 
-const PlayPauseButton = styled.button``;
-
 const ProgressTime = styled.div`
   margin-left: 16px;
   display: flex;
@@ -93,6 +94,7 @@ export function Video(props) {
   const [videoCurrentTime, setVideoCurrentTime] = useState("00:00");
   const [videoDuration, setVideoDuration] = useState("00:00");
   const [videoIsMuted, setVideoIsMuted] = useState(false);
+  const [videoIsPlaying, setVideoIsPlaying] = useState(false);
 
   function updateVideoCurrentTime(seconds) {
     const currentTime = formatTime(seconds);
@@ -106,8 +108,8 @@ export function Video(props) {
 
   function playPauseVideo() {
     videoRef.current.paused
-      ? videoRef.current.play()
-      : videoRef.current.pause();
+      ? (videoRef.current.play(), setVideoIsPlaying(true))
+      : (videoRef.current.pause(), setVideoIsPlaying(false));
   }
 
   function muteVideo() {
@@ -207,7 +209,7 @@ export function Video(props) {
       />
       <VideoControls>
         <PlayPauseButton type='button' onClick={() => playPauseVideo()}>
-          Play
+          {videoIsPlaying ? <PauseIcon /> : <PlayIcon />}
         </PlayPauseButton>
         <MainControls>
           <VolumeSlider
@@ -234,8 +236,10 @@ export function Video(props) {
               updateVideoTime(e),
               updateSeekBarThumb(seekBarValue)
             )}
-            onMouseDown={() => videoRef.current.pause()}
-            onMouseUp={() => videoRef.current.play()}
+            onMouseDown={() => (
+              videoRef.current.pause(), setVideoIsPlaying(false)
+            )}
+            onMouseUp={() => (videoRef.current.play(), setVideoIsPlaying(true))}
           />
           <DurationTime>
             <SmallCaption>{videoDuration}</SmallCaption>

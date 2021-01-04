@@ -190,3 +190,19 @@ export const ExpandButton = styled.button`
     opacity: 1;
   }
 `;
+
+export const PlayPauseButton = styled.button`
+  ${baseStyle}
+  width: 52px;
+  height: 52px;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate3d(-50%, -50%, 0);
+  transform-origin: 0 0;
+  transition: transform 0.2s ease, opacity 0.3s ease;
+
+  &:active {
+    transform: scale(0.9) translate3d(-50%, -50%, 0);
+  }
+`;
