@@ -25,10 +25,8 @@ export default function Home() {
       }}
     >
       <Video
-        isMorphed={true}
-        controls
+        ismorphed='true'
         preload='metadata'
-        poster={"images/airpods-max.jpg"}
         src={"videos/mollie-video.mp4"}
       />
 
