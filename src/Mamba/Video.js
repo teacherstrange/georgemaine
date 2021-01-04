@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { MuteIcon, SpeakerIcon } from "./Icon";
-import { SmallCaption, formatTime, MuteButton } from "./index";
+import { SmallCaption, formatTime, MuteButton, SeekBar } from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
 
@@ -52,9 +52,8 @@ const MainControls = styled.div`
 `;
 
 const PlayPauseButton = styled.button``;
-const SeekBar = styled.input``;
 
-const SliderThumb = styled.div`
+const VolumeThumb = styled.div`
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -72,7 +71,7 @@ const SliderThumb = styled.div`
   transition: transform 0.25s ease, opacity 0.25s ease 0.25s;
 `;
 
-const SliderFill = styled.div`
+const VolumeFill = styled.div`
   border-radius: 4px;
   margin: 0;
   padding: 0;
@@ -86,7 +85,7 @@ const SliderFill = styled.div`
   position: absolute;
 `;
 
-const SliderContainer = styled.div`
+const VolumeContainer = styled.div`
   border-radius: 4px;
   position: absolute;
   bottom: 36px;
@@ -105,12 +104,12 @@ const VolumeControls = styled.div`
   height: 100px;
   position: relative;
 
-  &:hover ${SliderThumb} {
+  &:hover ${VolumeThumb} {
     transform: scale(0.8333);
     opacity: 1;
   }
 
-  &:hover ${SliderContainer} {
+  &:hover ${VolumeContainer} {
     height: 64px;
     opacity: 1;
     transition: height 0.335s cubic-bezier(0.4, 0, 0.6, 1),
@@ -152,8 +151,11 @@ export function Video(props) {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
   const volumeBarRef = useRef(null);
-  const sliderFillRef = useRef(null);
-  const sliderThumbRef = useRef(null);
+  const volumeFillRef = useRef(null);
+  const volumeThumbRef = useRef(null);
+  const seekBarFillRef = useRef(null);
+  const seekBarThumbRef = useRef(null);
+
   const [seekBarValue, setSeekbarValue] = useState(0);
   const [videoCurrentTime, setVideoCurrentTime] = useState("00:00");
   const [videoDuration, setVideoDuration] = useState("00:00");
@@ -163,10 +165,12 @@ export function Video(props) {
     const currentTime = formatTime(seconds);
     setVideoCurrentTime(currentTime);
   }
+
   function updateVideoDuration(seconds) {
     const currentTime = formatTime(seconds);
     setVideoDuration(currentTime);
   }
+
   function playPauseVideo() {
     videoRef.current.paused
       ? videoRef.current.play()
@@ -199,17 +203,19 @@ export function Video(props) {
 
   function updateSeekBarValue(event) {
     const value = (100 / event.target.duration) * event.target.currentTime;
-    setSeekbarValue(value);
+    const formattedValue = Math.floor(value);
+    setSeekbarValue(formattedValue);
   }
 
   function updateVideoVolume(event) {
     videoRef.current.volume = event.target.value;
   }
+
   function updateVolumeSlider(value) {
-    // Set the location for each thumb and the slider fill
-    updateThumbPosition(sliderThumbRef.current, value * 100);
-    setSliderFill(sliderFillRef.current, value * 100);
+    updateThumbPosition(volumeThumbRef.current, value * 100);
+    setVolumeFill(volumeFillRef.current, value * 100);
   }
+
   function updateThumbPosition(element, value) {
     value === 0 && !videoIsMuted
       ? setVideoIsMuted(true)
@@ -218,12 +224,29 @@ export function Video(props) {
     element.style.bottom = currentPosition;
   }
 
-  function setSliderFill(element, value) {
+  function setVolumeFill(element, value) {
     let gradient = `linear-gradient(to top, #fff 0%, 
   #fff ${value}%, 
   rgba(255,255,255,0.16) ${Number(value) + 1}%, 
   rgba(255,255,255,0.16)  100%)`;
     element.style.backgroundImage = gradient;
+  }
+
+  function updateSeekBarFill(eventValue) {
+    const value = eventValue;
+    const seekBarFill = seekBarFillRef.current;
+    let gradient = `linear-gradient(to right, var(--white) 0%, 
+            var(--white) ${value}%, 
+            rgba(255,255,255,0.16) ${Number(value) + 1}%, 
+            rgba(255,255,255,0.16)  100%)`;
+    seekBarFill.style.backgroundImage = gradient;
+  }
+
+  function updateSeekBarThumb(value) {
+    const seekBarThumb = seekBarThumbRef.current;
+    const currentValue = value;
+    let currentPosition = `calc(${currentValue}% - ${4}px)`;
+    seekBarThumb.style.left = currentPosition;
   }
 
   useLayoutEffect(() => {
@@ -241,7 +264,10 @@ export function Video(props) {
       <video
         ref={videoRef}
         onTimeUpdate={(e) => (
-          updateSeekBarValue(e), updateVideoCurrentTime(e.target.currentTime)
+          updateSeekBarValue(e),
+          updateVideoCurrentTime(e.target.currentTime),
+          updateSeekBarFill(seekBarValue),
+          updateSeekBarThumb(seekBarValue)
         )}
         {...props}
       />
@@ -251,24 +277,21 @@ export function Video(props) {
         </PlayPauseButton>
         <MainControls>
           <VolumeControls>
-            <SliderContainer>
-              <SliderFill ref={sliderFillRef} />
+            <VolumeContainer>
+              <VolumeFill ref={volumeFillRef} />
               <VolumeBar
                 ref={volumeBarRef}
                 type='range'
                 min='0'
                 max='1'
                 step='0.01'
-                onInput={(e) => (
-                  updateVideoVolume(e), updateVolumeSlider(e.target.value)
-                )}
                 onChange={(e) => (
                   updateVideoVolume(e), updateVolumeSlider(e.target.value)
                 )}
                 orient='vertical'
               />
-              <SliderThumb ref={sliderThumbRef} />
-            </SliderContainer>
+              <VolumeThumb ref={volumeThumbRef} />
+            </VolumeContainer>
             <MuteButton onClick={() => muteVideo()}>
               {videoIsMuted ? <MuteIcon /> : <SpeakerIcon />}
             </MuteButton>
@@ -277,11 +300,16 @@ export function Video(props) {
             <SmallCaption>{videoCurrentTime}</SmallCaption>
           </ProgressTime>
           <SeekBar
+            seekBarFillRef={seekBarFillRef}
+            seekBarThumbRef={seekBarThumbRef}
             value={seekBarValue}
-            onChange={(e) => updateVideoTime(e)}
+            onChange={(e) => (
+              updateSeekBarFill(seekBarValue),
+              updateVideoTime(e),
+              updateSeekBarThumb(seekBarValue)
+            )}
             onMouseDown={() => videoRef.current.pause()}
             onMouseUp={() => videoRef.current.play()}
-            type='range'
           />
           <DurationTime>
             <SmallCaption>{videoDuration}</SmallCaption>

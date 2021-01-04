@@ -6,6 +6,7 @@ export * from "./Header";
 export * from "./MorphBox";
 export * from "./MorphVideo";
 export * from "./Section";
+export * from "./Seekbar";
 export * from "./SocialLinks";
 export * from "./Video";
 export * from "./Utils";
