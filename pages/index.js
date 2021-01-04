@@ -26,9 +26,7 @@ export default function Home() {
     >
       <Video
         ismorphed='true'
-        controls
         preload='metadata'
-        poster={"images/airpods-max.jpg"}
         src={"videos/mollie-video.mp4"}
       />
 
