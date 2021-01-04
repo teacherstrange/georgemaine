@@ -1,10 +1,11 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
-import { MuteIcon, SpeakerIcon } from "./Icon";
+import { ExpandIcon, MuteIcon, SpeakerIcon } from "./Icon";
 import {
   SmallCaption,
   formatTime,
   MuteButton,
+  ExpandButton,
   SeekBar,
   VolumeSlider,
 } from "./index";
@@ -58,8 +59,6 @@ const MainControls = styled.div`
 `;
 
 const PlayPauseButton = styled.button``;
-
-const FullScreenButton = styled.button``;
 
 const ProgressTime = styled.div`
   margin-left: 16px;
@@ -120,7 +119,7 @@ export function Video(props) {
         setVideoIsMuted(false),
         updateVolumeSlider(1));
   }
-  function maximizeVideo() {
+  function expandVideo() {
     if (videoRef.current.requestFullscreen) {
       videoRef.current.requestFullscreen();
     } else if (videoRef.current.mozRequestFullScreen) {
@@ -191,6 +190,7 @@ export function Video(props) {
     volumeBarRef.current.value = 1;
     updateVideoDuration(videoRef.current.duration);
     updateVolumeSlider(volumeBarRef.current.value);
+    updateSeekBarFill(seekBarValue);
   }, []);
 
   return (
@@ -222,7 +222,6 @@ export function Video(props) {
               {videoIsMuted ? <MuteIcon /> : <SpeakerIcon />}
             </MuteButton>
           </VolumeSlider>
-
           <ProgressTime>
             <SmallCaption>{videoCurrentTime}</SmallCaption>
           </ProgressTime>
@@ -241,7 +240,9 @@ export function Video(props) {
           <DurationTime>
             <SmallCaption>{videoDuration}</SmallCaption>
           </DurationTime>
-          <FullScreenButton onClick={() => maximizeVideo()} />
+          <ExpandButton onClick={() => expandVideo()}>
+            <ExpandIcon />
+          </ExpandButton>
         </MainControls>
       </VideoControls>
     </VideoContainer>

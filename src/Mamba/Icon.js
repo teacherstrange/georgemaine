@@ -84,3 +84,26 @@ export function MuteIcon() {
     </svg>
   );
 }
+
+export function ExpandIcon() {
+  return (
+    <svg
+      width='24'
+      height='24'
+      viewBox='0 0 24 24'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+    >
+      <path
+        d='M13.5 5.5H16.5C17.6046 5.5 18.5 6.39543 18.5 7.5V10.5M13.5 10.5L17.5 6.5'
+        stroke='var(--white)'
+        strokeLinecap='round'
+      />
+      <path
+        d='M5.5 13.5V16.5C5.5 17.6046 6.39543 18.5 7.5 18.5H10.5M6.5 17.5L10.5 13.5'
+        stroke='var(--white)'
+        strokeLinecap='round'
+      />
+    </svg>
+  );
+}

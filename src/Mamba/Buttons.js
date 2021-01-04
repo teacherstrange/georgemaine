@@ -170,3 +170,23 @@ export const MuteButton = styled.button`
     opacity: 1;
   }
 `;
+
+export const ExpandButton = styled.button`
+  ${baseStyle}
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  opacity: 0.8;
+  transition: transform 0.2s ease, opacity 0.5s ease;
+  transform: scale(1);
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+`;

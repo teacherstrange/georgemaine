@@ -23,14 +23,14 @@ const SeekBarInput = styled.input`
   }
 `;
 const SeekBarThumb = styled.div`
-  width: 12px;
-  height: 12px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  transform: scale(0.3333);
+  transform: scale(0.444);
   transform-origin: 50% 50%;
   background-color: var(--white);
   position: absolute;
-  left: 0;
+  left: -4px;
   top: 0;
   bottom: 0;
   margin-top: auto;
@@ -49,7 +49,7 @@ const SeekBarContainer = styled.div`
   align-items: center;
 
   &:hover ${SeekBarThumb} {
-    transform: scale(0.8333);
+    transform: scale(1);
   }
 `;
 
