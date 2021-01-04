@@ -9,4 +9,5 @@ export * from "./Section";
 export * from "./Seekbar";
 export * from "./SocialLinks";
 export * from "./Video";
+export * from "./VolumeSlider";
 export * from "./Utils";
