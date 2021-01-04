@@ -132,6 +132,22 @@ const VolumeBar = styled.input`
 
 const FullScreenButton = styled.button``;
 
+const ProgressTime = styled.div`
+  padding-left: 16px;
+  display: flex;
+  align-items: center;
+  width: 40px;
+  height: 36px;
+`;
+
+const DurationTime = styled.div`
+  padding-right: 16px;
+  display: flex;
+  align-items: center;
+  width: 40px;
+  height: 36px;
+`;
+
 export function Video(props) {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
@@ -257,7 +273,9 @@ export function Video(props) {
               {videoIsMuted ? <MuteIcon /> : <SpeakerIcon />}
             </MuteButton>
           </VolumeControls>
-          <SmallCaption>{videoCurrentTime}</SmallCaption>
+          <ProgressTime>
+            <SmallCaption>{videoCurrentTime}</SmallCaption>
+          </ProgressTime>
           <SeekBar
             value={seekBarValue}
             onChange={(e) => updateVideoTime(e)}
@@ -265,7 +283,9 @@ export function Video(props) {
             onMouseUp={() => videoRef.current.play()}
             type='range'
           />
-          <SmallCaption>{videoDuration}</SmallCaption>
+          <DurationTime>
+            <SmallCaption>{videoDuration}</SmallCaption>
+          </DurationTime>
           <FullScreenButton onClick={() => maximizeVideo()} />
         </MainControls>
       </VideoControls>

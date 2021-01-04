@@ -71,6 +71,7 @@ export const Caption = styled.p`
 
 export const SmallCaption = styled.p`
   ${smallBodyStyle}
+  color: var(--white);
 `;
 
 export const FigCaption = styled.figcaption`
