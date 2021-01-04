@@ -71,7 +71,7 @@ const VolumeBar = styled.input`
     width: 8px;
     height: 100%;
     padding: 0 5px;
-    opacity: 0 !important;
+    opacity: 0;
     cursor: pointer;
   }
 `;

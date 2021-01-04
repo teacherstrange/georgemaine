@@ -1,6 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
-import { ExpandIcon, MuteIcon, SpeakerIcon } from "./Icon";
 import {
   SmallCaption,
   formatTime,
@@ -11,6 +10,9 @@ import {
   PlayIcon,
   PauseIcon,
   PlayPauseButton,
+  ExpandIcon,
+  MuteIcon,
+  SpeakerIcon,
 } from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
@@ -103,8 +105,12 @@ const DurationTime = styled.div`
   margin-right: 16px;
   display: flex;
   align-items: center;
-  width: 48px;
   height: 36px;
+
+  p {
+    width: 44px;
+    text-align: left;
+  }
 `;
 
 export function Video(props) {
@@ -133,33 +139,33 @@ export function Video(props) {
   }
 
   function playPauseVideo() {
-    videoRef.current.paused
-      ? (videoRef.current.play(), setVideoIsPlaying(true))
-      : (videoRef.current.pause(), setVideoIsPlaying(false));
+    const video = videoRef.current;
+    video.paused
+      ? (video.play(), setVideoIsPlaying(true))
+      : (video.pause(), setVideoIsPlaying(false));
   }
 
   function muteVideo() {
-    !videoRef.current.muted
-      ? ((videoRef.current.muted = true),
-        setVideoIsMuted(true),
-        updateVolumeSlider(0))
-      : ((videoRef.current.muted = false),
-        setVideoIsMuted(false),
-        updateVolumeSlider(1));
+    const video = videoRef.current;
+    !video.muted
+      ? ((video.muted = true), setVideoIsMuted(true), updateVolumeSlider(0))
+      : ((video.muted = false), setVideoIsMuted(false), updateVolumeSlider(1));
   }
   function expandVideo() {
-    if (videoRef.current.requestFullscreen) {
-      videoRef.current.requestFullscreen();
-    } else if (videoRef.current.mozRequestFullScreen) {
-      videoRef.current.mozRequestFullScreen(); // Firefox
-    } else if (videoRef.current.webkitRequestFullscreen) {
-      videoRef.current.webkitRequestFullscreen(); // Chrome and Safari
+    const video = videoRef.current;
+    if (video.requestFullscreen) {
+      video.requestFullscreen();
+    } else if (video.mozRequestFullScreen) {
+      video.mozRequestFullScreen(); // Firefox
+    } else if (video.webkitRequestFullscreen) {
+      video.webkitRequestFullscreen(); // Chrome and Safari
     }
   }
 
   function updateVideoTime(event) {
-    const time = videoRef.current.duration * (event.target.value / 100);
-    videoRef.current.currentTime = time;
+    const video = videoRef.current;
+    const time = video.duration * (event.target.value / 100);
+    video.currentTime = time;
   }
 
   function updateSeekBarValue(event) {
@@ -169,12 +175,15 @@ export function Video(props) {
   }
 
   function updateVideoVolume(event) {
-    videoRef.current.volume = event.target.value;
+    const video = videoRef.current;
+    video.volume = event.target.value;
   }
 
   function updateVolumeSlider(value) {
-    updateThumbPosition(volumeThumbRef.current, value * 100);
-    setVolumeFill(volumeFillRef.current, value * 100);
+    const volumeThumb = volumeThumbRef.current;
+    const volumeFill = volumeFillRef.current;
+    updateThumbPosition(volumeThumb, value * 100);
+    setVolumeFill(volumeFill, value * 100);
   }
 
   function updateThumbPosition(element, value) {
@@ -194,11 +203,10 @@ export function Video(props) {
   }
 
   function updateSeekBarFill(eventValue) {
-    const value = eventValue;
     const seekBarFill = seekBarFillRef.current;
     let gradient = `linear-gradient(to right, var(--white) 0%, 
-            var(--white) ${value}%, 
-            rgba(255,255,255,0.16) ${Number(value) + 1}%, 
+            var(--white) ${eventValue}%, 
+            rgba(255,255,255,0.16) ${Number(eventValue) + 1}%, 
             rgba(255,255,255,0.16)  100%)`;
     seekBarFill.style.backgroundImage = gradient;
   }

@@ -14,7 +14,6 @@ const baseStyle = css`
 
 export const Button = styled.button`
   ${baseStyle}
-  font: inherit;
   letter-spacing: -0.023rem;
   padding: 8px 24px;
   border-radius: 32px;
@@ -160,7 +159,6 @@ export const MuteButton = styled.button`
   height: 36px;
   opacity: 0.8;
   transition: transform 0.2s ease, opacity 0.5s ease;
-  transform: scale(1);
 
   &:active {
     transform: scale(0.9);

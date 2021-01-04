@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 const SeekBarFill = styled.div`
   border-radius: 4px;
-  margin: 0;
-  padding: 0;
   height: 4px;
   width: 100%;
   bottom: 0;
@@ -35,9 +33,6 @@ const SeekBarThumb = styled.div`
   bottom: 0;
   margin-top: auto;
   margin-bottom: auto;
-  pointer-events: none;
-
-  transition: transform 0.25s ease;
 `;
 
 const SeekBarContainer = styled.div`
