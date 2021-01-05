@@ -17,6 +17,24 @@ import {
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
 
+const MobileVideo = styled.video`
+  width: 100%;
+  display: block;
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+`;
+
+const DesktopVideo = styled.video`
+  width: 100%;
+  display: block;
+
+  @media (max-width: 1023px) {
+    display: none;
+  }
+`;
+
 export const VideoContainer = styled.div`
   width: calc(100% - 48px);
   border-radius: 4px;
@@ -30,11 +48,6 @@ export const VideoContainer = styled.div`
     css`
       width: 100%;
     `}
-
-  video {
-    width: 100%;
-    display: block;
-  }
 `;
 
 const MainControls = styled.div`
@@ -88,6 +101,10 @@ const VideoControls = styled.div`
       transition: opacity 0.4s cubic-bezier(0, 0, 0.2, 1) 0.05s,
         transform 0.5s cubic-bezier(0, 0, 0.2, 1);
     }
+  }
+
+  @media (max-width: 1023px) {
+    display: none;
   }
 `;
 
@@ -231,7 +248,8 @@ export function Video(props) {
 
   return (
     <VideoContainer ref={containerRef} ismorphed={props.isMorphed}>
-      <video
+      <MobileVideo controls {...props} />
+      <DesktopVideo
         ref={videoRef}
         onPlay={() =>
           !videoControlsVisible ? setVideoControlsVisible(true) : null
