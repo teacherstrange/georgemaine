@@ -33,6 +33,7 @@ const SeekBarThumb = styled.div`
   bottom: 0;
   margin-top: auto;
   margin-bottom: auto;
+  transition: transform 0.25s ease;
 `;
 
 const SeekBarContainer = styled.div`
@@ -53,6 +54,7 @@ export function SeekBar(props) {
     <SeekBarContainer>
       <SeekBarFill ref={props.seekBarFillRef} />
       <SeekBarInput
+        ref={props.seekBarInputRef}
         value={props.value}
         onChange={props.onChange}
         onMouseDown={props.onMouseDown}

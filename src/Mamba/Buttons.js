@@ -198,7 +198,7 @@ export const PlayPauseButton = styled.button`
   align-items: center;
   transform-origin: center;
   opacity: 0.75;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.3s ease;
 
   &:hover {
     opacity: 1;
