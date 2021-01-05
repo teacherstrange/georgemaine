@@ -9,7 +9,7 @@ import {
   NextArrowIcon,
   NextButton,
 } from "./index";
-import { Apps, MollieVideo, Checkout, ApplePay } from "../Data";
+import { Apps, Promo, Checkout, ApplePay } from "../Data";
 
 // Variables
 const galleryHeight = 314;
@@ -71,7 +71,7 @@ export function SmallGallery() {
         <SmallMorphVideo
           pageIndex={pageIndex}
           sendMorphstate={sendMorphstate}
-          {...MollieVideo}
+          {...Promo}
         />
 
         <SmallMorphVideo
@@ -84,8 +84,11 @@ export function SmallGallery() {
       <PreviousButton
         style={{
           opacity: pageIndex >= 1 ? 1 : 0,
+          visibility: pageIndex >= 1 ? "visible" : "hidden",
+          pointerEvents: pageIndex >= 1 ? "auto" : "none",
           zIndex: morphstate && -1,
         }}
+        disabled={pageIndex >= 1 ? false : true}
         onClick={() => {
           setPageIndex(pageIndex - 1);
         }}
@@ -96,8 +99,11 @@ export function SmallGallery() {
       <NextButton
         style={{
           opacity: pageIndex <= 2 ? 1 : 0,
+          visibility: pageIndex <= 2 ? "visible" : "hidden",
+          pointerEvents: pageIndex <= 2 ? "auto" : "none",
           zIndex: morphstate && -1,
         }}
+        disabled={pageIndex <= 2 ? false : true}
         onClick={() => {
           setPageIndex(pageIndex + 1);
         }}
@@ -166,8 +172,11 @@ export function LargeGallery() {
         style={{
           opacity: pageIndex === 1 ? 1 : 0,
           zIndex: morphstate && -1,
+          visibility: pageIndex >= 1 ? "visible" : "hidden",
+          pointerEvents: pageIndex >= 1 ? "auto" : "none",
           left: -44,
         }}
+        disabled={pageIndex === 1 ? true : false}
         onClick={() => {
           setPageIndex(pageIndex - 1);
         }}
@@ -179,8 +188,11 @@ export function LargeGallery() {
         style={{
           opacity: pageIndex === 0 ? 1 : 0,
           zIndex: morphstate && -1,
+          visibility: pageIndex <= 2 ? "visible" : "hidden",
+          pointerEvents: pageIndex <= 2 ? "auto" : "none",
           right: -44,
         }}
+        disabled={pageIndex === 0 ? false : true}
         onClick={() => {
           setPageIndex(pageIndex + 1);
         }}

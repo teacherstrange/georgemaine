@@ -18,19 +18,9 @@ export default function Home() {
       style={{
         overflow: "hidden",
         minHeight: "100vh",
-        paddingLeft: 80,
-        paddingRight: 80,
-        display: "flex",
-        alignItems: "center",
       }}
     >
-      <Video
-        ismorphed='true'
-        preload='metadata'
-        src={"videos/mollie-video.mp4"}
-      />
-
-      {/* <Header>
+      <Header>
         <img width={120} src='/images/memoji.png' alt='Memoji portait of me' />
         <Manifesto>
           Hi, I’m Georgemaine—A product designer currently working on{" "}
@@ -54,7 +44,7 @@ export default function Home() {
         <Headline>Work</Headline>
         <SmallGallery />
         <LargeGallery />
-      </Section> */}
+      </Section>
     </main>
   );
 }

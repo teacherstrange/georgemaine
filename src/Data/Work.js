@@ -44,11 +44,23 @@ export const ApplePay = {
   galleryIndex: 3,
   width: 1920,
   height: 1080,
-  captionRightEdge: 980,
+  captionRightEdge: 984,
+  href: "videos/apple-pay.mp4",
+  poster: "images/airpods-max.jpg",
+  project: "Apple Pay Promo",
+  description:
+    "During the last quarter of 2019 I designed Mollie’s mobile apps to enable people to quickly manage payments and watch their business grow.",
+};
+
+export const Promo = {
+  key: 1,
+  galleryIndex: 1,
+  width: 1920,
+  height: 1080,
+  captionRightEdge: 984,
   href: "videos/mollie-video.mp4",
   poster: "images/airpods-max.jpg",
-  label: "Enjoy managing payments on mobile. ↗",
-  project: "Mollie Video",
+  project: "Mollie Promo",
   description:
     "During the last quarter of 2019 I designed Mollie’s mobile apps to enable people to quickly manage payments and watch their business grow.",
 };
