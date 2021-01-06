@@ -289,16 +289,12 @@ export function Video(props) {
 
     if (!props.isMorphed && mobileVideo.currentTime > 0) {
       mobileVideo.pause();
-      mobileVideo.currentTime = 0;
       mobileVideo.removeAttribute("controls");
-      mobileVideo.load();
       setMobileVideoIsPlaying(false);
     }
 
     if (!props.isMorphed && desktopVideo.currentTime > 0) {
       desktopVideo.pause();
-      desktopVideo.currentTime = 0;
-      // desktopVideo.load();
       setStartState(true);
       setVideoIsPlaying(false);
     }
