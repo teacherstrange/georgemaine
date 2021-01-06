@@ -298,7 +298,7 @@ export function Video(props) {
     if (!props.isMorphed && desktopVideo.currentTime > 0) {
       desktopVideo.pause();
       desktopVideo.currentTime = 0;
-      desktopVideo.load();
+      // desktopVideo.load();
       setStartState(true);
       setVideoIsPlaying(false);
     }
