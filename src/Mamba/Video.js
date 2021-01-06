@@ -61,6 +61,18 @@ const MainControls = styled.div`
     transform 0.5s cubic-bezier(0.4, 0, 0.6, 1);
 `;
 
+const MobilePlayButtonContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.56));
+`;
+
 const PlayButtonButtonContainer = styled.div`
   height: calc(100% - 60px);
   width: 100%;
@@ -254,7 +266,6 @@ export function Video(props) {
 
   useEffect(() => {
     const mobileVideo = mobileVideoRef.current;
-    const desktopVideo = videoRef.current;
 
     if (!props.isMorphed && mobileVideo.currentTime > 0) {
       mobileVideo.pause();
@@ -274,6 +285,14 @@ export function Video(props) {
       >
         <source src={props.src} type='video/mp4' />
       </MobileVideo>
+      {!mobileVideoIsPlaying && (
+        <MobilePlayButtonContainer>
+          <PlayPauseButton type='button' onClick={() => playPauseMobileVideo()}>
+            <PlayIcon />
+          </PlayPauseButton>
+        </MobilePlayButtonContainer>
+      )}
+
       <DesktopVideo
         ref={videoRef}
         onPlay={() =>
@@ -296,26 +315,6 @@ export function Video(props) {
       >
         <source src={"/videos/apple-pay.mp4"} type='video/mp4' />
       </DesktopVideo>
-      {!mobileVideoIsPlaying && (
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background:
-              "linear-gradient(rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.56))",
-          }}
-        >
-          <PlayPauseButton type='button' onClick={() => playPauseMobileVideo()}>
-            <PlayIcon />
-          </PlayPauseButton>
-        </div>
-      )}
 
       <VideoControls>
         <PlayButtonButtonContainer>
