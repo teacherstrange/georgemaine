@@ -31,10 +31,11 @@ export const Checkout = {
 export const ApplePay = {
   key: 3,
   galleryIndex: 3,
-  width: 1920,
-  height: 1080,
-  captionRightEdge: 984,
-  src: "/videos/apple-pay.mp4",
+  width: 2880,
+  height: 1800,
+  captionRightEdge: 1520,
+  src: "/videos/large_2x.mp4",
+  poster: "/images/airpods-max.jpg",
   project: "Apple Pay Promo",
   description:
     "During the last quarter of 2019 I designed Mollie’s mobile apps to enable people to quickly manage payments and watch their business grow.",
@@ -43,10 +44,11 @@ export const ApplePay = {
 export const Promo = {
   key: 1,
   galleryIndex: 1,
-  width: 1920,
-  height: 1080,
-  captionRightEdge: 984,
-  src: "/videos/mollie-promo.mp4",
+  width: 2880,
+  height: 1800,
+  captionRightEdge: 1520,
+  src: "/videos/large_2x.mp4",
+  poster: "/images/airpods-max.jpg",
   project: "Mollie Promo",
   description:
     "During the last quarter of 2019 I designed Mollie’s mobile apps to enable people to quickly manage payments and watch their business grow.",

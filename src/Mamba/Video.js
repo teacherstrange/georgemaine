@@ -15,8 +15,6 @@ import {
   SpeakerIcon,
 } from "./index";
 
-const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
-
 const MobileVideo = styled.video`
   width: 100%;
   display: block;
@@ -40,7 +38,7 @@ export const VideoContainer = styled.div`
   border-radius: 4px;
   margin: auto;
   border: 3px solid #111;
-  transition: ${MorphTransition};
+  transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
   position: relative;
 
   ${(props) =>
@@ -56,8 +54,7 @@ const MainControls = styled.div`
   align-items: flex-end;
   height: 36px;
   padding-bottom: 24px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   opacity: 0;
   transform: translate3d(0, 20px, 0);
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.6, 1) 0.05s,
@@ -150,6 +147,7 @@ export function Video(props) {
   const [videoDuration, setVideoDuration] = useState("00:00");
   const [videoIsMuted, setVideoIsMuted] = useState(false);
   const [videoIsPlaying, setVideoIsPlaying] = useState(false);
+  const [mobileVideoIsPlaying, setMobileVideoIsPlaying] = useState(false);
   const [videoControlsVisible, setVideoControlsVisible] = useState(false);
 
   function updateVideoCurrentTime(seconds) {
@@ -167,6 +165,13 @@ export function Video(props) {
     video.paused
       ? (video.play(), setVideoIsPlaying(true))
       : (video.pause(), setVideoIsPlaying(false));
+  }
+
+  function playPauseMobileVideo() {
+    const mobileVideo = mobileVideoRef.current;
+    mobileVideo.setAttribute("controls", ""),
+      mobileVideo.play(),
+      setMobileVideoIsPlaying(true);
   }
 
   function muteVideo() {
@@ -251,15 +256,22 @@ export function Video(props) {
     const mobileVideo = mobileVideoRef.current;
     const desktopVideo = videoRef.current;
 
-    if (!props.isMorphed && mobileVideo.duration > 0) {
+    if (!props.isMorphed && mobileVideo.currentTime > 0) {
       mobileVideo.pause();
       mobileVideo.currentTime = 0;
+      mobileVideo.removeAttribute("controls");
+      mobileVideo.load();
+      setMobileVideoIsPlaying(false);
     }
   }, [props.isMorphed]);
 
   return (
     <VideoContainer ref={containerRef} ismorphed={props.isMorphed}>
-      <MobileVideo ref={mobileVideoRef} controls preload='metadata'>
+      <MobileVideo
+        ref={mobileVideoRef}
+        preload='metadata'
+        poster={props.poster}
+      >
         <source src={props.src} type='video/mp4' />
       </MobileVideo>
       <DesktopVideo
@@ -282,9 +294,28 @@ export function Video(props) {
         )}
         {...props}
       >
-        {" "}
         <source src={"/videos/apple-pay.mp4"} type='video/mp4' />
       </DesktopVideo>
+      {!mobileVideoIsPlaying && (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background:
+              "linear-gradient(rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.56))",
+          }}
+        >
+          <PlayPauseButton type='button' onClick={() => playPauseMobileVideo()}>
+            <PlayIcon />
+          </PlayPauseButton>
+        </div>
+      )}
 
       <VideoControls>
         <PlayButtonButtonContainer>

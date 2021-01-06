@@ -232,7 +232,11 @@ export function LargeMorphVideo(props) {
       </MorphCloseButton>
 
       <MorphContent ref={contentRef} className={isMorphed && "is-morphed"}>
-        <Video preload='metadata' className={isMorphed && "is-morphed"} />
+        <Video
+          preload='metadata'
+          poster={props.poster}
+          className={isMorphed && "is-morphed"}
+        />
 
         <FigCaption
           ref={captionRef}
