@@ -7,8 +7,6 @@ import {
   CloseIcon,
   CloseButton,
   OpenButton,
-  Video,
-  VideoContainer,
 } from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
@@ -184,13 +182,6 @@ export function MorphBox(props) {
       </CloseButton>
 
       <Body ref={bodyRef} image={props.image} isMorphed={isMorphed}>
-        {props.video && (
-          <VideoContainer isMorphed={isMorphed}>
-            <Video controls preload='metadata' poster={props.poster}>
-              <source src={props.video} />
-            </Video>
-          </VideoContainer>
-        )}
         <FigCaption
           ref={captionRef}
           style={{

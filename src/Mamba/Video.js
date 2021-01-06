@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import {
   SmallCaption,
@@ -248,7 +248,9 @@ export function Video(props) {
 
   return (
     <VideoContainer ref={containerRef} ismorphed={props.isMorphed}>
-      <MobileVideo controls {...props} />
+      <MobileVideo controls preload='metadata'>
+        <source src={props.src} type='video/mp4' />
+      </MobileVideo>
       <DesktopVideo
         ref={videoRef}
         onPlay={() =>
@@ -268,7 +270,11 @@ export function Video(props) {
           updateSeekBarValue(e), updateVideoCurrentTime(e.target.currentTime)
         )}
         {...props}
-      />
+      >
+        {" "}
+        <source src={"/videos/apple-pay.mp4"} type='video/mp4' />
+      </DesktopVideo>
+
       <VideoControls>
         <PlayButtonButtonContainer>
           <PlayPauseButton type='button' onClick={() => playPauseVideo()}>

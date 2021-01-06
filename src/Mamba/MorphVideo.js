@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { Caption, FigCaption, Link, CloseIcon } from "./index";
+import { Caption, FigCaption, CloseIcon, Video } from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
 const fadeIn = "opacity .3s ease .5s";
@@ -28,7 +28,6 @@ const MorphContainer = styled.li`
   }
 `;
 
-// No image needed for Video
 const MorphContent = styled.figure`
   position: absolute;
   top: 0;
@@ -116,6 +115,7 @@ const MorphOpenButton = styled.button`
   &.is-morphed {
     opacity: 0;
     transition: opacity 0.129s cubic-bezier(0.52, 0.16, 0.24, 1);
+    pointer-events: none;
   }
 
   @media (max-width: 1023px) {
@@ -140,10 +140,6 @@ const MorphCaption = styled(Caption)`
 `;
 
 // Video added
-const MorphVideo = styled.video`
-  width: 100%;
-  display: block;
-`;
 
 export function LargeMorphVideo(props) {
   const contentWidth = props.width;
@@ -236,24 +232,7 @@ export function LargeMorphVideo(props) {
       </MorphCloseButton>
 
       <MorphContent ref={contentRef} className={isMorphed && "is-morphed"}>
-        <div
-          style={{
-            width: isMorphed ? "100%" : "calc(100% - 128px)",
-            borderRadius: 4,
-            margin: "auto",
-            border: "3px solid #111",
-            transition: MorphTransition,
-          }}
-        >
-          <MorphVideo
-            controls
-            preload='metadata'
-            poster='images/airpods-max.jpg'
-            className={isMorphed && "is-morphed"}
-          >
-            <source src='videos/mollie-video.mp4' />
-          </MorphVideo>
-        </div>
+        <Video preload='metadata' className={isMorphed && "is-morphed"} />
 
         <FigCaption
           ref={captionRef}
@@ -263,17 +242,6 @@ export function LargeMorphVideo(props) {
           className={isMorphed && "is-morphed"}
         >
           {props.children}
-          <Link
-            target='_blank'
-            rel='noopener noreferrer'
-            style={{ color: "var(--red)" }}
-            href={props.href}
-          >
-            <strong>{props.project}. </strong>
-            {props.description}
-            <br />
-            {props.label}
-          </Link>
         </FigCaption>
       </MorphContent>
 
@@ -385,25 +353,7 @@ export function SmallMorphVideo(props) {
       </MorphCloseButton>
 
       <MorphContent ref={contentRef} className={isMorphed && "is-morphed"}>
-        <div
-          style={{
-            width: isMorphed ? "100%" : "calc(100% - 48px)",
-            borderRadius: 4,
-            margin: "auto",
-            border: "3px solid #111",
-            transition: MorphTransition,
-          }}
-        >
-          <MorphVideo
-            controls
-            preload='metadata'
-            poster={props.poster}
-            className={isMorphed && "is-morphed"}
-          >
-            <source src={props.href} />
-          </MorphVideo>
-        </div>
-
+        <Video preload='metadata' poster={props.poster} src={props.src} />
         <FigCaption
           ref={captionRef}
           style={{
