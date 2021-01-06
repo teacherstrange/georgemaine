@@ -34,18 +34,16 @@ const DesktopVideo = styled.video`
 `;
 
 export const VideoContainer = styled.div`
-  width: calc(100% - 48px);
+  width: ${(props) => (props.ismorphed ? "100%" : "calc(100% - 48px)")};
   border-radius: 4px;
   margin: auto;
   border: 3px solid #111;
   transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
   position: relative;
 
-  ${(props) =>
-    props.ismorphed &&
-    css`
-      width: 100%;
-    `}
+  @media (min-width: 1024px) {
+    width: ${(props) => (props.ismorphed ? "100%" : "calc(100% - 96px)")};
+  }
 `;
 
 const MainControls = styled.div`
