@@ -84,9 +84,11 @@ export const FigCaption = styled.figcaption`
     opacity 0.229s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.03s;
   top: 100%;
   opacity: 0;
+  user-select: none;
 
   strong {
     color: var(--headline);
+    user-select: none;
   }
 
   &.is-morphed {
