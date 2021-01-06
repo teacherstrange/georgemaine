@@ -137,6 +137,7 @@ const DurationTime = styled.div`
 export function Video(props) {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
+  const mobileVideoRef = useRef(null);
   const volumeBarRef = useRef(null);
   const volumeFillRef = useRef(null);
   const volumeThumbRef = useRef(null);
@@ -246,9 +247,19 @@ export function Video(props) {
     videoRef.current.removeAttribute("controls");
   }, []);
 
+  useEffect(() => {
+    const mobileVideo = mobileVideoRef.current;
+    const desktopVideo = videoRef.current;
+
+    if (!props.isMorphed && mobileVideo.duration > 0) {
+      mobileVideo.pause();
+      mobileVideo.currentTime = 0;
+    }
+  }, [props.isMorphed]);
+
   return (
     <VideoContainer ref={containerRef} ismorphed={props.isMorphed}>
-      <MobileVideo controls preload='metadata'>
+      <MobileVideo ref={mobileVideoRef} controls preload='metadata'>
         <source src={props.src} type='video/mp4' />
       </MobileVideo>
       <DesktopVideo

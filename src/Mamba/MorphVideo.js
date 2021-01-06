@@ -353,7 +353,12 @@ export function SmallMorphVideo(props) {
       </MorphCloseButton>
 
       <MorphContent ref={contentRef} className={isMorphed && "is-morphed"}>
-        <Video preload='metadata' poster={props.poster} src={props.src} />
+        <Video
+          preload='metadata'
+          isMorphed={isMorphed}
+          poster={props.poster}
+          src={props.src}
+        />
         <FigCaption
           ref={captionRef}
           style={{
