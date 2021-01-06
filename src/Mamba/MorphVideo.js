@@ -235,6 +235,8 @@ export function LargeMorphVideo(props) {
         <Video
           preload='metadata'
           poster={props.poster}
+          src={props.src}
+          isMorphed={isMorphed}
           className={isMorphed && "is-morphed"}
         />
 
@@ -245,7 +247,8 @@ export function LargeMorphVideo(props) {
           }}
           className={isMorphed && "is-morphed"}
         >
-          {props.children}
+          <strong>{props.project}. </strong>
+          {props.description}
         </FigCaption>
       </MorphContent>
 
