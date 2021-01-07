@@ -7,6 +7,7 @@ import {
   CloseButton,
   OpenButton,
   Video,
+  Label,
 } from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
@@ -58,20 +59,6 @@ const MorphContent = styled.figure`
       left: 4vh;
       right: 4vh;
     }
-  }
-`;
-
-const MorphCaption = styled(Caption)`
-  position: absolute;
-  bottom: 0;
-  left: calc((100% - 90px) / 2);
-  transition: ${MorphTransition};
-
-  @media (min-width: 540px) {
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
   }
 `;
 
@@ -191,11 +178,11 @@ export function LargeMorphVideo(props) {
         onClick={() => handleMorph(contentRef)}
         isMorphed={isMorphed}
       >
-        <MorphCaption className={isMorphed && "is-morphed"}>
+        <Label>
           <strong>{props.project}</strong>
           <br />
           Learn more
-        </MorphCaption>
+        </Label>
       </OpenButton>
     </MorphContainer>
   );
@@ -317,11 +304,11 @@ export function SmallMorphVideo(props) {
         onClick={() => handleMorph(contentRef)}
         isMorphed={isMorphed}
       >
-        <MorphCaption className={isMorphed && "is-morphed"}>
+        <Label>
           <strong>{props.project}</strong>
           <br />
           Learn more
-        </MorphCaption>
+        </Label>
       </OpenButton>
     </MorphContainer>
   );
