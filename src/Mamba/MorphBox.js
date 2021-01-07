@@ -28,7 +28,7 @@ export function MorphBox(props) {
   const [isMorphedLeft, setisMorphedLeft] = useState(0);
   const [captionX, setCaptionX] = useState(0);
 
-  function layoutCaptions(setCaptionX) {
+  function layoutCaptions() {
     const scale =
       viewportWidth / viewportHeight > contentWidth / contentHeight
         ? viewportHeight / contentHeight
