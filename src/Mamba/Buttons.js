@@ -139,7 +139,6 @@ export const OpenButton = styled.button`
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding-bottom: 8px;
 
   ${(props) =>
     props.isMorphed &&
