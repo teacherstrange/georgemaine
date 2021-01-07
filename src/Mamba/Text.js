@@ -196,3 +196,17 @@ export const SocialLink = styled.a`
     cursor: pointer;
   }
 `;
+
+export const Label = styled(Caption)`
+  position: absolute;
+  bottom: 0;
+  left: calc((100% - 90px) / 2);
+  transition: ${MorphTransition};
+
+  @media (min-width: 540px) {
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+`;

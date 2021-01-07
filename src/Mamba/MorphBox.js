@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import {
-  Caption,
+  Label,
   FigCaption,
   Link,
   CloseIcon,
@@ -83,20 +83,6 @@ const Body = styled.figure`
         right: 4vh;
       }
     `}
-`;
-
-const Label = styled(Caption)`
-  position: absolute;
-  bottom: 0;
-  left: calc((100% - 90px) / 2);
-  transition: ${MorphTransition};
-
-  @media (min-width: 540px) {
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-  }
 `;
 
 export function MorphBox(props) {
