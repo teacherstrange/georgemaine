@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
   MorphBox,
@@ -62,16 +62,16 @@ export function SmallGallery() {
           sendMorphstate={sendMorphstate}
           {...Apps}
         />
+        <SmallMorphVideo
+          pageIndex={pageIndex}
+          sendMorphstate={sendMorphstate}
+          {...Promo}
+        />
         <MorphBox
           gallerySize='small'
           pageIndex={pageIndex}
           sendMorphstate={sendMorphstate}
           {...Checkout}
-        />
-        <SmallMorphVideo
-          pageIndex={pageIndex}
-          sendMorphstate={sendMorphstate}
-          {...Promo}
         />
 
         <SmallMorphVideo
@@ -125,48 +125,45 @@ export function LargeGallery() {
           transform: `translate3d( ${(0 - pageIndex) * 100}%, 0, 0)`,
         }}
       >
-        {Array(2)
-          .fill("")
-          .map(function (value, index) {
-            return (
-              <GalleryLargeItem
-                key={index}
-                style={{
-                  transform: `translate3d( ${(0 + index) * 100}%, 0, 0)`,
-                  opacity: index - pageIndex === 0 ? 1 : 0,
-                }}
-              >
-                {Array(2)
-                  .fill("")
-                  .map(function (value, index) {
-                    return (
-                      <LargeMorphVideo
-                        key={index}
-                        width={1920}
-                        height={1080}
-                        captionRightEdge={980}
-                        pageIndex={pageIndex}
-                        galleryIndex={index}
-                        sendMorphstate={sendMorphstate}
-                        href={
-                          "https://apps.apple.com/us/app/mollie/id1473455257?ls=1"
-                        }
-                        label={"Download Mollie for Mobile ↗"}
-                        project={"Mollie Apps"}
-                      >
-                        <strong>Mollie Apps. </strong>During the last quarter of
-                        2019 I designed Mollie’s mobile apps to enable people to
-                        quickly manage payments and watch their business grow
-                        <br />
-                        <br />
-                        <strong>Enjoy managing payments on mobile.</strong>
-                      </LargeMorphVideo>
-                    );
-                  })}
-              </GalleryLargeItem>
-            );
-          })}
+        <GalleryLargeItem
+          style={{
+            transform: `translate3d( ${0 * 100}%, 0, 0)`,
+            opacity: 0 - pageIndex === 0 ? 1 : 0,
+          }}
+        >
+          <MorphBox
+            pageIndex={pageIndex}
+            sendMorphstate={sendMorphstate}
+            {...Apps}
+          />
+          <LargeMorphVideo
+            pageIndex={pageIndex}
+            sendMorphstate={sendMorphstate}
+            {...Promo}
+          />
+        </GalleryLargeItem>
+
+        <GalleryLargeItem
+          style={{
+            transform: `translate3d( ${1 * 100}%, 0, 0)`,
+            opacity: 1 - pageIndex === 0 ? 1 : 0,
+          }}
+        >
+          <MorphBox
+            pageIndex={pageIndex}
+            sendMorphstate={sendMorphstate}
+            {...Checkout}
+            galleryIndex={0}
+          />
+          <LargeMorphVideo
+            pageIndex={pageIndex}
+            sendMorphstate={sendMorphstate}
+            {...ApplePay}
+            galleryIndex={1}
+          />
+        </GalleryLargeItem>
       </ItemContainer>
+
       <PreviousButton
         type='button'
         style={{
@@ -176,7 +173,7 @@ export function LargeGallery() {
           pointerEvents: pageIndex >= 1 ? "auto" : "none",
           left: -44,
         }}
-        disabled={pageIndex === 1 ? true : false}
+        disabled={pageIndex === 1 ? false : true}
         onClick={() => {
           setPageIndex(pageIndex - 1);
         }}

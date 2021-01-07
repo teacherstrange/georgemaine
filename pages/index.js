@@ -8,8 +8,6 @@ import {
   SocialLinks,
   SmallGallery,
   LargeGallery,
-  Video,
-  VideoContainer,
 } from "../src/Mamba";
 
 export default function Home() {

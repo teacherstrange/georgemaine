@@ -34,18 +34,16 @@ const DesktopVideo = styled.video`
 `;
 
 export const VideoContainer = styled.div`
-  width: calc(100% - 48px);
+  width: ${(props) => (props.ismorphed ? "100%" : "calc(100% - 48px)")};
   border-radius: 4px;
   margin: auto;
   border: 3px solid #111;
   transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
   position: relative;
 
-  ${(props) =>
-    props.ismorphed &&
-    css`
-      width: 100%;
-    `}
+  @media (min-width: 1024px) {
+    width: ${(props) => (props.ismorphed ? "100%" : "calc(100% - 96px)")};
+  }
 `;
 
 const MainControls = styled.div`
@@ -59,6 +57,7 @@ const MainControls = styled.div`
   transform: translate3d(0, 20px, 0);
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.6, 1) 0.05s,
     transform 0.5s cubic-bezier(0.4, 0, 0.6, 1);
+  visibility: ${(props) => (props.startState ? "hidden" : "visible")};
 `;
 
 const MobilePlayButtonContainer = styled.div`
@@ -71,6 +70,10 @@ const MobilePlayButtonContainer = styled.div`
   align-items: center;
   justify-content: center;
   background: linear-gradient(rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.56));
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
 `;
 
 const PlayButtonButtonContainer = styled.div`
@@ -80,6 +83,13 @@ const PlayButtonButtonContainer = styled.div`
   transform: translate3d(0, 20px, 0);
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.6, 1) 0.05s,
     transform 0.5s cubic-bezier(0.4, 0, 0.6, 1);
+
+  ${(props) =>
+    props.startState &&
+    css`
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    `}
 `;
 
 const VideoControls = styled.div`
@@ -94,23 +104,30 @@ const VideoControls = styled.div`
   transition: opacity 1s cubic-bezier(0.4, 0, 0.6, 1);
   cursor: pointer;
 
-  &:hover {
-    opacity: 1;
+  ${(props) =>
+    props.startState
+      ? css`
+          opacity: 1;
+        `
+      : css`
+          &:hover {
+            opacity: 1;
 
-    ${PlayButtonButtonContainer} {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-      transition: opacity 0.4s cubic-bezier(0, 0, 0.2, 1) 0.25s,
-        transform 0.5s cubic-bezier(0, 0, 0.2, 1) 0.2s;
-    }
+            ${PlayButtonButtonContainer} {
+              opacity: 1;
+              transform: translate3d(0, 0, 0);
+              transition: opacity 0.4s cubic-bezier(0, 0, 0.2, 1) 0.25s,
+                transform 0.5s cubic-bezier(0, 0, 0.2, 1) 0.2s;
+            }
 
-    ${MainControls} {
-      transform: translate3d(0, 0, 0);
-      opacity: 1;
-      transition: opacity 0.4s cubic-bezier(0, 0, 0.2, 1) 0.05s,
-        transform 0.5s cubic-bezier(0, 0, 0.2, 1);
-    }
-  }
+            ${MainControls} {
+              transform: translate3d(0, 0, 0);
+              opacity: 1;
+              transition: opacity 0.4s cubic-bezier(0, 0, 0.2, 1) 0.05s,
+                transform 0.5s cubic-bezier(0, 0, 0.2, 1);
+            }
+          }
+        `}
 
   @media (max-width: 1023px) {
     display: none;
@@ -160,7 +177,7 @@ export function Video(props) {
   const [videoIsMuted, setVideoIsMuted] = useState(false);
   const [videoIsPlaying, setVideoIsPlaying] = useState(false);
   const [mobileVideoIsPlaying, setMobileVideoIsPlaying] = useState(false);
-  const [videoControlsVisible, setVideoControlsVisible] = useState(false);
+  const [startState, setStartState] = useState(true);
 
   function updateVideoCurrentTime(seconds) {
     const currentTime = formatTime(seconds);
@@ -266,13 +283,18 @@ export function Video(props) {
 
   useEffect(() => {
     const mobileVideo = mobileVideoRef.current;
+    const desktopVideo = videoRef.current;
 
     if (!props.isMorphed && mobileVideo.currentTime > 0) {
       mobileVideo.pause();
-      mobileVideo.currentTime = 0;
       mobileVideo.removeAttribute("controls");
-      mobileVideo.load();
       setMobileVideoIsPlaying(false);
+    }
+
+    if (!props.isMorphed && desktopVideo.currentTime > 0) {
+      desktopVideo.pause();
+      setStartState(true);
+      setVideoIsPlaying(false);
     }
   }, [props.isMorphed]);
 
@@ -295,39 +317,30 @@ export function Video(props) {
 
       <DesktopVideo
         ref={videoRef}
-        onPlay={() =>
-          !videoControlsVisible ? setVideoControlsVisible(true) : null
-        }
+        onPlay={() => (startState ? setStartState(false) : null)}
         onLoadedData={() => (
-          setVideoControlsVisible(true),
           updateVideoDuration(videoRef.current.duration),
           updateSeekBarFill(seekBarValue),
           updateVolumeSlider(volumeBarRef.current.value),
           (volumeBarRef.current.value = 1)
         )}
-        onEnded={() => (
-          setVideoControlsVisible(false), setVideoIsPlaying(false)
-        )}
+        onEnded={() => (setStartState(true), setVideoIsPlaying(false))}
         onTimeUpdate={(e) => (
           updateSeekBarValue(e), updateVideoCurrentTime(e.target.currentTime)
         )}
         {...props}
       >
-        <source src={"/videos/apple-pay.mp4"} type='video/mp4' />
+        <source src={props.src} type='video/mp4' />
       </DesktopVideo>
 
-      <VideoControls>
-        <PlayButtonButtonContainer>
+      <VideoControls startState={startState}>
+        <PlayButtonButtonContainer startState={startState}>
           <PlayPauseButton type='button' onClick={() => playPauseVideo()}>
             {videoIsPlaying ? <PauseIcon /> : <PlayIcon />}
           </PlayPauseButton>
         </PlayButtonButtonContainer>
 
-        <MainControls
-          style={{
-            visibility: videoControlsVisible ? "visible" : "hidden",
-          }}
-        >
+        <MainControls startState={startState}>
           <VolumeSlider
             volumeFillRef={volumeFillRef}
             volumeBarRef={volumeBarRef}
