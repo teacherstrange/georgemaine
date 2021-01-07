@@ -1,14 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import {
-  Caption,
-  FigCaption,
-  CloseIcon,
-  CloseButton,
-  OpenButton,
-  Video,
-  Label,
-} from "./index";
+import { FigCaption, CloseIcon, CloseButton, OpenButton, Video } from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
 const fadeIn = "opacity .3s ease .5s";
@@ -43,6 +35,7 @@ const MorphContent = styled.figure`
   left: 0;
   bottom: 64px;
   display: flex;
+  align-items: center;
   transition: ${MorphTransition};
 
   &.is-morphed {
@@ -53,11 +46,17 @@ const MorphContent = styled.figure`
   }
 
   @media (max-width: 1023px) {
+    justify-content: center;
+
     &.is-morphed {
       top: 16vh;
       bottom: 42vh;
       left: 4vh;
       right: 4vh;
+    }
+
+    figcaption {
+      padding-top: calc(100% + 32px);
     }
   }
 `;
@@ -178,11 +177,8 @@ export function LargeMorphVideo(props) {
         onClick={() => handleMorph(contentRef)}
         isMorphed={isMorphed}
       >
-        <Label>
-          <strong>{props.project}</strong>
-          <br />
-          Learn more
-        </Label>
+        <strong>{props.project}</strong>
+        Learn more
       </OpenButton>
     </MorphContainer>
   );
@@ -304,11 +300,8 @@ export function SmallMorphVideo(props) {
         onClick={() => handleMorph(contentRef)}
         isMorphed={isMorphed}
       >
-        <Label>
-          <strong>{props.project}</strong>
-          <br />
-          Learn more
-        </Label>
+        <strong>{props.project}</strong>
+        Learn more
       </OpenButton>
     </MorphContainer>
   );

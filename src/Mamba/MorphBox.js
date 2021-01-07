@@ -1,13 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
-import {
-  Label,
-  FigCaption,
-  Link,
-  CloseIcon,
-  CloseButton,
-  OpenButton,
-} from "./index";
+import { FigCaption, Link, CloseIcon, CloseButton, OpenButton } from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
 const fadeIn = "opacity .3s ease .5s";
@@ -61,6 +54,8 @@ const Body = styled.figure`
       background-position: center;
       background-repeat: no-repeat;
     `}
+  display: flex;
+  align-items: center;
   position: absolute;
   top: 0;
   right: 0;
@@ -83,6 +78,14 @@ const Body = styled.figure`
         right: 4vh;
       }
     `}
+
+  @media (max-width: 1023px) {
+    justify-content: center;
+
+    figcaption {
+      padding-top: calc(100% + 124px);
+    }
+  }
 `;
 
 export function MorphBox(props) {
@@ -202,11 +205,8 @@ export function MorphBox(props) {
         onClick={() => handleMorph(bodyRef)}
         isMorphed={isMorphed}
       >
-        <Label>
-          <strong>{props.project}</strong>
-          <br />
-          Learn more
-        </Label>
+        <strong>{props.project}</strong>
+        Learn more
       </OpenButton>
     </Container>
   );

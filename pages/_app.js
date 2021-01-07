@@ -135,6 +135,10 @@ html {
   font-size: 62.5%;
 }
 
+strong {
+    color: var(--headline);
+  }
+
 body {
   font-family: TT Interphases, -system-ui, system-ui, sans-serif;
   font-weight: 600;
