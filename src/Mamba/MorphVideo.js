@@ -167,10 +167,6 @@ export function SmallMorphVideo(props) {
   }
 
   useEffect(() => {
-    contentRef.current, captionRef.current;
-  }, []);
-
-  useEffect(() => {
     const myObserver = new ResizeObserver((entries) => {
       entries.forEach((entry) => {
         setViewportWidth(entry.contentRect.width);

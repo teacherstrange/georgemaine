@@ -28,6 +28,10 @@ export const Button = styled.button`
   text-align: center;
   color: var(--white);
   background-color: var(--red);
+
+  &:active {
+    transform: none;
+  }
 `;
 
 export const CloseButton = styled.button`

@@ -1,7 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
 
-const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
-
 const largeTitleStyle = css`
   font-size: 2.6rem;
   line-height: 3.2rem;
@@ -77,12 +75,11 @@ export const FigCaption = styled.figcaption`
   ${bodyStyle}
   width: 275px;
   position: absolute;
-  transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
-    opacity 0.229s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.03s;
-
   opacity: 0;
   display: inline;
   user-select: none;
+  transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
+    opacity 0.229s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.03s;
 
   &.is-morphed {
     opacity: 1;
@@ -158,23 +155,20 @@ export const SocialLink = styled.a`
   visibility: hidden;
   transform: translatex(-100%);
   margin-left: 16px;
+  animation: ${woosh} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
 
   :first-of-type {
     margin-left: 0;
-    animation: ${woosh} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
     animation-delay: 0.04s;
   }
 
   :nth-of-type(2) {
-    animation: ${woosh} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
     animation-delay: 0.08s;
   }
   :nth-of-type(3) {
-    animation: ${woosh} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
     animation-delay: 0.12s;
   }
   :nth-of-type(4) {
-    animation: ${woosh} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
     animation-delay: 0.16s;
   }
 
