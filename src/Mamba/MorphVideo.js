@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+
 import {
+  Body,
   Container,
   FigCaption,
   CloseIcon,
@@ -8,41 +9,6 @@ import {
   OpenButton,
   Video,
 } from "./index";
-
-const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
-
-const MorphContent = styled.figure`
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 64px;
-  display: flex;
-  align-items: center;
-  transition: ${MorphTransition};
-
-  &.is-morphed {
-    left: 10vh;
-    right: 50vh;
-    top: 10vh;
-    bottom: 10vh;
-  }
-
-  @media (max-width: 1023px) {
-    justify-content: center;
-
-    &.is-morphed {
-      top: 16vh;
-      bottom: 42vh;
-      left: 4vh;
-      right: 4vh;
-    }
-
-    figcaption {
-      padding-top: calc(100% + 32px);
-    }
-  }
-`;
 
 export function LargeMorphVideo(props) {
   const contentWidth = props.width;
@@ -129,7 +95,7 @@ export function LargeMorphVideo(props) {
         <CloseIcon />
       </CloseButton>
 
-      <MorphContent ref={contentRef} className={isMorphed && "is-morphed"}>
+      <Body ref={contentRef} isMorphed={isMorphed}>
         <Video
           preload='metadata'
           poster={props.poster}
@@ -148,7 +114,7 @@ export function LargeMorphVideo(props) {
           <strong>{props.project}. </strong>
           {props.description}
         </FigCaption>
-      </MorphContent>
+      </Body>
 
       <OpenButton
         type='button'
@@ -251,7 +217,7 @@ export function SmallMorphVideo(props) {
         <CloseIcon />
       </CloseButton>
 
-      <MorphContent ref={contentRef} className={isMorphed && "is-morphed"}>
+      <Body ref={contentRef} isMorphed={isMorphed}>
         <Video
           preload='metadata'
           isMorphed={isMorphed}
@@ -268,7 +234,7 @@ export function SmallMorphVideo(props) {
           <strong>{props.project}. </strong>
           {props.description}
         </FigCaption>
-      </MorphContent>
+      </Body>
 
       <OpenButton
         type='button'

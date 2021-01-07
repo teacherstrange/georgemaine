@@ -45,7 +45,7 @@ export const Container = styled.li`
   transition: ${MorphTransition}, ${fadeIn};
 `;
 
-const Body = styled.figure`
+export const Body = styled.figure`
   ${(props) =>
     props.image &&
     css`
@@ -83,7 +83,7 @@ const Body = styled.figure`
     justify-content: center;
 
     figcaption {
-      padding-top: calc(100% + 124px);
+      padding-top: calc(100% + ${(props) => (props.image ? "124px" : "32px")});
     }
   }
 `;
