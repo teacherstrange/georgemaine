@@ -1,6 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { Caption, FigCaption, CloseIcon, Video } from "./index";
+import {
+  Caption,
+  FigCaption,
+  CloseIcon,
+  CloseButton,
+  OpenButton,
+  Video,
+} from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
 const fadeIn = "opacity .3s ease .5s";
@@ -54,77 +61,6 @@ const MorphContent = styled.figure`
   }
 `;
 
-const MorphCloseButton = styled.button`
-  position: absolute;
-  right: 16px;
-  top: 16px;
-  height: 36px;
-  width: 36px;
-  border-radius: 32px;
-  background-color: var(--secondaryFill);
-  border: none;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-  opacity: 0;
-  transition: background-color 0.25s linear;
-
-  path {
-    color: var(--primaryLabelFill);
-    transition: stroke 0.25s linear;
-  }
-
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: var(--tertiaryFill);
-    color: var(--secondaryLabelFill);
-
-    path {
-      stroke: var(--secondaryLabelFill);
-    }
-  }
-
-  &.is-morphed {
-    opacity: 1;
-    transition: opacity 0.37s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s,
-      background-color 0.25s linear;
-  }
-`;
-
-const MorphOpenButton = styled.button`
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  outline: none;
-  z-index: 1;
-  font: inherit;
-  color: inherit;
-  transition: opacity 0.229s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
-  opacity: 1;
-
-  &.is-morphed {
-    opacity: 0;
-    transition: opacity 0.129s cubic-bezier(0.52, 0.16, 0.24, 1);
-    pointer-events: none;
-  }
-
-  @media (max-width: 1023px) {
-    &.is-morphed {
-      transition: opacity 0.24s cubic-bezier(0.52, 0.16, 0.24, 1);
-    }
-  }
-`;
-
 const MorphCaption = styled(Caption)`
   position: absolute;
   bottom: 0;
@@ -138,8 +74,6 @@ const MorphCaption = styled(Caption)`
     margin-right: auto;
   }
 `;
-
-// Video added
 
 export function LargeMorphVideo(props) {
   const contentWidth = props.width;
@@ -223,13 +157,13 @@ export function LargeMorphVideo(props) {
       }}
       className={isMorphed && "is-morphed"}
     >
-      <MorphCloseButton
+      <CloseButton
         type='button'
         onClick={() => (setIsMorphed(!isMorphed), sendMorphstate(!isMorphed))}
-        className={isMorphed && "is-morphed"}
+        isMorphed={isMorphed}
       >
         <CloseIcon />
-      </MorphCloseButton>
+      </CloseButton>
 
       <MorphContent ref={contentRef} className={isMorphed && "is-morphed"}>
         <Video
@@ -252,17 +186,17 @@ export function LargeMorphVideo(props) {
         </FigCaption>
       </MorphContent>
 
-      <MorphOpenButton
+      <OpenButton
         type='button'
         onClick={() => handleMorph(contentRef)}
-        className={isMorphed && "is-morphed"}
+        isMorphed={isMorphed}
       >
         <MorphCaption className={isMorphed && "is-morphed"}>
           <strong>{props.project}</strong>
           <br />
           Learn more
         </MorphCaption>
-      </MorphOpenButton>
+      </OpenButton>
     </MorphContainer>
   );
 }
@@ -351,13 +285,13 @@ export function SmallMorphVideo(props) {
       }}
       className={isMorphed && "is-morphed"}
     >
-      <MorphCloseButton
+      <CloseButton
         type='button'
         onClick={() => (setIsMorphed(!isMorphed), sendMorphstate(!isMorphed))}
-        className={isMorphed && "is-morphed"}
+        isMorphed={isMorphed}
       >
         <CloseIcon />
-      </MorphCloseButton>
+      </CloseButton>
 
       <MorphContent ref={contentRef} className={isMorphed && "is-morphed"}>
         <Video
@@ -378,17 +312,17 @@ export function SmallMorphVideo(props) {
         </FigCaption>
       </MorphContent>
 
-      <MorphOpenButton
+      <OpenButton
         type='button'
         onClick={() => handleMorph(contentRef)}
-        className={isMorphed && "is-morphed"}
+        isMorphed={isMorphed}
       >
         <MorphCaption className={isMorphed && "is-morphed"}>
           <strong>{props.project}</strong>
           <br />
           Learn more
         </MorphCaption>
-      </MorphOpenButton>
+      </OpenButton>
     </MorphContainer>
   );
 }

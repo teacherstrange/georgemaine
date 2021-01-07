@@ -22,6 +22,11 @@ const Container = styled.li`
   top: 0;
   left: 0;
   transform: translate3d(${(props) => 100 * props.galleryIndex}%, 0, 0);
+
+  @media (min-width: 1060px) {
+    width: 50%;
+  }
+
   ${(props) =>
     props.isMorphed &&
     css`
@@ -32,6 +37,10 @@ const Container = styled.li`
       height: 100vh;
       background-color: var(--overlay);
       backdrop-filter: blur(20px) saturate(50%);
+
+      @media (min-width: 1060px) {
+        width: 100vw;
+      }
     `}
 
   ${(props) =>
@@ -39,9 +48,7 @@ const Container = styled.li`
     css`
       opacity: ${props.activeIndex === 0 ? 1 : 0};
     `}
-  @media (min-width: 1060px) {
-    width: 50%;
-  }
+  
   transition: ${MorphTransition}, ${fadeIn};
 `;
 
