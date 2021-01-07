@@ -76,7 +76,6 @@ export const PreviousButton = styled.button`
   align-items: center;
   z-index: 1;
   transition: 0.25s background-color linear, 0.25s opacity linear;
-  outline: none;
 
   path {
     color: var(--primaryLabelFill);
