@@ -63,10 +63,6 @@ export const Headline = styled.h2`
 export const Caption = styled.p`
   ${bodyStyle}
 
-  strong {
-    color: var(--headline);
-  }
-
   &:nth-child(2) {
     margin-top: 24px;
   }
@@ -87,11 +83,6 @@ export const FigCaption = styled.figcaption`
   top: 100%;
   opacity: 0;
   user-select: none;
-
-  strong {
-    color: var(--headline);
-    user-select: none;
-  }
 
   &.is-morphed {
     opacity: 1;
@@ -196,19 +187,5 @@ export const SocialLink = styled.a`
 
   &:hover {
     cursor: pointer;
-  }
-`;
-
-export const Label = styled(Caption)`
-  position: absolute;
-  bottom: 0;
-  left: calc((100% - 90px) / 2);
-  transition: ${MorphTransition};
-
-  @media (min-width: 540px) {
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
   }
 `;

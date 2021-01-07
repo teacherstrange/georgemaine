@@ -128,7 +128,6 @@ export const NextButton = styled.button`
 
 export const OpenButton = styled.button`
   ${baseStyle}
-  background: transparent;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -136,6 +135,10 @@ export const OpenButton = styled.button`
   color: inherit;
   transition: opacity 0.229s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
   opacity: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
 
   ${(props) =>
     props.isMorphed &&

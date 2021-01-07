@@ -1,13 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
-import {
-  Label,
-  FigCaption,
-  Link,
-  CloseIcon,
-  CloseButton,
-  OpenButton,
-} from "./index";
+import { FigCaption, Link, CloseIcon, CloseButton, OpenButton } from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
 const fadeIn = "opacity .3s ease .5s";
@@ -202,11 +195,8 @@ export function MorphBox(props) {
         onClick={() => handleMorph(bodyRef)}
         isMorphed={isMorphed}
       >
-        <Label>
-          <strong>{props.project}</strong>
-          <br />
-          Learn more
-        </Label>
+        <strong>{props.project}</strong>
+        Learn more
       </OpenButton>
     </Container>
   );
