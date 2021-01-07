@@ -76,12 +76,12 @@ export const SmallCaption = styled.p`
 export const FigCaption = styled.figcaption`
   ${bodyStyle}
   width: 275px;
-  text-align: left;
   position: absolute;
-  transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
+  transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
     opacity 0.229s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.03s;
-  top: 100%;
+
   opacity: 0;
+  display: inline;
   user-select: none;
 
   &.is-morphed {
@@ -89,11 +89,6 @@ export const FigCaption = styled.figcaption`
   }
 
   @media (min-width: 1024px) {
-    top: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     transition: opacity 0.32244s cubic-bezier(0.32, 0.08, 0.24, 1) 0.05s,
       transform cubic-bezier(0.52, 0.16, 0.24, 1);
 
@@ -104,9 +99,7 @@ export const FigCaption = styled.figcaption`
   }
 
   @media (max-width: 1023px) {
-    left: calc((100% - 275px) / 2);
     transform: scale(0.93) !important;
-    padding-top: 24px;
 
     &.is-morphed {
       transform: scale(1) !important;

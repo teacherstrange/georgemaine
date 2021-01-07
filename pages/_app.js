@@ -137,6 +137,7 @@ html {
 
 strong {
     color: var(--headline);
+    display: inline;
   }
 
 body {

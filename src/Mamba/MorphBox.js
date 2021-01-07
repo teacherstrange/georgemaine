@@ -54,6 +54,8 @@ const Body = styled.figure`
       background-position: center;
       background-repeat: no-repeat;
     `}
+  display: flex;
+  align-items: center;
   position: absolute;
   top: 0;
   right: 0;
@@ -76,6 +78,14 @@ const Body = styled.figure`
         right: 4vh;
       }
     `}
+
+  @media (max-width: 1023px) {
+    justify-content: center;
+
+    figcaption {
+      padding-top: calc(100% + 124px);
+    }
+  }
 `;
 
 export function MorphBox(props) {

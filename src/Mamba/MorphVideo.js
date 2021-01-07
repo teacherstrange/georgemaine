@@ -35,6 +35,7 @@ const MorphContent = styled.figure`
   left: 0;
   bottom: 64px;
   display: flex;
+  align-items: center;
   transition: ${MorphTransition};
 
   &.is-morphed {
@@ -45,11 +46,17 @@ const MorphContent = styled.figure`
   }
 
   @media (max-width: 1023px) {
+    justify-content: center;
+
     &.is-morphed {
       top: 16vh;
       bottom: 42vh;
       left: 4vh;
       right: 4vh;
+    }
+
+    figcaption {
+      padding-top: calc(100% + 32px);
     }
   }
 `;
