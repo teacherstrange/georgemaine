@@ -6,7 +6,8 @@ import {
   Header,
   Section,
   SocialLinks,
-  Gallery,
+  SmallGallery,
+  LargeGallery,
 } from "../src/Mamba";
 
 export default function Home() {
@@ -39,7 +40,8 @@ export default function Home() {
       </Header>
       <Section>
         <Headline>Work</Headline>
-        <Gallery />
+        <SmallGallery />
+        <LargeGallery />
       </Section>
     </main>
   );

@@ -87,7 +87,9 @@ export function SocialLinks() {
           </SocialLink>
         </SocialLinksContainer>
       ) : (
-        <Button onClick={() => setIsVisible(!isVisible)}>Get in touch</Button>
+        <Button type='button' onClick={() => setIsVisible(!isVisible)}>
+          Get in touch
+        </Button>
       )}
     </>
   );

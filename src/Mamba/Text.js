@@ -1,5 +1,7 @@
 import styled, { css, keyframes } from "styled-components";
 
+const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
+
 const largeTitleStyle = css`
   font-size: 2.6rem;
   line-height: 3.2rem;
@@ -24,6 +26,13 @@ const bodyStyle = css`
   letter-spacing: -0.023rem;
 `;
 
+const smallBodyStyle = css`
+  font-size: 1.3rem;
+  line-height: 3.6rem;
+  letter-spacing: -0.008rem;
+  color: var(--white);
+`;
+
 export const Manifesto = styled.h1`
   ${smallTitleStyle}
   text-align: center;
@@ -33,7 +42,7 @@ export const Manifesto = styled.h1`
   @media (min-width: 540px) {
     ${titleStyle}
   }
-  @media (min-width: 980px) {
+  @media (min-width: 1060px) {
     ${largeTitleStyle}
   }
 `;
@@ -46,7 +55,7 @@ export const Headline = styled.h2`
   @media (min-width: 540px) {
     ${titleStyle}
   }
-  @media (min-width: 980px) {
+  @media (min-width: 1060px) {
     ${largeTitleStyle}
   }
 `;
@@ -63,6 +72,11 @@ export const Caption = styled.p`
   }
 `;
 
+export const SmallCaption = styled.p`
+  ${smallBodyStyle}
+  color: var(--white);
+`;
+
 export const FigCaption = styled.figcaption`
   ${bodyStyle}
   width: 275px;
@@ -71,20 +85,19 @@ export const FigCaption = styled.figcaption`
   transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
     opacity 0.229s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.03s;
   top: 100%;
-
-  left: calc((100% - 275px) / 2);
   opacity: 0;
+  user-select: none;
 
   strong {
     color: var(--headline);
+    user-select: none;
   }
 
   &.is-morphed {
     opacity: 1;
   }
 
-  @media (min-width: 980px) {
-    left: unset;
+  @media (min-width: 1024px) {
     top: 0;
     bottom: 0;
     display: flex;
@@ -94,13 +107,13 @@ export const FigCaption = styled.figcaption`
       transform cubic-bezier(0.52, 0.16, 0.24, 1);
 
     &.is-morphed {
-      left: unset;
       transition: opacity 0.3345s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.15s,
         transform cubic-bezier(0.52, 0.16, 0.24, 1);
     }
   }
 
-  @media (max-width: 979px) {
+  @media (max-width: 1023px) {
+    left: calc((100% - 275px) / 2);
     transform: scale(0.93) !important;
     padding-top: 24px;
 
@@ -183,5 +196,19 @@ export const SocialLink = styled.a`
 
   &:hover {
     cursor: pointer;
+  }
+`;
+
+export const Label = styled(Caption)`
+  position: absolute;
+  bottom: 0;
+  left: calc((100% - 90px) / 2);
+  transition: ${MorphTransition};
+
+  @media (min-width: 540px) {
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
   }
 `;
