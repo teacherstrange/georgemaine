@@ -5,7 +5,7 @@ import { FigCaption, Link, CloseIcon, CloseButton, OpenButton } from "./index";
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
 const fadeIn = "opacity .3s ease .5s";
 
-const Container = styled.li`
+export const Container = styled.li`
   height: 314px;
   width: 100%;
   z-index: 0;
@@ -95,7 +95,7 @@ export function MorphBox(props) {
   const galleryIndex = props.galleryIndex;
 
   // Difference — Get index to determine LTR layout
-  const activeIndex = props.galleryIndex - props.pageIndex;
+  const activeIndex = props.galleryIndex - props.currentIndex;
   const sendMorphstate = props.sendMorphstate;
 
   // Distance between the center of the body and its optical right edge in the coordinate system of the native image resolution

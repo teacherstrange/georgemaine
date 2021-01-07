@@ -11,12 +11,8 @@ import {
 } from "./index";
 import { Apps, Promo, Checkout, ApplePay } from "../Data";
 
-// Variables
-const galleryHeight = 314;
-const fade = "opacity 0.3s ease 0.5s";
-
 const GallerySmall = styled.div`
-  height: ${galleryHeight}px;
+  height: 314px;
   position: relative;
 
   @media (min-width: 1060px) {
@@ -25,7 +21,7 @@ const GallerySmall = styled.div`
 `;
 
 const GalleryLarge = styled.div`
-  height: ${galleryHeight}px;
+  height: 314px;
   position: relative;
 
   @media (max-width: 1059px) {
@@ -34,7 +30,8 @@ const GalleryLarge = styled.div`
 `;
 
 const ItemContainer = styled.ul`
-  transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1), ${fade};
+  transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1),
+    opacity 0.3s ease 0.5s;
 `;
 
 const GalleryLargeItem = styled.div`
@@ -42,40 +39,40 @@ const GalleryLargeItem = styled.div`
   top: 0;
   width: 100%;
   display: flex;
-  transition: ${fade};
+  transition: opacity 0.3s ease 0.5s; ;
 `;
 
 export function SmallGallery() {
-  const [pageIndex, setPageIndex] = useState(0);
+  const [currentIndex, setCurrentindex] = useState(0);
   const [morphstate, sendMorphstate] = useState(false);
 
   return (
     <GallerySmall>
       <ItemContainer
         style={{
-          transform: `translate3d( ${(0 - pageIndex) * 100}%, 0, 0)`,
+          transform: `translate3d( ${(0 - currentIndex) * 100}%, 0, 0)`,
         }}
       >
         <MorphBox
           gallerySize='small'
-          pageIndex={pageIndex}
+          currentIndex={currentIndex}
           sendMorphstate={sendMorphstate}
           {...Apps}
         />
         <SmallMorphVideo
-          pageIndex={pageIndex}
+          currentIndex={currentIndex}
           sendMorphstate={sendMorphstate}
           {...Promo}
         />
         <MorphBox
           gallerySize='small'
-          pageIndex={pageIndex}
+          currentIndex={currentIndex}
           sendMorphstate={sendMorphstate}
           {...Checkout}
         />
 
         <SmallMorphVideo
-          pageIndex={pageIndex}
+          currentIndex={currentIndex}
           sendMorphstate={sendMorphstate}
           {...ApplePay}
         />
@@ -85,9 +82,9 @@ export function SmallGallery() {
         style={{
           zIndex: morphstate && -1,
         }}
-        disabled={pageIndex >= 1 ? false : true}
+        disabled={currentIndex >= 1 ? false : true}
         onClick={() => {
-          setPageIndex(pageIndex - 1);
+          setCurrentindex(currentIndex - 1);
         }}
       >
         <PreviousArrowIcon />
@@ -97,9 +94,9 @@ export function SmallGallery() {
         style={{
           zIndex: morphstate && -1,
         }}
-        disabled={pageIndex <= 2 ? false : true}
+        disabled={currentIndex <= 2 ? false : true}
         onClick={() => {
-          setPageIndex(pageIndex + 1);
+          setCurrentindex(currentIndex + 1);
         }}
       >
         <NextArrowIcon />
@@ -109,29 +106,29 @@ export function SmallGallery() {
 }
 
 export function LargeGallery() {
-  const [pageIndex, setPageIndex] = useState(0);
+  const [currentIndex, setCurrentindex] = useState(0);
   const [morphstate, sendMorphstate] = useState();
 
   return (
     <GalleryLarge>
       <ItemContainer
         style={{
-          transform: `translate3d( ${(0 - pageIndex) * 100}%, 0, 0)`,
+          transform: `translate3d( ${(0 - currentIndex) * 100}%, 0, 0)`,
         }}
       >
         <GalleryLargeItem
           style={{
             transform: `translate3d( ${0 * 100}%, 0, 0)`,
-            opacity: 0 - pageIndex === 0 ? 1 : 0,
+            opacity: 0 - currentIndex === 0 ? 1 : 0,
           }}
         >
           <MorphBox
-            pageIndex={pageIndex}
+            currentIndex={currentIndex}
             sendMorphstate={sendMorphstate}
             {...Apps}
           />
           <LargeMorphVideo
-            pageIndex={pageIndex}
+            currentIndex={currentIndex}
             sendMorphstate={sendMorphstate}
             {...Promo}
           />
@@ -140,17 +137,17 @@ export function LargeGallery() {
         <GalleryLargeItem
           style={{
             transform: `translate3d( ${1 * 100}%, 0, 0)`,
-            opacity: 1 - pageIndex === 0 ? 1 : 0,
+            opacity: 1 - currentIndex === 0 ? 1 : 0,
           }}
         >
           <MorphBox
-            pageIndex={pageIndex}
+            currentIndex={currentIndex}
             sendMorphstate={sendMorphstate}
             {...Checkout}
             galleryIndex={0}
           />
           <LargeMorphVideo
-            pageIndex={pageIndex}
+            currentIndex={currentIndex}
             sendMorphstate={sendMorphstate}
             {...ApplePay}
             galleryIndex={1}
@@ -163,9 +160,9 @@ export function LargeGallery() {
         style={{
           zIndex: morphstate && -1,
         }}
-        disabled={pageIndex === 1 ? false : true}
+        disabled={currentIndex === 1 ? false : true}
         onClick={() => {
-          setPageIndex(pageIndex - 1);
+          setCurrentindex(currentIndex - 1);
         }}
       >
         <PreviousArrowIcon />
@@ -175,9 +172,9 @@ export function LargeGallery() {
         style={{
           zIndex: morphstate && -1,
         }}
-        disabled={pageIndex === 0 ? false : true}
+        disabled={currentIndex === 0 ? false : true}
         onClick={() => {
-          setPageIndex(pageIndex + 1);
+          setCurrentindex(currentIndex + 1);
         }}
       >
         <NextArrowIcon />

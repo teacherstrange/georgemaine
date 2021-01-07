@@ -1,32 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { FigCaption, CloseIcon, CloseButton, OpenButton, Video } from "./index";
+import {
+  Container,
+  FigCaption,
+  CloseIcon,
+  CloseButton,
+  OpenButton,
+  Video,
+} from "./index";
 
 const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
-const fadeIn = "opacity .3s ease .5s";
-
-const MorphContainer = styled.li`
-  height: 314px;
-  width: 100%;
-  z-index: 0;
-  position: absolute;
-  overflow: hidden;
-  background-color: transparent;
-  transition: ${MorphTransition}, ${fadeIn};
-  top: 0;
-  left: 0;
-
-  &.is-morphed {
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--overlay);
-    backdrop-filter: blur(20px) saturate(50%);
-  }
-
-  @media (min-width: 1060px) {
-    width: 50%;
-  }
-`;
 
 const MorphContent = styled.figure`
   position: absolute;
@@ -66,8 +49,6 @@ export function LargeMorphVideo(props) {
   const contentHeight = props.height;
   const galleryIndex = props.galleryIndex;
   const sendMorphstate = props.sendMorphstate;
-
-  // Distance between the center of the image and its optical right edge in the coordinate system of the native image resolution
   const captionRightEdges = props.captionRightEdge;
 
   const contentRef = useRef(null);
@@ -76,8 +57,8 @@ export function LargeMorphVideo(props) {
   const [viewportHeight, setViewportHeight] = useState(0);
   const [viewportWidth, setViewportWidth] = useState(0);
   const [isMorphed, setIsMorphed] = useState(false);
-  const [morphTop, setMorphTop] = useState(0);
-  const [morphLeft, setMorphLeft] = useState(0);
+  const [isMorphedTop, setIsMorphedTop] = useState(0);
+  const [isMorphedLeft, setisMorphedLeft] = useState(0);
   const [captionX, setCaptionX] = useState(0);
 
   function layoutCaptions() {
@@ -96,8 +77,8 @@ export function LargeMorphVideo(props) {
     const screenWidth = window.innerWidth;
     const screenOffset = screenWidth - viewportWidth;
     const galleryOffset = galleryIndex * screenOffset;
-    setMorphTop(-ref.current.getBoundingClientRect().top);
-    setMorphLeft(-ref.current.getBoundingClientRect().left - galleryOffset);
+    setIsMorphedTop(-ref.current.getBoundingClientRect().top);
+    setisMorphedLeft(-ref.current.getBoundingClientRect().left - galleryOffset);
   }
 
   useEffect(() => {
@@ -134,14 +115,11 @@ export function LargeMorphVideo(props) {
   }, [isMorphed]);
 
   return (
-    <MorphContainer
-      style={{
-        top: isMorphed ? morphTop : null,
-        left: isMorphed ? morphLeft : null,
-        transform: `translate3d( ${100 * galleryIndex}%, 0, 0)`,
-        zIndex: isMorphed ? 20 : null,
-      }}
-      className={isMorphed && "is-morphed"}
+    <Container
+      isMorphed={isMorphed}
+      isMorphedTop={isMorphedTop}
+      isMorphedLeft={isMorphedLeft}
+      galleryIndex={galleryIndex}
     >
       <CloseButton
         type='button'
@@ -180,7 +158,7 @@ export function LargeMorphVideo(props) {
         <strong>{props.project}</strong>
         Learn more
       </OpenButton>
-    </MorphContainer>
+    </Container>
   );
 }
 
@@ -189,9 +167,7 @@ export function SmallMorphVideo(props) {
   const contentHeight = props.height;
   const galleryIndex = props.galleryIndex;
   const sendMorphstate = props.sendMorphstate;
-  const transformedIndex = props.galleryIndex - props.pageIndex;
-
-  // Distance between the center of the image and its optical right edge in the coordinate system of the native image resolution
+  const transformedIndex = props.galleryIndex - props.currentIndex;
   const captionRightEdges = props.captionRightEdge;
 
   const contentRef = useRef(null);
@@ -200,8 +176,8 @@ export function SmallMorphVideo(props) {
   const [viewportHeight, setViewportHeight] = useState(0);
   const [viewportWidth, setViewportWidth] = useState(0);
   const [isMorphed, setIsMorphed] = useState(false);
-  const [morphTop, setMorphTop] = useState(0);
-  const [morphLeft, setMorphLeft] = useState(0);
+  const [isMorphedTop, setIsMorphedTop] = useState(0);
+  const [isMorphedLeft, setisMorphedLeft] = useState(0);
   const [captionX, setCaptionX] = useState(0);
 
   function layoutCaptions() {
@@ -220,8 +196,8 @@ export function SmallMorphVideo(props) {
     const screenWidth = window.innerWidth;
     const screenOffset = screenWidth - viewportWidth;
     const galleryOffset = galleryIndex * screenOffset;
-    setMorphTop(-ref.current.getBoundingClientRect().top);
-    setMorphLeft(-ref.current.getBoundingClientRect().left - galleryOffset);
+    setIsMorphedTop(-ref.current.getBoundingClientRect().top);
+    setisMorphedLeft(-ref.current.getBoundingClientRect().left - galleryOffset);
   }
 
   useEffect(() => {
@@ -258,15 +234,14 @@ export function SmallMorphVideo(props) {
   }, [isMorphed]);
 
   return (
-    <MorphContainer
+    <Container
+      isMorphed={isMorphed}
+      isMorphedTop={isMorphedTop}
+      isMorphedLeft={isMorphedLeft}
+      galleryIndex={galleryIndex}
       style={{
-        top: isMorphed ? morphTop : null,
-        left: isMorphed ? morphLeft : null,
-        transform: `translate3d( ${100 * galleryIndex}%, 0, 0)`,
         opacity: transformedIndex === 0 ? 1 : 0,
-        zIndex: isMorphed ? 20 : null,
       }}
-      className={isMorphed && "is-morphed"}
     >
       <CloseButton
         type='button'
@@ -303,6 +278,6 @@ export function SmallMorphVideo(props) {
         <strong>{props.project}</strong>
         Learn more
       </OpenButton>
-    </MorphContainer>
+    </Container>
   );
 }
