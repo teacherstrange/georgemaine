@@ -1,5 +1,30 @@
 import styled from "styled-components";
 
+const VolumeBar = styled.input`
+  &[type="range"][orient="vertical"] {
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
+    width: 8px;
+    height: 100%;
+    padding: 0 5px;
+    opacity: 0;
+    cursor: pointer;
+  }
+`;
+
+const VolumeFill = styled.div`
+  border-radius: 4px;
+  width: 4px;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  pointer-events: none;
+`;
+
 const VolumeThumb = styled.div`
   width: 12px;
   height: 12px;
@@ -16,21 +41,6 @@ const VolumeThumb = styled.div`
   pointer-events: none;
   opacity: 0;
   transition: transform 0.25s ease, opacity 0.25s ease 0.25s;
-`;
-
-const VolumeFill = styled.div`
-  border-radius: 4px;
-  margin: 0;
-  padding: 0;
-  width: 4px;
-  height: 100%;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  position: absolute;
-  pointer-events: none;
 `;
 
 const VolumeContainer = styled.div`
@@ -62,18 +72,6 @@ const VolumeControls = styled.div`
     opacity: 1;
     transition: height 0.335s cubic-bezier(0.4, 0, 0.6, 1),
       opacity 0.067s cubic-bezier(0.4, 0, 0.6, 1);
-  }
-`;
-
-const VolumeBar = styled.input`
-  &[type="range"][orient="vertical"] {
-    writing-mode: bt-lr; /* IE */
-    -webkit-appearance: slider-vertical; /* WebKit */
-    width: 8px;
-    height: 100%;
-    padding: 0 5px;
-    opacity: 0;
-    cursor: pointer;
   }
 `;
 
