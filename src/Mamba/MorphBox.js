@@ -1,104 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
-import styled, { css } from "styled-components";
-import { FigCaption, Link, CloseIcon, CloseButton, OpenButton } from "./index";
-
-const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
-const fadeIn = "opacity .3s ease .5s";
-
-export const Container = styled.li`
-  height: 314px;
-  width: 100%;
-  z-index: 0;
-  position: absolute;
-  overflow: hidden;
-  background-color: transparent;
-  top: 0;
-  left: 0;
-  transform: translate3d(${(props) => 100 * props.galleryIndex}%, 0, 0);
-
-  @media (min-width: 1060px) {
-    width: 50%;
-  }
-
-  ${(props) =>
-    props.isMorphed &&
-    css`
-      top: ${props.isMorphedTop}px;
-      left: ${props.isMorphedLeft}px;
-      z-index: 2;
-      width: 100vw;
-      height: 100vh;
-      background-color: var(--overlay);
-      backdrop-filter: blur(20px) saturate(50%);
-
-      @media (min-width: 1060px) {
-        width: 100vw;
-      }
-    `}
-
-  ${(props) =>
-    props.gallerySize &&
-    css`
-      opacity: ${props.activeIndex === 0 ? 1 : 0};
-    `}
-  
-  transition: ${MorphTransition}, ${fadeIn};
-`;
-
-export const Body = styled.figure`
-  ${(props) =>
-    props.image &&
-    css`
-      background-image: ${props.image};
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
-    `}
-  display: flex;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 64px;
-  transition: ${MorphTransition};
-
-  ${(props) =>
-    props.isMorphed &&
-    css`
-      left: 10vh;
-      right: 50vh;
-      top: 10vh;
-      bottom: 10vh;
-
-      @media (max-width: 1023px) {
-        top: 16vh;
-        bottom: 42vh;
-        left: 4vh;
-        right: 4vh;
-      }
-    `}
-
-  @media (max-width: 1023px) {
-    justify-content: center;
-
-    figcaption {
-      padding-top: calc(100% + ${(props) => (props.image ? "124px" : "32px")});
-    }
-  }
-`;
+import {
+  Body,
+  Container,
+  FigCaption,
+  Link,
+  CloseIcon,
+  CloseButton,
+  OpenButton,
+} from "./index";
 
 export function MorphBox(props) {
   const gallerySize = props.gallerySize;
   const contentWidth = props.width;
   const contentHeight = props.height;
   const galleryIndex = props.galleryIndex;
-
-  // Difference — Get index to determine LTR layout
   const activeIndex = props.galleryIndex - props.currentIndex;
   const sendMorphstate = props.sendMorphstate;
-
-  // Distance between the center of the body and its optical right edge in the coordinate system of the native image resolution
   const captionRightEdges = props.captionRightEdge;
 
   const bodyRef = useRef(null);
@@ -111,7 +28,7 @@ export function MorphBox(props) {
   const [isMorphedLeft, setisMorphedLeft] = useState(0);
   const [captionX, setCaptionX] = useState(0);
 
-  function layoutCaptions() {
+  function layoutCaptions(setCaptionX) {
     const scale =
       viewportWidth / viewportHeight > contentWidth / contentHeight
         ? viewportHeight / contentHeight
@@ -132,14 +49,14 @@ export function MorphBox(props) {
   }
 
   useEffect(() => {
-    const myObserver = new ResizeObserver((entries) => {
+    const observeViewportSize = new ResizeObserver((entries) => {
       entries.forEach((entry) => {
         setViewportWidth(entry.contentRect.width);
         setViewportHeight(entry.contentRect.height);
       });
     });
 
-    myObserver.observe(bodyRef.current);
+    observeViewportSize.observe(bodyRef.current);
   }, []);
 
   useEffect(() => {
