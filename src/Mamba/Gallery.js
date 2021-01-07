@@ -79,6 +79,7 @@ export function SmallGallery() {
       </ItemContainer>
 
       <PreviousButton
+        ariaLabel='Previous'
         style={{
           zIndex: morphstate && -1,
         }}
@@ -91,6 +92,7 @@ export function SmallGallery() {
       </PreviousButton>
 
       <NextButton
+        ariaLabel='Next'
         style={{
           zIndex: morphstate && -1,
         }}
@@ -156,6 +158,7 @@ export function LargeGallery() {
       </ItemContainer>
 
       <PreviousButton
+        ariaLabel='Previous'
         type='button'
         style={{
           zIndex: morphstate && -1,
@@ -168,6 +171,7 @@ export function LargeGallery() {
         <PreviousArrowIcon />
       </PreviousButton>
       <NextButton
+        ariaLabel='Next'
         type='button'
         style={{
           zIndex: morphstate && -1,

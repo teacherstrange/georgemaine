@@ -81,7 +81,10 @@ export const Body = styled.figure`
   right: 0;
   left: 0;
   bottom: 64px;
-  transition: ${MorphTransition};
+  transition: top 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
+    right 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
+    bottom 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
+    left 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 
   ${(props) =>
     props.isMorphed &&

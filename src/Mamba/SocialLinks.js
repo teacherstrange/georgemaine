@@ -51,7 +51,11 @@ export function SocialLinks() {
           </SocialLink>
         </Container>
       ) : (
-        <Button type='button' onClick={() => setIsVisible(!isVisible)}>
+        <Button
+          ariaLabel='Get in touch'
+          type='button'
+          onClick={() => setIsVisible(!isVisible)}
+        >
           Get in touch
         </Button>
       )}

@@ -88,6 +88,7 @@ export function LargeMorphVideo(props) {
       galleryIndex={galleryIndex}
     >
       <CloseButton
+        ariaLabel='Close'
         type='button'
         onClick={() => (setIsMorphed(!isMorphed), sendMorphstate(!isMorphed))}
         isMorphed={isMorphed}
@@ -117,6 +118,7 @@ export function LargeMorphVideo(props) {
       </Body>
 
       <OpenButton
+        ariaLabel='Open'
         type='button'
         onClick={() => handleMorph(contentRef)}
         isMorphed={isMorphed}
@@ -206,6 +208,7 @@ export function SmallMorphVideo(props) {
       }}
     >
       <CloseButton
+        ariaLabel='Close'
         type='button'
         onClick={() => (setIsMorphed(!isMorphed), sendMorphstate(!isMorphed))}
         isMorphed={isMorphed}
@@ -233,6 +236,7 @@ export function SmallMorphVideo(props) {
       </Body>
 
       <OpenButton
+        ariaLabel='Open'
         type='button'
         onClick={() => handleMorph(contentRef)}
         isMorphed={isMorphed}

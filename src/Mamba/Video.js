@@ -309,7 +309,11 @@ export function Video(props) {
       </MobileVideo>
       {!mobileVideoIsPlaying && (
         <MobilePlayButtonContainer>
-          <PlayPauseButton type='button' onClick={() => playPauseMobileVideo()}>
+          <PlayPauseButton
+            ariaLabel='Play or Pause'
+            type='button'
+            onClick={() => playPauseMobileVideo()}
+          >
             <PlayIcon />
           </PlayPauseButton>
         </MobilePlayButtonContainer>
@@ -335,7 +339,11 @@ export function Video(props) {
 
       <VideoControls startState={startState}>
         <PlayButtonButtonContainer startState={startState}>
-          <PlayPauseButton type='button' onClick={() => playPauseVideo()}>
+          <PlayPauseButton
+            ariaLabel='Play or Pause'
+            type='button'
+            onClick={() => playPauseVideo()}
+          >
             {videoIsPlaying ? <PauseIcon /> : <PlayIcon />}
           </PlayPauseButton>
         </PlayButtonButtonContainer>
@@ -349,7 +357,7 @@ export function Video(props) {
               updateVideoVolume(e), updateVolumeSlider(e.target.value)
             )}
           >
-            <MuteButton onClick={() => muteVideo()}>
+            <MuteButton ariaLabel='Mute' onClick={() => muteVideo()}>
               {videoIsMuted ? <MuteIcon /> : <SpeakerIcon />}
             </MuteButton>
           </VolumeSlider>
@@ -369,7 +377,7 @@ export function Video(props) {
           <DurationTime>
             <SmallCaption>{videoDuration}</SmallCaption>
           </DurationTime>
-          <ExpandButton onClick={() => expandVideo()}>
+          <ExpandButton ariaLabel='Expand' onClick={() => expandVideo()}>
             <ExpandIcon />
           </ExpandButton>
         </MainControls>

@@ -87,6 +87,7 @@ export function MorphBox(props) {
       activeIndex={activeIndex}
     >
       <CloseButton
+        ariaLabel='Close'
         type='button'
         onClick={() => (setIsMorphed(!isMorphed), sendMorphstate(!isMorphed))}
         isMorphed={isMorphed}
@@ -118,6 +119,7 @@ export function MorphBox(props) {
       </Body>
 
       <OpenButton
+        ariaLabel='Open'
         type='button'
         onClick={() => handleMorph(bodyRef)}
         isMorphed={isMorphed}
