@@ -1,5 +1,7 @@
 import styled, { css, keyframes } from "styled-components";
 
+const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
+
 const largeTitleStyle = css`
   font-size: 2.6rem;
   line-height: 3.2rem;
