@@ -41,12 +41,6 @@ export function MorphBox(props) {
   const [translateY, updateTranslateY] = useState(0);
   const [currentScale, setCurrentScale] = useState(0);
 
-  function layoutCaptions() {
-    const xPos = viewportWidth / 2.0 + captionRightEdge * currentScale;
-    console.log("This is xPos:", xPos);
-    const x = Math.round(xPos);
-  }
-
   function handleMorph(event) {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
@@ -56,21 +50,6 @@ export function MorphBox(props) {
     setViewportWidth(isMorphed ? screenWidth : event.target.clientWidth);
     setViewportHeight(isMorphed ? screenHeight : event.target.clientHeight);
   }
-
-  useEffect(() => {
-    const observeViewportSize = new ResizeObserver((entries) => {
-      entries.forEach((entry) => {
-        setViewportWidth(entry.contentRect.width);
-        setViewportHeight(entry.contentRect.height);
-      });
-    });
-
-    observeViewportSize.observe(shapeRef.current);
-  });
-
-  useEffect(() => {
-    layoutCaptions();
-  }, []);
 
   useEffect(() => {
     // Set width
@@ -104,17 +83,21 @@ export function MorphBox(props) {
       scaledWidth / 2.0 + horizontalWhitespace / 2 - x + scaledRightEdge;
 
     // Add caption offset
+    const imageX = xOffset + 275 / 2;
+    const morphedCaptionX = centeredX - 275 / 2;
+    console.log("This is imageX:", imageX);
+    console.log("This is xOffset:", xOffset);
 
     // Translate to percentage
+    const translateX = (imageX / scaledWidth) * 100;
     const translateY = (yOffset / scaledHeight) * 100;
-    const translateX = (xOffset / scaledWidth) * 100;
 
     // Update values
     updateTranslateX(isMorphed ? -translateX : 0);
     updateTranslateY(isMorphed ? -translateY : 0);
     setCurrentScale(scale);
 
-    setCaptionX(isMorphed ? centeredX : captionX);
+    setCaptionX(isMorphed ? morphedCaptionX : captionX);
   }, [isMorphed]);
 
   useEffect(() => {
