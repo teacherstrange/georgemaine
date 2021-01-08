@@ -75,7 +75,7 @@ export const FigCaption = styled.p`
   ${bodyStyle}
   width: 275px;
   position: absolute;
-  bottom: 0;
+  top: 0;
   opacity: 1;
   display: inline;
   user-select: none;

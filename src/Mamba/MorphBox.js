@@ -32,29 +32,26 @@ export function MorphBox(props) {
   const captionRef = useRef(null);
   const bodyRef = useRef(null);
 
-  const [viewportHeight, setViewportHeight] = useState(480);
-  const [viewportWidth, setViewportWidth] = useState(314);
   const [isMorphed, setIsMorphed] = useState(false);
-
   const [captionX, setCaptionX] = useState(0);
+  const [captionY, updateCaptionY] = useState(0);
   const [translateX, updateTranslateX] = useState(0);
   const [translateY, updateTranslateY] = useState(0);
   const [currentScale, setCurrentScale] = useState(0);
 
   function handleMorph(event) {
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-
     setIsMorphed(!isMorphed);
     sendMorphstate(!isMorphed);
-    setViewportWidth(isMorphed ? screenWidth : event.target.clientWidth);
-    setViewportHeight(isMorphed ? screenHeight : event.target.clientHeight);
   }
 
   useEffect(() => {
-    // Set width
+    // Get positions and sizes
     const overlayWidth = isMorphed ? window.innerWidth * 0.8 : 303;
     const overlayHeight = isMorphed ? window.innerHeight * 0.8 : 314;
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    const x = shapeRef.current.getBoundingClientRect().x;
+    const y = shapeRef.current.getBoundingClientRect().y;
 
     // Calculate scale
     const scale =
@@ -62,42 +59,41 @@ export function MorphBox(props) {
         ? overlayHeight / contentHeight
         : overlayWidth / contentWidth;
 
-    // Get positions and sizes
-    const x = shapeRef.current.getBoundingClientRect().x;
-    const y = shapeRef.current.getBoundingClientRect().y;
-
+    // Scale sizes
     const scaledWidth = contentWidth * scale;
     const scaledHeight = contentHeight * scale;
     const scaledRightEdge = captionRightEdge * scale;
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
+    const captionHeight = 140 / 2;
 
-    // Calculate positions
+    // Calculate scaled positions
     const horizontalWhitespace = screenWidth - scaledWidth;
     const verticalWhitespace = screenHeight - scaledHeight;
-    const calculatedY = verticalWhitespace / 2;
-    const xOffset = x - horizontalWhitespace / 2;
-    const yOffset = y - calculatedY;
-    const captionX = scaledWidth / 2.0 + scaledRightEdge;
+
+    const imageYOffset = verticalWhitespace / 2;
+    const scaledImgX = x - horizontalWhitespace / 2;
+    const imageY = y - imageYOffset;
+
+    const captionX = scaledWidth / 2 + scaledRightEdge;
+    const captionY = scaledHeight / 2 - captionHeight;
+    const morphedCaptionY =
+      scaledHeight / 2 - captionHeight - y + verticalWhitespace / 2;
     const centeredX =
       scaledWidth / 2.0 + horizontalWhitespace / 2 - x + scaledRightEdge;
 
-    // Add caption offset
-    const imageX = xOffset + 275 / 2;
+    // Optically align image and caption
+    const imageX = scaledImgX + 275 / 2;
     const morphedCaptionX = centeredX - 275 / 2;
-    console.log("This is imageX:", imageX);
-    console.log("This is xOffset:", xOffset);
 
     // Translate to percentage
     const translateX = (imageX / scaledWidth) * 100;
-    const translateY = (yOffset / scaledHeight) * 100;
+    const translateY = (imageY / scaledHeight) * 100;
 
     // Update values
     updateTranslateX(isMorphed ? -translateX : 0);
     updateTranslateY(isMorphed ? -translateY : 0);
     setCurrentScale(scale);
-
     setCaptionX(isMorphed ? morphedCaptionX : captionX);
+    updateCaptionY(isMorphed ? morphedCaptionY : captionY);
   }, [isMorphed]);
 
   useEffect(() => {
@@ -137,7 +133,7 @@ export function MorphBox(props) {
       <FigCaption
         ref={captionRef}
         style={{
-          transform: `translate3d(${captionX}px, 0, 0)`,
+          transform: `translate3d(${captionX}px, ${captionY}px, 0)`,
         }}
         className={isMorphed && "is-morphed"}
       >
