@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
 import {
-  Body,
   Container,
   FigCaption,
   Link,
@@ -8,6 +8,20 @@ import {
   CloseButton,
   OpenButton,
 } from "./index";
+
+const Shape = styled.img`
+  width: 1582px;
+  height: 1638px;
+  margin: 0 auto;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
+  transform-origin: 0 0;
+  pointer-events: none;
+  transform: scale(${(props) => props.currentScale})
+    translate(${(props) => props.translateX}%, ${(props) => props.translateY}%);
+`;
 
 export function MorphBox(props) {
   const gallerySize = props.gallerySize;
@@ -18,34 +32,33 @@ export function MorphBox(props) {
   const sendMorphstate = props.sendMorphstate;
   const captionRightEdges = props.captionRightEdge;
 
-  const bodyRef = useRef(null);
+  const shapeRef = useRef(null);
   const captionRef = useRef(null);
+  const bodyRef = useRef(null);
 
-  const [viewportHeight, setViewportHeight] = useState(0);
-  const [viewportWidth, setViewportWidth] = useState(0);
+  const [viewportHeight, setViewportHeight] = useState(480);
+  const [viewportWidth, setViewportWidth] = useState(314);
   const [isMorphed, setIsMorphed] = useState(false);
-  const [isMorphedTop, setIsMorphedTop] = useState(0);
-  const [isMorphedLeft, setisMorphedLeft] = useState(0);
   const [captionX, setCaptionX] = useState(0);
+  const [translateX, updateTranslateX] = useState(0);
+  const [translateY, updateTranslateY] = useState(0);
+  const [currentScale, setCurrentScale] = useState(0);
 
   function layoutCaptions() {
     const scale =
       viewportWidth / viewportHeight > contentWidth / contentHeight
         ? viewportHeight / contentHeight
         : viewportWidth / contentWidth;
+
     const xPos = viewportWidth / 2.0 + captionRightEdges * scale;
     const x = Math.round(xPos);
+
     setCaptionX(x);
   }
 
-  function handleMorph(ref) {
+  function handleMorph(event) {
     setIsMorphed(!isMorphed);
     sendMorphstate(!isMorphed);
-    const screenWidth = window.innerWidth;
-    const screenOffset = screenWidth - viewportWidth;
-    const galleryOffset = galleryIndex * screenOffset;
-    setisMorphedLeft(-ref.current.getBoundingClientRect().left - galleryOffset);
-    setIsMorphedTop(-ref.current.getBoundingClientRect().top);
   }
 
   useEffect(() => {
@@ -61,7 +74,42 @@ export function MorphBox(props) {
 
   useEffect(() => {
     layoutCaptions();
-  }, [layoutCaptions]);
+  }, []);
+
+  useEffect(() => {
+    // Set width
+    const overlayWidth = isMorphed ? window.innerWidth * 0.8 : 480;
+    const overlayHeight = isMorphed ? window.innerHeight * 0.8 : 314;
+    const scale =
+      overlayWidth / overlayHeight > contentWidth / contentHeight
+        ? overlayHeight / contentHeight
+        : overlayWidth / contentWidth;
+
+    // Get positions and sizes
+    const currentX = shapeRef.current.getBoundingClientRect().x;
+    const currentY = shapeRef.current.getBoundingClientRect().y;
+
+    const scaledWidth = contentWidth * scale;
+    const scaledHeight = contentHeight * scale;
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    // Calculate positions
+    const horizontalWhitespace = screenWidth - scaledWidth;
+    const verticalWhitespace = screenHeight - scaledHeight;
+    const calculatedY = verticalWhitespace / 2;
+    const x = currentX - horizontalWhitespace / 2;
+    const y = currentY - calculatedY;
+
+    // Translate to percentage
+    const translateY = (x / scaledHeight) * 100;
+    const translateX = (y / scaledWidth) * 100;
+
+    // Update values
+    updateTranslateX(isMorphed ? -translateX : 0);
+    updateTranslateY(isMorphed ? -translateY : 0);
+    setCurrentScale(scale);
+  }, [isMorphed]);
 
   useEffect(() => {
     const dissmissModal = () => {
@@ -71,20 +119,14 @@ export function MorphBox(props) {
     return () => window.removeEventListener("resize", dissmissModal);
   }, []);
 
-  useEffect(() => {
-    isMorphed
-      ? (document.body.style = "overflow: hidden")
-      : (document.body.style = `overflow: ""`);
-  }, [isMorphed]);
-
   return (
     <Container
       isMorphed={isMorphed}
-      isMorphedTop={isMorphedTop}
-      isMorphedLeft={isMorphedLeft}
       galleryIndex={galleryIndex}
       gallerySize={gallerySize}
       activeIndex={activeIndex}
+      ref={bodyRef}
+      onClick={(event) => handleMorph(event)}
     >
       <CloseButton
         ariaLabel='Close'
@@ -95,35 +137,36 @@ export function MorphBox(props) {
         <CloseIcon />
       </CloseButton>
 
-      <Body ref={bodyRef} image={props.image} isMorphed={isMorphed}>
-        <FigCaption
-          ref={captionRef}
-          style={{
-            transform: `translate3d(${captionX}px, 0, 0)`,
-          }}
-          className={isMorphed && "is-morphed"}
-        >
-          <strong>{props.project}. </strong>
-          {props.description}
-          <br />
-          <br />
-          <Link
-            target='_blank'
-            rel='noopener noreferrer'
-            style={{ color: "var(--red)" }}
-            href={props.href}
-          >
-            {props.label}
-          </Link>
-        </FigCaption>
-      </Body>
-
-      <OpenButton
-        ariaLabel='Open'
-        type='button'
-        onClick={() => handleMorph(bodyRef)}
+      <Shape
+        ref={shapeRef}
+        src={"images/apps.png"}
+        currentScale={currentScale}
         isMorphed={isMorphed}
+        translateX={translateX}
+        translateY={translateY}
+      />
+      <FigCaption
+        ref={captionRef}
+        style={{
+          transform: `translate3d(${captionX}px, 0, 0)`,
+        }}
+        className={isMorphed && "is-morphed"}
       >
+        <strong>{props.project}. </strong>
+        {props.description}
+        <br />
+        <br />
+        <Link
+          target='_blank'
+          rel='noopener noreferrer'
+          style={{ color: "var(--red)" }}
+          href={props.href}
+        >
+          {props.label}
+        </Link>
+      </FigCaption>
+
+      <OpenButton ariaLabel='Open' type='button' isMorphed={isMorphed}>
         <strong>{props.project}</strong>
         Learn more
       </OpenButton>

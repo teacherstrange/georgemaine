@@ -129,14 +129,14 @@ export function LargeGallery() {
             sendMorphstate={sendMorphstate}
             {...Apps}
           />
-          <LargeMorphVideo
+          {/* <LargeMorphVideo
             currentIndex={currentIndex}
             sendMorphstate={sendMorphstate}
             {...Promo}
-          />
+          /> */}
         </GalleryLargeItem>
 
-        <GalleryLargeItem
+        {/* <GalleryLargeItem
           style={{
             transform: `translate3d( ${1 * 100}%, 0, 0)`,
             opacity: 1 - currentIndex === 0 ? 1 : 0,
@@ -154,7 +154,7 @@ export function LargeGallery() {
             {...ApplePay}
             galleryIndex={1}
           />
-        </GalleryLargeItem>
+        </GalleryLargeItem> */}
       </ItemContainer>
 
       <PreviousButton
