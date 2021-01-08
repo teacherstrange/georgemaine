@@ -12,15 +12,11 @@ import {
 const Shape = styled.img`
   width: 1582px;
   height: 1638px;
-  margin: 0 auto;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
   transform-origin: 0 0;
   pointer-events: none;
   transform: scale(${(props) => props.currentScale})
     translate(${(props) => props.translateX}%, ${(props) => props.translateY}%);
+  transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 `;
 
 export function MorphBox(props) {
@@ -30,7 +26,7 @@ export function MorphBox(props) {
   const galleryIndex = props.galleryIndex;
   const activeIndex = props.galleryIndex - props.currentIndex;
   const sendMorphstate = props.sendMorphstate;
-  const captionRightEdges = props.captionRightEdge;
+  const captionRightEdge = props.captionRightEdge;
 
   const shapeRef = useRef(null);
   const captionRef = useRef(null);
@@ -46,15 +42,9 @@ export function MorphBox(props) {
   const [currentScale, setCurrentScale] = useState(0);
 
   function layoutCaptions() {
-    const scale =
-      viewportWidth / viewportHeight > contentWidth / contentHeight
-        ? viewportHeight / contentHeight
-        : viewportWidth / contentWidth;
-
-    const xPos = viewportWidth / 2.0 + captionRightEdges * scale;
+    const xPos = viewportWidth / 2.0 + captionRightEdge * currentScale;
+    console.log("This is xPos:", xPos);
     const x = Math.round(xPos);
-
-    setCaptionX(x);
   }
 
   function handleMorph(event) {
@@ -75,8 +65,8 @@ export function MorphBox(props) {
       });
     });
 
-    observeViewportSize.observe(bodyRef.current);
-  }, []);
+    observeViewportSize.observe(shapeRef.current);
+  });
 
   useEffect(() => {
     layoutCaptions();
@@ -84,7 +74,7 @@ export function MorphBox(props) {
 
   useEffect(() => {
     // Set width
-    const overlayWidth = isMorphed ? window.innerWidth * 0.8 : 480;
+    const overlayWidth = isMorphed ? window.innerWidth * 0.8 : 303;
     const overlayHeight = isMorphed ? window.innerHeight * 0.8 : 314;
 
     // Calculate scale
@@ -99,6 +89,7 @@ export function MorphBox(props) {
 
     const scaledWidth = contentWidth * scale;
     const scaledHeight = contentHeight * scale;
+    const scaledRightEdge = captionRightEdge * scale;
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
 
@@ -108,6 +99,11 @@ export function MorphBox(props) {
     const calculatedY = verticalWhitespace / 2;
     const xOffset = x - horizontalWhitespace / 2;
     const yOffset = y - calculatedY;
+    const captionX = scaledWidth / 2.0 + scaledRightEdge;
+    const centeredX =
+      scaledWidth / 2.0 + horizontalWhitespace / 2 - x + scaledRightEdge;
+
+    // Add caption offset
 
     // Translate to percentage
     const translateY = (yOffset / scaledHeight) * 100;
@@ -117,6 +113,8 @@ export function MorphBox(props) {
     updateTranslateX(isMorphed ? -translateX : 0);
     updateTranslateY(isMorphed ? -translateY : 0);
     setCurrentScale(scale);
+
+    setCaptionX(isMorphed ? centeredX : captionX);
   }, [isMorphed]);
 
   useEffect(() => {

@@ -71,11 +71,12 @@ export const SmallCaption = styled.p`
   color: var(--white);
 `;
 
-export const FigCaption = styled.figcaption`
+export const FigCaption = styled.p`
   ${bodyStyle}
   width: 275px;
   position: absolute;
-  opacity: 0;
+  bottom: 0;
+  opacity: 1;
   display: inline;
   user-select: none;
   transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
@@ -87,11 +88,11 @@ export const FigCaption = styled.figcaption`
 
   @media (min-width: 1024px) {
     transition: opacity 0.32244s cubic-bezier(0.32, 0.08, 0.24, 1) 0.05s,
-      transform cubic-bezier(0.52, 0.16, 0.24, 1);
+      transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 
     &.is-morphed {
       transition: opacity 0.3345s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.15s,
-        transform cubic-bezier(0.52, 0.16, 0.24, 1);
+        transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
     }
   }
 

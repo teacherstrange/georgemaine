@@ -128,11 +128,6 @@ export function LargeGallery() {
             sendMorphstate={sendMorphstate}
             {...Apps}
           />
-          <MorphBox
-            currentIndex={currentIndex}
-            sendMorphstate={sendMorphstate}
-            {...Apps}
-          />
 
           {/* <LargeMorphVideo
             currentIndex={currentIndex}

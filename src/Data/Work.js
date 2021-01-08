@@ -3,7 +3,7 @@ export const Apps = {
   galleryIndex: 0,
   width: 1582,
   height: 1638,
-  captionRightEdge: 820,
+  captionRightEdge: 791,
   image: "url(images/apps.png)",
   href: "https://apps.apple.com/us/app/mollie/id1473455257?ls=1",
   label: "Enjoy managing payments on mobile. ↗",
