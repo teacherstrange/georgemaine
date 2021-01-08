@@ -39,6 +39,7 @@ export function MorphBox(props) {
   const [viewportHeight, setViewportHeight] = useState(480);
   const [viewportWidth, setViewportWidth] = useState(314);
   const [isMorphed, setIsMorphed] = useState(false);
+
   const [captionX, setCaptionX] = useState(0);
   const [translateX, updateTranslateX] = useState(0);
   const [translateY, updateTranslateY] = useState(0);
@@ -57,8 +58,13 @@ export function MorphBox(props) {
   }
 
   function handleMorph(event) {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
     setIsMorphed(!isMorphed);
     sendMorphstate(!isMorphed);
+    setViewportWidth(isMorphed ? screenWidth : event.target.clientWidth);
+    setViewportHeight(isMorphed ? screenHeight : event.target.clientHeight);
   }
 
   useEffect(() => {
@@ -80,14 +86,16 @@ export function MorphBox(props) {
     // Set width
     const overlayWidth = isMorphed ? window.innerWidth * 0.8 : 480;
     const overlayHeight = isMorphed ? window.innerHeight * 0.8 : 314;
+
+    // Calculate scale
     const scale =
       overlayWidth / overlayHeight > contentWidth / contentHeight
         ? overlayHeight / contentHeight
         : overlayWidth / contentWidth;
 
     // Get positions and sizes
-    const currentX = shapeRef.current.getBoundingClientRect().x;
-    const currentY = shapeRef.current.getBoundingClientRect().y;
+    const x = shapeRef.current.getBoundingClientRect().x;
+    const y = shapeRef.current.getBoundingClientRect().y;
 
     const scaledWidth = contentWidth * scale;
     const scaledHeight = contentHeight * scale;
@@ -98,12 +106,12 @@ export function MorphBox(props) {
     const horizontalWhitespace = screenWidth - scaledWidth;
     const verticalWhitespace = screenHeight - scaledHeight;
     const calculatedY = verticalWhitespace / 2;
-    const x = currentX - horizontalWhitespace / 2;
-    const y = currentY - calculatedY;
+    const xOffset = x - horizontalWhitespace / 2;
+    const yOffset = y - calculatedY;
 
     // Translate to percentage
-    const translateY = (x / scaledHeight) * 100;
-    const translateX = (y / scaledWidth) * 100;
+    const translateY = (yOffset / scaledHeight) * 100;
+    const translateX = (xOffset / scaledWidth) * 100;
 
     // Update values
     updateTranslateX(isMorphed ? -translateX : 0);

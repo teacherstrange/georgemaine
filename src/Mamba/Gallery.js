@@ -3,7 +3,6 @@ import styled from "styled-components";
 import {
   MorphBox,
   SmallMorphVideo,
-  LargeMorphVideo,
   PreviousArrowIcon,
   PreviousButton,
   NextArrowIcon,
@@ -129,6 +128,12 @@ export function LargeGallery() {
             sendMorphstate={sendMorphstate}
             {...Apps}
           />
+          <MorphBox
+            currentIndex={currentIndex}
+            sendMorphstate={sendMorphstate}
+            {...Apps}
+          />
+
           {/* <LargeMorphVideo
             currentIndex={currentIndex}
             sendMorphstate={sendMorphstate}
