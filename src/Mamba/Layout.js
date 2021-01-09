@@ -74,7 +74,6 @@ export const Overlay = styled.div`
   height: 100vh;
   background-color: var(--overlay);
   backdrop-filter: blur(20px) saturate(50%);
-  pointer-events: none;
   transform: translate3d(
     ${(props) => props.overlayX}px,
     ${(props) => props.overlayY}px,

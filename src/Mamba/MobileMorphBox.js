@@ -12,8 +12,6 @@ import {
 
 const Image = styled.img`
   transform-origin: center 0;
-  width: ${(props) => props.width}px;
-  height: ${(props) => props.height}px;
   transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 `;
 
@@ -26,6 +24,7 @@ export function MobileMorphBox(props) {
   const galleryIndex = props.galleryIndex;
   const activeIndex = props.galleryIndex - props.currentIndex;
   const sendMorphstate = props.sendMorphstate;
+  const morphScale = props.scale;
 
   const imageRef = useRef(null);
   const captionRef = useRef(null);
@@ -33,9 +32,7 @@ export function MobileMorphBox(props) {
   const overlayRef = useRef(null);
 
   const [isMorphed, setIsMorphed] = useState(false);
-  const [captionX, setCaptionX] = useState(0);
   const [captionY, updateCaptionY] = useState(0);
-  const [translateX, updateTranslateX] = useState(0);
   const [translateY, updateTranslateY] = useState(0);
   const [currentScale, setCurrentScale] = useState(0.14652014652014653);
   const [overlayY, updateOverlayY] = useState(0);
@@ -47,8 +44,10 @@ export function MobileMorphBox(props) {
   }
 
   useEffect(() => {
-    const canvasWidth = isMorphed ? window.innerWidth * 0.8 : smallWidth;
-    const canvasHeight = isMorphed ? window.innerHeight * 0.8 : smallHeight;
+    const canvasWidth = isMorphed ? window.innerWidth * morphScale : smallWidth;
+    const canvasHeight = isMorphed
+      ? window.innerHeight * morphScale
+      : smallHeight;
     const y = imageRef.current.getBoundingClientRect().y;
     const screenHeight = window.innerHeight;
     const screenCenterY = screenHeight / 2;
@@ -73,10 +72,6 @@ export function MobileMorphBox(props) {
 
     // 2.2 Text position
     const textOffsetY = textY - screenCenterY - scaledHeightOffset - 87;
-    console.log("This is textY:", textY);
-    console.log("This is screenCenterY:", screenCenterY);
-    console.log("This is scaledHeightOffset:", scaledHeightOffset);
-    console.log("This is textHeightOffset:", textHeightOffset);
 
     // Update values
     updateOverlayX(isMorphed ? overlayX : 0);
@@ -93,6 +88,12 @@ export function MobileMorphBox(props) {
     window.addEventListener("resize", dissmissModal);
     return () => window.removeEventListener("resize", dissmissModal);
   }, []);
+
+  useEffect(() => {
+    isMorphed
+      ? (document.body.style = "overflow: hidden")
+      : document.body.removeAttribute("style");
+  }, [isMorphed]);
 
   return (
     <Container
@@ -125,8 +126,6 @@ export function MobileMorphBox(props) {
         src={props.image}
         currentScale={currentScale}
         isMorphed={isMorphed}
-        x={translateX}
-        y={translateY}
         style={{
           transform: `matrix(${currentScale}, 0, 0, ${currentScale}, 0, ${translateY})`,
         }}

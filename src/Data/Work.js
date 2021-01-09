@@ -1,6 +1,7 @@
 export const Apps = {
   key: 0,
   galleryIndex: 0,
+  scale: 0.8,
   width: 1582,
   height: 1638,
   smallWidth: 232,
@@ -17,6 +18,7 @@ export const Apps = {
 export const Checkout = {
   key: 1,
   galleryIndex: 1,
+  scale: 1,
   width: 2400,
   height: 1536,
   smallWidth: 375,

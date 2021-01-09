@@ -15,7 +15,6 @@ export default function Home() {
     <main
       style={{
         overflow: "hidden",
-        minHeight: "100vh",
       }}
     >
       <Header>
