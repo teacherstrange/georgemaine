@@ -83,5 +83,5 @@ export const Overlay = styled.div`
   transition: ${(props) =>
     props.isMorphed
       ? "opacity 0.36s cubic-bezier(0.32, 0.08, 0.24, 1)"
-      : "opacity .44s cubic-bezier(0.52, 0.16, 0.24, 1) .2s"};
+      : "opacity .44s cubic-bezier(0.52, 0.16, 0.24, 1) .2s, transform .1s .64s"};
 `;
