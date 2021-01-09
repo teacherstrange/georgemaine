@@ -40,7 +40,7 @@ export default function Home() {
       </Header>
       <Section>
         <Headline>Work</Headline>
-        {/* <SmallGallery /> */}
+        <SmallGallery />
         <LargeGallery />
       </Section>
     </main>

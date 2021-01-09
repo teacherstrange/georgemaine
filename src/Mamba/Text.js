@@ -75,6 +75,7 @@ export const FigCaption = styled.p`
   ${bodyStyle}
   width: 275px;
   position: absolute;
+  transform-origin: center 0;
   top: 0;
   opacity: 0;
   display: inline;
@@ -91,17 +92,13 @@ export const FigCaption = styled.p`
       transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 
     &.is-morphed {
-      transition: opacity 0.3345s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.15s,
+      transition: opacity 0.3345s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.2s,
         transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
     }
   }
 
   @media (max-width: 1023px) {
-    transform: scale(0.93) !important;
-
-    &.is-morphed {
-      transform: scale(1) !important;
-    }
+    padding-top: 68px;
   }
 `;
 

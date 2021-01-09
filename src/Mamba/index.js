@@ -3,6 +3,7 @@ export * from "./Icon";
 export * from "./Buttons";
 export * from "./Gallery";
 export * from "./Layout";
+export * from "./MobileMorphBox";
 export * from "./MorphBox";
 export * from "./MorphVideo";
 export * from "./Seekbar";

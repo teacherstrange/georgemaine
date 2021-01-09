@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import {
   MorphBox,
-  SmallMorphVideo,
+  MobileMorphBox,
   PreviousArrowIcon,
   PreviousButton,
   NextArrowIcon,
@@ -50,30 +50,20 @@ export function SmallGallery() {
       <ItemContainer
         style={{
           transform: `translate3d( ${(0 - currentIndex) * 100}%, 0, 0)`,
+          display: "flex",
         }}
       >
-        <MorphBox
+        <MobileMorphBox
           gallerySize='small'
           currentIndex={currentIndex}
           sendMorphstate={sendMorphstate}
           {...Apps}
         />
-        <SmallMorphVideo
-          currentIndex={currentIndex}
-          sendMorphstate={sendMorphstate}
-          {...Promo}
-        />
-        <MorphBox
+        <MobileMorphBox
           gallerySize='small'
           currentIndex={currentIndex}
           sendMorphstate={sendMorphstate}
           {...Checkout}
-        />
-
-        <SmallMorphVideo
-          currentIndex={currentIndex}
-          sendMorphstate={sendMorphstate}
-          {...ApplePay}
         />
       </ItemContainer>
 
