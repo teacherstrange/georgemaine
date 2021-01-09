@@ -68,9 +68,7 @@ export const Body = styled.figure`
 
 export const Overlay = styled.div`
   position: fixed;
-
   opacity: ${(props) => (props.isMorphed ? 1 : 0)};
-  visibility: ${(props) => (props.isMorphed ? "visible" : "hidden")};
   width: 100vw;
   min-width: 100vw;
   height: 100vh;

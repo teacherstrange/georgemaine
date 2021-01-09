@@ -49,7 +49,6 @@ export function MorphBox(props) {
   }
 
   useEffect(() => {
-    // Get positions and sizes
     const canvasWidth = isMorphed ? window.innerWidth * 0.8 : smallWidth;
     const canvasHeight = isMorphed ? window.innerHeight * 0.8 : smallHeight;
     const x = imageRef.current.getBoundingClientRect().x;
@@ -68,6 +67,8 @@ export function MorphBox(props) {
     const textCenterYOffset = smallHeight / 2 - textHeightOffset;
     const textCenterY =
       captionRef.current.getBoundingClientRect().y + textHeightOffset;
+    const overlayY = overlayRef.current.getBoundingClientRect().y;
+    const overlayX = Math.abs(overlayRef.current.getBoundingClientRect().x);
 
     // Calculate scale
     const scale =
@@ -101,25 +102,14 @@ export function MorphBox(props) {
     const translateScaledTextY = (scaledTextY / textHeight) * 100;
 
     // Update values
-
+    updateOverlayX(isMorphed ? overlayX : 0);
+    updateOverlayY(isMorphed ? -overlayY : 0);
     updateTranslateX(isMorphed ? translateX : 0);
     updateTranslateY(isMorphed ? -translateY : 0);
     setCurrentScale(scale);
     setCaptionX(isMorphed ? captionCenterX : initialCaptionXPosition);
     updateCaptionY(isMorphed ? translateScaledTextY : translateTextY);
   }, [isMorphed]);
-
-  useEffect(() => {
-    const overlayY = overlayRef.current.getBoundingClientRect().y;
-    const currentOverlayX = Math.abs(
-      overlayRef.current.getBoundingClientRect().x
-    );
-    const bodyWidthOffset = bodyRef.current.getBoundingClientRect().width / 2;
-    const galleryOffsetX = galleryIndex * bodyWidthOffset;
-    const overlayX = currentOverlayX - galleryOffsetX;
-    updateOverlayX(overlayX);
-    updateOverlayY(-overlayY);
-  }, []);
 
   useEffect(() => {
     const dissmissModal = () => {
