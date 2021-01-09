@@ -98,7 +98,7 @@ export const FigCaption = styled.p`
   }
 
   @media (max-width: 1023px) {
-    padding-top: 68px;
+    padding-top: 60px;
   }
 `;
 
