@@ -50,16 +50,25 @@ export function MorphBox(props) {
     // Get positions and sizes
     const overlayWidth = isMorphed ? window.innerWidth * 0.8 : smallWidth;
     const overlayHeight = isMorphed ? window.innerHeight * 0.8 : smallHeight;
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-    const captionWidthOffset =
-      captionRef.current.getBoundingClientRect().width / 2;
-    const imageWidthOffset = imageRef.current.getBoundingClientRect().width / 2;
-    const captionHeight = 140 / 2;
+
     const x = imageRef.current.getBoundingClientRect().x;
     const y = imageRef.current.getBoundingClientRect().y;
+    const imageWidthOffset = imageRef.current.getBoundingClientRect().width / 2;
     const imageCenterX = x + imageWidthOffset;
+
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
     const screenCenterX = screenWidth / 2;
+    const screenCenterY = screenHeight / 2;
+
+    const textHeight = captionRef.current.getBoundingClientRect().height;
+    const textWidthOffset =
+      captionRef.current.getBoundingClientRect().width / 2;
+    const textHeightOffset =
+      captionRef.current.getBoundingClientRect().height / 2;
+    const textCenterYOffset = smallHeight / 2 - textHeightOffset;
+    const textCenterY =
+      captionRef.current.getBoundingClientRect().y + textHeightOffset;
 
     // Calculate scale
     const scale =
@@ -74,31 +83,30 @@ export function MorphBox(props) {
     const scaledWidthOffset = scaledWidth / 2;
 
     // 2.1 Image position
-    const screenCenterXOffset =
-      screenCenterX - imageCenterX - captionWidthOffset;
+    const screenCenterXOffset = screenCenterX - imageCenterX - textWidthOffset;
     const screenCenterYOffset = y - verticalWhitespace;
 
-    // 2.2 Caption position
+    // 2.2 Text position
+    const initialCaptionXPosition = smallWidth / 2 + textWidthOffset;
+    const scaledTextY = screenCenterY - textCenterY + textHeightOffset;
     const captionCenterX =
       scaledWidthOffset +
       (galleryIndex === 2
-        ? captionWidthOffset
-        : captionWidthOffset + captionWidthOffset);
-
-    const captionY = scaledHeight / 2 - captionHeight;
-    const morphedCaptionY =
-      scaledHeight / 2 - captionHeight - y + verticalWhitespace / 2;
+        ? textWidthOffset
+        : textWidthOffset + textWidthOffset);
 
     // Translate to percentage
     const translateX = (screenCenterXOffset / scaledWidth) * 100;
     const translateY = (screenCenterYOffset / scaledHeight) * 100;
+    const translateTextY = (textCenterYOffset / textHeight) * 100;
+    const translateScaledTextY = (scaledTextY / textHeight) * 100;
 
     // Update values
     updateTranslateX(isMorphed ? translateX : 0);
     updateTranslateY(isMorphed ? -translateY : 0);
     setCurrentScale(scale);
-    setCaptionX(isMorphed ? captionCenterX : 253);
-    updateCaptionY(isMorphed ? morphedCaptionY : captionY);
+    setCaptionX(isMorphed ? captionCenterX : initialCaptionXPosition);
+    updateCaptionY(isMorphed ? translateScaledTextY : translateTextY);
   }, [isMorphed]);
 
   useEffect(() => {
@@ -140,22 +148,26 @@ export function MorphBox(props) {
       <FigCaption
         ref={captionRef}
         style={{
-          transform: `translate3d(${captionX}px, ${captionY}px, 0)`,
+          transform: `translate3d(${captionX}px, ${captionY}%, 0)`,
         }}
         className={isMorphed && "is-morphed"}
       >
         <strong>{props.project}. </strong>
         {props.description}
-        <br />
-        <br />
-        <Link
-          target='_blank'
-          rel='noopener noreferrer'
-          style={{ color: "var(--red)" }}
-          href={props.href}
-        >
-          {props.label}
-        </Link>
+        {props.href && (
+          <>
+            <br />
+            <br />
+            <Link
+              target='_blank'
+              rel='noopener noreferrer'
+              style={{ color: "var(--red)" }}
+              href={props.href}
+            >
+              {props.label}
+            </Link>
+          </>
+        )}
       </FigCaption>
 
       <OpenButton ariaLabel='Open' type='button' isMorphed={isMorphed}>

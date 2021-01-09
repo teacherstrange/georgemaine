@@ -19,7 +19,7 @@ export const Checkout = {
   galleryIndex: 2,
   width: 2400,
   height: 1536,
-  smallWidth: 415,
+  smallWidth: 375,
   smallHeight: 240,
   captionRightEdge: 746,
   image: "images/checkout.png",
