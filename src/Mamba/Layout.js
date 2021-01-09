@@ -36,22 +36,6 @@ export const Container = styled.li`
   }
   transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1), ${fadeIn};
 
-  /* ${(props) =>
-    props.isMorphed &&
-    css`
-      top: ${props.isMorphedTop}px;
-      left: ${props.isMorphedLeft}px;
-      z-index: 2;
-      width: 100vw;
-      height: 100vh;
-      background-color: var(--overlay);
-      backdrop-filter: blur(20px) saturate(50%);
-
-      @media (min-width: 1060px) {
-        width: 100vw;
-      }
-    `} */
-
   ${(props) =>
     props.gallerySize &&
     css`
@@ -80,4 +64,26 @@ export const Body = styled.figure`
       padding-top: calc(100% + ${(props) => (props.image ? "124px" : "32px")});
     }
   }
+`;
+
+export const Overlay = styled.div`
+  position: fixed;
+
+  opacity: ${(props) => (props.isMorphed ? 1 : 0)};
+  visibility: ${(props) => (props.isMorphed ? "visible" : "hidden")};
+  width: 100vw;
+  min-width: 100vw;
+  height: 100vh;
+  background-color: var(--overlay);
+  backdrop-filter: blur(20px) saturate(50%);
+  pointer-events: none;
+  transform: translate3d(
+    ${(props) => props.overlayX}px,
+    ${(props) => props.overlayY}px,
+    0
+  );
+  transition: ${(props) =>
+    props.isMorphed
+      ? "opacity 0.36s cubic-bezier(0.32, 0.08, 0.24, 1)"
+      : "opacity .44s cubic-bezier(0.52, 0.16, 0.24, 1) .2s"};
 `;
