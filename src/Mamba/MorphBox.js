@@ -9,10 +9,11 @@ import {
   OpenButton,
 } from "./index";
 
-const Shape = styled.img`
-  width: 1582px;
-  height: 1638px;
-  transform-origin: 0 0;
+const Image = styled.img`
+  transform-origin: center 0;
+  width: ${(props) => props.width}px;
+  height: ${(props) => props.height}px;
+
   pointer-events: none;
   transform: scale(${(props) => props.currentScale})
     translate(${(props) => props.translateX}%, ${(props) => props.translateY}%);
@@ -23,12 +24,13 @@ export function MorphBox(props) {
   const gallerySize = props.gallerySize;
   const contentWidth = props.width;
   const contentHeight = props.height;
+  const smallWidth = props.smallWidth;
+  const smallHeight = props.smallHeight;
   const galleryIndex = props.galleryIndex;
   const activeIndex = props.galleryIndex - props.currentIndex;
   const sendMorphstate = props.sendMorphstate;
-  const captionRightEdge = props.captionRightEdge;
 
-  const shapeRef = useRef(null);
+  const imageRef = useRef(null);
   const captionRef = useRef(null);
   const bodyRef = useRef(null);
 
@@ -37,7 +39,7 @@ export function MorphBox(props) {
   const [captionY, updateCaptionY] = useState(0);
   const [translateX, updateTranslateX] = useState(0);
   const [translateY, updateTranslateY] = useState(0);
-  const [currentScale, setCurrentScale] = useState(0);
+  const [currentScale, setCurrentScale] = useState(0.14652014652014653);
 
   function handleMorph(event) {
     setIsMorphed(!isMorphed);
@@ -46,12 +48,18 @@ export function MorphBox(props) {
 
   useEffect(() => {
     // Get positions and sizes
-    const overlayWidth = isMorphed ? window.innerWidth * 0.8 : 303;
-    const overlayHeight = isMorphed ? window.innerHeight * 0.8 : 314;
+    const overlayWidth = isMorphed ? window.innerWidth * 0.8 : smallWidth;
+    const overlayHeight = isMorphed ? window.innerHeight * 0.8 : smallHeight;
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-    const x = shapeRef.current.getBoundingClientRect().x;
-    const y = shapeRef.current.getBoundingClientRect().y;
+    const captionWidthOffset =
+      captionRef.current.getBoundingClientRect().width / 2;
+    const imageWidthOffset = imageRef.current.getBoundingClientRect().width / 2;
+    const captionHeight = 140 / 2;
+    const x = imageRef.current.getBoundingClientRect().x;
+    const y = imageRef.current.getBoundingClientRect().y;
+    const imageCenterX = x + imageWidthOffset;
+    const screenCenterX = screenWidth / 2;
 
     // Calculate scale
     const scale =
@@ -59,40 +67,37 @@ export function MorphBox(props) {
         ? overlayHeight / contentHeight
         : overlayWidth / contentWidth;
 
-    // Scale sizes
+    // 1. Scale sizes
     const scaledWidth = contentWidth * scale;
     const scaledHeight = contentHeight * scale;
-    const scaledRightEdge = captionRightEdge * scale;
-    const captionHeight = 140 / 2;
+    const verticalWhitespace = (screenHeight - scaledHeight) / 2;
+    const scaledWidthOffset = scaledWidth / 2;
 
-    // Calculate scaled positions
-    const horizontalWhitespace = screenWidth - scaledWidth;
-    const verticalWhitespace = screenHeight - scaledHeight;
+    // 2.1 Image position
+    const screenCenterXOffset =
+      screenCenterX - imageCenterX - captionWidthOffset;
+    const screenCenterYOffset = y - verticalWhitespace;
 
-    const imageYOffset = verticalWhitespace / 2;
-    const scaledImgX = x - horizontalWhitespace / 2;
-    const imageY = y - imageYOffset;
+    // 2.2 Caption position
+    const captionCenterX =
+      scaledWidthOffset +
+      (galleryIndex === 2
+        ? captionWidthOffset
+        : captionWidthOffset + captionWidthOffset);
 
-    const captionX = scaledWidth / 2 + scaledRightEdge;
     const captionY = scaledHeight / 2 - captionHeight;
     const morphedCaptionY =
       scaledHeight / 2 - captionHeight - y + verticalWhitespace / 2;
-    const centeredX =
-      scaledWidth / 2.0 + horizontalWhitespace / 2 - x + scaledRightEdge;
-
-    // Optically align image and caption
-    const imageX = scaledImgX + 275 / 2;
-    const morphedCaptionX = centeredX - 275 / 2;
 
     // Translate to percentage
-    const translateX = (imageX / scaledWidth) * 100;
-    const translateY = (imageY / scaledHeight) * 100;
+    const translateX = (screenCenterXOffset / scaledWidth) * 100;
+    const translateY = (screenCenterYOffset / scaledHeight) * 100;
 
     // Update values
-    updateTranslateX(isMorphed ? -translateX : 0);
+    updateTranslateX(isMorphed ? translateX : 0);
     updateTranslateY(isMorphed ? -translateY : 0);
     setCurrentScale(scale);
-    setCaptionX(isMorphed ? morphedCaptionX : captionX);
+    setCaptionX(isMorphed ? captionCenterX : 253);
     updateCaptionY(isMorphed ? morphedCaptionY : captionY);
   }, [isMorphed]);
 
@@ -122,9 +127,11 @@ export function MorphBox(props) {
         <CloseIcon />
       </CloseButton>
 
-      <Shape
-        ref={shapeRef}
-        src={"images/apps.png"}
+      <Image
+        ref={imageRef}
+        width={props.width}
+        height={props.height}
+        src={props.image}
         currentScale={currentScale}
         isMorphed={isMorphed}
         translateX={translateX}

@@ -76,7 +76,7 @@ export const FigCaption = styled.p`
   width: 275px;
   position: absolute;
   top: 0;
-  opacity: 1;
+  opacity: 0;
   display: inline;
   user-select: none;
   transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),

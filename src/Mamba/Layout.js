@@ -22,10 +22,11 @@ export const Section = styled.section`
   }
 `;
 
-const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
 const fadeIn = "opacity .3s ease .5s";
 
 export const Container = styled.li`
+  display: flex;
+  justify-content: center;
   height: 314px;
   width: 100%;
   z-index: 0;
