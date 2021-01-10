@@ -13,7 +13,14 @@ export function LargeMorphVideo(props) {
   const galleryIndex = props.galleryIndex;
   const sendMorphstate = props.sendMorphstate;
   const captionRef = useRef(null);
+  const tvRef = useRef(null);
   const [isMorphed, setIsMorphed] = useState(false);
+  const [tvScale, setTvScale] = useState(0.1640625);
+  const [reverseScale, setReverseScale] = useState(0);
+  const [tvX, updateTvX] = useState(0);
+  const [tvY, updateTvY] = useState(30);
+  const [textY, updateTextY] = useState(0);
+  const [textX, updateTextX] = useState(0);
 
   function handleMorph() {
     setIsMorphed(!isMorphed);
@@ -29,6 +36,44 @@ export function LargeMorphVideo(props) {
   }, []);
 
   useEffect(() => {
+    const containerWidth = isMorphed ? window.innerWidth * 0.6 : 315;
+    const containerHeight = isMorphed ? window.innerHeight * 0.6 : 180;
+    const videoWidth = 1920;
+    const videoHeight = 1080;
+    const textY = captionRef.current.getBoundingClientRect().y;
+    const textHeightOffset = captionRef.current.scrollHeight / 2;
+    const tvY = tvRef.current.getBoundingClientRect().y;
+    const tvX = tvRef.current.getBoundingClientRect().x;
+    const tvWidthOffset = tvRef.current.getBoundingClientRect().width / 2;
+    const tvCenterX = tvX + tvWidthOffset;
+    const screenCenterX = window.innerWidth / 2;
+    const screenCenterY = window.innerHeight / 2;
+
+    // Calculate scale
+    const scale =
+      containerWidth / containerHeight > videoWidth / videoHeight
+        ? containerHeight / videoHeight
+        : containerWidth / videoWidth;
+    const reverseScale = 1 / scale;
+
+    // Scale sizes
+    const tvHeight = videoHeight * scale;
+    const verticalWhitespace = (window.innerHeight - tvHeight) / 2;
+    const videoOffsetX = (videoWidth * scale) / 2;
+
+    // 2.1 Image position
+    const tvCenterXOffset = screenCenterX - tvCenterX - 160;
+    const tvCenterYOffset = tvY - verticalWhitespace;
+    const textOffsetY = textY - screenCenterY + textHeightOffset;
+    const textOffsetX = videoOffsetX - (480 - 375) * 1 - 110;
+
+    updateTvX(isMorphed ? tvCenterXOffset : 0);
+    updateTvY(isMorphed ? -tvCenterYOffset : 30);
+    updateTextY(isMorphed ? -textOffsetY : 0);
+    updateTextX(isMorphed ? textOffsetX : 0);
+    setReverseScale(reverseScale);
+    setTvScale(scale);
+
     isMorphed
       ? (document.body.style = "overflow: hidden")
       : (document.body.style = `overflow: ""`);
@@ -44,16 +89,35 @@ export function LargeMorphVideo(props) {
       >
         <CloseIcon />
       </CloseButton>
-
-      <Video
-        preload='metadata'
-        poster={props.poster}
-        src={props.src}
-        isMorphed={isMorphed}
+      <div
+        ref={tvRef}
+        style={{
+          borderRadius: 4,
+          border: "3px solid #111",
+          position: "absolute",
+          transform: `matrix(${tvScale}, 0, 0, ${tvScale}, ${tvX}, ${tvY})`,
+          transformOrigin: "center 0",
+          transition: "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)",
+        }}
+      >
+        <Video
+          reverseScale={reverseScale}
+          preload='metadata'
+          poster={props.poster}
+          src={props.src}
+          isMorphed={isMorphed}
+          className={isMorphed && "is-morphed"}
+        />
+      </div>
+      <FigCaption
+        ref={captionRef}
+        style={{
+          transform: `matrix(${isMorphed ? 1 : 0.6}, 0, 0, ${
+            isMorphed ? 1 : 0.6
+          }, ${textX}, ${textY})`,
+        }}
         className={isMorphed && "is-morphed"}
-      />
-
-      <FigCaption ref={captionRef} className={isMorphed && "is-morphed"}>
+      >
         <strong>{props.project}. </strong>
         {props.description}
       </FigCaption>

@@ -27,6 +27,7 @@ const fadeIn = "opacity .3s ease .5s";
 export const Container = styled.li`
   display: flex;
   justify-content: center;
+  position: relative;
   height: 314px;
   width: 100%;
   z-index: 0;
@@ -46,6 +47,7 @@ export const Container = styled.li`
 export const Overlay = styled.div`
   position: fixed;
   opacity: ${(props) => (props.isMorphed ? 1 : 0)};
+  pointer-events: ${(props) => (props.isMorphed ? "auto" : "none")};
   width: 100vw;
   min-width: 100vw;
   height: 100vh;

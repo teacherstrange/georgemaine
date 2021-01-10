@@ -149,8 +149,10 @@ export const NextButton = styled.button`
 export const OpenButton = styled.button`
   ${baseStyle}
   position: absolute;
-  width: 100%;
-  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 1;
   color: inherit;
   transition: opacity 0.229s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
