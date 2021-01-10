@@ -44,34 +44,35 @@ export function MobileMorphBox(props) {
   }
 
   useEffect(() => {
-    const canvasWidth = isMorphed ? window.innerWidth * morphScale : smallWidth;
-    const canvasHeight = isMorphed
+    const containerWidth = isMorphed
+      ? window.innerWidth * morphScale
+      : smallWidth;
+    const containerHeight = isMorphed
       ? window.innerHeight * morphScale
       : smallHeight;
-    const y = imageRef.current.getBoundingClientRect().y;
+    const imageY = imageRef.current.getBoundingClientRect().y;
     const screenHeight = window.innerHeight;
     const screenCenterY = screenHeight / 2;
-    const textHeightOffset = 240 / 2;
+    const textHeightOffset = captionRef.current.scrollHeight / 2;
     const textY = captionRef.current.getBoundingClientRect().y;
     const overlayY = overlayRef.current.getBoundingClientRect().y;
     const overlayX = Math.abs(overlayRef.current.getBoundingClientRect().x);
 
     // Calculate scale
     const scale =
-      canvasWidth / canvasHeight > contentWidth / contentHeight
-        ? canvasHeight / contentHeight
-        : canvasWidth / contentWidth;
+      containerWidth / containerHeight > contentWidth / contentHeight
+        ? containerHeight / contentHeight
+        : containerWidth / contentWidth;
 
     // 1. Scale sizes
-    const scaledHeight = contentHeight * scale;
-    const scaledHeightOffset = scaledHeight / 2;
+    const imageHeight = contentHeight * scale;
+    const imageHeightOffset = imageHeight / 2;
 
     // 2.1 Image position
     const screenCenterYOffset =
-      y + scaledHeightOffset + textHeightOffset - screenCenterY;
-
-    // 2.2 Text position
-    const textOffsetY = textY - screenCenterY - scaledHeightOffset - 87;
+      imageY + imageHeightOffset + textHeightOffset + -screenCenterY;
+    const textOffsetY =
+      textY - screenCenterY - textHeightOffset - imageHeightOffset;
 
     // Update values
     updateOverlayX(isMorphed ? overlayX : 0);
