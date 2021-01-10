@@ -149,7 +149,7 @@ const DurationTime = styled.div`
 `;
 
 export function Video(props) {
-  const containerRef = useRef(null);
+  const tvRef = useRef(null);
   const videoRef = useRef(null);
   const mobileVideoRef = useRef(null);
   const volumeBarRef = useRef(null);
@@ -167,6 +167,8 @@ export function Video(props) {
   const [startState, setStartState] = useState(true);
   const [currentScale, setCurrentScale] = useState(0.1640625);
   const [reverseScale, setReverseScale] = useState(0);
+  const [tvX, updateTvX] = useState(0);
+  const [tvY, updateTvY] = useState(30);
 
   function updateVideoCurrentTime(seconds) {
     const currentTime = formatTime(seconds);
@@ -292,6 +294,12 @@ export function Video(props) {
     const containerHeight = props.isMorphed ? window.innerHeight * 0.7 : 180;
     const videoWidth = 1920;
     const videoHeight = 1080;
+    const tvY = tvRef.current.getBoundingClientRect().y;
+    const tvX = tvRef.current.getBoundingClientRect().x;
+    const tvWidthOffset = tvRef.current.getBoundingClientRect().width / 2;
+
+    const tvCenterX = tvX + tvWidthOffset;
+    const screenCenterX = window.innerWidth / 2;
 
     // Calculate scale
     const scale =
@@ -299,6 +307,17 @@ export function Video(props) {
         ? containerHeight / videoHeight
         : containerWidth / videoWidth;
     const reverseScale = 1 / scale;
+
+    // Scale sizes
+    const tvHeight = videoHeight * scale;
+    const verticalWhitespace = (window.innerHeight - tvHeight) / 2;
+
+    // 2.1 Image position
+    const tvCenterXOffset = screenCenterX - tvCenterX;
+    const tvCenterYOffset = tvY - verticalWhitespace;
+
+    updateTvX(props.isMorphed ? tvCenterXOffset : 0);
+    updateTvY(props.isMorphed ? -tvCenterYOffset : 30);
     setReverseScale(reverseScale);
     setCurrentScale(scale);
   }, [props.isMorphed]);
@@ -324,12 +343,12 @@ export function Video(props) {
         </MobilePlayButtonContainer>
       )}
       <div
-        ref={containerRef}
+        ref={tvRef}
         style={{
           borderRadius: 4,
           border: "3px solid #111",
           position: "absolute",
-          transform: `scale(${currentScale})`,
+          transform: `matrix(${currentScale}, 0, 0, ${currentScale}, ${tvX}, ${tvY})`,
           transformOrigin: "center 0",
           transition: "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)",
         }}

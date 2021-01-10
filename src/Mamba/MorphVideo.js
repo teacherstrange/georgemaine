@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import {
-  Body,
   Container,
   FigCaption,
   CloseIcon,
@@ -13,21 +12,13 @@ import {
 export function LargeMorphVideo(props) {
   const galleryIndex = props.galleryIndex;
   const sendMorphstate = props.sendMorphstate;
-
   const captionRef = useRef(null);
-
   const [isMorphed, setIsMorphed] = useState(false);
-
-  const [currentScale, setCurrentScale] = useState(0.203125);
 
   function handleMorph() {
     setIsMorphed(!isMorphed);
     sendMorphstate(!isMorphed);
   }
-
-  useEffect(() => {
-    captionRef.current;
-  }, []);
 
   useEffect(() => {
     const dissmissModal = () => {
@@ -38,18 +29,6 @@ export function LargeMorphVideo(props) {
   }, []);
 
   useEffect(() => {
-    const containerWidth = isMorphed ? window.innerWidth * 0.8 : 427;
-    const containerHeight = isMorphed ? window.innerHeight * 0.8 : 240;
-    const videoWidth = 1920;
-    const videoHeight = 1080;
-
-    // Calculate scale
-    const scale =
-      containerWidth / containerHeight > videoWidth / videoHeight
-        ? containerHeight / videoHeight
-        : containerWidth / videoWidth;
-
-    setCurrentScale(scale);
     isMorphed
       ? (document.body.style = "overflow: hidden")
       : (document.body.style = `overflow: ""`);
@@ -67,7 +46,6 @@ export function LargeMorphVideo(props) {
       </CloseButton>
 
       <Video
-        currentScale={currentScale}
         preload='metadata'
         poster={props.poster}
         src={props.src}
@@ -145,8 +123,6 @@ export function SmallMorphVideo(props) {
   return (
     <Container
       isMorphed={isMorphed}
-      isMorphedTop={isMorphedTop}
-      isMorphedLeft={isMorphedLeft}
       galleryIndex={galleryIndex}
       style={{
         opacity: transformedIndex === 0 ? 1 : 0,
