@@ -29,14 +29,11 @@ export function MobileMorphBox(props) {
   const imageRef = useRef(null);
   const captionRef = useRef(null);
   const bodyRef = useRef(null);
-  const overlayRef = useRef(null);
 
   const [isMorphed, setIsMorphed] = useState(false);
   const [captionY, updateCaptionY] = useState(0);
   const [translateY, updateTranslateY] = useState(0);
   const [currentScale, setCurrentScale] = useState(0.14652014652014653);
-  const [overlayY, updateOverlayY] = useState(0);
-  const [overlayX, updateOverlayX] = useState(0);
 
   function handleMorph(event) {
     setIsMorphed(!isMorphed);
@@ -55,8 +52,6 @@ export function MobileMorphBox(props) {
     const screenCenterY = screenHeight / 2;
     const textHeightOffset = captionRef.current.scrollHeight / 2;
     const textY = captionRef.current.getBoundingClientRect().y;
-    const overlayY = overlayRef.current.getBoundingClientRect().y;
-    const overlayX = Math.abs(overlayRef.current.getBoundingClientRect().x);
 
     // Calculate scale
     const scale =
@@ -75,8 +70,6 @@ export function MobileMorphBox(props) {
       textY - screenCenterY - textHeightOffset - imageHeightOffset;
 
     // Update values
-    updateOverlayX(isMorphed ? overlayX : 0);
-    updateOverlayY(isMorphed ? -overlayY : 0);
     updateTranslateY(isMorphed ? -screenCenterYOffset : 0);
     setCurrentScale(scale);
     updateCaptionY(isMorphed ? -textOffsetY : smallHeight);
@@ -105,12 +98,7 @@ export function MobileMorphBox(props) {
       ref={bodyRef}
       onClick={(event) => handleMorph(event)}
     >
-      <Overlay
-        ref={overlayRef}
-        isMorphed={isMorphed}
-        overlayX={overlayX}
-        overlayY={overlayY}
-      >
+      <Overlay isMorphed={isMorphed}>
         <CloseButton
           ariaLabel='Close'
           type='button'

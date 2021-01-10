@@ -32,7 +32,6 @@ export function MorphBox(props) {
   const imageRef = useRef(null);
   const captionRef = useRef(null);
   const bodyRef = useRef(null);
-  const overlayRef = useRef(null);
 
   const [isMorphed, setIsMorphed] = useState(false);
   const [captionX, setCaptionX] = useState(0);
@@ -40,8 +39,6 @@ export function MorphBox(props) {
   const [translateX, updateTranslateX] = useState(0);
   const [translateY, updateTranslateY] = useState(0);
   const [currentScale, setCurrentScale] = useState(0.14652014652014653);
-  const [overlayY, updateOverlayY] = useState(0);
-  const [overlayX, updateOverlayX] = useState(0);
 
   function handleMorph(event) {
     setIsMorphed(!isMorphed);
@@ -67,8 +64,6 @@ export function MorphBox(props) {
     const textCenterYOffset = smallHeight / 2 - textHeightOffset;
     const textCenterY =
       captionRef.current.getBoundingClientRect().y + textHeightOffset;
-    const overlayY = overlayRef.current.getBoundingClientRect().y;
-    const overlayX = Math.abs(overlayRef.current.getBoundingClientRect().x);
 
     // Calculate scale
     const scale =
@@ -102,8 +97,6 @@ export function MorphBox(props) {
     const translateScaledTextY = (scaledTextY / textHeight) * 100;
 
     // Update values
-    updateOverlayX(isMorphed ? overlayX : 0);
-    updateOverlayY(isMorphed ? -overlayY : 0);
     updateTranslateX(isMorphed ? translateX : 0);
     updateTranslateY(isMorphed ? -translateY : 0);
     setCurrentScale(scale);
@@ -128,12 +121,7 @@ export function MorphBox(props) {
       ref={bodyRef}
       onClick={(event) => handleMorph(event)}
     >
-      <Overlay
-        ref={overlayRef}
-        isMorphed={isMorphed}
-        overlayX={overlayX}
-        overlayY={overlayY}
-      >
+      <Overlay isMorphed={isMorphed}>
         <CloseButton
           ariaLabel='Close'
           type='button'

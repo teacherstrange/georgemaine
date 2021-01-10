@@ -15,7 +15,6 @@ export function LargeMorphVideo(props) {
   const sendMorphstate = props.sendMorphstate;
   const captionRef = useRef(null);
   const tvRef = useRef(null);
-  const overlayRef = useRef(null);
   const [isMorphed, setIsMorphed] = useState(false);
   const [tvScale, setTvScale] = useState(0.1640625);
   const [reverseScale, setReverseScale] = useState(0);
@@ -23,8 +22,6 @@ export function LargeMorphVideo(props) {
   const [tvY, updateTvY] = useState(30);
   const [textY, updateTextY] = useState(0);
   const [textX, updateTextX] = useState(0);
-  const [overlayY, updateOverlayY] = useState(0);
-  const [overlayX, updateOverlayX] = useState(0);
 
   function handleMorph() {
     setIsMorphed(!isMorphed);
@@ -52,9 +49,6 @@ export function LargeMorphVideo(props) {
     const tvCenterX = tvX + tvWidthOffset;
     const screenCenterX = window.innerWidth / 2;
     const screenCenterY = window.innerHeight / 2;
-    const overlayY = overlayRef.current.getBoundingClientRect().y;
-    const overlayX =
-      Math.abs(overlayRef.current.getBoundingClientRect().x) - 480;
 
     // Calculate scale
     const scale =
@@ -73,10 +67,7 @@ export function LargeMorphVideo(props) {
     const tvCenterYOffset = tvY - verticalWhitespace;
     const textOffsetY = textY - screenCenterY + textHeightOffset;
     const textOffsetX = videoOffsetX - (480 - 375) * 1 - 110;
-    console.log("This is overlayX:", overlayX);
-    console.log("This is overlayY:", overlayY);
-    updateOverlayX(isMorphed ? overlayX : 0);
-    updateOverlayY(isMorphed ? -overlayY : 0);
+
     updateTvX(isMorphed ? tvCenterXOffset : 0);
     updateTvY(isMorphed ? -tvCenterYOffset : 30);
     updateTextY(isMorphed ? -textOffsetY : 0);
@@ -91,12 +82,7 @@ export function LargeMorphVideo(props) {
 
   return (
     <Container isMorphed={isMorphed} galleryIndex={galleryIndex}>
-      <Overlay
-        ref={overlayRef}
-        isMorphed={isMorphed}
-        overlayX={overlayX}
-        overlayY={overlayY}
-      >
+      <Overlay isMorphed={isMorphed} video>
         <CloseButton
           ariaLabel='Close'
           type='button'

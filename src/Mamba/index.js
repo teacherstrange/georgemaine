@@ -6,6 +6,7 @@ export * from "./Layout";
 export * from "./MobileMorphBox";
 export * from "./MorphBox";
 export * from "./MorphVideo";
+export * from "./Overlay";
 export * from "./Seekbar";
 export * from "./SocialLinks";
 export * from "./Video";

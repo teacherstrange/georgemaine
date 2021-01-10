@@ -30,8 +30,8 @@ export const Container = styled.li`
   position: relative;
   height: 314px;
   width: 100%;
-  z-index: 0;
-  transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1), ${fadeIn};
+  z-index: ${(props) => (props.isMorphed ? 10 : 0)};
+  transition: z-index 0s ${(props) => (props.isMorphed ? 0 : 0.56)}s, ${fadeIn};
 
   @media (min-width: 1060px) {
     width: 50%;
@@ -42,24 +42,4 @@ export const Container = styled.li`
     css`
       opacity: ${props.activeIndex === 0 ? 1 : 0};
     `}
-`;
-
-export const Overlay = styled.div`
-  position: fixed;
-  opacity: ${(props) => (props.isMorphed ? 1 : 0)};
-  pointer-events: ${(props) => (props.isMorphed ? "auto" : "none")};
-  width: 100vw;
-  min-width: 100vw;
-  height: 100vh;
-  background-color: var(--overlay);
-  backdrop-filter: blur(20px) saturate(50%);
-  transform: translate3d(
-    ${(props) => props.overlayX}px,
-    ${(props) => props.overlayY}px,
-    0
-  );
-  transition: ${(props) =>
-    props.isMorphed
-      ? "opacity 0.36s cubic-bezier(0.32, 0.08, 0.24, 1)"
-      : "opacity .44s cubic-bezier(0.52, 0.16, 0.24, 1) .2s, transform .1s .64s"};
 `;
