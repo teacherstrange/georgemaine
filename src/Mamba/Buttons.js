@@ -87,7 +87,7 @@ export const PreviousButton = styled.button`
   justify-content: center;
   align-items: center;
   z-index: 1;
-  transition: transform 0.2s ease, background-color 0.3s ease, opacity 3s ease;
+  transition: transform 0.2s ease, background-color 0.3s ease, opacity 0.3s ease;
 
   path {
     color: var(--primaryLabelFill);
@@ -123,7 +123,7 @@ export const NextButton = styled.button`
   justify-content: center;
   align-items: center;
   z-index: 1;
-  transition: transform 0.2s ease, background-color 0.3s ease, opacity 3s ease;
+  transition: transform 0.2s ease, background-color 0.3s ease, opacity 0.3s ease;
 
   path {
     color: var(--primaryLabelFill);

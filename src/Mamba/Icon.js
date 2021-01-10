@@ -1,4 +1,4 @@
-export function LinkedinIcon() {
+export function LinkedinIcon(props) {
   return (
     <svg
       width='18'
@@ -14,7 +14,7 @@ export function LinkedinIcon() {
     </svg>
   );
 }
-export function DribbbleIcon() {
+export function DribbbleIcon(props) {
   return (
     <svg width='20' height='20' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <path
@@ -25,7 +25,7 @@ export function DribbbleIcon() {
   );
 }
 
-export function MailIcon() {
+export function MailIcon(props) {
   return (
     <svg width='18' height='15' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <path
@@ -38,7 +38,7 @@ export function MailIcon() {
   );
 }
 
-export function TwitterIcon() {
+export function TwitterIcon(props) {
   return (
     <svg width='18' height='17' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <path
@@ -49,7 +49,7 @@ export function TwitterIcon() {
   );
 }
 
-export function CloseIcon() {
+export function CloseIcon(props) {
   return (
     <svg
       width='20'
@@ -74,9 +74,15 @@ export function CloseIcon() {
   );
 }
 
-export function PreviousArrowIcon() {
+export function PreviousArrowIcon(props) {
   return (
-    <svg width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <svg
+      {...props}
+      width='24'
+      height='24'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+    >
       <path
         d='M13.5 2.5l-8 9.5 8 9.5'
         stroke='var(--primaryLabelFill)'
@@ -88,9 +94,15 @@ export function PreviousArrowIcon() {
   );
 }
 
-export function NextArrowIcon() {
+export function NextArrowIcon(props) {
   return (
-    <svg width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <svg
+      {...props}
+      width='24'
+      height='24'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+    >
       <path
         d='M10.5 2.5l8 9.5-8 9.5'
         stroke='var(--primaryLabelFill)'
@@ -102,9 +114,10 @@ export function NextArrowIcon() {
   );
 }
 
-export function SpeakerIcon() {
+export function SpeakerIcon(props) {
   return (
     <svg
+      {...props}
       width='24'
       height='24'
       viewBox='0 0 24 24'
@@ -119,9 +132,10 @@ export function SpeakerIcon() {
   );
 }
 
-export function MuteIcon() {
+export function MuteIcon(props) {
   return (
     <svg
+      {...props}
       width='24'
       height='24'
       viewBox='0 0 24 24'
@@ -136,9 +150,10 @@ export function MuteIcon() {
   );
 }
 
-export function ExpandIcon() {
+export function ExpandIcon(props) {
   return (
     <svg
+      {...props}
       width='24'
       height='24'
       viewBox='0 0 24 24'
@@ -159,9 +174,10 @@ export function ExpandIcon() {
   );
 }
 
-export function PlayIcon() {
+export function PlayIcon(props) {
   return (
     <svg
+      {...props}
       width='52'
       height='52'
       viewBox='0 0 52 52'
@@ -176,9 +192,10 @@ export function PlayIcon() {
   );
 }
 
-export function PauseIcon() {
+export function PauseIcon(props) {
   return (
     <svg
+      {...props}
       width='52'
       height='52'
       viewBox='0 0 52 52'

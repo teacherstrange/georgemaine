@@ -7,6 +7,7 @@ import {
   PreviousButton,
   NextArrowIcon,
   NextButton,
+  LargeMorphVideo,
 } from "./index";
 import { Apps, Promo, Checkout, ApplePay } from "../Data";
 
@@ -116,17 +117,17 @@ export function LargeGallery() {
           <MorphBox
             currentIndex={currentIndex}
             sendMorphstate={sendMorphstate}
-            {...Apps}
+            {...Checkout}
           />
 
-          {/* <LargeMorphVideo
+          <LargeMorphVideo
             currentIndex={currentIndex}
             sendMorphstate={sendMorphstate}
             {...Promo}
-          /> */}
+          />
         </GalleryLargeItem>
 
-        <GalleryLargeItem
+        {/* <GalleryLargeItem
           style={{
             transform: `translate3d( ${1 * 100}%, 0, 0)`,
             opacity: 1 - currentIndex === 0 ? 1 : 0,
@@ -137,7 +138,7 @@ export function LargeGallery() {
             sendMorphstate={sendMorphstate}
             {...Checkout}
           />
-        </GalleryLargeItem>
+        </GalleryLargeItem> */}
       </ItemContainer>
 
       <PreviousButton

@@ -25,24 +25,10 @@ const MobileVideo = styled.video`
 `;
 
 const DesktopVideo = styled.video`
-  width: 100%;
   display: block;
 
   @media (max-width: 1023px) {
     display: none;
-  }
-`;
-
-export const VideoContainer = styled.div`
-  width: ${(props) => (props.ismorphed ? "100%" : "calc(100% - 48px)")};
-  border-radius: 4px;
-  margin: auto;
-  border: 3px solid #111;
-  transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
-  position: relative;
-
-  @media (min-width: 1024px) {
-    width: ${(props) => (props.ismorphed ? "100%" : "calc(100% - 96px)")};
   }
 `;
 
@@ -97,6 +83,8 @@ const VideoControls = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
+  top: 0;
+  right: 0;
   bottom: 0;
   left: 0;
   z-index: 1;
@@ -170,7 +158,6 @@ export function Video(props) {
   const seekBarFillRef = useRef(null);
   const seekBarThumbRef = useRef(null);
   const seekBarInputRef = useRef(null);
-
   const [seekBarValue, setSeekbarValue] = useState(0);
   const [videoCurrentTime, setVideoCurrentTime] = useState("00:00");
   const [videoDuration, setVideoDuration] = useState("00:00");
@@ -178,6 +165,8 @@ export function Video(props) {
   const [videoIsPlaying, setVideoIsPlaying] = useState(false);
   const [mobileVideoIsPlaying, setMobileVideoIsPlaying] = useState(false);
   const [startState, setStartState] = useState(true);
+  const [currentScale, setCurrentScale] = useState(0.1640625);
+  const [reverseScale, setReverseScale] = useState(0);
 
   function updateVideoCurrentTime(seconds) {
     const currentTime = formatTime(seconds);
@@ -298,8 +287,24 @@ export function Video(props) {
     }
   }, [props.isMorphed]);
 
+  useEffect(() => {
+    const containerWidth = props.isMorphed ? window.innerWidth * 0.7 : 315;
+    const containerHeight = props.isMorphed ? window.innerHeight * 0.7 : 180;
+    const videoWidth = 1920;
+    const videoHeight = 1080;
+
+    // Calculate scale
+    const scale =
+      containerWidth / containerHeight > videoWidth / videoHeight
+        ? containerHeight / videoHeight
+        : containerWidth / videoWidth;
+    const reverseScale = 1 / scale;
+    setReverseScale(reverseScale);
+    setCurrentScale(scale);
+  }, [props.isMorphed]);
+
   return (
-    <VideoContainer ref={containerRef} ismorphed={props.isMorphed}>
+    <>
       <MobileVideo
         ref={mobileVideoRef}
         preload='metadata'
@@ -318,70 +323,99 @@ export function Video(props) {
           </PlayPauseButton>
         </MobilePlayButtonContainer>
       )}
-
-      <DesktopVideo
-        ref={videoRef}
-        onPlay={() => (startState ? setStartState(false) : null)}
-        onLoadedData={() => (
-          updateVideoDuration(videoRef.current.duration),
-          updateSeekBarFill(seekBarValue),
-          updateVolumeSlider(volumeBarRef.current.value),
-          (volumeBarRef.current.value = 1)
-        )}
-        onEnded={() => (setStartState(true), setVideoIsPlaying(false))}
-        onTimeUpdate={(e) => (
-          updateSeekBarValue(e), updateVideoCurrentTime(e.target.currentTime)
-        )}
-        {...props}
+      <div
+        ref={containerRef}
+        style={{
+          borderRadius: 4,
+          border: "3px solid #111",
+          position: "absolute",
+          transform: `scale(${currentScale})`,
+          transformOrigin: "center 0",
+          transition: "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)",
+        }}
       >
-        <source src={props.src} type='video/mp4' />
-      </DesktopVideo>
+        <DesktopVideo
+          ref={videoRef}
+          onPlay={() => (startState ? setStartState(false) : null)}
+          onLoadedData={() => (
+            updateVideoDuration(videoRef.current.duration),
+            updateSeekBarFill(seekBarValue),
+            updateVolumeSlider(volumeBarRef.current.value),
+            (volumeBarRef.current.value = 1)
+          )}
+          onEnded={() => (setStartState(true), setVideoIsPlaying(false))}
+          onTimeUpdate={(e) => (
+            updateSeekBarValue(e), updateVideoCurrentTime(e.target.currentTime)
+          )}
+          {...props}
+        >
+          <source src={props.src} type='video/mp4' />
+        </DesktopVideo>
 
-      <VideoControls startState={startState}>
-        <PlayButtonButtonContainer startState={startState}>
-          <PlayPauseButton
-            ariaLabel='Play or Pause'
-            type='button'
-            onClick={() => playPauseVideo()}
-          >
-            {videoIsPlaying ? <PauseIcon /> : <PlayIcon />}
-          </PlayPauseButton>
-        </PlayButtonButtonContainer>
+        <VideoControls startState={startState} style={{}}>
+          <PlayButtonButtonContainer startState={startState}>
+            <PlayPauseButton
+              ariaLabel='Play or Pause'
+              type='button'
+              onClick={() => playPauseVideo()}
+            >
+              {videoIsPlaying ? (
+                <PauseIcon
+                  style={{
+                    transform: `scale(${reverseScale})`,
+                    transition:
+                      "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)",
+                  }}
+                />
+              ) : (
+                <PlayIcon
+                  style={{
+                    transform: `scale(${reverseScale})`,
+                    transition:
+                      "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)",
+                  }}
+                />
+              )}
+            </PlayPauseButton>
+          </PlayButtonButtonContainer>
 
-        <MainControls startState={startState}>
-          <VolumeSlider
-            volumeFillRef={volumeFillRef}
-            volumeBarRef={volumeBarRef}
-            volumeThumbRef={volumeThumbRef}
-            onChange={(e) => (
-              updateVideoVolume(e), updateVolumeSlider(e.target.value)
-            )}
-          >
-            <MuteButton ariaLabel='Mute' onClick={() => muteVideo()}>
-              {videoIsMuted ? <MuteIcon /> : <SpeakerIcon />}
-            </MuteButton>
-          </VolumeSlider>
-          <ProgressTime>
-            <SmallCaption>{videoCurrentTime}</SmallCaption>
-          </ProgressTime>
-          <SeekBar
-            seekBarFillRef={seekBarFillRef}
-            seekBarThumbRef={seekBarThumbRef}
-            seekBarInputRef={seekBarInputRef}
-            onChange={(e) => updateVideoTime(e)}
-            onMouseDown={() => (
-              videoRef.current.pause(), setVideoIsPlaying(false)
-            )}
-            onMouseUp={() => (videoRef.current.play(), setVideoIsPlaying(true))}
-          />
-          <DurationTime>
-            <SmallCaption>{videoDuration}</SmallCaption>
-          </DurationTime>
-          <ExpandButton ariaLabel='Expand' onClick={() => expandVideo()}>
-            <ExpandIcon />
-          </ExpandButton>
-        </MainControls>
-      </VideoControls>
-    </VideoContainer>
+          <MainControls startState={startState}>
+            <VolumeSlider
+              volumeFillRef={volumeFillRef}
+              volumeBarRef={volumeBarRef}
+              volumeThumbRef={volumeThumbRef}
+              onChange={(e) => (
+                updateVideoVolume(e), updateVolumeSlider(e.target.value)
+              )}
+            >
+              <MuteButton ariaLabel='Mute' onClick={() => muteVideo()}>
+                {videoIsMuted ? <MuteIcon /> : <SpeakerIcon />}
+              </MuteButton>
+            </VolumeSlider>
+            <ProgressTime>
+              <SmallCaption>{videoCurrentTime}</SmallCaption>
+            </ProgressTime>
+            <SeekBar
+              seekBarFillRef={seekBarFillRef}
+              seekBarThumbRef={seekBarThumbRef}
+              seekBarInputRef={seekBarInputRef}
+              onChange={(e) => updateVideoTime(e)}
+              onMouseDown={() => (
+                videoRef.current.pause(), setVideoIsPlaying(false)
+              )}
+              onMouseUp={() => (
+                videoRef.current.play(), setVideoIsPlaying(true)
+              )}
+            />
+            <DurationTime>
+              <SmallCaption>{videoDuration}</SmallCaption>
+            </DurationTime>
+            <ExpandButton ariaLabel='Expand' onClick={() => expandVideo()}>
+              <ExpandIcon />
+            </ExpandButton>
+          </MainControls>
+        </VideoControls>
+      </div>
+    </>
   );
 }
