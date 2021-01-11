@@ -37,8 +37,8 @@ export function LargeMorphVideo(props) {
   }, []);
 
   useEffect(() => {
-    const containerWidth = isMorphed ? window.innerWidth * 0.6 : 315;
-    const containerHeight = isMorphed ? window.innerHeight * 0.6 : 180;
+    const containerWidth = isMorphed ? window.innerWidth * 0.8 : 315;
+    const containerHeight = isMorphed ? window.innerHeight * 0.8 : 180;
     const videoWidth = 1920;
     const videoHeight = 1080;
     const textY = captionRef.current.getBoundingClientRect().y;

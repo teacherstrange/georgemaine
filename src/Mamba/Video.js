@@ -16,20 +16,19 @@ import {
 } from "./index";
 
 const MobileVideo = styled.video`
-  width: 100%;
-  display: block;
+  display: none;
 
-  @media (min-width: 1024px) {
+  /* @media (min-width: 1024px) {
     display: none;
-  }
+  } */
 `;
 
 const DesktopVideo = styled.video`
   display: block;
 
-  @media (max-width: 1023px) {
+  /* @media (max-width: 1023px) {
     display: none;
-  }
+  } */
 `;
 
 const MainControls = styled.div`
