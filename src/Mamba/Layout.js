@@ -43,3 +43,19 @@ export const Container = styled.li`
       opacity: ${props.activeIndex === 0 ? 1 : 0};
     `}
 `;
+
+export const Tv = styled.div`
+  border-radius: 4px;
+  border: 3px solid #111;
+  position: absolute;
+  transform: matrix(
+    ${(props) => props.tvScale},
+    0,
+    0,
+    ${(props) => props.tvScale},
+    ${(props) => (props.tvX ? props.tvX : 0)},
+    ${(props) => props.tvY}
+  );
+  transform-origin: center 0;
+  transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
+`;

@@ -7,6 +7,7 @@ import {
   OpenButton,
   Video,
   Overlay,
+  Tv,
 } from "./index";
 
 export function LargeMorphVideo(props) {
@@ -91,17 +92,7 @@ export function LargeMorphVideo(props) {
           <CloseIcon />
         </CloseButton>
       </Overlay>
-      <div
-        ref={tvRef}
-        style={{
-          borderRadius: 4,
-          border: "3px solid #111",
-          position: "absolute",
-          transform: `matrix(${tvScale}, 0, 0, ${tvScale}, ${tvX}, ${tvY})`,
-          transformOrigin: "center 0",
-          transition: "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)",
-        }}
-      >
+      <Tv ref={tvRef} tvScale={tvScale} tvX={tvX} tvY={tvY}>
         <Video
           reverseScale={reverseScale}
           preload='metadata'
@@ -110,7 +101,7 @@ export function LargeMorphVideo(props) {
           isMorphed={isMorphed}
           className={isMorphed && "is-morphed"}
         />
-      </div>
+      </Tv>
       <FigCaption
         ref={captionRef}
         style={{
