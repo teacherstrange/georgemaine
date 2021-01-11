@@ -8,6 +8,7 @@ import {
   NextArrowIcon,
   NextButton,
   LargeMorphVideo,
+  MobileMorphBox,
 } from "./index";
 import { Apps, Promo, Checkout, ApplePay } from "../Data";
 
@@ -54,10 +55,29 @@ export function SmallGallery() {
           display: "flex",
         }}
       >
-        <MobileMorphVideo
+        <MobileMorphBox
+          gallerySize='small'
           currentIndex={currentIndex}
           sendMorphstate={sendMorphstate}
+          {...Apps}
+        />
+        <MobileMorphVideo
+          currentIndex={currentIndex}
+          gallerySize='small'
+          sendMorphstate={sendMorphstate}
           {...Promo}
+        />
+        <MobileMorphBox
+          gallerySize='small'
+          currentIndex={currentIndex}
+          sendMorphstate={sendMorphstate}
+          {...Checkout}
+        />
+        <MobileMorphVideo
+          currentIndex={currentIndex}
+          gallerySize='small'
+          sendMorphstate={sendMorphstate}
+          {...ApplePay}
         />
       </ItemContainer>
 

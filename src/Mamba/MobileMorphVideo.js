@@ -12,7 +12,9 @@ import {
 } from "./index";
 
 export function MobileMorphVideo(props) {
+  const gallerySize = props.gallerySize;
   const galleryIndex = props.galleryIndex;
+  const activeIndex = props.galleryIndex - props.currentIndex;
   const sendMorphstate = props.sendMorphstate;
   const captionRef = useRef(null);
   const tvRef = useRef(null);
@@ -73,7 +75,12 @@ export function MobileMorphVideo(props) {
   }, [isMorphed]);
 
   return (
-    <Container isMorphed={isMorphed} galleryIndex={galleryIndex}>
+    <Container
+      isMorphed={isMorphed}
+      activeIndex={activeIndex}
+      gallerySize={gallerySize}
+      galleryIndex={galleryIndex}
+    >
       <Overlay isMorphed={isMorphed}>
         <CloseButton
           ariaLabel='Close'

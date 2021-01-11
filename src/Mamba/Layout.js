@@ -29,7 +29,7 @@ export const Container = styled.li`
   justify-content: center;
   position: relative;
   height: 314px;
-  width: 100%;
+  min-width: 100%;
   z-index: ${(props) => (props.isMorphed ? 10 : 0)};
   transition: z-index 0s ${(props) => (props.isMorphed ? 0 : 0.56)}s, ${fadeIn};
 

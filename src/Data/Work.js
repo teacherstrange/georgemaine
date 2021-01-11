@@ -16,8 +16,8 @@ export const Apps = {
 };
 
 export const Checkout = {
-  key: 1,
-  galleryIndex: 1,
+  key: 2,
+  galleryIndex: 2,
   scale: 1,
   width: 2400,
   height: 1536,
