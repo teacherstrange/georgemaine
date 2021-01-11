@@ -46,10 +46,12 @@ export function MobileVideo(props) {
     function onFullScreen(e) {
       mobileVideo.webkitFullscreenElement
         ? mobileVideo.setAttribute("controls", "")
-        : mobileVideoRef.current.removeAttribute("controls");
+        : mobileVideo.removeAttribute("controls");
     }
 
     mobileVideo.addEventListener("webkitfullscreenchange", onFullScreen);
+    return () =>
+      mobileVideo.removeEventListener("webkitfullscreenchange", onFullScreen);
   }, []);
 
   return (
