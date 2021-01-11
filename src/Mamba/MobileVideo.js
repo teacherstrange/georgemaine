@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useLayoutEffect, useState } from "react";
 import styled from "styled-components";
 import { PlayIcon, PlayPauseButton } from "./index";
 
@@ -32,9 +32,7 @@ export function MobileVideo(props) {
 
   function playPauseMobileVideo() {
     const mobileVideo = mobileVideoRef.current;
-    mobileVideo.setAttribute("controls", ""),
-      mobileVideo.play(),
-      setMobileVideoIsPlaying(true);
+    mobileVideo.play(), setMobileVideoIsPlaying(true);
   }
 
   useEffect(() => {
@@ -42,9 +40,16 @@ export function MobileVideo(props) {
 
     if (!props.isMorphed && mobileVideo.currentTime > 0) {
       mobileVideo.pause();
-      mobileVideo.removeAttribute("controls");
       setMobileVideoIsPlaying(false);
     }
+
+    function onFullScreen(e) {
+      mobileVideo.webkitFullscreenElement
+        ? mobileVideo.setAttribute("controls", "")
+        : mobileVideoRef.current.removeAttribute("controls");
+    }
+
+    mobileVideo.addEventListener("webkitfullscreenchange", onFullScreen);
   }, [props.isMorphed]);
 
   return (
