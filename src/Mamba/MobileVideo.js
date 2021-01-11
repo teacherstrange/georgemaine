@@ -56,7 +56,12 @@ export function MobileVideo(props) {
 
   return (
     <>
-      <Video ref={mobileVideoRef} preload='metadata' poster={props.poster}>
+      <Video
+        onPause={(e) => e.target.removeAttribute("controls")}
+        ref={mobileVideoRef}
+        preload='metadata'
+        poster={props.poster}
+      >
         <source src={props.src} type='video/mp4' />
       </Video>
       <MobilePlayButtonContainer>
