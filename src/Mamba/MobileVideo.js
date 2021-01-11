@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useLayoutEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { PlayIcon, PlayPauseButton } from "./index";
 
@@ -28,7 +28,6 @@ const MobilePlayButtonContainer = styled.div`
 
 export function MobileVideo(props) {
   const mobileVideoRef = useRef(null);
-  const [mobileVideoIsPlaying, setMobileVideoIsPlaying] = useState(false);
 
   function playPauseMobileVideo() {
     const mobileVideo = mobileVideoRef.current;
@@ -55,22 +54,20 @@ export function MobileVideo(props) {
       <Video ref={mobileVideoRef} preload='metadata' poster={props.poster}>
         <source src={props.src} type='video/mp4' />
       </Video>
-      {!mobileVideoIsPlaying && (
-        <MobilePlayButtonContainer>
-          <PlayPauseButton
-            ariaLabel='Play or Pause'
-            type='button'
-            onClick={() => playPauseMobileVideo()}
-          >
-            <PlayIcon
-              style={{
-                transform: `scale(${props.reverseScale})`,
-                transition: "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)",
-              }}
-            />
-          </PlayPauseButton>
-        </MobilePlayButtonContainer>
-      )}
+      <MobilePlayButtonContainer>
+        <PlayPauseButton
+          ariaLabel='Play or Pause'
+          type='button'
+          onClick={() => playPauseMobileVideo()}
+        >
+          <PlayIcon
+            style={{
+              transform: `scale(${props.reverseScale})`,
+              transition: "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)",
+            }}
+          />
+        </PlayPauseButton>
+      </MobilePlayButtonContainer>
     </>
   );
 }

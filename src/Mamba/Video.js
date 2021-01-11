@@ -15,20 +15,12 @@ import {
   SpeakerIcon,
 } from "./index";
 
-const MobileVideo = styled.video`
-  display: none;
-
-  /* @media (min-width: 1024px) {
-    display: none;
-  } */
-`;
-
 const DesktopVideo = styled.video`
   display: block;
 
-  /* @media (max-width: 1023px) {
+  @media (max-width: 1023px) {
     display: none;
-  } */
+  }
 `;
 
 const MainControls = styled.div`
@@ -43,22 +35,6 @@ const MainControls = styled.div`
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.6, 1) 0.05s,
     transform 0.5s cubic-bezier(0.4, 0, 0.6, 1);
   visibility: ${(props) => (props.startState ? "hidden" : "visible")};
-`;
-
-const MobilePlayButtonContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.56));
-
-  @media (min-width: 1024px) {
-    display: none;
-  }
 `;
 
 const PlayButtonButtonContainer = styled.div`
@@ -149,7 +125,6 @@ const DurationTime = styled.div`
 
 export function Video(props) {
   const videoRef = useRef(null);
-  const mobileVideoRef = useRef(null);
   const volumeBarRef = useRef(null);
   const volumeFillRef = useRef(null);
   const volumeThumbRef = useRef(null);
@@ -161,7 +136,6 @@ export function Video(props) {
   const [videoDuration, setVideoDuration] = useState("00:00");
   const [videoIsMuted, setVideoIsMuted] = useState(false);
   const [videoIsPlaying, setVideoIsPlaying] = useState(false);
-  const [mobileVideoIsPlaying, setMobileVideoIsPlaying] = useState(false);
   const [startState, setStartState] = useState(true);
 
   function updateVideoCurrentTime(seconds) {
@@ -179,13 +153,6 @@ export function Video(props) {
     video.paused
       ? (video.play(), setVideoIsPlaying(true))
       : (video.pause(), setVideoIsPlaying(false));
-  }
-
-  function playPauseMobileVideo() {
-    const mobileVideo = mobileVideoRef.current;
-    mobileVideo.setAttribute("controls", ""),
-      mobileVideo.play(),
-      setMobileVideoIsPlaying(true);
   }
 
   function muteVideo() {
@@ -267,14 +234,7 @@ export function Video(props) {
   }, []);
 
   useEffect(() => {
-    const mobileVideo = mobileVideoRef.current;
     const desktopVideo = videoRef.current;
-
-    if (!props.isMorphed && mobileVideo.currentTime > 0) {
-      mobileVideo.pause();
-      mobileVideo.removeAttribute("controls");
-      setMobileVideoIsPlaying(false);
-    }
 
     if (!props.isMorphed && desktopVideo.currentTime > 0) {
       desktopVideo.pause();
@@ -285,25 +245,6 @@ export function Video(props) {
 
   return (
     <>
-      <MobileVideo
-        ref={mobileVideoRef}
-        preload='metadata'
-        poster={props.poster}
-      >
-        <source src={props.src} type='video/mp4' />
-      </MobileVideo>
-      {!mobileVideoIsPlaying && (
-        <MobilePlayButtonContainer>
-          <PlayPauseButton
-            ariaLabel='Play or Pause'
-            type='button'
-            onClick={() => playPauseMobileVideo()}
-          >
-            <PlayIcon />
-          </PlayPauseButton>
-        </MobilePlayButtonContainer>
-      )}
-
       <DesktopVideo
         ref={videoRef}
         onPlay={() => (startState ? setStartState(false) : null)}
