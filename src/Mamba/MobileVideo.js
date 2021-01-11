@@ -39,7 +39,10 @@ export function MobileVideo(props) {
     if (!props.isMorphed && mobileVideo.currentTime > 0) {
       mobileVideo.pause();
     }
+  }, [props.isMorphed]);
 
+  useEffect(() => {
+    const mobileVideo = mobileVideoRef.current;
     function onFullScreen(e) {
       mobileVideo.webkitFullscreenElement
         ? mobileVideo.setAttribute("controls", "")
@@ -47,7 +50,7 @@ export function MobileVideo(props) {
     }
 
     mobileVideo.addEventListener("webkitfullscreenchange", onFullScreen);
-  }, [props.isMorphed]);
+  }, []);
 
   return (
     <>
