@@ -46,7 +46,8 @@ export function MobileVideo(props) {
     function onFullScreen(e) {
       mobileVideo.webkitFullscreenElement
         ? mobileVideo.setAttribute("controls", "")
-        : mobileVideoRef.current.removeAttribute("controls");
+        : mobileVideoRef.current.removeAttribute("controls"),
+        setMobileVideoIsPlaying(false);
     }
 
     mobileVideo.addEventListener("webkitfullscreenchange", onFullScreen);
