@@ -32,22 +32,19 @@ export function MobileVideo(props) {
 
   function playPauseMobileVideo() {
     const mobileVideo = mobileVideoRef.current;
-    mobileVideo.play(), setMobileVideoIsPlaying(true);
+    mobileVideo.play();
   }
 
   useEffect(() => {
     const mobileVideo = mobileVideoRef.current;
-
     if (!props.isMorphed && mobileVideo.currentTime > 0) {
       mobileVideo.pause();
-      setMobileVideoIsPlaying(false);
     }
 
     function onFullScreen(e) {
       mobileVideo.webkitFullscreenElement
         ? mobileVideo.setAttribute("controls", "")
-        : mobileVideoRef.current.removeAttribute("controls"),
-        setMobileVideoIsPlaying(false);
+        : mobileVideoRef.current.removeAttribute("controls");
     }
 
     mobileVideo.addEventListener("webkitfullscreenchange", onFullScreen);
