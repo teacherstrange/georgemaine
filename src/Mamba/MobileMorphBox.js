@@ -116,8 +116,8 @@ export function MobileMorphBox(props) {
       <FigCaption
         ref={captionRef}
         style={{
-          transform: `matrix(${isMorphed ? 1 : currentScale}, 0, 0, ${
-            isMorphed ? 1 : currentScale
+          transform: `matrix(${isMorphed ? 1 : 0.65}, 0, 0, ${
+            isMorphed ? 1 : 0.65
           }, 0, ${captionY})`,
         }}
         className={isMorphed && "is-morphed"}

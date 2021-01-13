@@ -105,8 +105,8 @@ export function MobileMorphVideo(props) {
       <FigCaption
         ref={captionRef}
         style={{
-          transform: `matrix(${isMorphed ? 1 : tvScale}, 0, 0, ${
-            isMorphed ? 1 : tvScale
+          transform: `matrix(${isMorphed ? 1 : 0.65}, 0, 0, ${
+            isMorphed ? 1 : 0.65
           }, 0, ${textY})`,
         }}
         className={isMorphed && "is-morphed"}
