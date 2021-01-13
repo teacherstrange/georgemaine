@@ -8,6 +8,7 @@ import {
   CloseButton,
   OpenButton,
   Overlay,
+  calculateScale,
 } from "./index";
 
 const Image = styled.img`
@@ -17,19 +18,15 @@ const Image = styled.img`
 
 export function MobileMorphBox(props) {
   const gallerySize = props.gallerySize;
-  const contentWidth = props.width;
-  const contentHeight = props.height;
   const smallWidth = props.smallWidth;
   const smallHeight = props.smallHeight;
   const galleryIndex = props.galleryIndex;
   const activeIndex = props.galleryIndex - props.currentIndex;
   const sendMorphstate = props.sendMorphstate;
   const morphScale = props.scale;
-
   const imageRef = useRef(null);
   const captionRef = useRef(null);
   const bodyRef = useRef(null);
-
   const [isMorphed, setIsMorphed] = useState(false);
   const [captionY, updateCaptionY] = useState(0);
   const [translateY, updateTranslateY] = useState(0);
@@ -41,38 +38,35 @@ export function MobileMorphBox(props) {
   }
 
   useEffect(() => {
-    const containerWidth = isMorphed
-      ? window.innerWidth * morphScale
-      : smallWidth;
-    const containerHeight = isMorphed
-      ? window.innerHeight * morphScale
-      : smallHeight;
+    const container = {
+      width: isMorphed ? window.innerWidth * morphScale : smallWidth,
+      height: isMorphed ? window.innerHeight * morphScale : smallHeight,
+    };
+    const content = {
+      width: props.width,
+      height: props.height,
+    };
     const imageY = imageRef.current.getBoundingClientRect().y;
     const screenHeight = window.innerHeight;
-    const screenCenterY = screenHeight / 2;
-    const textHeightOffset = captionRef.current.scrollHeight / 2;
+    const textHeightOffset = captionRef.current.scrollHeight;
     const textY = captionRef.current.getBoundingClientRect().y;
+    const textBaseY = 285;
 
     // Calculate scale
-    const scale =
-      containerWidth / containerHeight > contentWidth / contentHeight
-        ? containerHeight / contentHeight
-        : containerWidth / contentWidth;
+    const scale = calculateScale(container, content);
 
     // 1. Scale sizes
-    const imageHeight = contentHeight * scale;
-    const imageHeightOffset = imageHeight / 2;
+    const imageHeight = content.height * scale;
+    const verticalWhitespace = screenHeight - (imageHeight + textHeightOffset);
 
     // 2.1 Image position
-    const screenCenterYOffset =
-      imageY + imageHeightOffset + textHeightOffset + -screenCenterY;
-    const textOffsetY =
-      textY - screenCenterY - textHeightOffset - imageHeightOffset;
+    const imageMorphY = imageY - verticalWhitespace / 2;
+    const textMorphY = textY - imageHeight - textBaseY - verticalWhitespace / 2;
 
     // Update values
-    updateTranslateY(isMorphed ? -screenCenterYOffset : 0);
+    updateTranslateY(isMorphed ? -imageMorphY : 0);
     setCurrentScale(scale);
-    updateCaptionY(isMorphed ? -textOffsetY : smallHeight);
+    updateCaptionY(isMorphed ? -textMorphY : textBaseY);
   }, [isMorphed]);
 
   useEffect(() => {
@@ -122,8 +116,8 @@ export function MobileMorphBox(props) {
       <FigCaption
         ref={captionRef}
         style={{
-          transform: `matrix(${isMorphed ? 1 : 0.6}, 0, 0, ${
-            isMorphed ? 1 : 0.6
+          transform: `matrix(${isMorphed ? 1 : currentScale}, 0, 0, ${
+            isMorphed ? 1 : currentScale
           }, 0, ${captionY})`,
         }}
         className={isMorphed && "is-morphed"}

@@ -9,6 +9,7 @@ import {
   MobileVideo,
   Overlay,
   Tv,
+  calculateScale,
 } from "./index";
 
 export function MobileMorphVideo(props) {
@@ -38,34 +39,34 @@ export function MobileMorphVideo(props) {
   }, []);
 
   useEffect(() => {
-    const containerWidth = isMorphed ? window.innerWidth * 0.8 : 310;
-    const containerHeight = isMorphed ? window.innerHeight * 0.8 : 174;
-    const videoWidth = 1920;
-    const videoHeight = 1080;
+    const container = {
+      width: isMorphed ? window.innerWidth * 0.8 : 310,
+      height: isMorphed ? window.innerHeight * 0.8 : 174,
+    };
+    const content = {
+      width: props.width,
+      height: props.height,
+    };
+    const screenHeight = window.innerHeight;
+    const textBaseY = 285;
     const textY = captionRef.current.getBoundingClientRect().y;
     const textHeightOffset = captionRef.current.scrollHeight / 2;
     const tvY = tvRef.current.getBoundingClientRect().y;
-    const screenCenterY = window.innerHeight / 2;
 
     // Calculate scale
-    const scale =
-      containerWidth / containerHeight > videoWidth / videoHeight
-        ? containerHeight / videoHeight
-        : containerWidth / videoWidth;
+    const scale = calculateScale(container, content);
     const reverseScale = 1 / scale;
 
     // Scale sizes
-    const tvHeight = videoHeight * scale;
-    const tvHeightOffset = tvHeight / 2;
+    const tvHeight = content.height * scale;
+    const verticalWhitespace = screenHeight - (tvHeight + textHeightOffset);
 
     // 2.1 Image position
-    const tvCenterYOffset =
-      tvY + tvHeightOffset + textHeightOffset + -screenCenterY;
-    const textOffsetY =
-      textY - screenCenterY - textHeightOffset - tvHeightOffset - 36;
+    const tvCenterYOffset = tvY - verticalWhitespace / 2;
+    const textOffsetY = textY - tvHeight - textBaseY - verticalWhitespace / 2;
 
     updateTvY(isMorphed ? -tvCenterYOffset : 30);
-    updateTextY(isMorphed ? -textOffsetY : 240);
+    updateTextY(isMorphed ? -textOffsetY : textBaseY);
     setReverseScale(reverseScale);
     setTvScale(scale);
 
@@ -104,8 +105,8 @@ export function MobileMorphVideo(props) {
       <FigCaption
         ref={captionRef}
         style={{
-          transform: `matrix(${isMorphed ? 1 : 0.6}, 0, 0, ${
-            isMorphed ? 1 : 0.6
+          transform: `matrix(${isMorphed ? 1 : tvScale}, 0, 0, ${
+            isMorphed ? 1 : tvScale
           }, 0, ${textY})`,
         }}
         className={isMorphed && "is-morphed"}

@@ -96,10 +96,6 @@ export const FigCaption = styled.p`
         transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
     }
   }
-
-  @media (max-width: 1023px) {
-    padding-top: 60px;
-  }
 `;
 
 export const Link = styled.a`
