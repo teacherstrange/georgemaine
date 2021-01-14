@@ -8,23 +8,18 @@ import {
   CloseButton,
   OpenButton,
   Overlay,
+  calculateScale,
 } from "./index";
 
 const Image = styled.img`
   transform-origin: center 0;
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
-  transform: scale(${(props) => props.currentScale})
-    translate(${(props) => props.translateX}%, ${(props) => props.translateY}%);
   transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 `;
 
 export function MorphBox(props) {
   const gallerySize = props.gallerySize;
-  const contentWidth = props.width;
-  const contentHeight = props.height;
-  const smallWidth = props.smallWidth;
-  const smallHeight = props.smallHeight;
   const galleryIndex = props.galleryIndex;
   const activeIndex = props.galleryIndex - props.currentIndex;
   const sendMorphstate = props.sendMorphstate;
@@ -46,62 +41,46 @@ export function MorphBox(props) {
   }
 
   useEffect(() => {
-    const canvasWidth = isMorphed ? window.innerWidth * 0.8 : smallWidth;
-    const canvasHeight = isMorphed ? window.innerHeight * 0.8 : smallHeight;
-    const x = imageRef.current.getBoundingClientRect().x;
-    const y = imageRef.current.getBoundingClientRect().y;
-    const imageWidthOffset = imageRef.current.getBoundingClientRect().width / 2;
-    const imageCenterX = x + imageWidthOffset;
-    const screenWidth = window.innerWidth;
+    const container = {
+      width: isMorphed ? window.innerWidth * 0.8 : props.smallWidth,
+      height: isMorphed ? window.innerHeight * 0.8 : props.smallHeight,
+    };
+    const content = {
+      width: props.width,
+      height: props.height,
+    };
+    const imageY = imageRef.current.getBoundingClientRect().y;
     const screenHeight = window.innerHeight;
-    const screenCenterX = screenWidth / 2;
-    const screenCenterY = screenHeight / 2;
-    const textHeight = captionRef.current.getBoundingClientRect().height;
-    const textWidthOffset =
-      captionRef.current.getBoundingClientRect().width / 2;
-    const textHeightOffset =
-      captionRef.current.getBoundingClientRect().height / 2;
-    const textCenterYOffset = smallHeight / 2 - textHeightOffset;
-    const textCenterY =
-      captionRef.current.getBoundingClientRect().y + textHeightOffset;
+    const screenWidth = window.innerWidth;
+    const textHeightOffset = captionRef.current.scrollHeight / 2;
+    const textY = captionRef.current.getBoundingClientRect().y;
+    const textWidth = captionRef.current.scrollWidth;
 
     // Calculate scale
-    const scale =
-      canvasWidth / canvasHeight > contentWidth / contentHeight
-        ? canvasHeight / contentHeight
-        : canvasWidth / contentWidth;
+    const scale = calculateScale(container, content);
+    const imageWidth = content.width * scale;
+    const imageHeight = content.height * scale;
 
     // 1. Scale sizes
-    const scaledWidth = contentWidth * scale;
-    const scaledHeight = contentHeight * scale;
-    const verticalWhitespace = (screenHeight - scaledHeight) / 2;
-    const scaledWidthOffset = scaledWidth / 2;
+    const imageWhitespaceX = screenWidth - imageWidth;
+    const imageOffsetX = screenWidth - imageWidth - textWidth;
+    const textWhitespaceX = screenWidth - textWidth;
+    const imageWhitespaceY = screenHeight - imageHeight;
 
     // 2.1 Image position
-    const screenCenterXOffset = screenCenterX - imageCenterX - textWidthOffset;
-    const screenCenterYOffset = y - verticalWhitespace;
-
-    // 2.2 Text position
-    const initialCaptionXPosition = smallWidth / 2 + textWidthOffset;
-    const scaledTextY = screenCenterY - textCenterY + textHeightOffset;
-    const captionCenterX =
-      scaledWidthOffset +
-      (galleryIndex === 2
-        ? textWidthOffset
-        : textWidthOffset + textWidthOffset);
-
-    // Translate to percentage
-    const translateX = (screenCenterXOffset / scaledWidth) * 100;
-    const translateY = (screenCenterYOffset / scaledHeight) * 100;
-    const translateTextY = (textCenterYOffset / textHeight) * 100;
-    const translateScaledTextY = (scaledTextY / textHeight) * 100;
+    const imageMorphY = imageY - imageWhitespaceY / 2;
+    const imageMorphX = 240 - imageWhitespaceX / 2 + imageOffsetX / 2;
+    const textMorphY =
+      textY - imageWhitespaceY / 2 - imageHeight / 2 + textHeightOffset;
+    const textMorphX =
+      240 - textWhitespaceX / 2 + imageOffsetX / 2 + imageWidth;
 
     // Update values
-    updateTranslateX(isMorphed ? translateX : 0);
-    updateTranslateY(isMorphed ? -translateY : 0);
+    updateTranslateX(isMorphed ? imageMorphX : 0);
+    updateTranslateY(isMorphed ? -imageMorphY : 0);
     setCurrentScale(scale);
-    setCaptionX(isMorphed ? captionCenterX : initialCaptionXPosition);
-    updateCaptionY(isMorphed ? translateScaledTextY : translateTextY);
+    setCaptionX(isMorphed ? textMorphX : 0);
+    updateCaptionY(isMorphed ? -textMorphY : 0);
   }, [isMorphed]);
 
   useEffect(() => {
@@ -136,15 +115,17 @@ export function MorphBox(props) {
         width={props.width}
         height={props.height}
         src={props.image}
-        currentScale={currentScale}
         isMorphed={isMorphed}
-        translateX={translateX}
-        translateY={translateY}
+        style={{
+          transform: `matrix(${currentScale}, 0, 0, ${currentScale}, ${translateX}, ${translateY})`,
+        }}
       />
       <FigCaption
         ref={captionRef}
         style={{
-          transform: `translate3d(${captionX}px, ${captionY}%, 0)`,
+          transform: `matrix(${isMorphed ? 1 : 0.65}, 0, 0, ${
+            isMorphed ? 1 : 0.65
+          }, ${captionX}, ${captionY})`,
         }}
         className={isMorphed && "is-morphed"}
       >

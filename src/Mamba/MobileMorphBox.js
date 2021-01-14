@@ -18,12 +18,9 @@ const Image = styled.img`
 
 export function MobileMorphBox(props) {
   const gallerySize = props.gallerySize;
-  const smallWidth = props.smallWidth;
-  const smallHeight = props.smallHeight;
   const galleryIndex = props.galleryIndex;
   const activeIndex = props.galleryIndex - props.currentIndex;
   const sendMorphstate = props.sendMorphstate;
-  const morphScale = props.scale;
   const imageRef = useRef(null);
   const captionRef = useRef(null);
   const bodyRef = useRef(null);
@@ -39,8 +36,8 @@ export function MobileMorphBox(props) {
 
   useEffect(() => {
     const container = {
-      width: isMorphed ? window.innerWidth * morphScale : smallWidth,
-      height: isMorphed ? window.innerHeight * morphScale : smallHeight,
+      width: isMorphed ? window.innerWidth * props.scale : props.smallWidth,
+      height: isMorphed ? window.innerHeight * props.scale : props.smallHeight,
     };
     const content = {
       width: props.width,
@@ -59,7 +56,7 @@ export function MobileMorphBox(props) {
     const imageHeight = content.height * scale;
     const verticalWhitespace = screenHeight - (imageHeight + textHeightOffset);
 
-    // 2.1 Image position
+    // 2.1 Calculate positions
     const imageMorphY = imageY - verticalWhitespace / 2;
     const textMorphY = textY - imageHeight - textBaseY - verticalWhitespace / 2;
 

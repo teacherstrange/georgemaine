@@ -29,12 +29,13 @@ export const Container = styled.li`
   justify-content: center;
   position: relative;
   height: 314px;
-  min-width: 100%;
+
+  width: 50%;
   z-index: ${(props) => (props.isMorphed ? 10 : 0)};
   transition: z-index 0s ${(props) => (props.isMorphed ? 0 : 0.56)}s, ${fadeIn};
 
-  @media (min-width: 1060px) {
-    width: 50%;
+  @media (max-width: 1059px) {
+    min-width: 100%;
   }
 
   ${(props) =>

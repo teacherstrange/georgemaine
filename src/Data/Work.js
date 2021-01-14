@@ -19,7 +19,7 @@ export const Checkout = {
   key: 2,
   galleryIndex: 2,
   scale: 1,
-  width: 2400,
+  width: 2024,
   height: 1536,
   smallWidth: 375,
   smallHeight: 240,
