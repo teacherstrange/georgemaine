@@ -41,39 +41,45 @@ export function MorphBox(props) {
   }
 
   useEffect(() => {
+    const screenHeight = window.innerHeight;
+    const screenWidth = window.innerWidth;
     const container = {
-      width: isMorphed ? window.innerWidth * 0.8 : props.smallWidth,
-      height: isMorphed ? window.innerHeight * 0.8 : props.smallHeight,
+      width: isMorphed ? screenWidth * 0.7 : props.smallWidth,
+      height: isMorphed ? screenHeight * 0.7 : props.smallHeight,
     };
     const content = {
       width: props.width,
       height: props.height,
     };
     const imageY = imageRef.current.getBoundingClientRect().y;
-    const screenHeight = window.innerHeight;
-    const screenWidth = window.innerWidth;
     const textHeightOffset = captionRef.current.scrollHeight / 2;
     const textY = captionRef.current.getBoundingClientRect().y;
     const textWidth = captionRef.current.scrollWidth;
 
     // Calculate scale
     const scale = calculateScale(container, content);
-    const imageWidth = content.width * scale;
     const imageHeight = content.height * scale;
+    const imageWidth = content.width * scale;
+    const captionOffsetX = props.captionRightEdge * scale;
 
     // 1. Scale sizes
-    const imageWhitespaceX = screenWidth - imageWidth;
-    const imageOffsetX = screenWidth - imageWidth - textWidth;
-    const textWhitespaceX = screenWidth - textWidth;
     const imageWhitespaceY = screenHeight - imageHeight;
+    const imageWhitespaceX = (screenWidth - imageWidth) / 2;
+    const textWhitespaceX = (screenWidth - textWidth) / 2;
+    const imageOffsetX = imageWidth / 2 + (captionOffsetX + textWidth);
+    const contentWhitespaceX = (screenWidth - imageOffsetX) / 2;
 
     // 2.1 Image position
     const imageMorphY = imageY - imageWhitespaceY / 2;
-    const imageMorphX = 240 - imageWhitespaceX / 2 + imageOffsetX / 2;
+    const imageMorphX = 240 - imageWhitespaceX + contentWhitespaceX;
     const textMorphY =
       textY - imageWhitespaceY / 2 - imageHeight / 2 + textHeightOffset;
     const textMorphX =
-      240 - textWhitespaceX / 2 + imageOffsetX / 2 + imageWidth;
+      240 -
+      textWhitespaceX +
+      contentWhitespaceX +
+      imageWidth / 2 +
+      captionOffsetX;
 
     // Update values
     updateTranslateX(isMorphed ? imageMorphX : 0);

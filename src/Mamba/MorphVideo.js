@@ -8,6 +8,7 @@ import {
   Video,
   Overlay,
   Tv,
+  calculateScale,
 } from "./index";
 
 export function LargeMorphVideo(props) {
@@ -37,10 +38,14 @@ export function LargeMorphVideo(props) {
   }, []);
 
   useEffect(() => {
-    const containerWidth = isMorphed ? window.innerWidth * 0.8 : 315;
-    const containerHeight = isMorphed ? window.innerHeight * 0.8 : 180;
-    const videoWidth = 1920;
-    const videoHeight = 1080;
+    const container = {
+      width: isMorphed ? window.innerWidth * 0.6 : props.smallWidth,
+      height: isMorphed ? window.innerHeight * 0.6 : props.smallHeight,
+    };
+    const content = {
+      width: props.width,
+      height: props.height,
+    };
     const textY = captionRef.current.getBoundingClientRect().y;
     const textHeightOffset = captionRef.current.scrollHeight / 2;
     const tvY = tvRef.current.getBoundingClientRect().y;
@@ -51,16 +56,13 @@ export function LargeMorphVideo(props) {
     const screenCenterY = window.innerHeight / 2;
 
     // Calculate scale
-    const scale =
-      containerWidth / containerHeight > videoWidth / videoHeight
-        ? containerHeight / videoHeight
-        : containerWidth / videoWidth;
+    const scale = calculateScale(container, content);
     const reverseScale = 1 / scale;
 
     // Scale sizes
-    const tvHeight = videoHeight * scale;
+    const tvHeight = content.height * scale;
     const verticalWhitespace = (window.innerHeight - tvHeight) / 2;
-    const videoOffsetX = (videoWidth * scale) / 2;
+    const videoOffsetX = (content.width * scale) / 2;
 
     // 2.1 Image position
     const tvCenterXOffset = screenCenterX - tvCenterX - 160;
