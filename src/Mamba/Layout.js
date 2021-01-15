@@ -22,17 +22,15 @@ export const Section = styled.section`
   }
 `;
 
-const fadeIn = "opacity .3s ease .5s";
-
 export const Container = styled.li`
   display: flex;
   justify-content: center;
   position: relative;
   height: 314px;
-
   width: 50%;
   z-index: ${(props) => (props.isMorphed ? 10 : 0)};
-  transition: z-index 0s ${(props) => (props.isMorphed ? 0 : 0.56)}s, ${fadeIn};
+  transition: z-index 0s ${(props) => (props.isMorphed ? 0 : 0.56)}s,
+    opacity 0.3s ease 0.5s;
 
   @media (max-width: 1059px) {
     min-width: 100%;

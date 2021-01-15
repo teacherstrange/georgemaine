@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
 import {
   Container,
   FigCaption,
@@ -9,14 +8,8 @@ import {
   OpenButton,
   Overlay,
   calculateScale,
+  Image,
 } from "./index";
-
-const Image = styled.img`
-  transform-origin: center 0;
-  width: ${(props) => props.width}px;
-  height: ${(props) => props.height}px;
-  transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
-`;
 
 export function MorphBox(props) {
   const gallerySize = props.gallerySize;

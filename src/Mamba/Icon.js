@@ -1,4 +1,4 @@
-export function LinkedinIcon(props) {
+export function LinkedinIcon() {
   return (
     <svg
       width='18'
@@ -14,9 +14,15 @@ export function LinkedinIcon(props) {
     </svg>
   );
 }
-export function DribbbleIcon(props) {
+export function DribbbleIcon() {
   return (
-    <svg width='20' height='20' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <svg
+      width='20'
+      height='20'
+      viewBox='0 0 20 20'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+    >
       <path
         d='M14.413 16.432a62.55 62.55 0 00-1.408-5.258c.5-.063 1.033-.094 1.596-.094.939 0 1.956.125 3.052.375a7.411 7.411 0 01-1.127 2.817 8.155 8.155 0 01-2.113 2.16zM10 17.793c-1.784-.03-3.333-.532-4.648-1.502.125-.25.344-.571.657-.962.313-.392.705-.822 1.174-1.291a10.16 10.16 0 011.737-1.362 10.371 10.371 0 012.3-1.08c.627 1.66 1.143 3.568 1.55 5.728-.845.313-1.768.47-2.77.47zM2.207 10v-.094h.845c.813 0 1.846-.063 3.098-.188 1.252-.125 2.582-.407 3.99-.845l.47 1.033c-.939.313-1.776.704-2.511 1.174-.736.47-1.37.947-1.902 1.432a13.52 13.52 0 00-1.338 1.385c-.36.438-.634.813-.821 1.127a7.455 7.455 0 01-1.362-2.301A7.778 7.778 0 012.206 10zm4.319-6.995c.282.313.673.821 1.174 1.526.5.704 1.048 1.604 1.643 2.7-1.19.343-2.332.578-3.428.703-1.095.125-2.003.188-2.723.188h-.75A7.933 7.933 0 013.92 5.094a7.374 7.374 0 012.606-2.09zM10 2.207c.939 0 1.815.148 2.63.446a8.353 8.353 0 012.253 1.244 10.29 10.29 0 01-3.85 2.77A33.832 33.832 0 009.53 4.085c-.47-.72-.861-1.3-1.174-1.738A9.438 9.438 0 0110 2.207zm6.15 2.957c1.002 1.284 1.55 2.77 1.643 4.46a16.757 16.757 0 00-3.192-.328c-.814 0-1.565.062-2.254.188-.187-.439-.36-.845-.516-1.221 1.596-.689 3.036-1.722 4.32-3.099zM10 0C7.152.063 4.789 1.033 2.91 2.91 1.034 4.79.064 7.153 0 10c.063 2.848 1.033 5.211 2.91 7.09C4.79 18.966 7.153 19.936 10 20c2.848-.063 5.211-1.033 7.09-2.91C18.966 15.21 19.936 12.847 20 10c-.063-2.848-1.033-5.211-2.91-7.09C15.21 1.034 12.847.064 10 0z'
         fill='var(--white)'
@@ -25,9 +31,15 @@ export function DribbbleIcon(props) {
   );
 }
 
-export function MailIcon(props) {
+export function MailIcon() {
   return (
-    <svg width='18' height='15' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <svg
+      width='18'
+      height='15'
+      fill='none'
+      viewBox='0 0 18 15'
+      xmlns='http://www.w3.org/2000/svg'
+    >
       <path
         fillRule='evenodd'
         clipRule='evenodd'
@@ -38,7 +50,7 @@ export function MailIcon(props) {
   );
 }
 
-export function TwitterIcon(props) {
+export function TwitterIcon() {
   return (
     <svg width='18' height='17' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <path
@@ -49,7 +61,7 @@ export function TwitterIcon(props) {
   );
 }
 
-export function CloseIcon(props) {
+export function CloseIcon() {
   return (
     <svg
       width='20'
@@ -80,6 +92,7 @@ export function PreviousArrowIcon(props) {
       {...props}
       width='24'
       height='24'
+      viewBox='0 0 24 24'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
     >
@@ -100,6 +113,7 @@ export function NextArrowIcon(props) {
       {...props}
       width='24'
       height='24'
+      viewBox='0 0 24 24'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
     >

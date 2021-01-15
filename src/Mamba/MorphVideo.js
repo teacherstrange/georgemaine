@@ -101,7 +101,6 @@ export function LargeMorphVideo(props) {
           poster={props.poster}
           src={props.src}
           isMorphed={isMorphed}
-          className={isMorphed && "is-morphed"}
         />
       </Tv>
       <FigCaption

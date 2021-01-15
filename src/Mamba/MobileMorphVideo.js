@@ -99,7 +99,6 @@ export function MobileMorphVideo(props) {
           reverseScale={reverseScale}
           src={props.src}
           isMorphed={isMorphed}
-          className={isMorphed && "is-morphed"}
         />
       </Tv>
       <FigCaption
