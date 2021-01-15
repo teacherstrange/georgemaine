@@ -44,8 +44,8 @@ export function MorphBox(props) {
     const screenHeight = window.innerHeight;
     const screenWidth = window.innerWidth;
     const container = {
-      width: isMorphed ? screenWidth * 0.7 : props.smallWidth,
-      height: isMorphed ? screenHeight * 0.7 : props.smallHeight,
+      width: isMorphed ? screenWidth * 0.8 : props.smallWidth,
+      height: isMorphed ? screenHeight * 0.8 : props.smallHeight,
     };
     const content = {
       width: props.width,
