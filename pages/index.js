@@ -8,7 +8,7 @@ import {
   SocialLinks,
   SmallGallery,
   LargeGallery,
-} from "../mamba/index";
+} from "../mamba";
 
 export default function Home() {
   return (
