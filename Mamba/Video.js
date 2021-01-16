@@ -236,12 +236,12 @@ export function Video(props) {
   useEffect(() => {
     const desktopVideo = videoRef.current;
 
-    if (!props.isMorphed && desktopVideo.currentTime > 0) {
+    if (!props.isZoomed && desktopVideo.currentTime > 0) {
       desktopVideo.pause();
       setStartState(true);
       setVideoIsPlaying(false);
     }
-  }, [props.isMorphed]);
+  }, [props.isZoomed]);
 
   return (
     <>

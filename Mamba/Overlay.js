@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 const OverlayContainer = styled.div`
   position: fixed;
-  opacity: ${(props) => (props.isMorphed ? 1 : 0)};
-  pointer-events: ${(props) => (props.isMorphed ? "auto" : "none")};
+  opacity: ${(props) => (props.isZoomed ? 1 : 0)};
+  pointer-events: ${(props) => (props.isZoomed ? "auto" : "none")};
   width: 100vw;
   min-width: 100vw;
   height: 100vh;
@@ -16,7 +16,7 @@ const OverlayContainer = styled.div`
     0
   );
   transition: ${(props) =>
-    props.isMorphed
+    props.isZoomed
       ? "opacity 0.36s cubic-bezier(0.32, 0.08, 0.24, 1)"
       : "opacity .44s cubic-bezier(0.52, 0.16, 0.24, 1) .2s, transform .1s .64s"};
 `;
@@ -31,14 +31,14 @@ export function Overlay(props) {
     const overlayX = props.video
       ? Math.abs(overlayRef.current.getBoundingClientRect().x) - 480
       : Math.abs(overlayRef.current.getBoundingClientRect().x);
-    updateOverlayX(props.isMorphed ? overlayX : 0);
-    updateOverlayY(props.isMorphed ? -overlayY : 0);
-  }, [props.isMorphed]);
+    updateOverlayX(props.isZoomed ? overlayX : 0);
+    updateOverlayY(props.isZoomed ? -overlayY : 0);
+  }, [props.isZoomed]);
 
   return (
     <OverlayContainer
       ref={overlayRef}
-      isMorphed={props.isMorphed}
+      isZoomed={props.isZoomed}
       overlayX={overlayX}
       overlayY={overlayY}
     >

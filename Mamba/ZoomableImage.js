@@ -11,34 +11,34 @@ import {
   Image,
 } from "./index";
 
-export function MorphBox(props) {
+export function ZoomableImage(props) {
   const gallerySize = props.gallerySize;
   const galleryIndex = props.galleryIndex;
   const activeIndex = props.galleryIndex - props.currentIndex;
-  const sendMorphstate = props.sendMorphstate;
+  const sendZoomState = props.sendZoomState;
 
   const imageRef = useRef(null);
   const captionRef = useRef(null);
   const bodyRef = useRef(null);
 
-  const [isMorphed, setIsMorphed] = useState(false);
+  const [isZoomed, setisZoomed] = useState(false);
   const [captionX, setCaptionX] = useState(0);
   const [captionY, updateCaptionY] = useState(0);
   const [translateX, updateTranslateX] = useState(0);
   const [translateY, updateTranslateY] = useState(0);
-  const [currentScale, setCurrentScale] = useState(0.14652014652014653);
+  const [currentScale, setCurrentScale] = useState(props.desktopScale);
 
-  function handleMorph(event) {
-    setIsMorphed(!isMorphed);
-    sendMorphstate(!isMorphed);
+  function handleZoom(event) {
+    setisZoomed(!isZoomed);
+    sendZoomState(!isZoomed);
   }
 
   useEffect(() => {
     const screenHeight = window.innerHeight;
     const screenWidth = window.innerWidth;
     const container = {
-      width: isMorphed ? screenWidth * 0.8 : props.smallWidth,
-      height: isMorphed ? screenHeight * 0.8 : props.smallHeight,
+      width: isZoomed ? screenWidth * 0.8 : props.smallWidth,
+      height: isZoomed ? screenHeight * 0.8 : props.smallHeight,
     };
     const content = {
       width: props.width,
@@ -63,11 +63,11 @@ export function MorphBox(props) {
     const contentWhitespaceX = (screenWidth - imageOffsetX) / 2;
 
     // 2.1 Image position
-    const imageMorphY = imageY - imageWhitespaceY / 2;
-    const imageMorphX = 240 - imageWhitespaceX + contentWhitespaceX;
-    const textMorphY =
+    const imageZoomY = imageY - imageWhitespaceY / 2;
+    const imageZoomX = 240 - imageWhitespaceX + contentWhitespaceX;
+    const textZoomY =
       textY - imageWhitespaceY / 2 - imageHeight / 2 + textHeightOffset;
-    const textMorphX =
+    const textZoomX =
       240 -
       textWhitespaceX +
       contentWhitespaceX +
@@ -75,16 +75,16 @@ export function MorphBox(props) {
       captionOffsetX;
 
     // Update values
-    updateTranslateX(isMorphed ? imageMorphX : 0);
-    updateTranslateY(isMorphed ? -imageMorphY : 0);
+    updateTranslateX(isZoomed ? imageZoomX : 0);
+    updateTranslateY(isZoomed ? -imageZoomY : 0);
     setCurrentScale(scale);
-    setCaptionX(isMorphed ? textMorphX : 0);
-    updateCaptionY(isMorphed ? -textMorphY : 0);
-  }, [isMorphed]);
+    setCaptionX(isZoomed ? textZoomX : 0);
+    updateCaptionY(isZoomed ? -textZoomY : 0);
+  }, [isZoomed]);
 
   useEffect(() => {
     const dissmissModal = () => {
-      setIsMorphed(false);
+      setisZoomed(false);
     };
     window.addEventListener("resize", dissmissModal);
     return () => window.removeEventListener("resize", dissmissModal);
@@ -92,19 +92,19 @@ export function MorphBox(props) {
 
   return (
     <Container
-      isMorphed={isMorphed}
+      isZoomed={isZoomed}
       galleryIndex={galleryIndex}
       gallerySize={gallerySize}
       activeIndex={activeIndex}
       ref={bodyRef}
-      onClick={(event) => handleMorph(event)}
+      onClick={(event) => handleZoom(event)}
     >
-      <Overlay isMorphed={isMorphed}>
+      <Overlay isZoomed={isZoomed}>
         <CloseButton
           ariaLabel='Close'
           type='button'
-          onClick={() => (setIsMorphed(!isMorphed), sendMorphstate(!isMorphed))}
-          isMorphed={isMorphed}
+          onClick={() => (setisZoomed(!isZoomed), sendZoomState(!isZoomed))}
+          isZoomed={isZoomed}
         >
           <CloseIcon />
         </CloseButton>
@@ -114,7 +114,7 @@ export function MorphBox(props) {
         width={props.width}
         height={props.height}
         src={props.image}
-        isMorphed={isMorphed}
+        isZoomed={isZoomed}
         style={{
           transform: `matrix(${currentScale}, 0, 0, ${currentScale}, ${translateX}, ${translateY})`,
         }}
@@ -122,11 +122,11 @@ export function MorphBox(props) {
       <FigCaption
         ref={captionRef}
         style={{
-          transform: `matrix(${isMorphed ? 1 : 0.65}, 0, 0, ${
-            isMorphed ? 1 : 0.65
+          transform: `matrix(${isZoomed ? 1 : 0.65}, 0, 0, ${
+            isZoomed ? 1 : 0.65
           }, ${captionX}, ${captionY})`,
         }}
-        className={isMorphed && "is-morphed"}
+        className={isZoomed && "is-zoomed"}
       >
         <strong>{props.project}. </strong>
         {props.description}
@@ -145,7 +145,7 @@ export function MorphBox(props) {
           </>
         )}
       </FigCaption>
-      <OpenButton ariaLabel='Open' type='button' isMorphed={isMorphed}>
+      <OpenButton ariaLabel='Open' type='button' isZoomed={isZoomed}>
         <strong>{props.project}</strong>
         Learn more
       </OpenButton>

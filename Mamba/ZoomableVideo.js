@@ -11,12 +11,12 @@ import {
   calculateScale,
 } from "./index";
 
-export function LargeMorphVideo(props) {
+export function ZoomableVideo(props) {
   const galleryIndex = props.galleryIndex;
-  const sendMorphstate = props.sendMorphstate;
+  const sendZoomState = props.sendZoomState;
   const captionRef = useRef(null);
   const tvRef = useRef(null);
-  const [isMorphed, setIsMorphed] = useState(false);
+  const [isZoomed, setisZoomed] = useState(false);
   const [tvScale, setTvScale] = useState(0.1640625);
   const [reverseScale, setReverseScale] = useState(0);
   const [tvX, updateTvX] = useState(0);
@@ -24,14 +24,14 @@ export function LargeMorphVideo(props) {
   const [textY, updateTextY] = useState(0);
   const [textX, updateTextX] = useState(0);
 
-  function handleMorph() {
-    setIsMorphed(!isMorphed);
-    sendMorphstate(!isMorphed);
+  function handleZoom() {
+    setisZoomed(!isZoomed);
+    sendZoomState(!isZoomed);
   }
 
   useEffect(() => {
     const dissmissModal = () => {
-      setIsMorphed(false);
+      setisZoomed(false);
     };
     window.addEventListener("resize", dissmissModal);
     return () => window.removeEventListener("resize", dissmissModal);
@@ -39,8 +39,8 @@ export function LargeMorphVideo(props) {
 
   useEffect(() => {
     const container = {
-      width: isMorphed ? window.innerWidth * 0.6 : props.smallWidth,
-      height: isMorphed ? window.innerHeight * 0.6 : props.smallHeight,
+      width: isZoomed ? window.innerWidth * 0.6 : props.smallWidth,
+      height: isZoomed ? window.innerHeight * 0.6 : props.smallHeight,
     };
     const content = {
       width: props.width,
@@ -70,26 +70,26 @@ export function LargeMorphVideo(props) {
     const textOffsetY = textY - screenCenterY + textHeightOffset;
     const textOffsetX = videoOffsetX - (480 - 375) * 1 - 110;
 
-    updateTvX(isMorphed ? tvCenterXOffset : 0);
-    updateTvY(isMorphed ? -tvCenterYOffset : 30);
-    updateTextY(isMorphed ? -textOffsetY : 0);
-    updateTextX(isMorphed ? textOffsetX : 0);
+    updateTvX(isZoomed ? tvCenterXOffset : 0);
+    updateTvY(isZoomed ? -tvCenterYOffset : 30);
+    updateTextY(isZoomed ? -textOffsetY : 0);
+    updateTextX(isZoomed ? textOffsetX : 0);
     setReverseScale(reverseScale);
     setTvScale(scale);
 
-    isMorphed
+    isZoomed
       ? (document.body.style = "overflow: hidden")
       : (document.body.style = `overflow: ""`);
-  }, [isMorphed]);
+  }, [isZoomed]);
 
   return (
-    <Container isMorphed={isMorphed} galleryIndex={galleryIndex}>
-      <Overlay isMorphed={isMorphed} video>
+    <Container isZoomed={isZoomed} galleryIndex={galleryIndex}>
+      <Overlay isZoomed={isZoomed} video>
         <CloseButton
           ariaLabel='Close'
           type='button'
-          onClick={() => (setIsMorphed(!isMorphed), sendMorphstate(!isMorphed))}
-          isMorphed={isMorphed}
+          onClick={() => (setisZoomed(!isZoomed), sendZoomState(!isZoomed))}
+          isZoomed={isZoomed}
         >
           <CloseIcon />
         </CloseButton>
@@ -100,17 +100,17 @@ export function LargeMorphVideo(props) {
           preload='metadata'
           poster={props.poster}
           src={props.src}
-          isMorphed={isMorphed}
+          isZoomed={isZoomed}
         />
       </Tv>
       <FigCaption
         ref={captionRef}
         style={{
-          transform: `matrix(${isMorphed ? 1 : 0.6}, 0, 0, ${
-            isMorphed ? 1 : 0.6
+          transform: `matrix(${isZoomed ? 1 : 0.6}, 0, 0, ${
+            isZoomed ? 1 : 0.6
           }, ${textX}, ${textY})`,
         }}
-        className={isMorphed && "is-morphed"}
+        className={isZoomed && "is-zoomed"}
       >
         <strong>{props.project}. </strong>
         {props.description}
@@ -119,8 +119,8 @@ export function LargeMorphVideo(props) {
       <OpenButton
         ariaLabel='Open'
         type='button'
-        onClick={() => handleMorph()}
-        isMorphed={isMorphed}
+        onClick={() => handleZoom()}
+        isZoomed={isZoomed}
       >
         <strong>{props.project}</strong>
         Learn more

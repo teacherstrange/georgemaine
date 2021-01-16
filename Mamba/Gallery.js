@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import {
-  MorphBox,
-  MobileMorphVideo,
+  ZoomableImage,
+  ZoomableVideoMobile,
   PreviousArrowIcon,
   PreviousButton,
   NextArrowIcon,
   NextButton,
-  LargeMorphVideo,
-  MobileMorphBox,
+  ZoomableVideo,
+  ZoomableImageMobile,
 } from "./index";
 import { Apps, Promo, Checkout, ApplePay } from "../Data";
 
@@ -45,7 +45,7 @@ const GalleryLargeItem = styled.div`
 
 export function SmallGallery() {
   const [currentIndex, setCurrentindex] = useState(0);
-  const [morphstate, sendMorphstate] = useState(false);
+  const [zoomState, sendZoomState] = useState(false);
 
   return (
     <GallerySmall>
@@ -55,28 +55,28 @@ export function SmallGallery() {
           display: "flex",
         }}
       >
-        <MobileMorphBox
+        <ZoomableImageMobile
           gallerySize='small'
           currentIndex={currentIndex}
-          sendMorphstate={sendMorphstate}
+          sendZoomState={sendZoomState}
           {...Apps}
         />
-        <MobileMorphVideo
+        <ZoomableVideoMobile
           currentIndex={currentIndex}
           gallerySize='small'
-          sendMorphstate={sendMorphstate}
+          sendZoomState={sendZoomState}
           {...Promo}
         />
-        <MobileMorphBox
+        <ZoomableImageMobile
           gallerySize='small'
           currentIndex={currentIndex}
-          sendMorphstate={sendMorphstate}
+          sendZoomState={sendZoomState}
           {...Checkout}
         />
-        <MobileMorphVideo
+        <ZoomableVideoMobile
           currentIndex={currentIndex}
           gallerySize='small'
-          sendMorphstate={sendMorphstate}
+          sendZoomState={sendZoomState}
           {...ApplePay}
         />
       </ItemContainer>
@@ -84,7 +84,7 @@ export function SmallGallery() {
       <PreviousButton
         ariaLabel='Previous'
         style={{
-          zIndex: morphstate && -1,
+          zIndex: zoomState && -1,
         }}
         disabled={currentIndex >= 1 ? false : true}
         onClick={() => {
@@ -97,7 +97,7 @@ export function SmallGallery() {
       <NextButton
         ariaLabel='Next'
         style={{
-          zIndex: morphstate && -1,
+          zIndex: zoomState && -1,
         }}
         disabled={currentIndex <= 2 ? false : true}
         onClick={() => {
@@ -112,7 +112,7 @@ export function SmallGallery() {
 
 export function LargeGallery() {
   const [currentIndex, setCurrentindex] = useState(0);
-  const [morphstate, sendMorphstate] = useState();
+  const [zoomState, sendZoomState] = useState();
 
   return (
     <GalleryLarge>
@@ -127,15 +127,15 @@ export function LargeGallery() {
             opacity: 0 - currentIndex === 0 ? 1 : 0,
           }}
         >
-          <MorphBox
+          <ZoomableImage
             currentIndex={currentIndex}
-            sendMorphstate={sendMorphstate}
+            sendZoomState={sendZoomState}
             {...Apps}
           />
 
-          <LargeMorphVideo
+          <ZoomableVideo
             currentIndex={currentIndex}
-            sendMorphstate={sendMorphstate}
+            sendZoomState={sendZoomState}
             {...Promo}
           />
         </GalleryLargeItem>
@@ -146,14 +146,14 @@ export function LargeGallery() {
             opacity: 1 - currentIndex === 0 ? 1 : 0,
           }}
         >
-          <MorphBox
+          <ZoomableImage
             currentIndex={currentIndex}
-            sendMorphstate={sendMorphstate}
+            sendZoomState={sendZoomState}
             {...Checkout}
           />
-          <LargeMorphVideo
+          <ZoomableVideo
             currentIndex={currentIndex}
-            sendMorphstate={sendMorphstate}
+            sendZoomState={sendZoomState}
             {...ApplePay}
           />
         </GalleryLargeItem>
@@ -163,7 +163,7 @@ export function LargeGallery() {
         ariaLabel='Previous'
         type='button'
         style={{
-          zIndex: morphstate && -1,
+          zIndex: zoomState && -1,
         }}
         disabled={currentIndex === 1 ? false : true}
         onClick={() => {
@@ -176,7 +176,7 @@ export function LargeGallery() {
         ariaLabel='Next'
         type='button'
         style={{
-          zIndex: morphstate && -1,
+          zIndex: zoomState && -1,
         }}
         disabled={currentIndex === 0 ? false : true}
         onClick={() => {

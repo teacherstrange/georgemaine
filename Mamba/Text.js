@@ -83,7 +83,7 @@ export const FigCaption = styled.p`
   transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
     opacity 0.229s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.03s;
 
-  &.is-morphed {
+  &.is-zoomed {
     opacity: 1;
   }
 
@@ -91,7 +91,7 @@ export const FigCaption = styled.p`
     transition: opacity 0.32244s cubic-bezier(0.32, 0.08, 0.24, 1) 0.05s,
       transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 
-    &.is-morphed {
+    &.is-zoomed {
       transition: opacity 0.3345s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.2s,
         transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
     }

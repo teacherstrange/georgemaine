@@ -1,7 +1,8 @@
 export const Apps = {
-  key: 0,
   galleryIndex: 0,
   scale: 0.8,
+  smallScale: 0.15625,
+  desktopScale: 0.12526997840172785,
   width: 1852,
   height: 1862,
   smallWidth: 232,
@@ -16,9 +17,10 @@ export const Apps = {
 };
 
 export const Checkout = {
-  key: 2,
   galleryIndex: 2,
   scale: 1,
+  smallScale: 0.12526997840172785,
+  desktopScale: 0.15625,
   width: 2400,
   height: 1536,
   smallWidth: 375,
@@ -31,7 +33,6 @@ export const Checkout = {
 };
 
 export const ApplePay = {
-  key: 3,
   galleryIndex: 3,
   width: 1920,
   height: 1080,
@@ -45,7 +46,6 @@ export const ApplePay = {
 };
 
 export const Promo = {
-  key: 1,
   galleryIndex: 1,
   width: 1920,
   height: 1080,

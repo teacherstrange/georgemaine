@@ -11,28 +11,28 @@ import {
   Image,
 } from "./index";
 
-export function MobileMorphBox(props) {
+export function ZoomableImageMobile(props) {
   const gallerySize = props.gallerySize;
   const galleryIndex = props.galleryIndex;
   const activeIndex = props.galleryIndex - props.currentIndex;
-  const sendMorphstate = props.sendMorphstate;
+  const sendZoomState = props.sendZoomState;
   const imageRef = useRef(null);
   const captionRef = useRef(null);
   const bodyRef = useRef(null);
-  const [isMorphed, setIsMorphed] = useState(false);
+  const [isZoomed, setisZoomed] = useState(false);
   const [captionY, updateCaptionY] = useState(0);
   const [translateY, updateTranslateY] = useState(0);
-  const [currentScale, setCurrentScale] = useState(0.14652014652014653);
+  const [currentScale, setCurrentScale] = useState(0.12526997840172785);
 
-  function handleMorph(event) {
-    setIsMorphed(!isMorphed);
-    sendMorphstate(!isMorphed);
+  function handleZoom(event) {
+    setisZoomed(!isZoomed);
+    sendZoomState(!isZoomed);
   }
 
   useEffect(() => {
     const container = {
-      width: isMorphed ? window.innerWidth * props.scale : props.smallWidth,
-      height: isMorphed ? window.innerHeight * props.scale : props.smallHeight,
+      width: isZoomed ? window.innerWidth * props.scale : props.smallWidth,
+      height: isZoomed ? window.innerHeight * props.scale : props.smallHeight,
     };
     const content = {
       width: props.width,
@@ -52,44 +52,44 @@ export function MobileMorphBox(props) {
     const verticalWhitespace = screenHeight - (imageHeight + textHeightOffset);
 
     // 2.1 Calculate positions
-    const imageMorphY = imageY - verticalWhitespace / 2;
-    const textMorphY = textY - imageHeight - textBaseY - verticalWhitespace / 2;
+    const imageZoomY = imageY - verticalWhitespace / 2;
+    const textZoomY = textY - imageHeight - textBaseY - verticalWhitespace / 2;
 
     // Update values
-    updateTranslateY(isMorphed ? -imageMorphY : 0);
+    updateTranslateY(isZoomed ? -imageZoomY : 0);
     setCurrentScale(scale);
-    updateCaptionY(isMorphed ? -textMorphY : textBaseY);
-  }, [isMorphed]);
+    updateCaptionY(isZoomed ? -textZoomY : textBaseY);
+  }, [isZoomed]);
 
   useEffect(() => {
     const dissmissModal = () => {
-      setIsMorphed(false);
+      setisZoomed(false);
     };
     window.addEventListener("resize", dissmissModal);
     return () => window.removeEventListener("resize", dissmissModal);
   }, []);
 
   useEffect(() => {
-    isMorphed
+    isZoomed
       ? (document.body.style = "overflow: hidden")
       : document.body.removeAttribute("style");
-  }, [isMorphed]);
+  }, [isZoomed]);
 
   return (
     <Container
-      isMorphed={isMorphed}
+      isZoomed={isZoomed}
       galleryIndex={galleryIndex}
       gallerySize={gallerySize}
       activeIndex={activeIndex}
       ref={bodyRef}
-      onClick={(event) => handleMorph(event)}
+      onClick={(event) => handleZoom(event)}
     >
-      <Overlay isMorphed={isMorphed}>
+      <Overlay isZoomed={isZoomed}>
         <CloseButton
           ariaLabel='Close'
           type='button'
-          onClick={() => (setIsMorphed(!isMorphed), sendMorphstate(!isMorphed))}
-          isMorphed={isMorphed}
+          onClick={() => (setisZoomed(!isZoomed), sendZoomState(!isZoomed))}
+          isZoomed={isZoomed}
         >
           <CloseIcon />
         </CloseButton>
@@ -100,7 +100,7 @@ export function MobileMorphBox(props) {
         height={props.height}
         src={props.image}
         currentScale={currentScale}
-        isMorphed={isMorphed}
+        isZoomed={isZoomed}
         style={{
           transform: `matrix(${currentScale}, 0, 0, ${currentScale}, 0, ${translateY})`,
         }}
@@ -108,11 +108,11 @@ export function MobileMorphBox(props) {
       <FigCaption
         ref={captionRef}
         style={{
-          transform: `matrix(${isMorphed ? 1 : 0.65}, 0, 0, ${
-            isMorphed ? 1 : 0.65
+          transform: `matrix(${isZoomed ? 1 : 0.65}, 0, 0, ${
+            isZoomed ? 1 : 0.65
           }, 0, ${captionY})`,
         }}
-        className={isMorphed && "is-morphed"}
+        className={isZoomed && "is-zoomed"}
       >
         <strong>{props.project}. </strong>
         {props.description}
@@ -131,7 +131,7 @@ export function MobileMorphBox(props) {
           </>
         )}
       </FigCaption>
-      <OpenButton ariaLabel='Open' type='button' isMorphed={isMorphed}>
+      <OpenButton ariaLabel='Open' type='button' isZoomed={isZoomed}>
         <strong>{props.project}</strong>
         Learn more
       </OpenButton>

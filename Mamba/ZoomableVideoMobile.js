@@ -12,27 +12,27 @@ import {
   calculateScale,
 } from "./index";
 
-export function MobileMorphVideo(props) {
+export function ZoomableVideoMobile(props) {
   const gallerySize = props.gallerySize;
   const galleryIndex = props.galleryIndex;
   const activeIndex = props.galleryIndex - props.currentIndex;
-  const sendMorphstate = props.sendMorphstate;
+  const sendZoomState = props.sendZoomState;
   const captionRef = useRef(null);
   const tvRef = useRef(null);
-  const [isMorphed, setIsMorphed] = useState(false);
+  const [isZoomed, setisZoomed] = useState(false);
   const [tvScale, setTvScale] = useState(0.1640625);
   const [reverseScale, setReverseScale] = useState(0);
   const [tvY, updateTvY] = useState(30);
   const [textY, updateTextY] = useState(0);
 
-  function handleMorph() {
-    setIsMorphed(!isMorphed);
-    sendMorphstate(!isMorphed);
+  function handleZoom() {
+    setisZoomed(!isZoomed);
+    sendZoomState(!isZoomed);
   }
 
   useEffect(() => {
     const dissmissModal = () => {
-      setIsMorphed(false);
+      setisZoomed(false);
     };
     window.addEventListener("resize", dissmissModal);
     return () => window.removeEventListener("resize", dissmissModal);
@@ -40,8 +40,8 @@ export function MobileMorphVideo(props) {
 
   useEffect(() => {
     const container = {
-      width: isMorphed ? window.innerWidth * 0.8 : 310,
-      height: isMorphed ? window.innerHeight * 0.8 : 174,
+      width: isZoomed ? window.innerWidth * 0.8 : 310,
+      height: isZoomed ? window.innerHeight * 0.8 : 174,
     };
     const content = {
       width: props.width,
@@ -65,29 +65,29 @@ export function MobileMorphVideo(props) {
     const tvCenterYOffset = tvY - verticalWhitespace / 2;
     const textOffsetY = textY - tvHeight - textBaseY - verticalWhitespace / 2;
 
-    updateTvY(isMorphed ? -tvCenterYOffset : 30);
-    updateTextY(isMorphed ? -textOffsetY : textBaseY);
+    updateTvY(isZoomed ? -tvCenterYOffset : 30);
+    updateTextY(isZoomed ? -textOffsetY : textBaseY);
     setReverseScale(reverseScale);
     setTvScale(scale);
 
-    isMorphed
+    isZoomed
       ? (document.body.style = "overflow: hidden")
       : (document.body.style = `overflow: ""`);
-  }, [isMorphed]);
+  }, [isZoomed]);
 
   return (
     <Container
-      isMorphed={isMorphed}
+      isZoomed={isZoomed}
       activeIndex={activeIndex}
       gallerySize={gallerySize}
       galleryIndex={galleryIndex}
     >
-      <Overlay isMorphed={isMorphed}>
+      <Overlay isZoomed={isZoomed}>
         <CloseButton
           ariaLabel='Close'
           type='button'
-          onClick={() => (setIsMorphed(!isMorphed), sendMorphstate(!isMorphed))}
-          isMorphed={isMorphed}
+          onClick={() => (setisZoomed(!isZoomed), sendZoomState(!isZoomed))}
+          isZoomed={isZoomed}
         >
           <CloseIcon />
         </CloseButton>
@@ -98,17 +98,17 @@ export function MobileMorphVideo(props) {
           poster={props.poster}
           reverseScale={reverseScale}
           src={props.src}
-          isMorphed={isMorphed}
+          isZoomed={isZoomed}
         />
       </Tv>
       <FigCaption
         ref={captionRef}
         style={{
-          transform: `matrix(${isMorphed ? 1 : 0.65}, 0, 0, ${
-            isMorphed ? 1 : 0.65
+          transform: `matrix(${isZoomed ? 1 : 0.65}, 0, 0, ${
+            isZoomed ? 1 : 0.65
           }, 0, ${textY})`,
         }}
-        className={isMorphed && "is-morphed"}
+        className={isZoomed && "is-zoomed"}
       >
         <strong>{props.project}. </strong>
         {props.description}
@@ -117,8 +117,8 @@ export function MobileMorphVideo(props) {
       <OpenButton
         ariaLabel='Open'
         type='button'
-        onClick={() => handleMorph()}
-        isMorphed={isMorphed}
+        onClick={() => handleZoom()}
+        isZoomed={isZoomed}
       >
         <strong>{props.project}</strong>
         Learn more

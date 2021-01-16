@@ -36,10 +36,10 @@ export function MobileVideo(props) {
 
   useEffect(() => {
     const mobileVideo = mobileVideoRef.current;
-    if (!props.isMorphed && mobileVideo.currentTime > 0) {
+    if (!props.isZoomed && mobileVideo.currentTime > 0) {
       mobileVideo.pause();
     }
-  }, [props.isMorphed]);
+  }, [props.isZoomed]);
 
   useEffect(() => {
     const mobileVideo = mobileVideoRef.current;

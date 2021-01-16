@@ -66,7 +66,7 @@ export const CloseButton = styled.button`
     }
   }
   ${(props) =>
-    props.isMorphed &&
+    props.isZoomed &&
     css`
       opacity: 1;
       transition: opacity 0.37s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s,
@@ -168,7 +168,7 @@ export const OpenButton = styled.button`
   }
 
   ${(props) =>
-    props.isMorphed &&
+    props.isZoomed &&
     css`
       opacity: 0;
       transition: opacity 0.129s cubic-bezier(0.52, 0.16, 0.24, 1);
