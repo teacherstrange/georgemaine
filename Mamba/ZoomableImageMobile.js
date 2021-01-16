@@ -30,16 +30,21 @@ export function ZoomableImageMobile(props) {
   }
 
   useEffect(() => {
+    const screenHeight = window.innerHeight;
+    const screenWidth = window.innerWidth;
     const container = {
-      width: isZoomed ? window.innerWidth * props.scale : props.smallWidth,
-      height: isZoomed ? window.innerHeight * props.scale : props.smallHeight,
+      width: isZoomed
+        ? screenWidth * props.scale.zoomableArea
+        : props.smallWidth,
+      height: isZoomed
+        ? screenHeight * props.scale.zoomableArea
+        : props.smallHeight,
     };
     const content = {
       width: props.width,
       height: props.height,
     };
     const imageY = imageRef.current.getBoundingClientRect().y;
-    const screenHeight = window.innerHeight;
     const textHeightOffset = captionRef.current.scrollHeight;
     const textY = captionRef.current.getBoundingClientRect().y;
     const textBaseY = 285;
@@ -49,11 +54,11 @@ export function ZoomableImageMobile(props) {
 
     // 1. Scale sizes
     const imageHeight = content.height * scale;
-    const verticalWhitespace = screenHeight - (imageHeight + textHeightOffset);
+    const screenWhitespace = screenHeight - (imageHeight + textHeightOffset);
 
     // 2.1 Calculate positions
-    const imageZoomY = imageY - verticalWhitespace / 2;
-    const textZoomY = textY - imageHeight - textBaseY - verticalWhitespace / 2;
+    const imageZoomY = imageY - screenWhitespace / 2;
+    const textZoomY = textY - imageHeight - textBaseY - screenWhitespace / 2;
 
     // Update values
     updateTranslateY(isZoomed ? -imageZoomY : 0);

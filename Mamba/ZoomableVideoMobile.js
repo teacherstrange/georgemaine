@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-
 import {
   Container,
   FigCaption,
@@ -20,7 +19,7 @@ export function ZoomableVideoMobile(props) {
   const captionRef = useRef(null);
   const tvRef = useRef(null);
   const [isZoomed, setisZoomed] = useState(false);
-  const [tvScale, setTvScale] = useState(0.1640625);
+  const [tvScale, setTvScale] = useState(props.scale.mobile);
   const [reverseScale, setReverseScale] = useState(0);
   const [tvY, updateTvY] = useState(30);
   const [textY, updateTextY] = useState(0);
@@ -39,16 +38,23 @@ export function ZoomableVideoMobile(props) {
   }, []);
 
   useEffect(() => {
+    const screenHeight = window.innerHeight;
+    const screenWidth = window.innerWidth;
     const container = {
-      width: isZoomed ? window.innerWidth * 0.8 : 310,
-      height: isZoomed ? window.innerHeight * 0.8 : 174,
+      width: isZoomed
+        ? screenWidth * props.scale.zoomableAreaMobile
+        : props.smallWidth,
+      height: isZoomed
+        ? screenHeight * props.scale.zoomableAreaMobile
+        : props.smallHeight,
     };
     const content = {
       width: props.width,
       height: props.height,
     };
-    const screenHeight = window.innerHeight;
+
     const textBaseY = 285;
+    const tvBaseY = 30;
     const textY = captionRef.current.getBoundingClientRect().y;
     const textHeightOffset = captionRef.current.scrollHeight / 2;
     const tvY = tvRef.current.getBoundingClientRect().y;
@@ -59,14 +65,14 @@ export function ZoomableVideoMobile(props) {
 
     // Scale sizes
     const tvHeight = content.height * scale;
-    const verticalWhitespace = screenHeight - (tvHeight + textHeightOffset);
+    const screenOffsetHeight = screenHeight - (tvHeight + textHeightOffset);
 
     // 2.1 Image position
-    const tvCenterYOffset = tvY - verticalWhitespace / 2;
-    const textOffsetY = textY - tvHeight - textBaseY - verticalWhitespace / 2;
+    const tvIsZoomedY = tvY - screenOffsetHeight / 2;
+    const textIsZoomedY = textY - tvHeight - textBaseY - screenOffsetHeight / 2;
 
-    updateTvY(isZoomed ? -tvCenterYOffset : 30);
-    updateTextY(isZoomed ? -textOffsetY : textBaseY);
+    updateTvY(isZoomed ? -tvIsZoomedY : tvBaseY);
+    updateTextY(isZoomed ? -textIsZoomedY : textBaseY);
     setReverseScale(reverseScale);
     setTvScale(scale);
 

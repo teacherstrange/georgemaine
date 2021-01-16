@@ -1,8 +1,10 @@
 export const Apps = {
   galleryIndex: 0,
-  scale: 0.8,
-  smallScale: 0.15625,
-  desktopScale: 0.12526997840172785,
+  scale: {
+    mobile: 0.15625,
+    desktop: 0.12526997840172785,
+    zoomableArea: 0.8,
+  },
   width: 1852,
   height: 1862,
   smallWidth: 232,
@@ -18,9 +20,11 @@ export const Apps = {
 
 export const Checkout = {
   galleryIndex: 2,
-  scale: 1,
-  smallScale: 0.12526997840172785,
-  desktopScale: 0.15625,
+  scale: {
+    mobile: 0.12526997840172785,
+    desktop: 0.15625,
+    zoomableArea: 0.8,
+  },
   width: 2400,
   height: 1536,
   smallWidth: 375,
@@ -36,9 +40,15 @@ export const ApplePay = {
   galleryIndex: 3,
   width: 1920,
   height: 1080,
-  smallWidth: 315,
-  smallHeight: 180,
-  captionRightEdge: 1040,
+  smallWidth: 310,
+  smallHeight: 174,
+  scale: {
+    mobile: 0.1640625,
+    desktop: 0.16111111111111112,
+    reverse: 6.206896551724138,
+    zoomableArea: 0.6,
+    zoomableAreaMobile: 0.8,
+  },
   src: "/videos/apple-pay.mp4",
   project: "Apple Pay Promo",
   description:
@@ -50,8 +60,15 @@ export const Promo = {
   width: 1920,
   height: 1080,
   smallWidth: 315,
-  smallHeight: 180,
-  captionRightEdge: 1040,
+  smallWidth: 310,
+  smallHeight: 174,
+  scale: {
+    mobile: 0.1640625,
+    desktop: 0.16111111111111112,
+    reverse: 6.206896551724138,
+    zoomableArea: 0.6,
+    zoomableAreaMobile: 0.8,
+  },
   src: "/videos/mollie-promo.mp4",
   project: "Mollie Promo",
   description:

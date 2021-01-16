@@ -17,8 +17,8 @@ export function ZoomableVideo(props) {
   const captionRef = useRef(null);
   const tvRef = useRef(null);
   const [isZoomed, setisZoomed] = useState(false);
-  const [tvScale, setTvScale] = useState(0.1640625);
-  const [reverseScale, setReverseScale] = useState(0);
+  const [tvScale, setTvScale] = useState(props.scale.desktop);
+  const [reverseScale, setReverseScale] = useState(props.scale.reverse);
   const [tvX, updateTvX] = useState(0);
   const [tvY, updateTvY] = useState(30);
   const [textY, updateTextY] = useState(0);
@@ -39,19 +39,23 @@ export function ZoomableVideo(props) {
 
   useEffect(() => {
     const container = {
-      width: isZoomed ? window.innerWidth * 0.6 : props.smallWidth,
-      height: isZoomed ? window.innerHeight * 0.6 : props.smallHeight,
+      width: isZoomed
+        ? window.innerWidth * props.scale.zoomableArea
+        : props.smallWidth,
+      height: isZoomed
+        ? window.innerHeight * props.scale.zoomableArea
+        : props.smallHeight,
     };
     const content = {
       width: props.width,
       height: props.height,
     };
     const textY = captionRef.current.getBoundingClientRect().y;
-    const textHeightOffset = captionRef.current.scrollHeight / 2;
+    const textOffsetHeight = captionRef.current.scrollHeight / 2;
     const tvY = tvRef.current.getBoundingClientRect().y;
     const tvX = tvRef.current.getBoundingClientRect().x;
-    const tvWidthOffset = tvRef.current.getBoundingClientRect().width / 2;
-    const tvCenterX = tvX + tvWidthOffset;
+    const textOffsetWidth = tvRef.current.getBoundingClientRect().width / 2;
+    const tvCenterX = tvX + textOffsetWidth;
     const screenCenterX = window.innerWidth / 2;
     const screenCenterY = window.innerHeight / 2;
 
@@ -61,19 +65,19 @@ export function ZoomableVideo(props) {
 
     // Scale sizes
     const tvHeight = content.height * scale;
-    const verticalWhitespace = (window.innerHeight - tvHeight) / 2;
+    const screenOffsetHeight = (window.innerHeight - tvHeight) / 2;
     const videoOffsetX = (content.width * scale) / 2;
 
     // 2.1 Image position
-    const tvCenterXOffset = screenCenterX - tvCenterX - 160;
-    const tvCenterYOffset = tvY - verticalWhitespace;
-    const textOffsetY = textY - screenCenterY + textHeightOffset;
-    const textOffsetX = videoOffsetX - (480 - 375) * 1 - 110;
+    const tvIsZoomedX = screenCenterX - tvCenterX - 160;
+    const tvIsZoomedY = tvY - screenOffsetHeight;
+    const textIsZoomedY = textY - screenCenterY + textOffsetHeight;
+    const textIsZoomedX = videoOffsetX - (480 - 375) * 1 - 110;
 
-    updateTvX(isZoomed ? tvCenterXOffset : 0);
-    updateTvY(isZoomed ? -tvCenterYOffset : 30);
-    updateTextY(isZoomed ? -textOffsetY : 0);
-    updateTextX(isZoomed ? textOffsetX : 0);
+    updateTvX(isZoomed ? tvIsZoomedX : 0);
+    updateTvY(isZoomed ? -tvIsZoomedY : 30);
+    updateTextY(isZoomed ? -textIsZoomedY : 0);
+    updateTextX(isZoomed ? textIsZoomedX : 0);
     setReverseScale(reverseScale);
     setTvScale(scale);
 

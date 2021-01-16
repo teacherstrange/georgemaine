@@ -10,7 +10,7 @@ import {
   ZoomableVideo,
   ZoomableImageMobile,
 } from "./index";
-import { Apps, Promo, Checkout, ApplePay } from "../Data";
+import { Apps, Promo, Checkout, ApplePay } from "../data";
 
 const GallerySmall = styled.div`
   height: 314px;
