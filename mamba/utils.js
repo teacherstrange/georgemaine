@@ -5,3 +5,9 @@ export function formatTime(seconds) {
   seconds = seconds >= 10 ? seconds : "0" + seconds;
   return minutes + ":" + seconds;
 }
+
+export function calculateScale(container, content) {
+  return container.width / container.height > content.width / content.height
+    ? container.height / content.height
+    : container.width / content.width;
+}

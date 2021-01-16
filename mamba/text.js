@@ -1,7 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
 
-const MorphTransition = "all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
-
 const largeTitleStyle = css`
   font-size: 2.6rem;
   line-height: 3.2rem;
@@ -73,36 +71,29 @@ export const SmallCaption = styled.p`
   color: var(--white);
 `;
 
-export const FigCaption = styled.figcaption`
+export const FigCaption = styled.p`
   ${bodyStyle}
   width: 275px;
   position: absolute;
-  transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
-    opacity 0.229s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.03s;
-
+  transform-origin: center 0;
+  top: 0;
   opacity: 0;
   display: inline;
   user-select: none;
+  transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
+    opacity 0.229s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.03s;
 
-  &.is-morphed {
+  &.is-zoomed {
     opacity: 1;
   }
 
   @media (min-width: 1024px) {
     transition: opacity 0.32244s cubic-bezier(0.32, 0.08, 0.24, 1) 0.05s,
-      transform cubic-bezier(0.52, 0.16, 0.24, 1);
+      transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 
-    &.is-morphed {
-      transition: opacity 0.3345s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.15s,
-        transform cubic-bezier(0.52, 0.16, 0.24, 1);
-    }
-  }
-
-  @media (max-width: 1023px) {
-    transform: scale(0.93) !important;
-
-    &.is-morphed {
-      transform: scale(1) !important;
+    &.is-zoomed {
+      transition: opacity 0.3345s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.2s,
+        transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
     }
   }
 `;
@@ -158,23 +149,20 @@ export const SocialLink = styled.a`
   visibility: hidden;
   transform: translatex(-100%);
   margin-left: 16px;
+  animation: ${woosh} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
 
   :first-of-type {
     margin-left: 0;
-    animation: ${woosh} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
     animation-delay: 0.04s;
   }
 
   :nth-of-type(2) {
-    animation: ${woosh} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
     animation-delay: 0.08s;
   }
   :nth-of-type(3) {
-    animation: ${woosh} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
     animation-delay: 0.12s;
   }
   :nth-of-type(4) {
-    animation: ${woosh} 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
     animation-delay: 0.16s;
   }
 

@@ -10,6 +10,14 @@ const baseStyle = css`
   outline: none;
   cursor: pointer;
   font: inherit;
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  &:disabled {
+    opacity: 0;
+  }
 `;
 
 export const Button = styled.button`
@@ -20,6 +28,10 @@ export const Button = styled.button`
   text-align: center;
   color: var(--white);
   background-color: var(--red);
+
+  &:active {
+    transform: none;
+  }
 `;
 
 export const CloseButton = styled.button`
@@ -54,7 +66,7 @@ export const CloseButton = styled.button`
     }
   }
   ${(props) =>
-    props.isMorphed &&
+    props.isZoomed &&
     css`
       opacity: 1;
       transition: opacity 0.37s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s,
@@ -75,7 +87,7 @@ export const PreviousButton = styled.button`
   justify-content: center;
   align-items: center;
   z-index: 1;
-  transition: 0.25s background-color linear, 0.25s opacity linear;
+  transition: transform 0.2s ease, background-color 0.3s ease, opacity 0.3s ease;
 
   path {
     color: var(--primaryLabelFill);
@@ -91,6 +103,10 @@ export const PreviousButton = styled.button`
     path {
       stroke: var(--secondaryLabelFill);
     }
+  }
+
+  @media (min-width: 414px) {
+    left: -44px;
   }
 `;
 
@@ -107,7 +123,7 @@ export const NextButton = styled.button`
   justify-content: center;
   align-items: center;
   z-index: 1;
-  transition: background-color 0.25s linear, opacity 0.25s linear;
+  transition: transform 0.2s ease, background-color 0.3s ease, opacity 0.3s ease;
 
   path {
     color: var(--primaryLabelFill);
@@ -124,13 +140,20 @@ export const NextButton = styled.button`
       stroke: var(--secondaryLabelFill);
     }
   }
+
+  @media (min-width: 414px) {
+    right: -44px;
+  }
 `;
 
 export const OpenButton = styled.button`
   ${baseStyle}
   position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
-  height: 100%;
   z-index: 1;
   color: inherit;
   transition: opacity 0.229s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
@@ -140,8 +163,12 @@ export const OpenButton = styled.button`
   align-items: center;
   justify-content: flex-end;
 
+  &:active {
+    transform: none;
+  }
+
   ${(props) =>
-    props.isMorphed &&
+    props.isZoomed &&
     css`
       opacity: 0;
       transition: opacity 0.129s cubic-bezier(0.52, 0.16, 0.24, 1);
@@ -160,7 +187,7 @@ export const MuteButton = styled.button`
   width: 36px;
   height: 36px;
   opacity: 0.8;
-  transition: transform 0.2s ease, opacity 0.5s ease;
+  transition: transform 0.2s ease, opacity 0.3s ease;
 
   &:active {
     transform: scale(0.9);
@@ -179,7 +206,7 @@ export const ExpandButton = styled.button`
   width: 36px;
   height: 36px;
   opacity: 0.8;
-  transition: transform 0.2s ease, opacity 0.5s ease;
+  transition: transform 0.2s ease, opacity 0.3s ease;
   transform: scale(1);
 
   &:active {

@@ -1,5 +1,15 @@
 import styled from "styled-components";
 
+const SeekBarInput = styled.input`
+  &[type="range"] {
+    width: 100%;
+    height: 4px;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+`;
+
 const SeekBarFill = styled.div`
   border-radius: 4px;
   height: 4px;
@@ -11,15 +21,7 @@ const SeekBarFill = styled.div`
   margin-bottom: auto;
   position: absolute;
 `;
-const SeekBarInput = styled.input`
-  &[type="range"] {
-    width: 100%;
-    height: 4px;
-    margin: 0;
-    opacity: 0;
-    cursor: pointer;
-  }
-`;
+
 const SeekBarThumb = styled.div`
   width: 9px;
   height: 9px;

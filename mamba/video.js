@@ -15,34 +15,11 @@ import {
   SpeakerIcon,
 } from "./index";
 
-const MobileVideo = styled.video`
-  width: 100%;
-  display: block;
-
-  @media (min-width: 1024px) {
-    display: none;
-  }
-`;
-
 const DesktopVideo = styled.video`
-  width: 100%;
   display: block;
 
   @media (max-width: 1023px) {
     display: none;
-  }
-`;
-
-export const VideoContainer = styled.div`
-  width: ${(props) => (props.ismorphed ? "100%" : "calc(100% - 48px)")};
-  border-radius: 4px;
-  margin: auto;
-  border: 3px solid #111;
-  transition: all 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
-  position: relative;
-
-  @media (min-width: 1024px) {
-    width: ${(props) => (props.ismorphed ? "100%" : "calc(100% - 96px)")};
   }
 `;
 
@@ -58,22 +35,6 @@ const MainControls = styled.div`
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.6, 1) 0.05s,
     transform 0.5s cubic-bezier(0.4, 0, 0.6, 1);
   visibility: ${(props) => (props.startState ? "hidden" : "visible")};
-`;
-
-const MobilePlayButtonContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.56));
-
-  @media (min-width: 1024px) {
-    display: none;
-  }
 `;
 
 const PlayButtonButtonContainer = styled.div`
@@ -97,6 +58,8 @@ const VideoControls = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
+  top: 0;
+  right: 0;
   bottom: 0;
   left: 0;
   z-index: 1;
@@ -161,22 +124,18 @@ const DurationTime = styled.div`
 `;
 
 export function Video(props) {
-  const containerRef = useRef(null);
   const videoRef = useRef(null);
-  const mobileVideoRef = useRef(null);
   const volumeBarRef = useRef(null);
   const volumeFillRef = useRef(null);
   const volumeThumbRef = useRef(null);
   const seekBarFillRef = useRef(null);
   const seekBarThumbRef = useRef(null);
   const seekBarInputRef = useRef(null);
-
   const [seekBarValue, setSeekbarValue] = useState(0);
   const [videoCurrentTime, setVideoCurrentTime] = useState("00:00");
   const [videoDuration, setVideoDuration] = useState("00:00");
   const [videoIsMuted, setVideoIsMuted] = useState(false);
   const [videoIsPlaying, setVideoIsPlaying] = useState(false);
-  const [mobileVideoIsPlaying, setMobileVideoIsPlaying] = useState(false);
   const [startState, setStartState] = useState(true);
 
   function updateVideoCurrentTime(seconds) {
@@ -194,13 +153,6 @@ export function Video(props) {
     video.paused
       ? (video.play(), setVideoIsPlaying(true))
       : (video.pause(), setVideoIsPlaying(false));
-  }
-
-  function playPauseMobileVideo() {
-    const mobileVideo = mobileVideoRef.current;
-    mobileVideo.setAttribute("controls", ""),
-      mobileVideo.play(),
-      setMobileVideoIsPlaying(true);
   }
 
   function muteVideo() {
@@ -282,39 +234,17 @@ export function Video(props) {
   }, []);
 
   useEffect(() => {
-    const mobileVideo = mobileVideoRef.current;
     const desktopVideo = videoRef.current;
 
-    if (!props.isMorphed && mobileVideo.currentTime > 0) {
-      mobileVideo.pause();
-      mobileVideo.removeAttribute("controls");
-      setMobileVideoIsPlaying(false);
-    }
-
-    if (!props.isMorphed && desktopVideo.currentTime > 0) {
+    if (!props.isZoomed && desktopVideo.currentTime > 0) {
       desktopVideo.pause();
       setStartState(true);
       setVideoIsPlaying(false);
     }
-  }, [props.isMorphed]);
+  }, [props.isZoomed]);
 
   return (
-    <VideoContainer ref={containerRef} ismorphed={props.isMorphed}>
-      <MobileVideo
-        ref={mobileVideoRef}
-        preload='metadata'
-        poster={props.poster}
-      >
-        <source src={props.src} type='video/mp4' />
-      </MobileVideo>
-      {!mobileVideoIsPlaying && (
-        <MobilePlayButtonContainer>
-          <PlayPauseButton type='button' onClick={() => playPauseMobileVideo()}>
-            <PlayIcon />
-          </PlayPauseButton>
-        </MobilePlayButtonContainer>
-      )}
-
+    <>
       <DesktopVideo
         ref={videoRef}
         onPlay={() => (startState ? setStartState(false) : null)}
@@ -335,8 +265,28 @@ export function Video(props) {
 
       <VideoControls startState={startState}>
         <PlayButtonButtonContainer startState={startState}>
-          <PlayPauseButton type='button' onClick={() => playPauseVideo()}>
-            {videoIsPlaying ? <PauseIcon /> : <PlayIcon />}
+          <PlayPauseButton
+            ariaLabel='Play or Pause'
+            type='button'
+            onClick={() => playPauseVideo()}
+          >
+            {videoIsPlaying ? (
+              <PauseIcon
+                style={{
+                  transform: `scale(${props.reverseScale})`,
+                  transition:
+                    "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)",
+                }}
+              />
+            ) : (
+              <PlayIcon
+                style={{
+                  transform: `scale(${props.reverseScale})`,
+                  transition:
+                    "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)",
+                }}
+              />
+            )}
           </PlayPauseButton>
         </PlayButtonButtonContainer>
 
@@ -349,7 +299,7 @@ export function Video(props) {
               updateVideoVolume(e), updateVolumeSlider(e.target.value)
             )}
           >
-            <MuteButton onClick={() => muteVideo()}>
+            <MuteButton ariaLabel='Mute' onClick={() => muteVideo()}>
               {videoIsMuted ? <MuteIcon /> : <SpeakerIcon />}
             </MuteButton>
           </VolumeSlider>
@@ -369,11 +319,11 @@ export function Video(props) {
           <DurationTime>
             <SmallCaption>{videoDuration}</SmallCaption>
           </DurationTime>
-          <ExpandButton onClick={() => expandVideo()}>
+          <ExpandButton ariaLabel='Expand' onClick={() => expandVideo()}>
             <ExpandIcon />
           </ExpandButton>
         </MainControls>
       </VideoControls>
-    </VideoContainer>
+    </>
   );
 }
