@@ -26,7 +26,7 @@ export function ZoomableImage(props) {
   const [captionY, updateCaptionY] = useState(0);
   const [translateX, updateTranslateX] = useState(0);
   const [translateY, updateTranslateY] = useState(0);
-  const [currentScale, setCurrentScale] = useState(props.scale.desktop);
+  const [currentScale, setCurrentScale] = useState(props.scale.initial);
 
   function handleZoom(event) {
     setisZoomed(!isZoomed);
@@ -37,12 +37,8 @@ export function ZoomableImage(props) {
     const screenHeight = window.innerHeight;
     const screenWidth = window.innerWidth;
     const container = {
-      width: isZoomed
-        ? screenWidth * props.scale.zoomableArea
-        : props.smallWidth,
-      height: isZoomed
-        ? screenHeight * props.scale.zoomableArea
-        : props.smallHeight,
+      width: isZoomed ? screenWidth * props.scale.target : props.smallWidth,
+      height: isZoomed ? screenHeight * props.scale.target : props.smallHeight,
     };
     const content = {
       width: props.width,

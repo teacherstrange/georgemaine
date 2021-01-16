@@ -22,7 +22,7 @@ export function ZoomableImageMobile(props) {
   const [isZoomed, setisZoomed] = useState(false);
   const [captionY, updateCaptionY] = useState(0);
   const [translateY, updateTranslateY] = useState(0);
-  const [currentScale, setCurrentScale] = useState(0.12526997840172785);
+  const [currentScale, setCurrentScale] = useState(props.scale.initialMobile);
 
   function handleZoom(event) {
     setisZoomed(!isZoomed);
@@ -34,10 +34,10 @@ export function ZoomableImageMobile(props) {
     const screenWidth = window.innerWidth;
     const container = {
       width: isZoomed
-        ? screenWidth * props.scale.zoomableArea
+        ? screenWidth * props.scale.targetMobile
         : props.smallWidth,
       height: isZoomed
-        ? screenHeight * props.scale.zoomableArea
+        ? screenHeight * props.scale.targetMobile
         : props.smallHeight,
     };
     const content = {

@@ -17,7 +17,7 @@ export function ZoomableVideo(props) {
   const captionRef = useRef(null);
   const tvRef = useRef(null);
   const [isZoomed, setisZoomed] = useState(false);
-  const [tvScale, setTvScale] = useState(props.scale.desktop);
+  const [tvScale, setTvScale] = useState(props.scale.initial);
   const [reverseScale, setReverseScale] = useState(props.scale.reverse);
   const [tvX, updateTvX] = useState(0);
   const [tvY, updateTvY] = useState(30);
@@ -40,10 +40,10 @@ export function ZoomableVideo(props) {
   useEffect(() => {
     const container = {
       width: isZoomed
-        ? window.innerWidth * props.scale.zoomableArea
+        ? window.innerWidth * props.scale.target
         : props.smallWidth,
       height: isZoomed
-        ? window.innerHeight * props.scale.zoomableArea
+        ? window.innerHeight * props.scale.target
         : props.smallHeight,
     };
     const content = {

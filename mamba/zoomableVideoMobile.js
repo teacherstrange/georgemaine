@@ -19,7 +19,7 @@ export function ZoomableVideoMobile(props) {
   const captionRef = useRef(null);
   const tvRef = useRef(null);
   const [isZoomed, setisZoomed] = useState(false);
-  const [tvScale, setTvScale] = useState(props.scale.mobile);
+  const [tvScale, setTvScale] = useState(props.scale.initialMobile);
   const [reverseScale, setReverseScale] = useState(0);
   const [tvY, updateTvY] = useState(30);
   const [textY, updateTextY] = useState(0);
@@ -42,10 +42,10 @@ export function ZoomableVideoMobile(props) {
     const screenWidth = window.innerWidth;
     const container = {
       width: isZoomed
-        ? screenWidth * props.scale.zoomableAreaMobile
+        ? screenWidth * props.scale.targetMobile
         : props.smallWidth,
       height: isZoomed
-        ? screenHeight * props.scale.zoomableAreaMobile
+        ? screenHeight * props.scale.targetMobile
         : props.smallHeight,
     };
     const content = {
