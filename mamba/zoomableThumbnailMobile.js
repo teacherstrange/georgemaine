@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { OpenButton, calculateScale, Thumbnail } from "./index";
+import { OpenButton, calculateScale } from "./index";
 
 export function ZoomableThumbnailMobile(props) {
   const imageRef = useRef(null);
@@ -8,38 +8,53 @@ export function ZoomableThumbnailMobile(props) {
   const [currentX, updateCurrentX] = useState(0);
   const [currentScale, setCurrentScale] = useState(props.scale.initialMobile);
 
-  function handleZoom() {
-    setisZoomed(!isZoomed);
-    console.log("triggered");
-  }
-
   useEffect(() => {
     const screenHeight = window.innerHeight;
     const screenWidth = window.innerWidth;
-    const container = {
-      width: isZoomed ? screenWidth * 2 : props.smallWidth,
-      height: isZoomed ? screenHeight * 0.54 : props.smallHeight,
-    };
+    const thumbnailScale = screenHeight / 2 / props.height;
     const content = {
-      width: props.width,
-      height: props.height,
+      width: props.width * thumbnailScale,
+      height: props.height * thumbnailScale,
+    };
+    imageRef.current.width = content.width;
+    imageRef.current.height = content.height;
+
+    const container = {
+      width: isZoomed ? screenWidth * 1.5 : props.smallWidth,
+      height: isZoomed ? screenHeight * 0.5 : props.smallHeight,
     };
     const imageZoomY = imageRef.current.getBoundingClientRect().y;
     const imageX = imageRef.current.getBoundingClientRect().x;
 
     // Calculate scale
     const scale = calculateScale(container, content);
-    const imageZoomX = imageX - (screenWidth - content.width * scale) / 2;
+    const imageZoomX = imageX - (screenWidth - content.width) / 2;
 
     // Update values
     updateTranslateY(isZoomed ? -imageZoomY : 0);
     updateCurrentX(isZoomed ? -imageZoomX : 0);
-    setCurrentScale(scale);
+    setCurrentScale(isZoomed ? 1 : scale);
   }, [isZoomed]);
 
   useEffect(() => {
+    const screenHeight = window.innerHeight;
+    const screenWidth = window.innerWidth;
+    const thumbnailScale = screenHeight / 2 / props.height;
+    const content = {
+      width: props.width * thumbnailScale,
+      height: props.height * thumbnailScale,
+    };
+    imageRef.current.width = content.width;
+    imageRef.current.height = content.height;
+
+    const container = {
+      width: isZoomed ? screenWidth * 2 : props.smallWidth,
+      height: isZoomed ? screenHeight * 0.5 : props.smallHeight,
+    };
+    const scale = calculateScale(container, content);
     const dissmissModal = () => {
       setisZoomed(false);
+      setCurrentScale(isZoomed ? 1 : scale);
     };
     window.addEventListener("resize", dissmissModal);
     return () => window.removeEventListener("resize", dissmissModal);
@@ -53,14 +68,13 @@ export function ZoomableThumbnailMobile(props) {
 
   return (
     <>
-      <Thumbnail
+      <img
         ref={imageRef}
-        width={props.width}
-        height={props.height}
         src={props.image}
-        currentScale={currentScale}
-        isZoomed={isZoomed}
         style={{
+          transformOrigin: "0 0",
+          borderRadius: isZoomed ? 0 : 6,
+          transition: "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)",
           transform: `matrix(${currentScale}, 0, 0, ${currentScale}, ${currentX}, ${translateY})`,
         }}
       />
@@ -69,7 +83,7 @@ export function ZoomableThumbnailMobile(props) {
         ariaLabel='Open'
         type='button'
         isZoomed={isZoomed}
-        onClick={() => handleZoom()}
+        onClick={() => setisZoomed(!isZoomed)}
       ></OpenButton>
     </>
   );

@@ -24,10 +24,10 @@ export const HelloWorld = {
     initial: 0.12526997840172785,
     target: 0.5,
   },
-  width: 1680,
-  height: 1200,
-  smallWidth: 126,
-  smallHeight: 90,
+  width: 1920,
+  height: 962,
+  smallWidth: 140,
+  smallHeight: 70,
   image: "images/hello-world.jpg",
 };
 

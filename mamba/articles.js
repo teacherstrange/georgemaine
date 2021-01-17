@@ -4,7 +4,7 @@ import { Caption, ZoomableThumbnailMobile } from "./index";
 const List = styled.ul``;
 const Item = styled.li`
   display: flex;
-  height: 90px;
+  height: 70px;
   position: relative;
 `;
 

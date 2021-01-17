@@ -4,8 +4,3 @@ export const Image = styled.img`
   transform-origin: center 0;
   transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 `;
-
-export const Thumbnail = styled.img`
-  transform-origin: 0 0;
-  transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
-`;
