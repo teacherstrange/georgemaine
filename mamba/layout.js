@@ -58,3 +58,15 @@ export const Tv = styled.div`
   transform-origin: center 0;
   transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
 `;
+
+export const Separator = styled.div`
+  height: 1px;
+  background-color: var(--secondaryFill);
+  margin: 60px auto;
+  width: 960px;
+
+  @media (max-width: 1059px) {
+    width: calc(100% - 64px);
+    max-width: 414px;
+  }
+`;

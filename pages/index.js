@@ -8,6 +8,8 @@ import {
   SocialLinks,
   SmallGallery,
   LargeGallery,
+  Separator,
+  Articles,
 } from "../mamba/index.js";
 
 export default function Home() {
@@ -42,6 +44,11 @@ export default function Home() {
         <Headline>Work</Headline>
         <SmallGallery />
         <LargeGallery />
+      </Section>
+      <Separator />
+      <Section>
+        <Headline>Writing</Headline>
+        <Articles />
       </Section>
     </main>
   );
