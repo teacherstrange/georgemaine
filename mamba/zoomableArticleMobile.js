@@ -6,6 +6,11 @@ import { Caption } from "./text";
 const Item = styled.li`
   display: flex;
   position: relative;
+  padding: 0 calc((100vw - 414px) / 2);
+
+  @media (max-width: 478px) {
+    padding: 0 32px;
+  }
 `;
 
 export function ZoomableArticleMobile(props) {
@@ -77,11 +82,9 @@ export function ZoomableArticleMobile(props) {
     <Item
       style={{
         height: isZoomed ? "100vh" : 70,
-        overflowY: isZoomed ? "scroll" : "hidden",
+        overflow: isZoomed ? "hidden scroll" : "hidden",
         zIndex: isZoomed ? 20 : "initial",
-        width: "calc(100% - 64px)",
         marginBottom: 60,
-        padding: "0 32px",
         transitionDelay: "0s, 0.56s",
         transition: isZoomed
           ? "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)"
