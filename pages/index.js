@@ -9,8 +9,9 @@ import {
   SmallGallery,
   LargeGallery,
   Separator,
-  Articles,
+  ZoomableArticleMobile,
 } from "../mamba/index.js";
+import { HelloWorld } from "../data";
 
 export default function Home() {
   return (
@@ -46,10 +47,19 @@ export default function Home() {
         <LargeGallery />
       </Section>
       <Separator />
-      <Section>
-        <Headline>Writing</Headline>
-        <Articles />
-      </Section>
+      <section>
+        <Headline
+          style={{
+            maxWidth: 414,
+            width: "calc(100% - 64px)",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          Writing
+        </Headline>
+        <ZoomableArticleMobile {...HelloWorld} />
+      </section>
     </main>
   );
 }
