@@ -111,6 +111,14 @@ export function ZoomableArticleMobile(props) {
           transform: `matrix(${currentScale}, 0, 0, ${currentScale}, ${currentX}, 0)`,
         }}
       >
+        <StickyCloseButton
+          ariaLabel='Close'
+          type='button'
+          onClick={() => setisZoomed(!isZoomed)}
+          isZoomed={isZoomed}
+        >
+          <CloseIcon />
+        </StickyCloseButton>
         <img ref={imageRef} src={props.image} />
         <Caption
           // FIXME: Remove inline styling
@@ -141,6 +149,7 @@ export function ZoomableArticleMobile(props) {
           fine—sometimes the feeling is mutual. Either way, it's refreshing to
           have a corner on the web that I can call my own. Welcome, everyone.
         </Caption>
+
         <div
           style={{
             position: "fixed",
@@ -149,19 +158,11 @@ export function ZoomableArticleMobile(props) {
             right: 0,
             bottom: 0,
             opacity: isZoomed ? 1 : 0,
+            zIndex: -1,
             background: "var(--overlay)",
             backdropFilter: "blur(20px) saturate(50%)",
           }}
-        >
-          <StickyCloseButton
-            ariaLabel='Close'
-            type='button'
-            onClick={() => setisZoomed(!isZoomed)}
-            isZoomed={isZoomed}
-          >
-            <CloseIcon />
-          </StickyCloseButton>
-        </div>
+        ></div>
       </div>
       <OpenButton
         ariaLabel='Open'
