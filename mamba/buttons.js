@@ -81,6 +81,11 @@ export const StickyCloseButton = styled(CloseButton)`
   margin-left: auto;
   margin-right: auto;
   transform: translateX(calc(50vw - 18px - 16px));
+
+  &:active {
+    // FIXME: There's a better way to include scale to clicking
+    transform: translateX(calc(50vw - 18px - 16px)) !important;
+  }
 `;
 
 export const PreviousButton = styled.button`
