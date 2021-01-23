@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { OpenButton, calculateScale } from "./index";
+import {
+  OpenButton,
+  StickyCloseButton,
+  CloseIcon,
+  calculateScale,
+} from "./index";
 import { Caption } from "./text";
 
 const Item = styled.li`
@@ -147,7 +152,16 @@ export function ZoomableArticleMobile(props) {
             background: "var(--overlay)",
             backdropFilter: "blur(20px) saturate(50%)",
           }}
-        ></div>
+        >
+          <StickyCloseButton
+            ariaLabel='Close'
+            type='button'
+            onClick={() => setisZoomed(!isZoomed)}
+            isZoomed={isZoomed}
+          >
+            <CloseIcon />
+          </StickyCloseButton>
+        </div>
       </div>
       <OpenButton
         ariaLabel='Open'

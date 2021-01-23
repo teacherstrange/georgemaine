@@ -47,11 +47,7 @@ export default function Home() {
         <LargeGallery />
       </Section>
       <Separator />
-      <section
-        style={{
-          position: "relative",
-        }}
-      >
+      <section>
         <Headline
           style={{
             maxWidth: 414,

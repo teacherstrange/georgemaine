@@ -84,7 +84,8 @@ export function SmallGallery() {
       <PreviousButton
         ariaLabel='Previous'
         style={{
-          zIndex: zoomState && -1,
+          // FIXME: Remove inline styling
+          zIndex: zoomState ? -1 : 0,
         }}
         disabled={currentIndex >= 1 ? false : true}
         onClick={() => {
@@ -97,6 +98,7 @@ export function SmallGallery() {
       <NextButton
         ariaLabel='Next'
         style={{
+          // FIXME: Remove inline styling
           zIndex: zoomState ? -1 : 0,
         }}
         disabled={currentIndex <= 2 ? false : true}

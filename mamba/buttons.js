@@ -74,6 +74,15 @@ export const CloseButton = styled.button`
     `}
 `;
 
+export const StickyCloseButton = styled(CloseButton)`
+  position: sticky;
+  right: 0;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  transform: translateX(calc(50vw - 18px - 16px));
+`;
+
 export const PreviousButton = styled.button`
   ${baseStyle}
   position: absolute;
