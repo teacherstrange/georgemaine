@@ -74,7 +74,7 @@ export const CloseButton = styled.button`
     `}
 `;
 
-export const StickyCloseButton = styled(CloseButton)`
+export const ArticleCloseButton = styled(CloseButton)`
   position: sticky;
   right: 0;
   left: 0;
@@ -193,6 +193,17 @@ export const OpenButton = styled.button`
         transition: opacity 0.24s cubic-bezier(0.52, 0.16, 0.24, 1);
       }
     `}
+`;
+
+export const ArticleOpenButton = styled(OpenButton)`
+  width: calc(100vw - 64px);
+  max-width: 414px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 156px;
+  text-align: left;
+  justify-content: center;
+  align-items: flex-start;
 `;
 
 export const MuteButton = styled.button`
