@@ -9,7 +9,7 @@ const OverlayContainer = styled.div`
   min-width: 100vw;
   height: 100vh;
   background-color: var(--overlay);
-  backdrop-filter: blur(20px) saturate(50%);
+  backdrop-filter: blur(20px) saturate(110%);
   transform: translate3d(
     ${(props) => props.overlayX}px,
     ${(props) => props.overlayY}px,

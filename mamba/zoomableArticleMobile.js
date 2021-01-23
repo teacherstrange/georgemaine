@@ -17,6 +17,18 @@ const Item = styled.div`
   }
 `;
 
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: ${(props) => (props.isZoomed ? 1 : 0)};
+  z-index: -1;
+  background: var(--overlay);
+  backdrop-filter: blur(20px) saturate(110%);
+`;
+
 export function ZoomableArticleMobile(props) {
   const imageRef = useRef(null);
   const [isZoomed, setisZoomed] = useState(false);
@@ -161,19 +173,7 @@ export function ZoomableArticleMobile(props) {
           have a corner on the web that I can call my own. Welcome, everyone.
         </Caption>
 
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            opacity: isZoomed ? 1 : 0,
-            zIndex: -1,
-            background: "var(--overlay)",
-            backdropFilter: "blur(20px) saturate(50%)",
-          }}
-        ></div>
+        <Overlay isZoomed={isZoomed} />
       </div>
       <OpenButton
         ariaLabel='Open'
