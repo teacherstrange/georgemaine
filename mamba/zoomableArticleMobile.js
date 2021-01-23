@@ -5,7 +5,7 @@ import { Caption } from "./text";
 
 const Item = styled.li`
   display: flex;
-  position: relative;
+
   padding: 0 calc((100vw - 414px) / 2);
 
   @media (max-width: 478px) {
@@ -68,11 +68,13 @@ export function ZoomableArticleMobile(props) {
       setisZoomed(false);
       setCurrentScale(isZoomed ? 1 : scale);
     };
+    // FIXME: Resize thumbnails on resize
     window.addEventListener("resize", dissmissModal);
     return () => window.removeEventListener("resize", dissmissModal);
   }, []);
 
   useEffect(() => {
+    // FIXME: Can this be merged with useEffect at the top?
     isZoomed
       ? (document.body.style = "overflow: hidden")
       : document.body.removeAttribute("style");
@@ -80,6 +82,7 @@ export function ZoomableArticleMobile(props) {
 
   return (
     <Item
+      // FIXME: Remove inline styling
       style={{
         height: isZoomed ? "100vh" : 70,
         overflow: isZoomed ? "hidden scroll" : "hidden",
@@ -93,6 +96,7 @@ export function ZoomableArticleMobile(props) {
       }}
     >
       <div
+        // FIXME: Remove inline styling
         style={{
           transformOrigin: "0 0",
           borderRadius: isZoomed ? 0 : 6,
@@ -102,6 +106,7 @@ export function ZoomableArticleMobile(props) {
       >
         <img ref={imageRef} src={props.image} />
         <Caption
+          // FIXME: Remove inline styling
           style={{
             marginLeft: "auto",
             marginRight: "auto",
@@ -135,7 +140,20 @@ export function ZoomableArticleMobile(props) {
         type='button'
         isZoomed={isZoomed}
         onClick={() => setisZoomed(!isZoomed)}
-      ></OpenButton>
+        // FIXME: Create variant of open button with inline styling below
+        style={{
+          width: "calc(100vw - 64px)",
+          maxWidth: 414,
+          marginLeft: "auto",
+          marginRight: "auto",
+          paddingLeft: 156,
+          textAlign: "left",
+          justifyContent: "center",
+          alignItems: "flex-start",
+        }}
+      >
+        <strong>Hello world.</strong>November 11, 2020
+      </OpenButton>
     </Item>
   );
 }
