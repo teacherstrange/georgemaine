@@ -99,6 +99,8 @@ export function ZoomableArticleMobile(props) {
         // FIXME: Remove inline styling
         style={{
           transformOrigin: "0 0",
+          zIndex: isZoomed ? 1 : 0,
+          height: "max-content",
           borderRadius: isZoomed ? 0 : 6,
           transition: "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)",
           transform: `matrix(${currentScale}, 0, 0, ${currentScale}, ${currentX}, 0)`,
@@ -134,6 +136,18 @@ export function ZoomableArticleMobile(props) {
           fine—sometimes the feeling is mutual. Either way, it's refreshing to
           have a corner on the web that I can call my own. Welcome, everyone.
         </Caption>
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            opacity: isZoomed ? 1 : 0,
+            background: "var(--overlay)",
+            backdropFilter: "blur(20px) saturate(50%)",
+          }}
+        ></div>
       </div>
       <OpenButton
         ariaLabel='Open'

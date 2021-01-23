@@ -97,7 +97,7 @@ export function SmallGallery() {
       <NextButton
         ariaLabel='Next'
         style={{
-          zIndex: zoomState && -1,
+          zIndex: zoomState ? -1 : 0,
         }}
         disabled={currentIndex <= 2 ? false : true}
         onClick={() => {
