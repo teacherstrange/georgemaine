@@ -64,13 +64,13 @@ export function ZoomableArticleMobile(props) {
       height: isZoomed ? screenHeight * 0.5 : props.smallHeight,
     };
     const scale = calculateScale(container, content);
-    const dissmissModal = () => {
+    const dismissModal = () => {
       setisZoomed(false);
       setCurrentScale(isZoomed ? 1 : scale);
     };
     // FIXME: Resize thumbnails on resize
-    window.addEventListener("resize", dissmissModal);
-    return () => window.removeEventListener("resize", dissmissModal);
+    window.addEventListener("resize", dismissModal);
+    return () => window.removeEventListener("resize", dismissModal);
   }, []);
 
   useEffect(() => {
