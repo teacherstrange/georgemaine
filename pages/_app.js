@@ -176,10 +176,10 @@ body {
 :root {
   --headline: hsla(0, 0%, 8%, 0.96);
   --caption: hsla(0, 0%, 8%, 0.5);
-  --primaryFill: hsla(240, 3%, 49%, 0.08);
+  --primaryFill: hsla(240, 3%, 49%, 0.28);
   --secondaryFill: hsla(240, 3%, 49%, 0.12);
   --tertiaryFill: hsla(240, 3%, 49%, 0.2);
-  --overlay: rgba(246, 246, 246, 0.72);
+  --overlay: hsla(0, 0%, 98%, 0.92);
   --primaryLabelFill: hsla(240, 6%, 25%, 0.3);
   --secondaryLabelFill: hsla(240, 6%, 25%, 0.6);
   --red: #d5344d;
@@ -192,7 +192,7 @@ body {
     --primaryFill: color(display-p3 0.4753 0.4753 0.5021 / 0.08);
     --secondaryFill: color(display-p3 0.4753 0.4753 0.5021 / 0.12);
     --tertiaryFill: color(display-p3 0.4753 0.4753 0.5021 / 0.2);
-    --overlay: color(display-p3 0.9648 0.9647 0.9646 / 0.72);
+    --overlay: color(display-p3 0.9801 0.98 0.9799 / 0.92);
     --primaryLabelFill: color(display-p3 0.235 0.235 0.2624 / 0.3);
     --secondaryLabelFill: color(display-p3 0.235 0.235 0.2624 / 0.6);
     --red: color(display-p3 0.7695 0.2608 0.316);

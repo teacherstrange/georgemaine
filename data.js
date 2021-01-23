@@ -29,6 +29,8 @@ export const HelloWorld = {
   smallWidth: 140,
   smallHeight: 70,
   image: "images/hello-world.jpg",
+  label: "Hello world",
+  timestamp: "January 23, 2021",
 };
 
 export const Checkout = {
