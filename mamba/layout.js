@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const Header = styled.header`
   text-align: center;
   margin: 120px auto 0;
-  width: calc(100% - 64px);
+  width: calc(100% - 60px);
   max-width: 414px;
 
   @media (min-width: 1060px) {
@@ -17,7 +17,7 @@ export const Section = styled.section`
   width: 960px;
 
   @media (max-width: 1059px) {
-    width: calc(100% - 64px);
+    width: calc(100% - 60px);
     max-width: 414px;
   }
 `;
@@ -66,7 +66,7 @@ export const Separator = styled.div`
   width: 960px;
 
   @media (max-width: 1059px) {
-    width: calc(100% - 64px);
+    width: calc(100% - 60px);
     max-width: 414px;
   }
 `;
@@ -86,7 +86,7 @@ export const ArticleContainer = styled.div`
   transform: matrix(1, 0, 0, 1, 0, ${(props) => props.y});
 
   @media (max-width: 478px) {
-    padding: 0 32px;
+    padding: 0 30px;
   }
 
   p {

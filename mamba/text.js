@@ -75,7 +75,7 @@ export const ArticleText = styled(Caption)`
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px;
-  width: 275px;
+  width: 276px;
   opacity: 0;
 
   &:last-of-type {
@@ -93,7 +93,7 @@ export const ArticleText = styled(Caption)`
 
 export const FigCaption = styled.p`
   ${bodyStyle}
-  width: 275px;
+  width: 276px;
   position: absolute;
   transform-origin: center 0;
   top: 0;

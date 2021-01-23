@@ -18,6 +18,7 @@ export function ZoomableArticleMobile(props) {
   const [currentScale, setCurrentScale] = useState(props.scale.initialMobile);
 
   useEffect(() => {
+    const image = imageRef.current;
     const screenHeight = window.innerHeight;
     const screenWidth = window.innerWidth;
     const mobileScreen = window.matchMedia("(max-width: 768px)");
@@ -29,8 +30,8 @@ export function ZoomableArticleMobile(props) {
       width: props.width * thumbnailScale,
       height: props.height * thumbnailScale,
     };
-    imageRef.current.width = content.width;
-    imageRef.current.height = content.height;
+    image.width = content.width;
+    image.height = content.height;
 
     const container = {
       width: isZoomed ? screenWidth * 1.5 : props.smallWidth,
@@ -40,8 +41,8 @@ export function ZoomableArticleMobile(props) {
           : 480
         : props.smallHeight,
     };
-    const imageZoomY = imageRef.current.getBoundingClientRect().y;
-    const imageX = imageRef.current.getBoundingClientRect().x;
+    const imageZoomY = image.getBoundingClientRect().y;
+    const imageX = image.getBoundingClientRect().x;
 
     // Calculate scale
     const scale = calculateScale(container, content);
@@ -57,6 +58,7 @@ export function ZoomableArticleMobile(props) {
   }, [isZoomed]);
 
   useEffect(() => {
+    const image = imageRef.current;
     const screenHeight = window.innerHeight;
     const screenWidth = window.innerWidth;
     const mobileScreen = window.matchMedia("(max-width: 768px)");
@@ -67,8 +69,8 @@ export function ZoomableArticleMobile(props) {
       width: props.width * thumbnailScale,
       height: props.height * thumbnailScale,
     };
-    imageRef.current.width = content.width;
-    imageRef.current.height = content.height;
+    image.width = content.width;
+    image.height = content.height;
     const container = {
       width: isZoomed ? screenWidth * 1.5 : props.smallWidth,
       height: isZoomed

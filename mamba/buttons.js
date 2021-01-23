@@ -102,7 +102,7 @@ export const PreviousButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: ${(props) => (props.zoomState ? -1 : 0)};
   transition: transform 0.2s ease, background-color 0.3s ease, opacity 0.3s ease;
 
   path {
@@ -138,7 +138,7 @@ export const NextButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: ${(props) => (props.zoomState ? -1 : 0)};
   transition: transform 0.2s ease, background-color 0.3s ease, opacity 0.3s ease;
 
   path {
@@ -196,7 +196,7 @@ export const OpenButton = styled.button`
 `;
 
 export const ArticleOpenButton = styled(OpenButton)`
-  width: calc(100vw - 64px);
+  width: calc(100vw - 60px);
   max-width: 414px;
   margin-left: auto;
   margin-right: auto;

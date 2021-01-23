@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import {
   Manifesto,
   Link,
@@ -53,7 +52,7 @@ export default function Home() {
         <Headline
           style={{
             maxWidth: 414,
-            width: "calc(100% - 64px)",
+            width: "calc(100% - 60px)",
             marginLeft: "auto",
             marginRight: "auto",
           }}

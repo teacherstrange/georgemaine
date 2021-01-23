@@ -20,7 +20,7 @@ export const Apps = {
 
 export const HelloWorld = {
   scale: {
-    initialMobile: 0.15625,
+    initialMobile: 0.2098950524737631,
     initial: 0.12526997840172785,
     target: 0.5,
   },
