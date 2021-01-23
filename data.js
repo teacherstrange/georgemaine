@@ -25,7 +25,7 @@ export const HelloWorld = {
     target: 0.5,
   },
   width: 1920,
-  height: 962,
+  height: 960,
   smallWidth: 140,
   smallHeight: 70,
   image: "images/hello-world.jpg",

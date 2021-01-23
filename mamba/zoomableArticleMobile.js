@@ -8,9 +8,8 @@ import {
 } from "./index";
 import { Caption } from "./text";
 
-const Item = styled.li`
+const Item = styled.div`
   display: flex;
-
   padding: 0 calc((100vw - 414px) / 2);
 
   @media (max-width: 478px) {
@@ -28,7 +27,12 @@ export function ZoomableArticleMobile(props) {
   useEffect(() => {
     const screenHeight = window.innerHeight;
     const screenWidth = window.innerWidth;
-    const thumbnailScale = screenHeight / 2 / props.height;
+    const mobileScreen = window.matchMedia("(max-width: 768px)");
+    console.log("This is mobileScreen:", mobileScreen.matches);
+    const thumbnailScale = mobileScreen.matches
+      ? screenHeight / 2 / props.height
+      : 480 / props.height;
+
     const content = {
       width: props.width * thumbnailScale,
       height: props.height * thumbnailScale,
@@ -38,7 +42,11 @@ export function ZoomableArticleMobile(props) {
 
     const container = {
       width: isZoomed ? screenWidth * 1.5 : props.smallWidth,
-      height: isZoomed ? screenHeight * 0.5 : props.smallHeight,
+      height: isZoomed
+        ? mobileScreen.matches
+          ? screenHeight * 0.5
+          : 480
+        : props.smallHeight,
     };
     const imageZoomY = imageRef.current.getBoundingClientRect().y;
     const imageX = imageRef.current.getBoundingClientRect().x;
@@ -51,22 +59,32 @@ export function ZoomableArticleMobile(props) {
     updateTranslateY(isZoomed ? -imageZoomY : 0);
     updateCurrentX(isZoomed ? -imageZoomX : 0);
     setCurrentScale(isZoomed ? 1 : scale);
+
+    isZoomed
+      ? (document.body.style = "overflow: hidden")
+      : document.body.removeAttribute("style");
   }, [isZoomed]);
 
   useEffect(() => {
     const screenHeight = window.innerHeight;
     const screenWidth = window.innerWidth;
-    const thumbnailScale = screenHeight / 2 / props.height;
+    const mobileScreen = window.matchMedia("(max-width: 768px)");
+    const thumbnailScale = mobileScreen.matches
+      ? screenHeight / 2 / props.height
+      : 480 / props.height;
     const content = {
       width: props.width * thumbnailScale,
       height: props.height * thumbnailScale,
     };
     imageRef.current.width = content.width;
     imageRef.current.height = content.height;
-
     const container = {
-      width: isZoomed ? screenWidth * 2 : props.smallWidth,
-      height: isZoomed ? screenHeight * 0.5 : props.smallHeight,
+      width: isZoomed ? screenWidth * 1.5 : props.smallWidth,
+      height: isZoomed
+        ? mobileScreen.matches
+          ? screenHeight * 0.5
+          : 480
+        : props.smallHeight,
     };
     const scale = calculateScale(container, content);
     const dismissModal = () => {
@@ -77,13 +95,6 @@ export function ZoomableArticleMobile(props) {
     window.addEventListener("resize", dismissModal);
     return () => window.removeEventListener("resize", dismissModal);
   }, []);
-
-  useEffect(() => {
-    // FIXME: Can this be merged with useEffect at the top?
-    isZoomed
-      ? (document.body.style = "overflow: hidden")
-      : document.body.removeAttribute("style");
-  }, [isZoomed]);
 
   return (
     <Item
