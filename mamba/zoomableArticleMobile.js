@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import {
   OpenButton,
   StickyCloseButton,
   CloseIcon,
   calculateScale,
+  ArticleText,
 } from "./index";
-import { Caption } from "./text";
 
 const Container = styled.div`
   display: flex;
@@ -25,21 +25,14 @@ const Container = styled.div`
   @media (max-width: 478px) {
     padding: 0 32px;
   }
-`;
 
-const Text = styled(Caption)`
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 20px;
-  width: 275px;
-
-  &:last-of-type {
-    margin-bottom: 60px;
-  }
-
-  @media (min-width: 540px) {
-    width: 62.5vw;
+  p {
+    ${(props) =>
+      props.isZoomed &&
+      css`
+        opacity: 1;
+        transition: opacity 0.37s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
+      `}
   }
 `;
 
@@ -171,7 +164,7 @@ export function ZoomableArticleMobile(props) {
           <CloseIcon />
         </StickyCloseButton>
         <img ref={imageRef} src={props.image} />
-        <Text>{props.timestamp}</Text>
+        <ArticleText>{props.timestamp}</ArticleText>
         {props.children}
         <Overlay isZoomed={isZoomed} />
       </Article>
