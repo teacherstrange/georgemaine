@@ -72,7 +72,6 @@ export const SmallCaption = styled.p`
 `;
 
 export const ArticleText = styled(Caption)`
-  margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px;
@@ -81,6 +80,10 @@ export const ArticleText = styled(Caption)`
 
   &:last-of-type {
     margin-bottom: 60px;
+  }
+
+  &:first-of-type {
+    margin-top: 30px;
   }
 
   @media (min-width: 540px) {

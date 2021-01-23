@@ -164,7 +164,9 @@ export function ZoomableArticleMobile(props) {
           <CloseIcon />
         </StickyCloseButton>
         <img ref={imageRef} src={props.image} />
-        <ArticleText>{props.timestamp}</ArticleText>
+        <ArticleText>
+          <time>{props.timestamp}</time>
+        </ArticleText>
         {props.children}
         <Overlay isZoomed={isZoomed} />
       </Article>
@@ -175,7 +177,7 @@ export function ZoomableArticleMobile(props) {
         onClick={() => setisZoomed(!isZoomed)}
       >
         <strong>{props.label}</strong>
-        {props.timestamp}
+        <time>{props.timestamp}</time>
       </Button>
     </Container>
   );
