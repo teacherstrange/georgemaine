@@ -30,11 +30,11 @@ export function ZoomableVideo(props) {
   }
 
   useEffect(() => {
-    const dissmissModal = () => {
+    const dismissModal = () => {
       setisZoomed(false);
     };
-    window.addEventListener("resize", dissmissModal);
-    return () => window.removeEventListener("resize", dissmissModal);
+    window.addEventListener("resize", dismissModal);
+    return () => window.removeEventListener("resize", dismissModal);
   }, []);
 
   useEffect(() => {

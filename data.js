@@ -18,6 +18,21 @@ export const Apps = {
     "During the last quarter of 2019 I designed Mollie’s mobile apps to enable people to quickly manage payments and watch their business grow.",
 };
 
+export const HelloWorld = {
+  scale: {
+    initialMobile: 0.2098950524737631,
+    initial: 0.12526997840172785,
+    target: 0.5,
+  },
+  width: 1920,
+  height: 960,
+  smallWidth: 140,
+  smallHeight: 70,
+  image: "images/hello-world.jpg",
+  label: "Hello world",
+  timestamp: "January 23, 2021",
+};
+
 export const Checkout = {
   galleryIndex: 2,
   scale: {

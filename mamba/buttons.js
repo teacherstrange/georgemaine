@@ -74,6 +74,22 @@ export const CloseButton = styled.button`
     `}
 `;
 
+export const ArticleCloseButton = styled(CloseButton)`
+  position: sticky;
+  right: 0;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  transform: translateX(calc(50vw - 18px - 16px));
+  z-index: 1;
+  margin-bottom: -36px;
+
+  &:active {
+    // FIXME: There's a better way to include scale to clicking
+    transform: translateX(calc(50vw - 18px - 16px)) !important;
+  }
+`;
+
 export const PreviousButton = styled.button`
   ${baseStyle}
   position: absolute;
@@ -86,7 +102,7 @@ export const PreviousButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: ${(props) => (props.zoomState ? -1 : 0)};
   transition: transform 0.2s ease, background-color 0.3s ease, opacity 0.3s ease;
 
   path {
@@ -122,7 +138,7 @@ export const NextButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: ${(props) => (props.zoomState ? -1 : 0)};
   transition: transform 0.2s ease, background-color 0.3s ease, opacity 0.3s ease;
 
   path {
@@ -177,6 +193,17 @@ export const OpenButton = styled.button`
         transition: opacity 0.24s cubic-bezier(0.52, 0.16, 0.24, 1);
       }
     `}
+`;
+
+export const ArticleOpenButton = styled(OpenButton)`
+  width: calc(100vw - 60px);
+  max-width: 414px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 156px;
+  text-align: left;
+  justify-content: center;
+  align-items: flex-start;
 `;
 
 export const MuteButton = styled.button`

@@ -71,9 +71,29 @@ export const SmallCaption = styled.p`
   color: var(--white);
 `;
 
+export const ArticleText = styled(Caption)`
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  width: 276px;
+  opacity: 0;
+
+  &:last-of-type {
+    margin-bottom: 60px;
+  }
+
+  &:first-of-type {
+    margin-top: 30px;
+  }
+
+  @media (min-width: 540px) {
+    width: 62.5vw;
+  }
+`;
+
 export const FigCaption = styled.p`
   ${bodyStyle}
-  width: 275px;
+  width: 276px;
   position: absolute;
   transform-origin: center 0;
   top: 0;

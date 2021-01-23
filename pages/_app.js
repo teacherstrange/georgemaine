@@ -176,7 +176,7 @@ body {
 :root {
   --headline: hsla(0, 0%, 8%, 0.96);
   --caption: hsla(0, 0%, 8%, 0.5);
-  --primaryFill: hsla(240, 3%, 49%, 0.08);
+  --primaryFill: hsla(240, 3%, 49%, 0.28);
   --secondaryFill: hsla(240, 3%, 49%, 0.12);
   --tertiaryFill: hsla(240, 3%, 49%, 0.2);
   --overlay: hsla(0, 0%, 98%, 0.92);

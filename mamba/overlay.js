@@ -9,7 +9,7 @@ const OverlayContainer = styled.div`
   min-width: 100vw;
   height: 100vh;
   background-color: var(--overlay);
-  backdrop-filter: blur(20px) saturate(50%);
+  backdrop-filter: blur(20px) saturate(110%);
   transform: translate3d(
     ${(props) => props.overlayX}px,
     ${(props) => props.overlayY}px,
@@ -46,3 +46,15 @@ export function Overlay(props) {
     </OverlayContainer>
   );
 }
+
+export const ArticleOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: ${(props) => (props.isZoomed ? 1 : 0)};
+  z-index: -1;
+  background: var(--overlay);
+  backdrop-filter: blur(30px) saturate(110%);
+`;

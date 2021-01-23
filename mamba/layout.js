@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const Header = styled.header`
   text-align: center;
   margin: 120px auto 0;
-  width: calc(100% - 64px);
+  width: calc(100% - 60px);
   max-width: 414px;
 
   @media (min-width: 1060px) {
@@ -17,7 +17,7 @@ export const Section = styled.section`
   width: 960px;
 
   @media (max-width: 1059px) {
-    width: calc(100% - 64px);
+    width: calc(100% - 60px);
     max-width: 414px;
   }
 `;
@@ -57,4 +57,60 @@ export const Tv = styled.div`
   );
   transform-origin: center 0;
   transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
+`;
+
+export const Separator = styled.div`
+  height: 1px;
+  background-color: var(--secondaryFill);
+  margin: 60px auto;
+  width: 960px;
+
+  @media (max-width: 1059px) {
+    width: calc(100% - 60px);
+    max-width: 414px;
+  }
+`;
+
+export const ArticleContainer = styled.div`
+  display: flex;
+  padding: 0 calc((100vw - 414px) / 2);
+  height: ${(props) => (props.isZoomed ? "100vh" : "70px")};
+  overflow: ${(props) => (props.isZoomed ? "hidden scroll" : "hidden")};
+  z-index: ${(props) => (props.isZoomed ? 20 : "initial")};
+  margin-bottom: 60px;
+  transition-delay: 0s, 0.56s;
+  transition: ${(props) =>
+    props.isZoomed
+      ? "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)"
+      : "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1), height 0s .56s"};
+  transform: matrix(1, 0, 0, 1, 0, ${(props) => props.y});
+
+  @media (max-width: 478px) {
+    padding: 0 30px;
+  }
+
+  p {
+    ${(props) =>
+      props.isZoomed &&
+      css`
+        opacity: 1;
+        transition: opacity 0.37s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
+      `}
+  }
+`;
+
+export const Article = styled.article`
+  transform-origin: 0 0;
+  z-index: ${(props) => (props.isZoomed ? 1 : 0)};
+  height: max-content;
+  border-radius: ${(props) => (props.isZoomed ? 0 : 6)};
+  transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
+  transform: matrix(
+    ${(props) => props.scale},
+    0,
+    0,
+    ${(props) => props.scale},
+    ${(props) => props.x},
+    0
+  );
 `;
