@@ -54,7 +54,13 @@ export const ArticleOverlay = styled.div`
   right: 0;
   bottom: 0;
   opacity: ${(props) => (props.isZoomed ? 1 : 0)};
+  pointer-events: ${(props) => (props.isZoomed ? "auto" : "none")};
   z-index: -1;
   background: var(--overlay);
   backdrop-filter: blur(30px) saturate(110%);
+
+  transition: ${(props) =>
+    props.isZoomed
+      ? "opacity .18s cubic-bezier(0.32, 0.08, 0.24, 1) .18s"
+      : "opacity 0.229s cubic-bezier(0.52, 0.16, 0.52, 0.84)"};
 `;

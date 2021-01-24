@@ -4,6 +4,7 @@ import {
   Article,
   ArticleContainerDesktop,
   ArticleOpenButton,
+  ArticleOverlay,
   ArticleText,
   calculateScale,
   CloseIcon,
@@ -20,7 +21,6 @@ const ArticleContentContainer = styled.div`
   margin-left: auto;
   margin-right: auto;
   transform: translateX(25vw);
-  background: var(--overlay);
 
   // FIXME: Remove nested styling
   p {
@@ -132,6 +132,7 @@ export function ZoomableArticle(props) {
             <time>{props.timestamp}</time>
           </ArticleText>
           {props.children}
+          <ArticleOverlay isZoomed={isZoomed} />
         </ArticleContentContainer>
       </Article>
       <ArticleOpenButton
