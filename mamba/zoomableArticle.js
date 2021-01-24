@@ -4,11 +4,10 @@ import {
   Article,
   ArticleContainerDesktop,
   ArticleOpenButton,
-  ArticleOverlay,
   ArticleText,
   calculateScale,
   CloseIcon,
-  ArticleCloseButton,
+  ArticleCloseButtonDesktop,
 } from "./index";
 
 const ArticleContentContainer = styled.div`
@@ -22,11 +21,14 @@ const ArticleContentContainer = styled.div`
   margin-right: auto;
   transform: translateX(25vw);
   background: var(--overlay);
-  backdrop-filter: blur(30px);
-  padding-top: 70px;
 
+  // FIXME: Remove nested styling
   p {
     width: 62.5% !important;
+
+    &:first-of-type {
+      margin-top: 154px;
+    }
   }
 `;
 
@@ -118,14 +120,14 @@ export function ZoomableArticle(props) {
       <Article isZoomed={isZoomed} scale={currentScale} x={currentX}>
         <img ref={imageRef} src={props.image} />
         <ArticleContentContainer>
-          <ArticleCloseButton
+          <ArticleCloseButtonDesktop
             ariaLabel='Close'
             type='button'
             onClick={() => setisZoomed(!isZoomed)}
             isZoomed={isZoomed}
           >
             <CloseIcon />
-          </ArticleCloseButton>
+          </ArticleCloseButtonDesktop>
           <ArticleText>
             <time>{props.timestamp}</time>
           </ArticleText>

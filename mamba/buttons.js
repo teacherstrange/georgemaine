@@ -74,6 +74,15 @@ export const CloseButton = styled.button`
     `}
 `;
 
+export const ArticleCloseButtonDesktop = styled(CloseButton)`
+  position: sticky;
+  margin-bottom: -36px;
+  right: initial;
+  margin-left: auto;
+  margin-right: 16px;
+  margin-top: -54px;
+`;
+
 export const ArticleCloseButton = styled(CloseButton)`
   position: sticky;
   right: 0;
