@@ -208,9 +208,11 @@ export const ArticleOpenButton = styled(OpenButton)`
   width: 960px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 340px;
+  padding-left: 282px;
+  padding-right: 40px;
   justify-content: center;
   align-items: flex-start;
+  text-align: left;
 
   @media (max-width: 959px) {
     max-width: 414px;

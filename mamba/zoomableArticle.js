@@ -52,8 +52,8 @@ export function ZoomableArticle(props) {
     image.height = content.height;
 
     const container = {
-      width: isZoomed ? screenWidth * 1.5 : 300,
-      height: isZoomed ? screenHeight : 150,
+      width: isZoomed ? screenWidth * 1.5 : 242,
+      height: isZoomed ? screenHeight : 121,
     };
     const imageZoomY = image.getBoundingClientRect().y;
     const imageX = image.getBoundingClientRect().x;
@@ -75,13 +75,7 @@ export function ZoomableArticle(props) {
     const image = imageRef.current;
     const screenHeight = window.innerHeight;
     const screenWidth = window.innerWidth;
-    const mobileScreen = window.matchMedia("(max-width: 768px)");
-    const desktopScreen = window.matchMedia("(min-width: 961px)");
-    const thumbnailScale = mobileScreen.matches
-      ? screenHeight / 2 / props.height
-      : desktopScreen.matches
-      ? screenHeight / props.height
-      : 480 / props.height;
+    const thumbnailScale = screenHeight / props.height;
     const content = {
       width: props.width * thumbnailScale,
       height: props.height * thumbnailScale,
@@ -89,20 +83,8 @@ export function ZoomableArticle(props) {
     image.width = content.width;
     image.height = content.height;
     const container = {
-      width: isZoomed
-        ? screenWidth * 1.5
-        : desktopScreen.matches
-        ? 300
-        : props.smallWidth,
-      height: isZoomed
-        ? mobileScreen.matches
-          ? screenHeight * 0.5
-          : desktopScreen.matches
-          ? screenHeight
-          : 480
-        : desktopScreen.matches
-        ? 150
-        : props.smallHeight,
+      width: isZoomed ? screenWidth * 1.5 : 242,
+      height: isZoomed ? screenHeight : 142,
     };
 
     const scale = calculateScale(container, content);

@@ -2,14 +2,14 @@ export const Apps = {
   galleryIndex: 0,
   scale: {
     initialMobile: 0.15625,
-    initial: 0.12526997840172785,
+    initial: 0.13930885529157666,
     target: 0.8,
     targetMobile: 0.8,
   },
   width: 1852,
   height: 1862,
-  smallWidth: 232,
-  smallHeight: 240,
+  smallWidth: 268,
+  smallHeight: 270,
   captionRightEdge: 836,
   image: "images/apps.png",
   href: "https://apps.apple.com/us/app/mollie/id1473455257?ls=1",
@@ -30,7 +30,8 @@ export const HelloWorld = {
   smallWidth: 140,
   smallHeight: 70,
   image: "images/hello-world.jpg",
-  label: "Hello world",
+  label:
+    "Hello world. As you may or may not be aware, I like to tinker with software, tools, and jokes. Ever since I was a young kid, I was fascinated with how things worked...",
   timestamp: "January 23, 2021",
 };
 
@@ -57,8 +58,8 @@ export const ApplePay = {
   galleryIndex: 3,
   width: 1920,
   height: 1080,
-  smallWidth: 310,
-  smallHeight: 174,
+  smallWidth: 384,
+  smallHeight: 216,
   scale: {
     initialMobile: 0.1640625,
     initial: 0.16111111111111112,
@@ -76,9 +77,8 @@ export const Promo = {
   galleryIndex: 1,
   width: 1920,
   height: 1080,
-  smallWidth: 315,
-  smallWidth: 310,
-  smallHeight: 174,
+  smallWidth: 384,
+  smallHeight: 224,
   scale: {
     initialMobile: 0.1640625,
     initial: 0.16111111111111112,

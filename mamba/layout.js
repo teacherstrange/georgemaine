@@ -106,7 +106,7 @@ export const ArticleContainer = styled.div`
 export const ArticleContainerDesktop = styled.div`
   display: flex;
   padding: 0 calc((100vw - 960px) / 2);
-  height: ${(props) => (props.isZoomed ? "100vh" : "150px")};
+  height: ${(props) => (props.isZoomed ? "100vh" : "121px")};
   overflow: ${(props) => (props.isZoomed ? "hidden scroll" : "hidden")};
   z-index: ${(props) => (props.isZoomed ? 20 : "initial")};
   margin-bottom: 60px;
@@ -122,7 +122,7 @@ export const ArticleContainerDesktop = styled.div`
       props.isZoomed &&
       css`
         opacity: 1;
-        transition: opacity 0.37s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
+        transition: opacity 0.18s cubic-bezier(0.32, 0.08, 0.24, 1) 0.18s;
       `}
   }
 

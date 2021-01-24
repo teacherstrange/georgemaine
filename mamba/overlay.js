@@ -62,5 +62,5 @@ export const ArticleOverlay = styled.div`
   transition: ${(props) =>
     props.isZoomed
       ? "opacity .18s cubic-bezier(0.32, 0.08, 0.24, 1) .18s"
-      : "opacity 0.229s cubic-bezier(0.52, 0.16, 0.52, 0.84)"};
+      : "opacity 0.209s cubic-bezier(0.52, 0.16, 0.52, 0.84)"};
 `;
