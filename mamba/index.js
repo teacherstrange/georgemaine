@@ -16,3 +16,4 @@ export * from "./zoomableImageMobile";
 export * from "./zoomableVideo";
 export * from "./zoomableVideoMobile";
 export * from "./zoomableArticleMobile";
+export * from "./zoomableArticle";

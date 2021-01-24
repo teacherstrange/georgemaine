@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
 import {
   Article,
-  ArticleContainer,
+  ArticleContainerDesktop,
   ArticleOpenButton,
   ArticleOverlay,
   ArticleText,
@@ -10,7 +11,26 @@ import {
   ArticleCloseButton,
 } from "./index";
 
-export function ZoomableArticleMobile(props) {
+const ArticleContentContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 50vw;
+  height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  transform: translateX(25vw);
+  background: var(--overlay);
+  backdrop-filter: blur(30px);
+  padding-top: 70px;
+
+  p {
+    width: 62.5% !important;
+  }
+`;
+
+export function ZoomableArticle(props) {
   const imageRef = useRef(null);
   const [isZoomed, setisZoomed] = useState(false);
   const [translateY, updateTranslateY] = useState(0);
@@ -21,14 +41,7 @@ export function ZoomableArticleMobile(props) {
     const image = imageRef.current;
     const screenHeight = window.innerHeight;
     const screenWidth = window.innerWidth;
-    const mobileScreen = window.matchMedia("(max-width: 768px)");
-    const desktopScreen = window.matchMedia("(min-width: 961px)");
-    const thumbnailScale = mobileScreen.matches
-      ? screenHeight / 2 / props.height
-      : desktopScreen.matches
-      ? screenHeight / props.height
-      : 480 / props.height;
-
+    const thumbnailScale = screenHeight / props.height;
     const content = {
       width: props.width * thumbnailScale,
       height: props.height * thumbnailScale,
@@ -37,20 +50,8 @@ export function ZoomableArticleMobile(props) {
     image.height = content.height;
 
     const container = {
-      width: isZoomed
-        ? screenWidth * 1.5
-        : desktopScreen.matches
-        ? 300
-        : props.smallWidth,
-      height: isZoomed
-        ? mobileScreen.matches
-          ? screenHeight * 0.5
-          : desktopScreen.matches
-          ? screenHeight
-          : 480
-        : desktopScreen.matches
-        ? 150
-        : props.smallHeight,
+      width: isZoomed ? screenWidth * 1.5 : 300,
+      height: isZoomed ? screenHeight : 150,
     };
     const imageZoomY = image.getBoundingClientRect().y;
     const imageX = image.getBoundingClientRect().x;
@@ -102,7 +103,6 @@ export function ZoomableArticleMobile(props) {
         : props.smallHeight,
     };
 
-    console.log("This is desktopScreen.matches:", desktopScreen.matches);
     const scale = calculateScale(container, content);
     const dismissModal = () => {
       setisZoomed(false);
@@ -114,22 +114,23 @@ export function ZoomableArticleMobile(props) {
   }, []);
 
   return (
-    <ArticleContainer isZoomed={isZoomed} y={translateY}>
+    <ArticleContainerDesktop isZoomed={isZoomed} y={translateY}>
       <Article isZoomed={isZoomed} scale={currentScale} x={currentX}>
-        <ArticleCloseButton
-          ariaLabel='Close'
-          type='button'
-          onClick={() => setisZoomed(!isZoomed)}
-          isZoomed={isZoomed}
-        >
-          <CloseIcon />
-        </ArticleCloseButton>
         <img ref={imageRef} src={props.image} />
-        <ArticleText>
-          <time>{props.timestamp}</time>
-        </ArticleText>
-        {props.children}
-        <ArticleOverlay isZoomed={isZoomed} />
+        <ArticleContentContainer>
+          <ArticleCloseButton
+            ariaLabel='Close'
+            type='button'
+            onClick={() => setisZoomed(!isZoomed)}
+            isZoomed={isZoomed}
+          >
+            <CloseIcon />
+          </ArticleCloseButton>
+          <ArticleText>
+            <time>{props.timestamp}</time>
+          </ArticleText>
+          {props.children}
+        </ArticleContentContainer>
       </Article>
       <ArticleOpenButton
         ariaLabel='Open'
@@ -140,6 +141,6 @@ export function ZoomableArticleMobile(props) {
         <strong>{props.label}</strong>
         <time>{props.timestamp}</time>
       </ArticleOpenButton>
-    </ArticleContainer>
+    </ArticleContainerDesktop>
   );
 }

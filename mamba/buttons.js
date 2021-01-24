@@ -196,14 +196,18 @@ export const OpenButton = styled.button`
 `;
 
 export const ArticleOpenButton = styled(OpenButton)`
-  width: calc(100vw - 60px);
-  max-width: 414px;
+  width: 960px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 156px;
-  text-align: left;
+  padding-left: 340px;
   justify-content: center;
   align-items: flex-start;
+
+  @media (max-width: 959px) {
+    max-width: 414px;
+    width: calc(100vw - 60px);
+    padding-left: 156px;
+  }
 `;
 
 export const MuteButton = styled.button`

@@ -55,6 +55,7 @@ export const Headline = styled.h2`
   }
   @media (min-width: 1060px) {
     ${largeTitleStyle}
+    width: 960px;
   }
 `;
 

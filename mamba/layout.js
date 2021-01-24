@@ -85,9 +85,37 @@ export const ArticleContainer = styled.div`
       : "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1), height 0s .56s"};
   transform: matrix(1, 0, 0, 1, 0, ${(props) => props.y});
 
+  p {
+    ${(props) =>
+      props.isZoomed &&
+      css`
+        opacity: 1;
+        transition: opacity 0.37s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
+      `}
+  }
+
   @media (max-width: 478px) {
     padding: 0 30px;
   }
+
+  @media (min-width: 1060px) {
+    display: none;
+  }
+`;
+
+export const ArticleContainerDesktop = styled.div`
+  display: flex;
+  padding: 0 calc((100vw - 960px) / 2);
+  height: ${(props) => (props.isZoomed ? "100vh" : "150px")};
+  overflow: ${(props) => (props.isZoomed ? "hidden scroll" : "hidden")};
+  z-index: ${(props) => (props.isZoomed ? 20 : "initial")};
+  margin-bottom: 60px;
+  transition-delay: 0s, 0.56s;
+  transition: ${(props) =>
+    props.isZoomed
+      ? "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)"
+      : "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1), height 0s .56s"};
+  transform: matrix(1, 0, 0, 1, 0, ${(props) => props.y});
 
   p {
     ${(props) =>
@@ -96,6 +124,10 @@ export const ArticleContainer = styled.div`
         opacity: 1;
         transition: opacity 0.37s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
       `}
+  }
+
+  @media (max-width: 1059px) {
+    display: none;
   }
 `;
 
