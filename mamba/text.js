@@ -91,6 +91,14 @@ export const ArticleText = styled(Caption)`
     width: 62.5vw;
   }
 
+  @media (min-width: 1060px) {
+    width: 62.5%;
+
+    &:first-of-type {
+      margin-top: 154px;
+    }
+  }
+
   @media (min-width: 1560px) {
     font-size: 1.9rem;
     line-height: 2.7rem;

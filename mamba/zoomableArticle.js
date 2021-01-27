@@ -21,15 +21,6 @@ const ArticleContentContainer = styled.div`
   margin-left: auto;
   margin-right: auto;
   transform: translateX(25vw);
-
-  // FIXME: Remove nested styling
-  p {
-    width: 62.5% !important;
-
-    &:first-of-type {
-      margin-top: 154px;
-    }
-  }
 `;
 
 export function ZoomableArticle(props) {
