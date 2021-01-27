@@ -90,6 +90,12 @@ export const ArticleText = styled(Caption)`
   @media (min-width: 540px) {
     width: 62.5vw;
   }
+
+  @media (min-width: 1560px) {
+    font-size: 1.9rem;
+    line-height: 2.7rem;
+    letter-spacing: 0.00023rem;
+  }
 `;
 
 export const FigCaption = styled.p`
