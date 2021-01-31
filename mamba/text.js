@@ -138,7 +138,7 @@ export const Link = styled.a`
   line-height: inherit;
   text-decoration: none;
   display: inline-block;
-  transition: all 0.15s ease;
+  transition: padding 0.15s ease, margin 0.15s ease, background-color 0.15s ease;
   border-radius: 16px;
 
   &:hover {

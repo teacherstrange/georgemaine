@@ -57,31 +57,15 @@ export function ZoomableArticle(props) {
     updateTranslateY(isZoomed ? -imageZoomY : 0);
     updateCurrentX(isZoomed ? -imageZoomX : 0);
     setCurrentScale(isZoomed ? 1 : scale);
+
     isZoomed
       ? (document.body.style = "overflow: hidden")
       : document.body.removeAttribute("style");
   }, [isZoomed]);
 
   useEffect(() => {
-    const image = imageRef.current;
-    const screenHeight = window.innerHeight;
-    const screenWidth = window.innerWidth;
-    const thumbnailScale = screenHeight / props.height;
-    const content = {
-      width: props.width * thumbnailScale,
-      height: props.height * thumbnailScale,
-    };
-    image.width = content.width;
-    image.height = content.height;
-    const container = {
-      width: isZoomed ? screenWidth * 1.5 : 242,
-      height: isZoomed ? screenHeight : 142,
-    };
-
-    const scale = calculateScale(container, content);
     const dismissModal = () => {
       setisZoomed(false);
-      setCurrentScale(isZoomed ? 1 : scale);
     };
 
     window.addEventListener("resize", dismissModal);

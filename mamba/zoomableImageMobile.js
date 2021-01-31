@@ -64,6 +64,10 @@ export function ZoomableImageMobile(props) {
     updateTranslateY(isZoomed ? -imageZoomY : 0);
     setCurrentScale(scale);
     updateCaptionY(isZoomed ? -textZoomY : textBaseY);
+
+    isZoomed
+      ? (document.body.style = "overflow: hidden")
+      : document.body.removeAttribute("style");
   }, [isZoomed]);
 
   useEffect(() => {
@@ -73,12 +77,6 @@ export function ZoomableImageMobile(props) {
     window.addEventListener("resize", dismissModal);
     return () => window.removeEventListener("resize", dismissModal);
   }, []);
-
-  useEffect(() => {
-    isZoomed
-      ? (document.body.style = "overflow: hidden")
-      : document.body.removeAttribute("style");
-  }, [isZoomed]);
 
   return (
     <Container
