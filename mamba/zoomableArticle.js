@@ -20,7 +20,7 @@ const ArticleContentContainer = styled.div`
   height: 100vh;
   margin-left: auto;
   margin-right: auto;
-  transform: translateX(25vw);
+  transform: translateX(50vw);
 `;
 
 export function ZoomableArticle(props) {
@@ -51,7 +51,7 @@ export function ZoomableArticle(props) {
 
     // Calculate scale
     const scale = calculateScale(container, content);
-    const imageZoomX = imageX - (screenWidth - content.width) / 2;
+    const imageZoomX = imageX - (screenWidth / 2 - content.width) / 2;
 
     // Update values
     updateTranslateY(isZoomed ? -imageZoomY : 0);

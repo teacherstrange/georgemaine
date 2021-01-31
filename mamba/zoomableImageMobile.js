@@ -24,7 +24,7 @@ export function ZoomableImageMobile(props) {
   const [translateY, updateTranslateY] = useState(0);
   const [currentScale, setCurrentScale] = useState(props.scale.initialMobile);
 
-  function handleZoom(event) {
+  function handleZoom() {
     setisZoomed(!isZoomed);
     sendZoomState(!isZoomed);
   }
@@ -85,7 +85,7 @@ export function ZoomableImageMobile(props) {
       gallerySize={gallerySize}
       activeIndex={activeIndex}
       ref={bodyRef}
-      onClick={(event) => handleZoom(event)}
+      onClick={() => handleZoom()}
     >
       <Overlay isZoomed={isZoomed}>
         <CloseButton
