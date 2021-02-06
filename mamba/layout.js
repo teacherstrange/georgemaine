@@ -76,7 +76,6 @@ export const ArticleContainer = styled.div`
   padding: 0 calc((100vw - 414px) / 2);
   height: ${(props) => (props.isZoomed ? "100vh" : "70px")};
   overflow: ${(props) => (props.isZoomed ? "hidden scroll" : "hidden")};
-  z-index: ${(props) => (props.isZoomed ? 20 : "initial")};
   margin-bottom: 60px;
   transition-delay: 0s, 0.56s;
   transition: ${(props) =>
@@ -108,7 +107,6 @@ export const ArticleContainerDesktop = styled.div`
   padding: 0 calc((100vw - 960px) / 2);
   height: ${(props) => (props.isZoomed ? "100vh" : "121px")};
   overflow: ${(props) => (props.isZoomed ? "hidden scroll" : "hidden")};
-  z-index: ${(props) => (props.isZoomed ? 20 : "initial")};
   margin-bottom: 60px;
   transition-delay: 0s, 0.56s;
   transition: ${(props) =>
@@ -133,7 +131,6 @@ export const ArticleContainerDesktop = styled.div`
 
 export const Article = styled.article`
   transform-origin: 0 0;
-  z-index: ${(props) => (props.isZoomed ? 1 : 0)};
   height: max-content;
   border-radius: ${(props) => (props.isZoomed ? 0 : 6)};
   transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
