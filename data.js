@@ -30,8 +30,11 @@ export const HelloWorld = {
   smallWidth: 140,
   smallHeight: 70,
   image: "images/hello-world.jpg",
-  label:
-    "Hello world. As you may or may not be aware, I like to tinker with software, tools, and jokes. Ever since I was a young kid, I was fascinated with how things worked...",
+  label: {
+    mobile: "Hello world",
+    desktop:
+      "Hello world. As you may or may not be aware, I like to tinker with software, tools, and jokes. Ever since I was a young kid, I was fascinated with how things worked...",
+  },
   timestamp: "January 23, 2021",
 };
 

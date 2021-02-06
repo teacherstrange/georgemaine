@@ -101,7 +101,7 @@ export function ZoomableArticleMobile(props) {
         isZoomed={isZoomed}
         onClick={() => setisZoomed(!isZoomed)}
       >
-        <strong>{props.label}</strong>
+        <strong>{props.label.mobile}</strong>
         <time>{props.timestamp}</time>
       </ArticleOpenButton>
     </ArticleContainer>
