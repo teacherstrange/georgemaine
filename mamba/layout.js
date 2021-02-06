@@ -19,6 +19,7 @@ export const Section = styled.section`
   @media (max-width: 1059px) {
     width: calc(100% - 60px);
     max-width: 414px;
+    margin: 44px auto;
   }
 `;
 
@@ -68,6 +69,7 @@ export const Separator = styled.div`
   @media (max-width: 1059px) {
     width: calc(100% - 60px);
     max-width: 414px;
+    margin: 44px auto;
   }
 `;
 

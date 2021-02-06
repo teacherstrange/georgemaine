@@ -47,7 +47,7 @@ export const Manifesto = styled.h1`
 
 export const Headline = styled.h2`
   ${smallTitleStyle}
-  margin-bottom: 60px;
+  margin-bottom: 12px;
   color: var(--headline);
 
   @media (min-width: 540px) {
@@ -56,6 +56,7 @@ export const Headline = styled.h2`
   @media (min-width: 1060px) {
     ${largeTitleStyle}
     width: 960px;
+    margin-bottom: 30px;
   }
 `;
 
