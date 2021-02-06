@@ -2,7 +2,7 @@ export const Apps = {
   galleryIndex: 0,
   scale: {
     initialMobile: 0.15625,
-    initial: 0.13930885529157666,
+    initial: 0.1447084233261339,
     target: 0.8,
     targetMobile: 0.8,
   },
@@ -62,7 +62,7 @@ export const ApplePay = {
   smallHeight: 216,
   scale: {
     initialMobile: 0.1640625,
-    initial: 0.16111111111111112,
+    initial: 0.2,
     reverse: 6.206896551724138,
     target: 0.6,
     targetMobile: 0.8,
@@ -81,7 +81,7 @@ export const Promo = {
   smallHeight: 224,
   scale: {
     initialMobile: 0.1640625,
-    initial: 0.16111111111111112,
+    initial: 0.2,
     reverse: 6.206896551724138,
     target: 0.6,
     targetMobile: 0.8,
