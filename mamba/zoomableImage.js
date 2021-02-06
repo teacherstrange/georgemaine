@@ -28,7 +28,7 @@ export function ZoomableImage(props) {
   const [translateY, updateTranslateY] = useState(0);
   const [currentScale, setCurrentScale] = useState(props.scale.initial);
 
-  function handleZoom(event) {
+  function handleZoom() {
     setisZoomed(!isZoomed);
     sendZoomState(!isZoomed);
   }
@@ -89,7 +89,7 @@ export function ZoomableImage(props) {
     window.addEventListener("resize", dismissModal);
     return () => window.removeEventListener("resize", dismissModal);
   }, []);
-
+  // FIXME: While zoomed, the zoomable article has a higher z-index than the image
   return (
     <Container
       isZoomed={isZoomed}
@@ -97,7 +97,7 @@ export function ZoomableImage(props) {
       gallerySize={gallerySize}
       activeIndex={activeIndex}
       ref={bodyRef}
-      onClick={(event) => handleZoom(event)}
+      onClick={() => handleZoom()}
     >
       <Overlay isZoomed={isZoomed}>
         <CloseButton

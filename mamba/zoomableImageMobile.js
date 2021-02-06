@@ -24,7 +24,7 @@ export function ZoomableImageMobile(props) {
   const [translateY, updateTranslateY] = useState(0);
   const [currentScale, setCurrentScale] = useState(props.scale.initialMobile);
 
-  function handleZoom(event) {
+  function handleZoom() {
     setisZoomed(!isZoomed);
     sendZoomState(!isZoomed);
   }
@@ -64,6 +64,10 @@ export function ZoomableImageMobile(props) {
     updateTranslateY(isZoomed ? -imageZoomY : 0);
     setCurrentScale(scale);
     updateCaptionY(isZoomed ? -textZoomY : textBaseY);
+
+    isZoomed
+      ? (document.body.style = "overflow: hidden")
+      : document.body.removeAttribute("style");
   }, [isZoomed]);
 
   useEffect(() => {
@@ -74,12 +78,6 @@ export function ZoomableImageMobile(props) {
     return () => window.removeEventListener("resize", dismissModal);
   }, []);
 
-  useEffect(() => {
-    isZoomed
-      ? (document.body.style = "overflow: hidden")
-      : document.body.removeAttribute("style");
-  }, [isZoomed]);
-
   return (
     <Container
       isZoomed={isZoomed}
@@ -87,7 +85,7 @@ export function ZoomableImageMobile(props) {
       gallerySize={gallerySize}
       activeIndex={activeIndex}
       ref={bodyRef}
-      onClick={(event) => handleZoom(event)}
+      onClick={() => handleZoom()}
     >
       <Overlay isZoomed={isZoomed}>
         <CloseButton

@@ -90,6 +90,20 @@ export const ArticleText = styled(Caption)`
   @media (min-width: 540px) {
     width: 62.5vw;
   }
+
+  @media (min-width: 1060px) {
+    width: 62.5%;
+
+    &:first-of-type {
+      margin-top: 154px;
+    }
+  }
+
+  @media (min-width: 1560px) {
+    font-size: 1.9rem;
+    line-height: 2.4rem;
+    letter-spacing: -0.049rem;
+  }
 `;
 
 export const FigCaption = styled.p`
@@ -124,7 +138,7 @@ export const Link = styled.a`
   line-height: inherit;
   text-decoration: none;
   display: inline-block;
-  transition: all 0.15s ease;
+  transition: padding 0.15s ease, margin 0.15s ease, background-color 0.15s ease;
   border-radius: 16px;
 
   &:hover {

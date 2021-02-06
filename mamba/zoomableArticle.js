@@ -8,7 +8,7 @@ import {
   ArticleText,
   calculateScale,
   CloseIcon,
-  ArticleCloseButton,
+  ArticleCloseButtonDesktop,
 } from "./index";
 
 const ArticleContentContainer = styled.div`
@@ -20,14 +20,7 @@ const ArticleContentContainer = styled.div`
   height: 100vh;
   margin-left: auto;
   margin-right: auto;
-  transform: translateX(25vw);
-  background: var(--overlay);
-  backdrop-filter: blur(30px);
-  padding-top: 70px;
-
-  p {
-    width: 62.5% !important;
-  }
+  transform: translateX(50vw);
 `;
 
 export function ZoomableArticle(props) {
@@ -50,63 +43,29 @@ export function ZoomableArticle(props) {
     image.height = content.height;
 
     const container = {
-      width: isZoomed ? screenWidth * 1.5 : 300,
-      height: isZoomed ? screenHeight : 150,
+      width: isZoomed ? screenWidth * 1.5 : 242,
+      height: isZoomed ? screenHeight : 121,
     };
     const imageZoomY = image.getBoundingClientRect().y;
     const imageX = image.getBoundingClientRect().x;
 
     // Calculate scale
     const scale = calculateScale(container, content);
-    const imageZoomX = imageX - (screenWidth - content.width) / 2;
+    const imageZoomX = imageX - (screenWidth / 2 - content.width) / 2;
 
     // Update values
     updateTranslateY(isZoomed ? -imageZoomY : 0);
     updateCurrentX(isZoomed ? -imageZoomX : 0);
     setCurrentScale(isZoomed ? 1 : scale);
+
     isZoomed
       ? (document.body.style = "overflow: hidden")
       : document.body.removeAttribute("style");
   }, [isZoomed]);
 
   useEffect(() => {
-    const image = imageRef.current;
-    const screenHeight = window.innerHeight;
-    const screenWidth = window.innerWidth;
-    const mobileScreen = window.matchMedia("(max-width: 768px)");
-    const desktopScreen = window.matchMedia("(min-width: 961px)");
-    const thumbnailScale = mobileScreen.matches
-      ? screenHeight / 2 / props.height
-      : desktopScreen.matches
-      ? screenHeight / props.height
-      : 480 / props.height;
-    const content = {
-      width: props.width * thumbnailScale,
-      height: props.height * thumbnailScale,
-    };
-    image.width = content.width;
-    image.height = content.height;
-    const container = {
-      width: isZoomed
-        ? screenWidth * 1.5
-        : desktopScreen.matches
-        ? 300
-        : props.smallWidth,
-      height: isZoomed
-        ? mobileScreen.matches
-          ? screenHeight * 0.5
-          : desktopScreen.matches
-          ? screenHeight
-          : 480
-        : desktopScreen.matches
-        ? 150
-        : props.smallHeight,
-    };
-
-    const scale = calculateScale(container, content);
     const dismissModal = () => {
       setisZoomed(false);
-      setCurrentScale(isZoomed ? 1 : scale);
     };
 
     window.addEventListener("resize", dismissModal);
@@ -118,18 +77,19 @@ export function ZoomableArticle(props) {
       <Article isZoomed={isZoomed} scale={currentScale} x={currentX}>
         <img ref={imageRef} src={props.image} />
         <ArticleContentContainer>
-          <ArticleCloseButton
+          <ArticleCloseButtonDesktop
             ariaLabel='Close'
             type='button'
             onClick={() => setisZoomed(!isZoomed)}
             isZoomed={isZoomed}
           >
             <CloseIcon />
-          </ArticleCloseButton>
+          </ArticleCloseButtonDesktop>
           <ArticleText>
             <time>{props.timestamp}</time>
           </ArticleText>
           {props.children}
+          <ArticleOverlay isZoomed={isZoomed} />
         </ArticleContentContainer>
       </Article>
       <ArticleOpenButton
