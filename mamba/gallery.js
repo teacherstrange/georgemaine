@@ -24,6 +24,7 @@ const GallerySmall = styled.div`
 const GalleryLarge = styled.div`
   height: 314px;
   position: relative;
+  z-index: 1;
 
   @media (max-width: 1059px) {
     display: none;
