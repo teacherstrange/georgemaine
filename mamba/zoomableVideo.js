@@ -38,6 +38,14 @@ export function ZoomableVideo(props) {
   }, []);
 
   useEffect(() => {
+    const dismissModal = (e) => {
+      e.keyCode === 27 && setisZoomed(false);
+    };
+    window.addEventListener("keydown", dismissModal);
+    return () => window.removeEventListener("keydown", dismissModal);
+  }, []);
+
+  useEffect(() => {
     const container = {
       width: isZoomed
         ? window.innerWidth * props.scale.target

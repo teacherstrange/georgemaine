@@ -89,7 +89,15 @@ export function ZoomableImage(props) {
     window.addEventListener("resize", dismissModal);
     return () => window.removeEventListener("resize", dismissModal);
   }, []);
-  // FIXME: While zoomed, the zoomable article has a higher z-index than the image
+
+  useEffect(() => {
+    const dismissModal = (e) => {
+      e.keyCode === 27 && setisZoomed(false);
+    };
+    window.addEventListener("keydown", dismissModal);
+    return () => window.removeEventListener("keydown", dismissModal);
+  }, []);
+
   return (
     <Container
       isZoomed={isZoomed}

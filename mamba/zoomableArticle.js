@@ -72,6 +72,14 @@ export function ZoomableArticle(props) {
     return () => window.removeEventListener("resize", dismissModal);
   }, []);
 
+  useEffect(() => {
+    const dismissModal = (e) => {
+      e.keyCode === 27 && setisZoomed(false);
+    };
+    window.addEventListener("keydown", dismissModal);
+    return () => window.removeEventListener("keydown", dismissModal);
+  }, []);
+
   return (
     <ArticleContainerDesktop isZoomed={isZoomed} y={translateY}>
       <Article isZoomed={isZoomed} scale={currentScale} x={currentX}>
