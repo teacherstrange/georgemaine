@@ -32,7 +32,20 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang='en'>
-        <Head></Head>
+        <Head>
+          <link
+            rel='preload'
+            href='/fonts/TypeType - TT Interphases DemiBold.woff2'
+            as='font'
+            type='font/woff2'
+          />
+          <link
+            rel='preload'
+            href='/fonts/TypeType - TT Interphases DemiBold.woff'
+            as='font'
+            type='font/woff'
+          />
+        </Head>
 
         <body>
           <Main />

@@ -14,7 +14,7 @@ import {
   ZoomableArticleMobile,
   ArticleText,
 } from "../mamba/index.js";
-import { HelloWorld } from "../data";
+import { HelloWorld, SuntoryTokiReview } from "../data";
 
 const SectionHeadline = styled(Headline)`
   margin-left: auto;
@@ -63,6 +63,80 @@ export default function Home() {
       <Separator />
       <section>
         <SectionHeadline>Writing</SectionHeadline>
+        <ZoomableArticleMobile {...SuntoryTokiReview}>
+          <ArticleText>
+            <strong>Suntory Toki review.</strong> Suntory is a Whiskey
+            Distillery founded in 1923 in Yamasaki, the oldest in the Japan. The
+            founder—Shinjiro Torii—dreamt of creating a whiskey that one day
+            would earn a rightful place at the Japanese dining table. And so far
+            it’s earned a place amongst the best whiskey’s in the world.
+          </ArticleText>
+          <ArticleText>
+            Suntory Whisky Toki comes in an elegant bottle made from thick glass
+            with a relatively small label. The cap is wrapped in paper that
+            feels like crepe, which made it a memorable opening experience.
+          </ArticleText>
+          <ArticleText>
+            Suntory Whisky Toki comes in an elegant bottle made from thick glass
+            with a relatively small label. The cap is wrapped in paper that
+            feels like crepe, which made it a memorable opening experience.
+          </ArticleText>
+          <ArticleText>
+            The liquid gold content is a blend of Hakashu single malt and Chita
+            grain whiskey which meld together in harmony. This unique
+            composition makes it excellent for a highball, but I like it old
+            fashioned.
+          </ArticleText>
+          <ArticleText>
+            The aroma is extremely woodliness queued by hints of vanilla and
+            ginger. The taste is smooth, tender followed by a fruity spicy ness.
+            Once it’s initial alcohol wears off you’re left with a fruity and
+            well-balanced spicy ness. Because the taste is so harmonious I
+            recommend drinking this one neat.
+          </ArticleText>
+          <ArticleText>
+            Sun Tory Toki is simple and harmonious and a great example of what
+            makes Japanese whiskey remarkable. It’s earned a place as one of my
+            favorites in the collection.
+          </ArticleText>
+        </ZoomableArticleMobile>
+        <ZoomableArticle {...SuntoryTokiReview}>
+          <ArticleText>
+            <strong>Suntory Toki review.</strong> Suntory is a Whiskey
+            Distillery founded in 1923 in Yamasaki, the oldest in the Japan. The
+            founder—Shinjiro Torii—dreamt of creating a whiskey that one day
+            would earn a rightful place at the Japanese dining table. And so far
+            it’s earned a place amongst the best whiskey’s in the world.
+          </ArticleText>
+          <ArticleText>
+            Suntory Whisky Toki comes in an elegant bottle made from thick glass
+            with a relatively small label. The cap is wrapped in paper that
+            feels like crepe, which made it a memorable opening experience.
+          </ArticleText>
+          <ArticleText>
+            Suntory Whisky Toki comes in an elegant bottle made from thick glass
+            with a relatively small label. The cap is wrapped in paper that
+            feels like crepe, which made it a memorable opening experience.
+          </ArticleText>
+          <ArticleText>
+            The liquid gold content is a blend of Hakashu single malt and Chita
+            grain whiskey which meld together in harmony. This unique
+            composition makes it excellent for a highball, but I like it old
+            fashioned.
+          </ArticleText>
+          <ArticleText>
+            The aroma is extremely woodliness queued by hints of vanilla and
+            ginger. The taste is smooth, tender followed by a fruity spicy ness.
+            Once it’s initial alcohol wears off you’re left with a fruity and
+            well-balanced spicy ness. Because the taste is so harmonious I
+            recommend drinking this one neat.
+          </ArticleText>
+          <ArticleText>
+            Sun Tory Toki is simple and harmonious and a great example of what
+            makes Japanese whiskey remarkable. It’s earned a place as one of my
+            favorites in the collection.
+          </ArticleText>
+        </ZoomableArticle>
         <ZoomableArticleMobile {...HelloWorld}>
           <ArticleText>
             <strong>Hello world.</strong> As you may or may not be aware, I like
