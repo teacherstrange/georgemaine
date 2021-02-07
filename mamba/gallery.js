@@ -24,7 +24,7 @@ const GallerySmall = styled.div`
 const GalleryLarge = styled.div`
   height: 314px;
   position: relative;
-  z-index: 1;
+  z-index: 0;
 
   @media (max-width: 1059px) {
     display: none;
@@ -49,7 +49,11 @@ export function SmallGallery() {
   const [zoomState, sendZoomState] = useState(false);
 
   return (
-    <GallerySmall>
+    <GallerySmall
+      style={{
+        zIndex: zoomState ? 1 : 0,
+      }}
+    >
       <ItemContainer
         style={{
           transform: `translate3d( ${(0 - currentIndex) * 100}%, 0, 0)`,
@@ -118,7 +122,11 @@ export function LargeGallery() {
   const [zoomState, sendZoomState] = useState();
 
   return (
-    <GalleryLarge>
+    <GalleryLarge
+      style={{
+        zIndex: zoomState ? 1 : 0,
+      }}
+    >
       <ItemContainer
         style={{
           transform: `translate3d( ${(0 - currentIndex) * 100}%, 0, 0)`,
