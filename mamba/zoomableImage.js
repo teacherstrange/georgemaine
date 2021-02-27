@@ -92,7 +92,7 @@ export function ZoomableImage(props) {
 
   useEffect(() => {
     const dismissModal = (e) => {
-      e.keyCode === 27 && setisZoomed(false);
+      e.keyCode === 27 && setisZoomed(false), sendZoomState(false);
     };
     window.addEventListener("keydown", dismissModal);
     return () => window.removeEventListener("keydown", dismissModal);

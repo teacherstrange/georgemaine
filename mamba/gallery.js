@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import {
   ZoomableImage,
@@ -24,7 +24,8 @@ const GallerySmall = styled.div`
 const GalleryLarge = styled.div`
   height: 314px;
   position: relative;
-  z-index: 0;
+  transition: ${(props) =>
+    props.isZoomed ? "z-index 0s 0s" : "z-index 0s 56s"};
 
   @media (max-width: 1059px) {
     display: none;
@@ -123,6 +124,7 @@ export function LargeGallery() {
 
   return (
     <GalleryLarge
+      isZoomed={zoomState}
       style={{
         zIndex: zoomState ? 1 : 0,
       }}

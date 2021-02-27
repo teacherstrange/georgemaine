@@ -12,6 +12,7 @@ import {
 
 export function ZoomableArticleMobile(props) {
   const imageRef = useRef(null);
+  const articleRef = useRef(null);
   const [isZoomed, setisZoomed] = useState(false);
   const [translateY, updateTranslateY] = useState(0);
   const [currentX, updateCurrentX] = useState(0);
@@ -63,6 +64,7 @@ export function ZoomableArticleMobile(props) {
     updateTranslateY(isZoomed ? -imageZoomY : 0);
     updateCurrentX(isZoomed ? -imageZoomX : 0);
     setCurrentScale(isZoomed ? 1 : scale);
+    !isZoomed ? (articleRef.current.scrollTop = 0) : null;
     isZoomed
       ? (document.body.style = "overflow: hidden")
       : document.body.removeAttribute("style");
@@ -78,7 +80,7 @@ export function ZoomableArticleMobile(props) {
   }, []);
 
   return (
-    <ArticleContainer isZoomed={isZoomed} y={translateY}>
+    <ArticleContainer isZoomed={isZoomed} y={translateY} ref={articleRef}>
       <Article isZoomed={isZoomed} scale={currentScale} x={currentX}>
         <ArticleCloseButton
           ariaLabel='Close'
