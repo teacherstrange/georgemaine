@@ -105,15 +105,16 @@ export const ArticleContainer = styled.div`
 `;
 
 export const ArticleContainerDesktop = styled.div`
+  position: relative;
   display: flex;
-  padding: 0 calc((100vw - 960px) / 2);
   height: 121px;
   margin-bottom: 30px;
-  transition-delay: 0s, 0.56s;
+  transition-delay: 0s, 0.56s, 0.56s;
+  z-index: ${(props) => (props.isZoomed ? 99999 : 0)};
   transition: ${(props) =>
     props.isZoomed
       ? "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)"
-      : "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1), height 0s .56s"};
+      : "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1), height 0s .56s, z-index 0s 0.56s"};
   transform: matrix(1, 0, 0, 1, 0, ${(props) => props.y});
 
   p {

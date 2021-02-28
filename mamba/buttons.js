@@ -22,7 +22,7 @@ const baseStyle = css`
 
 export const Button = styled.button`
   ${baseStyle}
-  letter-spacing: -0.023rem;
+  letter-spacing: -0.008rem;
   padding: 8px 24px;
   border-radius: 32px;
   text-align: center;
@@ -55,16 +55,6 @@ export const CloseButton = styled.button`
     transition: stroke 0.25s linear;
   }
 
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: var(--tertiaryFill);
-    color: var(--secondaryLabelFill);
-
-    path {
-      stroke: var(--secondaryLabelFill);
-    }
-  }
   ${(props) =>
     props.isZoomed &&
     css`

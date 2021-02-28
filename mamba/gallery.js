@@ -25,7 +25,7 @@ const GalleryLarge = styled.div`
   height: 314px;
   position: relative;
   transition: ${(props) =>
-    props.isZoomed ? "z-index 0s 0s" : "z-index 0s 56s"};
+    props.isZoomed ? "z-index 0s 0s" : "z-index 0s 0.56s"};
 
   @media (max-width: 1059px) {
     display: none;
@@ -126,7 +126,7 @@ export function LargeGallery() {
     <GalleryLarge
       isZoomed={zoomState}
       style={{
-        zIndex: zoomState ? 1 : 0,
+        zIndex: zoomState ? 99999 : 0,
       }}
     >
       <ItemContainer
