@@ -145,9 +145,8 @@ body {
   font-style: normal;
   -webkit-font-kerning: normal;
   font-kerning: normal;
-  font-feature-settings: "kern" 1;
+  font-feature-settings: "liga" 0;
   text-rendering: optimizelegibility;
-  font-variant-ligatures: common-ligatures;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -157,7 +156,7 @@ body {
   -moz-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  letter-spacing: -0.023rem;
+  letter-spacing: -0.008rem;
   font-size: 1.5rem;
   line-height: 2rem;
   color: var(--caption);
@@ -166,6 +165,25 @@ body {
 /* Typefaces */
 @font-face {
   font-family: TT Interphases;
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+  src: url("/fonts/TypeType - TT Interphases Regular.woff") format("woff"),
+    url("/fonts/TypeType - TT Interphases Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: TT Interphases;
+  font-display: swap;
+  font-weight: 500;
+  font-style: normal;
+  src: url("/fonts/TypeType - TT Interphases Medium.woff") format("woff"),
+    url("/fonts/TypeType - TT Interphases Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: TT Interphases;
+  font-display: swap;
   font-weight: 600;
   font-style: normal;
   src: url("/fonts/TypeType - TT Interphases DemiBold.woff") format("woff"),

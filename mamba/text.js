@@ -19,9 +19,9 @@ const smallTitleStyle = css`
 `;
 
 const bodyStyle = css`
-  font-size: 1.5rem;
-  line-height: 2rem;
-  letter-spacing: -0.023rem;
+  font-size: 1.7rem;
+  line-height: 2.4rem;
+  letter-spacing: 0rem;
 `;
 
 const smallBodyStyle = css`
@@ -74,6 +74,7 @@ export const SmallCaption = styled.p`
 `;
 
 export const ArticleText = styled(Caption)`
+  font-weight: 500;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px;
@@ -98,12 +99,6 @@ export const ArticleText = styled(Caption)`
     &:first-of-type {
       margin-top: 154px;
     }
-  }
-
-  @media (min-width: 1560px) {
-    font-size: 1.9rem;
-    line-height: 2.4rem;
-    letter-spacing: -0.049rem;
   }
 `;
 
