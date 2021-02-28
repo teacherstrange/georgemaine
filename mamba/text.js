@@ -94,10 +94,6 @@ export const ArticleText = styled(Caption)`
 
   @media (min-width: 1060px) {
     width: 62.5%;
-
-    &:first-of-type {
-      margin-top: 154px;
-    }
   }
 
   @media (min-width: 1560px) {

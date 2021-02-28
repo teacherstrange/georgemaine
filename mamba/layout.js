@@ -107,8 +107,7 @@ export const ArticleContainer = styled.div`
 export const ArticleContainerDesktop = styled.div`
   display: flex;
   padding: 0 calc((100vw - 960px) / 2);
-  height: ${(props) => (props.isZoomed ? "100vh" : "121px")};
-  overflow: ${(props) => (props.isZoomed ? "hidden scroll" : "hidden")};
+  height: 121px;
   margin-bottom: 30px;
   transition-delay: 0s, 0.56s;
   transition: ${(props) =>

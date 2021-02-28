@@ -21,6 +21,13 @@ const ArticleContentContainer = styled.div`
   margin-left: auto;
   margin-right: auto;
   transform: translateX(50vw);
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+  }
 `;
 
 export function ZoomableArticle(props) {
@@ -93,11 +100,24 @@ export function ZoomableArticle(props) {
           >
             <CloseIcon />
           </ArticleCloseButtonDesktop>
-          <ArticleText>
-            <time>{props.timestamp}</time>
-          </ArticleText>
-          {props.children}
-          <ArticleOverlay isZoomed={isZoomed} />
+          <div
+            style={{
+              paddingTop: 154,
+              paddingBottom: 60,
+              position: "relative",
+            }}
+          >
+            <ArticleText>
+              <time>{props.timestamp}</time>
+            </ArticleText>
+            {props.children}
+            <ArticleOverlay
+              style={{
+                position: "absolute",
+              }}
+              isZoomed={isZoomed}
+            />
+          </div>
         </ArticleContentContainer>
       </Article>
       <ArticleOpenButton
