@@ -85,7 +85,7 @@ export const ApplePay = {
   scale: {
     initialMobile: 0.1640625,
     initial: 0.2,
-    reverse: 6.206896551724138,
+    reverse: 5,
     target: 0.6,
     targetMobile: 0.8,
   },
@@ -104,7 +104,7 @@ export const Promo = {
   scale: {
     initialMobile: 0.1640625,
     initial: 0.2,
-    reverse: 6.206896551724138,
+    reverse: 5,
     target: 0.6,
     targetMobile: 0.8,
   },
