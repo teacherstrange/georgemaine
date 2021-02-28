@@ -89,7 +89,7 @@ export function ZoomableImageMobile(props) {
     >
       <Overlay isZoomed={isZoomed}>
         <CloseButton
-          ariaLabel='Close'
+          aria-label='Close'
           type='button'
           onClick={() => (setisZoomed(!isZoomed), sendZoomState(!isZoomed))}
           isZoomed={isZoomed}
@@ -101,6 +101,7 @@ export function ZoomableImageMobile(props) {
         ref={imageRef}
         width={props.width}
         height={props.height}
+        alt={props.alt}
         src={props.image}
         currentScale={currentScale}
         isZoomed={isZoomed}
@@ -134,7 +135,7 @@ export function ZoomableImageMobile(props) {
           </>
         )}
       </FigCaption>
-      <OpenButton ariaLabel='Open' type='button' isZoomed={isZoomed}>
+      <OpenButton aria-label='Open' type='button' isZoomed={isZoomed}>
         <strong>{props.project}</strong>
         Learn more
       </OpenButton>

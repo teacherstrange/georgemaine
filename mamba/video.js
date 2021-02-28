@@ -266,7 +266,7 @@ export function Video(props) {
       <VideoControls startState={startState}>
         <PlayButtonButtonContainer startState={startState}>
           <PlayPauseButton
-            ariaLabel='Play or Pause'
+            aria-label='Play or Pause'
             type='button'
             onClick={() => playPauseVideo()}
           >
@@ -299,7 +299,7 @@ export function Video(props) {
               updateVideoVolume(e), updateVolumeSlider(e.target.value)
             )}
           >
-            <MuteButton ariaLabel='Mute' onClick={() => muteVideo()}>
+            <MuteButton aria-label='Mute' onClick={() => muteVideo()}>
               {videoIsMuted ? <MuteIcon /> : <SpeakerIcon />}
             </MuteButton>
           </VolumeSlider>
@@ -319,7 +319,7 @@ export function Video(props) {
           <DurationTime>
             <SmallCaption>{videoDuration}</SmallCaption>
           </DurationTime>
-          <ExpandButton ariaLabel='Expand' onClick={() => expandVideo()}>
+          <ExpandButton aria-label='Expand' onClick={() => expandVideo()}>
             <ExpandIcon />
           </ExpandButton>
         </MainControls>

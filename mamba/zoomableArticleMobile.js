@@ -83,14 +83,14 @@ export function ZoomableArticleMobile(props) {
     <ArticleContainer isZoomed={isZoomed} y={translateY} ref={articleRef}>
       <Article isZoomed={isZoomed} scale={currentScale} x={currentX}>
         <ArticleCloseButton
-          ariaLabel='Close'
+          aria-label='Close'
           type='button'
           onClick={() => setisZoomed(!isZoomed)}
           isZoomed={isZoomed}
         >
           <CloseIcon />
         </ArticleCloseButton>
-        <img ref={imageRef} src={props.image} />
+        <img alt={props.alt} ref={imageRef} src={props.image} />
         <ArticleText>
           <time>{props.timestamp}</time>
         </ArticleText>
@@ -98,7 +98,7 @@ export function ZoomableArticleMobile(props) {
         <ArticleOverlay isZoomed={isZoomed} />
       </Article>
       <ArticleOpenButton
-        ariaLabel='Open'
+        aria-label='Open'
         type='button'
         isZoomed={isZoomed}
         onClick={() => setisZoomed(!isZoomed)}

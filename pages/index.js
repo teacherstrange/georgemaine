@@ -40,7 +40,7 @@ export default function Home() {
           width={120}
           height={120}
           src='/images/memoji.png'
-          alt='Memoji portait of me'
+          alt='Georgemaine Memoji'
         />
         <Manifesto>
           Hi, I’m Georgemaine—A product designer currently working on{" "}

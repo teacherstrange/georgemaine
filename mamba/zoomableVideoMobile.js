@@ -90,7 +90,7 @@ export function ZoomableVideoMobile(props) {
     >
       <Overlay isZoomed={isZoomed}>
         <CloseButton
-          ariaLabel='Close'
+          aria-label='Close'
           type='button'
           onClick={() => (setisZoomed(!isZoomed), sendZoomState(!isZoomed))}
           isZoomed={isZoomed}
@@ -121,7 +121,7 @@ export function ZoomableVideoMobile(props) {
       </FigCaption>
 
       <OpenButton
-        ariaLabel='Open'
+        aria-label='Open'
         type='button'
         onClick={() => handleZoom()}
         isZoomed={isZoomed}

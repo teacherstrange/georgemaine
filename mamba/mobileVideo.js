@@ -64,7 +64,7 @@ export function MobileVideo(props) {
       </Video>
       <MobilePlayButtonContainer>
         <PlayPauseButton
-          ariaLabel='Play or Pause'
+          aria-label='Play or Pause'
           type='button'
           onClick={() => playPauseMobileVideo()}
         >

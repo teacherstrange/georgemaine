@@ -12,6 +12,7 @@ export const Apps = {
   smallHeight: 270,
   captionRightEdge: 836,
   image: "images/apps.png",
+  alt: "Mollie's mobile apps",
   href: "https://apps.apple.com/us/app/mollie/id1473455257?ls=1",
   label: "Enjoy managing payments on mobile. ↗",
   project: "Mollie Apps",
@@ -30,6 +31,7 @@ export const HelloWorld = {
   smallWidth: 140,
   smallHeight: 70,
   image: "images/hello-world.jpg",
+  alt: "Photo of Georgemaine",
   label: {
     mobile: "Hello world",
     desktop:
@@ -49,6 +51,7 @@ export const SuntoryTokiReview = {
   smallWidth: 140,
   smallHeight: 70,
   image: "images/whiskey-placeholder.jpg",
+  alt: "Suntory Toki Whiskey bottle",
   label: {
     mobile: "Suntory Toki review",
     desktop:
@@ -72,6 +75,7 @@ export const Checkout = {
   captionRightEdge: 908,
   image: "images/checkout.png",
   project: "Mollie Checkout",
+  alt: "Mollie Checkout",
   description:
     "During the first quarter of 2019 I redesigned and developed the Checkout to close the technology gap, meet customer’s expectations of swiftly paying for their order with confidence.",
 };

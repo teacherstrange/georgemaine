@@ -88,7 +88,7 @@ export function SmallGallery() {
       </ItemContainer>
 
       <PreviousButton
-        ariaLabel='Previous'
+        aria-label='Previous'
         style={{
           // FIXME: Remove inline styling
           zIndex: zoomState ? -1 : 0,
@@ -102,7 +102,7 @@ export function SmallGallery() {
       </PreviousButton>
 
       <NextButton
-        ariaLabel='Next'
+        aria-label='Next'
         style={{
           // FIXME: Remove inline styling
           zIndex: zoomState ? -1 : 0,
@@ -173,7 +173,7 @@ export function LargeGallery() {
       </ItemContainer>
 
       <PreviousButton
-        ariaLabel='Previous'
+        aria-label='Previous'
         type='button'
         style={{
           zIndex: zoomState && -1,
@@ -186,7 +186,7 @@ export function LargeGallery() {
         <PreviousArrowIcon />
       </PreviousButton>
       <NextButton
-        ariaLabel='Next'
+        aria-label='Next'
         type='button'
         style={{
           zIndex: zoomState && -1,

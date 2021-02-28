@@ -100,7 +100,7 @@ export function ZoomableArticle(props) {
   return (
     <ArticleContainerDesktop isZoomed={isZoomed} y={translateY}>
       <Article isZoomed={isZoomed} scale={currentScale} x={currentX}>
-        <img ref={imageRef} src={props.image} />
+        <img alt={props.alt} ref={imageRef} src={props.image} />
         <ArticleContentContainer>
           <div
             style={{
@@ -124,7 +124,7 @@ export function ZoomableArticle(props) {
         </ArticleContentContainer>
       </Article>
       <ArticleOpenButton
-        ariaLabel='Open'
+        aria-label='Open'
         type='button'
         isZoomed={isZoomed}
         onClick={() => setisZoomed(!isZoomed)}
@@ -133,7 +133,7 @@ export function ZoomableArticle(props) {
         <time>{props.timestamp}</time>
       </ArticleOpenButton>
       <ArticleCloseButtonDesktop
-        ariaLabel='Close'
+        aria-label='Close'
         type='button'
         onClick={() => setisZoomed(!isZoomed)}
         isZoomed={isZoomed}
