@@ -132,7 +132,6 @@ export const ArticleContainerDesktop = styled.div`
 
 export const Article = styled.article`
   transform-origin: 0 0;
-  height: max-content;
   transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
   transform: matrix(
     ${(props) => props.scale},

@@ -77,11 +77,6 @@ export default function Home() {
             feels like crepe, which made it a memorable opening experience.
           </ArticleText>
           <ArticleText>
-            Suntory Whisky Toki comes in an elegant bottle made from thick glass
-            with a relatively small label. The cap is wrapped in paper that
-            feels like crepe, which made it a memorable opening experience.
-          </ArticleText>
-          <ArticleText>
             The liquid gold content is a blend of Hakashu single malt and Chita
             grain whiskey which meld together in harmony. This unique
             composition makes it excellent for a highball, but I like it old
@@ -107,11 +102,6 @@ export default function Home() {
             founder—Shinjiro Torii—dreamt of creating a whiskey that one day
             would earn a rightful place at the Japanese dining table. And so far
             it’s earned a place amongst the best whiskey’s in the world.
-          </ArticleText>
-          <ArticleText>
-            Suntory Whisky Toki comes in an elegant bottle made from thick glass
-            with a relatively small label. The cap is wrapped in paper that
-            feels like crepe, which made it a memorable opening experience.
           </ArticleText>
           <ArticleText>
             Suntory Whisky Toki comes in an elegant bottle made from thick glass

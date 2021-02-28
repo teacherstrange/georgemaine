@@ -53,6 +53,7 @@ export const ArticleOverlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
+  min-height: 100vh;
   opacity: ${(props) => (props.isZoomed ? 1 : 0)};
   pointer-events: ${(props) => (props.isZoomed ? "auto" : "none")};
   z-index: -1;

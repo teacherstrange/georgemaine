@@ -16,6 +16,7 @@ const ArticleContentContainer = styled.div`
   top: 0;
   left: 0;
   right: 0;
+  bottom: 0;
   width: 50vw;
   height: 100vh;
   margin-left: auto;
@@ -27,6 +28,15 @@ const ArticleContentContainer = styled.div`
   &::-webkit-scrollbar {
     width: 0;
     background: transparent;
+  }
+
+  p:first-of-type {
+    margin-top: 0;
+    padding-top: 72px;
+  }
+  p:last-of-type {
+    margin-bottom: 0;
+    padding-bottom: 60px;
   }
 `;
 
@@ -92,18 +102,8 @@ export function ZoomableArticle(props) {
       <Article isZoomed={isZoomed} scale={currentScale} x={currentX}>
         <img ref={imageRef} src={props.image} />
         <ArticleContentContainer>
-          <ArticleCloseButtonDesktop
-            ariaLabel='Close'
-            type='button'
-            onClick={() => setisZoomed(!isZoomed)}
-            isZoomed={isZoomed}
-          >
-            <CloseIcon />
-          </ArticleCloseButtonDesktop>
           <div
             style={{
-              paddingTop: 154,
-              paddingBottom: 60,
               position: "relative",
             }}
           >
@@ -114,6 +114,9 @@ export function ZoomableArticle(props) {
             <ArticleOverlay
               style={{
                 position: "absolute",
+                marginLeft: "auto",
+                marginRight: "auto",
+                width: "50vw",
               }}
               isZoomed={isZoomed}
             />
@@ -129,6 +132,20 @@ export function ZoomableArticle(props) {
         <strong>{props.label.desktop}</strong>
         <time>{props.timestamp}</time>
       </ArticleOpenButton>
+      <ArticleCloseButtonDesktop
+        ariaLabel='Close'
+        type='button'
+        onClick={() => setisZoomed(!isZoomed)}
+        isZoomed={isZoomed}
+        style={{
+          margin: 0,
+          marginTop: 16,
+          right: 16,
+          minWidth: 36,
+        }}
+      >
+        <CloseIcon />
+      </ArticleCloseButtonDesktop>
     </ArticleContainerDesktop>
   );
 }
