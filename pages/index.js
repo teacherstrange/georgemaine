@@ -36,7 +36,12 @@ export default function Home() {
       }}
     >
       <Header>
-        <img width={120} src='/images/memoji.png' alt='Memoji portait of me' />
+        <img
+          width={120}
+          height={120}
+          src='/images/memoji.png'
+          alt='Memoji portait of me'
+        />
         <Manifesto>
           Hi, I’m Georgemaine—A product designer currently working on{" "}
           <Link
@@ -59,9 +64,7 @@ export default function Home() {
         <Headline>Work</Headline>
         <SmallGallery />
         <LargeGallery />
-      </Section>
-      <Separator />
-      <section>
+        <Separator />
         <SectionHeadline>Writing</SectionHeadline>
         <ZoomableArticleMobile {...SuntoryTokiReview}>
           <ArticleText>
@@ -185,7 +188,7 @@ export default function Home() {
             you feel it's stupid, that's fine—sometimes the feeling is mutual.
           </ArticleText>
         </ZoomableArticle>
-      </section>
+      </Section>
     </main>
   );
 }
