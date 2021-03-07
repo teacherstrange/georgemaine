@@ -84,8 +84,11 @@ export const ApplePay = {
   galleryIndex: 3,
   width: 1920,
   height: 1080,
+  // FIXME: Improve the data structure
   smallWidth: 384,
   smallHeight: 216,
+  smallMobileWidth: 327,
+  smallMobileHeight: 184,
   scale: {
     initialMobile: 0.1640625,
     initial: 0.2,
@@ -103,8 +106,11 @@ export const Promo = {
   galleryIndex: 1,
   width: 1920,
   height: 1080,
+  // FIXME: Improve the data structure
   smallWidth: 384,
   smallHeight: 224,
+  smallMobileWidth: 327,
+  smallMobileHeight: 184,
   scale: {
     initialMobile: 0.1640625,
     initial: 0.2,

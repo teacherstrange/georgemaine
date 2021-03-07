@@ -43,10 +43,10 @@ export function ZoomableVideoMobile(props) {
     const container = {
       width: isZoomed
         ? screenWidth * props.scale.targetMobile
-        : props.smallWidth,
+        : props.smallMobileWidth,
       height: isZoomed
         ? screenHeight * props.scale.targetMobile
-        : props.smallHeight,
+        : props.smallMobileHeight,
     };
     const content = {
       width: props.width,
