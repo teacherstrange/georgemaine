@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import {
   SmallCaption,
@@ -229,7 +229,7 @@ export function Video(props) {
     seekBarThumb.style.left = currentPosition;
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     videoRef.current.removeAttribute("controls");
   }, []);
 

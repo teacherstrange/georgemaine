@@ -32,14 +32,18 @@ const smallBodyStyle = css`
 `;
 
 export const Manifesto = styled.h1`
-  ${smallTitleStyle}
   text-align: center;
   color: var(--headline);
   margin: 20px 0 24px;
 
-  @media (min-width: 540px) {
+  @media (max-width: 539px) {
+    ${smallTitleStyle}
+  }
+
+  @media (max-width: 1059px) {
     ${titleStyle}
   }
+
   @media (min-width: 1060px) {
     ${largeTitleStyle}
   }
@@ -47,7 +51,7 @@ export const Manifesto = styled.h1`
 
 export const Headline = styled.h2`
   ${smallTitleStyle}
-  margin-bottom: 12px;
+  margin-bottom: 30px;
   color: var(--headline);
 
   @media (min-width: 540px) {
@@ -56,7 +60,6 @@ export const Headline = styled.h2`
   @media (min-width: 1060px) {
     ${largeTitleStyle}
     width: 960px;
-    margin-bottom: 30px;
   }
 `;
 
@@ -134,7 +137,6 @@ export const Link = styled.a`
   line-height: inherit;
   text-decoration: none;
   display: inline-block;
-  transition: padding 0.15s ease, margin 0.15s ease, background-color 0.15s ease;
   border-radius: 16px;
 
   &:hover {

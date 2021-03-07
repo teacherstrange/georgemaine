@@ -81,7 +81,14 @@ export function ZoomableArticleMobile(props) {
 
   return (
     <ArticleContainer isZoomed={isZoomed} y={translateY} ref={articleRef}>
-      <Article isZoomed={isZoomed} scale={currentScale} x={currentX}>
+      <Article
+        style={{
+          height: "max-content",
+        }}
+        isZoomed={isZoomed}
+        scale={currentScale}
+        x={currentX}
+      >
         <ArticleCloseButton
           aria-label='Close'
           type='button'
@@ -95,7 +102,12 @@ export function ZoomableArticleMobile(props) {
           <time>{props.timestamp}</time>
         </ArticleText>
         {props.children}
-        <ArticleOverlay isZoomed={isZoomed} />
+        <ArticleOverlay
+          style={{
+            minHeight: "initial",
+          }}
+          isZoomed={isZoomed}
+        />
       </Article>
       <ArticleOpenButton
         aria-label='Open'

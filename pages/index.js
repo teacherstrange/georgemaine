@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import {
   Manifesto,
   Link,
@@ -15,17 +14,6 @@ import {
   ArticleText,
 } from "../mamba/index.js";
 import { HelloWorld, SuntoryTokiReview } from "../data";
-
-const SectionHeadline = styled(Headline)`
-  margin-left: auto;
-  margin-right: auto;
-  width: 960px;
-
-  @media (max-width: 959px) {
-    max-width: 414px;
-    width: calc(100% - 60px);
-  }
-`;
 
 export default function Home() {
   return (
@@ -65,7 +53,7 @@ export default function Home() {
         <SmallGallery />
         <LargeGallery />
         <Separator />
-        <SectionHeadline>Writing</SectionHeadline>
+        <Headline>Writing</Headline>
         <ZoomableArticleMobile {...SuntoryTokiReview}>
           <ArticleText>
             <strong>Suntory Toki review.</strong> Suntory is a Whiskey
