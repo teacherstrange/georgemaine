@@ -85,6 +85,22 @@ export default function Home() {
             makes Japanese whiskey remarkable. It’s earned a place as one of my
             favorites in the collection.
           </ArticleText>
+          <ArticleText
+            style={{
+              color: "var(--headline)",
+            }}
+          >
+            Website
+            <br />
+            <Link
+              target='_blank'
+              rel='noopener noreferrer'
+              href='https://www.whiskybase.com/whiskies/whisky/112631/suntory-toki'
+              style={{ color: "var(--red)" }}
+            >
+              Whiskybase.com/whisky/Suntory-Toki ↗
+            </Link>
+          </ArticleText>
         </ZoomableArticleMobile>
         <ZoomableArticle {...SuntoryTokiReview}>
           <ArticleText>
@@ -116,6 +132,22 @@ export default function Home() {
             Sun Tory Toki is simple and harmonious and a great example of what
             makes Japanese whiskey remarkable. It’s earned a place as one of my
             favorites in the collection.
+          </ArticleText>
+          <ArticleText
+            style={{
+              color: "var(--headline)",
+            }}
+          >
+            Website
+            <br />
+            <Link
+              target='_blank'
+              rel='noopener noreferrer'
+              href='https://www.whiskybase.com/whiskies/whisky/112631/suntory-toki'
+              style={{ color: "var(--red)" }}
+            >
+              Whiskybase.com/whisky/Suntory-Toki ↗
+            </Link>
           </ArticleText>
         </ZoomableArticle>
         <ZoomableArticleMobile {...HelloWorld}>
