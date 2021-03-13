@@ -3,11 +3,11 @@ import styled, { css } from "styled-components";
 export const Header = styled.header`
   text-align: center;
   margin: 120px auto 0;
-  width: calc(100% - 60px);
+  width: 86%;
   max-width: 414px;
 
   @media (min-width: 1060px) {
-    width: calc(100% -100px);
+    width: calc(100% - 100px);
     max-width: 960px;
   }
 `;
@@ -17,8 +17,7 @@ export const Section = styled.section`
   width: 960px;
 
   @media (max-width: 1059px) {
-    width: calc(100% - 60px);
-    max-width: 414px;
+    width: 100%;
     margin: 44px auto;
   }
 `;
@@ -67,7 +66,7 @@ export const Separator = styled.div`
   width: 960px;
 
   @media (max-width: 1059px) {
-    width: calc(100% - 60px);
+    width: 86%;
     max-width: 414px;
     margin: 44px auto;
   }
@@ -93,6 +92,10 @@ export const ArticleContainer = styled.div`
         opacity: 1;
         transition: opacity 0.37s cubic-bezier(0.52, 0.16, 0.24, 1) 0.37s;
       `}
+  }
+
+  @media (max-width: 414px) {
+    padding: 0 7%;
   }
 
   @media (min-width: 1060px) {

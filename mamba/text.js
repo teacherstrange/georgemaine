@@ -50,16 +50,20 @@ export const Manifesto = styled.h1`
 `;
 
 export const Headline = styled.h2`
-  ${smallTitleStyle}
-  margin-bottom: 30px;
+  ${titleStyle}
+  margin: 0 auto 30px;
   color: var(--headline);
+  max-width: 414px;
 
-  @media (min-width: 540px) {
-    ${titleStyle}
+  @media (max-width: 539px) {
+    padding: 0 7%;
+    ${smallTitleStyle}
   }
+
   @media (min-width: 1060px) {
     ${largeTitleStyle}
     width: 960px;
+    max-width: unset;
   }
 `;
 
