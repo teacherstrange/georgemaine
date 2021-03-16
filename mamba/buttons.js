@@ -93,7 +93,7 @@ export const PreviousButton = styled.button`
   ${baseStyle}
   position: absolute;
   top: calc(${imageHeight}px / 2 - 20px);
-  left: 7%;
+  left: -7%;
   height: 52px;
   width: 52px;
   border-radius: 32px;
@@ -120,7 +120,7 @@ export const PreviousButton = styled.button`
     }
   }
 
-  @media (min-width: 414px) {
+  @media (max-width: 1059px) {
     left: calc((100vw - 414px) / 2 - 44px);
   }
 `;
@@ -129,7 +129,7 @@ export const NextButton = styled.button`
   ${baseStyle}
   position: absolute;
   top: calc(${imageHeight}px / 2 - 20px);
-  right: 7%;
+  right: -7%;
   height: 52px;
   width: 52px;
   border-radius: 32px;
@@ -156,7 +156,7 @@ export const NextButton = styled.button`
     }
   }
 
-  @media (min-width: 414px) {
+  @media (max-width: 1059px) {
     right: calc((100vw - 414px) / 2 - 44px);
   }
 `;

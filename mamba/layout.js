@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const Header = styled.header`
   text-align: center;
-  margin: 120px auto 0;
+  margin: 90px auto 0;
   width: 86%;
   max-width: 414px;
 

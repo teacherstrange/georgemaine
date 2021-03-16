@@ -33,7 +33,6 @@ export default class MyDocument extends Document {
     return (
       <Html lang='en'>
         <Head>
-          <meta name='viewport' content='width=device-width, initial-scale=1' />
           <meta charSet='utf-8' />
           <meta property='og:type' content='website' />
           <meta name='description'></meta>
@@ -69,7 +68,7 @@ export default class MyDocument extends Document {
           />
           <meta name='twitter:creator' content='@georgemaine' key='twhandle' />
           <meta name='twitter:site' content='@georgemaine' key='twhandle' />
-          <title>Georgemaine Lourens</title>
+
           <link rel='icon' type='image/svg+xml' href='/fav-icon.svg' />
           <link rel='apple-touch-icon' href='/fav-icon.png' />
           <link rel='mask-icon' href='/fav-icon.svg' color='#8A8A8E' />
