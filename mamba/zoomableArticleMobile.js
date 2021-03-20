@@ -71,8 +71,45 @@ export function ZoomableArticleMobile(props) {
   }, [isZoomed]);
 
   useEffect(() => {
-    console.log("Hello");
+    const image = imageRef.current;
+    const screenHeight = window.innerHeight;
+    const screenWidth = window.innerWidth;
+    const mobileScreen = window.matchMedia("(max-width: 768px)");
+    const desktopScreen = window.matchMedia("(min-width: 1060px)");
+    const thumbnailScale = mobileScreen.matches
+      ? screenHeight / 2 / props.height
+      : desktopScreen.matches
+      ? screenHeight / props.height
+      : 530 / props.height;
+
+    const content = {
+      width: props.width * thumbnailScale,
+      height: props.height * thumbnailScale,
+    };
+    image.width = content.width;
+    image.height = content.height;
+
+    const container = {
+      width: isZoomed
+        ? screenWidth * 1
+        : desktopScreen.matches
+        ? 300
+        : props.smallWidth,
+      height: isZoomed
+        ? mobileScreen.matches
+          ? screenWidth * 0.5
+          : desktopScreen.matches
+          ? screenHeight
+          : 530
+        : desktopScreen.matches
+        ? 150
+        : props.smallHeight,
+    };
+    console.log("Container:", container);
+    // Calculate scale
+    const scale = calculateScale(container, content);
     const dismissModal = () => {
+      setCurrentScale(scale);
       setisZoomed(false);
     };
 
