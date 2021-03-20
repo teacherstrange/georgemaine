@@ -23,12 +23,12 @@ export function ZoomableArticleMobile(props) {
     const screenHeight = window.innerHeight;
     const screenWidth = window.innerWidth;
     const mobileScreen = window.matchMedia("(max-width: 768px)");
-    const desktopScreen = window.matchMedia("(min-width: 961px)");
+    const desktopScreen = window.matchMedia("(min-width: 1060px)");
     const thumbnailScale = mobileScreen.matches
       ? screenHeight / 2 / props.height
       : desktopScreen.matches
       ? screenHeight / props.height
-      : 480 / props.height;
+      : 530 / props.height;
 
     const content = {
       width: props.width * thumbnailScale,
@@ -48,7 +48,7 @@ export function ZoomableArticleMobile(props) {
           ? screenHeight * 0.5
           : desktopScreen.matches
           ? screenHeight
-          : 480
+          : 530
         : desktopScreen.matches
         ? 150
         : props.smallHeight,
@@ -71,6 +71,7 @@ export function ZoomableArticleMobile(props) {
   }, [isZoomed]);
 
   useEffect(() => {
+    console.log("Hello");
     const dismissModal = () => {
       setisZoomed(false);
     };

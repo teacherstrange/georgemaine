@@ -204,7 +204,8 @@ export const ArticleOpenButton = styled(OpenButton)`
   align-items: flex-start;
   text-align: left;
 
-  @media (max-width: 959px) {
+  @media (max-width: 1059px) {
+    padding-right: 0;
     max-width: 414px;
     width: calc(100vw - 60px);
     padding-left: 156px;

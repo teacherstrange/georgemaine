@@ -20,7 +20,7 @@ const smallTitleStyle = css`
 
 const bodyStyle = css`
   font-size: 1.7rem;
-  line-height: 2.4rem;
+  line-height: 2.2rem;
   letter-spacing: 0rem;
 `;
 
@@ -101,7 +101,7 @@ export const ArticleText = styled(Caption)`
   }
 
   @media (min-width: 1060px) {
-    width: 62.5%;
+    width: 72%;
 
     &:first-of-type {
       margin-top: 154px;

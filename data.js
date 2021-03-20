@@ -55,7 +55,7 @@ export const SuntoryTokiReview = {
   label: {
     mobile: "Suntory Toki review",
     desktop:
-      "Suntory Toki review. Suntory is a Whiskey Distillery founded in 1923 in Yamasaki, the oldest in the Japan. The founder—Shinjiro Torii—dreamt of creating a whiskey that one day...",
+      "Suntory is a whiskey distillery founded in 1923 in Yamasaki, the oldest in Japan. The founder—Shinjiro Torii—dreamt of creating a whiskey that one day...",
   },
   timestamp: "February 2, 2021",
 };

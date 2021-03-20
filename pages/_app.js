@@ -157,8 +157,8 @@ body {
   -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
   letter-spacing: -0.008rem;
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: 1.7rem;
+  line-height: 2.2rem;
   color: var(--caption);
 }
 
