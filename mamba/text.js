@@ -35,11 +35,11 @@ export const Manifesto = styled.h1`
     ${smallTitleStyle}
   }
 
-  @media (max-width: 1059px) {
+  @media (max-width: 1023px) {
     ${titleStyle}
   }
 
-  @media (min-width: 1060px) {
+  @media (min-width: 1024px) {
     ${largeTitleStyle}
   }
 `;
@@ -55,7 +55,7 @@ export const Headline = styled.h2`
     padding: 0 7%;
   }
 
-  @media (min-width: 1060px) {
+  @media (min-width: 1024px) {
     ${largeTitleStyle}
     width: 960px;
     max-width: unset;
@@ -64,7 +64,7 @@ export const Headline = styled.h2`
 
 export const Caption = styled.p`
   &:nth-child(2) {
-    margin-top: 24px;
+    margin-top: 2.2rem;
   }
 `;
 
@@ -76,13 +76,9 @@ export const SmallCaption = styled.p`
 export const ArticleText = styled(Caption)`
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 20px;
+  margin-bottom: 2.2rem;
   width: 86vw;
   opacity: 0;
-
-  strong {
-    font-weight: 600;
-  }
 
   &:last-of-type {
     margin-bottom: 60px;
@@ -96,7 +92,7 @@ export const ArticleText = styled(Caption)`
     width: 62.5vw;
   }
 
-  @media (min-width: 1060px) {
+  @media (min-width: 1024px) {
     width: 72%;
 
     &:first-of-type {
@@ -115,11 +111,6 @@ export const FigCaption = styled.p`
   user-select: none;
   transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
     opacity 0.229s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.03s;
-
-  strong,
-  a {
-    font-weight: 600;
-  }
 
   &.is-zoomed {
     opacity: 1;

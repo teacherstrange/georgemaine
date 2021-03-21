@@ -137,7 +137,11 @@ html {
 
 strong {
     color: var(--headline);
-  }
+}
+
+a, strong {
+  font-weight: 600;
+}
 
 body {
   font-family: TT Interphases, -system-ui, system-ui, sans-serif;

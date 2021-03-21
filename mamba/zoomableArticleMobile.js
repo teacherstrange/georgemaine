@@ -23,7 +23,7 @@ export function ZoomableArticleMobile(props) {
     const screenHeight = window.innerHeight;
     const screenWidth = window.innerWidth;
     const mobileScreen = window.matchMedia("(max-width: 768px)");
-    const desktopScreen = window.matchMedia("(min-width: 1060px)");
+    const desktopScreen = window.matchMedia("(min-width: 1024px)");
     const thumbnailScale = mobileScreen.matches
       ? screenHeight / 2 / props.height
       : desktopScreen.matches
@@ -75,7 +75,7 @@ export function ZoomableArticleMobile(props) {
     const screenHeight = window.innerHeight;
     const screenWidth = window.innerWidth;
     const mobileScreen = window.matchMedia("(max-width: 768px)");
-    const desktopScreen = window.matchMedia("(min-width: 1060px)");
+    const desktopScreen = window.matchMedia("(min-width: 1024px)");
     const thumbnailScale = mobileScreen.matches
       ? screenHeight / 2 / props.height
       : desktopScreen.matches

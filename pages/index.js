@@ -138,7 +138,7 @@ export default function Home() {
               color: "var(--headline)",
             }}
           >
-            Website
+            <strong>Website</strong>
             <br />
             <Link
               target='_blank'

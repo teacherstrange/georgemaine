@@ -16,7 +16,7 @@ const GallerySmall = styled.div`
   height: 314px;
   position: relative;
 
-  @media (min-width: 1060px) {
+  @media (min-width: 1024px) {
     display: none;
   }
 `;
@@ -27,7 +27,7 @@ const GalleryLarge = styled.div`
   transition: ${(props) =>
     props.isZoomed ? "z-index 0s 0s" : "z-index 0s 0.56s"};
 
-  @media (max-width: 1059px) {
+  @media (max-width: 1023px) {
     display: none;
   }
 `;

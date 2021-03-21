@@ -3,12 +3,11 @@ import styled, { css } from "styled-components";
 export const Header = styled.header`
   text-align: center;
   margin: 90px auto 0;
-  width: 86%;
-  max-width: 414px;
+  width: 960px;
 
-  @media (min-width: 1060px) {
-    width: calc(100% - 100px);
-    max-width: 960px;
+  @media (max-width: 1023px) {
+    width: 86%;
+    max-width: 414px;
   }
 `;
 
@@ -16,7 +15,7 @@ export const Section = styled.section`
   margin: 60px auto;
   width: 960px;
 
-  @media (max-width: 1059px) {
+  @media (max-width: 1023px) {
     width: 100%;
     margin: 44px auto;
   }
@@ -32,7 +31,7 @@ export const Container = styled.li`
   transition: z-index 0s ${(props) => (props.isZoomed ? 0 : 0.56)}s,
     opacity 0.3s ease 0.5s;
 
-  @media (max-width: 1059px) {
+  @media (max-width: 1023px) {
     min-width: 100%;
   }
 
@@ -65,7 +64,7 @@ export const Separator = styled.div`
   margin: 60px auto;
   width: 960px;
 
-  @media (max-width: 1059px) {
+  @media (max-width: 1023px) {
     width: 86%;
     max-width: 414px;
     margin: 44px auto;
@@ -98,7 +97,7 @@ export const ArticleContainer = styled.div`
     padding: 0 7%;
   }
 
-  @media (min-width: 1060px) {
+  @media (min-width: 1024px) {
     display: none;
   }
 `;
@@ -125,7 +124,7 @@ export const ArticleContainerDesktop = styled.div`
       `}
   }
 
-  @media (max-width: 1059px) {
+  @media (max-width: 1023px) {
     display: none;
   }
 `;

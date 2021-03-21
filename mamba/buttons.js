@@ -121,7 +121,7 @@ export const PreviousButton = styled.button`
     }
   }
 
-  @media (max-width: 1059px) {
+  @media (max-width: 1023px) {
     left: calc((100vw - 414px) / 2 - 44px);
   }
 `;
@@ -157,7 +157,7 @@ export const NextButton = styled.button`
     }
   }
 
-  @media (max-width: 1059px) {
+  @media (max-width: 1023px) {
     right: calc((100vw - 414px) / 2 - 44px);
   }
 `;
@@ -205,7 +205,7 @@ export const ArticleOpenButton = styled(OpenButton)`
   align-items: flex-start;
   text-align: left;
 
-  @media (max-width: 1059px) {
+  @media (max-width: 1023px) {
     padding-right: 0;
     max-width: 414px;
     width: 86vw;

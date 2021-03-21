@@ -36,7 +36,7 @@ const ArticleContentContainer = styled.div`
   }
   p:last-of-type {
     margin-bottom: 0;
-    padding-bottom: 60px;
+    padding-bottom: 28%;
   }
 `;
 
