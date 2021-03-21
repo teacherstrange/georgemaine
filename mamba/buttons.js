@@ -10,6 +10,7 @@ const baseStyle = css`
   outline: none;
   cursor: pointer;
   font: inherit;
+  font-weight: 600;
 
   &:active {
     transform: scale(0.9);

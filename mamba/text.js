@@ -18,12 +18,6 @@ const smallTitleStyle = css`
   letter-spacing: -0.043rem;
 `;
 
-const bodyStyle = css`
-  font-size: 1.7rem;
-  line-height: 2.2rem;
-  letter-spacing: 0.021rem;
-`;
-
 const smallBodyStyle = css`
   font-size: 1.3rem;
   line-height: 3.6rem;
@@ -32,6 +26,7 @@ const smallBodyStyle = css`
 `;
 
 export const Manifesto = styled.h1`
+  font-weight: 600;
   text-align: center;
   color: var(--headline);
   margin: 20px 0 24px;
@@ -50,6 +45,7 @@ export const Manifesto = styled.h1`
 `;
 
 export const Headline = styled.h2`
+  font-weight: 600;
   ${titleStyle}
   margin: 0 auto 30px;
   color: var(--headline);
@@ -67,8 +63,6 @@ export const Headline = styled.h2`
 `;
 
 export const Caption = styled.p`
-  ${bodyStyle}
-
   &:nth-child(2) {
     margin-top: 24px;
   }
@@ -80,12 +74,15 @@ export const SmallCaption = styled.p`
 `;
 
 export const ArticleText = styled(Caption)`
-  font-weight: 500;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px;
   width: 86vw;
   opacity: 0;
+
+  strong {
+    font-weight: 600;
+  }
 
   &:last-of-type {
     margin-bottom: 60px;
@@ -109,7 +106,6 @@ export const ArticleText = styled(Caption)`
 `;
 
 export const FigCaption = styled.p`
-  ${bodyStyle}
   width: 276px;
   position: absolute;
   transform-origin: center 0;
@@ -119,6 +115,11 @@ export const FigCaption = styled.p`
   user-select: none;
   transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1),
     opacity 0.229s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.03s;
+
+  strong,
+  a {
+    font-weight: 600;
+  }
 
   &.is-zoomed {
     opacity: 1;

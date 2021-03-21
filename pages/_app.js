@@ -141,7 +141,7 @@ strong {
 
 body {
   font-family: TT Interphases, -system-ui, system-ui, sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   font-style: normal;
   -webkit-font-kerning: normal;
   font-kerning: normal;
@@ -170,15 +170,6 @@ body {
   font-style: normal;
   src: url("/fonts/TypeType - TT Interphases Regular.woff") format("woff"),
     url("/fonts/TypeType - TT Interphases Regular.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: TT Interphases;
-  font-display: swap;
-  font-weight: 500;
-  font-style: normal;
-  src: url("/fonts/TypeType - TT Interphases Medium.woff") format("woff"),
-    url("/fonts/TypeType - TT Interphases Medium.woff2") format("woff2");
 }
 
 @font-face {
