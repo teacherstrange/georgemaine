@@ -21,7 +21,7 @@ const smallTitleStyle = css`
 const bodyStyle = css`
   font-size: 1.7rem;
   line-height: 2.2rem;
-  letter-spacing: 0rem;
+  letter-spacing: 0.021rem;
 `;
 
 const smallBodyStyle = css`
@@ -57,7 +57,6 @@ export const Headline = styled.h2`
 
   @media (max-width: 539px) {
     padding: 0 7%;
-    ${smallTitleStyle}
   }
 
   @media (min-width: 1060px) {
@@ -85,7 +84,7 @@ export const ArticleText = styled(Caption)`
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px;
-  width: 276px;
+  width: 86vw;
   opacity: 0;
 
   &:last-of-type {

@@ -207,8 +207,8 @@ export const ArticleOpenButton = styled(OpenButton)`
   @media (max-width: 1059px) {
     padding-right: 0;
     max-width: 414px;
-    width: calc(100vw - 60px);
-    padding-left: 156px;
+    width: 86vw;
+    padding-left: 193px;
   }
 `;
 

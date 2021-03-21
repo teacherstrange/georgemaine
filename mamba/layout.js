@@ -75,9 +75,9 @@ export const Separator = styled.div`
 export const ArticleContainer = styled.div`
   display: flex;
   padding: 0 calc((100vw - 414px) / 2);
-  height: ${(props) => (props.isZoomed ? "100vh" : "70px")};
+  height: ${(props) => (props.isZoomed ? "100vh" : "94px")};
   overflow: ${(props) => (props.isZoomed ? "hidden scroll" : "hidden")};
-  margin-bottom: 60px;
+  margin-bottom: 30px;
   transition-delay: 0s, 0.56s;
   transition: ${(props) =>
     props.isZoomed

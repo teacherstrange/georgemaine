@@ -156,7 +156,7 @@ body {
   -moz-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  letter-spacing: -0.008rem;
+  letter-spacing: 0.021rem;
   font-size: 1.7rem;
   line-height: 2.2rem;
   color: var(--caption);
