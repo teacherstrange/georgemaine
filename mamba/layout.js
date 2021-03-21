@@ -1,5 +1,7 @@
 import styled, { css } from "styled-components";
 
+const transformTransition = "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)";
+
 export const Header = styled.header`
   text-align: center;
   margin: 90px auto 0;
@@ -55,7 +57,7 @@ export const Tv = styled.div`
     ${(props) => props.tvY}
   );
   transform-origin: center 0;
-  transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
+  transition: ${transformTransition};
 `;
 
 export const Separator = styled.div`
@@ -80,8 +82,8 @@ export const ArticleContainer = styled.div`
   transition-delay: 0s, 0.56s;
   transition: ${(props) =>
     props.isZoomed
-      ? "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)"
-      : "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1), height 0s .56s"};
+      ? transformTransition
+      : `${transformTransition}, height 0s .56s`};
   transform: matrix(1, 0, 0, 1, 0, ${(props) => props.y});
 
   p {
@@ -111,8 +113,8 @@ export const ArticleContainerDesktop = styled.div`
   z-index: ${(props) => (props.isZoomed ? 99999 : 0)};
   transition: ${(props) =>
     props.isZoomed
-      ? "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1)"
-      : "transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1), height 0s .56s, z-index 0s 0.56s"};
+      ? transformTransition
+      : `${transformTransition}, height 0s .56s, z-index 0s 0.56s`};
   transform: matrix(1, 0, 0, 1, 0, ${(props) => props.y});
 
   p {
@@ -131,7 +133,7 @@ export const ArticleContainerDesktop = styled.div`
 
 export const Article = styled.article`
   transform-origin: 0 0;
-  transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
+  transition: ${transformTransition};
   transform: matrix(
     ${(props) => props.scale},
     0,
