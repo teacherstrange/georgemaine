@@ -12,12 +12,6 @@ const titleStyle = css`
   letter-spacing: -0.022rem;
 `;
 
-const smallTitleStyle = css`
-  font-size: 1.7rem;
-  line-height: 2.2rem;
-  letter-spacing: -0.043rem;
-`;
-
 const smallBodyStyle = css`
   font-size: 1.3rem;
   line-height: 3.6rem;
@@ -26,18 +20,11 @@ const smallBodyStyle = css`
 `;
 
 export const Manifesto = styled.h1`
+  ${titleStyle}
   font-weight: 600;
   text-align: center;
   color: var(--headline);
-  margin: 20px 0 24px;
-
-  @media (max-width: 539px) {
-    ${smallTitleStyle}
-  }
-
-  @media (max-width: 1023px) {
-    ${titleStyle}
-  }
+  margin: 2.2rem 0 2.6rem;
 
   @media (min-width: 1024px) {
     ${largeTitleStyle}
@@ -45,8 +32,8 @@ export const Manifesto = styled.h1`
 `;
 
 export const Headline = styled.h2`
-  font-weight: 600;
   ${titleStyle}
+  font-weight: 600;
   margin: 0 auto 30px;
   color: var(--headline);
   max-width: 414px;
@@ -62,31 +49,17 @@ export const Headline = styled.h2`
   }
 `;
 
-export const Caption = styled.p`
-  &:nth-child(2) {
-    margin-top: 2.2rem;
-  }
-`;
-
 export const SmallCaption = styled.p`
   ${smallBodyStyle}
   color: var(--white);
 `;
 
-export const ArticleText = styled(Caption)`
+export const ArticleText = styled.p`
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 2.2rem;
   width: 86vw;
   opacity: 0;
-
-  &:last-of-type {
-    margin-bottom: 60px;
-  }
-
-  &:first-of-type {
-    margin-top: 30px;
-  }
 
   @media (min-width: 540px) {
     width: 62.5vw;
