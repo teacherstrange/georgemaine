@@ -61,6 +61,10 @@ export const ArticleText = styled.p`
   width: 86vw;
   opacity: 0;
 
+  &:first-of-type {
+    margin-top: 2.2rem;
+  }
+
   @media (min-width: 540px) {
     width: 62.5vw;
   }
