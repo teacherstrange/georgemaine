@@ -1,5 +1,5 @@
 {
-  "name": "with-route-as-modal",
+  "name": "project-blog-with-routes",
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
@@ -8,9 +8,8 @@
   },
   "dependencies": {
     "next": "latest",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-modal": "3.11.2"
+    "react": "latest",
+    "react-dom": "16.13.1"
   },
   "license": "MIT"
 }
