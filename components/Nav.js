@@ -13,8 +13,8 @@ const slides = [
 ];
 
 const posts = [
-  { id: "Hello world", url: "hello_world", width: 123, x: 0 },
-  { id: "Suntory Toki review", url: "suntory_toki_review", width: 188, x: 123 },
+  { id: "Hello world", url: "hello_world", width: 122, x: 0 },
+  { id: "Suntory Toki review", url: "suntory_toki_review", width: 185, x: 122 },
 ];
 
 export default function Nav({
