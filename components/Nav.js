@@ -45,7 +45,11 @@ export default function Nav({
         </a>
       </Link>
       <div className={styles.filtersContainer}>
-        <nav className={styles.filters}>
+        <nav
+          className={`${styles.filters} ${
+            filterId === "slides" && styles.workFiltersExpanded
+          }`}
+        >
           {filterId === "posts" ? (
             <button
               className={styles.buttonLink}
@@ -74,7 +78,11 @@ export default function Nav({
             ></div>
           ) : null}
         </nav>
-        <nav className={styles.filters}>
+        <nav
+          className={`${styles.filters} ${
+            filterId === "posts" && styles.articleFiltersExpanded
+          }`}
+        >
           {filterId === "slides" ? (
             <button
               className={styles.buttonLink}

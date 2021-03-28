@@ -72,6 +72,16 @@
   justify-content: space-between;
 }
 
+@keyframes openFilter {
+  0% {
+    max-width: 3.6rem;
+  }
+
+  100% {
+    max-width: 60rem;
+  }
+}
+
 .filters {
   background: var(--container);
   display: flex;
@@ -80,6 +90,14 @@
   padding: 0.3rem;
   position: relative;
   overflow: hidden;
+}
+
+.workFiltersExpanded {
+  animation: openFilter 0.6s ease 1 forwards;
+}
+
+.articleFiltersExpanded {
+  animation: openFilter 0.95s ease 1 forwards;
 }
 
 .filter {
@@ -99,6 +117,7 @@
   margin: 0;
   position: relative;
   z-index: 2;
+  white-space: nowrap;
 }
 
 .filterSelection {
