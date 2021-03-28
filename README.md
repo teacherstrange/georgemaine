@@ -1,23 +1,15 @@
-# with-route-as-modal
+# georgemaine.com
 
-On many popular social media, opening a post will update the URL but won't trigger a navigation and will instead display the content inside a modal. This behavior ensures the user won't lose the current UI context (scroll position). The URL still reflect the post's actual page location and any refresh will bring the user there. This behavior ensures great UX without neglecting SEO.
+This repo contains the source code for [georgemaine.com](https://georgemaine.com)—my personal website and notebook. It's built in Next.js, if you have any questions or feedback—reach out on [Twitter](https://www.twitter.com/georgemaine).
 
-This example shows how to conditionally display a modal based on a route.
+## Local development
 
-## Deploy your own
+```shell
+git clone https://github.com/georgemaine/georgemaine.git
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+cd georgemaine
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-route-as-modal&project-name=with-route-as-modal&repository-name=with-route-as-modal)
+yarn
 
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-route-as-modal with-route-as-modal-app
-# or
-yarn create next-app --example with-route-as-modal with-route-as-modal-app
+yarn start
 ```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
