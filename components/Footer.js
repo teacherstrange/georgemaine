@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 // FIXME: Is this the right position for these objects
 
@@ -16,20 +15,19 @@ export default function Footer({
 }) {
   const router = useRouter();
 
-  const [navOffset, setNavOffset] = useState(0);
-
-  const mobileRef = useRef(null);
-  const videoRef = useRef(null);
-  const checkoutRef = useRef(null);
-  const applePayRef = useRef(null);
-  const helloWorldRef = useRef(null);
-  const suntoryTokiRef = useRef(null);
-
   const slides = [
-    { id: "Mollie Mobile", width: 137, x: 0, ref: mobileRef },
-    { id: "Mollie Video", width: 130, x: 137, ref: videoRef },
-    { id: "Mollie Checkout", width: 160, x: 267, ref: checkoutRef },
-    { id: "Mollie Apple Pay", width: 163, x: 427, ref: applePayRef },
+    { id: "Mollie Mobile", width: 137, x: 0 },
+    { id: "Mollie Video", width: 130, x: 137 },
+    {
+      id: "Mollie Checkout",
+      width: 160,
+      x: 267,
+    },
+    {
+      id: "Mollie Apple Pay",
+      width: 163,
+      x: 427,
+    },
   ];
 
   const posts = [
@@ -38,14 +36,12 @@ export default function Footer({
       url: "hello_world",
       width: 122,
       x: 0,
-      ref: helloWorldRef,
     },
     {
       id: "Suntory Toki review",
       url: "suntory_toki_review",
       width: 185,
       x: 122,
-      ref: suntoryTokiRef,
     },
   ];
 
@@ -53,7 +49,7 @@ export default function Footer({
   const selectedPost = posts.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
 
   return (
-    <footer className={styles.footer} onScroll={() => console.log("Scrolling")}>
+    <footer className={styles.footer}>
       <div className={styles.filtersContainer}>
         <nav
           className={`${styles.mobileFilters} ${
@@ -68,19 +64,28 @@ export default function Footer({
               Work
             </button>
           ) : (
-            slides.map((slide, index) => (
-              <button
-                className={styles.filter}
-                ref={slide.ref}
-                onClick={() => (
-                  setSlideId(slide.id),
-                  console.log(slide.ref.current.getBoundingClientRect())
-                )}
-                key={index}
-              >
-                {slide.id}
-              </button>
-            ))
+            slides.map((slide, index) => {
+              const ref = useRef();
+
+              return (
+                <button
+                  className={styles.filter}
+                  ref={ref}
+                  onClick={() => (
+                    setSlideId(slide.id),
+                    setTimeout(() => {
+                      ref.current.scrollIntoView({
+                        behavior: "smooth",
+                        inline: "center",
+                      });
+                    }, 1000)
+                  )}
+                  key={index}
+                >
+                  {slide.id}
+                </button>
+              );
+            })
           )}
           {filterId == "slides" ? (
             <div
@@ -105,20 +110,33 @@ export default function Footer({
               Articles
             </button>
           ) : (
-            posts.map((post, index) => (
-              <Link
-                key={index}
-                href={`/?postId=${post.url}`}
-                as={`/post/${post.url}`}
-              >
-                <button
-                  onClick={() => setPostId(post.id)}
-                  className={styles.filter}
+            posts.map((post, index) => {
+              const ref = useRef();
+
+              return (
+                <Link
+                  key={index}
+                  href={`/?postId=${post.url}`}
+                  as={`/post/${post.url}`}
                 >
-                  {post.id}
-                </button>
-              </Link>
-            ))
+                  <button
+                    ref={ref}
+                    onClick={() => (
+                      setPostId(post.id),
+                      setTimeout(() => {
+                        ref.current.scrollIntoView({
+                          behavior: "smooth",
+                          inline: "center",
+                        });
+                      }, 1000)
+                    )}
+                    className={styles.filter}
+                  >
+                    {post.id}
+                  </button>
+                </Link>
+              );
+            })
           )}
           {filterId == "posts" ? (
             <div
