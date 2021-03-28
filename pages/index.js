@@ -1,25 +1,23 @@
-import { useRouter } from 'next/router'
-import Modal from 'react-modal'
-import Post from '../components/Post'
-import Grid from '../components/Grid'
-
-Modal.setAppElement('#__next')
+import { useRouter } from "next/router";
+import Post from "../components/Post";
+import Nav from "../components/Nav";
+import { useState } from "react";
 
 const Index = () => {
-  const router = useRouter()
+  const router = useRouter();
+  const [filter, expandFilter] = useState("slides"); // FIXME: Better naming
 
   return (
     <>
-      <Modal
-        isOpen={!!router.query.postId}
-        onRequestClose={() => router.push('/')}
-        contentLabel="Post modal"
-      >
+      {filter === "posts" ? (
         <Post id={router.query.postId} pathname={router.pathname} />
-      </Modal>
-      <Grid />
+      ) : filter === "slides" ? (
+        <div>Slides tab</div>
+      ) : null}
+      {/* // FIXME: find alternative to null */}
+      <Nav expandedFilter={filter} filterOnClick={expandFilter} />
     </>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;
