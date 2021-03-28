@@ -29,3 +29,81 @@
   align-items: center;
   justify-content: center;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 4%;
+  padding: 0 4%;
+  width: 92%;
+}
+
+.buttonLink {
+  font-size: 1.7rem;
+  line-height: 2.2rem;
+  letter-spacing: -0.023rem;
+  font-weight: 600;
+  color: var(--headline);
+  text-decoration: none;
+  padding: 0.6rem 1.8rem;
+  border-radius: 3rem;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.buttonLink:hover {
+  cursor: pointer;
+}
+
+.buttonLinkIcon {
+  padding: 0 0.2rem 0 0;
+}
+
+.filtersContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filters {
+  background: var(--container);
+  display: flex;
+  margin: 0 0.6rem;
+  border-radius: 3rem;
+  padding: 0.3rem;
+  position: relative;
+}
+
+.filter {
+  font-size: 1.7rem;
+  line-height: 2.2rem;
+  letter-spacing: -0.023rem;
+  font-weight: 600;
+  color: var(--headline);
+  text-decoration: none;
+  padding: 0.6rem 1.8rem;
+  border-radius: 3rem;
+  background: none;
+  border: none;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.filterSelection {
+  position: absolute;
+  border-radius: 3rem;
+  height: 3.4rem;
+  transition: 300ms;
+  background: var(--white);
+  z-index: 1;
+  left: 0.3rem;
+  top: 0.3rem;
+}
