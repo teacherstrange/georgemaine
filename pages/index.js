@@ -1,21 +1,27 @@
 import { useRouter } from "next/router";
 import Post from "../components/Post";
+import Slide from "../components/Slide";
 import Nav from "../components/Nav";
 import { useState } from "react";
 
 const Index = () => {
   const router = useRouter();
-  const [filter, expandFilter] = useState("slides"); // FIXME: Better naming
+  const [filterId, setFilterId] = useState("slides"); // FIXME: Better naming
+  const [slideId, setSlideId] = useState("Mollie Mobile");
 
   return (
     <>
-      {filter === "posts" ? (
+      {filterId === "posts" ? (
         <Post id={router.query.postId} pathname={router.pathname} />
-      ) : filter === "slides" ? (
-        <div>Slides tab</div>
+      ) : filterId === "slides" ? (
+        <Slide id={slideId} />
       ) : null}
       {/* // FIXME: find alternative to null */}
-      <Nav expandedFilter={filter} filterOnClick={expandFilter} />
+      <Nav
+        filterId={filterId}
+        setFilterId={setFilterId}
+        setSlideId={setSlideId}
+      />
     </>
   );
 };

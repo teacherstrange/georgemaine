@@ -1,13 +1,11 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import styles from "./styles.module.css";
 
 export const slides = [
-  { name: "Mollie Mobile", url: "mollie_mobile" },
-  { name: "Mollie Video", url: "mollie_video" },
-  { name: "Mollie Checkout", url: "mollie_checkout" },
-  { name: "Mollie Apple Pay", url: "mollie_apple_pay" },
+  { id: "Mollie Mobile" },
+  { id: "Mollie Video" },
+  { id: "Mollie Checkout" },
+  { id: "Mollie Apple Pay" },
 ];
 
 export const posts = [
@@ -15,7 +13,7 @@ export const posts = [
   { name: "Suntory Toki review", url: "suntory_toki_review" },
 ];
 
-export default function Nav({ filterOnClick, expandedFilter }) {
+export default function Nav({ setFilterId, filterId, setSlideId }) {
   const router = useRouter();
 
   return (
@@ -23,16 +21,18 @@ export default function Nav({ filterOnClick, expandedFilter }) {
       <Link href={"/"}>Georgemaine</Link>
       <div>
         <ul>
-          {slides.map((workItem, index) => (
+          {slides.map((slide, index) => (
             <li
               onClick={() =>
-                expandedFilter === "posts" // Better naming
-                  ? (router.push("/"), filterOnClick("slides"))
-                  : null
+                filterId === "posts" // Better naming
+                  ? (router.push("/"),
+                    setFilterId("slides"),
+                    setSlideId(slide.id))
+                  : setSlideId(slide.id)
               }
               key={index}
             >
-              {workItem.name}
+              {slide.id}
             </li>
           ))}
         </ul>
@@ -43,7 +43,7 @@ export default function Nav({ filterOnClick, expandedFilter }) {
               href={`/?postId=${post.url}`}
               as={`/post/${post.url}`}
             >
-              <li onClick={() => filterOnClick("posts")}>{post.name}</li>
+              <li onClick={() => setFilterId("posts")}>{post.name}</li>
             </Link>
           ))}
         </ul>
