@@ -9,8 +9,8 @@ export const slides = [
 ];
 
 export const posts = [
-  { name: "Hello world", url: "hello_world" },
-  { name: "Suntory Toki review", url: "suntory_toki_review" },
+  { id: "Hello world", url: "hello_world" },
+  { id: "Suntory Toki review", url: "suntory_toki_review" },
 ];
 
 export default function Nav({ setFilterId, filterId, setSlideId }) {
@@ -20,33 +20,34 @@ export default function Nav({ setFilterId, filterId, setSlideId }) {
     <nav>
       <Link href={"/"}>Georgemaine</Link>
       <div>
-        <ul>
-          {slides.map((slide, index) => (
-            <li
-              onClick={() =>
-                filterId === "posts" // Better naming
-                  ? (router.push("/"),
-                    setFilterId("slides"),
-                    setSlideId(slide.id))
-                  : setSlideId(slide.id)
-              }
-              key={index}
-            >
-              {slide.id}
-            </li>
-          ))}
-        </ul>
-        <ul>
-          {posts.map((post, index) => (
-            <Link
-              key={index}
-              href={`/?postId=${post.url}`}
-              as={`/post/${post.url}`}
-            >
-              <li onClick={() => setFilterId("posts")}>{post.name}</li>
-            </Link>
-          ))}
-        </ul>
+        <div>
+          {filterId === "posts" ? (
+            <button onClick={() => (router.push("/"), setFilterId("slides"))}>
+              Work
+            </button>
+          ) : (
+            slides.map((slide, index) => (
+              <button onClick={() => setSlideId(slide.id)} key={index}>
+                {slide.id}
+              </button>
+            ))
+          )}
+        </div>
+        <div>
+          {filterId === "slides" ? (
+            <button onClick={() => setFilterId("posts")}>Articles</button>
+          ) : (
+            posts.map((post, index) => (
+              <Link
+                key={index}
+                href={`/?postId=${post.url}`}
+                as={`/post/${post.url}`}
+              >
+                <button>{post.id}</button>
+              </Link>
+            ))
+          )}
+        </div>
       </div>
       <button>Get in touch</button>
     </nav>
