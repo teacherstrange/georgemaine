@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Post from "../components/Post";
 import Slide from "../components/Slide";
 import Nav from "../components/Nav";
+import Footer from "../components/Footer";
 import { useState } from "react";
 
 const Index = () => {
@@ -13,6 +14,14 @@ const Index = () => {
   return (
     <>
       <Nav
+        filterId={filterId}
+        setFilterId={setFilterId}
+        slideId={slideId}
+        setSlideId={setSlideId}
+        postId={postId}
+        setPostId={setPostId}
+      />
+      <Footer
         filterId={filterId}
         setFilterId={setFilterId}
         slideId={slideId}

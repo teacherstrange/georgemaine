@@ -43,6 +43,35 @@
   margin-right: auto;
 }
 
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  height: 4rem;
+  bottom: 4%;
+  left: 0;
+  right: 0;
+  width: 94%;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: scroll;
+}
+
+.footer {
+  /*FireFox*/
+  scrollbar-width: none;
+  /*IE10+*/
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+.footer::-webkit-scrollbar {
+  /*Chrome, Safari, Edge*/
+  display: none;
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
+}
+
 .buttonLink {
   font-size: 1.7rem;
   line-height: 2.2rem;
@@ -83,6 +112,22 @@
 }
 
 .filters {
+  background: var(--container);
+  display: none;
+  margin: 0 0.6rem;
+  border-radius: 3rem;
+  padding: 0.3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 1112px) {
+  .filters {
+    display: flex;
+  }
+}
+
+.mobileFilters {
   background: var(--container);
   display: flex;
   margin: 0 0.6rem;

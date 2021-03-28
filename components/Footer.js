@@ -1,0 +1,136 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
+import styles from "./styles.module.css";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+
+// FIXME: Is this the right position for these objects
+
+export default function Footer({
+  slideId,
+  postId,
+  setPostId,
+  setFilterId,
+  filterId,
+  setSlideId,
+}) {
+  const router = useRouter();
+
+  const [navOffset, setNavOffset] = useState(0);
+
+  const mobileRef = useRef(null);
+  const videoRef = useRef(null);
+  const checkoutRef = useRef(null);
+  const applePayRef = useRef(null);
+  const helloWorldRef = useRef(null);
+  const suntoryTokiRef = useRef(null);
+
+  const slides = [
+    { id: "Mollie Mobile", width: 137, x: 0, ref: mobileRef },
+    { id: "Mollie Video", width: 130, x: 137, ref: videoRef },
+    { id: "Mollie Checkout", width: 160, x: 267, ref: checkoutRef },
+    { id: "Mollie Apple Pay", width: 163, x: 427, ref: applePayRef },
+  ];
+
+  const posts = [
+    {
+      id: "Hello world",
+      url: "hello_world",
+      width: 122,
+      x: 0,
+      ref: helloWorldRef,
+    },
+    {
+      id: "Suntory Toki review",
+      url: "suntory_toki_review",
+      width: 185,
+      x: 122,
+      ref: suntoryTokiRef,
+    },
+  ];
+
+  const selectedSlide = slides.findIndex((slide) => slide.id === slideId);
+  const selectedPost = posts.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
+
+  return (
+    <footer className={styles.footer} onScroll={() => console.log("Scrolling")}>
+      <div className={styles.filtersContainer}>
+        <nav
+          className={`${styles.mobileFilters} ${
+            filterId === "slides" && styles.workFiltersExpanded
+          }`}
+        >
+          {filterId === "posts" ? (
+            <button
+              className={styles.buttonLink}
+              onClick={() => (router.push("/"), setFilterId("slides"))}
+            >
+              Work
+            </button>
+          ) : (
+            slides.map((slide, index) => (
+              <button
+                className={styles.filter}
+                ref={slide.ref}
+                onClick={() => (
+                  setSlideId(slide.id),
+                  console.log(slide.ref.current.getBoundingClientRect())
+                )}
+                key={index}
+              >
+                {slide.id}
+              </button>
+            ))
+          )}
+          {filterId == "slides" ? (
+            <div
+              className={styles.filterSelection}
+              style={{
+                width: slides[selectedSlide].width,
+                transform: `translateX(${slides[selectedSlide].x}px)`,
+              }}
+            ></div>
+          ) : null}
+        </nav>
+        <nav
+          className={`${styles.mobileFilters} ${
+            filterId === "posts" && styles.articleFiltersExpanded
+          }`}
+        >
+          {filterId === "slides" ? (
+            <button
+              className={styles.buttonLink}
+              onClick={() => setFilterId("posts")}
+            >
+              Articles
+            </button>
+          ) : (
+            posts.map((post, index) => (
+              <Link
+                key={index}
+                href={`/?postId=${post.url}`}
+                as={`/post/${post.url}`}
+              >
+                <button
+                  onClick={() => setPostId(post.id)}
+                  className={styles.filter}
+                >
+                  {post.id}
+                </button>
+              </Link>
+            ))
+          )}
+          {filterId == "posts" ? (
+            <div
+              className={styles.filterSelection}
+              style={{
+                width: posts[selectedPost].width,
+                transform: `translateX(${posts[selectedPost].x}px)`,
+              }}
+            ></div>
+          ) : null}
+        </nav>
+      </div>
+    </footer>
+  );
+}
