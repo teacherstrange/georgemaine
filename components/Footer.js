@@ -1,8 +1,37 @@
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
-import { Filters, FilterLinks } from "../components/Filter";
+import { Filters, FilterLinks } from "./Filters";
 
 // FIXME: Is this the right position for these objects
+const slides = [
+  { id: "Mollie Mobile", width: 137, x: 0 },
+  { id: "Mollie Video", width: 130, x: 137 },
+  {
+    id: "Mollie Checkout",
+    width: 160,
+    x: 267,
+  },
+  {
+    id: "Mollie Apple Pay",
+    width: 163,
+    x: 427,
+  },
+];
+
+const posts = [
+  {
+    id: "Hello world",
+    url: "hello_world",
+    width: 122,
+    x: 0,
+  },
+  {
+    id: "Suntory Toki review",
+    url: "suntory_toki_review",
+    width: 185,
+    x: 122,
+  },
+];
 
 export default function Footer({
   slideId,
@@ -13,36 +42,6 @@ export default function Footer({
   setSlideId,
 }) {
   const router = useRouter();
-
-  const slides = [
-    { id: "Mollie Mobile", width: 137, x: 0 },
-    { id: "Mollie Video", width: 130, x: 137 },
-    {
-      id: "Mollie Checkout",
-      width: 160,
-      x: 267,
-    },
-    {
-      id: "Mollie Apple Pay",
-      width: 163,
-      x: 427,
-    },
-  ];
-
-  const posts = [
-    {
-      id: "Hello world",
-      url: "hello_world",
-      width: 122,
-      x: 0,
-    },
-    {
-      id: "Suntory Toki review",
-      url: "suntory_toki_review",
-      width: 185,
-      x: 122,
-    },
-  ];
 
   const selectedSlide = slides.findIndex((slide) => slide.id === slideId);
   const selectedPost = posts.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
