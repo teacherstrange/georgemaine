@@ -1,23 +1,43 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
-import Image from "next/image";
-import React from "react";
+import { Filters, FilterLinks } from "./Filters";
+import { useEffect } from "react";
+import scrollPolyfill from "scroll-polyfill";
+// FIXME: Polyfill belongs inside component
 
 // FIXME: Is this the right position for these objects
+// FIXME: Consolidate Footer & Nav objects
 const slides = [
   { id: "Mollie Mobile", width: 137, x: 0 },
   { id: "Mollie Video", width: 130, x: 137 },
-  { id: "Mollie Checkout", width: 160, x: 267 },
-  { id: "Mollie Apple Pay", width: 163, x: 427 },
+  {
+    id: "Mollie Checkout",
+    width: 160,
+    x: 267,
+  },
+  {
+    id: "Mollie Apple Pay",
+    width: 163,
+    x: 427,
+  },
 ];
 
 const posts = [
-  { id: "Hello world", url: "hello_world", width: 122, x: 0 },
-  { id: "Suntory Toki review", url: "suntory_toki_review", width: 185, x: 122 },
+  {
+    id: "Hello world",
+    url: "hello_world",
+    width: 122,
+    x: 0,
+  },
+  {
+    id: "Suntory Toki review",
+    url: "suntory_toki_review",
+    width: 185,
+    x: 122,
+  },
 ];
 
-export default function Nav({
+export default function Footer({
   slideId,
   postId,
   setPostId,
@@ -26,27 +46,19 @@ export default function Nav({
   setSlideId,
 }) {
   const router = useRouter();
+  // FIXME: Polyfill is not needed beyond 768px
+  useEffect(() => {
+    scrollPolyfill();
+  }, []);
+
   const selectedSlide = slides.findIndex((slide) => slide.id === slideId);
   const selectedPost = posts.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
 
   return (
-    <header className={styles.header}>
-      <Link href={"/"}>
-        <a className={styles.buttonLink}>
-          <Image
-            className={styles.buttonLinkIcon}
-            src='/images/memoji.jpg'
-            height={24}
-            width={24}
-            alt='Georgemaine Lourens'
-            // FIXME: Image doesn't have padding-right
-          />
-          Georgemaine
-        </a>
-      </Link>
+    <footer className={styles.footer}>
       <div className={styles.filtersContainer}>
         <nav
-          className={`${styles.filters} ${
+          className={`${styles.mobileFilters} ${
             filterId === "slides" && styles.workFiltersExpanded
           }`}
         >
@@ -58,16 +70,7 @@ export default function Nav({
               Work
             </button>
           ) : (
-            slides.map((slide, index) => (
-              // FIXME: Can we use components here?
-              <button
-                className={styles.filter}
-                onClick={() => setSlideId(slide.id)}
-                key={index}
-              >
-                {slide.id}
-              </button>
-            ))
+            <Filters array={slides} setId={setSlideId} />
           )}
           {filterId == "slides" ? (
             <div
@@ -80,7 +83,7 @@ export default function Nav({
           ) : null}
         </nav>
         <nav
-          className={`${styles.filters} ${
+          className={`${styles.mobileFilters} ${
             filterId === "posts" && styles.articleFiltersExpanded
           }`}
         >
@@ -92,21 +95,7 @@ export default function Nav({
               Articles
             </button>
           ) : (
-            posts.map((post, index) => (
-              // FIXME: Use components to create these
-              <Link
-                key={index}
-                href={`/?postId=${post.url}`}
-                as={`/post/${post.url}`}
-              >
-                <button
-                  onClick={() => setPostId(post.id)}
-                  className={styles.filter}
-                >
-                  {post.id}
-                </button>
-              </Link>
-            ))
+            <FilterLinks array={posts} setId={setPostId} />
           )}
           {filterId == "posts" ? (
             <div
@@ -119,7 +108,6 @@ export default function Nav({
           ) : null}
         </nav>
       </div>
-      <button>Get in touch</button>
-    </header>
+    </footer>
   );
 }
