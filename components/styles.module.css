@@ -121,12 +121,6 @@
   overflow: hidden;
 }
 
-@media (min-width: 1112px) {
-  .filters {
-    display: flex;
-  }
-}
-
 .mobileFilters {
   background: var(--container);
   display: flex;
@@ -174,4 +168,20 @@
   z-index: 1;
   left: 0.3rem;
   top: 0.3rem;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    overflow-x: initial;
+    justify-content: center;
+  }
+}
+@media (min-width: 1112px) {
+  .footer {
+    display: none;
+  }
+
+  .filters {
+    display: flex;
+  }
 }
