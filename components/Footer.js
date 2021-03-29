@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
+import smoothscroll from "smoothscroll-polyfill";
 import styles from "./styles.module.css";
 import { Filters, FilterLinks } from "./Filters";
+import { useEffect } from "react";
 
 // FIXME: Is this the right position for these objects
 const slides = [
@@ -42,6 +44,9 @@ export default function Footer({
   setSlideId,
 }) {
   const router = useRouter();
+  useEffect(() => {
+    smoothscroll.polyfill();
+  }, []);
 
   const selectedSlide = slides.findIndex((slide) => slide.id === slideId);
   const selectedPost = posts.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
