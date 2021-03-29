@@ -1,7 +1,6 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
-import { useRef } from "react";
+import { Filters, FilterLinks } from "../components/Filter";
 
 // FIXME: Is this the right position for these objects
 
@@ -64,28 +63,7 @@ export default function Footer({
               Work
             </button>
           ) : (
-            slides.map((slide, index) => {
-              const ref = useRef();
-
-              return (
-                <button
-                  className={styles.filter}
-                  ref={ref}
-                  onClick={() => (
-                    setSlideId(slide.id),
-                    setTimeout(() => {
-                      ref.current.scrollIntoView({
-                        behavior: "smooth",
-                        inline: "center",
-                      });
-                    }, 1000)
-                  )}
-                  key={index}
-                >
-                  {slide.id}
-                </button>
-              );
-            })
+            <Filters array={slides} setId={setSlideId} />
           )}
           {filterId == "slides" ? (
             <div
@@ -110,33 +88,7 @@ export default function Footer({
               Articles
             </button>
           ) : (
-            posts.map((post, index) => {
-              const ref = useRef();
-
-              return (
-                <Link
-                  key={index}
-                  href={`/?postId=${post.url}`}
-                  as={`/post/${post.url}`}
-                >
-                  <button
-                    ref={ref}
-                    onClick={() => (
-                      setPostId(post.id),
-                      setTimeout(() => {
-                        ref.current.scrollIntoView({
-                          behavior: "smooth",
-                          inline: "center",
-                        });
-                      }, 1000)
-                    )}
-                    className={styles.filter}
-                  >
-                    {post.id}
-                  </button>
-                </Link>
-              );
-            })
+            <FilterLinks array={posts} setId={setPostId} />
           )}
           {filterId == "posts" ? (
             <div
