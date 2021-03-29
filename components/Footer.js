@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
-import smoothscroll from "smoothscroll-polyfill";
 import styles from "./styles.module.css";
 import { Filters, FilterLinks } from "./Filters";
 import { useEffect } from "react";
+import { polyfill } from "seamless-scroll-polyfill";
 
 // FIXME: Is this the right position for these objects
 const slides = [
@@ -45,7 +45,7 @@ export default function Footer({
 }) {
   const router = useRouter();
   useEffect(() => {
-    smoothscroll.polyfill();
+    polyfill();
   }, []);
 
   const selectedSlide = slides.findIndex((slide) => slide.id === slideId);
