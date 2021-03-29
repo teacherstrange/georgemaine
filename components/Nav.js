@@ -59,6 +59,7 @@ export default function Nav({
             </button>
           ) : (
             slides.map((slide, index) => (
+              // FIXME: Can we use components here?
               <button
                 className={styles.filter}
                 onClick={() => setSlideId(slide.id)}
@@ -92,6 +93,7 @@ export default function Nav({
             </button>
           ) : (
             posts.map((post, index) => (
+              // FIXME: Use components to create these
               <Link
                 key={index}
                 href={`/?postId=${post.url}`}

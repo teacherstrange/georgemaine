@@ -3,8 +3,10 @@ import styles from "./styles.module.css";
 import { Filters, FilterLinks } from "./Filters";
 import { useEffect } from "react";
 import scrollPolyfill from "scroll-polyfill";
+// FIXME: Polyfill belongs inside component
 
 // FIXME: Is this the right position for these objects
+// FIXME: Consolidate Footer & Nav objects
 const slides = [
   { id: "Mollie Mobile", width: 137, x: 0 },
   { id: "Mollie Video", width: 130, x: 137 },
@@ -44,6 +46,7 @@ export default function Footer({
   setSlideId,
 }) {
   const router = useRouter();
+  // FIXME: Polyfill is not needed beyond 768px
   useEffect(() => {
     scrollPolyfill();
   }, []);

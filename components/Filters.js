@@ -2,6 +2,8 @@ import Link from "next/link";
 import styles from "./styles.module.css";
 import { useRef } from "react";
 
+// FIXME: Merge into one component
+
 export const Filters = ({ array, setId }) => (
   <>
     {array.map((object) => {
