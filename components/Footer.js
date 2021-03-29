@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import styles from "./styles.module.css";
 import { Filters, FilterLinks } from "./Filters";
 import { useEffect } from "react";
-import { polyfill } from "seamless-scroll-polyfill";
+import scrollPolyfill from "scroll-polyfill";
 
 // FIXME: Is this the right position for these objects
 const slides = [
@@ -45,7 +45,7 @@ export default function Footer({
 }) {
   const router = useRouter();
   useEffect(() => {
-    polyfill();
+    scrollPolyfill();
   }, []);
 
   const selectedSlide = slides.findIndex((slide) => slide.id === slideId);

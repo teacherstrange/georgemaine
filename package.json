@@ -10,7 +10,7 @@
     "next": "latest",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "seamless-scroll-polyfill": "^1.2.3"
+    "scroll-polyfill": "^0.1.1"
   },
   "license": "MIT"
 }

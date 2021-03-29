@@ -388,6 +388,11 @@ commondir@^1.0.1:
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
   integrity sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=
 
+compute-scroll-into-view@^1.0.13:
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/compute-scroll-into-view/-/compute-scroll-into-view-1.0.17.tgz#6a88f18acd9d42e9cf4baa6bec7e0522607ab7ab"
+  integrity sha512-j4dx+Fb0URmzbwwMUrhqWM2BEWHdFGx+qZ9qqASHRPqvTYdqvWnHg0H1hIbcyLnvgnoNAVMlwkepyqM3DaIFUg==
+
 console-browserify@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/console-browserify/-/console-browserify-1.2.0.tgz#67063cef57ceb6cf4993a2ab3a55840ae8c49336"
@@ -1262,10 +1267,13 @@ scheduler@^0.20.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
 
-seamless-scroll-polyfill@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/seamless-scroll-polyfill/-/seamless-scroll-polyfill-1.2.3.tgz#53d42d5b8c00db9c70dd4160c448469de36735b3"
-  integrity sha512-emnwZtu6NrlBlvT6HrlbAOs024JX4orWew8H5owBOyUJ7eFXn8lGe4bsXTBD6AAWzP/p7LL86AjVIH8Apqec5w==
+scroll-polyfill@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/scroll-polyfill/-/scroll-polyfill-0.1.1.tgz#161c7432e2b90a1d2db474546f1957564238ab87"
+  integrity sha512-hKVRau0NenvHRNYh0Yejdrrzdc7CE0wtNb7YSKMhoymsSh770weT16y4oMdRlU69Ih5jFtCVurMOVvCFt2Eu3w==
+  dependencies:
+    compute-scroll-into-view "^1.0.13"
+    wobble "^1.5.1"
 
 semver@^6.0.0:
   version "6.3.0"
@@ -1545,6 +1553,11 @@ whatwg-url@^7.0.0:
     lodash.sortby "^4.7.0"
     tr46 "^1.0.1"
     webidl-conversions "^4.0.2"
+
+wobble@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/wobble/-/wobble-1.5.1.tgz#2f2d50b6a54597eef765a688a9b9c56c87ecd606"
+  integrity sha512-vQD1uu0yXhZWfQJKVf2UVNb3AVnD0qXAbcIqG6Aw02ABLVm77xz6KcLuduWSwOiOMNh8TjZqouZsHTJWTdLwVQ==
 
 xtend@^4.0.0:
   version "4.0.2"
