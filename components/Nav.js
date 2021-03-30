@@ -162,7 +162,11 @@ export default function Nav({
               return (
                 <li key={index}>
                   <Link href={item.url}>
-                    <a target='_blank' rel='noreferrer'>
+                    <a
+                      target='_blank'
+                      rel='noreferrer'
+                      className={styles.menuItem}
+                    >
                       {item.id}
                     </a>
                   </Link>
