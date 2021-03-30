@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import React, { useState } from "react";
+import Icon from "./Icon";
 
 // FIXME: Is this the right position for these objects
 const slides = [
@@ -27,16 +28,16 @@ const links = [
     url: "https://twitter.com/georgemaine",
   },
   {
+    id: "Dribbble",
+    url: "https://dribbble.com/georgemaine",
+  },
+  {
     id: "Github",
     url: "https://github.com/georgemaine",
   },
   {
     id: "LinkedIn",
-    url: "www.linkedin.com/in/georgemaine",
-  },
-  {
-    id: "Dribbble",
-    url: "https://dribbble.com/georgemaine",
+    url: "www.linkedin.com/in/georgemaine", // FIXME: Broken link
   },
 ];
 
@@ -143,7 +144,12 @@ export default function Nav({
           ) : null}
         </nav>
       </div>
-      <button onClick={() => setMenuVisible(!menuVisible)}>Get in touch</button>
+      <button
+        className={styles.button}
+        onClick={() => setMenuVisible(!menuVisible)}
+      >
+        Get in touch
+      </button>
       {!!menuVisible && (
         <>
           <div
@@ -167,7 +173,8 @@ export default function Nav({
                       rel='noreferrer'
                       className={styles.menuItem}
                     >
-                      {item.id}
+                      <span>{item.id}</span>
+                      <Icon string={item.id} />
                     </a>
                   </Link>
                 </li>
