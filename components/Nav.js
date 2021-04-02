@@ -11,7 +11,7 @@ const slides = [
     id: "Mollie Mobile",
     caption:
       "Designed apps for iOS, Android and developed the landing page • 2020",
-    width: 137,
+    width: 138,
     x: 0,
   },
   {
@@ -19,27 +19,27 @@ const slides = [
     caption:
       "Created an engaging video to help showcase Mollie at events • 2020",
     width: 130,
-    x: 137,
+    x: 138,
   },
   {
     id: "Mollie Checkout",
     caption:
       "Redesigned and developed the Mollie Checkout Web application • 2019",
     width: 160,
-    x: 267,
+    x: 268,
   },
   {
     id: "Mollie Apple Pay",
     caption:
       "Created an engaging promo video for the Mollie Apple Pay launch • 2019",
-    width: 163,
+    width: 162,
     x: 427,
   },
 ];
 
 const posts = [
   { id: "Hello world", url: "hello_world", width: 122, x: 0 },
-  { id: "Suntory Toki review", url: "suntory_toki_review", width: 185, x: 122 },
+  { id: "Suntory Toki review", url: "suntory_toki_review", width: 184, x: 122 },
 ];
 
 const links = [

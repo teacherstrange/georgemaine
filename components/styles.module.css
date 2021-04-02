@@ -132,8 +132,8 @@
 .button {
   font-size: 1.7rem;
   line-height: 2.2rem;
-  letter-spacing: -0.023rem;
-  font-weight: 600;
+  letter-spacing: 0.013rem;
+  font-weight: 400;
   color: var(--white);
   text-decoration: none;
   padding: 0.6rem 1.8rem;
@@ -148,8 +148,8 @@
 .buttonLink {
   font-size: 1.7rem;
   line-height: 2.2rem;
-  letter-spacing: -0.023rem;
-  font-weight: 600;
+  letter-spacing: 0.013rem;
+  font-weight: 400;
   color: var(--headline);
   text-decoration: none;
   padding: 0.6rem 1.8rem;
@@ -225,8 +225,8 @@
 .filter {
   font-size: 1.7rem;
   line-height: 2.2rem;
-  letter-spacing: -0.023rem;
-  font-weight: 600;
+  letter-spacing: 0.013rem;
+  font-weight: 400;
   color: var(--headline);
   text-decoration: none;
   padding: 0.6rem 1.8rem;
@@ -248,6 +248,8 @@
   height: 3.4rem;
   transition: 300ms;
   background: var(--white);
+  box-shadow: 0px 0px 0.05rem rgba(0, 0, 0, 0.04),
+    0px 0.3rem 0.8rem rgba(0, 0, 0, 0.12), 0px 0.3rem 0.1rem rgba(0, 0, 0, 0.04);
   z-index: 1;
   left: 0.3rem;
   top: 0.3rem;
