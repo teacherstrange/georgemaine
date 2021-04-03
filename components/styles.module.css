@@ -58,7 +58,7 @@
   line-height: 2.2rem;
   letter-spacing: 0.023rem;
   font-weight: 400;
-  color: var(--headline);
+  color: var(--primaryText);
   text-decoration: none;
   padding: 0.9rem 1.8rem;
   border-radius: 3rem;
@@ -133,7 +133,7 @@
   line-height: 2.2rem;
   letter-spacing: 0.013rem;
   font-weight: 400;
-  color: var(--headline);
+  color: var(--primaryText);
   text-decoration: none;
   padding: 0.6rem 1.8rem;
   border-radius: 3rem;
@@ -204,7 +204,7 @@
   line-height: 2.2rem;
   letter-spacing: 0.013rem;
   font-weight: 400;
-  color: var(--headline);
+  color: var(--primaryText);
   text-decoration: none;
   padding: 0.6rem 1.8rem;
   border-radius: 3rem;
@@ -235,7 +235,7 @@
 .body {
   font-weight: 400;
   letter-spacing: 0.035rem;
-  color: var(--caption);
+  color: var(--secondaryText);
   margin-left: 7vw;
   margin-right: 7vw;
 }
@@ -243,7 +243,7 @@
 .body strong {
   font-weight: 600;
   display: inline;
-  color: var(--headline);
+  color: var(--primaryText);
 }
 
 .body:first-of-type {
@@ -264,7 +264,7 @@
 }
 
 .caption strong {
-  color: var(--headline);
+  color: var(--primaryText);
 }
 
 @media (min-width: 73.6rem) {

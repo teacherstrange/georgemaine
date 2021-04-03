@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./styles.module.css";
 
+// FIXME: Find a better spot for these data objects
 const Article = ({ id }) => {
   switch (id) {
     case "hello_world":
@@ -124,13 +125,12 @@ const Article = ({ id }) => {
 };
 
 const Post = ({ id }) => {
-  useEffect(() => console.log(id));
   return (
     <>
       <figure
         className={styles.articleArtwork}
         style={{
-          backgroundImage: `url(images/hello-world.jpg)`,
+          backgroundImage: `url(images/hello-world.jpg)`, // FIXME: Fetch images based on post
         }}
       />
       <div className={styles.articleContent}>

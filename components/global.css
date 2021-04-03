@@ -157,10 +157,10 @@ body {
   -moz-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  letter-spacing: 0.021rem;
+  letter-spacing: 0.005rem;
   font-size: 1.7rem;
   line-height: 2.2rem;
-  color: var(--caption);
+  color: var(--secondaryText);
 }
 
 /* Typefaces */
@@ -184,28 +184,21 @@ body {
 
 /* Variables */
 :root {
-  --headline: hsla(0, 0%, 8%, 0.96);
-  --caption: hsla(0, 0%, 8%, 0.5);
+  --primaryText: hsla(0, 0%, 0%, 0.85);
+  --secondaryText: hsla(0, 0%, 0%, 0.5);
   --primaryFill: hsla(240, 3%, 49%, 0.28);
   --container: hsla(240, 3%, 49%, 0.12);
-  --tertiaryFill: hsla(240, 3%, 49%, 0.2);
-  /* FIXME: Validate names and colors */
   --overlay: hsla(0, 0%, 98%, 0.92);
-  --primaryLabelFill: hsla(240, 6%, 25%, 0.3);
-  --secondaryLabelFill: hsla(240, 6%, 25%, 0.6);
   --red: #d5344d;
   --white: #fff;
 }
 @supports (color: color(display-p3 1 1 1)) {
   :root {
-    --headline: color(display-p3 0.08 0.08 0.08 / 0.96);
-    --caption: color(display-p3 0.08 0.08 0.08 / 0.5);
+    --primaryText: color(display-p3 0 0 0 / 0.85);
+    --secondaryText: color(display-p3 0 0 0 / 0.5);
     --primaryFill: color(display-p3 0.4753 0.4753 0.5021 / 0.08);
     --container: color(display-p3 0.4753 0.4753 0.5021 / 0.12);
-    --tertiaryFill: color(display-p3 0.4753 0.4753 0.5021 / 0.2);
     --overlay: color(display-p3 0.9801 0.98 0.9799 / 0.92);
-    --primaryLabelFill: color(display-p3 0.235 0.235 0.2624 / 0.3);
-    --secondaryLabelFill: color(display-p3 0.235 0.235 0.2624 / 0.6);
     --red: color(display-p3 0.7695 0.2608 0.316);
     --white: color(display-p3 1.0001 1 0.9999);
   }
