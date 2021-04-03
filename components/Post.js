@@ -10,8 +10,8 @@ const Article = ({ id }) => {
             <time datetime='2021-04-03'>Published April 3, 2021</time>
           </p>
           <p className={styles.body}>
-            <strong>{id}</strong>. As you may or may not be aware, I like to
-            tinker with software, and tools,. Ever since I was a young kid, I
+            <strong>Hello world. </strong>As you may or may not be aware, I like
+            to tinker with software, and tools,. Ever since I was a young kid, I
             was fascinated with how things worked. Can I remake it differently?
             Would people like that better? The part I hated was actually showing
             my version to people. Go figure.
@@ -19,8 +19,8 @@ const Article = ({ id }) => {
           <p className={styles.body}>
             Strangely enough, the vicious cycle above is ongoing, which I don't
             mind personally. I make things—it makes me feel better. Software,
-            photo's, tree houses, food, urban jungles, video's, clothes just as
-            long as its useful to me or others.
+            websites, food, urban jungles, video's, clothes just as long as its
+            useful to me or others.
           </p>
           <p className={styles.body}>
             I design—it's my job. Currently, I design products at Pitch. I
@@ -49,11 +49,11 @@ const Article = ({ id }) => {
             <time datetime='2021-04-03'>Published April 3, 2021</time>
           </p>
           <p className={styles.body}>
-            <strong>{id}</strong>. As you may or may not be aware, I like to
-            tinker with software, and tools,. Ever since I was a young kid, I
-            was fascinated with how things worked. Can I remake it differently?
-            Would people like that better? The part I hated was actually showing
-            my version to people. Go figure.
+            <strong>Suntory Toki review.</strong> As you may or may not be
+            aware, I like to tinker with software, and tools,. Ever since I was
+            a young kid, I was fascinated with how things worked. Can I remake
+            it differently? Would people like that better? The part I hated was
+            actually showing my version to people. Go figure.
           </p>
           <p className={styles.body}>
             Strangely enough, the vicious cycle above is ongoing, which I don't
@@ -88,8 +88,8 @@ const Article = ({ id }) => {
             <time datetime='2021-04-03'>Published April 3, 2021</time>
           </p>
           <p className={styles.body}>
-            <strong>{id}</strong>. As you may or may not be aware, I like to
-            tinker with software, and tools,. Ever since I was a young kid, I
+            <strong>Hello world.</strong> As you may or may not be aware, I like
+            to tinker with software, and tools,. Ever since I was a young kid, I
             was fascinated with how things worked. Can I remake it differently?
             Would people like that better? The part I hated was actually showing
             my version to people. Go figure.

@@ -83,7 +83,6 @@ const Nav = ({
       <Link href={"/"}>
         <a className={styles.buttonLink}>
           <Image
-            className={styles.buttonLinkIcon}
             src='/images/memoji.jpg'
             height={24}
             width={24}
