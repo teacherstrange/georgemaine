@@ -90,7 +90,7 @@ export default function Nav({
             alt='Georgemaine Lourens'
             // FIXME: Image doesn't have padding-right
           />
-          Georgemaine
+          <strong>Georgemaine</strong>
         </a>
       </Link>
       <div className={styles.filtersContainer}>

@@ -136,6 +136,10 @@ button {
   font: inherit;
 }
 
+strong {
+  font-weight: 600;
+}
+
 body {
   font-family: TT Interphases, -system-ui, system-ui, sans-serif;
   font-weight: 400;
