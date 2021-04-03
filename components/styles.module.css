@@ -253,9 +253,8 @@
   font-weight: 400;
   letter-spacing: 0.035rem;
   color: var(--caption);
-  max-width: 87.5vw;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 7vw;
+  margin-right: 7vw;
 }
 
 .body strong {
@@ -265,7 +264,7 @@
 }
 
 .body:first-of-type {
-  padding-top: 2.2rem;
+  padding-top: 4.4rem;
 }
 
 .body + .body {
@@ -307,11 +306,11 @@
 
   .body:first-of-type {
     padding-top: calc(4vh + 8.4rem);
+    margin-bottom: 4.4rem;
   }
-  .body {
-    max-width: 60rem;
-    margin-left: 6rem;
-    margin-right: 6rem;
+
+  .body:last-of-type {
+    padding-bottom: calc(5.8rem + 4vh);
   }
 }
 
