@@ -65,14 +65,14 @@ const links = [
   },
 ];
 
-export default function Nav({
+const Nav = ({
   slideId,
   postId,
   setPostId,
   setFilterId,
   filterId,
   setSlideId,
-}) {
+}) => {
   const router = useRouter();
   const [menuVisible, setMenuVisible] = useState(false);
   const selectedSlide = slides.findIndex((slide) => slide.id === slideId);
@@ -209,4 +209,6 @@ export default function Nav({
       )}
     </header>
   );
-}
+};
+
+export default Nav;

@@ -37,14 +37,14 @@ const posts = [
   },
 ];
 
-export default function Footer({
+const Footer = ({
   slideId,
   postId,
   setPostId,
   setFilterId,
   filterId,
   setSlideId,
-}) {
+}) => {
   const router = useRouter();
   // FIXME: Polyfill is not needed beyond 768px
   useEffect(() => {
@@ -110,4 +110,6 @@ export default function Footer({
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;
