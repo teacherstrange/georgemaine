@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
 import Image from "next/image";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import Icon from "./Icon";
 
 // FIXME: Is this the right position for these objects
@@ -75,11 +75,23 @@ const Nav = ({
 }) => {
   const router = useRouter();
   const [menuVisible, setMenuVisible] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(false);
   const selectedSlide = slides.findIndex((slide) => slide.id === slideId);
   const selectedPost = posts.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
 
+  useEffect(() => {
+    const onScroll = () => {
+      const currentScrollPos = window.scrollY;
+      setPrevScrollPos(currentScrollPos);
+      setVisible(prevScrollPos > currentScrollPos);
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [prevScrollPos]);
+
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${visible ? "" : styles.hidden}`}>
       <Link href={"/"}>
         <a className={styles.buttonLink}>
           <Image

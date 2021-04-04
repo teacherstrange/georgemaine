@@ -83,6 +83,12 @@
   left: 7vw;
   right: 7vw;
   z-index: 3;
+  transform: translateY(0);
+  transition: 250ms;
+}
+
+.header.hidden {
+  transform: translateY(calc((-4vh - 36px)));
 }
 
 .footer {
