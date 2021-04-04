@@ -18,6 +18,7 @@ export const Filters = ({ array, setId }) => (
             setTimeout(() => {
               ref.current.scrollIntoView({
                 behavior: "smooth",
+                block: "nearest",
                 inline: "center",
               });
             }, 1000)
@@ -50,6 +51,7 @@ export const FilterLinks = ({ array, setId }) => (
               setTimeout(() => {
                 ref.current.scrollIntoView({
                   behavior: "smooth",
+                  block: "nearest",
                   inline: "center",
                 });
               }, 1000)
