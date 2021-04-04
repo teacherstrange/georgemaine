@@ -75,16 +75,14 @@ const Nav = ({
 }) => {
   const router = useRouter();
   const [menuVisible, setMenuVisible] = useState(false);
-  const [prev, setPrev] = useState(window.scrollY);
-  const [visible, setVisible] = useState(false);
+  const [prev, setPrev] = useState(null);
+  const [visible, setVisible] = useState(true);
   const selectedSlide = slides.findIndex((slide) => slide.id === slideId);
   const selectedPost = posts.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
 
   useEffect(() => {
     setPrev(window.scrollY);
-    const handleNavigation = (e, prev) => {
-      const window = e.currentTarget;
-
+    const handleNavigation = (prev) => {
       if (prev > window.scrollY) {
         console.log("scrolling up");
         setVisible(true);
@@ -94,9 +92,9 @@ const Nav = ({
       }
       setPrev(window.scrollY);
     };
-    window.addEventListener("scroll", (e) => handleNavigation(e, prev));
+    window.addEventListener("scroll", () => handleNavigation(prev));
     return () =>
-      window.addEventListener("scroll", (e) => handleNavigation(e, prev));
+      window.addEventListener("scroll", () => handleNavigation(prev));
   });
 
   return (
