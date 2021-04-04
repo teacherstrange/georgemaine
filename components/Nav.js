@@ -75,20 +75,29 @@ const Nav = ({
 }) => {
   const router = useRouter();
   const [menuVisible, setMenuVisible] = useState(false);
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [prev, setPrev] = useState(window.scrollY);
   const [visible, setVisible] = useState(false);
   const selectedSlide = slides.findIndex((slide) => slide.id === slideId);
   const selectedPost = posts.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
 
   useEffect(() => {
-    const onScroll = () => {
-      const currentScrollPos = window.scrollY;
-      setPrevScrollPos(currentScrollPos);
-      setVisible(prevScrollPos > currentScrollPos);
+    setPrev(window.scrollY);
+    const handleNavigation = (e, prev) => {
+      const window = e.currentTarget;
+
+      if (prev > window.scrollY) {
+        console.log("scrolling up");
+        setVisible(true);
+      } else if (prev < window.scrollY) {
+        console.log("scrolling down");
+        setVisible(false);
+      }
+      setPrev(window.scrollY);
     };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [prevScrollPos]);
+    window.addEventListener("scroll", (e) => handleNavigation(e, prev));
+    return () =>
+      window.addEventListener("scroll", (e) => handleNavigation(e, prev));
+  });
 
   return (
     <header className={`${styles.header} ${visible ? "" : styles.hidden}`}>
@@ -101,7 +110,7 @@ const Nav = ({
             alt='Georgemaine Lourens'
             // FIXME: Image doesn't have padding-right
           />
-          <strong>Georgemaine</strong>
+          {/* <strong>Georgemaine</strong> */}
         </a>
       </Link>
       <div className={styles.filtersContainer}>
