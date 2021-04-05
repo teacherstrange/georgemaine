@@ -65,6 +65,22 @@ const links = [
   },
 ];
 
+const debounce = (func, wait, immediate) => {
+  let timeout;
+  return function () {
+    const context = this,
+      args = arguments;
+    const later = function () {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    const callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
+};
+
 const Nav = ({
   slideId,
   postId,
@@ -75,24 +91,31 @@ const Nav = ({
 }) => {
   const router = useRouter();
   const [menuVisible, setMenuVisible] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const selectedSlide = slides.findIndex((slide) => slide.id === slideId);
   const selectedPost = posts.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
 
-  /* When the user scrolls down, hide the navbar. When the user scrolls up, show the navbar */
+  const handleScroll = debounce(() => {
+    // find current scroll position
+    const currentScrollPos = window.pageYOffset;
+
+    // set state based on location info (explained in more detail below)
+    setVisible(
+      (prevScrollPos > currentScrollPos &&
+        prevScrollPos - currentScrollPos > 60) ||
+        currentScrollPos < 10
+    );
+
+    // set state to new scroll position
+    setPrevScrollPos(currentScrollPos);
+  }, 40);
 
   useEffect(() => {
-    var prevScrollpos = window.pageYOffset;
-    window.onscroll = function () {
-      var currentScrollPos = window.pageYOffset;
-      if (prevScrollpos > currentScrollPos) {
-        setVisible(true);
-      } else {
-        setVisible(false);
-      }
-      prevScrollpos = currentScrollPos;
-    };
-  }, []);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [prevScrollPos, visible, handleScroll]);
 
   return (
     <header
