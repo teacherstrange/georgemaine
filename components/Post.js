@@ -1,4 +1,6 @@
 import React from "react";
+import Link from "next/link";
+import Image from "next/image";
 import styles from "./styles.module.css";
 
 // FIXME: Find a better spot for these data objects
@@ -128,6 +130,40 @@ const Article = ({ id }) => {
   }
 };
 
+const Seperator = () => <hr className={styles.articleSeperator} />;
+
+const Footer = () => {
+  return (
+    <footer className={styles.articleFooter}>
+      <Seperator />
+      <p className={styles.articleFooterBody}>
+        Thoughts or idea’s? Reach out to me via{" "}
+        <Link
+          href={
+            "mailto:georgemaine.lourens@gmail.com?subject=Hello%20%F0%9F%91%8B"
+          }
+        >
+          email
+        </Link>{" "}
+        or <Link href={"https://twitter.com/georgemaine"}>Twitter</Link>.
+      </p>
+      <div className={styles.articleFooterAuthor}>
+        <Image
+          src='/images/hello-world.jpg'
+          height={36}
+          width={36}
+          alt='Georgemaine Lourens'
+          // FIXME: Image doesn't have padding-right
+        />
+        <p className={styles.articleFooterBody}>
+          Posted by{" "}
+          <Link href={"https://twitter.com/georgemaine"}>@Georgemaine</Link>
+        </p>
+      </div>
+    </footer>
+  );
+};
+
 const Post = ({ id }) => {
   return (
     <>
@@ -144,6 +180,7 @@ const Post = ({ id }) => {
       </figure>
       <div className={styles.articleContent}>
         <Article id={id} />
+        <Footer />
       </div>
     </>
   );

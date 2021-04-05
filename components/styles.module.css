@@ -38,6 +38,42 @@
   backdrop-filter: blur(3rem) saturate(200%);
 }
 
+.articleFooter {
+  margin-left: 7vw;
+  margin-right: 7vw;
+  text-align: center;
+  padding: 4.4rem 0 calc(10.2rem + 4vh);
+}
+
+.articleSeperator {
+  width: calc(100% - 8.8rem);
+  margin: 0 auto 4.4rem;
+  border: 0;
+  height: 1px;
+  background-color: var(--container);
+}
+
+.articleFooterBody a {
+  font-size: 1.7rem;
+  line-height: 2.2rem;
+  letter-spacing: 0.035rem;
+  font-weight: 400;
+  color: var(--red);
+  text-decoration: none;
+  border-radius: 3rem;
+  background: none;
+  border: none;
+  display: inline;
+  margin: 0;
+}
+
+.articleFooterAuthor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2.2rem auto 0;
+}
+
 .menu {
   position: fixed;
   top: calc(4% + 4rem);
@@ -56,7 +92,7 @@
 .menuItem {
   font-size: 1.7rem;
   line-height: 2.2rem;
-  letter-spacing: 0.023rem;
+  letter-spacing: 0.035rem;
   font-weight: 400;
   color: var(--primaryText);
   text-decoration: none;
@@ -121,7 +157,7 @@
 .button {
   font-size: 1.7rem;
   line-height: 2.2rem;
-  letter-spacing: 0.013rem;
+  letter-spacing: 0.035rem;
   font-weight: 400;
   color: var(--white);
   text-decoration: none;
@@ -137,7 +173,7 @@
 .buttonLink {
   font-size: 1.7rem;
   line-height: 2.2rem;
-  letter-spacing: 0.013rem;
+  letter-spacing: 0.035rem;
   font-weight: 400;
   color: var(--primaryText);
   text-decoration: none;
@@ -208,7 +244,7 @@
 .filter {
   font-size: 1.7rem;
   line-height: 2.2rem;
-  letter-spacing: 0.013rem;
+  letter-spacing: 0.035rem;
   font-weight: 400;
   color: var(--primaryText);
   text-decoration: none;
@@ -260,10 +296,6 @@
   margin-top: 2.2rem;
 }
 
-.body:last-of-type {
-  padding-bottom: calc(10.2rem + 4vh);
-}
-
 .caption {
   font-weight: 600;
   letter-spacing: 0.035rem;
@@ -291,7 +323,6 @@
     z-index: 1;
     width: 50vw;
     margin-left: 50vw;
-    /* padding: calc(4% + 5.8rem) 4vw calc(5.8rem + 4vh); */
     min-height: 100vh;
   }
 
@@ -300,7 +331,7 @@
     margin-bottom: 4.4rem;
   }
 
-  .body:last-of-type {
+  .articleFooter {
     padding-bottom: calc(5.8rem + 4vh);
   }
 }
@@ -333,7 +364,7 @@
   }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1920px) {
   .body {
     font-size: 1.9rem;
     line-height: 2.4rem;
