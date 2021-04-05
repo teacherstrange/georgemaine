@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Icon from "./Icon";
 
 // FIXME: Is this the right position for these objects
@@ -75,18 +75,39 @@ const Nav = ({
 }) => {
   const router = useRouter();
   const [menuVisible, setMenuVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const selectedSlide = slides.findIndex((slide) => slide.id === slideId);
   const selectedPost = posts.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
 
+  /* When the user scrolls down, hide the navbar. When the user scrolls up, show the navbar */
+
+  useEffect(() => {
+    var prevScrollpos = window.pageYOffset;
+    window.onscroll = function () {
+      var currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        setVisible(true);
+      } else {
+        setVisible(false);
+      }
+      prevScrollpos = currentScrollPos;
+    };
+  }, []);
+
   return (
-    <header className={styles.header}>
+    <header
+      className={styles.header}
+      style={{
+        opacity: visible ? 1 : 0,
+      }}
+    >
       <Link href={"/"}>
         <a className={styles.buttonLink}>
           <Image
             src='/images/memoji.png'
             quality={100}
-            height={36}
-            width={36}
+            height={48}
+            width={48}
             alt='Georgemaine Lourens'
             // FIXME: Image doesn't have padding-right
           />
