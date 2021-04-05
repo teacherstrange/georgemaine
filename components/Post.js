@@ -149,15 +149,19 @@ const Footer = () => {
       </p>
       <div className={styles.articleFooterAuthor}>
         <Image
-          src='/images/hello-world.jpg'
-          height={36}
-          width={36}
+          src='/images/avatar.png'
+          quality={100}
+          height={54}
+          width={54}
           alt='Georgemaine Lourens'
+          className={styles.articleAvatar}
           // FIXME: Image doesn't have padding-right
         />
         <p className={styles.articleFooterBody}>
           Posted by{" "}
-          <Link href={"https://twitter.com/georgemaine"}>@Georgemaine</Link>
+          <Link href={"https://twitter.com/georgemaine"}>
+            Georgemaine Lourens
+          </Link>
         </p>
       </div>
     </footer>

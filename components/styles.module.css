@@ -42,12 +42,12 @@
   margin-left: 7vw;
   margin-right: 7vw;
   text-align: center;
-  padding: 4.4rem 0 calc(10.2rem + 4vh);
+  padding: 6.6rem 0 calc(10.2rem + 4vh);
 }
 
 .articleSeperator {
   width: calc(100% - 8.8rem);
-  margin: 0 auto 4.4rem;
+  margin: 0 auto 6.6rem;
   border: 0;
   height: 1px;
   background-color: var(--container);
@@ -72,6 +72,12 @@
   align-items: center;
   justify-content: center;
   margin: 2.2rem auto 0;
+}
+
+.articleAvatar {
+  border-radius: 50%;
+  border: 1px solid var(--container) !important;
+  margin-right: 6px !important;
 }
 
 .menu {
@@ -244,7 +250,7 @@
 .filter {
   font-size: 1.7rem;
   line-height: 2.2rem;
-  letter-spacing: 0.035rem;
+  letter-spacing: 0.013rem;
   font-weight: 400;
   color: var(--primaryText);
   text-decoration: none;
