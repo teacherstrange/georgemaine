@@ -83,9 +83,10 @@ const Nav = ({
       <Link href={"/"}>
         <a className={styles.buttonLink}>
           <Image
-            src='/images/memoji.jpg'
-            height={24}
-            width={24}
+            src='/images/memoji.png'
+            quality={100}
+            height={36}
+            width={36}
             alt='Georgemaine Lourens'
             // FIXME: Image doesn't have padding-right
           />

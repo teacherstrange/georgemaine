@@ -64,11 +64,6 @@ const Article = ({ id }) => {
             feels like crepe, which made it a memorable opening experience.
           </p>
           <p className={styles.body}>
-            Suntory Whisky Toki comes in an elegant bottle made from thick glass
-            with a relatively small label. The cap is wrapped in paper that
-            feels like crepe, which made it a memorable opening experience.
-          </p>
-          <p className={styles.body}>
             The liquid gold content is a blend of Hakashu single malt and Chita
             grain whiskey which meld together in harmony. This unique
             composition makes it excellent for a highball, but I like it old
