@@ -109,7 +109,7 @@ const Nav = ({
 
     // set state to new scroll position
     setPrevScrollPos(currentScrollPos);
-  }, 40);
+  }, 30);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);

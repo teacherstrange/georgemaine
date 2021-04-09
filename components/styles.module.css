@@ -42,7 +42,7 @@
   margin-left: 7vw;
   margin-right: 7vw;
   text-align: center;
-  padding: 6.6rem 0 calc(10.2rem + 4vh);
+  padding: 6.6rem 0 calc(10.2rem + 6vh);
 }
 
 .articleSeperator {
@@ -130,7 +130,7 @@
 }
 
 .header.hidden {
-  transform: translateY(calc((-4vh - 36px)));
+  transform: translateY(calc((-6vh - 36px)));
 }
 
 .footer {
@@ -139,7 +139,7 @@
   align-items: center;
   position: fixed;
   height: 4rem;
-  bottom: 4%;
+  bottom: 6%;
   left: 0;
   right: 0;
   width: 94%;
@@ -308,7 +308,7 @@
   width: 94vw;
   max-width: 48rem;
   text-align: center;
-  margin-bottom: calc(5.8rem + 4vh);
+  margin-bottom: calc(5.8rem + 6vh);
 }
 
 .caption strong {
@@ -333,12 +333,12 @@
   }
 
   .body:first-of-type {
-    padding-top: calc(4vh + 8.4rem);
+    padding-top: calc(6vh + 8.4rem);
     margin-bottom: 4.4rem;
   }
 
   .articleFooter {
-    padding-bottom: calc(5.8rem + 4vh);
+    padding-bottom: calc(5.8rem + 6vh);
   }
 }
 
@@ -349,7 +349,7 @@
   }
 
   .caption {
-    margin-bottom: calc(6rem + 4vh);
+    margin-bottom: calc(6rem + 6vh);
   }
 }
 
@@ -366,7 +366,7 @@
     font-size: 2.2rem;
     line-height: 2.6rem;
     letter-spacing: 0.005rem;
-    margin-bottom: 4vh;
+    margin-bottom: 6vh;
   }
 }
 

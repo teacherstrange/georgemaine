@@ -21,7 +21,7 @@ export const Filters = ({ array, setId }) => (
                 block: "nearest",
                 inline: "center",
               });
-            }, 1000)
+            }, 0)
           )}
           key={object.id}
         >
@@ -54,7 +54,7 @@ export const FilterLinks = ({ array, setId }) => (
                   block: "nearest",
                   inline: "center",
                 });
-              }, 1000)
+              }, 0)
             )}
             className={styles.filter}
           >
