@@ -2,6 +2,78 @@ import React from "react";
 import styles from "./styles.module.css";
 
 // FIXME: This is some ugly code lol
+const Video = ({ id }) => {
+  switch (id) {
+    case "Mollie Mobile":
+      return (
+        <>
+          <video
+            autoPlay
+            playsInline
+            muted
+            loop
+            src={"videos/mollie-mobile-mobile.mp4"}
+            className={styles.mobileVideo}
+          />
+          <video
+            autoPlay
+            playsInline
+            muted
+            loop
+            src={"videos/mollie-mobile.mp4"}
+            className={styles.desktopVideo}
+          />
+        </>
+      );
+    case "Mollie Video":
+      return (
+        <>
+          <video
+            autoPlay
+            playsInline
+            muted
+            loop
+            src={"videos/mollie-video.mp4"}
+            className={styles.video}
+          />
+        </>
+      );
+    case "Mollie Checkout":
+      return (
+        <>
+          <video
+            autoPlay
+            playsInline
+            muted
+            loop
+            src={"videos/mollie-checkout-mobile.mp4"}
+            className={styles.mobileVideo}
+          />
+          <video
+            autoPlay
+            playsInline
+            muted
+            loop
+            src={"videos/mollie-checkout.mp4"}
+            className={styles.desktopVideo}
+          />
+        </>
+      );
+    case "Mollie Apple Pay":
+      return (
+        <>
+          <video
+            autoPlay
+            playsInline
+            muted
+            loop
+            src={"videos/mollie-apple-pay.mp4"}
+            className={styles.video}
+          />
+        </>
+      );
+  }
+};
 const Caption = ({ id }) => {
   switch (id) {
     case "Mollie Mobile":
@@ -38,6 +110,7 @@ const Caption = ({ id }) => {
 const Slide = ({ id }) => {
   return (
     <div className={styles.slide}>
+      <Video id={id} />
       <Caption id={id} />
     </div>
   );

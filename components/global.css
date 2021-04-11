@@ -151,7 +151,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: var(--primaryFill);
+  background-color: var(--white);
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
@@ -187,8 +187,8 @@ body {
   --primaryText: hsla(0, 0%, 0%, 0.85);
   --secondaryText: hsla(0, 0%, 0%, 0.5);
   --primaryFill: hsla(240, 3%, 49%, 0.28);
-  --container: hsla(240, 3%, 49%, 0.12);
-  --overlay: hsla(0, 0%, 98%, 0.92);
+  --container: hsla(240, 3%, 49%, 0.3);
+  --overlay: hsla(0, 0%, 98%, 0.84);
   --red: #d5344d;
   --white: #fff;
 }
@@ -197,8 +197,8 @@ body {
     --primaryText: color(display-p3 0 0 0 / 0.85);
     --secondaryText: color(display-p3 0 0 0 / 0.5);
     --primaryFill: color(display-p3 0.4753 0.4753 0.5021 / 0.08);
-    --container: color(display-p3 0.4753 0.4753 0.5021 / 0.12);
-    --overlay: color(display-p3 0.9801 0.98 0.9799 / 0.92);
+    --container: color(display-p3 0.4753 0.4753 0.5021 / 0.3);
+    --overlay: color(display-p3 0.9801 0.98 0.9799 / 0.84);
     --red: color(display-p3 0.7695 0.2608 0.316);
     --white: color(display-p3 1.0001 1 0.9999);
   }
