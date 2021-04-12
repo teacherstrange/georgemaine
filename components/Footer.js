@@ -1,24 +1,26 @@
 import { useRouter } from "next/router";
+import Link from "next/link";
+import Icon from "./Icon";
 import styles from "./styles.module.css";
 import { Filters, FilterLinks } from "./Filters";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import scrollPolyfill from "scroll-polyfill";
 // FIXME: Polyfill belongs inside component
 
 // FIXME: Is this the right position for these objects
 // FIXME: Consolidate Footer & Nav objects
 const slides = [
-  { id: "Mollie Mobile", width: 137, x: 0 },
-  { id: "Mollie Video", width: 130, x: 137 },
+  { id: "Mollie Mobile", width: 129, x: 0 },
+  { id: "Mollie Video", width: 121, x: 129 },
   {
     id: "Mollie Checkout",
-    width: 160,
-    x: 267,
+    width: 152,
+    x: 250,
   },
   {
     id: "Mollie Apple Pay",
-    width: 163,
-    x: 427,
+    width: 153,
+    x: 402,
   },
 ];
 
@@ -26,14 +28,37 @@ const posts = [
   {
     id: "Hello world",
     url: "hello_world",
-    width: 122,
+    width: 112,
     x: 0,
   },
   {
     id: "Suntory Toki review",
     url: "suntory_toki_review",
-    width: 185,
-    x: 122,
+    width: 176,
+    x: 112,
+  },
+];
+
+const links = [
+  {
+    id: "Email",
+    url: "mailto:georgemaine.lourens@gmail.com?subject=Hello%20%F0%9F%91%8B",
+  },
+  {
+    id: "Twitter",
+    url: "https://twitter.com/georgemaine",
+  },
+  {
+    id: "Dribbble",
+    url: "https://dribbble.com/georgemaine",
+  },
+  {
+    id: "Github",
+    url: "https://github.com/georgemaine",
+  },
+  {
+    id: "LinkedIn",
+    url: "https://www.linkedin.com/in/georgemaine",
   },
 ];
 
@@ -53,10 +78,14 @@ const Footer = ({
 
   const selectedSlide = slides.findIndex((slide) => slide.id === slideId);
   const selectedPost = posts.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
-
+  const [expandedContactLinks, setExpandedContactLinks] = useState(false);
   return (
     <footer className={styles.footer}>
-      <div className={styles.filtersContainer}>
+      <div
+        style={{
+          display: "flex",
+        }}
+      >
         <nav
           className={`${styles.mobileFilters} ${
             filterId === "slides" && styles.workFiltersExpanded
@@ -105,6 +134,33 @@ const Footer = ({
                 transform: `translateX(${posts[selectedPost].x}px)`,
               }}
             ></div>
+          ) : null}
+        </nav>
+        <nav
+          className={`${styles.mobileFilters} ${
+            expandedContactLinks && styles.socialLinksExpanded
+          }`}
+        >
+          {expandedContactLinks === false ? (
+            <button
+              className={styles.buttonLink}
+              onClick={() => setExpandedContactLinks(true)}
+            >
+              Contact
+            </button>
+          ) : expandedContactLinks ? (
+            links.map((link, index) => (
+              <Link key={index} href={link.url}>
+                <a
+                  target='_blank'
+                  rel='noreferrer'
+                  onClick={() => setExpandedContactLinks(false)}
+                  className={styles.button}
+                >
+                  <Icon string={link.id} />
+                </a>
+              </Link>
+            ))
           ) : null}
         </nav>
       </div>

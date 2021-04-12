@@ -162,10 +162,9 @@
 
 .footer {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   position: fixed;
-  height: 4rem;
+  height: 4.2rem;
   bottom: 6%;
   left: 0;
   right: 0;
@@ -180,6 +179,7 @@
   scrollbar-width: none;
   -ms-overflow-style: -ms-autohiding-scrollbar;
 }
+
 .footer::-webkit-scrollbar {
   display: none;
   -webkit-appearance: none;
