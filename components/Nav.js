@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
-import Image from "next/image";
-import { useEffect, useState } from "react";
 import Icon from "./Icon";
+import { useState } from "react";
 
 // FIXME: Is this the right position for these objects
 const slides = [
@@ -11,35 +10,35 @@ const slides = [
     id: "Mollie Mobile",
     caption:
       "Designed apps for iOS, Android and developed the landing page • 2020",
-    width: 138,
+    width: 129,
     x: 0,
   },
   {
     id: "Mollie Video",
     caption:
       "Created an engaging video to help showcase Mollie at events • 2020",
-    width: 130,
-    x: 138,
+    width: 121,
+    x: 129,
   },
   {
     id: "Mollie Checkout",
     caption:
       "Redesigned and developed the Mollie Checkout Web application • 2019",
-    width: 160,
-    x: 268,
+    width: 152,
+    x: 250,
   },
   {
     id: "Mollie Apple Pay",
     caption:
       "Created an engaging promo video for the Mollie Apple Pay launch • 2019",
-    width: 162,
-    x: 427,
+    width: 153,
+    x: 402,
   },
 ];
 
 const posts = [
-  { id: "Hello world", url: "hello_world", width: 122, x: 0 },
-  { id: "Suntory Toki review", url: "suntory_toki_review", width: 184, x: 122 },
+  { id: "Hello world", url: "hello_world", width: 112, x: 0 },
+  { id: "Suntory Toki review", url: "suntory_toki_review", width: 176, x: 112 },
 ];
 
 const links = [
@@ -61,25 +60,9 @@ const links = [
   },
   {
     id: "LinkedIn",
-    url: "www.linkedin.com/in/georgemaine", // FIXME: Broken link
+    url: "https://www.linkedin.com/in/georgemaine",
   },
 ];
-
-const debounce = (func, wait, immediate) => {
-  let timeout;
-  return function () {
-    const context = this,
-      args = arguments;
-    const later = function () {
-      timeout = null;
-      if (!immediate) func.apply(context, args);
-    };
-    const callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    if (callNow) func.apply(context, args);
-  };
-};
 
 const Nav = ({
   slideId,
@@ -90,167 +73,119 @@ const Nav = ({
   setSlideId,
 }) => {
   const router = useRouter();
-  const [menuVisible, setMenuVisible] = useState(false);
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const [visible, setVisible] = useState(true);
+  const [expandedContactLinks, setExpandedContactLinks] = useState(false);
   const selectedSlide = slides.findIndex((slide) => slide.id === slideId);
   const selectedPost = posts.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
 
-  const handleScroll = debounce(() => {
-    // find current scroll position
-    const currentScrollPos = window.pageYOffset;
-
-    // set state based on location info (explained in more detail below)
-    setVisible(
-      (prevScrollPos > currentScrollPos &&
-        prevScrollPos - currentScrollPos > 60) ||
-        currentScrollPos < 10
-    );
-
-    // set state to new scroll position
-    setPrevScrollPos(currentScrollPos);
-  }, 30);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [prevScrollPos, visible, handleScroll]);
+  const handleFilters = (hook, id) => {
+    hook(id);
+    setExpandedContactLinks(false);
+  };
 
   return (
-    <header
-      className={styles.header}
-      style={{
-        opacity: visible ? 1 : 0,
-      }}
-    >
-      <Link href={"/"}>
-        <a className={styles.buttonLink}>
-          <Image
-            src='/images/memoji.png'
-            quality={100}
-            height={48}
-            width={48}
-            alt='Georgemaine Lourens'
-            // FIXME: Image doesn't have padding-right
-          />
-          {/* <strong>Georgemaine</strong> */}
-        </a>
-      </Link>
-      <div className={styles.filtersContainer}>
-        <nav
-          className={`${styles.filters} ${
-            filterId === "slides" && styles.workFiltersExpanded
-          }`}
-        >
-          {filterId === "posts" ? (
-            <button
-              className={styles.buttonLink}
-              onClick={() => (router.push("/"), setFilterId("slides"))}
-            >
-              Work
-            </button>
-          ) : (
-            slides.map((slide, index) => (
-              // FIXME: Can we use components here?
-              <button
-                className={styles.filter}
-                onClick={() => setSlideId(slide.id)}
-                key={index}
-              >
-                {slide.id}
-              </button>
-            ))
-          )}
-          {filterId == "slides" ? (
-            <div
-              className={styles.filterSelection}
-              style={{
-                width: slides[selectedSlide].width,
-                transform: `translateX(${slides[selectedSlide].x}px)`,
-              }}
-            ></div>
-          ) : null}
-        </nav>
-        <nav
-          className={`${styles.filters} ${
-            filterId === "posts" && styles.articleFiltersExpanded
-          }`}
-        >
-          {filterId === "slides" ? (
-            <button
-              className={styles.buttonLink}
-              onClick={() => setFilterId("posts")}
-            >
-              Articles
-            </button>
-          ) : (
-            posts.map((post, index) => (
-              // FIXME: Use components to create these
-              <Link
-                key={index}
-                href={`/?postId=${post.url}`}
-                as={`/post/${post.url}`}
-              >
-                <button
-                  onClick={() => setPostId(post.id)}
-                  className={styles.filter}
-                >
-                  {post.id}
-                </button>
-              </Link>
-            ))
-          )}
-          {filterId == "posts" ? (
-            <div
-              className={styles.filterSelection}
-              style={{
-                width: posts[selectedPost].width,
-                transform: `translateX(${posts[selectedPost].x}px)`,
-              }}
-            ></div>
-          ) : null}
-        </nav>
-      </div>
-      <button
-        className={styles.button}
-        onClick={() => setMenuVisible(!menuVisible)}
+    <header className={styles.header}>
+      <nav
+        className={`${styles.filters} ${
+          filterId === "slides" && styles.workFiltersExpanded
+        }`}
       >
-        Get in touch
-      </button>
-      {!!menuVisible && (
-        <>
+        {filterId === "posts" ? (
+          <button
+            className={styles.buttonLink}
+            onClick={() => (
+              router.push("/"), handleFilters(setFilterId, "slides")
+            )}
+          >
+            Work
+          </button>
+        ) : (
+          slides.map((slide, index) => (
+            // FIXME: Can we use components here?
+            <button
+              className={styles.filter}
+              onClick={() => handleFilters(setSlideId, slide.id)}
+              key={index}
+            >
+              {slide.id}
+            </button>
+          ))
+        )}
+        {filterId == "slides" ? (
           <div
+            className={styles.filterSelection}
             style={{
-              position: "fixed",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              zIndex: 1,
+              width: slides[selectedSlide].width, // FIXME: Update widths
+              transform: `translateX(${slides[selectedSlide].x}px)`,
             }}
-            onClick={() => setMenuVisible(false)}
-          />
-          <ul className={styles.menu}>
-            {links.map((item, index) => {
-              return (
-                <li key={index}>
-                  <Link href={item.url}>
-                    <a
-                      target='_blank'
-                      rel='noreferrer'
-                      className={styles.menuItem}
-                    >
-                      <span>{item.id}</span>
-                      <Icon string={item.id} />
-                    </a>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </>
-      )}
+          ></div>
+        ) : null}
+      </nav>
+      <nav
+        className={`${styles.filters} ${
+          filterId === "posts" && styles.articleFiltersExpanded
+        }`}
+      >
+        {filterId === "slides" ? (
+          <button
+            className={styles.buttonLink}
+            onClick={() => handleFilters(setFilterId, "posts")}
+          >
+            Articles
+          </button>
+        ) : (
+          posts.map((post, index) => (
+            // FIXME: Use components to create these
+            <Link
+              key={index}
+              href={`/?postId=${post.url}`}
+              as={`/post/${post.url}`}
+            >
+              <button
+                onClick={() => handleFilters(setPostId, post.id)}
+                className={styles.filter}
+              >
+                {post.id}
+              </button>
+            </Link>
+          ))
+        )}
+        {filterId == "posts" ? (
+          <div
+            className={styles.filterSelection}
+            style={{
+              width: posts[selectedPost].width,
+              transform: `translateX(${posts[selectedPost].x}px)`,
+            }}
+          ></div>
+        ) : null}
+      </nav>
+      <nav
+        className={`${styles.filters} ${
+          expandedContactLinks && styles.socialLinksExpanded
+        }`}
+      >
+        {expandedContactLinks === false ? (
+          <button
+            className={styles.buttonLink}
+            onClick={() => setExpandedContactLinks(true)}
+          >
+            Contact
+          </button>
+        ) : expandedContactLinks ? (
+          links.map((link, index) => (
+            <Link key={index} href={link.url}>
+              <a
+                target='_blank'
+                rel='noreferrer'
+                onClick={() => setExpandedContactLinks(false)}
+                className={styles.button}
+              >
+                <Icon string={link.id} />
+              </a>
+            </Link>
+          ))
+        ) : null}
+      </nav>
     </header>
   );
 };

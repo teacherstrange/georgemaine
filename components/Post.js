@@ -10,7 +10,7 @@ const Article = ({ id }) => {
       return (
         <>
           <p className={styles.body}>
-            <time datetime='2021-04-03'>Published April 3, 2021</time>
+            <time dateTime='2021-04-03'>Published April 3, 2021</time>
           </p>
           <p className={styles.body}>
             <strong>Hello world. </strong>As you may or may not be aware, I like
@@ -49,7 +49,7 @@ const Article = ({ id }) => {
       return (
         <>
           <p className={styles.body}>
-            <time datetime='2021-04-03'>Published April 3, 2021</time>
+            <time dateTime='2021-04-03'>Published April 3, 2021</time>
           </p>
           <p className={styles.body}>
             <strong>Suntory Toki review.</strong> Suntory is a Whiskey
@@ -87,7 +87,7 @@ const Article = ({ id }) => {
       return (
         <>
           <p className={styles.body}>
-            <time datetime='2021-04-03'>Published April 3, 2021</time>
+            <time dateTime='2021-04-03'>Published April 3, 2021</time>
           </p>
           <p className={styles.body}>
             <strong>Hello world.</strong> As you may or may not be aware, I like
