@@ -158,7 +158,7 @@ const Footer = ({
                 setExpandedContactLinks(true)
               )}
             >
-              Contact
+              Get in touch
             </button>
           ) : expandedContactLinks ? (
             links.map((link, index) => (

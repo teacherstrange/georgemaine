@@ -169,7 +169,7 @@ const Nav = ({
             className={styles.buttonLink}
             onClick={() => setExpandedContactLinks(true)}
           >
-            Contact
+            Get in touch
           </button>
         ) : expandedContactLinks ? (
           links.map((link, index) => (

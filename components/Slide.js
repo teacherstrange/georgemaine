@@ -79,8 +79,8 @@ const Caption = ({ id }) => {
     case "Mollie Mobile":
       return (
         <p className={styles.caption}>
-          <strong>{id}</strong>. Designed apps for iOS, Android and developed
-          the landing page • 2020
+          <strong>{id}</strong>. Designed apps for iOS, Android and built the
+          landing page • 2020
         </p>
       );
     case "Mollie Video":
