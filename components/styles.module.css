@@ -153,8 +153,8 @@
   align-items: center;
   position: fixed;
   top: 4%;
-  left: 7vw;
-  right: 7vw;
+  left: 0;
+  right: 0;
   z-index: 3;
   transform: translateY(0);
   transition: 250ms;
@@ -367,7 +367,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 76.8rem) {
   .footer {
     overflow-x: initial;
     justify-content: center;
@@ -386,7 +386,7 @@
   }
 }
 
-@media (min-width: 1112px) {
+@media (min-width: 98rem) {
   .footer {
     display: none;
   }
@@ -403,7 +403,7 @@
   }
 }
 
-@media (min-width: 1920px) {
+@media (min-width: 192rem) {
   .body {
     font-size: 1.9rem;
     line-height: 2.4rem;

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Icon from "./Icon";
 import styles from "./styles.module.css";
 import { Filters, FilterLinks } from "./Filters";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import scrollPolyfill from "scroll-polyfill";
 // FIXME: Polyfill belongs inside component
 
@@ -72,6 +72,7 @@ const Footer = ({
 }) => {
   const router = useRouter();
   // FIXME: Polyfill is not needed beyond 768px
+  const buttonRef = useRef();
   useEffect(() => {
     scrollPolyfill();
   }, []);
@@ -79,6 +80,7 @@ const Footer = ({
   const selectedSlide = slides.findIndex((slide) => slide.id === slideId);
   const selectedPost = posts.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
   const [expandedContactLinks, setExpandedContactLinks] = useState(false);
+
   return (
     <footer className={styles.footer}>
       <div
@@ -137,6 +139,7 @@ const Footer = ({
           ) : null}
         </nav>
         <nav
+          ref={buttonRef}
           className={`${styles.mobileFilters} ${
             expandedContactLinks && styles.socialLinksExpanded
           }`}
@@ -144,7 +147,16 @@ const Footer = ({
           {expandedContactLinks === false ? (
             <button
               className={styles.buttonLink}
-              onClick={() => setExpandedContactLinks(true)}
+              onClick={() => (
+                setTimeout(() => {
+                  buttonRef.current.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                    inline: "center",
+                  });
+                }, 0),
+                setExpandedContactLinks(true)
+              )}
             >
               Contact
             </button>

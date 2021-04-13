@@ -125,6 +125,50 @@ const Article = ({ id }) => {
   }
 };
 
+const Artwork = ({ id }) => {
+  // FIXME: Find better way to fetch objects
+  switch (id) {
+    case "hello_world":
+      return (
+        <figure
+          className={styles.articleArtwork}
+          style={{
+            backgroundImage: "url(/images/hello-world.jpg)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        />
+      );
+    case "suntory_toki_review":
+      return (
+        <figure
+          className={styles.articleArtwork}
+          style={{
+            backgroundColor: `var(--container)`, // FIXME: Add whisky image
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Image placeholder
+        </figure>
+      );
+    default:
+      return (
+        <figure
+          className={styles.articleArtwork}
+          style={{
+            backgroundImage: "url(/images/hello-world.jpg)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        />
+      );
+  }
+};
+
 const Seperator = () => <hr className={styles.articleSeperator} />;
 
 const Footer = () => {
@@ -166,21 +210,11 @@ const Footer = () => {
 const Post = ({ id }) => {
   return (
     <>
-      <figure
-        className={styles.articleArtwork}
-        style={{
-          backgroundColor: `var(--container)`, // FIXME: Fetch images based on post
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        Image placeholder
-      </figure>
-      <div className={styles.articleContent}>
+      <Artwork id={id} />
+      <article className={styles.articleContent}>
         <Article id={id} />
         <Footer />
-      </div>
+      </article>
     </>
   );
 };
