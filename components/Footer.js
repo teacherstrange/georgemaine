@@ -162,7 +162,7 @@ const Footer = ({
                 setTimeout(() => {
                   buttonRef.current.scrollIntoView({
                     behavior: "smooth",
-                    block: "center",
+                    block: "nearest",
                     inline: "end",
                   });
                 }, 0),
