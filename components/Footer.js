@@ -162,8 +162,8 @@ const Footer = ({
                 setTimeout(() => {
                   buttonRef.current.scrollIntoView({
                     behavior: "smooth",
-                    block: "nearest",
-                    inline: "left",
+                    block: "center",
+                    inline: "end",
                   });
                 }, 0),
                 setExpandedContactLinks(true)
