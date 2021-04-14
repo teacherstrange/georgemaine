@@ -77,6 +77,12 @@ const Footer = ({
     scrollPolyfill();
   }, []);
 
+  // FIXME: Make util out of this
+  const handleFilters = (hook, id) => {
+    hook(id);
+    setExpandedContactLinks(false);
+  };
+
   const selectedSlide = slides.findIndex((slide) => slide.id === slideId);
   const selectedPost = posts.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
   const [expandedContactLinks, setExpandedContactLinks] = useState(false);
@@ -96,7 +102,9 @@ const Footer = ({
           {filterId === "posts" ? (
             <button
               className={styles.buttonLink}
-              onClick={() => (router.push("/"), setFilterId("slides"))}
+              onClick={() => (
+                router.push("/"), handleFilters(setFilterId, "slides")
+              )}
             >
               Work
             </button>
@@ -121,7 +129,7 @@ const Footer = ({
           {filterId === "slides" ? (
             <button
               className={styles.buttonLink}
-              onClick={() => setFilterId("posts")}
+              onClick={() => handleFilters(setFilterId, "posts")}
             >
               Articles
             </button>
@@ -143,6 +151,9 @@ const Footer = ({
           className={`${styles.mobileFilters} ${
             expandedContactLinks && styles.socialLinksExpanded
           }`}
+          style={{
+            minWidth: expandedContactLinks ? 246 : 126,
+          }}
         >
           {expandedContactLinks === false ? (
             <button
@@ -152,7 +163,7 @@ const Footer = ({
                   buttonRef.current.scrollIntoView({
                     behavior: "smooth",
                     block: "nearest",
-                    inline: "center",
+                    inline: "left",
                   });
                 }, 0),
                 setExpandedContactLinks(true)
