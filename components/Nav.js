@@ -10,35 +10,35 @@ const slides = [
     id: "Mollie Mobile",
     caption:
       "Designed apps for iOS, Android and developed the landing page • 2020",
-    width: 129,
+    width: 141,
     x: 0,
   },
   {
     id: "Mollie Video",
     caption:
       "Created an engaging video to help showcase Mollie at events • 2020",
-    width: 121,
-    x: 129,
+    width: 133,
+    x: 141,
   },
   {
     id: "Mollie Checkout",
     caption:
       "Redesigned and developed the Mollie Checkout Web application • 2019",
-    width: 152,
-    x: 250,
+    width: 164,
+    x: 274,
   },
   {
     id: "Mollie Apple Pay",
     caption:
       "Created an engaging promo video for the Mollie Apple Pay launch • 2019",
-    width: 153,
-    x: 402,
+    width: 164,
+    x: 436,
   },
 ];
 
-const posts = [
-  { id: "Hello world", url: "hello_world", width: 112, x: 0 },
-  { id: "Suntory Toki review", url: "suntory_toki_review", width: 176, x: 112 },
+const blog = [
+  { id: "Hello world", url: "hello_world", width: 124, x: 0 },
+  { id: "Suntory Toki review", url: "suntory_toki_review", width: 188, x: 124 },
 ];
 
 const links = [
@@ -75,7 +75,7 @@ const Nav = ({
   const router = useRouter();
   const [expandedContactLinks, setExpandedContactLinks] = useState(false);
   const selectedSlide = slides.findIndex((slide) => slide.id === slideId);
-  const selectedPost = posts.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
+  const selectedPost = blog.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
 
   const handleFilters = (hook, id) => {
     hook(id);
@@ -89,7 +89,7 @@ const Nav = ({
           filterId === "slides" && styles.workFiltersExpanded
         }`}
       >
-        {filterId === "posts" ? (
+        {filterId === "blog" ? (
           <button
             className={styles.buttonLink}
             onClick={() => (
@@ -122,23 +122,23 @@ const Nav = ({
       </nav>
       <nav
         className={`${styles.filters} ${
-          filterId === "posts" && styles.articleFiltersExpanded
+          filterId === "blog" && styles.articleFiltersExpanded
         }`}
       >
         {filterId === "slides" ? (
           <button
             className={styles.buttonLink}
-            onClick={() => handleFilters(setFilterId, "posts")}
+            onClick={() => handleFilters(setFilterId, "blog")}
           >
-            Articles
+            Blog
           </button>
         ) : (
-          posts.map((post, index) => (
+          blog.map((post, index) => (
             // FIXME: Use components to create these
             <Link
               key={index}
               href={`/?postId=${post.url}`}
-              as={`/post/${post.url}`}
+              as={`/blog/${post.url}`}
             >
               <button
                 onClick={() => handleFilters(setPostId, post.id)}
@@ -149,12 +149,12 @@ const Nav = ({
             </Link>
           ))
         )}
-        {filterId == "posts" ? (
+        {filterId == "blog" ? (
           <div
             className={styles.filterSelection}
             style={{
-              width: posts[selectedPost].width,
-              transform: `translateX(${posts[selectedPost].x}px)`,
+              width: blog[selectedPost].width,
+              transform: `translateX(${blog[selectedPost].x}px)`,
             }}
           ></div>
         ) : null}

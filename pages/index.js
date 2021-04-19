@@ -29,7 +29,7 @@ const Index = () => {
         postId={postId}
         setPostId={setPostId}
       />
-      {filterId === "posts" ? (
+      {filterId === "blog" ? (
         <Post id={router.query.postId} pathname={router.pathname} />
       ) : filterId === "slides" ? (
         <Slide id={slideId} />

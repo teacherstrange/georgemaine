@@ -10,32 +10,32 @@ import scrollPolyfill from "scroll-polyfill";
 // FIXME: Is this the right position for these objects
 // FIXME: Consolidate Footer & Nav objects
 const slides = [
-  { id: "Mollie Mobile", width: 129, x: 0 },
-  { id: "Mollie Video", width: 121, x: 129 },
+  { id: "Mollie Mobile", width: 141, x: 0 },
+  { id: "Mollie Video", width: 133, x: 141 },
   {
     id: "Mollie Checkout",
-    width: 152,
-    x: 250,
+    width: 164,
+    x: 274,
   },
   {
     id: "Mollie Apple Pay",
-    width: 153,
-    x: 402,
+    width: 164,
+    x: 436,
   },
 ];
 
-const posts = [
+const blog = [
   {
     id: "Hello world",
     url: "hello_world",
-    width: 112,
+    width: 124,
     x: 0,
   },
   {
     id: "Suntory Toki review",
     url: "suntory_toki_review",
-    width: 176,
-    x: 112,
+    width: 188,
+    x: 124,
   },
 ];
 
@@ -84,7 +84,7 @@ const Footer = ({
   };
 
   const selectedSlide = slides.findIndex((slide) => slide.id === slideId);
-  const selectedPost = posts.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
+  const selectedPost = blog.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
   const [expandedContactLinks, setExpandedContactLinks] = useState(false);
 
   return (
@@ -99,7 +99,7 @@ const Footer = ({
             filterId === "slides" && styles.workFiltersExpanded
           }`}
         >
-          {filterId === "posts" ? (
+          {filterId === "blog" ? (
             <button
               className={styles.buttonLink}
               onClick={() => (
@@ -123,25 +123,25 @@ const Footer = ({
         </nav>
         <nav
           className={`${styles.mobileFilters} ${
-            filterId === "posts" && styles.articleFiltersExpanded
+            filterId === "blog" && styles.articleFiltersExpanded
           }`}
         >
           {filterId === "slides" ? (
             <button
               className={styles.buttonLink}
-              onClick={() => handleFilters(setFilterId, "posts")}
+              onClick={() => handleFilters(setFilterId, "blog")}
             >
-              Articles
+              Blog
             </button>
           ) : (
-            <FilterLinks array={posts} setId={setPostId} />
+            <FilterLinks array={blog} setId={setPostId} />
           )}
-          {filterId == "posts" ? (
+          {filterId == "blog" ? (
             <div
               className={styles.filterSelection}
               style={{
-                width: posts[selectedPost].width,
-                transform: `translateX(${posts[selectedPost].x}px)`,
+                width: blog[selectedPost].width,
+                transform: `translateX(${blog[selectedPost].x}px)`,
               }}
             ></div>
           ) : null}

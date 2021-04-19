@@ -41,7 +41,7 @@ export const FilterLinks = ({ array, setId }) => (
         <Link
           key={object.id}
           href={`/?postId=${object.url}`}
-          as={`/post/${object.url}`}
+          as={`/blog/${object.url}`}
         >
           <button
             key={object.id}
