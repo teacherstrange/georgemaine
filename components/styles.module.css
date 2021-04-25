@@ -126,7 +126,7 @@
 .footer {
   display: flex;
   align-items: center;
-  position: absolute;
+  position: fixed;
   height: 4.2rem;
   bottom: 6%;
   left: 0;
