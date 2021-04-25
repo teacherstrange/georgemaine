@@ -3,7 +3,7 @@ import Link from "next/link";
 import Icon from "./Icon";
 import styles from "./styles.module.css";
 import { Filters, FilterLinks } from "./Filters";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import scrollPolyfill from "scroll-polyfill";
 // FIXME: Polyfill belongs inside component
 
@@ -31,13 +31,9 @@ const blog = [
     width: 124,
     x: 0,
   },
-  {
-    id: "Suntory Toki review",
-    url: "suntory_toki_review",
-    width: 188,
-    x: 124,
-  },
 ];
+
+// FIXME: Merge blog with links
 
 const links = [
   {
@@ -72,7 +68,7 @@ const Footer = ({
 }) => {
   const router = useRouter();
   // FIXME: Polyfill is not needed beyond 768px
-  const buttonRef = useRef();
+
   useEffect(() => {
     scrollPolyfill();
   }, []);
@@ -106,7 +102,7 @@ const Footer = ({
                 router.push("/"), handleFilters(setFilterId, "slides")
               )}
             >
-              Work
+              Portfolio
             </button>
           ) : (
             <Filters array={slides} setId={setSlideId} />
@@ -131,10 +127,24 @@ const Footer = ({
               className={styles.buttonLink}
               onClick={() => handleFilters(setFilterId, "blog")}
             >
-              Blog
+              Get in touch
             </button>
           ) : (
-            <FilterLinks array={blog} setId={setPostId} />
+            <>
+              <FilterLinks array={blog} setId={setPostId} />
+              {links.map((link, index) => (
+                <Link key={index} href={link.url}>
+                  <a
+                    target='_blank'
+                    rel='noreferrer'
+                    onClick={() => setExpandedContactLinks(false)}
+                    className={styles.button}
+                  >
+                    <Icon string={link.id} />
+                  </a>
+                </Link>
+              ))}
+            </>
           )}
           {filterId == "blog" ? (
             <div
@@ -144,46 +154,6 @@ const Footer = ({
                 transform: `translateX(${blog[selectedPost].x}px)`,
               }}
             ></div>
-          ) : null}
-        </nav>
-        <nav
-          ref={buttonRef}
-          className={`${styles.mobileFilters} ${
-            expandedContactLinks && styles.socialLinksExpanded
-          }`}
-          style={{
-            minWidth: expandedContactLinks ? 246 : 126,
-          }}
-        >
-          {expandedContactLinks === false ? (
-            <button
-              className={styles.buttonLink}
-              onClick={() => (
-                setTimeout(() => {
-                  buttonRef.current.scrollIntoView({
-                    behavior: "smooth",
-                    block: "nearest",
-                    inline: "end",
-                  });
-                }, 0),
-                setExpandedContactLinks(true)
-              )}
-            >
-              Get in touch
-            </button>
-          ) : expandedContactLinks ? (
-            links.map((link, index) => (
-              <Link key={index} href={link.url}>
-                <a
-                  target='_blank'
-                  rel='noreferrer'
-                  onClick={() => setExpandedContactLinks(false)}
-                  className={styles.button}
-                >
-                  <Icon string={link.id} />
-                </a>
-              </Link>
-            ))
           ) : null}
         </nav>
       </div>

@@ -36,10 +36,7 @@ const slides = [
   },
 ];
 
-const blog = [
-  { id: "Hello world", url: "hello_world", width: 124, x: 0 },
-  { id: "Suntory Toki review", url: "suntory_toki_review", width: 188, x: 124 },
-];
+const blog = [{ id: "Hello world", url: "hello_world", width: 112, x: 0 }];
 
 const links = [
   {
@@ -73,7 +70,7 @@ const Nav = ({
   setSlideId,
 }) => {
   const router = useRouter();
-  const [expandedContactLinks, setExpandedContactLinks] = useState(false);
+  const [expandedContactLinks, setExpandedContactLinks] = useState(false); // FIXME: Clean this up
   const selectedSlide = slides.findIndex((slide) => slide.id === slideId);
   const selectedPost = blog.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
 
@@ -96,7 +93,7 @@ const Nav = ({
               router.push("/"), handleFilters(setFilterId, "slides")
             )}
           >
-            Work
+            Portfolio
           </button>
         ) : (
           slides.map((slide, index) => (
@@ -130,24 +127,38 @@ const Nav = ({
             className={styles.buttonLink}
             onClick={() => handleFilters(setFilterId, "blog")}
           >
-            Blog
+            Get in touch
           </button>
         ) : (
-          blog.map((post, index) => (
-            // FIXME: Use components to create these
-            <Link
-              key={index}
-              href={`/?postId=${post.url}`}
-              as={`/blog/${post.url}`}
-            >
-              <button
-                onClick={() => handleFilters(setPostId, post.id)}
-                className={styles.filter}
+          <>
+            {blog.map((post, index) => (
+              // FIXME: Use components to create these
+              <Link
+                key={index}
+                href={`/?postId=${post.url}`}
+                as={`/blog/${post.url}`}
               >
-                {post.id}
-              </button>
-            </Link>
-          ))
+                <button
+                  onClick={() => handleFilters(setPostId, post.id)}
+                  className={styles.filter}
+                >
+                  About me
+                </button>
+              </Link>
+            ))}
+            {links.map((link, index) => (
+              <Link key={index} href={link.url}>
+                <a
+                  target='_blank'
+                  rel='noreferrer'
+                  onClick={() => setExpandedContactLinks(false)}
+                  className={styles.button}
+                >
+                  <Icon string={link.id} />
+                </a>
+              </Link>
+            ))}
+          </>
         )}
         {filterId == "blog" ? (
           <div
@@ -157,33 +168,6 @@ const Nav = ({
               transform: `translateX(${blog[selectedPost].x}px)`,
             }}
           ></div>
-        ) : null}
-      </nav>
-      <nav
-        className={`${styles.filters} ${
-          expandedContactLinks && styles.socialLinksExpanded
-        }`}
-      >
-        {expandedContactLinks === false ? (
-          <button
-            className={styles.buttonLink}
-            onClick={() => setExpandedContactLinks(true)}
-          >
-            Get in touch
-          </button>
-        ) : expandedContactLinks ? (
-          links.map((link, index) => (
-            <Link key={index} href={link.url}>
-              <a
-                target='_blank'
-                rel='noreferrer'
-                onClick={() => setExpandedContactLinks(false)}
-                className={styles.button}
-              >
-                <Icon string={link.id} />
-              </a>
-            </Link>
-          ))
         ) : null}
       </nav>
     </header>
