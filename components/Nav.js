@@ -37,6 +37,19 @@ const slides = [
 ];
 
 const blog = [{ id: "Hello world", url: "hello_world", width: 112, x: 0 }];
+const watchlist = [
+  {
+    title: "Wonder Woman",
+    description:
+      "Before she was Wonder Woman, she was Diana, princess of the Amazons, trained to be an unconquerable warrior. Raised on a sheltered island paradise, when an American pilot crashes on their shores and tells of a massive conflict raging in the outside world, Diana leaves her home, convinced she can stop the threat. Fighting alongside man in a war to end all wars, Diana will discover her full powers… and her true destiny.",
+    metadata: {
+      genre: "Action",
+      date: "2017",
+      duration: "2 hr 21 min",
+      platform: "Apple TV+",
+    },
+  },
+];
 
 const links = [
   {
@@ -86,7 +99,7 @@ const Nav = ({
           filterId === "slides" && styles.workFiltersExpanded
         }`}
       >
-        {filterId === "blog" ? (
+        {filterId === "blog" || filterId === "watchlist" ? (
           <button
             className={styles.buttonLink}
             onClick={() => (
@@ -117,12 +130,46 @@ const Nav = ({
           ></div>
         ) : null}
       </nav>
+
+      <nav className={`${styles.filters} `}>
+        {filterId === "slides" || filterId === "blog" ? (
+          <button
+            className={styles.buttonLink}
+            onClick={() => (
+              router.push("/"), handleFilters(setFilterId, "watchlist")
+            )}
+          >
+            Watch List
+          </button>
+        ) : (
+          watchlist.map((item, index) => (
+            // FIXME: Can we use components here?
+            <button
+              className={styles.filter}
+              onClick={() => handleFilters(setSlideId, item.id)}
+              key={index}
+            >
+              Watch List
+            </button>
+          ))
+        )}
+        {/* {filterId == "watchlist" ? (
+          <div
+            className={styles.filterSelection}
+            style={{
+              width: watchlist[selectedSlide].width, // FIXME: Update widths
+              transform: `translateX(${watchlist[selectedSlide].x}px)`,
+            }}
+          ></div>
+        ) : null} */}
+      </nav>
+
       <nav
         className={`${styles.filters} ${
           filterId === "blog" && styles.articleFiltersExpanded
         }`}
       >
-        {filterId === "slides" ? (
+        {filterId === "slides" || filterId === "watchlist" ? (
           <button
             className={styles.buttonLink}
             onClick={() => handleFilters(setFilterId, "blog")}

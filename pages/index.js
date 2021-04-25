@@ -3,6 +3,7 @@ import Post from "../components/Post";
 import Slide from "../components/Slide";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
+import WatchList from "../components/WatchList";
 import { useState } from "react";
 
 const Index = () => {
@@ -33,6 +34,19 @@ const Index = () => {
         <Post id={router.query.postId} pathname={router.pathname} />
       ) : filterId === "slides" ? (
         <Slide id={slideId} />
+      ) : filterId === "watchlist" ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            background: "var(--container)",
+            width: "100vw",
+            height: "100vh",
+          }}
+        >
+          <WatchList />
+        </div>
       ) : null}
       {/* // FIXME: find alternative to null */}
     </>
