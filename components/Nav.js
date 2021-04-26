@@ -39,15 +39,7 @@ const slides = [
 const blog = [{ id: "Hello world", url: "hello_world", width: 112, x: 0 }];
 const watchlist = [
   {
-    title: "Wonder Woman",
-    description:
-      "Before she was Wonder Woman, she was Diana, princess of the Amazons, trained to be an unconquerable warrior. Raised on a sheltered island paradise, when an American pilot crashes on their shores and tells of a massive conflict raging in the outside world, Diana leaves her home, convinced she can stop the threat. Fighting alongside man in a war to end all wars, Diana will discover her full powers… and her true destiny.",
-    metadata: {
-      genre: "Action",
-      date: "2017",
-      duration: "2 hr 21 min",
-      platform: "Apple TV+",
-    },
+    id: "Wonder Woman 1987",
   },
 ];
 

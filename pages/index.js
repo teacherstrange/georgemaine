@@ -6,6 +6,24 @@ import Footer from "../components/Footer";
 import WatchList from "../components/WatchList";
 import { useState } from "react";
 
+const movies = [
+  "Wonder Woman",
+  "Movie 2",
+  "Movie 3",
+  "Movie 4",
+  "Movie 5",
+  "Movie 6",
+  "Movie 7",
+];
+
+const setShuffle = (array) => {
+  while (array.length) {
+    const random = Math.floor(Math.random() * array.length);
+    const el = array.splice(random, 1)[0];
+    return el;
+  }
+};
+
 const Index = () => {
   const router = useRouter();
   const [filterId, setFilterId] = useState("slides"); // FIXME: Better naming
@@ -35,18 +53,7 @@ const Index = () => {
       ) : filterId === "slides" ? (
         <Slide id={slideId} />
       ) : filterId === "watchlist" ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            background: "var(--container)",
-            width: "100vw",
-            height: "100vh",
-          }}
-        >
-          <WatchList />
-        </div>
+        <WatchList shuffleList={movies} shuffleMethod={setShuffle(movies)} />
       ) : null}
       {/* // FIXME: find alternative to null */}
     </>
