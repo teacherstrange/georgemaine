@@ -1,29 +1,19 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
 
-const Controls = ({ onShuffleBtnClick, onPlayBtnClick, trailerModalState }) => {
-  const movies = [
-    "Wonder Woman",
-    "Movie 2",
-    "Movie 3",
-    "Movie 4",
-    "Movie 5",
-    "Movie 6",
-    "Movie 7",
-  ];
-
-  const shuffle = (array) => {
-    while (array.length) {
-      const random = Math.floor(Math.random() * array.length);
-      const el = array.splice(random, 1)[0];
-      return el;
-    }
-  };
-
+const Controls = ({
+  onShuffleBtnClick,
+  onTrailerBtnClick,
+  shuffleList,
+  shuffleMethod,
+  trailerModalState,
+}) => {
   return (
     <footer className={styles.filters}>
-      <button onClick={() => onPlayBtnClick(!trailerModalState)}>Play</button>
-      <button onClick={() => onShuffleBtnClick(shuffle(movies))}>
+      <button onClick={() => onTrailerBtnClick(!trailerModalState)}>
+        Play
+      </button>
+      <button onClick={() => onShuffleBtnClick(shuffleMethod(shuffleList))}>
         Shuffle
       </button>
       <button>Share</button>
@@ -31,13 +21,50 @@ const Controls = ({ onShuffleBtnClick, onPlayBtnClick, trailerModalState }) => {
   );
 };
 
-const Player = ({ onCloseBtnClick }) => {
+const Player = ({ onCloseBtnClick, trailerId }) => {
   return (
     <div className={styles.watchListPlayer}>
-      <button onClick={() => onCloseBtnClick(false)}>Close</button>Trailer
-      placeholder
+      <Trailer id={trailerId} />
+      <button
+        onClick={() => onCloseBtnClick(false)}
+        style={{ position: "relative" }}
+      >
+        Close
+      </button>
+      Trailer placeholder
     </div>
   );
+};
+
+const Trailer = ({ id }) => {
+  switch (id) {
+    case "Wonder Woman":
+      return (
+        <video
+          autoPlay
+          controls
+          playsInline
+          muted
+          loop
+          className={styles.video}
+          src={
+            "https://play.itunes.apple.com/WebObjects/MZPlay.woa/hls/playlist.m3u8?cc=NL&a=1545235353&id=233856991&l=nl-NL&aec=HD&xtrick=true&webbrowser=true"
+          }
+        />
+      );
+    default:
+      return (
+        <video
+          autoPlay
+          controls
+          playsInline
+          muted
+          loop
+          className={styles.video}
+          src={""}
+        />
+      );
+  }
 };
 
 const Metadata = ({ id }) => {
@@ -102,7 +129,7 @@ const Description = ({ id }) => {
   }
 };
 
-const WatchList = () => {
+const WatchList = ({ shuffleList, shuffleMethod }) => {
   const [watchlistId, setWatchlistId] = useState("Movie Title");
   const [trailerModalActive, setTrailerModalActive] = useState(false);
 
@@ -115,14 +142,19 @@ const WatchList = () => {
         </p>
         <Description id={watchlistId} />
         <Controls
-          onPlayBtnClick={setTrailerModalActive}
+          onTrailerBtnClick={setTrailerModalActive}
           trailerModalState={trailerModalActive}
           onShuffleBtnClick={setWatchlistId}
+          shuffleList={shuffleList}
+          shuffleMethod={shuffleMethod}
           id={watchlistId}
         />
       </main>
       {trailerModalActive ? (
-        <Player onCloseBtnClick={setTrailerModalActive} />
+        <Player
+          onCloseBtnClick={setTrailerModalActive}
+          trailerId={watchlistId}
+        />
       ) : null}
     </>
   );

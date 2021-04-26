@@ -16,7 +16,7 @@ const movies = [
   "Movie 7",
 ];
 
-const setShuffle = (array) => {
+const shuffle = (array) => {
   while (array.length) {
     const random = Math.floor(Math.random() * array.length);
     const el = array.splice(random, 1)[0];
@@ -53,7 +53,7 @@ const Index = () => {
       ) : filterId === "slides" ? (
         <Slide id={slideId} />
       ) : filterId === "watchlist" ? (
-        <WatchList shuffleList={movies} shuffleMethod={setShuffle(movies)} />
+        <WatchList shuffleList={movies} shuffleMethod={shuffle} />
       ) : null}
       {/* // FIXME: find alternative to null */}
     </>
