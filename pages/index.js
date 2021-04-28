@@ -17,10 +17,14 @@ const movies = [
 ];
 
 const shuffle = (array) => {
-  while (array.length) {
+  const storedArray = array;
+
+  if (array.length) {
     const random = Math.floor(Math.random() * array.length);
     const el = array.splice(random, 1)[0];
     return el;
+  } else {
+    console.log(storedArray);
   }
 };
 
