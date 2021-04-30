@@ -162,7 +162,10 @@ const WatchList = ({ shuffleList, shuffleMethod }) => {
         />
       </main>
       {trailerModalActive ? (
-        <Player trailerId={suggested[suggested.length - 1] || "Wonder Woman"} />
+        <Player
+          onCloseBtnClick={setTrailerModalActive}
+          trailerId={suggested[suggested.length - 1] || "Wonder Woman"}
+        />
       ) : null}
     </>
   );
