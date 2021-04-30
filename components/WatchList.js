@@ -1,21 +1,22 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
 
+const getRandomMovie = (arr) => {
+  const randomMovie = Math.floor(Math.random() * arr.length);
+  return arr[randomMovie];
+};
+
 const Controls = ({
-  onShuffleBtnClick,
   onTrailerBtnClick,
-  shuffleList,
-  shuffleMethod,
   trailerModalState,
+  onShuffleBtnClick,
 }) => {
   return (
     <footer className={styles.filters}>
       <button onClick={() => onTrailerBtnClick(!trailerModalState)}>
         Play
       </button>
-      <button onClick={() => onShuffleBtnClick(shuffleMethod(shuffleList))}>
-        Shuffle
-      </button>
+      <button onClick={onShuffleBtnClick}>Shuffle</button>
       <button>Share</button>
     </footer>
   );
@@ -130,31 +131,38 @@ const Description = ({ id }) => {
 };
 
 const WatchList = ({ shuffleList, shuffleMethod }) => {
-  const [watchlistId, setWatchlistId] = useState("Movie Title");
   const [trailerModalActive, setTrailerModalActive] = useState(false);
+  const [suggested, setSuggested] = useState([]);
+  const movies = ["Wonder Woman", "Interstellar", "Inception"];
 
   return (
     <>
       <main className={styles.watchListWrapper}>
-        <Metadata id={watchlistId} />
+        <Metadata id={suggested[suggested.length - 1] || "Wonder Woman"} />
         <p>
-          <strong>{watchlistId}</strong>
+          <strong>{suggested[suggested.length - 1] || "Wonder Woman"}</strong>
         </p>
-        <Description id={watchlistId} />
+        <Description id={suggested[suggested.length - 1] || "Wonder Woman"} />
         <Controls
           onTrailerBtnClick={setTrailerModalActive}
           trailerModalState={trailerModalActive}
-          onShuffleBtnClick={setWatchlistId}
+          onShuffleBtnClick={() => {
+            const filtered = movies.filter(
+              (value) => !suggested.includes(value)
+            );
+            const el = getRandomMovie(filtered);
+            const suggestions = el
+              ? [...suggested, el]
+              : [getRandomMovie(movies)];
+            setSuggested(suggestions);
+          }}
           shuffleList={shuffleList}
           shuffleMethod={shuffleMethod}
-          id={watchlistId}
+          id={suggested[suggested.length - 1] || "Wonder Woman"}
         />
       </main>
       {trailerModalActive ? (
-        <Player
-          onCloseBtnClick={setTrailerModalActive}
-          trailerId={watchlistId}
-        />
+        <Player trailerId={suggested[suggested.length - 1] || "Wonder Woman"} />
       ) : null}
     </>
   );
