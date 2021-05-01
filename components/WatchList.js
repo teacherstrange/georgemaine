@@ -37,6 +37,52 @@ const Player = ({ onCloseBtnClick, trailerId }) => {
   );
 };
 
+const MoviePoster = ({ id }) => {
+  // FIXME: Improve code
+  switch (id) {
+    case "Wonder Woman":
+      return (
+        <figure
+          style={{
+            position: "absolute",
+            zIndex: -2,
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            backgroundImage: "url(images/wonder-woman.jpg",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center top",
+            width: "100%",
+            height: "100%",
+          }}
+        />
+      );
+    default:
+      return (
+        <figure
+          style={{
+            position: "absolute",
+            zIndex: -2,
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            backgroundImage:
+              "linear-gradient(to right, #feefff, #e1d6ea 50%, #FFE4E2 75%)",
+            backgroundPosition: "100% 0%",
+            transition:
+              "4s background-position,transform 1s cubic-bezier(0.39, 0.575, 0.565, 1)",
+            backgroundSize: "300% 100%",
+            width: "100%",
+            height: "100%",
+          }}
+        />
+      );
+  }
+};
+
 const Trailer = ({ id }) => {
   switch (id) {
     case "Wonder Woman":
@@ -138,6 +184,7 @@ const WatchList = ({ shuffleList, shuffleMethod }) => {
   return (
     <>
       <main className={styles.watchListWrapper}>
+        <MoviePoster id={suggested[suggested.length - 1]} />
         <Metadata id={suggested[suggested.length - 1] || "Wonder Woman"} />
         <p>
           <strong>{suggested[suggested.length - 1] || "Wonder Woman"}</strong>
