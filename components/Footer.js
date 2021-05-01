@@ -77,13 +77,13 @@ const Footer = ({
         </nav>
 
         <nav
-          className={`${styles.mobileFilters} ${
+          className={`${styles.controls} ${
             filterId === "portfolio" && styles.workFiltersExpanded
           }`}
         >
           {filterId === "portfolio" || filterId === "blog" ? (
             <button
-              className={styles.buttonLink}
+              className={styles.buttonControl}
               onClick={() => (router.push("/"), setFilterId("watchlist"))}
             >
               Watch List
@@ -92,7 +92,7 @@ const Footer = ({
             <>
               <button
                 onClick={() => onTrailerBtnClick(!trailerModalState)}
-                className={styles.button}
+                className={styles.buttonControl}
                 style={{
                   // FIXME: Improve icon only styling
                   borderRadius: 0,
@@ -102,7 +102,7 @@ const Footer = ({
               </button>
               <button
                 onClick={onShuffleBtnClick}
-                className={styles.button}
+                className={styles.buttonControl}
                 style={{
                   borderRadius: 0,
                 }}
@@ -111,7 +111,7 @@ const Footer = ({
               </button>
               <button
                 onClick={onShareBtnClick}
-                className={styles.button}
+                className={styles.buttonControl}
                 style={{
                   borderRadius: 0,
                 }}

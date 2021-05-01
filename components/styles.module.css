@@ -203,9 +203,27 @@
   display: flex;
   align-items: center;
   margin: 0;
+  color: var(--primaryText);
 }
 
-.button:hover {
+.buttonControl {
+  font-size: 1.7rem;
+  line-height: 2.2rem;
+  letter-spacing: 0.035rem;
+  font-weight: 400;
+  text-decoration: none;
+  padding: 0.9rem 1.8rem;
+  border-radius: 0;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  color: var(--primaryText);
+}
+
+.button:hover,
+.buttonControl:hover {
   background-color: rgba(0, 0, 0, 0.06);
 }
 
@@ -262,6 +280,17 @@
   margin: 0 0.6rem;
   border-radius: 3rem;
   padding: 0.3rem;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(3rem) saturate(25%);
+}
+
+.controls {
+  background: rgba(227, 227, 227, 0.6);
+  /* FIXME: display-p3 color */
+  display: flex;
+  margin: 0 0.6rem;
+  border-radius: 3rem;
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(3rem) saturate(25%);

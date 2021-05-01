@@ -9,14 +9,15 @@ const Controls = ({
 }) => {
   return (
     <footer
-      className={styles.filters}
+      className={styles.controls}
       style={{
         padding: 0,
+        bottom: "4%",
       }}
     >
       <button
         onClick={() => onTrailerBtnClick(!trailerModalState)}
-        className={styles.button}
+        className={styles.buttonControl}
         style={{
           borderRadius: 0,
         }}
@@ -24,7 +25,7 @@ const Controls = ({
         <Icon string={"Play"} />
       </button>
       <button
-        className={styles.button}
+        className={styles.buttonControl}
         onClick={onShuffleBtnClick}
         style={{
           borderRadius: 0,
@@ -33,7 +34,7 @@ const Controls = ({
         Shuffle
       </button>
       <button
-        className={styles.button}
+        className={styles.buttonControl}
         onClick={onShareBtnClick}
         style={{
           borderRadius: 0,
