@@ -73,6 +73,38 @@ const Icon = ({ string }) => {
           />
         </svg>
       );
+    case "Play":
+      return (
+        <svg
+          width='24'
+          height='24'
+          fill='none'
+          xmlns='http://www.w3.org/2000/svg'
+        >
+          <path
+            d='M7 5.79a1 1 0 011.524-.852l10.092 6.21a1 1 0 010 1.704l-10.092 6.21A1 1 0 017 18.21V5.79z'
+            fill='var(--primaryText)'
+          />
+        </svg>
+      );
+    case "Share":
+      return (
+        <svg
+          width='16'
+          height='16'
+          viewBox='0 0 16 16'
+          fill='none'
+          xmlns='http://www.w3.org/2000/svg'
+        >
+          <path
+            d='M1.5 9.5V11.5C1.5 13.1569 2.56091 14.5 4.21777 14.5H11.783C13.4399 14.5 14.5 13.1569 14.5 11.5V9.5M5.39168 4L8.00038 1.5L5.39168 4ZM8.00038 1.5L10.6091 4L8.00038 1.5ZM8.00038 1.5V9.5V1.5Z'
+            stroke='var(--primaryText)'
+            strokeWidth='1.25'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+          />
+        </svg>
+      );
   }
 };
 

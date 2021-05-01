@@ -90,11 +90,34 @@ const Footer = ({
             </button>
           ) : (
             <>
-              <button onClick={() => onTrailerBtnClick(!trailerModalState)}>
-                Play
+              <button
+                onClick={() => onTrailerBtnClick(!trailerModalState)}
+                className={styles.button}
+                style={{
+                  // FIXME: Improve icon only styling
+                  borderRadius: 0,
+                }}
+              >
+                <Icon string={"Play"} />
               </button>
-              <button onClick={onShuffleBtnClick}>Shuffle</button>
-              <button onClick={onShareBtnClick}>Share</button>
+              <button
+                onClick={onShuffleBtnClick}
+                className={styles.button}
+                style={{
+                  borderRadius: 0,
+                }}
+              >
+                Shuffle
+              </button>
+              <button
+                onClick={onShareBtnClick}
+                className={styles.button}
+                style={{
+                  borderRadius: 0,
+                }}
+              >
+                <Icon string={"Share"} />
+              </button>
             </>
           )}
         </nav>

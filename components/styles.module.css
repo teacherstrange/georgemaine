@@ -205,6 +205,10 @@
   margin: 0;
 }
 
+.button:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
 .buttonLink {
   font-size: 1.7rem;
   line-height: 2.4rem;

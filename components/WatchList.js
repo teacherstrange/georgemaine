@@ -1,5 +1,5 @@
-import { useState } from "react";
 import styles from "./styles.module.css";
+import Icon from "../components/Icon";
 
 const Controls = ({
   onTrailerBtnClick,
@@ -8,12 +8,39 @@ const Controls = ({
   onShareBtnClick,
 }) => {
   return (
-    <footer className={styles.filters}>
-      <button onClick={() => onTrailerBtnClick(!trailerModalState)}>
-        Play
+    <footer
+      className={styles.filters}
+      style={{
+        padding: 0,
+      }}
+    >
+      <button
+        onClick={() => onTrailerBtnClick(!trailerModalState)}
+        className={styles.button}
+        style={{
+          borderRadius: 0,
+        }}
+      >
+        <Icon string={"Play"} />
       </button>
-      <button onClick={onShuffleBtnClick}>Shuffle</button>
-      <button onClick={onShareBtnClick}>Share</button>
+      <button
+        className={styles.button}
+        onClick={onShuffleBtnClick}
+        style={{
+          borderRadius: 0,
+        }}
+      >
+        Shuffle
+      </button>
+      <button
+        className={styles.button}
+        onClick={onShareBtnClick}
+        style={{
+          borderRadius: 0,
+        }}
+      >
+        <Icon string={"Share"} />
+      </button>
     </footer>
   );
 };
