@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./styles.module.css";
 
 const getRandomMovie = (arr) => {
@@ -60,6 +60,7 @@ const MoviePoster = ({ id }) => {
           }}
         />
       );
+
     default:
       return (
         <figure
@@ -179,7 +180,13 @@ const Description = ({ id }) => {
 
 const WatchList = () => {
   const [trailerModalActive, setTrailerModalActive] = useState(false);
-  const [suggested, setSuggested] = useState([]);
+  const [suggested, setSuggested] = useState([
+    {
+      name: "Wonder Woman",
+      url:
+        "https://tv.apple.com/nl/movie/wonder-woman-1984/umc.cmc.1pq7jxkjbskjmlbiskxlydtef",
+    },
+  ]);
   const movies = [
     {
       name: "Wonder Woman",
@@ -202,16 +209,12 @@ const WatchList = () => {
     <>
       <main className={styles.watchListWrapper}>
         <MoviePoster id={suggested[suggested.length - 1].name} />
-        <Metadata id={suggested[suggested.length - 1].name || "Wonder Woman"} />
+        <Metadata id={suggested[suggested.length - 1].name} />
         <p>
-          <strong>
-            {suggested[suggested.length - 1].name || "Wonder Woman"}
-          </strong>
+          <strong>{suggested[suggested.length - 1].name}</strong>
         </p>
 
-        <Description
-          id={suggested[suggested.length - 1].name || "Wonder Woman"}
-        />
+        <Description id={suggested[suggested.length - 1].name} />
         <Controls
           onTrailerBtnClick={setTrailerModalActive}
           trailerModalState={trailerModalActive}
@@ -237,7 +240,7 @@ const WatchList = () => {
       {trailerModalActive ? (
         <Player
           onCloseBtnClick={setTrailerModalActive}
-          trailerId={suggested[suggested.length - 1].name || "Wonder Woman"}
+          trailerId={suggested[suggested.length - 1].name}
         />
       ) : null}
     </>
