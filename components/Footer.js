@@ -3,26 +3,10 @@ import Link from "next/link";
 import Icon from "./Icon";
 import styles from "./styles.module.css";
 import { Filters, FilterLinks } from "./Filters";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import scrollPolyfill from "scroll-polyfill";
 // FIXME: Polyfill belongs inside component
-
-// FIXME: Is this the right position for these objects
 // FIXME: Consolidate Footer & Nav objects
-const slides = [
-  { id: "Mollie Mobile", width: 141, x: 0 },
-  { id: "Mollie Video", width: 133, x: 141 },
-  {
-    id: "Mollie Checkout",
-    width: 164,
-    x: 274,
-  },
-  {
-    id: "Mollie Apple Pay",
-    width: 164,
-    x: 436,
-  },
-];
 
 const blog = [
   {
@@ -35,29 +19,6 @@ const blog = [
 
 // FIXME: Merge blog with links
 
-const links = [
-  {
-    id: "Email",
-    url: "mailto:georgemaine.lourens@gmail.com?subject=Hello%20%F0%9F%91%8B",
-  },
-  {
-    id: "Twitter",
-    url: "https://twitter.com/georgemaine",
-  },
-  {
-    id: "Dribbble",
-    url: "https://dribbble.com/georgemaine",
-  },
-  {
-    id: "Github",
-    url: "https://github.com/georgemaine",
-  },
-  {
-    id: "LinkedIn",
-    url: "https://www.linkedin.com/in/georgemaine",
-  },
-];
-
 const Footer = ({
   slideId,
   postId,
@@ -65,6 +26,12 @@ const Footer = ({
   setFilterId,
   filterId,
   setSlideId,
+  onShuffleBtnClick,
+  onShareBtnClick,
+  onTrailerBtnClick,
+  trailerModalState,
+  portfolio,
+  socialLinks,
 }) => {
   const router = useRouter();
   // FIXME: Polyfill is not needed beyond 768px
@@ -73,15 +40,8 @@ const Footer = ({
     scrollPolyfill();
   }, []);
 
-  // FIXME: Make util out of this
-  const handleFilters = (hook, id) => {
-    hook(id);
-    setExpandedContactLinks(false);
-  };
-
-  const selectedSlide = slides.findIndex((slide) => slide.id === slideId);
+  const selectedSlide = portfolio.findIndex((slide) => slide.id === slideId);
   const selectedPost = blog.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
-  const [expandedContactLinks, setExpandedContactLinks] = useState(false);
 
   return (
     <footer className={styles.footer}>
@@ -92,54 +52,71 @@ const Footer = ({
       >
         <nav
           className={`${styles.mobileFilters} ${
-            filterId === "slides" && styles.workFiltersExpanded
+            filterId === "portfolio" && styles.workFiltersExpanded
           }`}
         >
-          {filterId === "blog" ? (
+          {filterId === "blog" || filterId === "watchlist" ? (
             <button
               className={styles.buttonLink}
-              onClick={() => (
-                router.push("/"), handleFilters(setFilterId, "slides")
-              )}
+              onClick={() => (router.push("/"), setFilterId("portfolio"))}
             >
               Portfolio
             </button>
           ) : (
-            <Filters array={slides} setId={setSlideId} />
+            <Filters array={portfolio} setId={setSlideId} />
           )}
-          {filterId == "slides" ? (
+          {filterId == "portfolio" ? (
             <div
               className={styles.filterSelection}
               style={{
-                width: slides[selectedSlide].width,
-                transform: `translateX(${slides[selectedSlide].x}px)`,
+                width: portfolio[selectedSlide].width,
+                transform: `translateX(${portfolio[selectedSlide].x}px)`,
               }}
             ></div>
           ) : null}
         </nav>
+
+        <nav
+          className={`${styles.mobileFilters} ${
+            filterId === "portfolio" && styles.workFiltersExpanded
+          }`}
+        >
+          {filterId === "portfolio" || filterId === "blog" ? (
+            <button
+              className={styles.buttonLink}
+              onClick={() => (router.push("/"), setFilterId("watchlist"))}
+            >
+              Watch List
+            </button>
+          ) : (
+            <>
+              <button onClick={() => onTrailerBtnClick(!trailerModalState)}>
+                Play
+              </button>
+              <button onClick={onShuffleBtnClick}>Shuffle</button>
+              <button onClick={onShareBtnClick}>Share</button>
+            </>
+          )}
+        </nav>
+
         <nav
           className={`${styles.mobileFilters} ${
             filterId === "blog" && styles.articleFiltersExpanded
           }`}
         >
-          {filterId === "slides" ? (
+          {filterId === "portfolio" || filterId === "watchlist" ? (
             <button
               className={styles.buttonLink}
-              onClick={() => handleFilters(setFilterId, "blog")}
+              onClick={() => setFilterId("blog")}
             >
               Get in touch
             </button>
           ) : (
             <>
               <FilterLinks array={blog} setId={setPostId} />
-              {links.map((link, index) => (
+              {socialLinks.map((link, index) => (
                 <Link key={index} href={link.url}>
-                  <a
-                    target='_blank'
-                    rel='noreferrer'
-                    onClick={() => setExpandedContactLinks(false)}
-                    className={styles.button}
-                  >
+                  <a target='_blank' rel='noreferrer' className={styles.button}>
                     <Icon string={link.id} />
                   </a>
                 </Link>

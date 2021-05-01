@@ -1,11 +1,6 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
 
-const getRandomMovie = (arr) => {
-  const randomMovie = Math.floor(Math.random() * arr.length);
-  return arr[randomMovie];
-};
-
 const Controls = ({
   onTrailerBtnClick,
   trailerModalState,
@@ -51,7 +46,7 @@ const MoviePoster = ({ id }) => {
             right: 0,
             bottom: 0,
             left: 0,
-            backgroundImage: "url(images/wonder-woman.jpg",
+            backgroundImage: "url(images/wonder-woman.jpg)",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center top",
@@ -178,71 +173,34 @@ const Description = ({ id }) => {
   }
 };
 
-const WatchList = () => {
-  const [trailerModalActive, setTrailerModalActive] = useState(false);
-  const [suggested, setSuggested] = useState([
-    {
-      name: "Wonder Woman",
-      url:
-        "https://tv.apple.com/nl/movie/wonder-woman-1984/umc.cmc.1pq7jxkjbskjmlbiskxlydtef",
-    },
-  ]);
-  const movies = [
-    {
-      name: "Wonder Woman",
-      url:
-        "https://tv.apple.com/nl/movie/wonder-woman-1984/umc.cmc.1pq7jxkjbskjmlbiskxlydtef",
-    },
-    {
-      name: "Interstellar",
-      url:
-        "https://tv.apple.com/nl/movie/wonder-woman-1984/umc.cmc.1pq7jxkjbskjmlbiskxlydtef",
-    },
-    {
-      name: "Inception",
-      url:
-        "https://tv.apple.com/nl/movie/wonder-woman-1984/umc.cmc.1pq7jxkjbskjmlbiskxlydtef",
-    },
-  ];
-
+const WatchList = ({
+  randomMovie,
+  onShuffleBtnClick,
+  onShareBtnClick,
+  trailerModalActive,
+  onCloseBtnClick,
+  onTrailerBtnClick,
+}) => {
   return (
     <>
       <main className={styles.watchListWrapper}>
-        <MoviePoster id={suggested[suggested.length - 1].name} />
-        <Metadata id={suggested[suggested.length - 1].name} />
+        <MoviePoster id={randomMovie} />
+        <Metadata id={randomMovie} />
         <p>
-          <strong>{suggested[suggested.length - 1].name}</strong>
+          <strong>{randomMovie}</strong>
         </p>
 
-        <Description id={suggested[suggested.length - 1].name} />
+        <Description id={randomMovie} />
         <Controls
-          onTrailerBtnClick={setTrailerModalActive}
+          onTrailerBtnClick={onTrailerBtnClick}
           trailerModalState={trailerModalActive}
-          onShuffleBtnClick={() => {
-            const filtered = movies.filter(
-              (value) => !suggested.includes(value)
-            );
-            const el = getRandomMovie(filtered);
-            const suggestions = el
-              ? [...suggested, el]
-              : [getRandomMovie(movies)];
-            setSuggested(suggestions);
-          }}
-          onShareBtnClick={async () => {
-            try {
-              await navigator.share(suggested[suggested.length - 1]);
-            } catch (err) {
-              null;
-            }
-          }}
+          onShuffleBtnClick={onShuffleBtnClick}
+          onShareBtnClick={onShareBtnClick}
         />
       </main>
-      {trailerModalActive ? (
-        <Player
-          onCloseBtnClick={setTrailerModalActive}
-          trailerId={suggested[suggested.length - 1].name}
-        />
-      ) : null}
+      {trailerModalActive && (
+        <Player onCloseBtnClick={onCloseBtnClick} trailerId={randomMovie} />
+      )}
     </>
   );
 };
