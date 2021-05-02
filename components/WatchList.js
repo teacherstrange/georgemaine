@@ -8,37 +8,19 @@ const Controls = ({
   onShareBtnClick,
 }) => {
   return (
-    <footer
-      className={styles.controls}
-      style={{
-        padding: 0,
-        bottom: "4%",
-      }}
-    >
+    <footer className={styles.watchListNavDesktop}>
       <button
         onClick={() => onTrailerBtnClick(!trailerModalState)}
-        className={styles.buttonControl}
-        style={{
-          borderRadius: 0,
-        }}
+        className={styles.watchListNavIconButton}
       >
         <Icon string={"Play"} />
       </button>
-      <button
-        className={styles.buttonControl}
-        onClick={onShuffleBtnClick}
-        style={{
-          borderRadius: 0,
-        }}
-      >
+      <button className={styles.watchListNavButton} onClick={onShuffleBtnClick}>
         Shuffle
       </button>
       <button
-        className={styles.buttonControl}
+        className={styles.watchListNavIconButton}
         onClick={onShareBtnClick}
-        style={{
-          borderRadius: 0,
-        }}
       >
         <Icon string={"Share"} />
       </button>
@@ -143,16 +125,16 @@ const Metadata = ({ id }) => {
   switch (id) {
     case "Wonder Woman":
       return (
-        <ul>
-          <li>Action</li>
-          <li>2017</li>
-          <li>2 hr 21 min</li>
-          <li>Apple TV+</li>
+        <ul className={styles.metaDataList}>
+          <li className={styles.metaDataListItem}>Action</li>
+          <li className={styles.metaDataListItem}>2017</li>
+          <li className={styles.metaDataListItem}>2 hr 21 min</li>
+          <li className={styles.metaDataListItem}>Apple TV+</li>
         </ul>
       );
     default:
       return (
-        <ul>
+        <ul className={styles.metaDataList}>
           <li>Genre</li>
           <li>Release year</li>
           <li>Duration</li>
@@ -166,11 +148,7 @@ const Description = ({ id }) => {
   switch (id) {
     case "Wonder Woman":
       return (
-        <p
-          style={{
-            maxWidth: 600,
-          }}
-        >
+        <p className={styles.metaDataDescription}>
           Before she was Wonder Woman, she was Diana, princess of the Amazons,
           trained to be an unconquerable warrior. Raised on a sheltered island
           paradise, when an American pilot crashes on their shores and tells of
@@ -183,11 +161,7 @@ const Description = ({ id }) => {
 
     default:
       return (
-        <p
-          style={{
-            maxWidth: 600,
-          }}
-        >
+        <p className={styles.metaDataDescription}>
           Nulla lectus ante, consequat et ex eget, feugiat tincidunt metus.
           Phasellus sodales massa malesuada tellus fringilla, nec bibendum
           tellus blandit. Vivamus a ante congue, porta nunc nec, hendrerit
@@ -213,10 +187,10 @@ const WatchList = ({
     <>
       <main className={styles.watchListWrapper}>
         <MoviePoster id={randomMovie} />
-        <Metadata id={randomMovie} />
         <p>
           <strong>{randomMovie}</strong>
         </p>
+        <Metadata id={randomMovie} />
 
         <Description id={randomMovie} />
         <Controls

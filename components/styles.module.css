@@ -26,6 +26,34 @@
   );
 }
 
+.metaDataList {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.metaDataListItem {
+  font-size: 1.5rem;
+  line-height: 3rem;
+  letter-spacing: 0.035rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.metaDataListItem:not(:last-child):after {
+  content: " · ";
+  margin-right: 3px;
+}
+
+.metaDataDescription {
+  max-width: 600px;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: 0.035rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 6rem;
+}
+
 .desktopVideo {
   display: none;
   position: fixed;
@@ -204,15 +232,16 @@
   align-items: center;
   margin: 0;
   color: var(--primaryText);
+  transition: 200ms;
 }
 
-.buttonControl {
+.watchListNavButton {
   font-size: 1.7rem;
   line-height: 2.2rem;
   letter-spacing: 0.035rem;
   font-weight: 400;
   text-decoration: none;
-  padding: 0.9rem 1.8rem;
+  padding: 1rem 1.2rem;
   border-radius: 0;
   background: none;
   border: none;
@@ -220,10 +249,44 @@
   align-items: center;
   margin: 0;
   color: var(--primaryText);
+  white-space: nowrap;
+  transition: 200ms;
+}
+
+.watchListNavWideButton {
+  font-size: 1.7rem;
+  line-height: 2.2rem;
+  letter-spacing: 0.035rem;
+  font-weight: 400;
+  text-decoration: none;
+  padding: 1rem 1.8rem;
+  border-radius: 0;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  color: var(--primaryText);
+  white-space: nowrap;
+  transition: 200ms;
+}
+
+.watchListNavIconButton {
+  text-decoration: none;
+  padding: 0.9rem 1.2rem;
+  border-radius: 0;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  white-space: nowrap;
+  transition: 200ms;
 }
 
 .button:hover,
-.buttonControl:hover {
+.watchListNavButton:hover,
+.watchListNavIconButton:hover {
   background-color: rgba(0, 0, 0, 0.06);
 }
 
@@ -285,15 +348,26 @@
   backdrop-filter: blur(3rem) saturate(25%);
 }
 
-.controls {
+.watchListNavMobile {
   background: rgba(227, 227, 227, 0.6);
   /* FIXME: display-p3 color */
   display: flex;
-  margin: 0 0.6rem;
   border-radius: 3rem;
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(3rem) saturate(25%);
+}
+
+.watchListNavDesktop {
+  background: rgba(227, 227, 227, 0.6);
+  /* FIXME: display-p3 color */
+  display: none;
+  border-radius: 3rem;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(3rem) saturate(25%);
+  bottom: 4%;
+  position: fixed;
 }
 
 .workFiltersExpanded {
@@ -426,6 +500,14 @@
 @media (min-width: 98rem) {
   .footer {
     display: none;
+  }
+
+  .watchListNavMobile {
+    display: none;
+  }
+
+  .watchListNavDesktop {
+    display: flex;
   }
 
   .filters {
