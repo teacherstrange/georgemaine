@@ -148,7 +148,7 @@ const Description = ({ id }) => {
   switch (id) {
     case "Wonder Woman":
       return (
-        <p className={styles.metaDataDescription}>
+        <p className={styles.watchListSynopsis}>
           Before she was Wonder Woman, she was Diana, princess of the Amazons,
           trained to be an unconquerable warrior. Raised on a sheltered island
           paradise, when an American pilot crashes on their shores and tells of
@@ -161,7 +161,7 @@ const Description = ({ id }) => {
 
     default:
       return (
-        <p className={styles.metaDataDescription}>
+        <p className={styles.watchListSynopsis}>
           Nulla lectus ante, consequat et ex eget, feugiat tincidunt metus.
           Phasellus sodales massa malesuada tellus fringilla, nec bibendum
           tellus blandit. Vivamus a ante congue, porta nunc nec, hendrerit
