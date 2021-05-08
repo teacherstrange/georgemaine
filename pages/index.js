@@ -14,7 +14,7 @@ const Index = () => {
   const [slideId, setSlideId] = useState("Mollie Mobile");
   const [postId, setPostId] = useState("Hello world");
   const [suggested, setSuggested] = useState([data.movies[0]]);
-  const [trailerModalActive, setTrailerModalActive] = useState(false);
+  const [theaterMode, setTheaterMode] = useState(false);
 
   return (
     <>
@@ -53,9 +53,9 @@ const Index = () => {
             null;
           }
         }}
-        onTrailerBtnClick={setTrailerModalActive}
+        onTrailerBtnClick={setTheaterMode}
         socialLinks={data.links}
-        trailerModalState={trailerModalActive}
+        trailerModalState={theaterMode}
       />
       {filterId === "blog" ? (
         <Post id={router.query.postId} pathname={router.pathname} />
@@ -64,9 +64,9 @@ const Index = () => {
       ) : filterId === "watchlist" ? (
         // FIXME: Break component down into smaller pieces
         <WatchList
-          trailerModalActive={trailerModalActive}
-          onCloseBtnClick={setTrailerModalActive}
-          onTrailerBtnClick={setTrailerModalActive}
+          theaterMode={theaterMode}
+          onCloseBtnClick={setTheaterMode}
+          onTrailerBtnClick={setTheaterMode}
           randomMovie={suggested[suggested.length - 1].name}
           onShuffleBtnClick={() => {
             const filtered = data.movies.filter(

@@ -30,6 +30,9 @@
   display: flex;
   padding: 0;
   margin: 0;
+  transition: 600ms;
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition-property: opacity, transform;
 }
 
 .metaDataListItem {
@@ -70,6 +73,9 @@
       rgb(0, 0, 0) calc(76px)
     );
   -webkit-mask-position: right bottom;
+  transition: 600ms;
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition-property: opacity, transform;
 }
 
 .desktopVideo {
@@ -165,6 +171,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
+  background-color: #000;
 }
 
 .watchListWrapper::before {
@@ -194,6 +201,9 @@
   justify-content: center;
   background-color: var(--overlay);
   z-index: 3;
+  transition: 600ms;
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition-property: opacity, transform;
 }
 
 .header {
@@ -316,6 +326,17 @@
   white-space: nowrap;
 }
 
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(100vh);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes openFilter {
   0% {
     max-width: 3.6rem;
@@ -430,6 +451,9 @@
   color: rgba(255, 255, 255, 0.85);
   letter-spacing: 0;
   text-align: center;
+  transition: 600ms;
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition-property: opacity, transform;
 }
 
 .body {

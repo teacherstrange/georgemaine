@@ -28,9 +28,15 @@ const Controls = ({
   );
 };
 
-const Player = ({ onCloseBtnClick, trailerId }) => {
+const Player = ({ onCloseBtnClick, trailerId, isActive }) => {
   return (
-    <div className={styles.watchListPlayer}>
+    <div
+      className={styles.watchListPlayer}
+      style={{
+        opacity: isActive ? 1 : 0,
+        transform: isActive ? `translateY(0)` : `translateY(100vh)`,
+      }}
+    >
       <Trailer id={trailerId} />
       <button
         onClick={() => onCloseBtnClick(false)}
@@ -43,7 +49,7 @@ const Player = ({ onCloseBtnClick, trailerId }) => {
   );
 };
 
-const MoviePoster = ({ id }) => {
+const MoviePoster = ({ id, isActive }) => {
   // FIXME: Improve code
   switch (id) {
     case "Wonder Woman":
@@ -62,6 +68,11 @@ const MoviePoster = ({ id }) => {
             backgroundPosition: "center top",
             width: "100%",
             height: "100%",
+            transition: "600ms",
+            transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
+            transitionProperty: "opacity , transform",
+            opacity: isActive ? 0 : 1,
+            transform: isActive ? "scale(.97)" : "scale(1)",
           }}
         />
       );
@@ -84,6 +95,11 @@ const MoviePoster = ({ id }) => {
             backgroundSize: "300% 100%",
             width: "100%",
             height: "100%",
+            transition: "600ms",
+            transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
+            transitionProperty: "opacity , transform",
+            opacity: isActive ? 0 : 1,
+            transform: isActive ? "scale(.97)" : "scale(1)",
           }}
         />
       );
@@ -121,11 +137,17 @@ const Trailer = ({ id }) => {
   }
 };
 
-const Metadata = ({ id }) => {
+const Metadata = ({ id, isActive }) => {
   switch (id) {
     case "Wonder Woman":
       return (
-        <ul className={styles.metaDataList}>
+        <ul
+          className={styles.metaDataList}
+          style={{
+            opacity: isActive ? 0 : 1,
+            transform: isActive ? "translateY(-15px)" : "translateY(0)",
+          }}
+        >
           <li className={styles.metaDataListItem}>Action</li>
           <li className={styles.metaDataListItem}>2017</li>
           <li className={styles.metaDataListItem}>2 hr 21 min</li>
@@ -134,7 +156,13 @@ const Metadata = ({ id }) => {
       );
     default:
       return (
-        <ul className={styles.metaDataList}>
+        <ul
+          className={styles.metaDataList}
+          style={{
+            opacity: isActive ? 0 : 1,
+            transform: isActive ? "translateY(-15px)" : "translateY(0)",
+          }}
+        >
           <li className={styles.metaDataListItem}>Genre</li>
           <li className={styles.metaDataListItem}>Release year</li>
           <li className={styles.metaDataListItem}>Duration</li>
@@ -144,11 +172,17 @@ const Metadata = ({ id }) => {
   }
 };
 
-const Description = ({ id }) => {
+const Description = ({ id, isActive }) => {
   switch (id) {
     case "Wonder Woman":
       return (
-        <p className={styles.watchListSynopsis}>
+        <p
+          className={styles.watchListSynopsis}
+          style={{
+            opacity: isActive ? 0 : 1,
+            transform: isActive ? "translateY(-15px)" : "translateY(0)",
+          }}
+        >
           Before she was Wonder Woman, she was Diana, princess of the Amazons,
           trained to be an unconquerable warrior. Raised on a sheltered island
           paradise, when an American pilot crashes on their shores and tells of
@@ -161,7 +195,13 @@ const Description = ({ id }) => {
 
     default:
       return (
-        <p className={styles.watchListSynopsis}>
+        <p
+          className={styles.watchListSynopsis}
+          style={{
+            opacity: isActive ? 0 : 1,
+            transform: isActive ? "translateY(-15px)" : "translateY(0)",
+          }}
+        >
           Nulla lectus ante, consequat et ex eget, feugiat tincidunt metus.
           Phasellus sodales massa malesuada tellus fringilla, nec bibendum
           tellus blandit. Vivamus a ante congue, porta nunc nec, hendrerit
@@ -179,28 +219,39 @@ const WatchList = ({
   randomMovie,
   onShuffleBtnClick,
   onShareBtnClick,
-  trailerModalActive,
+  theaterMode,
   onCloseBtnClick,
   onTrailerBtnClick,
 }) => {
   return (
     <>
       <main className={styles.watchListWrapper}>
-        <MoviePoster id={randomMovie} />
-        <h1 className={styles.title}>{randomMovie}</h1>
-        <Metadata id={randomMovie} />
+        <MoviePoster id={randomMovie} isActive={theaterMode} />
+        <h1
+          className={styles.title}
+          style={{
+            opacity: theaterMode ? 0 : 1,
+            transform: theaterMode ? "translateY(-15px)" : "translateY(0)",
+          }}
+        >
+          {randomMovie}
+        </h1>
+        <Metadata id={randomMovie} isActive={theaterMode} />
 
-        <Description id={randomMovie} />
+        <Description id={randomMovie} isActive={theaterMode} />
         <Controls
           onTrailerBtnClick={onTrailerBtnClick}
-          trailerModalState={trailerModalActive}
+          trailerModalState={theaterMode}
           onShuffleBtnClick={onShuffleBtnClick}
           onShareBtnClick={onShareBtnClick}
         />
       </main>
-      {trailerModalActive && (
-        <Player onCloseBtnClick={onCloseBtnClick} trailerId={randomMovie} />
-      )}
+
+      <Player
+        onCloseBtnClick={onCloseBtnClick}
+        trailerId={randomMovie}
+        isActive={theaterMode}
+      />
     </>
   );
 };
