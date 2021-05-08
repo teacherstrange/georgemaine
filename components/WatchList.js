@@ -135,10 +135,10 @@ const Metadata = ({ id }) => {
     default:
       return (
         <ul className={styles.metaDataList}>
-          <li>Genre</li>
-          <li>Release year</li>
-          <li>Duration</li>
-          <li>Platform</li>
+          <li className={styles.metaDataListItem}>Genre</li>
+          <li className={styles.metaDataListItem}>Release year</li>
+          <li className={styles.metaDataListItem}>Duration</li>
+          <li className={styles.metaDataListItem}>Platform</li>
         </ul>
       );
   }
@@ -187,9 +187,7 @@ const WatchList = ({
     <>
       <main className={styles.watchListWrapper}>
         <MoviePoster id={randomMovie} />
-        <p>
-          <strong>{randomMovie}</strong>
-        </p>
+        <h1 className={styles.title}>{randomMovie}</h1>
         <Metadata id={randomMovie} />
 
         <Description id={randomMovie} />
