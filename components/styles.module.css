@@ -206,19 +206,6 @@
   transition-property: opacity, transform;
 }
 
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 4%;
-  left: 0;
-  right: 0;
-  z-index: 3;
-  transform: translateY(0);
-  transition: 250ms;
-}
-
 .footer {
   display: flex;
   align-items: center;
@@ -232,9 +219,6 @@
   margin-right: auto;
   overflow-x: scroll;
   z-index: 3;
-}
-
-.footer {
   scrollbar-width: none;
   -ms-overflow-style: -ms-autohiding-scrollbar;
 }
@@ -384,18 +368,6 @@
 .filters {
   background: rgba(227, 227, 227, 0.6);
   /* FIXME: display-p3 color */
-  display: none;
-  margin: 0 0.6rem;
-  border-radius: 3rem;
-  padding: 0.3rem;
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(3rem) saturate(25%);
-}
-
-.mobileFilters {
-  background: rgba(227, 227, 227, 0.6);
-  /* FIXME: display-p3 color */
   display: flex;
   margin: 0 0.6rem;
   border-radius: 3rem;
@@ -413,18 +385,6 @@
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(3rem) saturate(25%);
-}
-
-.watchListNavDesktop {
-  background: rgba(227, 227, 227, 0.6);
-  /* FIXME: display-p3 color */
-  display: none;
-  border-radius: 3rem;
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(3rem) saturate(25%);
-  bottom: 6%;
-  position: fixed;
 }
 
 .workFiltersExpanded {
@@ -572,18 +532,6 @@
 }
 
 @media (min-width: 98rem) {
-  .footer {
-    display: none;
-  }
-
-  .watchListNavMobile {
-    display: none;
-  }
-
-  .watchListNavDesktop {
-    display: flex;
-  }
-
   .filters {
     display: flex;
   }
@@ -592,7 +540,6 @@
     font-size: 2.2rem;
     line-height: 2.6rem;
     letter-spacing: 0.005rem;
-    margin-bottom: 6vh;
   }
 
   .button:hover,

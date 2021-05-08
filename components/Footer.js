@@ -51,7 +51,7 @@ const Footer = ({
         }}
       >
         <nav
-          className={`${styles.mobileFilters} ${
+          className={`${styles.filters} ${
             filterId === "portfolio" && styles.workFiltersExpanded
           }`}
         >
@@ -113,7 +113,7 @@ const Footer = ({
         </nav>
 
         <nav
-          className={`${styles.mobileFilters} ${
+          className={`${styles.filters} ${
             filterId === "blog" && styles.articleFiltersExpanded
           }`}
         >

@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import Post from "../components/Post";
 import Slide from "../components/Slide";
-import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import WatchList from "../components/WatchList";
 import * as data from "../components/Data";
@@ -18,16 +17,6 @@ const Index = () => {
 
   return (
     <>
-      <Nav
-        filterId={filterId}
-        setFilterId={setFilterId}
-        slideId={slideId}
-        setSlideId={setSlideId}
-        postId={postId}
-        setPostId={setPostId}
-        portfolio={data.portfolio}
-        socialLinks={data.links}
-      />
       <Footer
         filterId={filterId}
         setFilterId={setFilterId}
