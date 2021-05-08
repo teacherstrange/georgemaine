@@ -39,8 +39,8 @@ const Player = ({ onCloseBtnClick, trailerId, isActive }) => {
     >
       <Trailer id={trailerId} />
       <button
+        className={styles.trailerCloseButton}
         onClick={() => onCloseBtnClick(false)}
-        style={{ position: "relative" }}
       >
         Close
       </button>

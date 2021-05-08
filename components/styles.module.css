@@ -281,6 +281,30 @@
   transition: 200ms;
 }
 
+.trailerCloseButton {
+  font-size: 1.7rem;
+  line-height: 2.2rem;
+  letter-spacing: 0.035rem;
+  font-weight: 400;
+  text-decoration: none;
+  padding: 1rem 1.8rem;
+  border-radius: 0;
+  background-color: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  color: var(--primaryText);
+  white-space: nowrap;
+  transition: 200ms;
+  background: rgba(227, 227, 227, 0.6);
+  position: fixed;
+  top: 4vh;
+  right: 3vw;
+  border-radius: 3rem;
+  backdrop-filter: blur(3rem) saturate(25%);
+}
+
 .watchListNavWideButton {
   font-size: 1.7rem;
   line-height: 2.2rem;
