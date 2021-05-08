@@ -55,25 +55,7 @@ const Index = () => {
         <WatchList
           theaterMode={theaterMode}
           onCloseBtnClick={setTheaterMode}
-          onTrailerBtnClick={setTheaterMode}
           randomMovie={suggested[suggested.length - 1].name}
-          onShuffleBtnClick={() => {
-            const filtered = data.movies.filter(
-              (value) => !suggested.includes(value)
-            );
-            const el = getRandomMovie(filtered);
-            const suggestions = el
-              ? [...suggested, el]
-              : [getRandomMovie(data.movies)];
-            setSuggested(suggestions);
-          }}
-          onShareBtnClick={async () => {
-            try {
-              await navigator.share(suggested[suggested.length - 1]);
-            } catch (err) {
-              null;
-            }
-          }}
         />
       ) : null}
       {/* // FIXME: find alternative to null */}

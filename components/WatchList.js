@@ -1,32 +1,4 @@
 import styles from "./styles.module.css";
-import Icon from "../components/Icon";
-
-const Controls = ({
-  onTrailerBtnClick,
-  trailerModalState,
-  onShuffleBtnClick,
-  onShareBtnClick,
-}) => {
-  return (
-    <footer className={styles.watchListNavDesktop}>
-      <button
-        onClick={() => onTrailerBtnClick(!trailerModalState)}
-        className={styles.watchListNavIconButton}
-      >
-        <Icon string={"Play"} />
-      </button>
-      <button className={styles.watchListNavButton} onClick={onShuffleBtnClick}>
-        Shuffle
-      </button>
-      <button
-        className={styles.watchListNavIconButton}
-        onClick={onShareBtnClick}
-      >
-        <Icon string={"Share"} />
-      </button>
-    </footer>
-  );
-};
 
 const Player = ({ onCloseBtnClick, trailerId, isActive }) => {
   return (
@@ -215,14 +187,7 @@ const Description = ({ id, isActive }) => {
   }
 };
 
-const WatchList = ({
-  randomMovie,
-  onShuffleBtnClick,
-  onShareBtnClick,
-  theaterMode,
-  onCloseBtnClick,
-  onTrailerBtnClick,
-}) => {
+const WatchList = ({ randomMovie, theaterMode, onCloseBtnClick }) => {
   return (
     <>
       <main className={styles.watchListWrapper}>
@@ -239,12 +204,6 @@ const WatchList = ({
         <Metadata id={randomMovie} isActive={theaterMode} />
 
         <Description id={randomMovie} isActive={theaterMode} />
-        <Controls
-          onTrailerBtnClick={onTrailerBtnClick}
-          trailerModalState={theaterMode}
-          onShuffleBtnClick={onShuffleBtnClick}
-          onShareBtnClick={onShareBtnClick}
-        />
       </main>
 
       <Player
