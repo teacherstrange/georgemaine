@@ -155,13 +155,9 @@ const Description = ({ id, isActive }) => {
             transform: isActive ? "translateY(-15px)" : "translateY(0)",
           }}
         >
-          Before she was Wonder Woman, she was Diana, princess of the Amazons,
-          trained to be an unconquerable warrior. Raised on a sheltered island
-          paradise, when an American pilot crashes on their shores and tells of
-          a massive conflict raging in the outside world, Diana leaves her home,
-          convinced she can stop the threat. Fighting alongside man in a war to
-          end all wars, Diana will discover her full powers… and her true
-          destiny.
+          Fast forward to the 1980s as Wonder Woman’s next big screen adventure
+          finds her facing a wide array of foes including: Max Lord and the
+          Cheetah.
         </p>
       );
 

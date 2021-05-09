@@ -2,6 +2,7 @@ import styles from "./styles.module.css";
 
 const Article = () => (
   <article className={styles.articleContent}>
+    <h1 className={styles.articleTitle}>About me</h1>
     <p className={styles.body}>
       <strong>Hello world.</strong> As you may or may not be aware, I like to
       tinker with software, and tools,. Ever since I was a young kid, I was
