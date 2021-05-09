@@ -1,6 +1,6 @@
 .slide {
   position: fixed;
-  background-color: #000; /* FIXME: Get p3 display color  */
+  background-color: var(--black);
   z-index: 0;
   top: 0;
   right: 0;
@@ -39,7 +39,7 @@
   font-size: 1.5rem;
   line-height: 3rem;
   letter-spacing: 0.035rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--primaryLabelColorLight);
 }
 
 .metaDataListItem:not(:last-child):after {
@@ -54,7 +54,7 @@
   line-height: 2rem;
   letter-spacing: 0.035rem;
   text-align: center;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--primaryLabelColorLight);
   margin-bottom: calc(6vh + 8.4rem);
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -64,13 +64,13 @@
       0deg,
       transparent 0px,
       transparent calc(22px),
-      rgb(0, 0, 0) calc(22px)
+      var(--black) calc(22px)
     ),
     linear-gradient(
       270deg,
       transparent 0px,
       transparent calc(32px),
-      rgb(0, 0, 0) calc(76px)
+      var(--black) calc(76px)
     );
   -webkit-mask-position: right bottom;
   transition: 600ms;
@@ -134,7 +134,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  background-color: #000;
+  background-color: var(--black);
 }
 
 .watchListWrapper::before {
@@ -244,7 +244,7 @@
   color: var(--primaryLabelColorDark);
   white-space: nowrap;
   transition: 200ms;
-  background: rgba(227, 227, 227, 0.6);
+  background: var(--container);
   position: fixed;
   top: 4vh;
   right: 3vw;
@@ -329,7 +329,7 @@
 }
 
 .filters {
-  background: rgba(227, 227, 227, 0.6);
+  background: var(--container);
   /* FIXME: display-p3 color */
   display: flex;
   margin: 0 0.6rem;
@@ -341,7 +341,7 @@
 }
 
 .watchListNavMobile {
-  background: rgba(227, 227, 227, 0.6);
+  background: var(--container);
   /* FIXME: display-p3 color */
   display: flex;
   border-radius: 3rem;
@@ -384,7 +384,7 @@
   border-radius: 3rem;
   height: 3.6rem;
   transition: 300ms;
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--primaryLabelColorLight);
   /* FIXME: display-p3 color */
   box-shadow: 0 0 0.05rem rgba(0, 0, 0, 0.04),
     0 0.3rem 0.8rem rgba(0, 0, 0, 0.12), 0 0.3rem 0.1rem rgba(0, 0, 0, 0.04);
@@ -395,7 +395,7 @@
 
 .title {
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--primaryLabelColorLight);
   letter-spacing: 0;
   text-align: center;
   transition: 600ms;
@@ -430,7 +430,7 @@
   position: relative;
   z-index: 2;
   letter-spacing: 0.035rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--secondaryLabelColorLight);
   width: 94vw;
   max-width: 48rem;
   text-align: center;
@@ -438,7 +438,7 @@
 }
 
 .caption strong {
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--primaryLabelColorLight);
 }
 
 @media (min-width: 73.6rem) {
@@ -504,12 +504,5 @@
   .watchListNavButton:hover,
   .watchListNavIconButton:hover {
     background-color: rgba(0, 0, 0, 0.06);
-  }
-}
-
-@media (min-width: 192rem) {
-  .body {
-    font-size: 1.9rem;
-    line-height: 2.4rem;
   }
 }
