@@ -33,11 +33,11 @@
   transition: 600ms;
   transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
   transition-property: opacity, transform;
+  margin-bottom: calc(6vh + 7.2rem);
 }
 
 .metaDataListItem {
-  line-height: 3rem;
-  color: var(--primaryLabelColorLight);
+  color: var(--secondaryLabelColorLight);
 }
 
 .metaDataListItem:not(:last-child):after {
@@ -47,10 +47,11 @@
 
 .watchListSynopsis {
   max-width: 600px;
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
   width: 94%;
   text-align: center;
   color: var(--primaryLabelColorLight);
-  margin-bottom: calc(6vh + 8.4rem);
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -168,7 +169,6 @@
   display: flex;
   align-items: center;
   position: fixed;
-  height: 4.2rem;
   bottom: 6%;
   left: 0;
   right: 0;
@@ -263,15 +263,6 @@
   backdrop-filter: blur(3rem) saturate(25%);
 }
 
-.watchListNavMobile {
-  background: var(--container);
-  display: flex;
-  border-radius: 3rem;
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(3rem) saturate(25%);
-}
-
 .workFiltersExpanded {
   animation: openFilter 0.6s ease 1 forwards;
 }
@@ -299,8 +290,10 @@
 
 .title {
   font-weight: 600;
+  font-size: 3.4rem;
+  line-height: 4.2rem;
   color: var(--primaryLabelColorLight);
-  letter-spacing: 0;
+  letter-spacing: 0.036rem;
   text-align: center;
   transition: 600ms;
   transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);

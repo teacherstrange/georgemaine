@@ -42,87 +42,95 @@ const Footer = ({
 
   return (
     <footer className={styles.footer}>
-      <nav
-        className={`${styles.filters} ${
-          filterId === "portfolio" && styles.workFiltersExpanded
-        }`}
+      <div
+        style={{
+          display: "flex",
+        }}
       >
-        {filterId === "blog" || filterId === "watchlist" ? (
-          <button onClick={() => (router.push("/"), setFilterId("portfolio"))}>
-            Portfolio
-          </button>
-        ) : (
-          <Filters array={portfolio} setId={setSlideId} />
-        )}
-        {filterId == "portfolio" ? (
-          <div
-            className={styles.filterSelection}
-            style={{
-              width: portfolio[selectedSlide].width,
-              transform: `translateX(${portfolio[selectedSlide].x}px)`,
-            }}
-          ></div>
-        ) : null}
-      </nav>
-
-      <nav
-        className={`${styles.watchListNavMobile} ${
-          filterId === "portfolio" && styles.workFiltersExpanded
-        }`}
-      >
-        {filterId === "portfolio" || filterId === "blog" ? (
-          <button
-            className={styles.watchListNavWideButton}
-            onClick={() => (router.push("/"), setFilterId("watchlist"))}
-          >
-            Watch List
-          </button>
-        ) : (
-          <>
-            <button onClick={() => onTrailerBtnClick(!trailerModalState)}>
-              <Icon string={"Play"} />
+        <nav
+          className={`${styles.filters} ${
+            filterId === "portfolio" && styles.workFiltersExpanded
+          }`}
+        >
+          {filterId === "blog" || filterId === "watchlist" ? (
+            <button
+              onClick={() => (router.push("/"), setFilterId("portfolio"))}
+            >
+              Portfolio
             </button>
-            <button onClick={onShuffleBtnClick}>Shuffle</button>
-            <button onClick={onShareBtnClick}>
-              <Icon string={"Share"} />
-            </button>
-          </>
-        )}
-      </nav>
+          ) : (
+            <Filters array={portfolio} setId={setSlideId} />
+          )}
+          {filterId == "portfolio" ? (
+            <div
+              className={styles.filterSelection}
+              style={{
+                width: portfolio[selectedSlide].width,
+                transform: `translateX(${portfolio[selectedSlide].x}px)`,
+              }}
+            ></div>
+          ) : null}
+        </nav>
 
-      <nav
-        className={`${styles.filters} ${
-          filterId === "blog" && styles.articleFiltersExpanded
-        }`}
-      >
-        {filterId === "portfolio" || filterId === "watchlist" ? (
-          <button onClick={() => setFilterId("blog")}>Get in touch</button>
-        ) : (
-          <>
-            <FilterLinks array={blog} setId={setPostId} />
-            {socialLinks.map((link, index) => (
-              <Link key={index} href={link.url}>
-                <a
-                  target='_blank'
-                  rel='noreferrer'
-                  className={styles.buttonLink}
-                >
-                  <Icon string={link.id} />
-                </a>
-              </Link>
-            ))}
-          </>
-        )}
-        {filterId == "blog" ? (
-          <div
-            className={styles.filterSelection}
-            style={{
-              width: blog[selectedPost].width,
-              transform: `translateX(${blog[selectedPost].x}px)`,
-            }}
-          ></div>
-        ) : null}
-      </nav>
+        <nav
+          className={`${styles.filters} ${
+            filterId === "portfolio" && styles.workFiltersExpanded
+          }`}
+        >
+          {filterId === "portfolio" || filterId === "blog" ? (
+            <button
+              className={styles.watchListNavWideButton}
+              onClick={() => (router.push("/"), setFilterId("watchlist"))}
+            >
+              Watch List
+            </button>
+          ) : (
+            <>
+              <button onClick={() => onTrailerBtnClick(!trailerModalState)}>
+                <Icon string={"Play"} />
+              </button>
+              <button onClick={onShuffleBtnClick}>Shuffle</button>
+              <button onClick={onShareBtnClick}>
+                <Icon string={"Share"} />
+              </button>
+            </>
+          )}
+        </nav>
+
+        <nav
+          className={`${styles.filters} ${
+            filterId === "blog" && styles.articleFiltersExpanded
+          }`}
+        >
+          {filterId === "portfolio" || filterId === "watchlist" ? (
+            <button onClick={() => setFilterId("blog")}>Get in touch</button>
+          ) : (
+            <>
+              <FilterLinks array={blog} setId={setPostId} />
+              {socialLinks.map((link, index) => (
+                <Link key={index} href={link.url}>
+                  <a
+                    target='_blank'
+                    rel='noreferrer'
+                    className={styles.buttonLink}
+                  >
+                    <Icon string={link.id} />
+                  </a>
+                </Link>
+              ))}
+            </>
+          )}
+          {filterId == "blog" ? (
+            <div
+              className={styles.filterSelection}
+              style={{
+                width: blog[selectedPost].width,
+                transform: `translateX(${blog[selectedPost].x}px)`,
+              }}
+            ></div>
+          ) : null}
+        </nav>
+      </div>
     </footer>
   );
 };

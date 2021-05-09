@@ -201,9 +201,8 @@ const WatchList = ({ randomMovie, theaterMode, onCloseBtnClick }) => {
         >
           {randomMovie}
         </h1>
-        <Metadata id={randomMovie} isActive={theaterMode} />
-
         <Description id={randomMovie} isActive={theaterMode} />
+        <Metadata id={randomMovie} isActive={theaterMode} />
       </main>
 
       <Player
