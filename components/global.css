@@ -160,7 +160,7 @@ body {
   letter-spacing: 0.005rem;
   font-size: 1.7rem;
   line-height: 2.2rem;
-  color: var(--secondaryText);
+  color: var(--secondaryLabelColorDark);
 }
 
 /* Typefaces */
@@ -184,22 +184,20 @@ body {
 
 /* Variables */
 :root {
-  --primaryText: hsla(0, 0%, 0%, 0.85);
-  --secondaryText: hsla(0, 0%, 0%, 0.5);
-  --primaryFill: hsla(240, 3%, 49%, 0.28);
+  --primaryLabelColorDark: hsla(0, 0%, 0%, 0.85);
+  --secondaryLabelColorDark: hsla(0, 0%, 0%, 0.6);
+  --primaryLabelColorLight: rgba(255, 255, 255, 0.85);
+  --secondaryLabelColorLight: rgba(255, 255, 255, 0.6);
   --container: hsla(240, 3%, 49%, 0.3);
   --overlay: hsla(0, 0%, 98%, 0.84);
-  --red: #d5344d;
   --white: #fff;
 }
 @supports (color: color(display-p3 1 1 1)) {
   :root {
-    --primaryText: color(display-p3 0 0 0 / 0.85);
-    --secondaryText: color(display-p3 0 0 0 / 0.5);
-    --primaryFill: color(display-p3 0.4753 0.4753 0.5021 / 0.08);
+    --primaryLabelColorDark: color(display-p3 0 0 0 / 0.85);
+    --secondaryLabelColorDark: color(display-p3 0 0 0 / 0.6);
     --container: color(display-p3 0.4753 0.4753 0.5021 / 0.3);
     --overlay: color(display-p3 0.9801 0.98 0.9799 / 0.84);
-    --red: color(display-p3 0.7695 0.2608 0.316);
     --white: color(display-p3 1.0001 1 0.9999);
   }
 }

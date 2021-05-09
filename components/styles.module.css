@@ -113,6 +113,10 @@
   background-repeat: no-repeat;
   width: 100%;
   min-height: 41.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(/images/hello-world.jpg);
 }
 
 .articleContent {
@@ -120,47 +124,6 @@
   backdrop-filter: blur(3rem) saturate(200%);
 }
 
-.articleFooter {
-  margin-left: 7vw;
-  margin-right: 7vw;
-  text-align: center;
-  padding: 6.6rem 0 calc(10.2rem + 6vh);
-}
-
-.articleSeperator {
-  width: calc(100% - 8.8rem);
-  margin: 0 auto 6.6rem;
-  border: 0;
-  height: 1px;
-  background-color: var(--container);
-}
-
-.articleFooterBody a {
-  font-size: 1.7rem;
-  line-height: 2.2rem;
-  letter-spacing: 0.035rem;
-  font-weight: 400;
-  color: var(--red);
-  text-decoration: none;
-  border-radius: 3rem;
-  background: none;
-  border: none;
-  display: inline;
-  margin: 0;
-}
-
-.articleFooterAuthor {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 2.2rem auto 0;
-}
-
-.articleAvatar {
-  border-radius: 50%;
-  border: 1px solid var(--container) !important;
-  margin-right: 6px !important;
-}
 .watchListWrapper {
   position: fixed;
   top: 0;
@@ -243,7 +206,7 @@
   display: flex;
   align-items: center;
   margin: 0;
-  color: var(--primaryText);
+  color: var(--primaryLabelColorDark);
   transition: 200ms;
 }
 
@@ -260,7 +223,7 @@
   display: flex;
   align-items: center;
   margin: 0;
-  color: var(--primaryText);
+  color: var(--primaryLabelColorDark);
   white-space: nowrap;
   transition: 200ms;
 }
@@ -278,7 +241,7 @@
   display: flex;
   align-items: center;
   margin: 0;
-  color: var(--primaryText);
+  color: var(--primaryLabelColorDark);
   white-space: nowrap;
   transition: 200ms;
   background: rgba(227, 227, 227, 0.6);
@@ -302,7 +265,7 @@
   display: flex;
   align-items: center;
   margin: 0;
-  color: var(--primaryText);
+  color: var(--primaryLabelColorDark);
   white-space: nowrap;
   transition: 200ms;
 }
@@ -325,7 +288,7 @@
   line-height: 2.4rem;
   letter-spacing: 0.035rem;
   font-weight: 400;
-  color: var(--primaryText);
+  color: var(--primaryLabelColorDark);
   padding: 0.6rem 1.8rem;
   border-radius: 3rem;
   background: none;
@@ -404,7 +367,7 @@
   line-height: 2.4rem;
   letter-spacing: 0.035rem;
   font-weight: 400;
-  color: var(--primaryText);
+  color: var(--primaryLabelColorDark);
   padding: 0.6rem 1.8rem;
   border-radius: 3rem;
   background: none;
@@ -443,7 +406,7 @@
 .body {
   font-weight: 400;
   letter-spacing: 0.035rem;
-  color: var(--secondaryText);
+  color: var(--secondaryLabelColorDark);
   margin-left: 7vw;
   margin-right: 7vw;
 }
@@ -451,7 +414,7 @@
 .body strong {
   font-weight: 600;
   display: inline;
-  color: var(--primaryText);
+  color: var(--primaryLabelColorDark);
 }
 
 .body:first-of-type {
@@ -497,11 +460,6 @@
 
   .body:first-of-type {
     padding-top: calc(6vh + 8.4rem);
-    margin-bottom: 4.4rem;
-  }
-
-  .articleFooter {
-    padding-bottom: calc(5.8rem + 6vh);
   }
 }
 
