@@ -134,10 +134,24 @@ html {
 
 button {
   font: inherit;
+  line-height: 2.4rem;
+  letter-spacing: -0.024rem;
+  text-decoration: none;
+  padding: 0.6rem 1.8rem;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  color: var(--primaryLabelColorDark);
+  transition: 200ms;
 }
 
 strong {
   font-weight: 600;
+  letter-spacing: -0.024rem;
+  color: var(--primaryLabelColorDark);
 }
 
 body {
@@ -157,8 +171,7 @@ body {
   -moz-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  letter-spacing: 0.005rem;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   line-height: 2.2rem;
   color: var(--secondaryLabelColorDark);
 }
@@ -193,6 +206,7 @@ body {
   --white: rgb(255, 255, 255);
   --black: rgb(0, 0, 0);
 }
+
 @supports (color: color(display-p3 1 1 1)) {
   :root {
     --primaryLabelColorDark: color(display-p3 0 0 0 / 0.85);

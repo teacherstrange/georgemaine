@@ -6,18 +6,15 @@ import { Filters, FilterLinks } from "./Filters";
 import { useEffect } from "react";
 import scrollPolyfill from "scroll-polyfill";
 // FIXME: Polyfill belongs inside component
-// FIXME: Consolidate Footer & Nav objects
 
 const blog = [
   {
     id: "Hello world",
     url: "hello_world",
-    width: 124,
+    width: 108,
     x: 0,
   },
 ];
-
-// FIXME: Merge blog with links
 
 const Footer = ({
   slideId,
@@ -45,108 +42,87 @@ const Footer = ({
 
   return (
     <footer className={styles.footer}>
-      <div
-        style={{
-          display: "flex",
-        }}
+      <nav
+        className={`${styles.filters} ${
+          filterId === "portfolio" && styles.workFiltersExpanded
+        }`}
       >
-        <nav
-          className={`${styles.filters} ${
-            filterId === "portfolio" && styles.workFiltersExpanded
-          }`}
-        >
-          {filterId === "blog" || filterId === "watchlist" ? (
-            <button
-              className={styles.buttonLink}
-              onClick={() => (router.push("/"), setFilterId("portfolio"))}
-            >
-              Portfolio
-            </button>
-          ) : (
-            <Filters array={portfolio} setId={setSlideId} />
-          )}
-          {filterId == "portfolio" ? (
-            <div
-              className={styles.filterSelection}
-              style={{
-                width: portfolio[selectedSlide].width,
-                transform: `translateX(${portfolio[selectedSlide].x}px)`,
-              }}
-            ></div>
-          ) : null}
-        </nav>
+        {filterId === "blog" || filterId === "watchlist" ? (
+          <button onClick={() => (router.push("/"), setFilterId("portfolio"))}>
+            Portfolio
+          </button>
+        ) : (
+          <Filters array={portfolio} setId={setSlideId} />
+        )}
+        {filterId == "portfolio" ? (
+          <div
+            className={styles.filterSelection}
+            style={{
+              width: portfolio[selectedSlide].width,
+              transform: `translateX(${portfolio[selectedSlide].x}px)`,
+            }}
+          ></div>
+        ) : null}
+      </nav>
 
-        <nav
-          className={`${styles.watchListNavMobile} ${
-            filterId === "portfolio" && styles.workFiltersExpanded
-          }`}
-        >
-          {filterId === "portfolio" || filterId === "blog" ? (
-            <button
-              className={styles.watchListNavWideButton}
-              onClick={() => (router.push("/"), setFilterId("watchlist"))}
-            >
-              Watch List
+      <nav
+        className={`${styles.watchListNavMobile} ${
+          filterId === "portfolio" && styles.workFiltersExpanded
+        }`}
+      >
+        {filterId === "portfolio" || filterId === "blog" ? (
+          <button
+            className={styles.watchListNavWideButton}
+            onClick={() => (router.push("/"), setFilterId("watchlist"))}
+          >
+            Watch List
+          </button>
+        ) : (
+          <>
+            <button onClick={() => onTrailerBtnClick(!trailerModalState)}>
+              <Icon string={"Play"} />
             </button>
-          ) : (
-            <>
-              <button
-                onClick={() => onTrailerBtnClick(!trailerModalState)}
-                className={styles.watchListNavIconButton}
-              >
-                <Icon string={"Play"} />
-              </button>
-              <button
-                onClick={onShuffleBtnClick}
-                className={styles.watchListNavButton}
-              >
-                Shuffle
-              </button>
-              <button
-                onClick={onShareBtnClick}
-                className={styles.watchListNavIconButton}
-              >
-                <Icon string={"Share"} />
-              </button>
-            </>
-          )}
-        </nav>
+            <button onClick={onShuffleBtnClick}>Shuffle</button>
+            <button onClick={onShareBtnClick}>
+              <Icon string={"Share"} />
+            </button>
+          </>
+        )}
+      </nav>
 
-        <nav
-          className={`${styles.filters} ${
-            filterId === "blog" && styles.articleFiltersExpanded
-          }`}
-        >
-          {filterId === "portfolio" || filterId === "watchlist" ? (
-            <button
-              className={styles.buttonLink}
-              onClick={() => setFilterId("blog")}
-            >
-              Get in touch
-            </button>
-          ) : (
-            <>
-              <FilterLinks array={blog} setId={setPostId} />
-              {socialLinks.map((link, index) => (
-                <Link key={index} href={link.url}>
-                  <a target='_blank' rel='noreferrer' className={styles.button}>
-                    <Icon string={link.id} />
-                  </a>
-                </Link>
-              ))}
-            </>
-          )}
-          {filterId == "blog" ? (
-            <div
-              className={styles.filterSelection}
-              style={{
-                width: blog[selectedPost].width,
-                transform: `translateX(${blog[selectedPost].x}px)`,
-              }}
-            ></div>
-          ) : null}
-        </nav>
-      </div>
+      <nav
+        className={`${styles.filters} ${
+          filterId === "blog" && styles.articleFiltersExpanded
+        }`}
+      >
+        {filterId === "portfolio" || filterId === "watchlist" ? (
+          <button onClick={() => setFilterId("blog")}>Get in touch</button>
+        ) : (
+          <>
+            <FilterLinks array={blog} setId={setPostId} />
+            {socialLinks.map((link, index) => (
+              <Link key={index} href={link.url}>
+                <a
+                  target='_blank'
+                  rel='noreferrer'
+                  className={styles.buttonLink}
+                >
+                  <Icon string={link.id} />
+                </a>
+              </Link>
+            ))}
+          </>
+        )}
+        {filterId == "blog" ? (
+          <div
+            className={styles.filterSelection}
+            style={{
+              width: blog[selectedPost].width,
+              transform: `translateX(${blog[selectedPost].x}px)`,
+            }}
+          ></div>
+        ) : null}
+      </nav>
     </footer>
   );
 };

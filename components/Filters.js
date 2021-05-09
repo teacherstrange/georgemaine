@@ -1,8 +1,5 @@
 import Link from "next/link";
-import styles from "./styles.module.css";
 import { useRef } from "react";
-
-// FIXME: Merge into one component
 
 export const Filters = ({ array, setId }) => (
   <>
@@ -11,7 +8,6 @@ export const Filters = ({ array, setId }) => (
 
       return (
         <button
-          className={styles.filter}
           ref={ref}
           onClick={() => (
             setId(object.id),
@@ -56,7 +52,6 @@ export const FilterLinks = ({ array, setId }) => (
                 });
               }, 0)
             )}
-            className={styles.filter}
           >
             {object.id}
           </button>
