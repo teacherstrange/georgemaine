@@ -54,7 +54,7 @@ const Index = () => {
         <WatchList
           theaterMode={theaterMode}
           onCloseBtnClick={setTheaterMode}
-          randomMovie={suggested[suggested.length - 1].name}
+          randomMovie={suggested[suggested.length - 1]}
           isExpanded={isExpanded}
           setIsExpanded={setIsExpanded}
           pRef={ref}

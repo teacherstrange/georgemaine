@@ -45,7 +45,7 @@ const MoviePoster = ({ id, isActive, isExpanded }) => {
             transition: "600ms",
             transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
             transitionProperty: "opacity , transform",
-            opacity: isActive ? 0 : isExpanded ? 0.6 : 1,
+            opacity: isActive ? 0 : isExpanded ? 0.4 : 1,
             transform: isActive ? "scale(.97)" : "scale(1)",
           }}
         />
@@ -65,14 +65,14 @@ const MoviePoster = ({ id, isActive, isExpanded }) => {
               "linear-gradient(to right, #feefff, #e1d6ea 50%, #FFE4E2 75%)",
             backgroundPosition: "100% 0%",
             transition:
-              "4s background-position,transform 1s cubic-bezier(0.39, 0.575, 0.565, 1)",
+              "4s background-position,transform 1s cubic-bezier(0.49, 0.575, 0.565, 1)",
             backgroundSize: "300% 100%",
             width: "100%",
             height: "100%",
             transition: "600ms",
             transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
             transitionProperty: "opacity , transform",
-            opacity: isActive ? 0 : isExpanded ? 0.6 : 1,
+            opacity: isActive ? 0 : isExpanded ? 0.4 : 1,
             transform: isActive ? "scale(.97)" : "scale(1)",
           }}
         />
@@ -157,31 +157,21 @@ const Metadata = ({ id, isActive, isExpanded, isExpandedOffset }) => {
 };
 
 const Description = ({ id }) => {
-  switch (id) {
+  switch (id.name) {
     case "Wonder Woman":
-      return (
-        <>
-          Before she was Wonder Woman, she was Diana, princess of the Amazons,
-          trained to be an unconquerable warrior. Raised on a sheltered island
-          paradise, when an American pilot crashes on their shores and tells of
-          a massive conflict raging in the outside world, Diana leaves her home,
-          convinced she can stop the threat. Fighting alongside man in a war to
-          end all wars, Diana will discover her full powers… and her true
-          destiny.
-        </>
-      );
+      return <>{id.synopsis}</>;
 
     default:
       return (
         <>
-          Nulla lectus ante, consequat et ex eget, feugiat tincidunt metus.
+          "Nulla lectus ante, consequat et ex eget, feugiat tincidunt metus.
           Phasellus sodales massa malesuada tellus fringilla, nec bibendum
           tellus blandit. Vivamus a ante congue, porta nunc nec, hendrerit
           turpis. Vestibulum ante ipsum primis in faucibus orci luctus et
           ultrices posuere cubilia Curae. Phasellus sodales massa malesuada
           tellus fringilla, nec bibendum tellus blandit. In sit amet felis
           malesuada, feugiat purus eget, varius mi. Class aptent taciti sociosqu
-          ad litora torquent per conubia nostra, per inceptos himenaeos.
+          ad litora torquent per conubia nostra, per inceptos himenaeos."
         </>
       );
   }
@@ -229,12 +219,13 @@ const WatchList = ({
   const [synopsisOffset, setSynopsisOffset] = useState(0);
   useEffect(() => {
     setSynopsisOffset(pRef.current.getBoundingClientRect().height);
+    console.log("This is randomMovie:", randomMovie);
   }, [shuffleState]);
   return (
     <>
       <main className={styles.watchListWrapper}>
         <MoviePoster
-          id={randomMovie}
+          id={randomMovie.name}
           isActive={theaterMode}
           isExpanded={isExpanded}
         />
@@ -253,10 +244,10 @@ const WatchList = ({
             transition: "transform .6s cubic-bezier(0.25, 0.1, 0.25, 1)",
           }}
         >
-          {randomMovie}
+          {randomMovie.name}
         </h1>
         <Metadata
-          id={randomMovie}
+          id={randomMovie.name}
           isActive={theaterMode}
           isExpanded={isExpanded}
           isExpandedOffset={synopsisOffset}
@@ -285,6 +276,7 @@ const WatchList = ({
             marginBottom: "calc(6rem + 4vh)",
             position: "relative",
             zIndex: 1,
+            color: "var(--primaryLabelColorLight)",
           }}
         >
           More
@@ -302,7 +294,7 @@ const WatchList = ({
 
       <Player
         onCloseBtnClick={onCloseBtnClick}
-        trailerId={randomMovie}
+        trailerId={randomMovie.name}
         isActive={theaterMode}
       />
     </>
