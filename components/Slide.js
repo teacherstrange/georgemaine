@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 // FIXME: This is some ugly code lol
 const Video = ({ id }) => {
   switch (id) {
-    case "Mollie Mobile":
+    case "Mobile Apps":
       return (
         <>
           <video
@@ -25,7 +25,7 @@ const Video = ({ id }) => {
           />
         </>
       );
-    case "Mollie Video":
+    case "Promo Video":
       return (
         <>
           <video
@@ -38,7 +38,7 @@ const Video = ({ id }) => {
           />
         </>
       );
-    case "Mollie Checkout":
+    case "Checkout":
       return (
         <>
           <video
@@ -59,7 +59,7 @@ const Video = ({ id }) => {
           />
         </>
       );
-    case "Mollie Apple Pay":
+    case "Launch Video":
       return (
         <>
           <video
@@ -76,33 +76,73 @@ const Video = ({ id }) => {
 };
 const Caption = ({ id }) => {
   switch (id) {
-    case "Mollie Mobile":
+    case "Mobile Apps":
       return (
-        <p className={styles.caption}>
-          <strong>{id}</strong>. Designed apps for iOS, Android and built the
-          landing page • 2020
-        </p>
+        <h1
+          className={styles.title}
+          style={{
+            color: "var(--primaryLabelColorLight)",
+            position: "relative",
+            zIndex: 2,
+          }}
+        >
+          <strong style={{ color: "var(--primaryLabelColorLight)" }}>
+            Mobile apps for Mollie Payments
+          </strong>{" "}
+          · Product Design 2019-2020
+        </h1>
       );
-    case "Mollie Video":
+    case "Promo Video":
       return (
-        <p className={styles.caption}>
-          <strong>{id}</strong>. Created an engaging video to help showcase
-          Mollie at events • 2020
-        </p>
+        <h1
+          className={styles.title}
+          style={{
+            color: "var(--primaryLabelColorLight)",
+            position: "relative",
+            zIndex: 2,
+          }}
+        >
+          <strong style={{ color: "var(--primaryLabelColorLight)" }}>
+            Promo Video for Mollie Payments
+          </strong>{" "}
+          · Design & Video 2019
+        </h1>
       );
-    case "Mollie Checkout":
+    case "Checkout":
       return (
-        <p className={styles.caption}>
-          <strong>{id}</strong>. Redesigned and developed the Mollie Checkout
-          Web application • 2019
-        </p>
+        <h1
+          className={styles.title}
+          style={{
+            color: "var(--primaryLabelColorLight)",
+            position: "relative",
+            zIndex: 2,
+          }}
+        >
+          <strong style={{ color: "var(--primaryLabelColorLight)" }}>
+            Checkout for Mollie Payments
+          </strong>{" "}
+          · Product Design & Development 2019
+        </h1>
       );
-    case "Mollie Apple Pay":
+    case "Launch Video":
       return (
-        <p className={styles.caption}>
-          <strong>{id}</strong>. Created an engaging promo video for the Mollie
-          Apple Pay launch • 2019
-        </p>
+        <h1
+          className={styles.title}
+          style={{
+            color: "var(--primaryLabelColorLight)",
+            position: "relative",
+            zIndex: 2,
+          }}
+        >
+          <strong
+            style={{
+              color: "var(--primaryLabelColorLight)",
+            }}
+          >
+            Apple Pay launch video for Mollie Payments
+          </strong>{" "}
+          · Design & Video 2018
+        </h1>
       );
   }
 };

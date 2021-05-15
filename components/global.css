@@ -133,19 +133,19 @@ html {
 }
 
 button {
+  background: none;
+  border: none;
   font: inherit;
-  line-height: 2.4rem;
+  line-height: 3rem;
   letter-spacing: -0.024rem;
   text-decoration: none;
   padding: 0.6rem 1.8rem;
   white-space: nowrap;
-  background: none;
-  border: none;
   display: flex;
   align-items: center;
   margin: 0;
-  color: var(--primaryLabelColorDark);
-  transition: 200ms;
+  color: var(--secondaryLabelColorDark);
+  transition: 0.2s;
 }
 
 strong {
@@ -171,8 +171,8 @@ body {
   -moz-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  font-size: 1.7rem;
-  line-height: 2.4rem;
+  font-size: 1.9rem;
+  line-height: 2.6rem;
   color: var(--secondaryLabelColorDark);
 }
 

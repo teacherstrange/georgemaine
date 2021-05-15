@@ -2,24 +2,13 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Icon from "./Icon";
 import styles from "./styles.module.css";
-import { Filters, FilterLinks } from "./Filters";
+import Filters from "./Filters";
 import { useEffect } from "react";
 import scrollPolyfill from "scroll-polyfill";
 // FIXME: Polyfill belongs inside component
 
-const blog = [
-  {
-    id: "Hello world",
-    url: "hello_world",
-    width: 108,
-    x: 0,
-  },
-];
-
 const Footer = ({
   slideId,
-  postId,
-  setPostId,
   setFilterId,
   filterId,
   setSlideId,
@@ -38,7 +27,6 @@ const Footer = ({
   }, []);
 
   const selectedSlide = portfolio.findIndex((slide) => slide.id === slideId);
-  const selectedPost = blog.findIndex((element) => element.id === postId); // FIXME: Combine the two methods into a single one
 
   return (
     <footer className={styles.footer}>
@@ -59,7 +47,11 @@ const Footer = ({
               Portfolio
             </button>
           ) : (
-            <Filters array={portfolio} setId={setSlideId} />
+            <Filters
+              array={portfolio}
+              setId={setSlideId}
+              active={portfolio[selectedSlide].id}
+            />
           )}
           {filterId == "portfolio" ? (
             <div
@@ -106,7 +98,22 @@ const Footer = ({
             <button onClick={() => setFilterId("blog")}>Get in touch</button>
           ) : (
             <>
-              <FilterLinks array={blog} setId={setPostId} />
+              <button
+                onClick={() =>
+                  setTimeout(() => {
+                    ref.current.scrollIntoView({
+                      behavior: "smooth",
+                      block: "nearest",
+                      inline: "center",
+                    });
+                  }, 0)
+                }
+                style={{
+                  color: "var(--primaryLabelColorLight)",
+                }}
+              >
+                About me
+              </button>
               {socialLinks.map((link, index) => (
                 <Link key={index} href={link.url}>
                   <a
@@ -121,13 +128,7 @@ const Footer = ({
             </>
           )}
           {filterId == "blog" ? (
-            <div
-              className={styles.filterSelection}
-              style={{
-                width: blog[selectedPost].width,
-                transform: `translateX(${blog[selectedPost].x}px)`,
-              }}
-            ></div>
+            <div className={styles.filterSelection} />
           ) : null}
         </nav>
       </div>

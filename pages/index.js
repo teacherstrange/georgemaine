@@ -10,8 +10,7 @@ import { useState } from "react";
 const Index = () => {
   const router = useRouter();
   const [filterId, setFilterId] = useState("portfolio"); // FIXME: Better naming
-  const [slideId, setSlideId] = useState("Mollie Mobile");
-  const [postId, setPostId] = useState("Hello world");
+  const [slideId, setSlideId] = useState("Mobile Apps");
   const [suggested, setSuggested] = useState([data.movies[0]]);
   const [theaterMode, setTheaterMode] = useState(false);
 
@@ -23,8 +22,6 @@ const Index = () => {
         slideId={slideId}
         setSlideId={setSlideId}
         portfolio={data.portfolio}
-        postId={postId}
-        setPostId={setPostId}
         onShuffleBtnClick={() => {
           const filtered = data.movies.filter(
             (value) => !suggested.includes(value)

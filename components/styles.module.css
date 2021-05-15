@@ -18,12 +18,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  top: 72vh;
-  background-image: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(0, 0, 0, 0.36)
-  );
+  top: 60vh;
+  background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
 }
 
 .metaDataList {
@@ -140,7 +136,7 @@
   right: 0;
   bottom: 0;
   z-index: -1;
-  top: 50vh;
+  top: 40vh;
   background-image: linear-gradient(
     rgba(0, 0, 0, 0) 0%,
     rgba(0, 0, 0, 0.66) 65%
@@ -167,7 +163,7 @@
   display: flex;
   align-items: center;
   position: fixed;
-  bottom: 6%;
+  bottom: 4%;
   left: 0;
   right: 0;
   width: 92%;
@@ -257,7 +253,6 @@
   margin: 0 0.6rem;
   border-radius: 3rem;
   position: relative;
-  overflow: hidden;
   backdrop-filter: blur(3rem) saturate(25%);
 }
 
@@ -276,70 +271,47 @@
 .filterSelection {
   position: absolute;
   border-radius: 3rem;
-  height: 3rem;
-  transition: 300ms;
-  background: var(--primaryLabelColorLight);
-  box-shadow: 0 0 0.05rem rgba(0, 0, 0, 0.04),
-    0 0.3rem 0.8rem rgba(0, 0, 0, 0.12), 0 0.3rem 0.1rem rgba(0, 0, 0, 0.04);
+  width: 110px;
+  transition: 0.3s;
+  background: rgba(17, 17, 17, 0.3);
   z-index: -1;
-  left: 0.3rem;
   top: 0.3rem;
+  bottom: 0.3rem;
+  left: 0.3rem;
 }
 
 .title {
-  font-weight: 600;
-  font-size: 2.6rem;
-  line-height: 3.8rem;
+  font-size: 2.7rem;
+  line-height: 3rem;
   color: var(--primaryLabelColorLight);
-  letter-spacing: 0.034rem;
   text-align: center;
   transition: 600ms;
   transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-  transition-property: opacity, transform;
+  transition-property: color, opacity, transform;
+  margin-bottom: calc(6.6rem + 4vh);
 }
 
 .articleTitle {
+  padding: 3.6rem 0;
   margin-left: 8vw;
   color: var(--primaryLabelColorDark);
   margin-right: 8vw;
   font-weight: 600;
-  font-size: 2.6rem;
-  line-height: 3.8rem;
-  letter-spacing: 0.034rem;
-  transition: 600ms;
-  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-  transition-property: opacity, transform;
+  font-size: 2.7rem;
+  line-height: 3rem;
 }
 
 .body {
-  font-size: 1.8rem;
-  line-height: 2.5rem;
   margin-left: 8vw;
   margin-right: 8vw;
 }
 
-.body:first-of-type {
-  padding-top: 4.4rem;
+.body:last-of-type {
+  padding-bottom: calc(6vh + 8.4rem);
 }
 
 .body + .body {
   margin-top: 2.2rem;
-}
-
-.caption {
-  font-weight: 600;
-  position: relative;
-  z-index: 2;
-  letter-spacing: 0.035rem;
-  color: var(--secondaryLabelColorLight);
-  width: 94vw;
-  max-width: 48rem;
-  text-align: center;
-  margin-bottom: calc(5.8rem + 6vh);
-}
-
-.caption strong {
-  color: var(--primaryLabelColorLight);
 }
 
 @media (min-width: 73.6rem) {
@@ -370,10 +342,6 @@
     justify-content: center;
   }
 
-  .caption {
-    margin-bottom: calc(6rem + 6vh);
-  }
-
   .desktopVideo {
     display: initial;
   }
@@ -393,12 +361,6 @@
 @media (min-width: 98rem) {
   .filters {
     display: flex;
-  }
-
-  .caption {
-    font-size: 2.2rem;
-    line-height: 2.6rem;
-    letter-spacing: 0.005rem;
   }
 
   .button:hover,

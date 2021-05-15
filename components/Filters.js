@@ -1,7 +1,6 @@
-import Link from "next/link";
 import { useRef } from "react";
 
-export const Filters = ({ array, setId }) => (
+const Filters = ({ array, setId, active }) => (
   <>
     {array.map((object) => {
       const ref = useRef();
@@ -20,6 +19,9 @@ export const Filters = ({ array, setId }) => (
             }, 0)
           )}
           key={object.id}
+          style={{
+            color: object.id === active && "var(--primaryLabelColorLight)",
+          }}
         >
           {object.id}
         </button>
@@ -28,35 +30,4 @@ export const Filters = ({ array, setId }) => (
   </>
 );
 
-export const FilterLinks = ({ array, setId }) => (
-  <>
-    {array.map((object) => {
-      const ref = useRef();
-
-      return (
-        <Link
-          key={object.id}
-          href={`/?postId=${object.url}`}
-          as={`/blog/${object.url}`}
-        >
-          <button
-            key={object.id}
-            ref={ref}
-            onClick={() => (
-              setId(object.id),
-              setTimeout(() => {
-                ref.current.scrollIntoView({
-                  behavior: "smooth",
-                  block: "nearest",
-                  inline: "center",
-                });
-              }, 0)
-            )}
-          >
-            {object.id}
-          </button>
-        </Link>
-      );
-    })}
-  </>
-);
+export default Filters;
