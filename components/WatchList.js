@@ -23,7 +23,7 @@ const Player = ({ onCloseBtnClick, trailerId, isActive }) => {
   );
 };
 
-const MoviePoster = ({ id, isActive }) => {
+const MoviePoster = ({ id, isActive, isExpanded }) => {
   // FIXME: Improve code
   switch (id) {
     case "Wonder Woman":
@@ -45,7 +45,7 @@ const MoviePoster = ({ id, isActive }) => {
             transition: "600ms",
             transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
             transitionProperty: "opacity , transform",
-            opacity: isActive ? 0 : 1,
+            opacity: isActive ? 0 : isExpanded ? 0.6 : 1,
             transform: isActive ? "scale(.97)" : "scale(1)",
           }}
         />
@@ -72,7 +72,7 @@ const MoviePoster = ({ id, isActive }) => {
             transition: "600ms",
             transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
             transitionProperty: "opacity , transform",
-            opacity: isActive ? 0 : 1,
+            opacity: isActive ? 0 : isExpanded ? 0.6 : 1,
             transform: isActive ? "scale(.97)" : "scale(1)",
           }}
         />
@@ -228,14 +228,16 @@ const WatchList = ({
 }) => {
   const [synopsisOffset, setSynopsisOffset] = useState(0);
   useEffect(() => {
-    console.log("This is ref:", pRef.current.getBoundingClientRect().height);
     setSynopsisOffset(pRef.current.getBoundingClientRect().height);
-    console.log("This is synopsisOffset:", synopsisOffset);
   }, [shuffleState]);
   return (
     <>
       <main className={styles.watchListWrapper}>
-        <MoviePoster id={randomMovie} isActive={theaterMode} />
+        <MoviePoster
+          id={randomMovie}
+          isActive={theaterMode}
+          isExpanded={isExpanded}
+        />
         <div className={styles.overlay} />
         <h1
           className={styles.title}
