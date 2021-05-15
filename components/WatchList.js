@@ -1,3 +1,5 @@
+import { useState } from "react";
+import Icon from "./Icon";
 import styles from "./styles.module.css";
 
 const Player = ({ onCloseBtnClick, trailerId, isActive }) => {
@@ -28,12 +30,6 @@ const MoviePoster = ({ id, isActive }) => {
       return (
         <figure
           style={{
-            position: "absolute",
-            zIndex: -2,
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
             backgroundImage: "url(images/wonder-woman.jpg)",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
@@ -53,12 +49,6 @@ const MoviePoster = ({ id, isActive }) => {
       return (
         <figure
           style={{
-            position: "absolute",
-            zIndex: -2,
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
             backgroundImage:
               "linear-gradient(to right, #feefff, #e1d6ea 50%, #FFE4E2 75%)",
             backgroundPosition: "100% 0%",
@@ -144,7 +134,7 @@ const Metadata = ({ id, isActive }) => {
   }
 };
 
-const Description = ({ id, isActive }) => {
+const Description = ({ id, isActive, isExpanded }) => {
   switch (id) {
     case "Wonder Woman":
       return (
@@ -153,11 +143,17 @@ const Description = ({ id, isActive }) => {
           style={{
             opacity: isActive ? 0 : 1,
             transform: isActive ? "translateY(-15px)" : "translateY(0)",
+            maxHeight: isExpanded ? "100%" : 1,
+            transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
           }}
         >
-          Fast forward to the 1980s as Wonder Woman’s next big screen adventure
-          finds her facing a wide array of foes including: Max Lord and the
-          Cheetah.
+          Before she was Wonder Woman, she was Diana, princess of the Amazons,
+          trained to be an unconquerable warrior. Raised on a sheltered island
+          paradise, when an American pilot crashes on their shores and tells of
+          a massive conflict raging in the outside world, Diana leaves her home,
+          convinced she can stop the threat. Fighting alongside man in a war to
+          end all wars, Diana will discover her full powers… and her true
+          destiny.
         </p>
       );
 
@@ -168,6 +164,8 @@ const Description = ({ id, isActive }) => {
           style={{
             opacity: isActive ? 0 : 1,
             transform: isActive ? "translateY(-15px)" : "translateY(0)",
+            maxHeight: isExpanded ? "100%" : 1,
+            transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
           }}
         >
           Nulla lectus ante, consequat et ex eget, feugiat tincidunt metus.
@@ -184,21 +182,59 @@ const Description = ({ id, isActive }) => {
 };
 
 const WatchList = ({ randomMovie, theaterMode, onCloseBtnClick }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
   return (
     <>
       <main className={styles.watchListWrapper}>
-        <MoviePoster id={randomMovie} isActive={theaterMode} />
+        <div
+          style={{
+            opacity: isExpanded ? 0.6 : 1,
+            position: "absolute",
+            zIndex: -2,
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            transition: "400ms",
+            transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
+            transitionProperty: "opacity",
+          }}
+        >
+          <MoviePoster id={randomMovie} isActive={theaterMode} />
+        </div>
         <h1
           className={styles.title}
           style={{
             opacity: theaterMode ? 0 : 1,
             transform: theaterMode ? "translateY(-15px)" : "translateY(0)",
+            marginBottom: 3,
           }}
         >
           {randomMovie}
         </h1>
-        <Description id={randomMovie} isActive={theaterMode} />
         <Metadata id={randomMovie} isActive={theaterMode} />
+        <Description
+          id={randomMovie}
+          isActive={theaterMode}
+          isExpanded={isExpanded}
+        />
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          style={{
+            marginBottom: "calc(6rem + 4vh)",
+          }}
+        >
+          More
+          <span
+            style={{
+              transform: isExpanded ? "rotateX(180deg)" : "initial",
+              transition: ".4s ease",
+              display: "flex",
+            }}
+          >
+            <Icon string='Chevron' />
+          </span>
+        </button>
       </main>
 
       <Player

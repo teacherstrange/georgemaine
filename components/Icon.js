@@ -1,5 +1,21 @@
 const Icon = ({ string }) => {
   switch (string) {
+    case "Chevron":
+      return (
+        <svg
+          width='24'
+          height='24'
+          fill='none'
+          xmlns='http://www.w3.org/2000/svg'
+        >
+          <path
+            d='M15 11l-2.976 3L9 11'
+            stroke='var(--primaryLabelColorLight)'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+          />
+        </svg>
+      );
     case "Email":
       return (
         <svg

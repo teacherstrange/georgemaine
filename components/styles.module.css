@@ -34,11 +34,11 @@
   transition: 600ms;
   transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
   transition-property: opacity, transform;
-  margin-bottom: calc(6vh + 7.2rem);
 }
 
 .metaDataListItem {
   color: var(--secondaryLabelColorLight);
+  line-height: 3.6rem;
 }
 
 .metaDataListItem:not(:last-child):after {
@@ -47,32 +47,14 @@
 }
 
 .watchListSynopsis {
-  max-width: 600px;
+  max-width: 480px;
   margin-top: 0.6rem;
   margin-bottom: 0.6rem;
   width: 94%;
   text-align: center;
   color: var(--primaryLabelColorLight);
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
   overflow: hidden;
-  mask: linear-gradient(
-      0deg,
-      transparent 0px,
-      transparent calc(22px),
-      var(--black) calc(22px)
-    ),
-    linear-gradient(
-      270deg,
-      transparent 0px,
-      transparent calc(32px),
-      var(--black) calc(76px)
-    );
-  -webkit-mask-position: right bottom;
-  transition: 600ms;
-  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-  transition-property: opacity, transform;
+  transition-duration: 0.6s;
 }
 
 .desktopVideo {
@@ -354,13 +336,6 @@
 
   .mobileVideo {
     display: none;
-  }
-
-  .watchListSynopsis {
-    display: initial;
-    overflow: initial;
-    mask: initial;
-    -webkit-mask-position: initial;
   }
 }
 
