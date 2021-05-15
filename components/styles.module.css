@@ -18,8 +18,13 @@
   left: 0;
   right: 0;
   bottom: 0;
-  top: 60vh;
-  background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
+  top: 0;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 60%,
+    rgba(17, 17, 17, 0) 70%,
+    rgba(17, 17, 17, 0.4) 100%
+  );
 }
 
 .metaDataList {
@@ -257,15 +262,11 @@
 }
 
 .workFiltersExpanded {
-  animation: openFilter 0.6s ease 1 forwards;
+  animation: openFilter 0.6s 1 forwards;
 }
 
 .articleFiltersExpanded {
-  animation: openFilter 0.95s ease 1 forwards;
-}
-
-.socialLinksExpanded {
-  animation: openFilter 0.95s ease 1 forwards;
+  animation: openFilter 0.9s 1 forwards;
 }
 
 .filterSelection {
@@ -281,8 +282,8 @@
 }
 
 .title {
-  font-size: 2.7rem;
-  line-height: 3rem;
+  font-size: 2.1rem;
+  line-height: 2.4rem;
   color: var(--primaryLabelColorLight);
   text-align: center;
   transition: 600ms;
@@ -340,6 +341,11 @@
   .footer {
     overflow-x: initial;
     justify-content: center;
+  }
+
+  .title {
+    font-size: 2.7rem;
+    line-height: 3rem;
   }
 
   .desktopVideo {

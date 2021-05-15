@@ -84,12 +84,14 @@ const Caption = ({ id }) => {
             color: "var(--primaryLabelColorLight)",
             position: "relative",
             zIndex: 2,
+            paddingRight: 25,
+            paddingLeft: 25,
           }}
         >
           <strong style={{ color: "var(--primaryLabelColorLight)" }}>
             Mobile apps for Mollie Payments
           </strong>{" "}
-          · Product Design 2019-2020
+          · Product Design · 2019-2020
         </h1>
       );
     case "Promo Video":
@@ -100,12 +102,14 @@ const Caption = ({ id }) => {
             color: "var(--primaryLabelColorLight)",
             position: "relative",
             zIndex: 2,
+            paddingRight: 25,
+            paddingLeft: 25,
           }}
         >
           <strong style={{ color: "var(--primaryLabelColorLight)" }}>
             Promo Video for Mollie Payments
           </strong>{" "}
-          · Design & Video 2019
+          · Design & Video · 2019
         </h1>
       );
     case "Checkout":
@@ -116,12 +120,14 @@ const Caption = ({ id }) => {
             color: "var(--primaryLabelColorLight)",
             position: "relative",
             zIndex: 2,
+            paddingRight: 25,
+            paddingLeft: 25,
           }}
         >
           <strong style={{ color: "var(--primaryLabelColorLight)" }}>
             Checkout for Mollie Payments
           </strong>{" "}
-          · Product Design & Development 2019
+          · Product Design & Development · 2019
         </h1>
       );
     case "Launch Video":
@@ -132,6 +138,8 @@ const Caption = ({ id }) => {
             color: "var(--primaryLabelColorLight)",
             position: "relative",
             zIndex: 2,
+            paddingRight: 25,
+            paddingLeft: 25,
           }}
         >
           <strong
@@ -141,7 +149,7 @@ const Caption = ({ id }) => {
           >
             Apple Pay launch video for Mollie Payments
           </strong>{" "}
-          · Design & Video 2018
+          · Design & Video · 2018
         </h1>
       );
   }

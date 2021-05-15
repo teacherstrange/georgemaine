@@ -145,7 +145,7 @@ button {
   align-items: center;
   margin: 0;
   color: var(--secondaryLabelColorDark);
-  transition: 0.2s;
+  transition: 0.275s;
 }
 
 strong {
