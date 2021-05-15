@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Icon from "./Icon";
 import styles from "./styles.module.css";
 
@@ -30,6 +30,12 @@ const MoviePoster = ({ id, isActive }) => {
       return (
         <figure
           style={{
+            position: "absolute",
+            zIndex: -2,
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
             backgroundImage: "url(images/wonder-woman.jpg)",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
@@ -49,6 +55,12 @@ const MoviePoster = ({ id, isActive }) => {
       return (
         <figure
           style={{
+            position: "absolute",
+            zIndex: -2,
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
             backgroundImage:
               "linear-gradient(to right, #feefff, #e1d6ea 50%, #FFE4E2 75%)",
             backgroundPosition: "100% 0%",
@@ -99,7 +111,7 @@ const Trailer = ({ id }) => {
   }
 };
 
-const Metadata = ({ id, isActive }) => {
+const Metadata = ({ id, isActive, isExpanded, isExpandedOffset }) => {
   switch (id) {
     case "Wonder Woman":
       return (
@@ -107,7 +119,12 @@ const Metadata = ({ id, isActive }) => {
           className={styles.metaDataList}
           style={{
             opacity: isActive ? 0 : 1,
-            transform: isActive ? "translateY(-15px)" : "translateY(0)",
+            position: "relative",
+            zIndex: 1,
+            top: isExpandedOffset,
+            transform: isExpanded
+              ? `translateY(-${isExpandedOffset}px)`
+              : "translateY(0px)",
           }}
         >
           <li className={styles.metaDataListItem}>Action</li>
@@ -122,7 +139,12 @@ const Metadata = ({ id, isActive }) => {
           className={styles.metaDataList}
           style={{
             opacity: isActive ? 0 : 1,
-            transform: isActive ? "translateY(-15px)" : "translateY(0)",
+            position: "relative",
+            zIndex: 1,
+            top: isExpandedOffset,
+            transform: isExpanded
+              ? `translateY(-${isExpandedOffset}px)`
+              : "translateY(0px)",
           }}
         >
           <li className={styles.metaDataListItem}>Genre</li>
@@ -134,19 +156,11 @@ const Metadata = ({ id, isActive }) => {
   }
 };
 
-const Description = ({ id, isActive, isExpanded }) => {
+const Description = ({ id }) => {
   switch (id) {
     case "Wonder Woman":
       return (
-        <p
-          className={styles.watchListSynopsis}
-          style={{
-            opacity: isActive ? 0 : 1,
-            transform: isActive ? "translateY(-15px)" : "translateY(0)",
-            maxHeight: isExpanded ? "100%" : 1,
-            transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
-          }}
-        >
+        <>
           Before she was Wonder Woman, she was Diana, princess of the Amazons,
           trained to be an unconquerable warrior. Raised on a sheltered island
           paradise, when an American pilot crashes on their shores and tells of
@@ -154,20 +168,12 @@ const Description = ({ id, isActive, isExpanded }) => {
           convinced she can stop the threat. Fighting alongside man in a war to
           end all wars, Diana will discover her full powers… and her true
           destiny.
-        </p>
+        </>
       );
 
     default:
       return (
-        <p
-          className={styles.watchListSynopsis}
-          style={{
-            opacity: isActive ? 0 : 1,
-            transform: isActive ? "translateY(-15px)" : "translateY(0)",
-            maxHeight: isExpanded ? "100%" : 1,
-            transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
-          }}
-        >
+        <>
           Nulla lectus ante, consequat et ex eget, feugiat tincidunt metus.
           Phasellus sodales massa malesuada tellus fringilla, nec bibendum
           tellus blandit. Vivamus a ante congue, porta nunc nec, hendrerit
@@ -176,52 +182,107 @@ const Description = ({ id, isActive, isExpanded }) => {
           tellus fringilla, nec bibendum tellus blandit. In sit amet felis
           malesuada, feugiat purus eget, varius mi. Class aptent taciti sociosqu
           ad litora torquent per conubia nostra, per inceptos himenaeos.
-        </p>
+        </>
       );
   }
 };
 
-const WatchList = ({ randomMovie, theaterMode, onCloseBtnClick }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+const Synopsis = ({
+  children,
+  isActive,
+  pRef,
+  isExpanded,
+  isExpandedOffset,
+}) => {
+  return (
+    <p
+      ref={pRef}
+      className={styles.watchListSynopsis}
+      style={{
+        opacity: isActive ? 0 : 1,
+        transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
+        position: "relative",
+        zIndex: 1,
+        width: "calc(100% - 50px)",
+        marginLeft: "auto",
+        marginRight: "auto",
+        top: isExpandedOffset,
+        transform: isExpanded
+          ? `translateY(-${isExpandedOffset}px)`
+          : "translateY(0px)",
+      }}
+    >
+      {children}
+    </p>
+  );
+};
+
+const WatchList = ({
+  randomMovie,
+  theaterMode,
+  onCloseBtnClick,
+  isExpanded,
+  setIsExpanded,
+  pRef,
+  shuffleState,
+}) => {
+  const [synopsisOffset, setSynopsisOffset] = useState(0);
+  useEffect(() => {
+    console.log("This is ref:", pRef.current.getBoundingClientRect().height);
+    setSynopsisOffset(pRef.current.getBoundingClientRect().height);
+    console.log("This is synopsisOffset:", synopsisOffset);
+  }, [shuffleState]);
   return (
     <>
       <main className={styles.watchListWrapper}>
-        <div
-          style={{
-            opacity: isExpanded ? 0.6 : 1,
-            position: "absolute",
-            zIndex: -2,
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-            transition: "400ms",
-            transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
-            transitionProperty: "opacity",
-          }}
-        >
-          <MoviePoster id={randomMovie} isActive={theaterMode} />
-        </div>
+        <MoviePoster id={randomMovie} isActive={theaterMode} />
+        <div className={styles.overlay} />
         <h1
           className={styles.title}
           style={{
             opacity: theaterMode ? 0 : 1,
-            transform: theaterMode ? "translateY(-15px)" : "translateY(0)",
+            position: "relative",
+            top: synopsisOffset,
+            zIndex: 1,
+            transform: isExpanded
+              ? `translateY(-${synopsisOffset}px)`
+              : "translateY(0px)",
             marginBottom: 3,
+            transition: "transform .6s cubic-bezier(0.25, 0.1, 0.25, 1)",
           }}
         >
           {randomMovie}
         </h1>
-        <Metadata id={randomMovie} isActive={theaterMode} />
-        <Description
+        <Metadata
           id={randomMovie}
           isActive={theaterMode}
           isExpanded={isExpanded}
+          isExpandedOffset={synopsisOffset}
         />
+        <div
+          style={{
+            overflow: "hidden",
+            position: "relative",
+            zIndex: 1,
+            mask: "linear-gradient(0deg, transparent 0px rgb(0,0,0) 100%",
+            maskPosition: "top bottom",
+          }}
+        >
+          <Synopsis
+            isActive={theaterMode}
+            pRef={pRef}
+            isExpanded={isExpanded}
+            isExpandedOffset={synopsisOffset}
+          >
+            <Description id={randomMovie} isExpanded={isExpanded} />
+          </Synopsis>
+        </div>
         <button
           onClick={() => setIsExpanded(!isExpanded)}
           style={{
             marginBottom: "calc(6rem + 4vh)",
+            position: "relative",
+            zIndex: 1,
           }}
         >
           More

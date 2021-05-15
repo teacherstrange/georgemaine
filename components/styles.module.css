@@ -47,7 +47,7 @@
 }
 
 .watchListSynopsis {
-  max-width: 480px;
+  max-width: 494px;
   margin-top: 0.6rem;
   margin-bottom: 0.6rem;
   width: 94%;
@@ -55,6 +55,8 @@
   color: var(--primaryLabelColorLight);
   overflow: hidden;
   transition-duration: 0.6s;
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition-property: transform;
 }
 
 .desktopVideo {
@@ -116,13 +118,15 @@
   background-color: var(--black);
 }
 
-.watchListWrapper::before {
+.overlay {
   position: fixed;
+  user-select: none;
+  pointer-events: none;
   content: "";
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: -1;
+  z-index: 0;
   top: 40vh;
   background-image: linear-gradient(
     rgba(0, 0, 0, 0) 0%,
@@ -268,9 +272,6 @@
   line-height: 2.4rem;
   color: var(--primaryLabelColorLight);
   text-align: center;
-  transition: 600ms;
-  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-  transition-property: color, opacity, transform;
   margin-bottom: calc(6.6rem + 4vh);
 }
 

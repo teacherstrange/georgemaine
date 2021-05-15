@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
+import { useState, useRef } from "react";
 import Post from "../components/Post";
 import Slide from "../components/Slide";
 import Footer from "../components/Footer";
 import WatchList from "../components/WatchList";
 import * as data from "../components/Data";
 import { getRandomMovie } from "../components/Utilities";
-import { useState } from "react";
 
 const Index = () => {
   const router = useRouter();
@@ -13,6 +13,8 @@ const Index = () => {
   const [slideId, setSlideId] = useState("Mobile Apps");
   const [suggested, setSuggested] = useState([data.movies[0]]);
   const [theaterMode, setTheaterMode] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const ref = useRef(null);
 
   return (
     <>
@@ -53,6 +55,10 @@ const Index = () => {
           theaterMode={theaterMode}
           onCloseBtnClick={setTheaterMode}
           randomMovie={suggested[suggested.length - 1].name}
+          isExpanded={isExpanded}
+          setIsExpanded={setIsExpanded}
+          pRef={ref}
+          shuffleState={suggested}
         />
       ) : null}
       {/* // FIXME: find alternative to null */}
