@@ -46,28 +46,28 @@ export const portfolio = [
     id: "Mobile Apps",
     caption:
       "Designed apps for iOS, Android and developed the landing page • 2020",
-    width: 138,
+    width: 124,
     x: 0,
   },
   {
     id: "Promo Video",
     caption:
       "Created an engaging video to help showcase Mollie at events • 2020",
-    width: 142,
-    x: 135,
+    width: 131,
+    x: 124,
   },
   {
     id: "Checkout",
     caption:
       "Redesigned and developed the Mollie Checkout Web application • 2019",
-    width: 116,
-    x: 277,
+    width: 107,
+    x: 255,
   },
   {
     id: "Launch Video",
     caption:
       "Created an engaging promo video for the Mollie Apple Pay launch • 2019",
-    width: 145,
-    x: 393,
+    width: 133,
+    x: 362,
   },
 ];

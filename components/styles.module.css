@@ -272,7 +272,7 @@
 .filterSelection {
   position: absolute;
   border-radius: 3rem;
-  width: 110px;
+  width: 10.5rem;
   transition: 0.3s;
   background: rgba(17, 17, 17, 0.3);
   z-index: -1;
