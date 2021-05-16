@@ -271,12 +271,12 @@ const WatchList = ({
           </Synopsis>
         </div>
         <button
+          className={styles.transparentIconButton}
           onClick={() => setIsExpanded(!isExpanded)}
           style={{
             marginBottom: "calc(6rem + 4vh)",
             position: "relative",
             zIndex: 1,
-            color: "var(--primaryLabelColorLight)",
           }}
         >
           More
