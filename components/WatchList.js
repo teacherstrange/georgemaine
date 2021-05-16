@@ -2,83 +2,35 @@ import { useEffect, useState } from "react";
 import Icon from "./Icon";
 import styles from "./styles.module.css";
 
-const Player = ({ onCloseBtnClick, trailerId, isActive }) => {
-  return (
-    <div
-      className={styles.watchListPlayer}
-      style={{
-        opacity: isActive ? 1 : 0,
-        transform: isActive ? `translateY(0)` : `translateY(100vh)`,
-      }}
+const Player = ({ onCloseBtnClick, trailerId, isActive }) => (
+  <div
+    className={styles.watchListPlayer}
+    style={{
+      opacity: isActive ? 1 : 0,
+      transform: isActive ? `translateY(0)` : `translateY(100vh)`,
+    }}
+  >
+    <Trailer id={trailerId} />
+    <button
+      className={styles.trailerCloseButton}
+      onClick={() => onCloseBtnClick(false)}
     >
-      <Trailer id={trailerId} />
-      <button
-        className={styles.trailerCloseButton}
-        onClick={() => onCloseBtnClick(false)}
-      >
-        Close
-      </button>
-      Trailer placeholder
-    </div>
-  );
-};
+      Close
+    </button>
+    Trailer placeholder
+  </div>
+);
 
-const MoviePoster = ({ id, isActive, isExpanded }) => {
-  // FIXME: Improve code
-  switch (id) {
-    case "Wonder Woman":
-      return (
-        <figure
-          style={{
-            position: "absolute",
-            zIndex: -2,
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-            backgroundImage: "url(images/wonder-woman.jpg)",
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center top",
-            width: "100%",
-            height: "100%",
-            transition: "600ms",
-            transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
-            transitionProperty: "opacity , transform",
-            opacity: isActive ? 0 : isExpanded ? 0.4 : 1,
-            transform: isActive ? "scale(.97)" : "scale(1)",
-          }}
-        />
-      );
-
-    default:
-      return (
-        <figure
-          style={{
-            position: "absolute",
-            zIndex: -2,
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-            backgroundImage:
-              "linear-gradient(to right, #feefff, #e1d6ea 50%, #FFE4E2 75%)",
-            backgroundPosition: "100% 0%",
-            transition:
-              "4s background-position,transform 1s cubic-bezier(0.49, 0.575, 0.565, 1)",
-            backgroundSize: "300% 100%",
-            width: "100%",
-            height: "100%",
-            transition: "600ms",
-            transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
-            transitionProperty: "opacity , transform",
-            opacity: isActive ? 0 : isExpanded ? 0.4 : 1,
-            transform: isActive ? "scale(.97)" : "scale(1)",
-          }}
-        />
-      );
-  }
-};
+const MoviePoster = ({ id, isActive, isExpanded }) => (
+  <figure
+    className={styles.watchListPoster}
+    style={{
+      backgroundImage: id.posterUrl && `url(${id.posterUrl}`,
+      opacity: isActive ? 0 : isExpanded ? 0.4 : 1,
+      transform: isActive ? "scale(.97)" : "scale(1)",
+    }}
+  />
+);
 
 const Trailer = ({ id }) => {
   switch (id) {
@@ -217,15 +169,15 @@ const WatchList = ({
   shuffleState,
 }) => {
   const [synopsisOffset, setSynopsisOffset] = useState(0);
+
   useEffect(() => {
     setSynopsisOffset(pRef.current.getBoundingClientRect().height);
-    console.log("This is randomMovie:", randomMovie);
   }, [shuffleState]);
   return (
     <>
       <main className={styles.watchListWrapper}>
         <MoviePoster
-          id={randomMovie.name}
+          id={randomMovie}
           isActive={theaterMode}
           isExpanded={isExpanded}
         />
