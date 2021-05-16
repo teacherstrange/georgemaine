@@ -24,21 +24,30 @@ export const links = [
 export const movies = [
   {
     name: "Wonder Woman",
+    metadata: ["Action", 2017, "2 hr 21 min"],
     posterUrl: "images/wonder-woman.jpg",
     synopsis:
       "Before she was Wonder Woman, she was Diana, princess of the Amazons, trained to be an unconquerable warrior. Raised on a sheltered island paradise, when an American pilot crashes on their shores and tells of a massive conflict raging in the outside world, Diana leaves her home, convinced she can stop the threat. Fighting alongside man in a war to end all wars, Diana will discover her full powers… and her true destiny.",
-    url:
-      "https://tv.apple.com/nl/movie/wonder-woman-1984/umc.cmc.1pq7jxkjbskjmlbiskxlydtef",
+    trailerUrl:
+      "https://play.itunes.apple.com/WebObjects/MZPlay.woa/hls/playlist.m3u8?cc=NL&a=1545235353&id=233856991&l=nl-NL&aec=HD&xtrick=true&webbrowser=true",
   },
   {
     name: "Interstellar",
-    url:
-      "https://tv.apple.com/nl/movie/wonder-woman-1984/umc.cmc.1pq7jxkjbskjmlbiskxlydtef",
+    metadata: ["Action", 2017, "2 hr 21 min"],
+    posterUrl: "images/wonder-woman.jpg",
+    synopsis:
+      "Nulla lectus ante, consequat et ex eget, feugiat tincidunt metus.           Phasellus sodales massa malesuada tellus fringilla, nec bibendum           tellus blandit. Vivamus a ante congue, porta nunc nec, hendrerit           turpis. Vestibulum ante ipsum primis in faucibus orci luctus et           ultrices posuere cubilia Curae. Phasellus sodales massa malesuada           tellus fringilla, nec bibendum tellus blandit. In sit amet felis           malesuada, feugiat purus eget, varius mi. Class aptent taciti sociosqu           ad litora torquent per conubia nostra, per inceptos himenaeos.",
+    trailerUrl:
+      "https://play.itunes.apple.com/WebObjects/MZPlay.woa/hls/playlist.m3u8?cc=NL&a=1545235353&id=233856991&l=nl-NL&aec=HD&xtrick=true&webbrowser=true",
   },
   {
     name: "Inception",
-    url:
-      "https://tv.apple.com/nl/movie/wonder-woman-1984/umc.cmc.1pq7jxkjbskjmlbiskxlydtef",
+    metadata: ["Action", 2017, "2 hr 21 min"],
+    posterUrl: "images/wonder-woman.jpg",
+    synopsis:
+      "Nulla lectus ante, consequat et ex eget, feugiat tincidunt metus.           Phasellus sodales massa malesuada tellus fringilla, nec bibendum           tellus blandit. Vivamus a ante congue, porta nunc nec, hendrerit           turpis. Vestibulum ante ipsum primis in faucibus orci luctus et           ultrices posuere cubilia Curae. Phasellus sodales massa malesuada           tellus fringilla, nec bibendum tellus blandit. In sit amet felis           malesuada, feugiat purus eget, varius mi. Class aptent taciti sociosqu           ad litora torquent per conubia nostra, per inceptos himenaeos.",
+    trailerUrl:
+      "https://play.itunes.apple.com/WebObjects/MZPlay.woa/hls/playlist.m3u8?cc=NL&a=1545235353&id=233856991&l=nl-NL&aec=HD&xtrick=true&webbrowser=true",
   },
 ];
 

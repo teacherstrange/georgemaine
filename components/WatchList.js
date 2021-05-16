@@ -32,102 +32,40 @@ const MoviePoster = ({ id, isActive, isExpanded }) => (
   />
 );
 
-const Trailer = ({ id }) => {
-  switch (id) {
-    case "Wonder Woman":
-      return (
-        <video
-          autoPlay
-          controls
-          playsInline
-          muted
-          loop
-          className={styles.video}
-          src={
-            "https://play.itunes.apple.com/WebObjects/MZPlay.woa/hls/playlist.m3u8?cc=NL&a=1545235353&id=233856991&l=nl-NL&aec=HD&xtrick=true&webbrowser=true"
-          }
-        />
-      );
-    default:
-      return (
-        <video
-          autoPlay
-          controls
-          playsInline
-          muted
-          loop
-          className={styles.video}
-          src={""}
-        />
-      );
-  }
-};
+const Trailer = ({ id }) => (
+  <video
+    autoPlay
+    controls
+    playsInline
+    muted
+    loop
+    className={styles.video}
+    src={id.trailerUrl}
+  />
+);
 
-const Metadata = ({ id, isActive, isExpanded, isExpandedOffset }) => {
-  switch (id) {
-    case "Wonder Woman":
+const Metadata = ({ id, isActive, isExpanded, isExpandedOffset }) => (
+  <ul
+    className={styles.metaDataList}
+    style={{
+      opacity: isActive ? 0 : 1,
+      position: "relative",
+      zIndex: 1,
+      top: isExpandedOffset,
+      transform: isExpanded
+        ? `translateY(-${isExpandedOffset}px)`
+        : "translateY(0px)",
+    }}
+  >
+    {id.metadata.map((metadata, key) => {
       return (
-        <ul
-          className={styles.metaDataList}
-          style={{
-            opacity: isActive ? 0 : 1,
-            position: "relative",
-            zIndex: 1,
-            top: isExpandedOffset,
-            transform: isExpanded
-              ? `translateY(-${isExpandedOffset}px)`
-              : "translateY(0px)",
-          }}
-        >
-          <li className={styles.metaDataListItem}>Action</li>
-          <li className={styles.metaDataListItem}>2017</li>
-          <li className={styles.metaDataListItem}>2 hr 21 min</li>
-          <li className={styles.metaDataListItem}>Apple TV+</li>
-        </ul>
+        <li key={key} className={styles.metaDataListItem}>
+          {metadata}
+        </li>
       );
-    default:
-      return (
-        <ul
-          className={styles.metaDataList}
-          style={{
-            opacity: isActive ? 0 : 1,
-            position: "relative",
-            zIndex: 1,
-            top: isExpandedOffset,
-            transform: isExpanded
-              ? `translateY(-${isExpandedOffset}px)`
-              : "translateY(0px)",
-          }}
-        >
-          <li className={styles.metaDataListItem}>Genre</li>
-          <li className={styles.metaDataListItem}>Release year</li>
-          <li className={styles.metaDataListItem}>Duration</li>
-          <li className={styles.metaDataListItem}>Platform</li>
-        </ul>
-      );
-  }
-};
-
-const Description = ({ id }) => {
-  switch (id.name) {
-    case "Wonder Woman":
-      return <>{id.synopsis}</>;
-
-    default:
-      return (
-        <>
-          "Nulla lectus ante, consequat et ex eget, feugiat tincidunt metus.
-          Phasellus sodales massa malesuada tellus fringilla, nec bibendum
-          tellus blandit. Vivamus a ante congue, porta nunc nec, hendrerit
-          turpis. Vestibulum ante ipsum primis in faucibus orci luctus et
-          ultrices posuere cubilia Curae. Phasellus sodales massa malesuada
-          tellus fringilla, nec bibendum tellus blandit. In sit amet felis
-          malesuada, feugiat purus eget, varius mi. Class aptent taciti sociosqu
-          ad litora torquent per conubia nostra, per inceptos himenaeos."
-        </>
-      );
-  }
-};
+    })}
+  </ul>
+);
 
 const Synopsis = ({
   children,
@@ -199,7 +137,7 @@ const WatchList = ({
           {randomMovie.name}
         </h1>
         <Metadata
-          id={randomMovie.name}
+          id={randomMovie}
           isActive={theaterMode}
           isExpanded={isExpanded}
           isExpandedOffset={synopsisOffset}
@@ -219,7 +157,7 @@ const WatchList = ({
             isExpanded={isExpanded}
             isExpandedOffset={synopsisOffset}
           >
-            <Description id={randomMovie} isExpanded={isExpanded} />
+            {randomMovie.synopsis}
           </Synopsis>
         </div>
         <button
@@ -246,7 +184,7 @@ const WatchList = ({
 
       <Player
         onCloseBtnClick={onCloseBtnClick}
-        trailerId={randomMovie.name}
+        trailerId={randomMovie}
         isActive={theaterMode}
       />
     </>
