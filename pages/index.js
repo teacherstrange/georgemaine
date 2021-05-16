@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import Post from "../components/Post";
 import Slide from "../components/Slide";
 import Footer from "../components/Footer";
-import WatchList from "../components/WatchList";
+import MovieList from "../components/MovieList";
 import * as data from "../components/Data";
 import { getRandomMovie } from "../components/Utilities";
 
@@ -49,9 +49,9 @@ const Index = () => {
         <Post id={router.query.postId} pathname={router.pathname} />
       ) : filterId === "portfolio" ? (
         <Slide id={slideId} />
-      ) : filterId === "watchlist" ? (
+      ) : filterId === "movieList" ? (
         // FIXME: Break component down into smaller pieces
-        <WatchList
+        <MovieList
           theaterMode={theaterMode}
           onCloseBtnClick={setTheaterMode}
           randomMovie={suggested[suggested.length - 1]}

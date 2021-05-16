@@ -40,7 +40,7 @@ const Footer = ({
             filterId === "portfolio" && styles.workFiltersExpanded
           }`}
         >
-          {filterId === "blog" || filterId === "watchlist" ? (
+          {filterId === "blog" || filterId === "movieList" ? (
             <button
               onClick={() => (router.push("/"), setFilterId("portfolio"))}
             >
@@ -71,10 +71,10 @@ const Footer = ({
         >
           {filterId === "portfolio" || filterId === "blog" ? (
             <button
-              className={styles.watchListNavWideButton}
-              onClick={() => (router.push("/"), setFilterId("watchlist"))}
+              className={styles.movieListNavWideButton}
+              onClick={() => (router.push("/"), setFilterId("movieList"))}
             >
-              Watch List
+              Movie List
             </button>
           ) : (
             <>
@@ -94,7 +94,7 @@ const Footer = ({
             filterId === "blog" && styles.articleFiltersExpanded
           }`}
         >
-          {filterId === "portfolio" || filterId === "watchlist" ? (
+          {filterId === "portfolio" || filterId === "movieList" ? (
             <button onClick={() => setFilterId("blog")}>Get in touch</button>
           ) : (
             <>

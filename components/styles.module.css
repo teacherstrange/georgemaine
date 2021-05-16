@@ -45,7 +45,7 @@
   content: " · ";
   margin-right: 3px;
 }
-.watchListPoster {
+.movieListPoster {
   position: absolute;
   z-index: -2;
   top: 0;
@@ -67,7 +67,7 @@
   transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
   transition-property: opacity, transform;
 }
-.watchListSynopsis {
+.movieListSynopsis {
   max-width: 494px;
   margin-top: 0.6rem;
   margin-bottom: 0.6rem;
@@ -126,7 +126,7 @@
   backdrop-filter: blur(3rem) saturate(200%);
 }
 
-.watchListWrapper {
+.movieListWrapper {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -155,7 +155,7 @@
   );
 }
 
-.watchListPlayer {
+.movieListPlayer {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -381,8 +381,8 @@
   }
 
   .button:hover,
-  .watchListNavButton:hover,
-  .watchListNavIconButton:hover {
+  .movieListNavButton:hover,
+  .movieListNavIconButton:hover {
     background-color: rgba(0, 0, 0, 0.06);
   }
 }

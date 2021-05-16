@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 
 const Player = ({ onCloseBtnClick, trailerId, isActive }) => (
   <div
-    className={styles.watchListPlayer}
+    className={styles.movieListPlayer}
     style={{
       opacity: isActive ? 1 : 0,
       transform: isActive ? `translateY(0)` : `translateY(100vh)`,
@@ -23,7 +23,7 @@ const Player = ({ onCloseBtnClick, trailerId, isActive }) => (
 
 const MoviePoster = ({ id, isActive, isExpanded }) => (
   <figure
-    className={styles.watchListPoster}
+    className={styles.movieListPoster}
     style={{
       backgroundImage: id.posterUrl && `url(${id.posterUrl}`,
       opacity: isActive ? 0 : isExpanded ? 0.4 : 1,
@@ -77,7 +77,7 @@ const Synopsis = ({
   return (
     <p
       ref={pRef}
-      className={styles.watchListSynopsis}
+      className={styles.movieListSynopsis}
       style={{
         opacity: isActive ? 0 : 1,
         transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
@@ -97,7 +97,7 @@ const Synopsis = ({
   );
 };
 
-const WatchList = ({
+const MovieList = ({
   randomMovie,
   theaterMode,
   onCloseBtnClick,
@@ -113,7 +113,7 @@ const WatchList = ({
   }, [shuffleState]);
   return (
     <>
-      <main className={styles.watchListWrapper}>
+      <main className={styles.movieListWrapper}>
         <MoviePoster
           id={randomMovie}
           isActive={theaterMode}
@@ -191,4 +191,4 @@ const WatchList = ({
   );
 };
 
-export default WatchList;
+export default MovieList;
