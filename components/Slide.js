@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import Icon from "./Icon";
 import styles from "./styles.module.css";
 
 // FIXME: This is some ugly code lol
-const Video = ({ id }) => {
+const Video = ({ id, isMuted, setMuted }) => {
   switch (id) {
     case "Mobile Apps":
       return (
@@ -28,10 +29,11 @@ const Video = ({ id }) => {
     case "Promo Video":
       return (
         <>
+          <MuteButton onClick={() => setMuted(!isMuted)} isMuted={isMuted} />
           <video
             autoPlay
             playsInline
-            muted
+            muted={isMuted ? true : false}
             loop
             src={"videos/mollie-video.mp4"}
             className={styles.video}
@@ -62,10 +64,11 @@ const Video = ({ id }) => {
     case "Launch Video":
       return (
         <>
+          <MuteButton onClick={() => setMuted(!isMuted)} isMuted={isMuted} />
           <video
             autoPlay
             playsInline
-            muted
+            muted={isMuted ? true : false}
             loop
             src={"videos/mollie-apple-pay.mp4"}
             className={styles.video}
@@ -155,10 +158,29 @@ const Caption = ({ id }) => {
   }
 };
 
+const MuteButton = ({ onClick, isMuted }) => (
+  <button
+    style={{
+      position: "fixed",
+      top: 12,
+      right: 12,
+      zIndex: 3,
+      backgroundColor: "var(--secondaryLabelColorDark)",
+      boxShadow: "0 0 0 0.5px rgba(255,255,255,.16)",
+      borderRadius: 18,
+      backdropFilter: "blur(3rem)",
+    }}
+    onClick={() => onClick(!isMuted)}
+  >
+    {isMuted ? <Icon string='isMuted' /> : <Icon string='Mute' />}
+  </button>
+);
+
 const Slide = ({ id }) => {
+  const [muted, setMuted] = useState(false);
   return (
     <div className={styles.slide}>
-      <Video id={id} />
+      <Video id={id} isMuted={muted} setMuted={setMuted} />
       <Caption id={id} />
     </div>
   );
