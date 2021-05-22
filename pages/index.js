@@ -38,7 +38,7 @@ const Index = () => {
           try {
             await navigator.share(suggested[suggested.length - 1]);
           } catch (err) {
-            null;
+            console.log(err);
           }
         }}
         onTrailerBtnClick={setTheaterMode}

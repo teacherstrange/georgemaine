@@ -40,7 +40,7 @@ const Trailer = ({ id }) => (
     muted
     loop
     className={styles.video}
-    src={id.trailerUrl}
+    src={id.url}
   />
 );
 
