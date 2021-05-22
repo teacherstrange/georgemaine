@@ -35,7 +35,7 @@ const Video = ({ id, isMuted, setMuted }) => {
             playsInline
             muted={isMuted ? true : false}
             loop
-            src={"videos/mollie-video.mp4"}
+            src={"videos/promo-video.mp4"}
             className={styles.video}
           />
         </>
@@ -70,7 +70,7 @@ const Video = ({ id, isMuted, setMuted }) => {
             playsInline
             muted={isMuted ? true : false}
             loop
-            src={"videos/mollie-apple-pay.mp4"}
+            src={"videos/launch-video.mp4"}
             className={styles.video}
           />
         </>
