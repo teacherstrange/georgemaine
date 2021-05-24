@@ -17,16 +17,18 @@ const TrailerModal = ({ onCloseBtnClick, trailerId, isActive }) => {
         transform: isActive ? `translateY(0)` : `translateY(100vh)`,
       }}
     >
-      <video
-        ref={trailerVideoRef}
-        autoPlay
-        controls
-        playsInline
-        muted
-        loop
-        className={styles.trailerVideo}
-        src={trailerId.url}
-      />
+      <div className={styles.trailerVideoContainer}>
+        <video
+          ref={trailerVideoRef}
+          autoPlay
+          controls
+          playsInline
+          muted
+          loop
+          className={styles.trailerVideo}
+          src={trailerId.url}
+        />
+      </div>
       <button
         className={styles.trailerModalCloseBtn}
         onClick={() => (onCloseBtnClick(false), pauseTrailerVideo())}
