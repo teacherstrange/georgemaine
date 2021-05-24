@@ -22,9 +22,7 @@ const Footer = ({
   const router = useRouter();
   // FIXME: Polyfill is not needed beyond 768px
 
-  useEffect(() => {
-    scrollPolyfill();
-  }, []);
+  useEffect(() => scrollPolyfill(), []);
 
   const selectedSlide = portfolio.findIndex((slide) => slide.id === slideId);
 

@@ -1,25 +1,33 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Icon from "./Icon";
 import styles from "./styles.module.css";
 
-const Player = ({ onCloseBtnClick, trailerId, isActive }) => (
-  <div
-    className={styles.movieListPlayer}
-    style={{
-      opacity: isActive ? 1 : 0,
-      transform: isActive ? `translateY(0)` : `translateY(100vh)`,
-    }}
-  >
-    <Trailer id={trailerId} />
-    <button
-      className={styles.trailerCloseButton}
-      onClick={() => onCloseBtnClick(false)}
+const Player = ({ onCloseBtnClick, trailerId, isActive }) => {
+  const trailerRef = useRef(null);
+
+  const pauseVideo = () => {
+    trailerRef.current.pause();
+  };
+
+  return (
+    <div
+      className={styles.movieListPlayer}
+      style={{
+        opacity: isActive ? 1 : 0,
+        transform: isActive ? `translateY(0)` : `translateY(100vh)`,
+      }}
     >
-      Close
-    </button>
-    Trailer placeholder
-  </div>
-);
+      <Trailer id={trailerId} trailerRef={trailerRef} />
+      <button
+        className={styles.trailerCloseButton}
+        onClick={() => (onCloseBtnClick(false), pauseVideo())}
+      >
+        Close
+      </button>
+      Trailer placeholder
+    </div>
+  );
+};
 
 const MoviePoster = ({ id, isActive, isExpanded }) => (
   <figure
@@ -32,8 +40,9 @@ const MoviePoster = ({ id, isActive, isExpanded }) => (
   />
 );
 
-const Trailer = ({ id }) => (
+const Trailer = ({ id, trailerRef }) => (
   <video
+    ref={trailerRef}
     autoPlay
     controls
     playsInline
