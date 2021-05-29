@@ -12,7 +12,7 @@ const Index = () => {
   const [filterId, setFilterId] = useState("portfolio"); // FIXME: Better naming
   const [slideId, setSlideId] = useState("Mobile Apps");
   const [suggested, setSuggested] = useState([data.movies[0]]);
-  const [theaterMode, setTheaterMode] = useState(false);
+  const [trailerMode, setTrailerMode] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const ref = useRef(null);
 
@@ -41,9 +41,9 @@ const Index = () => {
             console.log(err);
           }
         }}
-        onTrailerBtnClick={setTheaterMode}
+        onTrailerBtnClick={setTrailerMode}
         socialLinks={data.links}
-        trailerModalState={theaterMode}
+        trailerModalState={trailerMode}
       />
       {filterId === "blog" ? (
         <Post id={router.query.postId} pathname={router.pathname} />
@@ -52,8 +52,8 @@ const Index = () => {
       ) : filterId === "movieList" ? (
         // FIXME: Break component down into smaller pieces
         <MovieList
-          theaterMode={theaterMode}
-          onCloseBtnClick={setTheaterMode}
+          trailerMode={trailerMode}
+          onCloseBtnClick={setTrailerMode}
           randomMovie={suggested[suggested.length - 1]}
           isExpanded={isExpanded}
           setIsExpanded={setIsExpanded}

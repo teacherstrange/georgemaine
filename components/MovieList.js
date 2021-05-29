@@ -40,19 +40,30 @@ const TrailerModal = ({ onCloseBtnClick, trailerId, isActive }) => {
 };
 
 const MoviePoster = ({ id, isActive, isExpanded }) => (
-  <figure
-    className={styles.movieListPoster}
-    style={{
-      backgroundImage: id.posterUrl && `url(${id.posterUrl}`,
-      opacity: isActive ? 0 : isExpanded ? 0.4 : 1,
-      transform: isActive ? "scale(.97)" : "scale(1)",
-    }}
-  />
+  <>
+    <figure
+      className={styles.moviePosterMobile}
+      style={{
+        backgroundImage:
+          id.moviePosterMobileUrl && `url(${id.moviePosterMobileUrl}`,
+        opacity: isActive ? 0 : isExpanded ? 0.4 : 1,
+        transform: isActive ? "scale(.97)" : "scale(1)",
+      }}
+    />
+    <figure
+      className={styles.moviePosterDesktop}
+      style={{
+        backgroundImage: id.trailerPosterUrl && `url(${id.trailerPosterUrl}`,
+        opacity: isActive ? 0 : isExpanded ? 0.4 : 1,
+        transform: isActive ? "scale(.97)" : "scale(1)",
+      }}
+    />
+  </>
 );
 
 const Metadata = ({ id, isActive, isExpanded, isExpandedOffset }) => (
   <ul
-    className={styles.metaDataList}
+    className={styles.movieMetadataList}
     style={{
       opacity: isActive ? 0 : 1,
       position: "relative",
@@ -65,7 +76,7 @@ const Metadata = ({ id, isActive, isExpanded, isExpandedOffset }) => (
   >
     {id.metadata.map((metadata, key) => {
       return (
-        <li key={key} className={styles.metaDataListItem}>
+        <li key={key} className={styles.movieMetadataListItem}>
           {metadata}
         </li>
       );
@@ -83,7 +94,7 @@ const Synopsis = ({
   return (
     <p
       ref={pRef}
-      className={styles.movieListSynopsis}
+      className={styles.movieSynopsis}
       style={{
         opacity: isActive ? 0 : 1,
         transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
@@ -105,7 +116,7 @@ const Synopsis = ({
 
 const MovieList = ({
   randomMovie,
-  theaterMode,
+  trailerMode,
   onCloseBtnClick,
   isExpanded,
   setIsExpanded,
@@ -122,14 +133,14 @@ const MovieList = ({
       <main className={styles.movieListWrapper}>
         <MoviePoster
           id={randomMovie}
-          isActive={theaterMode}
+          isActive={trailerMode}
           isExpanded={isExpanded}
         />
         <div className={styles.overlay} />
         <h1
           className={styles.title}
           style={{
-            opacity: theaterMode ? 0 : 1,
+            opacity: trailerMode ? 0 : 1,
             position: "relative",
             top: synopsisOffset,
             zIndex: 1,
@@ -144,7 +155,7 @@ const MovieList = ({
         </h1>
         <Metadata
           id={randomMovie}
-          isActive={theaterMode}
+          isActive={trailerMode}
           isExpanded={isExpanded}
           isExpandedOffset={synopsisOffset}
         />
@@ -158,7 +169,7 @@ const MovieList = ({
           }}
         >
           <Synopsis
-            isActive={theaterMode}
+            isActive={trailerMode}
             pRef={pRef}
             isExpanded={isExpanded}
             isExpandedOffset={synopsisOffset}
@@ -191,7 +202,7 @@ const MovieList = ({
       <TrailerModal
         onCloseBtnClick={onCloseBtnClick}
         trailerId={randomMovie}
-        isActive={theaterMode}
+        isActive={trailerMode}
       />
     </>
   );

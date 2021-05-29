@@ -27,7 +27,7 @@
   );
 }
 
-.metaDataList {
+.movieMetadataList {
   display: flex;
   padding: 0;
   margin: 0;
@@ -36,38 +36,31 @@
   transition-property: opacity, transform;
 }
 
-.metaDataListItem {
+.movieMetadataListItem {
   color: var(--secondaryLabelColorLight);
   line-height: 3.6rem;
 }
 
-.metaDataListItem:not(:last-child):after {
+.movieMetadataListItem:not(:last-child):after {
   content: " · ";
   margin-right: 3px;
 }
-.movieListPoster {
+.moviePosterDesktop {
   position: absolute;
+  display: none;
   z-index: -2;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: linear-gradient(
-    to right,
-    #feefff,
-    #e1d6ea 50%,
-    #ffe4e2 75%
-  );
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center top;
   width: 100%;
   height: 100%;
   transition: 600ms;
   transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
   transition-property: opacity, transform;
 }
-.movieListSynopsis {
+.movieSynopsis {
   max-width: 494px;
   margin-top: 0.6rem;
   margin-bottom: 0.6rem;
@@ -125,6 +118,21 @@
 .trailerVideo {
   width: inherit;
   object-fit: contain;
+}
+
+.moviePosterMobile {
+  position: absolute;
+  z-index: -2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  transition: 600ms;
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition-property: opacity, transform;
 }
 
 .mobileVideo {
@@ -315,6 +323,7 @@
 .title {
   font-size: 2.1rem;
   line-height: 2.4rem;
+  font-weight: 600;
   color: var(--primaryLabelColorLight);
   text-align: center;
   margin-bottom: calc(6.6rem + 4vh);
@@ -394,6 +403,13 @@
   .movieListNavButton:hover,
   .movieListNavIconButton:hover {
     background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  .moviePosterMobile {
+    display: none;
+  }
+  .moviePosterDesktop {
+    display: block;
   }
 }
 
