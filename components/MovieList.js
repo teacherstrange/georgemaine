@@ -138,17 +138,13 @@ const MovieList = ({
         />
         <div className={styles.overlay} />
         <h1
-          className={styles.title}
+          className={styles.movieTitle}
           style={{
             opacity: trailerMode ? 0 : 1,
-            position: "relative",
             top: synopsisOffset,
-            zIndex: 1,
             transform: isExpanded
               ? `translateY(-${synopsisOffset}px)`
               : "translateY(0px)",
-            marginBottom: 3,
-            transition: "transform .6s cubic-bezier(0.25, 0.1, 0.25, 1)",
           }}
         >
           {randomMovie.name}
