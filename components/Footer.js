@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import Link from "next/link";
 import Icon from "./Icon";
 import styles from "./styles.module.css";

@@ -53,7 +53,8 @@ const MoviePoster = ({ id, isActive, isExpanded }) => (
     <figure
       className={styles.moviePosterDesktop}
       style={{
-        backgroundImage: id.trailerPosterUrl && `url(${id.trailerPosterUrl}`,
+        backgroundImage:
+          id.moviePosterDesktopUrl && `url(${id.moviePosterDesktopUrl}`,
         opacity: isActive ? 0 : isExpanded ? 0.4 : 1,
         transform: isActive ? "scale(.97)" : "scale(1)",
       }}
