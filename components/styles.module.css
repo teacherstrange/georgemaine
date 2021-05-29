@@ -301,7 +301,11 @@
 }
 
 .workFiltersExpanded {
-  animation: openFilter 0.6s 1 forwards;
+  animation: openFilter 0.8s 1 forwards;
+}
+
+.movieListControlsExpanded {
+  animation: openFilter 1.2s 1 forwards;
 }
 
 .articleFiltersExpanded {

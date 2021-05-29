@@ -19,9 +19,7 @@ const Footer = ({
   portfolio,
   socialLinks,
 }) => {
-  const router = useRouter();
   // FIXME: Polyfill is not needed beyond 768px
-
   useEffect(() => scrollPolyfill(), []);
 
   const selectedSlide = portfolio.findIndex((slide) => slide.id === slideId);
@@ -39,11 +37,7 @@ const Footer = ({
           }`}
         >
           {filterId === "blog" || filterId === "movieList" ? (
-            <button
-              onClick={() => (router.push("/"), setFilterId("portfolio"))}
-            >
-              Portfolio
-            </button>
+            <button onClick={() => setFilterId("portfolio")}>Portfolio</button>
           ) : (
             <Filters
               array={portfolio}
@@ -64,13 +58,13 @@ const Footer = ({
 
         <nav
           className={`${styles.filters} ${
-            filterId === "portfolio" && styles.workFiltersExpanded
+            filterId === "movieList" && styles.movieListControlsExpanded
           }`}
         >
           {filterId === "portfolio" || filterId === "blog" ? (
             <button
               className={styles.movieListNavWideButton}
-              onClick={() => (router.push("/"), setFilterId("movieList"))}
+              onClick={() => setFilterId("movieList")}
             >
               Movie List
             </button>
