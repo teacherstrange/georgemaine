@@ -110,7 +110,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: black;
+  background-color: var(--black);
   z-index: 3;
   transition: 600ms;
   transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -394,5 +394,11 @@
   .movieListNavButton:hover,
   .movieListNavIconButton:hover {
     background-color: rgba(0, 0, 0, 0.06);
+  }
+}
+
+@media (min-width: 192rem) {
+  .trailerVideoContainer {
+    max-width: 192rem;
   }
 }
