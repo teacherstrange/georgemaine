@@ -144,6 +144,7 @@
   padding: 0.6rem;
   align-self: center;
   border-radius: 50%;
+  transform: scale(1);
 }
 
 .bubbleBtn:active {

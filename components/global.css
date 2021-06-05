@@ -130,7 +130,7 @@ html {
 }
 
 button {
-  background: none;
+  background: rgba(0, 0, 0, 0);
   border: none;
   font: inherit;
   text-decoration: none;
@@ -192,7 +192,7 @@ body {
 /* Variables */
 :root {
   --black: rgb(0, 0, 0);
-  --opaque: rgba(255, 255, 255, 0.91);
+  --opaque: rgba(249, 249, 249, 0.94);
   --body: rgb(77, 77, 77);
   --title: rgb(38, 38, 38);
   --hover: rgba(0, 0, 0, 0.12);
@@ -203,7 +203,7 @@ body {
 @supports (color: color(display-p3 1 1 1)) {
   :root {
     --black: color(display-p3 0 0 0);
-    --opaque: color(display-p3 1.0001 1 0.9999 / 0.91);
+    --opaque: color(display-p3 0.9765 0.9765 0.9764 / 0.94);
     --body: color(display-p3 0.302 0.302 0.3019);
     --title: color(display-p3 0.149 0.149 0.149);
     --hover: color(display-p3 0 0 0 / 0.12);
