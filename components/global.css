@@ -140,6 +140,12 @@ button {
   align-items: center;
   margin: 0;
   color: var(--body);
+  transition: 120ms ease-out;
+}
+
+button:disabled {
+  opacity: 0.25;
+  pointer-events: none;
 }
 
 h1,

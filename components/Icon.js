@@ -1,5 +1,41 @@
 const Icon = ({ string }) => {
   switch (string) {
+    case "ArrowBack":
+      return (
+        <svg
+          width='24'
+          height='24'
+          viewBox='0 0 24 24'
+          fill='none'
+          xmlns='http://www.w3.org/2000/svg'
+        >
+          <path
+            d='M4 12.5L8.5 8M20.5 12.5H4H20.5ZM4 12.5L8.5 17L4 12.5Z'
+            stroke='var(--body)'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+          />
+        </svg>
+      );
+    case "ArrowNext":
+      return (
+        <svg
+          width='24'
+          height='24'
+          viewBox='0 0 24 24'
+          fill='none'
+          xmlns='http://www.w3.org/2000/svg'
+        >
+          <path
+            d='M21 12.5L16.5 17M4.5 12.5L21 12.5L4.5 12.5ZM21 12.5L16.5 8L21 12.5Z'
+            stroke='var(--body)'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+          />
+        </svg>
+      );
     case "Chevron":
       return (
         <svg

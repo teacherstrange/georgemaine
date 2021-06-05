@@ -27,6 +27,25 @@
     0 0.025rem 0.025rem 0 rgba(0, 0, 0, 0.12);
 }
 
+.portfolioMenu {
+  padding: 1.2rem;
+  display: flex;
+  background: var(--opaque);
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  backdrop-filter: blur(3rem) saturate(200%);
+}
+
+.portfolioMenuTextBlock {
+  flex-grow: 1;
+}
+
 .slide {
   position: fixed;
   background-color: var(--black);
@@ -35,25 +54,6 @@
   right: 0;
   left: 0;
   bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.slide::after {
-  position: fixed;
-  content: "";
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  background-image: linear-gradient(
-    to bottom,
-    transparent 60%,
-    rgba(17, 17, 17, 0) 70%,
-    rgba(17, 17, 17, 0.6) 100%
-  );
 }
 
 .movieMetadataList {
@@ -138,6 +138,18 @@
   transition: 600ms;
   transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
   transition-property: opacity, transform;
+}
+
+.bubbleBtn {
+  padding: 0.6rem;
+  align-self: center;
+  border-radius: 50%;
+}
+
+.bubbleBtn:active {
+  transform: scale(0.83);
+  background-color: var(--hover);
+  color: var(--black);
 }
 
 .trailerVideoContainer {
@@ -396,6 +408,17 @@
 
 .body + .body {
   margin-top: 2.2rem;
+}
+
+@media (min-width: 63.6rem) {
+  .portfolioMenu {
+    bottom: 1.8rem;
+    border-radius: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 60rem;
+    max-width: fit-content;
+  }
 }
 
 @media (min-width: 73.6rem) {

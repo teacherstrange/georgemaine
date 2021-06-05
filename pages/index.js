@@ -4,14 +4,15 @@ import Post from "../components/Post";
 import Slide from "../components/Slide";
 import Nav from "../components/Nav";
 import MovieList from "../components/MovieList";
-import * as data from "../components/Data";
+import { movies } from "../components/Data";
+import { PortfolioMenu } from "../components/Menu";
 import { getRandomMovie } from "../components/Utilities";
 
 const Index = () => {
   const router = useRouter();
   const [filterId, setFilterId] = useState("portfolio"); // FIXME: Better naming
-  const [slideId, setSlideId] = useState("Mobile Apps");
-  const [suggested, setSuggested] = useState([data.movies[0]]);
+  const [portfolioItem, setPortfolioItem] = useState("Mobile Apps");
+  const [suggested, setSuggested] = useState([movies[0]]);
   const [trailerMode, setTrailerMode] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const ref = useRef(null);
@@ -22,7 +23,13 @@ const Index = () => {
       {filterId === "blog" ? (
         <Post id={router.query.postId} pathname={router.pathname} />
       ) : filterId === "portfolio" ? (
-        <Slide id={slideId} />
+        <>
+          <Slide id={portfolioItem} />
+          <PortfolioMenu
+            portfolioItem={portfolioItem}
+            onBtnClick={setPortfolioItem}
+          />
+        </>
       ) : filterId === "movieList" ? (
         // FIXME: Break component down into smaller pieces
         <MovieList
