@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState, useRef } from "react";
 import Post from "../components/Post";
 import Slide from "../components/Slide";
-import Footer from "../components/Footer";
+import Nav from "../components/Nav";
 import MovieList from "../components/MovieList";
 import * as data from "../components/Data";
 import { getRandomMovie } from "../components/Utilities";
@@ -18,33 +18,7 @@ const Index = () => {
 
   return (
     <>
-      <Footer
-        filterId={filterId}
-        setFilterId={setFilterId}
-        slideId={slideId}
-        setSlideId={setSlideId}
-        portfolio={data.portfolio}
-        onShuffleBtnClick={() => {
-          const filtered = data.movies.filter(
-            (value) => !suggested.includes(value)
-          );
-          const el = getRandomMovie(filtered);
-          const suggestions = el
-            ? [...suggested, el]
-            : [getRandomMovie(data.movies)];
-          setSuggested(suggestions);
-        }}
-        onShareBtnClick={async () => {
-          try {
-            await navigator.share(suggested[suggested.length - 1]);
-          } catch (err) {
-            console.log(err);
-          }
-        }}
-        onTrailerBtnClick={setTrailerMode}
-        socialLinks={data.links}
-        trailerModalState={trailerMode}
-      />
+      <Nav filterId={filterId} setFilterId={setFilterId} />
       {filterId === "blog" ? (
         <Post id={router.query.postId} pathname={router.pathname} />
       ) : filterId === "portfolio" ? (

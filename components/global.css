@@ -133,16 +133,13 @@ button {
   background: none;
   border: none;
   font: inherit;
-  line-height: 3rem;
-  letter-spacing: -0.024rem;
   text-decoration: none;
-  padding: 0.6rem 1.8rem;
+  padding: 0.6rem 1.5rem;
   white-space: nowrap;
   display: flex;
   align-items: center;
   margin: 0;
   color: var(--body);
-  transition: 0.275s;
 }
 
 h1,

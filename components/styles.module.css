@@ -1,3 +1,32 @@
+.nav {
+  padding: 0.15rem;
+  display: flex;
+  position: fixed;
+  top: 1.8rem;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background: var(--opaque);
+  z-index: 2;
+  border-radius: 1.7rem;
+  max-width: fit-content;
+  backdrop-filter: blur(3rem) saturate(200%);
+}
+
+.navSelectionBackground {
+  position: absolute;
+  border-radius: 1.5rem;
+  z-index: -1;
+  background: var(--white);
+  height: 3.6rem;
+  min-width: 9.5rem;
+  transition: transform 150ms ease-out;
+  box-shadow: 0px 0px 0px 0.5px rgba(0, 0, 0, 0.04),
+    0 0.1rem 0.075rem 0 rgba(0, 0, 0, 0.06),
+    0 0.025rem 0.025rem 0 rgba(0, 0, 0, 0.12);
+}
+
 .slide {
   position: fixed;
   background-color: var(--black);
