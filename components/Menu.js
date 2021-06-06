@@ -31,10 +31,10 @@ export const MovieListMenu = ({
 }) => {
   const ref = useRef();
   const [menuExpanded, setMenuExpanded] = useState(false);
-  const [y, setY] = useState();
+  const [movieListMenuHeight, setMovieListMenuHeight] = useState();
 
   useEffect(() => {
-    setY(ref.current.clientHeight);
+    setMovieListMenuHeight(ref.current.clientHeight);
   }, [menuExpanded]);
 
   return (
@@ -43,7 +43,7 @@ export const MovieListMenu = ({
       className={styles.movieListMenu}
       style={{
         transform: menuExpanded
-          ? `translateY(calc(100vh - ${y}px))`
+          ? `translateY(calc(100vh - ${movieListMenuHeight}px))`
           : `translateY(calc(100vh - 72px)`,
       }}
     >
@@ -93,8 +93,7 @@ export const PortfolioMenu = ({ onBtnClick, portfolioItem }) => {
     portfolio.map((item, index) => portfolioItem === item.id && setPage(index));
 
   const handleNavigation = (i) => {
-    if (i < 0) i = 0;
-    else if (i > portfolio.length - 1) i = portfolio.length - 1;
+    i < 0 ? (i = 0) : i > portfolio.length - 1 ? (i = portfolio.length - 1) : i;
     setPage(i);
     onBtnClick(portfolio[i].id);
   };

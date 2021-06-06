@@ -16,7 +16,7 @@
 
 .tabMenuButton:hover,
 .tabMenuButton:active {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: var(--transparent);
 }
 
 .tabMenuSelectionBackground {
@@ -267,7 +267,7 @@
   z-index: 0;
   top: 40vh;
   background-image: linear-gradient(
-    rgba(0, 0, 0, 0) 0%,
+    var(--transparent) 0%,
     rgba(0, 0, 0, 0.66) 65%
   );
 }
