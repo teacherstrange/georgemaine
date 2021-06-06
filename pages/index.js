@@ -58,20 +58,6 @@ const Index = () => {
             }}
             randomMovie={suggested[suggested.length - 1]}
           />
-          <div className={styles.portfolioMenuMask}>
-            <figure
-              className={styles.moviePosterDesktop}
-              style={{
-                backgroundImage:
-                  suggested[suggested.length - 1].moviePosterDesktopUrl &&
-                  `url(${
-                    suggested[suggested.length - 1].moviePosterDesktopUrl
-                  }`,
-                opacity: trailerMode ? 0 : isExpanded ? 0.4 : 1,
-                top: "calc(3rem - 100vh)",
-              }}
-            />
-          </div>
         </>
       ) : null}
       {/* // FIXME: find alternative to null */}

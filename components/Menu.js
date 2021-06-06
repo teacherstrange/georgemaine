@@ -32,58 +32,74 @@ export const MovieListMenu = ({
   const ref = useRef();
   const [menuExpanded, setMenuExpanded] = useState(false);
   const [movieListMenuHeight, setMovieListMenuHeight] = useState();
+  const screenHeight = window.innerHeight;
 
   useEffect(() => {
     setMovieListMenuHeight(ref.current.clientHeight);
+    menuExpanded === false && (ref.current.scrollTop = 0);
   }, [menuExpanded, onShuffleBtnClick]);
 
   return (
-    <footer
-      ref={ref}
-      className={styles.movieListMenu}
-      style={{
-        transform: menuExpanded
-          ? `translateY(calc(100vh - ${movieListMenuHeight}px))`
-          : `translateY(calc(100vh - 72px)`,
-      }}
-    >
-      <header className={styles.movieListMenuHeader}>
-        <div
-          style={{
-            flexGrow: 1,
-          }}
-        >
-          <h2>{randomMovie.name}</h2>
-          <button
-            className={styles.smallBtn}
-            onClick={() => setMenuExpanded(!menuExpanded)}
+    <>
+      <footer
+        ref={ref}
+        className={styles.movieListMenu}
+        style={{
+          transform: menuExpanded
+            ? `translateY(${screenHeight - movieListMenuHeight - 18}px)`
+            : `translateY(${screenHeight - 90}px)`,
+          overflowY: menuExpanded ? "scroll" : "hidden",
+        }}
+      >
+        <header className={styles.movieListMenuHeader}>
+          <div
+            style={{
+              flexGrow: 1,
+            }}
           >
-            Show more ›
-          </button>
+            <h2>{randomMovie.name}</h2>
+            <button
+              className={styles.smallBtn}
+              onClick={() => setMenuExpanded(!menuExpanded)}
+            >
+              Show more ›
+            </button>
+          </div>
+          <div className={styles.movieListMenuBtns}>
+            <button onClick={onShuffleBtnClick}>Shuffle</button>
+            <button className={styles.bubbleBtn} onClick={onShareBtnClick}>
+              <Icon string={"Share"} />
+            </button>
+          </div>
+        </header>
+        <p>{randomMovie.synopsis}</p>
+        <p>
+          {randomMovie.metadata[0]} · {randomMovie.metadata[1]} ·
+          {randomMovie.metadata[2]}
+        </p>
+        <h3>Trailer</h3>
+        <div className={styles.movieListMenuTrailerWrapper}>
+          <video
+            className={styles.movieListMenuVideo}
+            poster={"images/wonder-woman-trailer-poster.jpg"}
+            src={randomMovie.url}
+            controls
+            playsInline
+          />
         </div>
-        <div className={styles.movieListMenuBtns}>
-          <button onClick={onShuffleBtnClick}>Shuffle</button>
-          <button className={styles.bubbleBtn} onClick={onShareBtnClick}>
-            <Icon string={"Share"} />
-          </button>
-        </div>
-      </header>
-      <p>{randomMovie.synopsis}</p>
-      <p>
-        {randomMovie.metadata[0]} · {randomMovie.metadata[1]} ·
-        {randomMovie.metadata[2]}
-      </p>
-      <h3>Trailer</h3>
-      <div className={styles.movieListMenuTrailerWrapper}>
-        <video
-          className={styles.movieListMenuVideo}
-          poster={"images/wonder-woman-trailer-poster.jpg"}
-          src={randomMovie.url}
-          controls
-          playsInline
+      </footer>
+      <div className={styles.portfolioMenuMask}>
+        <figure
+          className={styles.moviePosterDesktop}
+          style={{
+            backgroundImage:
+              randomMovie.moviePosterDesktopUrl &&
+              `url(${randomMovie.moviePosterDesktopUrl}`,
+            top: "calc(3rem - 100vh)",
+          }}
         />
       </div>
-    </footer>
+    </>
   );
 };
 
