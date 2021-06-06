@@ -35,7 +35,7 @@ export const MovieListMenu = ({
 
   useEffect(() => {
     setMovieListMenuHeight(ref.current.clientHeight);
-  }, [menuExpanded]);
+  }, [menuExpanded, onShuffleBtnClick]);
 
   return (
     <footer
