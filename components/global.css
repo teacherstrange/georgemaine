@@ -129,6 +129,13 @@ html {
   font-size: 62.5%;
 }
 
+html,
+body {
+  /* mobile viewport bug fix */
+  height: -webkit-fill-available;
+  min-height: -webkit-fill-available;
+}
+
 button {
   background: rgba(0, 0, 0, 0);
   border-radius: 1.5rem;
@@ -176,6 +183,7 @@ body {
   font-size: 1.7rem;
   line-height: 2.4rem;
   color: var(--body);
+  min-height: 100vh;
 }
 
 /* Typefaces */
