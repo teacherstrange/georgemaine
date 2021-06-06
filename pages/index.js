@@ -58,7 +58,6 @@ const Index = () => {
             }}
             randomMovie={suggested[suggested.length - 1]}
           />
-          // FIXME: Create component
           <div className={styles.portfolioMenuMask}>
             <figure
               className={styles.moviePosterDesktop}
