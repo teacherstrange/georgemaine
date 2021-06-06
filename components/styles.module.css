@@ -1,4 +1,4 @@
-.nav {
+.tabMenu {
   padding: 0.15rem;
   display: flex;
   position: fixed;
@@ -14,7 +14,12 @@
   backdrop-filter: blur(3rem) saturate(200%);
 }
 
-.navSelectionBackground {
+.tabMenuButton:hover,
+.tabMenuButton:active {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.tabMenuSelectionBackground {
   position: absolute;
   border-radius: 1.5rem;
   z-index: -1;
@@ -46,6 +51,55 @@
   flex-grow: 1;
 }
 
+.movieListMenu {
+  padding: 1.2rem 1.2rem 1.8rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+  background: var(--opaque);
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  backdrop-filter: blur(3rem) saturate(200%);
+  transition: transform 150ms ease-out;
+}
+
+.movieListMenuHeader {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.movieListMenuBtns {
+  display: flex;
+  align-items: center;
+}
+
+.movieListMenuVideo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  object-fit: cover;
+}
+
+.movieListMenuTrailerWrapper {
+  position: relative;
+  border-radius: 0.6rem;
+  padding-top: 41.5%;
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+  border: 0.1rem solid var(--border);
+  box-shadow: 0 0.6rem 1.2rem 0 rgba(0, 0, 0, 0.06);
+}
+
 .slide {
   position: fixed;
   background-color: var(--black);
@@ -56,24 +110,6 @@
   bottom: 0;
 }
 
-.movieMetadataList {
-  display: flex;
-  padding: 0;
-  margin: 0;
-  transition: 600ms;
-  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-  transition-property: opacity, transform;
-}
-
-.movieMetadataListItem {
-  color: var(--secondaryLabelColorLight);
-  line-height: 3.6rem;
-}
-
-.movieMetadataListItem:not(:last-child):after {
-  content: " · ";
-  margin-right: 3px;
-}
 .moviePosterDesktop {
   position: absolute;
   display: none;
@@ -89,18 +125,7 @@
   transition: 600ms;
   transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
   transition-property: opacity, transform;
-}
-.movieSynopsis {
-  max-width: 494px;
-  margin-top: 0.6rem;
-  margin-bottom: 0.6rem;
-  width: 94%;
-  text-align: center;
-  color: var(--primaryLabelColorLight);
-  overflow: hidden;
-  transition-duration: 0.6s;
-  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-  transition-property: transform;
+  animation: reveal 600ms;
 }
 
 .desktopVideo {
@@ -153,6 +178,18 @@
   color: var(--black);
 }
 
+.smallBtn {
+  margin-left: -0.6rem;
+  line-height: 1.8rem;
+  border-radius: 0.6rem;
+  padding: 0.3rem 0.6rem;
+}
+
+.smallBtn:active {
+  background-color: var(--hover);
+  color: var(--black);
+}
+
 .trailerVideoContainer {
   width: 100%;
   max-width: 128rem;
@@ -197,11 +234,13 @@
   justify-content: center;
   align-items: center;
   background-image: url(/images/hello-world.jpg);
+  animation: reveal 150ms;
 }
 
 .articleContent {
-  background: var(--overlay);
+  background: var(--opaque);
   backdrop-filter: blur(3rem) saturate(200%);
+  animation: reveal 150ms;
 }
 
 .movieListWrapper {
@@ -233,29 +272,6 @@
   );
 }
 
-.footer {
-  display: flex;
-  align-items: center;
-  position: fixed;
-  bottom: 4%;
-  left: 0;
-  right: 0;
-  width: 92%;
-  margin-left: auto;
-  margin-right: auto;
-  overflow-x: scroll;
-  z-index: 3;
-  scrollbar-width: none;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-}
-
-.footer::-webkit-scrollbar {
-  display: none;
-  -webkit-appearance: none;
-  width: 0;
-  height: 0;
-}
-
 .trailerModalCloseBtn {
   text-decoration: none;
   padding: 0.7rem 1.8rem;
@@ -276,33 +292,7 @@
   backdrop-filter: blur(3rem) saturate(25%);
 }
 
-.buttonLink {
-  letter-spacing: -0.024rem;
-  color: var(--primaryLabelColorDark);
-  padding: 0.3rem 1.8rem;
-  border-radius: 3rem;
-  background: none;
-  border: none;
-  margin: 0;
-  white-space: nowrap;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.transparentIconButton {
-  color: var(--primaryLabelColorLight);
-  border-radius: 1.9rem;
-  padding: 0.6rem 0.9rem 0.6rem 1.8rem;
-}
-
-.transparentIconButton:hover,
-.transparentIconButton:active {
-  background-color: rgba(118, 118, 128, 0.24);
-}
-
-.transparentIconButton:active {
-  transform: scale(0.97);
-}
+/* Animations */
 
 @keyframes slideIn {
   0% {
@@ -315,16 +305,6 @@
   }
 }
 
-@keyframes openFilter {
-  0% {
-    max-width: 3.6rem;
-  }
-
-  100% {
-    max-width: 60rem;
-  }
-}
-
 @keyframes reveal {
   0% {
     opacity: 0;
@@ -333,59 +313,6 @@
   100% {
     opacity: 1;
   }
-}
-
-.filters {
-  background: var(--container);
-  display: flex;
-  margin: 0 0.6rem;
-  border-radius: 3rem;
-  position: relative;
-  backdrop-filter: blur(3rem) saturate(25%);
-}
-
-.workFiltersExpanded {
-  animation: openFilter 0.8s 1 forwards;
-}
-
-.movieListControlsExpanded {
-  animation: openFilter 1.2s 1 forwards;
-}
-
-.articleFiltersExpanded {
-  animation: openFilter 0.9s 1 forwards;
-}
-
-.filterSelection {
-  position: absolute;
-  border-radius: 3rem;
-  width: 10.5rem;
-  transition: 0.3s;
-  background: rgba(17, 17, 17, 0.3);
-  z-index: -1;
-  top: 0.3rem;
-  bottom: 0.3rem;
-  left: 0.3rem;
-}
-
-.title {
-  font-size: 2.1rem;
-  line-height: 2.4rem;
-  color: var(--primaryLabelColorLight);
-  text-align: center;
-  margin-bottom: calc(6.6rem + 4vh);
-}
-
-.movieTitle {
-  font-size: 2.1rem;
-  line-height: 2.4rem;
-  font-weight: 600;
-  color: var(--primaryLabelColorLight);
-  text-align: center;
-  margin-bottom: 0.3rem;
-  position: relative;
-  z-index: 1;
-  transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .articleTitle {
@@ -410,6 +337,8 @@
 .body + .body {
   margin-top: 2.2rem;
 }
+
+/* Responsive */
 
 @media (min-width: 63.6rem) {
   .portfolioMenu {
@@ -445,17 +374,6 @@
 }
 
 @media (min-width: 76.8rem) {
-  .footer {
-    overflow-x: initial;
-    justify-content: center;
-  }
-
-  .title,
-  .movieTitle {
-    font-size: 2.7rem;
-    line-height: 3rem;
-  }
-
   .desktopVideo {
     display: initial;
   }
@@ -466,16 +384,6 @@
 }
 
 @media (min-width: 98rem) {
-  .filters {
-    display: flex;
-  }
-
-  .button:hover,
-  .movieListNavButton:hover,
-  .movieListNavIconButton:hover {
-    background-color: rgba(0, 0, 0, 0.06);
-  }
-
   .moviePosterMobile {
     display: none;
   }

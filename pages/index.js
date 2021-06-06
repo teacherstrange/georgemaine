@@ -1,11 +1,10 @@
 import { useRouter } from "next/router";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Post from "../components/Post";
 import Slide from "../components/Slide";
-import Nav from "../components/Nav";
 import MovieList from "../components/MovieList";
 import { movies } from "../components/Data";
-import { PortfolioMenu } from "../components/Menu";
+import { PortfolioMenu, MovieListMenu, TabMenu } from "../components/Menu";
 import { getRandomMovie } from "../components/Utilities";
 
 const Index = () => {
@@ -15,11 +14,10 @@ const Index = () => {
   const [suggested, setSuggested] = useState([movies[0]]);
   const [trailerMode, setTrailerMode] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  const ref = useRef(null);
 
   return (
     <>
-      <Nav filterId={filterId} setFilterId={setFilterId} />
+      <TabMenu filterId={filterId} setFilterId={setFilterId} />
       {filterId === "blog" ? (
         <Post id={router.query.postId} pathname={router.pathname} />
       ) : filterId === "portfolio" ? (
@@ -32,15 +30,34 @@ const Index = () => {
         </>
       ) : filterId === "movieList" ? (
         // FIXME: Break component down into smaller pieces
-        <MovieList
-          trailerMode={trailerMode}
-          onCloseBtnClick={setTrailerMode}
-          randomMovie={suggested[suggested.length - 1]}
-          isExpanded={isExpanded}
-          setIsExpanded={setIsExpanded}
-          pRef={ref}
-          shuffleState={suggested}
-        />
+        <>
+          <MovieList
+            trailerMode={trailerMode}
+            onCloseBtnClick={setTrailerMode}
+            randomMovie={suggested[suggested.length - 1]}
+            isExpanded={isExpanded}
+          />
+          <MovieListMenu
+            onShareBtnClick={async () => {
+              try {
+                await navigator.share(suggested[suggested.length - 1]);
+              } catch (err) {
+                console.log(err);
+              }
+            }}
+            onShuffleBtnClick={() => {
+              const filtered = movies.filter(
+                (value) => !suggested.includes(value)
+              );
+              const el = getRandomMovie(filtered);
+              const suggestions = el
+                ? [...suggested, el]
+                : [getRandomMovie(movies)];
+              setSuggested(suggestions);
+            }}
+            randomMovie={suggested[suggested.length - 1]}
+          />
+        </>
       ) : null}
       {/* // FIXME: find alternative to null */}
     </>
