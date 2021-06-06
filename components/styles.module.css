@@ -51,8 +51,16 @@
   flex-grow: 1;
 }
 
+.portfolioMenuMask {
+  display: none;
+}
+
+.portfolioMenuMask::after {
+  display: none;
+}
+
 .movieListMenu {
-  padding: 1.2rem 1.2rem 1.8rem;
+  padding: 1.2rem;
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.2rem;
@@ -340,14 +348,47 @@
 
 /* Responsive */
 
-@media (min-width: 63.6rem) {
+@media (min-width: 53.4rem) {
   .portfolioMenu {
     bottom: 1.8rem;
     border-radius: 1.5rem;
     margin-left: auto;
     margin-right: auto;
-    min-width: 60rem;
+    min-width: 48.6rem;
     max-width: fit-content;
+  }
+
+  .movieListMenu {
+    max-width: 48.6rem;
+    top: -1.8rem;
+    border-radius: 1.5rem;
+  }
+
+  .portfolioMenuMask {
+    display: initial;
+    position: fixed;
+    top: calc(100vh - 3rem);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 4;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--black);
+  }
+
+  .portfolioMenuMask::after {
+    display: initial;
+    content: "";
+    position: fixed;
+    left: calc(50vw - 25.5rem);
+    right: calc(50vw - 25.5rem);
+    height: 1.2rem;
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    background-color: var(--opaque);
+    backdrop-filter: blur(3rem) saturate(200%);
   }
 }
 
