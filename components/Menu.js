@@ -24,6 +24,35 @@ const portfolio = [
   },
 ];
 
+export const GetInTouchMenu = ({ links }) => {
+  return (
+    <nav className={styles.getInTouchMenu}>
+      <div className={styles.portfolioMenuTextBlock}>
+        <h2>Georgemaine Lourens</h2>
+        <p>Product Designer at Pitch</p>
+      </div>
+      <ul className={styles.getInTouchLinks}>
+        {links.map((link) => {
+          return (
+            <li key={link.id}>
+              <a
+                href={link.url}
+                className={styles.bubbleBtn}
+                style={{
+                  display: "flex",
+                  margin: "0 .3rem",
+                }}
+              >
+                <Icon string={link.id} />
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
+};
+
 export const MovieListMenu = ({
   onShuffleBtnClick,
   randomMovie,
@@ -118,7 +147,7 @@ export const PortfolioMenu = ({ onBtnClick, portfolioItem }) => {
   }, []);
 
   return (
-    <footer className={styles.portfolioMenu}>
+    <nav className={styles.portfolioMenu}>
       {portfolio.map((item, i) => {
         return (
           <div
@@ -134,27 +163,21 @@ export const PortfolioMenu = ({ onBtnClick, portfolioItem }) => {
         );
       })}
 
-      <nav
-        style={{
-          display: "flex",
-        }}
+      <button
+        className={styles.bubbleBtn}
+        onClick={() => handleNavigation(page - 1)}
+        disabled={page === 0 ? true : false}
       >
-        <button
-          className={styles.bubbleBtn}
-          onClick={() => handleNavigation(page - 1)}
-          disabled={page === 0 ? true : false}
-        >
-          <Icon string={"ArrowBack"} />
-        </button>
-        <button
-          className={styles.bubbleBtn}
-          onClick={() => handleNavigation(page + 1)}
-          disabled={page === portfolio.length - 1 ? true : false}
-        >
-          <Icon string={"ArrowNext"} />
-        </button>
-      </nav>
-    </footer>
+        <Icon string={"ArrowBack"} />
+      </button>
+      <button
+        className={styles.bubbleBtn}
+        onClick={() => handleNavigation(page + 1)}
+        disabled={page === portfolio.length - 1 ? true : false}
+      >
+        <Icon string={"ArrowNext"} />
+      </button>
+    </nav>
   );
 };
 
@@ -188,7 +211,7 @@ export const TabMenu = ({ setFilterId, filterId }) => {
               : filterId === "movieList"
               ? 106
               : filterId === "blog"
-              ? 124
+              ? 121
               : 91,
           transform:
             filterId === "portfolio"
@@ -196,7 +219,7 @@ export const TabMenu = ({ setFilterId, filterId }) => {
               : filterId === "movieList"
               ? "translateX(91px)"
               : filterId === "blog"
-              ? "translateX(201px)"
+              ? "translateX(197px)"
               : "translateX(0px)",
         }}
       />

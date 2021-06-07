@@ -3,8 +3,13 @@ import { useState } from "react";
 import Post from "../components/Post";
 import Slide from "../components/Slide";
 import MovieList from "../components/MovieList";
-import { movies } from "../components/Data";
-import { PortfolioMenu, MovieListMenu, TabMenu } from "../components/Menu";
+import { movies, links } from "../components/Data";
+import {
+  PortfolioMenu,
+  MovieListMenu,
+  TabMenu,
+  GetInTouchMenu,
+} from "../components/Menu";
 import { getRandomMovie } from "../components/Utilities";
 import styles from "../components/styles.module.css";
 
@@ -20,7 +25,10 @@ const Index = () => {
     <>
       <TabMenu filterId={filterId} setFilterId={setFilterId} />
       {filterId === "blog" ? (
-        <Post id={router.query.postId} pathname={router.pathname} />
+        <>
+          <Post id={router.query.postId} pathname={router.pathname} />
+          <GetInTouchMenu links={links} />
+        </>
       ) : filterId === "portfolio" ? (
         <>
           <Slide id={portfolioItem} />

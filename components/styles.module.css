@@ -35,6 +35,7 @@
 .portfolioMenu {
   padding: 1.2rem;
   display: flex;
+  align-items: center;
   background: var(--opaque);
   border-top-left-radius: 1.5rem;
   border-top-right-radius: 1.5rem;
@@ -45,6 +46,30 @@
   margin-left: auto;
   margin-right: auto;
   backdrop-filter: blur(3rem) saturate(200%);
+  z-index: 2;
+}
+
+.getInTouchMenu {
+  padding: 1.2rem;
+  align-items: center;
+  background: var(--opaque);
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  backdrop-filter: blur(3rem) saturate(200%);
+  z-index: 2;
+}
+
+.getInTouchLinks {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.2rem;
 }
 
 .portfolioMenuTextBlock {
@@ -178,7 +203,7 @@
 
 .bubbleBtn {
   padding: 0.6rem;
-  align-self: center;
+  height: max-content;
   border-radius: 50%;
   transform: scale(1);
 }
@@ -292,7 +317,6 @@
   display: flex;
   align-items: center;
   margin: 0;
-  color: var(--primaryLabelColorDark);
   white-space: nowrap;
   transition: 200ms;
   background: var(--container);
@@ -329,9 +353,7 @@
 .articleTitle {
   padding: 3.6rem 0;
   margin-left: 8vw;
-  color: var(--primaryLabelColorDark);
   margin-right: 8vw;
-  font-weight: 600;
   font-size: 2.7rem;
   line-height: 3rem;
 }
@@ -352,7 +374,17 @@
 /* Responsive */
 
 @media (min-width: 59.2rem) {
-  .portfolioMenu {
+  .getInTouchMenu {
+    display: flex;
+    align-items: center;
+  }
+
+  .getInTouchLinks {
+    margin-top: initial;
+  }
+
+  .portfolioMenu,
+  .getInTouchMenu {
     bottom: 1.8rem;
     border-radius: 1.5rem;
     margin-left: auto;

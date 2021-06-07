@@ -85,7 +85,6 @@ const MuteButton = ({ onClick, isMuted }) => (
       top: 12,
       right: 12,
       zIndex: 3,
-      backgroundColor: "var(--secondaryLabelColorDark)",
       boxShadow: "0 0 0 0.5px rgba(255,255,255,.16)",
       borderRadius: 18,
       backdropFilter: "blur(3rem)",
