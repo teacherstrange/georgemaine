@@ -38,6 +38,8 @@ export const GetInTouchMenu = ({ links }) => {
               <a
                 href={link.url}
                 className={styles.bubbleBtn}
+                target='_blank'
+                rel='noreferrer'
                 style={{
                   display: "flex",
                   margin: "0 .3rem",

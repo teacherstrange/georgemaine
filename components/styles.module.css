@@ -402,7 +402,7 @@
   .portfolioMenuMask {
     display: initial;
     position: fixed;
-    top: calc(100vh - 3rem);
+    top: calc(100% - 3rem);
     left: 0;
     right: 0;
     bottom: 0;
