@@ -152,31 +152,23 @@ export const movies = [
 
 export const portfolio = [
   {
+    title: "Mobile apps for Mollie Payments",
+    body: "Product Design · 2019-2020",
     id: "Mobile Apps",
-    caption:
-      "Designed apps for iOS, Android and developed the landing page • 2020",
-    width: 124,
-    x: 0,
   },
   {
+    title: "Promo Video for Mollie Payments",
+    body: "Design & Video · 2019",
     id: "Promo Video",
-    caption:
-      "Created an engaging video to help showcase Mollie at events • 2020",
-    width: 131,
-    x: 124,
   },
   {
+    title: "Checkout for Mollie Payments",
+    body: "Product Design & Development · 2019",
     id: "Checkout",
-    caption:
-      "Redesigned and developed the Mollie Checkout Web application • 2019",
-    width: 107,
-    x: 255,
   },
   {
+    title: "Launch video for Mollie Payments ",
+    body: "Design & Video · 2018",
     id: "Launch Video",
-    caption:
-      "Created an engaging promo video for the Mollie Apple Pay launch • 2019",
-    width: 133,
-    x: 362,
   },
 ];

@@ -1,0 +1,475 @@
+.tabMenu {
+  padding: 0.15rem;
+  display: flex;
+  position: fixed;
+  top: 1.8rem;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background: var(--opaque);
+  z-index: 2;
+  border-radius: 1.7rem;
+  max-width: fit-content;
+  backdrop-filter: blur(3rem) saturate(200%);
+}
+
+.tabMenuButton:hover,
+.tabMenuButton:active {
+  background-color: var(--transparent);
+}
+
+.tabMenuSelectionBackground {
+  position: absolute;
+  border-radius: 1.5rem;
+  z-index: -1;
+  background: var(--white);
+  height: 3.6rem;
+  min-width: 9.5rem;
+  transition: transform 150ms ease-out;
+  box-shadow: 0px 0px 0px 0.5px rgba(0, 0, 0, 0.04),
+    0 0.1rem 0.075rem 0 rgba(0, 0, 0, 0.06),
+    0 0.025rem 0.025rem 0 rgba(0, 0, 0, 0.12);
+}
+
+.portfolioMenu {
+  padding: 1.2rem;
+  display: flex;
+  align-items: center;
+  background: var(--opaque);
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  backdrop-filter: blur(3rem) saturate(200%);
+  z-index: 2;
+}
+
+.getInTouchMenu {
+  padding: 1.2rem;
+  align-items: center;
+  background: var(--opaque);
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  backdrop-filter: blur(3rem) saturate(200%);
+  z-index: 2;
+}
+
+.getInTouchLinks {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.2rem;
+}
+
+.portfolioMenuTextBlock {
+  flex-grow: 1;
+}
+
+.portfolioMenuMask {
+  display: none;
+}
+
+.portfolioMenuMask::after {
+  display: none;
+}
+
+.movieListMenu {
+  padding: 1.2rem;
+  display: grid;
+  grid-auto-rows: max-content;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+  background: var(--opaque);
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  position: fixed;
+  top: 1.8rem;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  backdrop-filter: blur(3rem) saturate(200%);
+  transition: transform 150ms ease-out;
+  z-index: 2;
+  height: 30rem;
+}
+
+.movieListMenuHeader {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.movieListMenuBtns {
+  display: flex;
+  align-items: center;
+}
+
+.movieListMenuVideo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  object-fit: cover;
+}
+
+.movieListMenuTrailerWrapper {
+  position: relative;
+  border-radius: 0.6rem;
+  padding-top: 41.5%;
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+  border: 0.1rem solid var(--border);
+  box-shadow: 0 0.6rem 1.2rem 0 rgba(0, 0, 0, 0.06);
+}
+
+.PortfolioPage {
+  position: fixed;
+  background-color: var(--black);
+  z-index: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.moviePosterDesktop {
+  position: absolute;
+  display: none;
+  z-index: -2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  transition: 600ms;
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition-property: opacity, transform;
+  animation: reveal 600ms;
+}
+
+.desktopVideo {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: reveal 600ms;
+}
+
+.video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: reveal 600ms;
+}
+
+.trailerModalContainer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--black);
+  z-index: 3;
+  transition: 600ms;
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition-property: opacity, transform;
+}
+
+.bubbleBtn {
+  padding: 0.6rem;
+  height: max-content;
+  border-radius: 50%;
+  transform: scale(1);
+}
+
+.bubbleBtn:active {
+  transform: scale(0.83);
+  background-color: var(--hover);
+  color: var(--title);
+}
+
+.smallBtn {
+  margin-left: -0.6rem;
+  line-height: 1.8rem;
+  border-radius: 0.6rem;
+  padding: 0.3rem 0.6rem;
+}
+
+.smallBtn:active {
+  background-color: var(--hover);
+  color: var(--black);
+}
+
+.trailerVideoContainer {
+  width: 100%;
+  max-width: 128rem;
+}
+
+.trailerVideo {
+  width: inherit;
+  object-fit: contain;
+}
+
+.moviePosterMobile {
+  position: absolute;
+  z-index: -2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  transition: 600ms;
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition-property: opacity, transform;
+}
+
+.mobileVideo {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: reveal 600ms;
+}
+
+.articleArtwork {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 41.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(/images/hello-world.jpg);
+  animation: reveal 150ms;
+}
+
+.articleContent {
+  background: var(--opaque);
+  backdrop-filter: blur(3rem) saturate(200%);
+  animation: reveal 150ms;
+}
+
+.movieListWrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: var(--black);
+}
+
+.overlay {
+  position: fixed;
+  user-select: none;
+  pointer-events: none;
+  content: "";
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  top: 40vh;
+  background-image: linear-gradient(
+    var(--transparent) 0%,
+    rgba(0, 0, 0, 0.66) 65%
+  );
+}
+
+.trailerModalCloseBtn {
+  text-decoration: none;
+  padding: 0.7rem 1.8rem;
+  border-radius: 0;
+  background-color: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  white-space: nowrap;
+  transition: 200ms;
+  background: var(--container);
+  position: absolute;
+  top: 4vh;
+  right: 3vw;
+  border-radius: 3rem;
+  backdrop-filter: blur(3rem) saturate(25%);
+}
+
+/* Animations */
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(100vh);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.articleTitle {
+  padding: 3.6rem 0;
+  margin-left: 8vw;
+  margin-right: 8vw;
+  font-size: 2.7rem;
+  line-height: 3rem;
+}
+
+.body {
+  margin-left: 8vw;
+  margin-right: 8vw;
+}
+
+.body:last-of-type {
+  padding-bottom: calc(6vh + 8.4rem);
+}
+
+.body + .body {
+  margin-top: 2.2rem;
+}
+
+/* Responsive */
+
+@media (min-width: 59.2rem) {
+  .getInTouchMenu {
+    display: flex;
+    align-items: center;
+  }
+
+  .getInTouchLinks {
+    margin-top: initial;
+  }
+
+  .portfolioMenu,
+  .getInTouchMenu {
+    bottom: 1.8rem;
+    border-radius: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 54.6rem;
+    max-width: fit-content;
+  }
+
+  .movieListMenu {
+    top: 0;
+    max-width: 54.6rem;
+    border-radius: 1.5rem;
+  }
+
+  .portfolioMenuMask {
+    display: initial;
+    position: fixed;
+    top: calc(100% - 3rem);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 4;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--black);
+  }
+
+  .portfolioMenuMask::after {
+    display: initial;
+    content: "";
+    position: fixed;
+    left: calc(50vw - 28.5rem);
+    right: calc(50vw - 28.5rem);
+    height: 1.2rem;
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    background-color: var(--opaque);
+    backdrop-filter: blur(3rem) saturate(200%);
+  }
+}
+
+@media (min-width: 73.6rem) {
+  .articleArtwork {
+    width: 100vw;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -25vw;
+  }
+
+  .articleContent {
+    position: relative;
+    z-index: 1;
+    width: 50vw;
+    margin-left: 50vw;
+    min-height: 100vh;
+  }
+
+  .articleTitle {
+    padding-top: calc(6vh + 8.4rem);
+  }
+}
+
+@media (min-width: 76.8rem) {
+  .desktopVideo {
+    display: initial;
+  }
+
+  .mobileVideo {
+    display: none;
+  }
+}
+
+@media (min-width: 98rem) {
+  .moviePosterMobile {
+    display: none;
+  }
+  .moviePosterDesktop {
+    display: block;
+  }
+}
+
+@media (min-width: 192rem) {
+  .trailerVideoContainer {
+    max-width: 192rem;
+  }
+}

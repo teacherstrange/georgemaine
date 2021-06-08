@@ -77,86 +77,6 @@ const Video = ({ id, isMuted, setMuted }) => {
       );
   }
 };
-const Caption = ({ id }) => {
-  switch (id) {
-    case "Mobile Apps":
-      return (
-        <h1
-          className={styles.title}
-          style={{
-            color: "var(--primaryLabelColorLight)",
-            position: "relative",
-            zIndex: 2,
-            paddingRight: 25,
-            paddingLeft: 25,
-          }}
-        >
-          <strong style={{ color: "var(--primaryLabelColorLight)" }}>
-            Mobile apps for Mollie Payments
-          </strong>{" "}
-          · Product Design · 2019-2020
-        </h1>
-      );
-    case "Promo Video":
-      return (
-        <h1
-          className={styles.title}
-          style={{
-            color: "var(--primaryLabelColorLight)",
-            position: "relative",
-            zIndex: 2,
-            paddingRight: 25,
-            paddingLeft: 25,
-          }}
-        >
-          <strong style={{ color: "var(--primaryLabelColorLight)" }}>
-            Promo Video for Mollie Payments
-          </strong>{" "}
-          · Design & Video · 2019
-        </h1>
-      );
-    case "Checkout":
-      return (
-        <h1
-          className={styles.title}
-          style={{
-            color: "var(--primaryLabelColorLight)",
-            position: "relative",
-            zIndex: 2,
-            paddingRight: 25,
-            paddingLeft: 25,
-          }}
-        >
-          <strong style={{ color: "var(--primaryLabelColorLight)" }}>
-            Checkout for Mollie Payments
-          </strong>{" "}
-          · Product Design & Development · 2019
-        </h1>
-      );
-    case "Launch Video":
-      return (
-        <h1
-          className={styles.title}
-          style={{
-            color: "var(--primaryLabelColorLight)",
-            position: "relative",
-            zIndex: 2,
-            paddingRight: 25,
-            paddingLeft: 25,
-          }}
-        >
-          <strong
-            style={{
-              color: "var(--primaryLabelColorLight)",
-            }}
-          >
-            Apple Pay launch video for Mollie Payments
-          </strong>{" "}
-          · Design & Video · 2018
-        </h1>
-      );
-  }
-};
 
 const MuteButton = ({ onClick, isMuted }) => (
   <button
@@ -165,7 +85,6 @@ const MuteButton = ({ onClick, isMuted }) => (
       top: 12,
       right: 12,
       zIndex: 3,
-      backgroundColor: "var(--secondaryLabelColorDark)",
       boxShadow: "0 0 0 0.5px rgba(255,255,255,.16)",
       borderRadius: 18,
       backdropFilter: "blur(3rem)",
@@ -176,14 +95,13 @@ const MuteButton = ({ onClick, isMuted }) => (
   </button>
 );
 
-const Slide = ({ id }) => {
+const PortfolioPage = ({ id }) => {
   const [muted, setMuted] = useState(false);
   return (
-    <div className={styles.slide}>
+    <div className={styles.PortfolioPage}>
       <Video id={id} isMuted={muted} setMuted={setMuted} />
-      <Caption id={id} />
     </div>
   );
 };
 
-export default Slide;
+export default PortfolioPage;

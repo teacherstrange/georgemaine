@@ -1,67 +1,77 @@
-import { useRouter } from "next/router";
-import { useState, useRef } from "react";
-import Post from "../components/Post";
-import Slide from "../components/Slide";
-import Footer from "../components/Footer";
-import MovieList from "../components/MovieList";
-import * as data from "../components/Data";
-import { getRandomMovie } from "../components/Utilities";
+import { useState } from "react";
+import Post from "../neró/Post";
+import PortfolioPage from "../neró/PortfolioPage";
+import MovieList from "../neró/MovieList";
+import { movies, links, portfolio } from "../neró/Data";
+import {
+  PortfolioMenu,
+  MovieListMenu,
+  TabMenu,
+  GetInTouchMenu,
+} from "../neró/Menu";
+import { getRandomMovie } from "../neró/Utilities";
 
 const Index = () => {
-  const router = useRouter();
-  const [filterId, setFilterId] = useState("portfolio"); // FIXME: Better naming
-  const [slideId, setSlideId] = useState("Mobile Apps");
-  const [suggested, setSuggested] = useState([data.movies[0]]);
+  const [activeTabMenuItem, setActiveTabMenuItem] = useState("portfolio"); // FIXME: Better naming
+  const [activePortfolioPage, setActivePortfolioPage] = useState("Mobile Apps");
+  const [suggested, setSuggested] = useState([movies[0]]);
   const [trailerMode, setTrailerMode] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  const ref = useRef(null);
 
   return (
     <>
-      <Footer
-        filterId={filterId}
-        setFilterId={setFilterId}
-        slideId={slideId}
-        setSlideId={setSlideId}
-        portfolio={data.portfolio}
-        onShuffleBtnClick={() => {
-          const filtered = data.movies.filter(
-            (value) => !suggested.includes(value)
-          );
-          const el = getRandomMovie(filtered);
-          const suggestions = el
-            ? [...suggested, el]
-            : [getRandomMovie(data.movies)];
-          setSuggested(suggestions);
-        }}
-        onShareBtnClick={async () => {
-          try {
-            await navigator.share(suggested[suggested.length - 1]);
-          } catch (err) {
-            console.log(err);
-          }
-        }}
-        onTrailerBtnClick={setTrailerMode}
-        socialLinks={data.links}
-        trailerModalState={trailerMode}
+      <TabMenu
+        activeTabMenuItem={activeTabMenuItem}
+        setActiveTabMenuItem={setActiveTabMenuItem}
       />
-      {filterId === "blog" ? (
-        <Post id={router.query.postId} pathname={router.pathname} />
-      ) : filterId === "portfolio" ? (
-        <Slide id={slideId} />
-      ) : filterId === "movieList" ? (
-        // FIXME: Break component down into smaller pieces
-        <MovieList
-          trailerMode={trailerMode}
-          onCloseBtnClick={setTrailerMode}
-          randomMovie={suggested[suggested.length - 1]}
-          isExpanded={isExpanded}
-          setIsExpanded={setIsExpanded}
-          pRef={ref}
-          shuffleState={suggested}
-        />
-      ) : null}
-      {/* // FIXME: find alternative to null */}
+      {activeTabMenuItem === "blog" && (
+        <>
+          <Post />
+          <GetInTouchMenu links={links} />
+        </>
+      )}
+
+      {activeTabMenuItem === "portfolio" && (
+        <>
+          <PortfolioPage id={activePortfolioPage} />
+          <PortfolioMenu
+            portfolio={portfolio}
+            activePortfolioPage={activePortfolioPage}
+            onBtnClick={setActivePortfolioPage}
+          />
+        </>
+      )}
+
+      {activeTabMenuItem === "movieList" && (
+        <>
+          <MovieList
+            trailerMode={trailerMode}
+            onCloseBtnClick={setTrailerMode}
+            randomMovie={suggested[suggested.length - 1]}
+            isExpanded={isExpanded}
+          />
+          <MovieListMenu
+            onShareBtnClick={async () => {
+              try {
+                await navigator.share(suggested[suggested.length - 1]);
+              } catch (err) {
+                console.log(err);
+              }
+            }}
+            onShuffleBtnClick={() => {
+              const filtered = movies.filter(
+                (value) => !suggested.includes(value)
+              );
+              const el = getRandomMovie(filtered);
+              const suggestions = el
+                ? [...suggested, el]
+                : [getRandomMovie(movies)];
+              setSuggested(suggestions);
+            }}
+            randomMovie={suggested[suggested.length - 1]}
+          />
+        </>
+      )}
     </>
   );
 };
