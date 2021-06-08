@@ -211,7 +211,7 @@
 .bubbleBtn:active {
   transform: scale(0.83);
   background-color: var(--hover);
-  color: var(--black);
+  color: var(--title);
 }
 
 .smallBtn {

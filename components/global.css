@@ -210,7 +210,7 @@ body {
 :root {
   --black: rgb(0, 0, 0);
   --opaque: rgba(249, 249, 249, 0.94);
-  --body: rgb(77, 77, 77);
+  --body: rgb(110, 110, 115);
   --title: rgb(38, 38, 38);
   --hover: rgba(0, 0, 0, 0.12);
   --border: rgba(0, 0, 0, 0.09);
@@ -222,7 +222,7 @@ body {
   :root {
     --black: color(display-p3 0 0 0);
     --opaque: color(display-p3 0.9765 0.9765 0.9764 / 0.94);
-    --body: color(display-p3 0.302 0.302 0.3019);
+    --body: color(display-p3 0.4314 0.4314 0.4492);
     --title: color(display-p3 0.149 0.149 0.149);
     --hover: color(display-p3 0 0 0 / 0.12);
     --border: color(display-p3 0 0 0 / 0.09);
