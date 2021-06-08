@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { useState } from "react";
 import Post from "../neró/Post";
 import PortfolioPage from "../neró/PortfolioPage";
@@ -13,7 +12,6 @@ import {
 import { getRandomMovie } from "../neró/Utilities";
 
 const Index = () => {
-  const router = useRouter();
   const [activeTabMenuItem, setActiveTabMenuItem] = useState("portfolio"); // FIXME: Better naming
   const [activePortfolioPage, setActivePortfolioPage] = useState("Mobile Apps");
   const [suggested, setSuggested] = useState([movies[0]]);
@@ -28,7 +26,7 @@ const Index = () => {
       />
       {activeTabMenuItem === "blog" && (
         <>
-          <Post id={router.query.postId} pathname={router.pathname} />
+          <Post />
           <GetInTouchMenu links={links} />
         </>
       )}
