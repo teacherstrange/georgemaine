@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import Post from "../../components/Post";
+import Post from "../../neró/Post";
 
 const PostPage = () => {
   const router = useRouter();

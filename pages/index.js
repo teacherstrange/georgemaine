@@ -1,17 +1,17 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import Post from "../components/Post";
-import Slide from "../components/Slide";
-import MovieList from "../components/MovieList";
-import { movies, links } from "../components/Data";
+import Post from "../neró/Post";
+import Slide from "../neró/Slide";
+import MovieList from "../neró/MovieList";
+import { movies, links } from "../neró/Data";
 import {
   PortfolioMenu,
   MovieListMenu,
   TabMenu,
   GetInTouchMenu,
-} from "../components/Menu";
-import { getRandomMovie } from "../components/Utilities";
-import styles from "../components/styles.module.css";
+} from "../neró/Menu";
+import { getRandomMovie } from "../neró/Utilities";
+import styles from "../neró/styles.module.css";
 
 const Index = () => {
   const router = useRouter();
