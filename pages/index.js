@@ -2,7 +2,7 @@ import { useState } from "react";
 import Post from "../neró/Post";
 import PortfolioPage from "../neró/PortfolioPage";
 import MovieList from "../neró/MovieList";
-import { movies, links } from "../neró/Data";
+import { movies, links, portfolio } from "../neró/Data";
 import {
   PortfolioMenu,
   MovieListMenu,
@@ -35,6 +35,7 @@ const Index = () => {
         <>
           <PortfolioPage id={activePortfolioPage} />
           <PortfolioMenu
+            portfolio={portfolio}
             activePortfolioPage={activePortfolioPage}
             onBtnClick={setActivePortfolioPage}
           />

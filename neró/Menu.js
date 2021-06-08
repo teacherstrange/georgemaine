@@ -1,28 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Icon from "./Icon";
 import styles from "./styles.module.css";
-const portfolio = [
-  {
-    title: "Mobile apps for Mollie Payments",
-    body: "Product Design · 2019-2020",
-    id: "Mobile Apps",
-  },
-  {
-    title: "Promo Video for Mollie Payments",
-    body: "Design & Video · 2019",
-    id: "Promo Video",
-  },
-  {
-    title: "Checkout for Mollie Payments",
-    body: "Product Design & Development · 2019",
-    id: "Checkout",
-  },
-  {
-    title: "Launch video for Mollie Payments ",
-    body: "Design & Video · 2018",
-    id: "Launch Video",
-  },
-];
 
 export const GetInTouchMenu = ({ links }) => {
   return (
@@ -134,7 +112,11 @@ export const MovieListMenu = ({
   );
 };
 
-export const PortfolioMenu = ({ onBtnClick, activePortfolioPage }) => {
+export const PortfolioMenu = ({
+  onBtnClick,
+  activePortfolioPage,
+  portfolio,
+}) => {
   const [page, setPage] = useState();
   const setInitialPage = () =>
     portfolio.map(
