@@ -95,13 +95,13 @@ const MuteButton = ({ onClick, isMuted }) => (
   </button>
 );
 
-const Slide = ({ id }) => {
+const PortfolioPage = ({ id }) => {
   const [muted, setMuted] = useState(false);
   return (
-    <div className={styles.slide}>
+    <div className={styles.PortfolioPage}>
       <Video id={id} isMuted={muted} setMuted={setMuted} />
     </div>
   );
 };
 
-export default Slide;
+export default PortfolioPage;

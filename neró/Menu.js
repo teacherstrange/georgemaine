@@ -134,10 +134,12 @@ export const MovieListMenu = ({
   );
 };
 
-export const PortfolioMenu = ({ onBtnClick, portfolioItem }) => {
+export const PortfolioMenu = ({ onBtnClick, activePortfolioPage }) => {
   const [page, setPage] = useState();
   const setInitialPage = () =>
-    portfolio.map((item, index) => portfolioItem === item.id && setPage(index));
+    portfolio.map(
+      (item, index) => activePortfolioPage === item.id && setPage(index)
+    );
 
   const handleNavigation = (i) => {
     i < 0 ? (i = 0) : i > portfolio.length - 1 ? (i = portfolio.length - 1) : i;
@@ -183,24 +185,24 @@ export const PortfolioMenu = ({ onBtnClick, portfolioItem }) => {
   );
 };
 
-export const TabMenu = ({ setFilterId, filterId }) => {
+export const TabMenu = ({ setActiveTabMenuItem, activeTabMenuItem }) => {
   return (
     <nav className={styles.tabMenu}>
       <button
         className={styles.tabMenuButton}
-        onClick={() => setFilterId("portfolio")}
+        onClick={() => setActiveTabMenuItem("portfolio")}
       >
         Portfolio
       </button>
       <button
         className={styles.tabMenuButton}
-        onClick={() => setFilterId("movieList")}
+        onClick={() => setActiveTabMenuItem("movieList")}
       >
         Movie List
       </button>
       <button
         className={styles.tabMenuButton}
-        onClick={() => setFilterId("blog")}
+        onClick={() => setActiveTabMenuItem("blog")}
       >
         Get in touch
       </button>
@@ -208,19 +210,19 @@ export const TabMenu = ({ setFilterId, filterId }) => {
         className={styles.tabMenuSelectionBackground}
         style={{
           width:
-            filterId === "portfolio"
+            activeTabMenuItem === "portfolio"
               ? 91
-              : filterId === "movieList"
+              : activeTabMenuItem === "movieList"
               ? 106
-              : filterId === "blog"
+              : activeTabMenuItem === "blog"
               ? 121
               : 91,
           transform:
-            filterId === "portfolio"
+            activeTabMenuItem === "portfolio"
               ? "translateX(0px)"
-              : filterId === "movieList"
+              : activeTabMenuItem === "movieList"
               ? "translateX(91px)"
-              : filterId === "blog"
+              : activeTabMenuItem === "blog"
               ? "translateX(197px)"
               : "translateX(0px)",
         }}

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Post from "../neró/Post";
-import Slide from "../neró/Slide";
+import PortfolioPage from "../neró/PortfolioPage";
 import MovieList from "../neró/MovieList";
 import { movies, links } from "../neró/Data";
 import {
@@ -11,34 +11,39 @@ import {
   GetInTouchMenu,
 } from "../neró/Menu";
 import { getRandomMovie } from "../neró/Utilities";
-import styles from "../neró/styles.module.css";
 
 const Index = () => {
   const router = useRouter();
-  const [filterId, setFilterId] = useState("portfolio"); // FIXME: Better naming
-  const [portfolioItem, setPortfolioItem] = useState("Mobile Apps");
+  const [activeTabMenuItem, setActiveTabMenuItem] = useState("portfolio"); // FIXME: Better naming
+  const [activePortfolioPage, setActivePortfolioPage] = useState("Mobile Apps");
   const [suggested, setSuggested] = useState([movies[0]]);
   const [trailerMode, setTrailerMode] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <>
-      <TabMenu filterId={filterId} setFilterId={setFilterId} />
-      {filterId === "blog" ? (
+      <TabMenu
+        activeTabMenuItem={activeTabMenuItem}
+        setActiveTabMenuItem={setActiveTabMenuItem}
+      />
+      {activeTabMenuItem === "blog" && (
         <>
           <Post id={router.query.postId} pathname={router.pathname} />
           <GetInTouchMenu links={links} />
         </>
-      ) : filterId === "portfolio" ? (
+      )}
+
+      {activeTabMenuItem === "portfolio" && (
         <>
-          <Slide id={portfolioItem} />
+          <PortfolioPage id={activePortfolioPage} />
           <PortfolioMenu
-            portfolioItem={portfolioItem}
-            onBtnClick={setPortfolioItem}
+            activePortfolioPage={activePortfolioPage}
+            onBtnClick={setActivePortfolioPage}
           />
         </>
-      ) : filterId === "movieList" ? (
-        // FIXME: Break component down into smaller pieces
+      )}
+
+      {activeTabMenuItem === "movieList" && (
         <>
           <MovieList
             trailerMode={trailerMode}
@@ -67,8 +72,7 @@ const Index = () => {
             randomMovie={suggested[suggested.length - 1]}
           />
         </>
-      ) : null}
-      {/* // FIXME: find alternative to null */}
+      )}
     </>
   );
 };
