@@ -48,7 +48,7 @@ const MoviePoster = ({ randomMovie, trailerMode }) => (
       className={styles.moviePosterMobile}
       style={{
         backgroundImage:
-          randomMovieid && `url(images/${randomMovieid}-mobile.jpg`,
+          randomMovie.id && `url(images/${randomMovie.id}-mobile.jpg`,
         opacity: trailerMode ? 0 : 1,
         transform: trailerMode ? "scale(.96)" : "scale(1)",
       }}
@@ -56,7 +56,7 @@ const MoviePoster = ({ randomMovie, trailerMode }) => (
     <figure
       className={styles.moviePosterDesktop}
       style={{
-        backgroundImage: randomMovieid && `url(images/${randomMovieid}.jpg`,
+        backgroundImage: randomMovie.id && `url(images/${randomMovie.id}.jpg`,
         opacity: trailerMode ? 0.3 : 1,
         transform: trailerMode ? "scale(.96)" : "scale(1)",
       }}
