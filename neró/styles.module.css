@@ -163,6 +163,21 @@
   animation: reveal 600ms;
 }
 
+.moviePosterDesktop::after {
+  content: "©©Artwork by Apple";
+  position: absolute;
+  bottom: 0;
+  font: inherit;
+  font-size: 1.1rem;
+  line-height: 1.2rem;
+  color: var(--opaque);
+  border-top-left-radius: 0.6rem;
+  right: 0;
+  padding: 0.3rem 0.6rem;
+  background-color: rgba(44, 44, 46, 0.7);
+  backdrop-filter: blur(3rem) saturate(200%);
+}
+
 .desktopVideo {
   display: none;
   position: fixed;
@@ -196,6 +211,21 @@
   background-color: var(--black);
   z-index: 999;
   transition: transform 300ms ease-out;
+}
+
+.trailerModal::after {
+  content: "©Trailer by Apple";
+  position: absolute;
+  bottom: 0;
+  font: inherit;
+  font-size: 1.1rem;
+  line-height: 1.2rem;
+  color: var(--opaque);
+  border-top-left-radius: 0.6rem;
+  right: 0;
+  padding: 0.3rem 0.6rem;
+  background-color: rgba(44, 44, 46, 0.7);
+  backdrop-filter: blur(3rem) saturate(200%);
 }
 
 .trailerVideoContainer {
