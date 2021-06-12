@@ -70,6 +70,7 @@ export const MovieListMenu = ({
           >
             <h2>{randomMovie.name}</h2>
             <button
+              ariaLabel='Show More'
               className={styles.smallBtn}
               onClick={() => setMenuExpanded(!menuExpanded)}
             >
@@ -77,8 +78,14 @@ export const MovieListMenu = ({
             </button>
           </div>
           <div className={styles.movieListMenuBtns}>
-            <button onClick={onShuffleBtnClick}>Shuffle</button>
-            <button className={styles.bubbleBtn} onClick={onShareBtnClick}>
+            <button ariaLabel='Shuffle' onClick={onShuffleBtnClick}>
+              Shuffle
+            </button>
+            <button
+              ariaLabel='Share'
+              className={styles.bubbleBtn}
+              onClick={onShareBtnClick}
+            >
               <Icon string={"Share"} />
             </button>
           </div>
@@ -96,6 +103,7 @@ export const MovieListMenu = ({
             src={randomMovie.url}
           />
           <button
+            ariaLabel='Play Trailer'
             onClick={onPlayBtnClick}
             className={styles.transparentBubbleBtn}
             style={{
@@ -160,6 +168,7 @@ export const PortfolioMenu = ({
       })}
 
       <button
+        ariaLabel='Previous'
         className={styles.bubbleBtn}
         onClick={() => handleNavigation(page - 1)}
         disabled={page === 0 ? true : false}
@@ -167,6 +176,7 @@ export const PortfolioMenu = ({
         <Icon string={"ArrowBack"} />
       </button>
       <button
+        ariaLabel='Next'
         className={styles.bubbleBtn}
         onClick={() => handleNavigation(page + 1)}
         disabled={page === portfolio.length - 1 ? true : false}
@@ -181,18 +191,21 @@ export const TabMenu = ({ setActiveTabMenuItem, activeTabMenuItem }) => {
   return (
     <nav className={styles.tabMenu}>
       <button
+        ariaLabel='Show Portfolio'
         className={styles.tabMenuButton}
         onClick={() => setActiveTabMenuItem("portfolio")}
       >
         Portfolio
       </button>
       <button
+        ariaLabel='Show Movie list'
         className={styles.tabMenuButton}
         onClick={() => setActiveTabMenuItem("movieList")}
       >
         Movie List
       </button>
       <button
+        ariaLabel='Show Blog'
         className={styles.tabMenuButton}
         onClick={() => setActiveTabMenuItem("blog")}
       >

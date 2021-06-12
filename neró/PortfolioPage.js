@@ -80,6 +80,7 @@ const Video = ({ id, isMuted, setMuted }) => {
 
 const MuteButton = ({ onClick, isMuted }) => (
   <button
+    ariaLabel='Mute Sound'
     style={{
       position: "fixed",
       top: 12,

@@ -32,6 +32,7 @@ const TrailerModal = ({ onCloseBtnClick, trailer, trailerMode }) => {
         />
       </div>
       <button
+        ariaLabel='Close'
         className={styles.trailerCloseBtn}
         onClick={() => (onCloseBtnClick(false), pauseTrailer())}
       >
@@ -49,7 +50,7 @@ const MoviePoster = ({ id, trailerMode }) => (
         backgroundImage:
           id.moviePosterMobileUrl && `url(${id.moviePosterMobileUrl}`,
         opacity: trailerMode ? 0 : 1,
-        transform: trailerMode ? "scale(.94)" : "scale(1)",
+        transform: trailerMode ? "scale(.96)" : "scale(1)",
       }}
     />
     <figure
@@ -58,7 +59,7 @@ const MoviePoster = ({ id, trailerMode }) => (
         backgroundImage:
           id.moviePosterDesktopUrl && `url(${id.moviePosterDesktopUrl}`,
         opacity: trailerMode ? 0.3 : 1,
-        transform: trailerMode ? "scale(.94)" : "scale(1)",
+        transform: trailerMode ? "scale(.96)" : "scale(1)",
       }}
     />
   </>

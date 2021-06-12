@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Head from "next/head";
 import Post from "../neró/Post";
 import PortfolioPage from "../neró/PortfolioPage";
 import MovieList from "../neró/MovieList";
@@ -19,6 +20,9 @@ const Index = () => {
 
   return (
     <>
+      <Head>
+        <title>Georgemaine's Website</title>
+      </Head>
       <TabMenu
         activeTabMenuItem={activeTabMenuItem}
         setActiveTabMenuItem={setActiveTabMenuItem}

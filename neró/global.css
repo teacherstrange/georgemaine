@@ -150,6 +150,7 @@ button {
   margin: 0;
   color: var(--body);
   transition: 120ms ease-out;
+  transition-property: color, background-color, transform;
 }
 
 button:hover,
