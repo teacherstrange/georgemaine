@@ -1,36 +1,39 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import styles from "./styles.module.css";
 
-const TrailerModal = ({ onCloseBtnClick, trailerId, isActive }) => {
-  const trailerVideoRef = useRef(null);
+const TrailerModal = ({ onCloseBtnClick, trailer, trailerMode }) => {
+  const trailerRef = useRef(null);
 
-  const pauseTrailerVideo = () => {
-    trailerVideoRef.current.pause();
+  const pauseTrailer = () => {
+    trailerRef.current.pause();
   };
+
+  const playTrailer = () => {
+    trailerRef.current.play();
+  };
+
+  useEffect(() => {
+    trailerMode && trailerRef.current.paused ? playTrailer() : pauseTrailer();
+  }, [trailerMode]);
 
   return (
     <div
-      className={styles.trailerModalContainer}
+      className={styles.trailerModal}
       style={{
-        opacity: isActive ? 1 : 0,
-        transform: isActive ? `translateY(0)` : `translateY(100vh)`,
+        transform: trailerMode ? `translateY(0)` : `translateY(100vh)`,
       }}
     >
       <div className={styles.trailerVideoContainer}>
         <video
-          ref={trailerVideoRef}
-          autoPlay
+          ref={trailerRef}
           controls
-          playsInline
-          muted
-          loop
           className={styles.trailerVideo}
-          src={trailerId.url}
+          src={trailer.url}
         />
       </div>
       <button
-        className={styles.trailerModalCloseBtn}
-        onClick={() => (onCloseBtnClick(false), pauseTrailerVideo())}
+        className={styles.trailerCloseBtn}
+        onClick={() => (onCloseBtnClick(false), pauseTrailer())}
       >
         Close
       </button>
@@ -38,15 +41,15 @@ const TrailerModal = ({ onCloseBtnClick, trailerId, isActive }) => {
   );
 };
 
-const MoviePoster = ({ id, isActive, isExpanded }) => (
+const MoviePoster = ({ id, trailerMode }) => (
   <>
     <figure
       className={styles.moviePosterMobile}
       style={{
         backgroundImage:
           id.moviePosterMobileUrl && `url(${id.moviePosterMobileUrl}`,
-        opacity: isActive ? 0 : isExpanded ? 0.4 : 1,
-        transform: isActive ? "scale(.97)" : "scale(1)",
+        opacity: trailerMode ? 0 : 1,
+        transform: trailerMode ? "scale(.94)" : "scale(1)",
       }}
     />
     <figure
@@ -54,33 +57,24 @@ const MoviePoster = ({ id, isActive, isExpanded }) => (
       style={{
         backgroundImage:
           id.moviePosterDesktopUrl && `url(${id.moviePosterDesktopUrl}`,
-        opacity: isActive ? 0 : isExpanded ? 0.4 : 1,
-        transform: isActive ? "scale(.97)" : "scale(1)",
+        opacity: trailerMode ? 0.3 : 1,
+        transform: trailerMode ? "scale(.94)" : "scale(1)",
       }}
     />
   </>
 );
 
-const MovieList = ({
-  randomMovie,
-  trailerMode,
-  onCloseBtnClick,
-  isExpanded,
-}) => {
+const MovieList = ({ randomMovie, trailerMode, onCloseBtnClick }) => {
   return (
     <>
       <main className={styles.movieListWrapper}>
-        <MoviePoster
-          id={randomMovie}
-          isActive={trailerMode}
-          isExpanded={isExpanded}
-        />
+        <MoviePoster id={randomMovie} trailerMode={trailerMode} />
       </main>
 
       <TrailerModal
         onCloseBtnClick={onCloseBtnClick}
-        trailerId={randomMovie}
-        isActive={trailerMode}
+        trailer={randomMovie}
+        trailerMode={trailerMode}
       />
     </>
   );

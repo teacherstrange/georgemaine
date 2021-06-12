@@ -18,6 +18,7 @@ export const GetInTouchMenu = ({ links }) => {
                 className={styles.bubbleBtn}
                 target='_blank'
                 rel='noreferrer'
+                // FIXME: Remove inline styling
                 style={{
                   display: "flex",
                   margin: "0 .3rem",
@@ -34,9 +35,10 @@ export const GetInTouchMenu = ({ links }) => {
 };
 
 export const MovieListMenu = ({
+  onPlayBtnClick,
   onShuffleBtnClick,
-  randomMovie,
   onShareBtnClick,
+  randomMovie,
 }) => {
   const ref = useRef();
   const [menuExpanded, setMenuExpanded] = useState(false);
@@ -92,9 +94,16 @@ export const MovieListMenu = ({
             className={styles.movieListMenuVideo}
             poster={"images/wonder-woman-trailer-poster.jpg"}
             src={randomMovie.url}
-            controls
-            playsInline
           />
+          <button
+            onClick={onPlayBtnClick}
+            className={styles.transparentBubbleBtn}
+            style={{
+              position: "absolute",
+            }}
+          >
+            <Icon string='Play' />
+          </button>
         </div>
       </footer>
       <div className={styles.portfolioMenuMask}>
@@ -104,6 +113,7 @@ export const MovieListMenu = ({
             backgroundImage:
               randomMovie.moviePosterDesktopUrl &&
               `url(${randomMovie.moviePosterDesktopUrl}`,
+            // FIXME: Remove inline styling
             top: "calc(3rem - 100vh)",
           }}
         />

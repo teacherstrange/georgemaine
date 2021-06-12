@@ -41,15 +41,6 @@ export const movies = [
     url: "https://play.itunes.apple.com/WebObjects/MZPlay.woa/hls/subscription/playlist.m3u8?cc=NL&svcId=tvs.vds.4078&a=1561104524&isExternal=true&brandId=tvs.sbd.4000&id=248266278&l=nl-NL&aec=UHD&xtrick=true&webbrowser=true",
   },
   {
-    name: "Lady and the Tramp",
-    metadata: ["Adventure", 2019, "1 hr 43 min"],
-    moviePosterDesktopUrl: "images/lady-and-the-tramp.jpg",
-    moviePosterMobileUrl: "images/lady-and-the-tramp-mobile.jpg",
-    synopsis:
-      "In LADY AND THE TRAMP, Lady (voiced by Tessa Thompson) is a pampered pet who lives a comfortable, predictable life. When her owners, Jim Dear (Thomas Mann) and Darling (Kiersey Clemons), have a baby, Lady feels forgotten. She runs away and meets stray dog Tramp (Justin Theroux), who teaches her about some of the pleasures of a life with no attachments. The pair slowly fall in love as Tramp shows Lady how to beg for scraps at the classiest restaurants, find the best starry lookout over their city, and howl at the moon. But Tramp is hounded by a persistent dog catcher, and Lady feels homesick. When her people find her again, Lady decides to stay home. Will she and Tramp find each other again?",
-    url: "https://youtu.be/A2ZDDU34gYw",
-  },
-  {
     name: "Let Him Go",
     metadata: ["Drama", 2020, "1 hr 54 min"],
     moviePosterDesktopUrl: "images/let-him-go.jpg",

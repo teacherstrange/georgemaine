@@ -15,8 +15,7 @@ const Index = () => {
   const [activeTabMenuItem, setActiveTabMenuItem] = useState("portfolio"); // FIXME: Better naming
   const [activePortfolioPage, setActivePortfolioPage] = useState("Mobile Apps");
   const [suggested, setSuggested] = useState([movies[0]]);
-  const [trailerMode, setTrailerMode] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   return (
     <>
@@ -45,12 +44,12 @@ const Index = () => {
       {activeTabMenuItem === "movieList" && (
         <>
           <MovieList
-            trailerMode={trailerMode}
-            onCloseBtnClick={setTrailerMode}
+            trailerMode={isActive}
+            onCloseBtnClick={setIsActive}
             randomMovie={suggested[suggested.length - 1]}
-            isExpanded={isExpanded}
           />
           <MovieListMenu
+            onPlayBtnClick={() => setIsActive(!isActive)}
             onShareBtnClick={async () => {
               try {
                 await navigator.share(suggested[suggested.length - 1]);
