@@ -99,7 +99,7 @@ export const MovieListMenu = ({
         <div className={styles.movieListMenuTrailerWrapper}>
           <video
             className={styles.movieListMenuVideo}
-            poster={"images/wonder-woman-trailer-poster.jpg"}
+            poster={`images/${randomMovie.id}-poster.jpg`}
             src={randomMovie.url}
           />
           <button
@@ -119,10 +119,9 @@ export const MovieListMenu = ({
           className={styles.moviePosterDesktop}
           style={{
             backgroundImage:
-              randomMovie.moviePosterDesktopUrl &&
-              `url(${randomMovie.moviePosterDesktopUrl}`,
+              randomMovie.id && `url(images/${randomMovie.id}.jpg`,
             // FIXME: Remove inline styling
-            top: "calc(3rem - 100vh)",
+            top: "calc(3rem - 100%)",
           }}
         />
       </div>

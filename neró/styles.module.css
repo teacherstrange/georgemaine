@@ -127,7 +127,7 @@
 
 .movieListMenuTrailerWrapper {
   position: relative;
-  border-radius: 0.6rem;
+  border-radius: 0.9rem;
   padding-top: 41.5%;
   overflow: hidden;
   width: 100%;
@@ -201,6 +201,8 @@
 .trailerVideoContainer {
   width: 100%;
   max-width: 128rem;
+  display: grid;
+  place-items: center;
 }
 
 .trailerVideo {

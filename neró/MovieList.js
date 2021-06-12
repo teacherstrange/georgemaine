@@ -20,7 +20,7 @@ const TrailerModal = ({ onCloseBtnClick, trailer, trailerMode }) => {
     <div
       className={styles.trailerModal}
       style={{
-        transform: trailerMode ? `translateY(0)` : `translateY(100vh)`,
+        transform: trailerMode ? `translateY(0)` : `translateY(100%)`,
       }}
     >
       <div className={styles.trailerVideoContainer}>
@@ -42,13 +42,13 @@ const TrailerModal = ({ onCloseBtnClick, trailer, trailerMode }) => {
   );
 };
 
-const MoviePoster = ({ id, trailerMode }) => (
+const MoviePoster = ({ randomMovie, trailerMode }) => (
   <>
     <figure
       className={styles.moviePosterMobile}
       style={{
         backgroundImage:
-          id.moviePosterMobileUrl && `url(${id.moviePosterMobileUrl}`,
+          randomMovieid && `url(images/${randomMovieid}-mobile.jpg`,
         opacity: trailerMode ? 0 : 1,
         transform: trailerMode ? "scale(.96)" : "scale(1)",
       }}
@@ -56,8 +56,7 @@ const MoviePoster = ({ id, trailerMode }) => (
     <figure
       className={styles.moviePosterDesktop}
       style={{
-        backgroundImage:
-          id.moviePosterDesktopUrl && `url(${id.moviePosterDesktopUrl}`,
+        backgroundImage: randomMovieid && `url(images/${randomMovieid}.jpg`,
         opacity: trailerMode ? 0.3 : 1,
         transform: trailerMode ? "scale(.96)" : "scale(1)",
       }}
@@ -69,7 +68,7 @@ const MovieList = ({ randomMovie, trailerMode, onCloseBtnClick }) => {
   return (
     <>
       <main className={styles.movieListWrapper}>
-        <MoviePoster id={randomMovie} trailerMode={trailerMode} />
+        <MoviePoster randomMovie={randomMovie} trailerMode={trailerMode} />
       </main>
 
       <TrailerModal
