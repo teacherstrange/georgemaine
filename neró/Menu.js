@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Icon from "./Icon";
 import styles from "./styles.module.css";
+import { useKeyPress } from "./Utilities";
 
 export const GetInTouchMenu = ({ links }) => {
   return (
@@ -70,7 +71,7 @@ export const MovieListMenu = ({
           >
             <h2>{randomMovie.name}</h2>
             <button
-              ariaLabel='Show More'
+              aria-label='Show More'
               className={styles.smallBtn}
               onClick={() => setMenuExpanded(!menuExpanded)}
             >
@@ -78,11 +79,11 @@ export const MovieListMenu = ({
             </button>
           </div>
           <div className={styles.movieListMenuBtns}>
-            <button ariaLabel='Shuffle' onClick={onShuffleBtnClick}>
+            <button aria-label='Shuffle' onClick={onShuffleBtnClick}>
               Shuffle
             </button>
             <button
-              ariaLabel='Share'
+              aria-label='Share'
               className={styles.bubbleBtn}
               onClick={onShareBtnClick}
             >
@@ -103,7 +104,7 @@ export const MovieListMenu = ({
             src={randomMovie.url}
           />
           <button
-            ariaLabel='Play Trailer'
+            aria-label='Play Trailer'
             onClick={onPlayBtnClick}
             className={styles.transparentBubbleBtn}
             style={{
@@ -135,6 +136,9 @@ export const PortfolioMenu = ({
   portfolio,
 }) => {
   const [page, setPage] = useState();
+  const arrowLeftPress = useKeyPress("ArrowLeft");
+  const arrowRightPress = useKeyPress("ArrowRight");
+
   const setInitialPage = () =>
     portfolio.map(
       (item, index) => activePortfolioPage === item.id && setPage(index)
@@ -145,9 +149,18 @@ export const PortfolioMenu = ({
     setPage(i);
     onBtnClick(portfolio[i].id);
   };
+
   useEffect(() => {
     setInitialPage();
   }, []);
+
+  useEffect(() => {
+    arrowLeftPress && handleNavigation(page - 1);
+  }, [arrowLeftPress]);
+
+  useEffect(() => {
+    arrowRightPress && handleNavigation(page + 1);
+  }, [arrowRightPress]);
 
   return (
     <nav className={styles.portfolioMenu}>
@@ -167,7 +180,7 @@ export const PortfolioMenu = ({
       })}
 
       <button
-        ariaLabel='Previous'
+        aria-label='Previous'
         className={styles.bubbleBtn}
         onClick={() => handleNavigation(page - 1)}
         disabled={page === 0 ? true : false}
@@ -175,7 +188,7 @@ export const PortfolioMenu = ({
         <Icon string={"ArrowBack"} />
       </button>
       <button
-        ariaLabel='Next'
+        aria-label='Next'
         className={styles.bubbleBtn}
         onClick={() => handleNavigation(page + 1)}
         disabled={page === portfolio.length - 1 ? true : false}
@@ -190,21 +203,21 @@ export const TabMenu = ({ setActiveTabMenuItem, activeTabMenuItem }) => {
   return (
     <nav className={styles.tabMenu}>
       <button
-        ariaLabel='Show Portfolio'
+        aria-label='Show Portfolio'
         className={styles.tabMenuButton}
         onClick={() => setActiveTabMenuItem("portfolio")}
       >
         Portfolio
       </button>
       <button
-        ariaLabel='Show Movie list'
+        aria-label='Show Movie list'
         className={styles.tabMenuButton}
         onClick={() => setActiveTabMenuItem("movieList")}
       >
         Movie List
       </button>
       <button
-        ariaLabel='Show Blog'
+        aria-label='Show Blog'
         className={styles.tabMenuButton}
         onClick={() => setActiveTabMenuItem("blog")}
       >

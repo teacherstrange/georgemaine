@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react";
 import styles from "./styles.module.css";
+import { useKeyPress } from "./Utilities";
 
 const TrailerModal = ({ onCloseBtnClick, trailer, trailerMode }) => {
   const trailerRef = useRef(null);
+  const escapePressed = useKeyPress("Escape");
 
   const pauseTrailer = () => {
     trailerRef.current.pause();
@@ -11,6 +13,10 @@ const TrailerModal = ({ onCloseBtnClick, trailer, trailerMode }) => {
   const playTrailer = () => {
     trailerRef.current.play();
   };
+
+  useEffect(() => {
+    escapePressed && onCloseBtnClick(false), pauseTrailer();
+  }, [escapePressed]);
 
   useEffect(() => {
     trailerMode && trailerRef.current.paused ? playTrailer() : pauseTrailer();
@@ -32,7 +38,7 @@ const TrailerModal = ({ onCloseBtnClick, trailer, trailerMode }) => {
         />
       </div>
       <button
-        ariaLabel='Close'
+        aria-label='Close'
         className={styles.trailerCloseBtn}
         onClick={() => (onCloseBtnClick(false), pauseTrailer())}
       >
