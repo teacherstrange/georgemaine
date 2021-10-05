@@ -10,10 +10,6 @@ import {
   transitionForProgressInSteps,
 } from "../components/utils";
 
-const log = (element) => {
-  console.log("element:", element);
-};
-
 const collection = [
   {
     name: "The morning show",
@@ -358,9 +354,6 @@ export default function MovieList() {
 
           // Slide and transition the images
 
-          // Filter the progress through an ease out curve and use that to control scaling
-          var easeOutSlideProgress =
-            slideProgress < 1 ? slideProgress * (2 - slideProgress) : 1;
           var rotate = transitionForProgressInSteps(progress, rotateSteps[i]);
           var scale = transitionForProgressInSteps(progress, scaleSteps[i]);
           var x = transitionForProgressInSteps(progress, xSteps[i]);

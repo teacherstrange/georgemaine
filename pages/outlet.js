@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import GlobalNav from "../components/GlobalNav";
 import Head from "../components/Head";
 import { StickyMediaTile } from "../components/StickyMediaTile";

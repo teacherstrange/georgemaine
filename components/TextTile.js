@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { modulate, useOnScreen, onVideoLoaded, onImagesLoaded } from "./utils";
+import { modulate, useOnScreen } from "./utils";
 import { throttle } from "lodash";
 
 export const CaptionWithTransition = ({ children }) => {
@@ -11,25 +11,12 @@ export const CaptionWithTransition = ({ children }) => {
   const onScreen = useOnScreen(textRef);
 
   useEffect(() => {
-    const media = document.querySelectorAll("video");
-    const images = Array.from(document.images);
-
-    if (images.length > 0) {
-      onImagesLoaded(images).then(function () {
-        const windowHeight = window.innerHeight;
-        const textPosition = textRef.current.getBoundingClientRect().top;
-        setScreenHeight(windowHeight);
-        setHeight(textPosition);
-      });
-    }
-    if (media.length > 0) {
-      onVideoLoaded(media[0], function () {
-        const windowHeight = window.innerHeight;
-        const textPosition = textRef.current.getBoundingClientRect().top;
-        setScreenHeight(windowHeight);
-        setHeight(textPosition);
-      });
-    }
+    setTimeout(() => {
+      const windowHeight = window.innerHeight;
+      const textPosition = textRef.current.getBoundingClientRect().top;
+      setScreenHeight(windowHeight);
+      setHeight(textPosition);
+    }, 600);
   }, []);
 
   useEffect(() => {
@@ -57,12 +44,22 @@ export const CaptionWithTransition = ({ children }) => {
         isNaN(opacityProgress) ? null : setOpacity(opacityProgress);
       }
     };
+    let currentRequest;
 
-    scrollerRef.addEventListener("touchmove", throttle(scrollerHandler, 16)),
+    scrollerRef.addEventListener("touchmove", function () {
+      cancelAnimationFrame(currentRequest);
+      currentRequest = requestAnimationFrame(scrollerHandler);
+    }),
       { passive: true };
-    window.addEventListener("resize", throttle(scrollerHandler, 16)),
+    window.addEventListener("resize", function () {
+      cancelAnimationFrame(currentRequest);
+      currentRequest = requestAnimationFrame(scrollerHandler);
+    }),
       { passive: true };
-    scrollerRef.addEventListener("scroll", throttle(scrollerHandler, 16));
+    scrollerRef.addEventListener("scroll", function () {
+      cancelAnimationFrame(currentRequest);
+      currentRequest = requestAnimationFrame(scrollerHandler);
+    });
 
     scrollerHandler();
 
@@ -72,9 +69,19 @@ export const CaptionWithTransition = ({ children }) => {
         throttle(scrollerHandler, 16)
       ),
         { passive: true };
-      window.removeEventListener("resize", throttle(scrollerHandler, 16)),
+      window.removeEventListener("resize", function () {
+        cancelAnimationFrame(currentRequest);
+        currentRequest = requestAnimationFrame(scrollerHandler);
+      }),
         { passive: true };
-      scrollerRef.removeEventListener("scroll", throttle(scrollerHandler, 16));
+      window.removeEventListener("scroll", function () {
+        cancelAnimationFrame(currentRequest);
+        currentRequest = requestAnimationFrame(scrollerHandler);
+      });
+      scrollerRef.removeEventListener("scroll", function () {
+        cancelAnimationFrame(currentRequest);
+        currentRequest = requestAnimationFrame(scrollerHandler);
+      });
     };
   }, [height, onScreen, screenHeight]);
 
@@ -133,25 +140,12 @@ export const TextWithTransition = ({ children }) => {
   const onScreen = useOnScreen(textRef, "-100% 0px 0px 0px");
 
   useEffect(() => {
-    const media = document.querySelectorAll("video");
-    const images = Array.from(document.images);
-
-    if (images.length > 0) {
-      onImagesLoaded(images).then(function () {
-        const windowHeight = window.innerHeight;
-        const textPosition = textRef.current.getBoundingClientRect().top;
-        setScreenHeight(windowHeight);
-        setHeight(textPosition);
-      });
-    }
-    if (media.length > 0) {
-      onVideoLoaded(media[0], function () {
-        const windowHeight = window.innerHeight;
-        const textPosition = textRef.current.getBoundingClientRect().top;
-        setScreenHeight(windowHeight);
-        setHeight(textPosition);
-      });
-    }
+    setTimeout(() => {
+      const windowHeight = window.innerHeight;
+      const textPosition = textRef.current.getBoundingClientRect().top;
+      setScreenHeight(windowHeight);
+      setHeight(textPosition);
+    }, 600);
   }, []);
 
   useEffect(() => {
@@ -180,11 +174,22 @@ export const TextWithTransition = ({ children }) => {
       }
     };
 
-    scrollerRef.addEventListener("touchmove", throttle(scrollerHandler, 16)),
+    let currentRequest;
+
+    scrollerRef.addEventListener("touchmove", function () {
+      cancelAnimationFrame(currentRequest);
+      currentRequest = requestAnimationFrame(scrollerHandler);
+    }),
       { passive: true };
-    window.addEventListener("resize", throttle(scrollerHandler, 16)),
+    window.addEventListener("resize", function () {
+      cancelAnimationFrame(currentRequest);
+      currentRequest = requestAnimationFrame(scrollerHandler);
+    }),
       { passive: true };
-    scrollerRef.addEventListener("scroll", throttle(scrollerHandler, 16));
+    scrollerRef.addEventListener("scroll", function () {
+      cancelAnimationFrame(currentRequest);
+      currentRequest = requestAnimationFrame(scrollerHandler);
+    });
 
     scrollerHandler();
 
@@ -194,9 +199,19 @@ export const TextWithTransition = ({ children }) => {
         throttle(scrollerHandler, 16)
       ),
         { passive: true };
-      window.removeEventListener("resize", throttle(scrollerHandler, 16)),
+      window.removeEventListener("resize", function () {
+        cancelAnimationFrame(currentRequest);
+        currentRequest = requestAnimationFrame(scrollerHandler);
+      }),
         { passive: true };
-      scrollerRef.removeEventListener("scroll", throttle(scrollerHandler, 16));
+      window.removeEventListener("scroll", function () {
+        cancelAnimationFrame(currentRequest);
+        currentRequest = requestAnimationFrame(scrollerHandler);
+      });
+      scrollerRef.removeEventListener("scroll", function () {
+        cancelAnimationFrame(currentRequest);
+        currentRequest = requestAnimationFrame(scrollerHandler);
+      });
     };
   }, [height, onScreen, screenHeight]);
 
@@ -250,25 +265,12 @@ export const TitleTile = ({ children }) => {
   const onScreen = useOnScreen(textRef, "-100% 0px 0px 0px");
 
   useEffect(() => {
-    const media = document.querySelectorAll("video");
-    const images = Array.from(document.images);
-
-    if (images.length > 0) {
-      onImagesLoaded(images).then(function () {
-        const windowHeight = window.innerHeight;
-        const textPosition = textRef.current.getBoundingClientRect().top;
-        setScreenHeight(windowHeight);
-        setHeight(textPosition);
-      });
-    }
-    if (media.length > 0) {
-      onVideoLoaded(media[0], function () {
-        const windowHeight = window.innerHeight;
-        const textPosition = textRef.current.getBoundingClientRect().top;
-        setScreenHeight(windowHeight);
-        setHeight(textPosition);
-      });
-    }
+    setTimeout(() => {
+      const windowHeight = window.innerHeight;
+      const textPosition = textRef.current.getBoundingClientRect().top;
+      setScreenHeight(windowHeight);
+      setHeight(textPosition);
+    }, 600);
   }, []);
 
   useEffect(() => {
@@ -297,11 +299,22 @@ export const TitleTile = ({ children }) => {
       }
     };
 
-    scrollerRef.addEventListener("touchmove", throttle(scrollerHandler, 16)),
+    let currentRequest;
+
+    scrollerRef.addEventListener("touchmove", function () {
+      cancelAnimationFrame(currentRequest);
+      currentRequest = requestAnimationFrame(scrollerHandler);
+    }),
       { passive: true };
-    window.addEventListener("resize", throttle(scrollerHandler, 16)),
+    window.addEventListener("resize", function () {
+      cancelAnimationFrame(currentRequest);
+      currentRequest = requestAnimationFrame(scrollerHandler);
+    }),
       { passive: true };
-    scrollerRef.addEventListener("scroll", throttle(scrollerHandler, 16));
+    scrollerRef.addEventListener("scroll", function () {
+      cancelAnimationFrame(currentRequest);
+      currentRequest = requestAnimationFrame(scrollerHandler);
+    });
 
     scrollerHandler();
 
@@ -311,9 +324,19 @@ export const TitleTile = ({ children }) => {
         throttle(scrollerHandler, 16)
       ),
         { passive: true };
-      window.removeEventListener("resize", throttle(scrollerHandler, 16)),
+      window.removeEventListener("resize", function () {
+        cancelAnimationFrame(currentRequest);
+        currentRequest = requestAnimationFrame(scrollerHandler);
+      }),
         { passive: true };
-      scrollerRef.removeEventListener("scroll", throttle(scrollerHandler, 16));
+      window.removeEventListener("scroll", function () {
+        cancelAnimationFrame(currentRequest);
+        currentRequest = requestAnimationFrame(scrollerHandler);
+      });
+      scrollerRef.removeEventListener("scroll", function () {
+        cancelAnimationFrame(currentRequest);
+        currentRequest = requestAnimationFrame(scrollerHandler);
+      });
     };
   }, [height, onScreen, screenHeight]);
 

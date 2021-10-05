@@ -1,6 +1,5 @@
 import GlobalNav from "../components/GlobalNav";
 import Head from "../components/Head";
-import { StickyMediaTile } from "../components/StickyMediaTile";
 import { TextWithTransition, InlineLink } from "../components/TextTile";
 import { ScrollBar } from "../components/ScrollBar";
 
