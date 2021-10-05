@@ -5,7 +5,7 @@ import { throttle } from "lodash";
 export const CaptionWithTransition = ({ children }) => {
   const [height, setHeight] = useState(0);
   const [screenHeight, setScreenHeight] = useState(0);
-  const [y, setY] = useState(150);
+  const [y, setY] = useState(200);
   const [opacity, setOpacity] = useState(0);
   const textRef = useRef(null);
   const onScreen = useOnScreen(textRef);
@@ -24,14 +24,14 @@ export const CaptionWithTransition = ({ children }) => {
 
     const scrollerHandler = () => {
       const value = scrollerRef.scrollTop;
-      const startValue = Math.floor(height - screenHeight + 130 * 1.5);
-      const endValue = Math.floor(height - screenHeight + 270 * 1.5);
+      const startValue = Math.floor(height - screenHeight + 130);
+      const endValue = Math.floor(height - screenHeight + 530);
 
       if (onScreen) {
         const yProgress = modulate(
           value,
           [startValue, endValue],
-          [150, 0],
+          [200, 0],
           true
         );
         const opacityProgress = modulate(
@@ -60,8 +60,6 @@ export const CaptionWithTransition = ({ children }) => {
       cancelAnimationFrame(currentRequest);
       currentRequest = requestAnimationFrame(scrollerHandler);
     });
-
-    scrollerHandler();
 
     return () => {
       scrollerRef.removeEventListener(
@@ -191,8 +189,6 @@ export const TextWithTransition = ({ children }) => {
       currentRequest = requestAnimationFrame(scrollerHandler);
     });
 
-    scrollerHandler();
-
     return () => {
       scrollerRef.removeEventListener(
         "touchmove",
@@ -315,8 +311,6 @@ export const TitleTile = ({ children }) => {
       cancelAnimationFrame(currentRequest);
       currentRequest = requestAnimationFrame(scrollerHandler);
     });
-
-    scrollerHandler();
 
     return () => {
       scrollerRef.removeEventListener(
