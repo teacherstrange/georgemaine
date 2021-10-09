@@ -60,7 +60,7 @@ export const AnimatedCaption = ({ children, videoIsLoaded }) => {
           letter-spacing: -0.08rem;
           font-weight: 700;
           margin: 0;
-          margin: 6vh 0;
+          margin: 9vh 0 18vh;
           opacity: 0;
           transform: translate3d(0rem, -20rem, 0rem);
         }
@@ -74,7 +74,6 @@ export const AnimatedCaption = ({ children, videoIsLoaded }) => {
         @media (min-width: 73.7rem) {
           p {
             font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
-            margin: calc(5.6rem + 56 * (100vw - 126rem) / 1260) 0;
           }
         }
 
@@ -143,7 +142,7 @@ export const AnimatedCallout = ({ children, videoIsLoaded }) => {
           line-height: 1.08;
           letter-spacing: -0.08rem;
           font-weight: 700;
-          margin: 6vh 0;
+          margin: 15vh 0;
           opacity: 0;
           transform: translate3d(0rem, -5rem, 0rem);
         }
@@ -157,7 +156,6 @@ export const AnimatedCallout = ({ children, videoIsLoaded }) => {
         @media (min-width: 73.7rem) {
           p {
             font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
-            margin: calc(5.6rem + 56 * (100vw - 126rem) / 1260) 0;
           }
         }
 
@@ -227,7 +225,7 @@ export const AnimatedSeasonCallout = ({ children, videoIsLoaded }) => {
           line-height: 1.08;
           letter-spacing: -0.08rem;
           font-weight: 700;
-          margin: 18vh 0;
+          margin: 24vh 0;
           opacity: 0;
           transform: translate3d(0rem, -5rem, 0rem);
         }
@@ -241,8 +239,6 @@ export const AnimatedSeasonCallout = ({ children, videoIsLoaded }) => {
         @media (min-width: 73.7rem) {
           h1 {
             font-size: calc(5.6rem + 56 * (100vw - 74rem) / 740);
-            flex-shrink: 0;
-            margin: 20rem 0;
           }
         }
 

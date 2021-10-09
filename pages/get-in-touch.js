@@ -1,5 +1,6 @@
 import GlobalNav from "../components/GlobalNav";
 import Head from "../components/Head";
+import { Video } from "../components/Media";
 import { AnimatedCallout, InlineLink } from "../components/TextTile";
 import { ScrollBar } from "../components/ScrollBar";
 import { useRef, useState } from "react";
@@ -46,22 +47,13 @@ export default function GetInTouch() {
               <Head />
               <GlobalNav />
 
-              <video
+              <Video
                 ref={video}
-                autoPlay
-                playsInline
-                muted
                 width={1080 * 2}
                 height={1920 * 2}
                 src='media/georgemaine.mp4'
                 onPlay={(event) => {
                   setVideoIsLoaded(event);
-                }}
-                style={{
-                  maxWidth: "100%",
-                  height: "auto",
-                  borderRadius: "1rem",
-                  aspectRatio: "attr(width) / attr(height)",
                 }}
               />
 
@@ -112,7 +104,7 @@ export default function GetInTouch() {
           width: 86vw;
           margin-left: auto;
           margin-right: auto;
-          padding: calc(18vh + 2.8rem) 0 30vh;
+          padding: 0 0 15vh;
           max-width: 168.8rem;
         }
       `}</style>

@@ -1,6 +1,6 @@
 import GlobalNav from "../components/GlobalNav";
 import Head from "../components/Head";
-import { StickyMediaTile } from "../components/StickyMediaTile";
+import { StickyMedia } from "../components/Media";
 import {
   AnimatedCaption,
   InlineLink,
@@ -73,22 +73,20 @@ export default function Outlet() {
               </Head>
               <GlobalNav />
 
-              <StickyMediaTile
+              <StickyMedia
                 src={hortus1}
                 alt={"Visited Hortus Botanicus Amsterdam"}
-                margin={"0 0 9.5rem"}
                 imgHeight={1450}
                 imgWidth={1947}
               />
-              <StickyMediaTile
+              <StickyMedia
                 src={hortus3}
                 alt={"Visited Hortus Botanicus Amsterdam"}
                 width={"50%"}
-                margin={"0 0 9.5rem"}
                 imgHeight={3024}
                 imgWidth={4032}
               />
-              <StickyMediaTile
+              <StickyMedia
                 src={hortus2}
                 alt={"Visited Hortus Botanicus Amsterdam"}
                 imgHeight={2851}
@@ -99,7 +97,7 @@ export default function Outlet() {
                 <br /> — Lauren Gallo
               </AnimatedCallout>
 
-              <StickyMediaTile
+              <StickyMedia
                 src={plant}
                 alt={"Bought the extraordinary Phyllanthus Mirabilis"}
                 imgWidth={4032}
@@ -115,8 +113,8 @@ export default function Outlet() {
                   />
                   , a cute plants shop.
                 </AnimatedCaption>
-              </StickyMediaTile>
-              <StickyMediaTile
+              </StickyMedia>
+              <StickyMedia
                 src={alwaysSunday}
                 alt={"Always Sunday by Music"}
                 width={"50%"}
@@ -134,15 +132,15 @@ export default function Outlet() {
                   in the background. Genuinely enjoying the lovely low-key
                   vibes.
                 </AnimatedCaption>
-              </StickyMediaTile>
-              <StickyMediaTile
+              </StickyMedia>
+              <StickyMedia
                 src={hibiki}
                 alt={"Finally tasted Hibiki by Suntory Toki"}
                 imgWidth={4032}
                 imgHeight={3024}
               />
               <AnimatedSeasonCallout>Summer</AnimatedSeasonCallout>
-              <StickyMediaTile
+              <StickyMedia
                 src={appleWatchMarchChallenge}
                 alt={"Completed Apple's March Challenge"}
                 imgWidth={2875}
@@ -183,7 +181,7 @@ export default function Outlet() {
           width: 86vw;
           margin-left: auto;
           margin-right: auto;
-          padding: calc(18vh + 2.8rem) 0 30vh;
+          padding: 0 0 15vh;
           max-width: 168.8rem;
         }
       `}</style>

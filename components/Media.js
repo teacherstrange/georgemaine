@@ -1,24 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
-const StickyMediaTileWrapper = ({ children, margin = "0 0 20rem" }) => {
+const StickyWrapper = ({ children }) => {
   return (
     <div>
       {children}
       <style jsx>{`
         div {
-          margin: 0 0 4rem;
-        }
-
-        @media (min-width: 73.7rem) {
-          div {
-            margin: ${margin};
-          }
+          margin: 12vh 0;
         }
       `}</style>
     </div>
   );
 };
 
-const StickyMediaWrapper = ({ children, width = "100%" }) => {
+const Figure = ({ children, width = "100%" }) => {
   return (
     <figure>
       {children}
@@ -44,7 +38,7 @@ const StickyMediaWrapper = ({ children, width = "100%" }) => {
   );
 };
 
-const StickyMediaCaption = ({ caption }) => {
+const Caption = ({ caption }) => {
   return (
     <figcaption>
       {caption}
@@ -96,7 +90,7 @@ const StickyMediaCaption = ({ caption }) => {
   );
 };
 
-const StickyMediaImage = ({ src, alt, imgWidth, imgHeight }) => {
+const Image = ({ src, alt, imgWidth, imgHeight }) => {
   return (
     <>
       <img src={src} alt={alt} width={imgWidth} height={imgHeight} />
@@ -112,27 +106,46 @@ const StickyMediaImage = ({ src, alt, imgWidth, imgHeight }) => {
   );
 };
 
-export const StickyMediaTile = ({
+export const Video = ({ width, height, src, onPlay }) => {
+  return (
+    <>
+      <video
+        autoPlay
+        playsInline
+        muted
+        width={width}
+        height={height}
+        src={src}
+        onPlay={onPlay}
+      />
+      <style jsx>{`
+        video {
+          max-width: 100%;
+          height: auto;
+          border-radius: 1rem;
+          aspect-ratio: attr(width) / attr(height);
+          margin: 12vh 0 0;
+        }
+      `}</style>
+    </>
+  );
+};
+
+export const StickyMedia = ({
   alt,
   children,
-  margin,
   src,
   width,
   imgWidth,
   imgHeight,
 }) => {
   return (
-    <StickyMediaTileWrapper margin={margin}>
-      <StickyMediaWrapper width={width}>
-        <StickyMediaImage
-          src={src}
-          alt={alt}
-          imgWidth={imgWidth}
-          imgHeight={imgHeight}
-        />
-        <StickyMediaCaption caption={alt} />
-      </StickyMediaWrapper>
+    <StickyWrapper>
+      <Figure width={width}>
+        <Image src={src} alt={alt} imgWidth={imgWidth} imgHeight={imgHeight} />
+        <Caption caption={alt} />
+      </Figure>
       {children}
-    </StickyMediaTileWrapper>
+    </StickyWrapper>
   );
 };
