@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "fathom-client": "^3.2.0",
     "lodash": "^4.17.21",
     "next": "11.0.1",
     "react": "17.0.2",
