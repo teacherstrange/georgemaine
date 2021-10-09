@@ -103,7 +103,7 @@ const StickyMediaImage = ({ src, alt, imgWidth, imgHeight }) => {
       <style jsx>{`
         img {
           width: 100%;
-          display: block;
+          vertical-align: middle;
           height: auto;
           aspect-ratio: attr(width) / attr(height);
         }

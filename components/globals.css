@@ -61,7 +61,7 @@ body {
 }
 
 .image {
-  display: block;
+  vertical-align: middle;
   width: 50%;
   height: auto;
   aspect-ratio: attr(width) / attr(height);

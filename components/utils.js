@@ -14,6 +14,7 @@ export const transitionForProgressInRange = (
 ) => {
   return startValue + progress * (endValue - startValue);
 };
+
 export const progressForValueInRange = (value, startValue, endValue) => {
   return (value - startValue) / (endValue - startValue);
 };
@@ -132,15 +133,20 @@ export const fadeInOnScroll = (element, container) => {
     container.scrollTop + element.getBoundingClientRect().top - offsetTop;
 
   let progress = 0;
+  let y = 5;
+  let opacity = 0;
 
   if (scrollTop > distanceToTop) {
     progress = (scrollTop - distanceToTop) / duration;
+    const easeOutProgress = progress < 1 ? progress * (2 - progress) : 1;
+
+    y = transitionForProgressInRange(easeOutProgress, 5, 0);
+    opacity = transitionForProgressInRange(easeOutProgress, 0, 1);
   }
 
   if (progress >= 0) {
-    element.style.opacity = progress > 1 ? 1 : progress;
-    element.style.webkitTransform = `translate3d(0rem, ${
-      progress > 1 ? 0 : 5 - progress * 5
-    }rem, 0rem)`;
+    element.style.opacity = opacity;
+    element.style.webkitTransform = `translate3d(0rem, ${y}rem, 0rem)`;
+    element.style.MozTransfor = `translate3d(0rem, ${y}rem, 0rem)`;
   }
 };
