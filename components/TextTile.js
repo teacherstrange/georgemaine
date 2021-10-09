@@ -62,6 +62,7 @@ export const AnimatedCaption = ({ children, videoIsLoaded }) => {
           margin: 0;
           margin: 6vh 0;
           opacity: 0;
+          transform: translate3d(0rem, -20rem, 0rem);
         }
 
         @media (max-width: 54rem) {
@@ -144,6 +145,7 @@ export const AnimatedCallout = ({ children, videoIsLoaded }) => {
           font-weight: 700;
           margin: 6vh 0;
           opacity: 0;
+          transform: translate3d(0rem, -5rem, 0rem);
         }
 
         @media (max-width: 54rem) {
@@ -227,6 +229,7 @@ export const AnimatedSeasonCallout = ({ children, videoIsLoaded }) => {
           font-weight: 700;
           margin: 18vh 0;
           opacity: 0;
+          transform: translate3d(0rem, -5rem, 0rem);
         }
 
         @media (max-width: 54rem) {
