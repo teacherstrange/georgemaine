@@ -4,8 +4,8 @@ import { StickyMediaTile } from "../components/StickyMediaTile";
 import {
   CaptionWithTransition,
   InlineLink,
-  TitleTile,
-  TextWithTransition,
+  AnimatedSeasonCallout,
+  AnimatedCallout,
 } from "../components/TextTile";
 import { ScrollBar } from "../components/ScrollBar";
 
@@ -94,10 +94,10 @@ export default function Outlet() {
                 imgHeight={2851}
                 imgWidth={3997}
               />
-              <TextWithTransition>
+              <AnimatedCallout>
                 “No one succeeds alone.”
                 <br /> — Lauren Gallo
-              </TextWithTransition>
+              </AnimatedCallout>
 
               <StickyMediaTile
                 src={plant}
@@ -141,39 +141,39 @@ export default function Outlet() {
                 imgWidth={4032}
                 imgHeight={3024}
               />
-              <TitleTile>Summer</TitleTile>
+              <AnimatedSeasonCallout>Summer</AnimatedSeasonCallout>
               <StickyMediaTile
                 src={appleWatchMarchChallenge}
                 alt={"Completed Apple's March Challenge"}
                 imgWidth={2875}
                 imgHeight={3833}
               />
-              <TextWithTransition>
+              <AnimatedCallout>
                 I love tinkering with things — it empowers me to explore my
                 ideas.
-              </TextWithTransition>
-              <TextWithTransition>
+              </AnimatedCallout>
+              <AnimatedCallout>
                 Sometimes, I get <i>so caught</i> up in tinkering that nothing
                 else really matters — I don’t even realize what time it is 🙈
-              </TextWithTransition>
-              <TextWithTransition>
+              </AnimatedCallout>
+              <AnimatedCallout>
                 During the lockdown, I finally realized why I could spend hours
                 tinkering, thinking it’s only a couple of minutes.
-              </TextWithTransition>
-              <TextWithTransition>
+              </AnimatedCallout>
+              <AnimatedCallout>
                 I’m just expressing my emotion, energy, and talent — it’s my
                 outlet.
-              </TextWithTransition>
-              <TextWithTransition>
+              </AnimatedCallout>
+              <AnimatedCallout>
                 So, I came up with this page — a real-time feed of some of those
                 expressions, posted chronologically.
-              </TextWithTransition>
-              <TextWithTransition>
+              </AnimatedCallout>
+              <AnimatedCallout>
                 Hopefully, one day this page will tell me a story of all the
                 times I messed up and kept going while exploring ideas. Haha.
-              </TextWithTransition>
-              <TitleTile>Spring</TitleTile>
-              <TitleTile>2021</TitleTile>
+              </AnimatedCallout>
+              <AnimatedSeasonCallout>Spring</AnimatedSeasonCallout>
+              <AnimatedSeasonCallout>2021</AnimatedSeasonCallout>
             </main>
           </div>
         </div>

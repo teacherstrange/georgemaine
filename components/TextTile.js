@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { modulate, useOnScreen } from "./utils";
+import { modulate, useOnScreen, fadeInOnScroll } from "./utils";
 import { throttle } from "lodash";
 
 export const CaptionWithTransition = ({ children }) => {
@@ -11,12 +11,10 @@ export const CaptionWithTransition = ({ children }) => {
   const onScreen = useOnScreen(textRef);
 
   useEffect(() => {
-    setTimeout(() => {
-      const windowHeight = window.innerHeight;
-      const textPosition = textRef.current.getBoundingClientRect().top;
-      setScreenHeight(windowHeight);
-      setHeight(textPosition);
-    }, 600);
+    const windowHeight = window.innerHeight;
+    const textPosition = textRef.current.getBoundingClientRect().top;
+    setScreenHeight(windowHeight);
+    setHeight(textPosition);
   }, []);
 
   useEffect(() => {
@@ -129,92 +127,37 @@ export const CaptionWithTransition = ({ children }) => {
   );
 };
 
-export const TextWithTransition = ({ children }) => {
-  const [height, setHeight] = useState(0);
-  const [screenHeight, setScreenHeight] = useState(0);
-  const [y, setY] = useState(5);
-  const [opacity, setOpacity] = useState(0);
-  const textRef = useRef(null);
-  const onScreen = useOnScreen(textRef, "-100% 0px 0px 0px");
-
+export const AnimatedCallout = ({ children, videoIsLoaded }) => {
+  const ref = useRef(null);
+  const onScreen = useOnScreen(ref);
   useEffect(() => {
-    setTimeout(() => {
-      const windowHeight = window.innerHeight;
-      const textPosition = textRef.current.getBoundingClientRect().top;
-      setScreenHeight(windowHeight);
-      setHeight(textPosition);
-    }, 600);
-  }, []);
-
-  useEffect(() => {
+    const calloutRef = ref.current;
     const scrollerRef = document.querySelector(".scroll-container");
 
-    const scrollerHandler = () => {
-      const value = scrollerRef.scrollTop;
-      const startValue = Math.floor(height - screenHeight * 0.85);
-      const endValue = Math.floor(height - screenHeight * 0.7);
-
+    const scrollHandler = () => {
       if (onScreen) {
-        const yProgress = modulate(
-          value,
-          [startValue, endValue],
-          [50, 0],
-          true
-        );
-        const opacityProgress = modulate(
-          value,
-          [startValue, endValue],
-          [0, 1],
-          true
-        );
-        setY(yProgress);
-        isNaN(opacityProgress) ? null : setOpacity(opacityProgress);
+        fadeInOnScroll(calloutRef, scrollerRef);
       }
+      return;
     };
 
-    let currentRequest;
-
-    scrollerRef.addEventListener("touchmove", function () {
-      cancelAnimationFrame(currentRequest);
-      currentRequest = requestAnimationFrame(scrollerHandler);
-    }),
+    scrollerRef.addEventListener("scroll", throttle(scrollHandler, 16));
+    scrollerRef.addEventListener("touchmove", throttle(scrollHandler, 16)),
       { passive: true };
-    window.addEventListener("resize", function () {
-      cancelAnimationFrame(currentRequest);
-      currentRequest = requestAnimationFrame(scrollerHandler);
-    }),
-      { passive: true };
-    scrollerRef.addEventListener("scroll", function () {
-      cancelAnimationFrame(currentRequest);
-      currentRequest = requestAnimationFrame(scrollerHandler);
-    });
 
     return () => {
-      scrollerRef.removeEventListener(
-        "touchmove",
-        throttle(scrollerHandler, 16)
-      ),
+      scrollerRef.removeEventListener("scroll", throttle(scrollHandler, 16));
+      scrollerRef.removeEventListener("touchmove", throttle(scrollHandler, 16)),
         { passive: true };
-      window.removeEventListener("resize", function () {
-        cancelAnimationFrame(currentRequest);
-        currentRequest = requestAnimationFrame(scrollerHandler);
-      }),
-        { passive: true };
-      window.removeEventListener("scroll", function () {
-        cancelAnimationFrame(currentRequest);
-        currentRequest = requestAnimationFrame(scrollerHandler);
-      });
-      scrollerRef.removeEventListener("scroll", function () {
-        cancelAnimationFrame(currentRequest);
-        currentRequest = requestAnimationFrame(scrollerHandler);
-      });
     };
-  }, [height, onScreen, screenHeight]);
+  }, [onScreen, videoIsLoaded]);
 
   return (
     <p
-      ref={textRef}
-      style={{ transform: `translate3d(0, ${y / 10}rem, 0)`, opacity: opacity }}
+      ref={ref}
+      style={{
+        willChange: onScreen ? "opacity, transform" : null,
+      }}
     >
       {children}
       <style jsx>{`
@@ -223,8 +166,8 @@ export const TextWithTransition = ({ children }) => {
           line-height: 1.08;
           letter-spacing: -0.08rem;
           font-weight: 700;
-          margin: 5vh 0;
-          opacity: 0;
+          margin: 5rem 0;
+          transform: translate3d(0rem, 5rem, 0rem);
         }
 
         @media (max-width: 54rem) {
@@ -252,93 +195,34 @@ export const TextWithTransition = ({ children }) => {
   );
 };
 
-export const TitleTile = ({ children }) => {
-  const [height, setHeight] = useState(0);
-  const [screenHeight, setScreenHeight] = useState(0);
-  const [y, setY] = useState(5);
-  const [opacity, setOpacity] = useState(0);
-  const textRef = useRef(null);
-  const onScreen = useOnScreen(textRef, "-100% 0px 0px 0px");
+export const AnimatedSeasonCallout = ({ children, videoIsLoaded }) => {
+  const ref = useRef(null);
+  const onScreen = useOnScreen(ref);
 
   useEffect(() => {
-    setTimeout(() => {
-      const windowHeight = window.innerHeight;
-      const textPosition = textRef.current.getBoundingClientRect().top;
-      setScreenHeight(windowHeight);
-      setHeight(textPosition);
-    }, 600);
-  }, []);
-
-  useEffect(() => {
+    const calloutRef = ref.current;
     const scrollerRef = document.querySelector(".scroll-container");
 
-    const scrollerHandler = () => {
-      const value = scrollerRef.scrollTop;
-      const startValue = Math.floor(height - screenHeight * 0.85);
-      const endValue = Math.floor(height - screenHeight * 0.7);
-
+    const scrollHandler = () => {
       if (onScreen) {
-        const yProgress = modulate(
-          value,
-          [startValue, endValue],
-          [50, 0],
-          true
-        );
-        const opacityProgress = modulate(
-          value,
-          [startValue, endValue],
-          [0, 1],
-          true
-        );
-        setY(yProgress);
-        isNaN(opacityProgress) ? null : setOpacity(opacityProgress);
+        fadeInOnScroll(calloutRef, scrollerRef);
       }
+      return;
     };
 
-    let currentRequest;
-
-    scrollerRef.addEventListener("touchmove", function () {
-      cancelAnimationFrame(currentRequest);
-      currentRequest = requestAnimationFrame(scrollerHandler);
-    }),
+    scrollerRef.addEventListener("scroll", throttle(scrollHandler, 16));
+    scrollerRef.addEventListener("touchmove", throttle(scrollHandler, 16)),
       { passive: true };
-    window.addEventListener("resize", function () {
-      cancelAnimationFrame(currentRequest);
-      currentRequest = requestAnimationFrame(scrollerHandler);
-    }),
-      { passive: true };
-    scrollerRef.addEventListener("scroll", function () {
-      cancelAnimationFrame(currentRequest);
-      currentRequest = requestAnimationFrame(scrollerHandler);
-    });
 
     return () => {
-      scrollerRef.removeEventListener(
-        "touchmove",
-        throttle(scrollerHandler, 16)
-      ),
+      scrollerRef.removeEventListener("scroll", throttle(scrollHandler, 16));
+      scrollerRef.removeEventListener("touchmove", throttle(scrollHandler, 16)),
         { passive: true };
-      window.removeEventListener("resize", function () {
-        cancelAnimationFrame(currentRequest);
-        currentRequest = requestAnimationFrame(scrollerHandler);
-      }),
-        { passive: true };
-      window.removeEventListener("scroll", function () {
-        cancelAnimationFrame(currentRequest);
-        currentRequest = requestAnimationFrame(scrollerHandler);
-      });
-      scrollerRef.removeEventListener("scroll", function () {
-        cancelAnimationFrame(currentRequest);
-        currentRequest = requestAnimationFrame(scrollerHandler);
-      });
     };
-  }, [height, onScreen, screenHeight]);
+  }, [onScreen, videoIsLoaded]);
 
   return (
-    <h1
-      ref={textRef}
-      style={{ transform: `translate3d(0, ${y / 10}rem, 0)`, opacity: opacity }}
-    >
+    <h1 ref={ref}>
       {children}
       <style jsx>{`
         h1 {

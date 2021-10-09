@@ -1,9 +1,13 @@
 import GlobalNav from "../components/GlobalNav";
 import Head from "../components/Head";
-import { TextWithTransition, InlineLink } from "../components/TextTile";
+import { AnimatedCallout, InlineLink } from "../components/TextTile";
 import { ScrollBar } from "../components/ScrollBar";
+import { useRef, useState } from "react";
 
 export default function GetInTouch() {
+  const video = useRef();
+  const [videoIsLoaded, setVideoIsLoaded] = useState(false);
+
   return (
     <div style={{ minHeight: "100vh" }}>
       <div
@@ -43,42 +47,44 @@ export default function GetInTouch() {
               <GlobalNav />
 
               <video
+                ref={video}
                 autoPlay
                 playsInline
-                preload='auto'
                 muted
                 width={1080 * 2}
                 height={1920 * 2}
+                src='media/georgemaine.mp4'
+                onPlay={(event) => {
+                  setVideoIsLoaded(event);
+                }}
                 style={{
                   maxWidth: "100%",
                   height: "auto",
                   borderRadius: "1rem",
                   aspectRatio: "attr(width) / attr(height)",
                 }}
-              >
-                <source src={"media/georgemaine.mp4"} type='video/mp4' />
-              </video>
+              />
 
-              <TextWithTransition>
+              <AnimatedCallout videoIsLoaded={videoIsLoaded}>
                 As you may or may not be aware, I’ve always been fascinated with
                 how things work.
-              </TextWithTransition>
+              </AnimatedCallout>
 
-              <TextWithTransition>
+              <AnimatedCallout videoIsLoaded={videoIsLoaded}>
                 Could I remake it differently? Would people prefer that?
-              </TextWithTransition>
-              <TextWithTransition>
+              </AnimatedCallout>
+              <AnimatedCallout videoIsLoaded={videoIsLoaded}>
                 The part I hated was showing my version to people — Go figure.
-              </TextWithTransition>
-              <TextWithTransition>
+              </AnimatedCallout>
+              <AnimatedCallout videoIsLoaded={videoIsLoaded}>
                 Currently, I’m an indoor gardener and product designer at{" "}
                 <InlineLink href={"https://pitch.io"} text={"Pitch"} />
-              </TextWithTransition>
-              <TextWithTransition>
+              </AnimatedCallout>
+              <AnimatedCallout videoIsLoaded={videoIsLoaded}>
                 I love surrounding myself with extraordinary people and plants —
                 they teach me so much and make me a better person.
-              </TextWithTransition>
-              <TextWithTransition>
+              </AnimatedCallout>
+              <AnimatedCallout videoIsLoaded={videoIsLoaded}>
                 If you love that too, reach out via{" "}
                 <InlineLink
                   href={
@@ -96,7 +102,7 @@ export default function GetInTouch() {
                   href={"https://www.linkedin.com/in/georgemaine"}
                   text={"LinkedIn"}
                 />
-              </TextWithTransition>
+              </AnimatedCallout>
             </main>
           </div>
         </div>

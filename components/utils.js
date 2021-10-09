@@ -119,3 +119,28 @@ export const useOnScreen = (ref, rootMargin = "0px") => {
   }, [ref, rootMargin]);
   return isIntersecting;
 };
+
+export const fadeInOnScroll = (element, container) => {
+  if (!element) {
+    return;
+  }
+
+  const duration = window.innerHeight * 0.15;
+  const offsetTop = window.innerHeight * 0.85;
+  const scrollTop = container.scrollTop;
+  const distanceToTop =
+    container.scrollTop + element.getBoundingClientRect().top - offsetTop;
+
+  let progress = 0;
+
+  if (scrollTop > distanceToTop) {
+    progress = (scrollTop - distanceToTop) / duration;
+  }
+
+  if (progress >= 0) {
+    element.style.opacity = progress > 1 ? 1 : progress;
+    element.style.webkitTransform = `translate3d(0rem, ${
+      progress > 1 ? 0 : 5 - progress * 5
+    }rem, 0rem)`;
+  }
+};
