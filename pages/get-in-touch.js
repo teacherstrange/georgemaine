@@ -53,6 +53,7 @@ export default function GetInTouch() {
                   maxWidth: "100%",
                   height: "auto",
                   borderRadius: "1rem",
+                  aspectRatio: "attr(width) / attr(height)",
                 }}
               >
                 <source src={"media/georgemaine.mp4"} type='video/mp4' />

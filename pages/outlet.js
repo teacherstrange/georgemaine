@@ -94,10 +94,10 @@ export default function Outlet() {
                 imgHeight={2851}
                 imgWidth={3997}
               />
-              <TitleTile>
+              <TextWithTransition>
                 “No one succeeds alone.”
                 <br /> — Lauren Gallo
-              </TitleTile>
+              </TextWithTransition>
 
               <StickyMediaTile
                 src={plant}

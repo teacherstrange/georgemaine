@@ -409,6 +409,8 @@ export default function Components() {
         <style jsx>{`
           main {
             background: var(--black);
+            padding-right: 30px;
+            margin-right: -30px;
           }
         `}</style>
       </main>
