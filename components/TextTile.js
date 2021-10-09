@@ -141,13 +141,27 @@ export const AnimatedCallout = ({ children, videoIsLoaded }) => {
       return;
     };
 
-    scrollerRef.addEventListener("scroll", throttle(scrollHandler, 16));
-    scrollerRef.addEventListener("touchmove", throttle(scrollHandler, 16)),
+    let currentRequest;
+
+    scrollerRef.addEventListener("scroll", () => {
+      cancelAnimationFrame(currentRequest);
+      currentRequest = requestAnimationFrame(scrollHandler);
+    });
+    scrollerRef.addEventListener("touchmove", () => {
+      cancelAnimationFrame(currentRequest);
+      currentRequest = requestAnimationFrame(scrollHandler);
+    }),
       { passive: true };
 
     return () => {
-      scrollerRef.removeEventListener("scroll", throttle(scrollHandler, 16));
-      scrollerRef.removeEventListener("touchmove", throttle(scrollHandler, 16)),
+      scrollerRef.removeEventListener("scroll", () => {
+        cancelAnimationFrame(currentRequest);
+        currentRequest = requestAnimationFrame(scrollHandler);
+      });
+      scrollerRef.removeEventListener("touchmove", () => {
+        cancelAnimationFrame(currentRequest);
+        currentRequest = requestAnimationFrame(scrollHandler);
+      }),
         { passive: true };
     };
   }, [onScreen, videoIsLoaded]);
@@ -210,13 +224,27 @@ export const AnimatedSeasonCallout = ({ children, videoIsLoaded }) => {
       return;
     };
 
-    scrollerRef.addEventListener("scroll", throttle(scrollHandler, 16));
-    scrollerRef.addEventListener("touchmove", throttle(scrollHandler, 16)),
+    let currentRequest;
+
+    scrollerRef.addEventListener("scroll", () => {
+      cancelAnimationFrame(currentRequest);
+      currentRequest = requestAnimationFrame(scrollHandler);
+    });
+    scrollerRef.addEventListener("touchmove", () => {
+      cancelAnimationFrame(currentRequest);
+      currentRequest = requestAnimationFrame(scrollHandler);
+    }),
       { passive: true };
 
     return () => {
-      scrollerRef.removeEventListener("scroll", throttle(scrollHandler, 16));
-      scrollerRef.removeEventListener("touchmove", throttle(scrollHandler, 16)),
+      scrollerRef.removeEventListener("scroll", () => {
+        cancelAnimationFrame(currentRequest);
+        currentRequest = requestAnimationFrame(scrollHandler);
+      });
+      scrollerRef.removeEventListener("touchmove", () => {
+        cancelAnimationFrame(currentRequest);
+        currentRequest = requestAnimationFrame(scrollHandler);
+      }),
         { passive: true };
     };
   }, [onScreen, videoIsLoaded]);

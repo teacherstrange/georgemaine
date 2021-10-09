@@ -45,6 +45,12 @@ body {
   color: var(--text-dark);
   background: var(--bg-light);
   font-variant-ligatures: common-ligatures;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 @media (prefers-color-scheme: dark) {
