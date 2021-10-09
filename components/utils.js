@@ -71,33 +71,6 @@ export const transitionForProgressInSteps = (progress, steps) => {
   return transition;
 };
 
-export const modulate = (value, rangeA, rangeB, limit = false) => {
-  const [fromLow, fromHigh] = rangeA;
-  const [toLow, toHigh] = rangeB;
-  const result =
-    toLow + ((value - fromLow) / (fromHigh - fromLow)) * (toHigh - toLow);
-
-  if (limit === true) {
-    if (toLow < toHigh) {
-      if (result < toLow) {
-        return toLow;
-      }
-      if (result > toHigh) {
-        return toHigh;
-      }
-    } else {
-      if (result > toLow) {
-        return toLow;
-      }
-      if (result < toHigh) {
-        return toHigh;
-      }
-    }
-  }
-
-  return result;
-};
-
 export const useOnScreen = (ref, rootMargin = "0px") => {
   const [isIntersecting, setIntersecting] = useState(false);
 
@@ -121,32 +94,67 @@ export const useOnScreen = (ref, rootMargin = "0px") => {
   return isIntersecting;
 };
 
-export const fadeInOnScroll = (element, container) => {
+export const slideInOnScroll = (element, container) => {
   if (!element) {
     return;
   }
 
-  const duration = window.innerHeight * 0.15;
-  const offsetTop = window.innerHeight * 0.85;
-  const scrollTop = container.scrollTop;
-  const distanceToTop =
+  const height = window.innerHeight * 0.2;
+  const offsetTop = window.innerHeight * 0.8;
+  const scrollPosition = container.scrollTop;
+  const scrollDistance =
     container.scrollTop + element.getBoundingClientRect().top - offsetTop;
 
   let progress = 0;
   let y = 5;
   let opacity = 0;
 
-  if (scrollTop > distanceToTop) {
-    progress = (scrollTop - distanceToTop) / duration;
-    const easeOutProgress = progress < 1 ? progress * (2 - progress) : 1;
+  if (scrollPosition > scrollDistance) {
+    progress = (scrollPosition - scrollDistance) / height;
 
-    y = transitionForProgressInRange(easeOutProgress, 5, 0);
-    opacity = transitionForProgressInRange(easeOutProgress, 0, 1);
+    y = transitionForProgressInRange(clampedProgress(progress), 5, 0);
+    opacity = transitionForProgressInRange(clampedProgress(progress), 0, 1);
   }
 
   if (progress >= 0) {
     element.style.opacity = opacity;
     element.style.webkitTransform = `translate3d(0rem, ${y}rem, 0rem)`;
-    element.style.MozTransfor = `translate3d(0rem, ${y}rem, 0rem)`;
+    element.style.MozTransform = `translate3d(0rem, ${y}rem, 0rem)`;
   }
+};
+
+export const slideOutOnScroll = (element, container) => {
+  if (!element) {
+    return;
+  }
+
+  const height = window.innerHeight - 400;
+  const offsetTop = window.innerHeight;
+  const scrollPosition = container.scrollTop;
+  const scrollDistance =
+    container.scrollTop + element.getBoundingClientRect().top - offsetTop;
+
+  let progress = 0;
+  let y = 20;
+  let opacity = 0;
+
+  if (scrollPosition > scrollDistance) {
+    progress = (scrollPosition - scrollDistance) / height;
+
+    y = transitionForProgressInRange(clampedProgress(progress), 20, 0);
+    opacity = transitionForProgressInRange(clampedProgress(progress), 0, 1);
+  }
+
+  if (progress >= 0) {
+    element.style.opacity = opacity;
+    element.style.webkitTransform = `translate3d(0rem, ${-y}rem, 0rem)`;
+    element.style.MozTransform = `translate3d(0rem, ${-y}rem, 0rem)`;
+  }
+};
+
+export const clampedProgress = (progress) => {
+  if (progress < 0) progress = 0;
+  else if (progress > 1) progress = 1;
+
+  return progress;
 };
