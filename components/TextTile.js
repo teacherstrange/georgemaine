@@ -5,7 +5,11 @@ import {
   useOnScreen,
 } from "../components/utils";
 
-export const AnimatedCaption = ({ children, videoIsLoaded }) => {
+export const AnimatedCaption = ({
+  children,
+  videoIsLoaded,
+  marginFactor = 1,
+}) => {
   const ref = useRef(null);
   const onScreen = useOnScreen(ref);
 
@@ -54,29 +58,28 @@ export const AnimatedCaption = ({ children, videoIsLoaded }) => {
       {children}
       <style jsx>{`
         p {
-          font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
+          font-size: var(--callout1);
           line-height: 1.08;
           letter-spacing: -0.08rem;
           font-weight: 700;
-          margin: 0;
-          margin: calc(2.8rem + 28 * (100vw - 37.5rem) / 375) 0 0;
+          margin: calc(var(--callout1) * ${marginFactor}) 0 0;
           opacity: 0;
           transform: translate3d(0rem, -20rem, 0rem);
         }
 
         @media (min-width: 73.7rem) {
           p {
-            font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
-            margin: calc(4.2rem + 42 * (100vw - 74rem) / 740) 0 0;
+            font-size: var(--callout2);
+            margin: calc(var(--callout2) * ${marginFactor}) 0 0;
           }
         }
 
         @media (min-width: 126rem) {
           p {
-            font-size: calc(5.6rem + 56 * (100vw - 126rem) / 1260);
+            font-size: var(--callout3);
             letter-spacing: -0.015rem;
             line-height: 1.05;
-            margin: calc(5.6rem + 56 * (100vw - 126rem) / 1260) 0 0;
+            margin: calc(var(--callout3) * ${marginFactor}) 0 0;
           }
         }
       `}</style>
@@ -84,7 +87,11 @@ export const AnimatedCaption = ({ children, videoIsLoaded }) => {
   );
 };
 
-export const AnimatedCallout = ({ children, videoIsLoaded }) => {
+export const AnimatedCallout = ({
+  children,
+  videoIsLoaded,
+  marginFactor = 1,
+}) => {
   const ref = useRef(null);
   const onScreen = useOnScreen(ref);
   useEffect(() => {
@@ -131,28 +138,28 @@ export const AnimatedCallout = ({ children, videoIsLoaded }) => {
       {children}
       <style jsx>{`
         p {
-          font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
+          font-size: var(--callout1);
           line-height: 1.08;
           letter-spacing: -0.08rem;
           font-weight: 700;
-          margin: calc(2.8rem + 28 * (100vw - 37.5rem) / 375) 0;
+          margin: calc(var(--callout1) * ${marginFactor}) 0;
           opacity: 0;
           transform: translate3d(0rem, -5rem, 0rem);
         }
 
         @media (min-width: 73.7rem) {
           p {
-            font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
-            margin: calc(4.2rem + 42 * (100vw - 74rem) / 740) 0;
+            font-size: var(--callout2);
+            margin: calc(var(--callout2) * ${marginFactor}) 0;
           }
         }
 
         @media (min-width: 126rem) {
           p {
-            font-size: calc(5.6rem + 56 * (100vw - 126rem) / 1260);
+            font-size: var(--callout3);
             letter-spacing: -0.015rem;
             line-height: 1.05;
-            margin: calc(5.6rem + 56 * (100vw - 126rem) / 1260) 0;
+            margin: calc(var(--callout3) * ${marginFactor}) 0;
           }
         }
       `}</style>
@@ -209,26 +216,26 @@ export const AnimatedSeasonCallout = ({ children, videoIsLoaded }) => {
       {children}
       <style jsx>{`
         h1 {
-          font-size: calc(4.2rem + 42 * (100vw - 37.5rem) / 375);
+          font-size: var(--seasonCallout1);
           line-height: 1.08;
           letter-spacing: -0.08rem;
           font-weight: 700;
-          margin: calc((4.2rem + 42 * (100vw - 37.5rem) / 375) * 2) 0;
+          margin: calc(var(--seasonCallout1) * 2) 0;
           opacity: 0;
           transform: translate3d(0rem, -5rem, 0rem);
         }
 
         @media (min-width: 73.7rem) {
           h1 {
-            font-size: calc(5.6rem + 56 * (100vw - 74rem) / 740);
-            margin: calc((5.6rem + 56 * (100vw - 74rem) / 740) * 2) 0;
+            font-size: var(--seasonCallout2);
+            margin: calc(var(--seasonCallout2) * 2) 0;
           }
         }
 
         @media screen and (min-width: 177rem) {
           h1 {
-            font-size: 18rem;
-            margin: 36rem 0;
+            font-size: var(--seasonCallout3);
+            margin: calc(var(--seasonCallout3) * 2) 0;
           }
         }
       `}</style>

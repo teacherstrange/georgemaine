@@ -60,7 +60,6 @@ export default function Outlet() {
                 alt={"Visited Hortus Botanicus Amsterdam"}
                 imgHeight={1450}
                 imgWidth={1947}
-                related={true}
               />
               <StickyMedia
                 src={hortus3}
@@ -68,16 +67,14 @@ export default function Outlet() {
                 width={"50%"}
                 imgHeight={3024}
                 imgWidth={4032}
-                related={true}
               />
               <StickyMedia
                 src={hortus2}
                 alt={"Visited Hortus Botanicus Amsterdam"}
                 imgHeight={2851}
                 imgWidth={3997}
-                related={true}
               />
-              <AnimatedCallout>
+              <AnimatedCallout marginFactor={3}>
                 “No one succeeds alone.”
                 <br /> — Lauren Gallo
               </AnimatedCallout>
@@ -87,6 +84,7 @@ export default function Outlet() {
                 alt={"Bought the extraordinary Phyllanthus Mirabilis"}
                 imgWidth={4032}
                 imgHeight={3024}
+                marginFactor={3}
               >
                 <AnimatedCaption>
                   Meet Phyllanthus Mirabilis. During dusk, the leaves fold
@@ -105,6 +103,7 @@ export default function Outlet() {
                 width={"50%"}
                 imgWidth={1158}
                 imgHeight={1158}
+                marginFactor={3}
               >
                 <AnimatedCaption>
                   Lately, most of my weekends start with playing{" "}
@@ -130,6 +129,7 @@ export default function Outlet() {
                 alt={"Completed Apple's March Challenge"}
                 imgWidth={2875}
                 imgHeight={3833}
+                marginFactor={3}
               />
               <AnimatedCallout>
                 I love tinkering with things — it empowers me to explore my
@@ -166,7 +166,7 @@ export default function Outlet() {
           width: 86vw;
           margin-left: auto;
           margin-right: auto;
-          padding: 0 0 15vh;
+          padding: 0 0 18vh;
           max-width: 168.8rem;
         }
       `}</style>

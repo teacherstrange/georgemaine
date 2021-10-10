@@ -102,7 +102,7 @@ export default function GetInTouch() {
           width: 86vw;
           margin-left: auto;
           margin-right: auto;
-          padding: 0 0 15vh;
+          padding: 0 0 18vh;
           max-width: 168.8rem;
         }
       `}</style>

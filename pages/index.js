@@ -296,7 +296,7 @@ const HeroSectionCopy = ({ sectionHeadline, sectionDescription }) => {
         }
 
         h2 {
-          font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
+          font-size: var(--callout1);
           max-width: 60%;
           margin: 0;
           line-height: 1.08;
@@ -312,14 +312,14 @@ const HeroSectionCopy = ({ sectionHeadline, sectionDescription }) => {
           }
 
           h2 {
-            font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
+            font-size: var(--callout2);
             max-width: 50%;
           }
         }
 
         @media (min-width: 126rem) {
           h2 {
-            font-size: calc(5.6rem + 56 * (100vw - 140rem) / 1400);
+            font-size: var(--callout3);
             letter-spacing: -0.015rem;
             line-height: 1.05;
             max-width: 40%;
@@ -360,7 +360,7 @@ const SectionCopy = ({ sectionHeadline, sectionDescription }) => {
         }
 
         h2 {
-          font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
+          font-size: var(--callout1);
           max-width: 60%;
           margin: 0;
           line-height: 1.08;
@@ -376,13 +376,13 @@ const SectionCopy = ({ sectionHeadline, sectionDescription }) => {
           }
 
           h2 {
-            font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
+            font-size: var(--callout2);
           }
         }
 
         @media (min-width: 126rem) {
           h2 {
-            font-size: calc(5.6rem + 56 * (100vw - 140rem) / 1400);
+            font-size: var(--callout3);
             letter-spacing: -0.015rem;
             line-height: 1.05;
           }

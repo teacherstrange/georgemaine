@@ -70,6 +70,12 @@ body {
   --bg-dark: rgb(22, 22, 23);
   --dark-border: rgba(0, 0, 0, 0.15);
   --light-border: rgba(255, 255, 255, 0.15);
+  --callout1: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
+  --callout2: calc(4.2rem + 42 * (100vw - 74rem) / 740);
+  --callout3: calc(5.6rem + 56 * (100vw - 140rem) / 1400);
+  --seasonCallout1: calc(4.2rem + 42 * (100vw - 37.5rem) / 375);
+  --seasonCallout2: calc(5.6rem + 56 * (100vw - 74rem) / 740);
+  --seasonCallout3: 18rem;
 }
 
 @supports (color: color(display-p3 1 1 1)) {

@@ -100,7 +100,7 @@ export const slideInOnScroll = (element, container) => {
   }
 
   const height = window.innerHeight * 0.2;
-  const offsetTop = window.innerHeight * 0.8;
+  const offsetTop = window.innerHeight * 0.85;
   const scrollPosition = container.scrollTop;
   const scrollDistance =
     container.scrollTop + element.getBoundingClientRect().top - offsetTop;
@@ -157,4 +157,8 @@ export const clampedProgress = (progress) => {
   else if (progress > 1) progress = 1;
 
   return progress;
+};
+
+export const log = (object) => {
+  console.log(JSON.stringify(object, null, 2));
 };

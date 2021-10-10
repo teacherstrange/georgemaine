@@ -38,7 +38,7 @@ const Caption = ({ caption }) => {
           left: 0;
           right: 0;
           bottom: 0;
-          font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
+          font-size: var(--callout1);
           line-height: 1.08;
           letter-spacing: -0.08rem;
           font-weight: 700;
@@ -56,13 +56,13 @@ const Caption = ({ caption }) => {
 
         @media (min-width: 73.7rem) {
           figcaption {
-            font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
+            font-size: var(--callout2);
           }
         }
 
         @media (min-width: 126rem) {
           figcaption {
-            font-size: calc(5.6rem + 56 * (100vw - 140rem) / 1400);
+            font-size: var(--callout3);
             letter-spacing: -0.015rem;
             line-height: 1.05;
           }
@@ -88,7 +88,7 @@ const Image = ({ src, alt, imgWidth, imgHeight }) => {
   );
 };
 
-export const Video = ({ width, height, src, onPlay }) => {
+export const Video = ({ width, height, src, onPlay, marginFactor = 1 }) => {
   return (
     <>
       <video
@@ -106,7 +106,20 @@ export const Video = ({ width, height, src, onPlay }) => {
           height: auto;
           border-radius: 1rem;
           aspect-ratio: attr(width) / attr(height);
-          margin: 12vh 0 0;
+          margin: calc(var(--callout1) * ${marginFactor}) 0;
+          display: block;
+        }
+
+        @media (min-width: 73.7rem) {
+          video {
+            margin: calc(var(--callout2) * ${marginFactor}) 0;
+          }
+        }
+
+        @media (min-width: 126rem) {
+          video {
+            margin: calc(var(--callout3) * ${marginFactor}) 0;
+          }
         }
       `}</style>
     </>
@@ -120,7 +133,7 @@ export const StickyMedia = ({
   width,
   imgWidth,
   imgHeight,
-  related = false,
+  marginFactor = 1,
 }) => {
   return (
     <div>
@@ -131,22 +144,18 @@ export const StickyMedia = ({
       {children}
       <style jsx>{`
         div {
-          margin: ${related
-            ? "calc(4.2rem + 42 * (100vw - 37.5rem) / 375) 0"
-            : "calc((4.2rem + 42 * (100vw - 37.5rem) / 375) * 2) 0"};
+          margin: calc(var(--callout1) * ${marginFactor}) 0;
         }
 
         @media (min-width: 73.7rem) {
           div {
-            margin: ${related
-              ? "calc(5.6rem + 56 * (100vw - 74rem) / 740) 0"
-              : "calc((5.6rem + 56 * (100vw - 74rem) / 740) * 2) 0"};
+            margin: calc(var(--callout2) * ${marginFactor}) 0;
           }
         }
 
-        @media screen and (min-width: 177rem) {
+        @media (min-width: 126rem) {
           div {
-            margin: ${related ? "18rem 0" : "36rem 0"};
+            margin: calc(var(--callout3) * ${marginFactor}) 0;
           }
         }
       `}</style>
