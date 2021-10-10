@@ -76,6 +76,7 @@ body {
   --seasonCallout1: calc(4.2rem + 42 * (100vw - 37.5rem) / 375);
   --seasonCallout2: calc(5.6rem + 56 * (100vw - 74rem) / 740);
   --seasonCallout3: 18rem;
+  --globalNavHeight: 4.4rem;
 }
 
 @supports (color: color(display-p3 1 1 1)) {
