@@ -14,35 +14,34 @@ export const AnimatedCaption = ({ children, videoIsLoaded }) => {
     const scrollerRef = document.querySelector(".scroll-container");
 
     const scrollHandler = () => {
-      if (onScreen) {
-        slideOutOnScroll(captionRef, scrollerRef);
-      }
-      return;
+      slideOutOnScroll(captionRef, scrollerRef);
     };
 
-    let currentRequest;
+    if (onScreen) {
+      let currentRequest;
 
-    scrollerRef.addEventListener("scroll", () => {
-      cancelAnimationFrame(currentRequest);
-      currentRequest = requestAnimationFrame(scrollHandler);
-    });
-    scrollerRef.addEventListener("touchmove", () => {
-      cancelAnimationFrame(currentRequest);
-      currentRequest = requestAnimationFrame(scrollHandler);
-    }),
-      { passive: true };
-
-    return () => {
-      scrollerRef.removeEventListener("scroll", () => {
+      scrollerRef.addEventListener("scroll", () => {
         cancelAnimationFrame(currentRequest);
         currentRequest = requestAnimationFrame(scrollHandler);
       });
-      scrollerRef.removeEventListener("touchmove", () => {
+      scrollerRef.addEventListener("touchmove", () => {
         cancelAnimationFrame(currentRequest);
         currentRequest = requestAnimationFrame(scrollHandler);
       }),
         { passive: true };
-    };
+
+      return () => {
+        scrollerRef.removeEventListener("scroll", () => {
+          cancelAnimationFrame(currentRequest);
+          currentRequest = requestAnimationFrame(scrollHandler);
+        });
+        scrollerRef.removeEventListener("touchmove", () => {
+          cancelAnimationFrame(currentRequest);
+          currentRequest = requestAnimationFrame(scrollHandler);
+        }),
+          { passive: true };
+      };
+    }
   }, [onScreen, videoIsLoaded]);
 
   return (
@@ -55,25 +54,20 @@ export const AnimatedCaption = ({ children, videoIsLoaded }) => {
       {children}
       <style jsx>{`
         p {
-          font-size: 2.8rem;
+          font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
           line-height: 1.08;
           letter-spacing: -0.08rem;
           font-weight: 700;
           margin: 0;
-          margin: 9vh 0 18vh;
+          margin: calc(2.8rem + 28 * (100vw - 37.5rem) / 375) 0 0;
           opacity: 0;
           transform: translate3d(0rem, -20rem, 0rem);
-        }
-
-        @media (max-width: 54rem) {
-          p {
-            font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
-          }
         }
 
         @media (min-width: 73.7rem) {
           p {
             font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
+            margin: calc(4.2rem + 42 * (100vw - 74rem) / 740) 0 0;
           }
         }
 
@@ -82,6 +76,7 @@ export const AnimatedCaption = ({ children, videoIsLoaded }) => {
             font-size: calc(5.6rem + 56 * (100vw - 126rem) / 1260);
             letter-spacing: -0.015rem;
             line-height: 1.05;
+            margin: calc(5.6rem + 56 * (100vw - 126rem) / 1260) 0 0;
           }
         }
       `}</style>
@@ -97,35 +92,33 @@ export const AnimatedCallout = ({ children, videoIsLoaded }) => {
     const scrollerRef = document.querySelector(".scroll-container");
 
     const scrollHandler = () => {
-      if (onScreen) {
-        slideInOnScroll(calloutRef, scrollerRef);
-      }
-      return;
+      slideInOnScroll(calloutRef, scrollerRef);
     };
+    if (onScreen) {
+      let currentRequest;
 
-    let currentRequest;
-
-    scrollerRef.addEventListener("scroll", () => {
-      cancelAnimationFrame(currentRequest);
-      currentRequest = requestAnimationFrame(scrollHandler);
-    });
-    scrollerRef.addEventListener("touchmove", () => {
-      cancelAnimationFrame(currentRequest);
-      currentRequest = requestAnimationFrame(scrollHandler);
-    }),
-      { passive: true };
-
-    return () => {
-      scrollerRef.removeEventListener("scroll", () => {
+      scrollerRef.addEventListener("scroll", () => {
         cancelAnimationFrame(currentRequest);
         currentRequest = requestAnimationFrame(scrollHandler);
       });
-      scrollerRef.removeEventListener("touchmove", () => {
+      scrollerRef.addEventListener("touchmove", () => {
         cancelAnimationFrame(currentRequest);
         currentRequest = requestAnimationFrame(scrollHandler);
       }),
         { passive: true };
-    };
+
+      return () => {
+        scrollerRef.removeEventListener("scroll", () => {
+          cancelAnimationFrame(currentRequest);
+          currentRequest = requestAnimationFrame(scrollHandler);
+        });
+        scrollerRef.removeEventListener("touchmove", () => {
+          cancelAnimationFrame(currentRequest);
+          currentRequest = requestAnimationFrame(scrollHandler);
+        }),
+          { passive: true };
+      };
+    }
   }, [onScreen, videoIsLoaded]);
 
   return (
@@ -138,24 +131,19 @@ export const AnimatedCallout = ({ children, videoIsLoaded }) => {
       {children}
       <style jsx>{`
         p {
-          font-size: 2.8rem;
+          font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
           line-height: 1.08;
           letter-spacing: -0.08rem;
           font-weight: 700;
-          margin: 15vh 0;
+          margin: calc(2.8rem + 28 * (100vw - 37.5rem) / 375) 0;
           opacity: 0;
           transform: translate3d(0rem, -5rem, 0rem);
-        }
-
-        @media (max-width: 54rem) {
-          p {
-            font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
-          }
         }
 
         @media (min-width: 73.7rem) {
           p {
             font-size: calc(4.2rem + 42 * (100vw - 74rem) / 740);
+            margin: calc(4.2rem + 42 * (100vw - 74rem) / 740) 0;
           }
         }
 
@@ -164,6 +152,7 @@ export const AnimatedCallout = ({ children, videoIsLoaded }) => {
             font-size: calc(5.6rem + 56 * (100vw - 126rem) / 1260);
             letter-spacing: -0.015rem;
             line-height: 1.05;
+            margin: calc(5.6rem + 56 * (100vw - 126rem) / 1260) 0;
           }
         }
       `}</style>
@@ -180,35 +169,34 @@ export const AnimatedSeasonCallout = ({ children, videoIsLoaded }) => {
     const scrollerRef = document.querySelector(".scroll-container");
 
     const scrollHandler = () => {
-      if (onScreen) {
-        slideInOnScroll(calloutRef, scrollerRef);
-      }
-      return;
+      slideInOnScroll(calloutRef, scrollerRef);
     };
 
-    let currentRequest;
+    if (onScreen) {
+      let currentRequest;
 
-    scrollerRef.addEventListener("scroll", () => {
-      cancelAnimationFrame(currentRequest);
-      currentRequest = requestAnimationFrame(scrollHandler);
-    });
-    scrollerRef.addEventListener("touchmove", () => {
-      cancelAnimationFrame(currentRequest);
-      currentRequest = requestAnimationFrame(scrollHandler);
-    }),
-      { passive: true };
-
-    return () => {
-      scrollerRef.removeEventListener("scroll", () => {
+      scrollerRef.addEventListener("scroll", () => {
         cancelAnimationFrame(currentRequest);
         currentRequest = requestAnimationFrame(scrollHandler);
       });
-      scrollerRef.removeEventListener("touchmove", () => {
+      scrollerRef.addEventListener("touchmove", () => {
         cancelAnimationFrame(currentRequest);
         currentRequest = requestAnimationFrame(scrollHandler);
       }),
         { passive: true };
-    };
+
+      return () => {
+        scrollerRef.removeEventListener("scroll", () => {
+          cancelAnimationFrame(currentRequest);
+          currentRequest = requestAnimationFrame(scrollHandler);
+        });
+        scrollerRef.removeEventListener("touchmove", () => {
+          cancelAnimationFrame(currentRequest);
+          currentRequest = requestAnimationFrame(scrollHandler);
+        }),
+          { passive: true };
+      };
+    }
   }, [onScreen, videoIsLoaded]);
 
   return (
@@ -221,30 +209,26 @@ export const AnimatedSeasonCallout = ({ children, videoIsLoaded }) => {
       {children}
       <style jsx>{`
         h1 {
-          font-size: 4.2rem;
+          font-size: calc(4.2rem + 42 * (100vw - 37.5rem) / 375);
           line-height: 1.08;
           letter-spacing: -0.08rem;
           font-weight: 700;
-          margin: 24vh 0;
+          margin: calc((4.2rem + 42 * (100vw - 37.5rem) / 375) * 2) 0;
           opacity: 0;
           transform: translate3d(0rem, -5rem, 0rem);
-        }
-
-        @media (max-width: 54rem) {
-          h1 {
-            font-size: calc(4.2rem + 42 * (100vw - 37.5rem) / 375);
-          }
         }
 
         @media (min-width: 73.7rem) {
           h1 {
             font-size: calc(5.6rem + 56 * (100vw - 74rem) / 740);
+            margin: calc((5.6rem + 56 * (100vw - 74rem) / 740) * 2) 0;
           }
         }
 
         @media screen and (min-width: 177rem) {
           h1 {
             font-size: 18rem;
+            margin: 36rem 0;
           }
         }
       `}</style>

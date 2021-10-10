@@ -3,10 +3,9 @@ import Head from "../components/Head";
 import { Video } from "../components/Media";
 import { AnimatedCallout, InlineLink } from "../components/TextTile";
 import { ScrollBar } from "../components/ScrollBar";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 export default function GetInTouch() {
-  const video = useRef();
   const [videoIsLoaded, setVideoIsLoaded] = useState(false);
 
   return (
@@ -48,7 +47,6 @@ export default function GetInTouch() {
               <GlobalNav />
 
               <Video
-                ref={video}
                 width={1080 * 2}
                 height={1920 * 2}
                 src='media/georgemaine.mp4'

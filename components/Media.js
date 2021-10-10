@@ -1,16 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-const StickyWrapper = ({ children }) => {
-  return (
-    <div>
-      {children}
-      <style jsx>{`
-        div {
-          margin: 12vh 0;
-        }
-      `}</style>
-    </div>
-  );
-};
 
 const Figure = ({ children, width = "100%" }) => {
   return (
@@ -64,12 +52,6 @@ const Caption = ({ caption }) => {
 
         figcaption:hover {
           opacity: 1;
-        }
-
-        @media (max-width: 54rem) {
-          figcaption {
-            font-size: calc(2.8rem + 28 * (100vw - 37.5rem) / 375);
-          }
         }
 
         @media (min-width: 73.7rem) {
@@ -138,14 +120,36 @@ export const StickyMedia = ({
   width,
   imgWidth,
   imgHeight,
+  related = false,
 }) => {
   return (
-    <StickyWrapper>
+    <div>
       <Figure width={width}>
         <Image src={src} alt={alt} imgWidth={imgWidth} imgHeight={imgHeight} />
         <Caption caption={alt} />
       </Figure>
       {children}
-    </StickyWrapper>
+      <style jsx>{`
+        div {
+          margin: ${related
+            ? "calc(4.2rem + 42 * (100vw - 37.5rem) / 375) 0"
+            : "calc((4.2rem + 42 * (100vw - 37.5rem) / 375) * 2) 0"};
+        }
+
+        @media (min-width: 73.7rem) {
+          div {
+            margin: ${related
+              ? "calc(5.6rem + 56 * (100vw - 74rem) / 740) 0"
+              : "calc((5.6rem + 56 * (100vw - 74rem) / 740) * 2) 0"};
+          }
+        }
+
+        @media screen and (min-width: 177rem) {
+          div {
+            margin: ${related ? "18rem 0" : "36rem 0"};
+          }
+        }
+      `}</style>
+    </div>
   );
 };

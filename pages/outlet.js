@@ -1,5 +1,4 @@
 import GlobalNav from "../components/GlobalNav";
-import Head from "../components/Head";
 import { StickyMedia } from "../components/Media";
 import {
   AnimatedCaption,
@@ -16,16 +15,6 @@ const plant = "/media/plant.jpeg";
 const alwaysSunday = "/media/always-sunday.jpg";
 const hibiki = "/media/hibiki.jpg";
 const appleWatchMarchChallenge = "/media/apple-watch-march-challenge.jpeg";
-
-const imageList = [
-  hortus1,
-  hortus2,
-  hortus3,
-  plant,
-  alwaysSunday,
-  hibiki,
-  appleWatchMarchChallenge,
-];
 
 export default function Outlet() {
   return (
@@ -64,13 +53,6 @@ export default function Outlet() {
           >
             <ScrollBar />
             <main>
-              <Head>
-                {imageList.map((image, index) => {
-                  return (
-                    <link key={index} rel='preload' href={image} as='image' />
-                  );
-                })}
-              </Head>
               <GlobalNav />
 
               <StickyMedia
@@ -78,6 +60,7 @@ export default function Outlet() {
                 alt={"Visited Hortus Botanicus Amsterdam"}
                 imgHeight={1450}
                 imgWidth={1947}
+                related={true}
               />
               <StickyMedia
                 src={hortus3}
@@ -85,12 +68,14 @@ export default function Outlet() {
                 width={"50%"}
                 imgHeight={3024}
                 imgWidth={4032}
+                related={true}
               />
               <StickyMedia
                 src={hortus2}
                 alt={"Visited Hortus Botanicus Amsterdam"}
                 imgHeight={2851}
                 imgWidth={3997}
+                related={true}
               />
               <AnimatedCallout>
                 “No one succeeds alone.”

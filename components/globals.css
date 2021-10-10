@@ -60,12 +60,6 @@ body {
   }
 }
 
-.image {
-  vertical-align: middle;
-  width: 50%;
-  height: auto;
-  aspect-ratio: attr(width) / attr(height);
-}
 /* Colors */
 :root {
   --white: var(--white);

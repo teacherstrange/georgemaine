@@ -44,10 +44,10 @@ const ScrollTrack = () => {
   );
 };
 
-export const ScrollBar = ({ scrollContainer }) => {
+export const ScrollBar = () => {
   return (
     <div>
-      <ScrollTrack scrollContainer={scrollContainer} />
+      <ScrollTrack />
       <style jsx>{`
         div {
           width: 0.4rem;
