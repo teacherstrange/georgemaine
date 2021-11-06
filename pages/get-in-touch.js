@@ -47,8 +47,8 @@ export default function GetInTouch() {
               <GlobalNav />
 
               <Video
-                width={1080 * 2}
-                height={1920 * 2}
+                width={1962}
+                height={2160}
                 src='media/georgemaine.mp4'
                 onPlay={(event) => {
                   setVideoIsLoaded(event);

@@ -1,5 +1,15 @@
 import { useState, useEffect } from "react";
+import { getWindow } from "ssr-window";
 
+export const now = () => {
+  return Date.now();
+};
+
+export const updateCardOffsets = (foodSpots, cards) => {
+  for (let i = 0, n = foodSpots.length; i < n; ++i) {
+    cards[i].cardOffset = foodSpots[i].offsetLeft;
+  }
+};
 export const calculateXOffsetForIndex = (index, scale) => {
   const selectOffsetScale = [1, 0.86, 0.86, 0.78, 0.77];
   const imageWidth = 225;
@@ -20,12 +30,12 @@ export const progressForValueInRange = (value, startValue, endValue) => {
 };
 
 export const transitionForProgressInSteps = (progress, steps) => {
-  // FIXME: clean up to ES6
-  var transition = -1;
-  var normalizedProgress;
+  let transition = -1;
+  let normalizedProgress;
 
   // Bail if there's fewer than two steps
   if (steps.length < 2) {
+    console.log("bailed");
     return transition;
   }
 
@@ -159,6 +169,33 @@ export const clampedProgress = (progress) => {
   return progress;
 };
 
-export const log = (object) => {
-  console.log(JSON.stringify(object, null, 2));
+export const clampedIndex = (index) => {
+  if (index < -4) index = -4;
+  else if (index > 4) index = 4;
+
+  return index;
+};
+
+export const getRandomResult = (arr, n) => {
+  let randomResults = new Array(n),
+    length = arr.length,
+    taken = new Array(length);
+  if (n > length)
+    throw new RangeError("getRandomResult: more elements taken than available");
+  while (n--) {
+    var x = Math.floor(Math.random() * length);
+    randomResults[n] = arr[x in taken ? taken[x] : x];
+    taken[x] = --length in taken ? taken[length] : length;
+  }
+  return randomResults;
+};
+
+export const effectTarget = (effectParams, $slideEl) => {
+  if (effectParams.transformEl) {
+    return $slideEl.find(effectParams.transformEl).css({
+      "backface-visibility": "hidden",
+      "-webkit-backface-visibility": "hidden",
+    });
+  }
+  return $slideEl;
 };

@@ -31,8 +31,8 @@ export default function GlobalNav({ onMedia }) {
           </ActiveLink>
         </li>
         <li>
-          <ActiveLink activeClassName={"current"} href='/movie-list'>
-            <a>Movie list</a>
+          <ActiveLink activeClassName={"current"} href='/food-spots'>
+            <a>Food spots</a>
           </ActiveLink>
         </li>
         <li>
