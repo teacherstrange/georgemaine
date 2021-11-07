@@ -1,6 +1,158 @@
 import { useState, useEffect } from "react";
 import { getWindow } from "ssr-window";
 
+export const updateCardOffset = (el) => {
+  const cards = el.cards;
+  // FIXME: realtime offsetLeft?
+  for (let i = 0; i < cards.length; i += 1) {
+    console.log("cards[i].offsetLeft", cards[i].offsetLeft);
+    cards[i].swiperSlideOffset = cards[i].offsetLeft;
+  }
+};
+
+export const updateSlidesProgress = (translate = 0, el) => {
+  const params = el.params;
+  const slides = el.cards;
+  const rtl = el.params.rtl;
+
+  if (slides.length === 0) return;
+  if (typeof slides[0].swiperSlideOffset === "undefined") updateCardOffset(el);
+
+  let offsetCenter = -translate;
+  if (rtl) offsetCenter = translate;
+
+  // Visible Slides
+  // slides.removeClass(params.slideVisibleClass);
+
+  for (let i = 0; i < slides.length; i += 1) {
+    const slide = slides[i];
+    let slideOffset = slide.swiperSlideOffset;
+
+    console.log("slide", slide);
+    console.log("slideOffset", slideOffset);
+    // console.log("params.spaceBetween", params.spaceBetween);
+    const slideProgress =
+      (offsetCenter + 0 - slideOffset) /
+      (slide.clientWidth + params.spaceBetween);
+    const slideBefore = -(offsetCenter - slideOffset);
+    const slideAfter = slideBefore + slide.clientWidth;
+    // FIXME: size, clientwidth are all the same ?
+    const isVisible =
+      (slideBefore >= 0 && slideBefore < slide.clientWidth - 1) ||
+      (slideAfter > 1 && slideAfter <= slide.clientWidth) ||
+      (slideBefore <= 0 && slideAfter >= slide.clientWidth);
+    // FIXME: seems to deal with hiding of slides > 5 ||  < 5
+    // if (isVisible) {
+    //   swiper.visibleSlides.push(slide);
+    //   swiper.visibleSlidesIndexes.push(i);
+    //   slides.eq(i).addClass(params.slideVisibleClass);
+    // }
+    slide.progress = rtl ? -slideProgress : slideProgress;
+  }
+};
+
+export const updateProgress = (translate, el) => {
+  const params = el.params;
+  let progress = params.progress;
+  let isBeginning = params.isBeginning;
+  let isEnd = params.isEnd;
+  const minTranslate = params.minTranslate;
+  const maxTranslate = params.maxTranslate;
+
+  if (typeof translate === "undefined") {
+    const multiplier = params.rtlTranslate ? -1 : 1;
+    translate = (el && params.translate && params.translate * multiplier) || 0;
+  }
+
+  const translatesDiff = maxTranslate - minTranslate;
+
+  const wasBeginning = isBeginning;
+  const wasEnd = isEnd;
+
+  if (translatesDiff === 0) {
+    progress = 0;
+    isBeginning = true;
+    isEnd = true;
+  } else {
+    progress = (translate - minTranslate) / translatesDiff;
+    isBeginning = progress <= 0;
+    isEnd = progress >= 1;
+  }
+
+  Object.assign(el, {
+    progress,
+    isBeginning,
+    isEnd,
+  });
+
+  updateSlidesProgress(translate, el);
+
+  // if (isBeginning && !wasBeginning) {
+  //   swiper.emit("reachBeginning toEdge");
+  // }
+  // if (isEnd && !wasEnd) {
+  //   swiper.emit("reachEnd toEdge");
+  // }
+  // if ((wasBeginning && !isBeginning) || (wasEnd && !isEnd)) {
+  //   swiper.emit("fromEdge");
+  // }
+
+  // swiper.emit("progress", progress);
+};
+
+function getTranslate(el, axis = "x") {
+  const window = getWindow();
+  let matrix;
+  let curTransform;
+  let transformMatrix;
+
+  const curStyle = getComputedStyle(el, null);
+
+  if (window.WebKitCSSMatrix) {
+    curTransform = curStyle.transform || curStyle.webkitTransform;
+    if (curTransform.split(",").length > 6) {
+      curTransform = curTransform
+        .split(", ")
+        .map((a) => a.replace(",", "."))
+        .join(", ");
+    }
+    // Some old versions of Webkit choke when 'none' is passed; pass
+    // empty string instead in this case
+    transformMatrix = new window.WebKitCSSMatrix(
+      curTransform === "none" ? "" : curTransform
+    );
+  } else {
+    transformMatrix =
+      curStyle.MozTransform ||
+      curStyle.OTransform ||
+      curStyle.MsTransform ||
+      curStyle.msTransform ||
+      curStyle.transform ||
+      curStyle
+        .getPropertyValue("transform")
+        .replace("translate(", "matrix(1, 0, 0, 1,");
+    matrix = transformMatrix.toString().split(",");
+  }
+
+  if (axis === "x") {
+    // Latest Chrome and webkits Fix
+    if (window.WebKitCSSMatrix) curTransform = transformMatrix.m41;
+    // Crazy IE10 Matrix
+    else if (matrix.length === 16) curTransform = parseFloat(matrix[12]);
+    // Normal Browsers
+    else curTransform = parseFloat(matrix[4]);
+  }
+  if (axis === "y") {
+    // Latest Chrome and webkits Fix
+    if (window.WebKitCSSMatrix) curTransform = transformMatrix.m42;
+    // Crazy IE10 Matrix
+    else if (matrix.length === 16) curTransform = parseFloat(matrix[13]);
+    // Normal Browsers
+    else curTransform = parseFloat(matrix[5]);
+  }
+  return curTransform || 0;
+}
+
 export const now = () => {
   return Date.now();
 };
@@ -9,76 +161,6 @@ export const updateCardOffsets = (foodSpots, cards) => {
   for (let i = 0, n = foodSpots.length; i < n; ++i) {
     cards[i].cardOffset = foodSpots[i].offsetLeft;
   }
-};
-export const calculateXOffsetForIndex = (index, scale) => {
-  const selectOffsetScale = [1, 0.86, 0.86, 0.78, 0.77];
-  const imageWidth = 225;
-  const offset = imageWidth - imageWidth * scale;
-  return offset * selectOffsetScale[index];
-};
-
-export const transitionForProgressInRange = (
-  progress,
-  startValue,
-  endValue
-) => {
-  return startValue + progress * (endValue - startValue);
-};
-
-export const progressForValueInRange = (value, startValue, endValue) => {
-  return (value - startValue) / (endValue - startValue);
-};
-
-export const transitionForProgressInSteps = (progress, steps) => {
-  let transition = -1;
-  let normalizedProgress;
-
-  // Bail if there's fewer than two steps
-  if (steps.length < 2) {
-    console.log("bailed");
-    return transition;
-  }
-
-  // If the progress is before the beginning of the range, extrapolate from the first and second steps.
-  if (progress < 0) {
-    transition = transitionForProgressInRange(progress, steps[0], steps[1]);
-  }
-
-  // If the progress is after the end of the range, extrapolate from the second last and last steps.
-  else if (progress > steps.length - 1) {
-    normalizedProgress = progressForValueInRange(
-      progress,
-      Math.floor(progress),
-      Math.floor(progress) + 1
-    );
-    normalizedProgress = normalizedProgress + 1;
-    transition = transitionForProgressInRange(
-      normalizedProgress,
-      steps[steps.length - 2],
-      steps[steps.length - 1]
-    );
-  }
-
-  // Supress potential NaNs
-  else if (progress == steps.length - 1 || progress == 0) {
-    transition = steps[progress];
-  }
-
-  // Otherwise interpolate between steps
-  else {
-    normalizedProgress = progressForValueInRange(
-      progress,
-      Math.floor(progress),
-      Math.floor(progress) + 1
-    );
-    transition = transitionForProgressInRange(
-      normalizedProgress,
-      steps[Math.floor(progress)],
-      steps[Math.floor(progress) + 1]
-    );
-  }
-
-  return transition;
 };
 
 export const useOnScreen = (ref, rootMargin = "0px") => {
@@ -188,14 +270,4 @@ export const getRandomResult = (arr, n) => {
     taken[x] = --length in taken ? taken[length] : length;
   }
   return randomResults;
-};
-
-export const effectTarget = (effectParams, $slideEl) => {
-  if (effectParams.transformEl) {
-    return $slideEl.find(effectParams.transformEl).css({
-      "backface-visibility": "hidden",
-      "-webkit-backface-visibility": "hidden",
-    });
-  }
-  return $slideEl;
 };

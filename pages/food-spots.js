@@ -2,14 +2,24 @@ import GlobalNav from "../components/GlobalNav";
 import Head from "../components/Head";
 import { FoodSpotCard, foodSpots } from "../components/FoodSpotCard";
 import { useEffect, useState } from "react";
-import { getRandomResult, now } from "../components/utils";
+import { getRandomResult, now, updateProgress } from "../components/utils";
 import { getWindow, getDocument } from "ssr-window";
+import translate from "../components/translate/index";
+import getSwiperTranslate from "../components/translate/getTranslate";
+import { useRef } from "react";
 
 const randomFoodSpots = getRandomResult(foodSpots, 2);
 
+const prototypes = {
+  translate,
+};
+const width = 256;
+
 export default function FoodSpots() {
+  const stackRef = useRef();
   const [cards, setCards] = useState(randomFoodSpots);
   const [stack, setStack] = useState({
+    cards: cards,
     touchEventsData: {
       isTouched: undefined,
       isMoved: undefined,
@@ -31,11 +41,33 @@ export default function FoodSpots() {
       startMoving: undefined,
     },
     params: {
-      threshold: 0,
-      touchStartPreventDefault: true,
+      animating: false,
       allowClick: true,
-      swipeDirection: undefined,
+      activeIndex: 0,
+      allowSlidePrev: true,
+      allowSlideNext: true,
       allowTouchMove: true,
+      isBeginning: true,
+      isEnd: false,
+      minTranslate: -0,
+      maxTranslate: -width * cards.length - 1,
+      nested: false,
+      previousTranslate: 0,
+      progress: 0,
+      realIndex: 0,
+      rtl: false,
+      rtlTranslate: false,
+      translate: 0,
+      swipeDirection: undefined,
+      resistance: true,
+      resistanceRatio: 0.85,
+      threshold: 0,
+      touchAngle: 45,
+      touchMoveStopPropagation: false,
+      touchRatio: 1,
+      touchStartPreventDefault: true,
+      velocity: 0,
+      virtualTranslate: true,
     },
     touches: {
       startX: 0,
@@ -44,19 +76,29 @@ export default function FoodSpots() {
       currentY: 0,
       diff: 0,
     },
+    methods: { getSwiperTranslate },
   });
 
   useEffect(() => {
     const stackWrapper = document.querySelector(".stack");
     const foodSpots = document.querySelectorAll(".foodSpot");
     const captions = document.querySelectorAll(".caption");
+    Object.assign(stack, {
+      cards: stackWrapper.children,
+    });
 
     stackWrapper.addEventListener("mousedown", function (event) {
       onTouchStart(event, stack);
     });
+    stackWrapper.addEventListener("mousemove", function (event) {
+      onTouchMove(event, stack);
+    });
     return () => {
       stackWrapper.removeEventListener("mousedown", function (event) {
         onTouchStart(event, stack);
+      });
+      stackWrapper.removeEventListener("mousemove", function (event) {
+        onTouchMove(event, stack);
       });
     };
   }, [stack]);
@@ -67,6 +109,7 @@ export default function FoodSpots() {
       <GlobalNav />
       <div className='collection'>
         <div
+          ref={stackRef}
           className='stack'
           style={{
             position: "relative",
@@ -132,6 +175,167 @@ export default function FoodSpots() {
   );
 }
 
+const onTouchMove = (event, el) => {
+  const document = getDocument();
+  const window = getWindow();
+  const data = el.touchEventsData;
+  const touches = el.touches;
+  const params = el.params;
+  const methods = el.methods;
+  let e = event;
+  if (e.originalEvent) e = e.originalEvent;
+
+  if (!data.isTouched) {
+    return;
+  }
+
+  const targetTouch =
+    e.type === "touchmove" && e.targetTouches && e.changedTouches;
+
+  const pageX = e.type === "touchmove" ? targetTouch.pageX : e.pageX;
+  const pageY = e.type === "touchmove" ? targetTouch.pageY : e.pageY;
+
+  if (e.preventedByNestedSwiper) {
+    touches.startX = pageX;
+    touches.startY = pageY;
+    return;
+  }
+
+  touches.currentX = pageX;
+  touches.currentY = pageY;
+
+  const diffX = touches.currentX - touches.startX;
+  const diffY = touches.currentY - touches.startY;
+
+  if (
+    params.threshold &&
+    Math.sqrt(diffX ** 2 + diffY ** 2) < params.threshold
+  ) {
+    return;
+  }
+
+  if (typeof data.isScrolling === "undefined") {
+    let touchAngle;
+    if (touches.currentY === touches.startY) {
+      data.isScrolling = false;
+    } else {
+      if (diffX * diffX + diffY * diffY >= 25) {
+        touchAngle =
+          (Math.atan2(Math.abs(diffY), Math.abs(diffX)) * 180) / Math.PI;
+        data.isScrolling = true
+          ? touchAngle > params.touchAngle
+          : 90 - touchAngle > params.touchAngle;
+      }
+    }
+  }
+  if (typeof data.startMoving === "undefined") {
+    if (
+      touches.currentX !== touches.startX ||
+      touches.currentY !== touches.startY
+    ) {
+      data.startMoving = true;
+    }
+  }
+  if (!data.startMoving) {
+    return;
+  }
+
+  params.allowClick = false;
+  if (!params.cssMode && e.cancelable) {
+    e.preventDefault();
+  }
+  if (params.touchMoveStopPropagation && !params.nested) {
+    e.stopPropagation();
+  }
+
+  if (!data.isMoved) {
+    data.startTranslate = methods.getSwiperTranslate("x", el);
+    // swiper.setTransition(0);
+    // if (swiper.animating) {
+    //   swiper.$wrapperEl.trigger("webkitTransitionEnd transitionend");
+    // }
+    data.allowMomentumBounce = false;
+  }
+  data.isMoved = true;
+  let diff = diffX;
+  touches.diff = diff;
+
+  diff *= params.touchRatio;
+
+  if (params.rtl) diff = -diff;
+
+  params.swipeDirection = diff > 0 ? "prev" : "next";
+
+  data.currentTranslate = diff + data.startTranslate;
+
+  let disableParentSwiper = true;
+  let resistanceRatio = params.resistanceRatio;
+
+  if (params.touchReleaseOnEdges) {
+    resistanceRatio = 0;
+  }
+
+  if (diff > 0 && data.currentTranslate > params.minTranslate) {
+    disableParentSwiper = false;
+    if (params.resistance)
+      data.currentTranslate =
+        params.minTranslate -
+        1 +
+        (-params.minTranslate + data.startTranslate + diff) ** resistanceRatio;
+  } else if (diff < 0 && data.currentTranslate < params.maxTranslate) {
+    disableParentSwiper = false;
+    if (params.resistance)
+      data.currentTranslate =
+        params.maxTranslate +
+        1 -
+        (params.maxTranslate - data.startTranslate - diff) ** resistanceRatio;
+  }
+
+  if (disableParentSwiper) {
+    e.preventedByNestedSwiper = true;
+  }
+
+  // Directions locks
+  if (
+    !params.allowSlideNext &&
+    params.swipeDirection === "next" &&
+    data.currentTranslate < data.startTranslate
+  ) {
+    data.currentTranslate = data.startTranslate;
+  }
+
+  if (
+    !params.allowSlidePrev &&
+    params.swipeDirection === "prev" &&
+    data.currentTranslate > data.startTranslate
+  ) {
+    data.currentTranslate = data.startTranslate;
+  }
+
+  if (!params.allowSlidePrev && !params.allowSlideNext) {
+    data.currentTranslate = data.startTranslate;
+  }
+
+  // Threshold
+  if (params.threshold > 0) {
+    if (Math.abs(diff) > params.threshold || data.allowThresholdMove) {
+      if (!data.allowThresholdMove) {
+        data.allowThresholdMove = true;
+        touches.startX = touches.currentX;
+        touches.startY = touches.currentY;
+        data.currentTranslate = data.startTranslate;
+        touches.diff = touches.currentX - touches.startX;
+        return;
+      }
+    } else {
+      data.currentTranslate = data.startTranslate;
+      return;
+    }
+  }
+
+  updateProgress(data.currentTranslate, el);
+};
+
 const onTouchStart = (event, el) => {
   const document = getDocument();
   const window = getWindow();
@@ -140,9 +344,7 @@ const onTouchStart = (event, el) => {
   const params = el.params;
 
   let e = event;
-  if (e.originalEvent) {
-    e = e.originalEvent;
-  }
+  if (e.originalEvent) e = e.originalEvent;
   let targetEl = e.target;
   data.isTouchEvent = e.type === "touchstart";
 
