@@ -2,7 +2,16 @@ import GlobalNav from "../components/GlobalNav";
 import Head from "../components/Head";
 import { FoodSpotCard, foodSpots } from "../components/FoodSpotCard";
 import { useEffect, useState } from "react";
-import { getRandomResult, now, updateProgress } from "../components/utils";
+import {
+  getRandomResult,
+  now,
+  setCardEffectTranslate,
+  setTranslate,
+  updateProgress,
+  updateActiveIndex,
+  setTransition,
+  onTouchEnd,
+} from "../components/utils";
 import { getWindow, getDocument } from "ssr-window";
 import translate from "../components/translate/index";
 import getSwiperTranslate from "../components/translate/getTranslate";
@@ -10,9 +19,6 @@ import { useRef } from "react";
 
 const randomFoodSpots = getRandomResult(foodSpots, 2);
 
-const prototypes = {
-  translate,
-};
 const width = 256;
 
 export default function FoodSpots() {
@@ -20,6 +26,10 @@ export default function FoodSpots() {
   const [cards, setCards] = useState(randomFoodSpots);
   const [stack, setStack] = useState({
     cards: cards,
+    cardsPerGroup: 1,
+    cardsPerGroupSkip: 0,
+    cardsPerGroupAuto: false,
+    speed: 300,
     touchEventsData: {
       isTouched: undefined,
       isMoved: undefined,
@@ -49,12 +59,16 @@ export default function FoodSpots() {
       allowTouchMove: true,
       isBeginning: true,
       isEnd: false,
+      longSwipesMs: 300,
+      longSwipesRatio: 0.5,
+      shortSwipes: true,
       minTranslate: -0,
       maxTranslate: -width * cards.length - 1,
       nested: false,
       previousTranslate: 0,
       progress: 0,
       realIndex: 0,
+      snapIndex: undefined,
       rtl: false,
       rtlTranslate: false,
       translate: 0,
@@ -64,7 +78,6 @@ export default function FoodSpots() {
       threshold: 0,
       touchAngle: 45,
       touchMoveStopPropagation: false,
-      touchRatio: 1,
       touchStartPreventDefault: true,
       velocity: 0,
       virtualTranslate: true,
@@ -81,10 +94,19 @@ export default function FoodSpots() {
 
   useEffect(() => {
     const stackWrapper = document.querySelector(".stack");
-    const foodSpots = document.querySelectorAll(".foodSpot");
-    const captions = document.querySelectorAll(".caption");
+    const stackChildren = [...stackWrapper.children];
+    const snapGrid = [];
+    const cardSizesGrid = [];
+
+    stackChildren.forEach((element) => {
+      snapGrid.push(element.offsetLeft);
+      cardSizesGrid.push(element.clientWidth);
+    });
+
     Object.assign(stack, {
       cards: stackWrapper.children,
+      cardSizesGrid: cardSizesGrid,
+      snapGrid: snapGrid,
     });
 
     stackWrapper.addEventListener("mousedown", function (event) {
@@ -93,12 +115,18 @@ export default function FoodSpots() {
     stackWrapper.addEventListener("mousemove", function (event) {
       onTouchMove(event, stack);
     });
+    stackWrapper.addEventListener("mouseup", function (event) {
+      onTouchEnd(event, stack);
+    });
     return () => {
       stackWrapper.removeEventListener("mousedown", function (event) {
         onTouchStart(event, stack);
       });
       stackWrapper.removeEventListener("mousemove", function (event) {
         onTouchMove(event, stack);
+      });
+      stackWrapper.removeEventListener("mouseup", function (event) {
+        onTouchEnd(event, stack);
       });
     };
   }, [stack]);
@@ -216,6 +244,7 @@ const onTouchMove = (event, el) => {
 
   if (typeof data.isScrolling === "undefined") {
     let touchAngle;
+
     if (touches.currentY === touches.startY) {
       data.isScrolling = false;
     } else {
@@ -250,17 +279,17 @@ const onTouchMove = (event, el) => {
 
   if (!data.isMoved) {
     data.startTranslate = methods.getSwiperTranslate("x", el);
-    // swiper.setTransition(0);
+    setTransition(0, el);
     // if (swiper.animating) {
     //   swiper.$wrapperEl.trigger("webkitTransitionEnd transitionend");
     // }
     data.allowMomentumBounce = false;
   }
   data.isMoved = true;
-  let diff = diffX;
-  touches.diff = diff;
 
-  diff *= params.touchRatio;
+  let diff = diffX;
+
+  touches.diff = diff;
 
   if (params.rtl) diff = -diff;
 
@@ -296,25 +325,30 @@ const onTouchMove = (event, el) => {
   }
 
   // Directions locks
-  if (
-    !params.allowSlideNext &&
-    params.swipeDirection === "next" &&
-    data.currentTranslate < data.startTranslate
-  ) {
-    data.currentTranslate = data.startTranslate;
-  }
+  console.log("el", el);
+  console.log("params.swipeDirection", params.swipeDirection);
 
-  if (
-    !params.allowSlidePrev &&
-    params.swipeDirection === "prev" &&
-    data.currentTranslate > data.startTranslate
-  ) {
-    data.currentTranslate = data.startTranslate;
-  }
+  // if (
+  //   !params.allowSlideNext &&
+  //   params.swipeDirection === "next" &&
+  //   data.currentTranslate < data.startTranslate
+  // ) {
+  //   console.log("triggered");
+  //   data.currentTranslate = data.startTranslate;
+  // }
 
-  if (!params.allowSlidePrev && !params.allowSlideNext) {
-    data.currentTranslate = data.startTranslate;
-  }
+  // if (
+  //   !params.allowSlidePrev &&
+  //   params.swipeDirection === "prev" &&
+  //   data.currentTranslate > data.startTranslate
+  // ) {
+  //   data.currentTranslate = data.startTranslate;
+  // }
+
+  // if (!params.allowSlidePrev && !params.allowSlideNext) {
+
+  //   data.currentTranslate = data.startTranslate;
+  // }
 
   // Threshold
   if (params.threshold > 0) {
@@ -333,7 +367,11 @@ const onTouchMove = (event, el) => {
     }
   }
 
+  updateActiveIndex(el);
   updateProgress(data.currentTranslate, el);
+  setTranslate(data.currentTranslate, el);
+  setTransition(300, el);
+  setCardEffectTranslate(el);
 };
 
 const onTouchStart = (event, el) => {
