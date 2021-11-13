@@ -130,11 +130,10 @@ export const nextTick = (callback, delay = 0) => {
 
 export const setTransition = (duration, el) => {
   const cards = el.cards;
-  console.log("duration:", duration);
+
   for (let i = 0; i < cards.length; i += 1) {
     const card = cards[i];
     card.style.transitionDuration = `${duration}ms`;
-    console.log("card.style.transitionDuration", card.style.transitionDuration);
   }
 
   // FIXME: effectVirtualTransitionEnd

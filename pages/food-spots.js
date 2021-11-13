@@ -106,23 +106,47 @@ export default function FoodSpots() {
   useEffect(() => {
     const stackWrapper = document.querySelector(".stack");
 
+    stackWrapper.addEventListener("touchstart", function (event) {
+      onTouchStart(event, collection.current);
+    });
     stackWrapper.addEventListener("mousedown", function (event) {
       onTouchStart(event, collection.current);
     });
     stackWrapper.addEventListener("mousemove", function (event) {
       onTouchMove(event, collection.current);
     });
+    stackWrapper.addEventListener("touchmove", function (event) {
+      onTouchMove(event, collection.current);
+    });
     stackWrapper.addEventListener("mouseup", function (event) {
+      onTouchEnd(event, collection.current);
+    });
+    stackWrapper.addEventListener("touchend", function (event) {
+      onTouchEnd(event, collection.current);
+    });
+    stackWrapper.addEventListener("touchcancel", function (event) {
       onTouchEnd(event, collection.current);
     });
     return () => {
       stackWrapper.removeEventListener("mousedown", function (event) {
         onTouchStart(event, collection.current);
       });
+      stackWrapper.removeEventListener("touchstart", function (event) {
+        onTouchStart(event, collection.current);
+      });
       stackWrapper.removeEventListener("mousemove", function (event) {
         onTouchMove(event, collection.current);
       });
+      stackWrapper.removeEventListener("touchmove", function (event) {
+        onTouchMove(event, collection.current);
+      });
       stackWrapper.removeEventListener("mouseup", function (event) {
+        onTouchEnd(event, collection.current);
+      });
+      stackWrapper.removeEventListener("touchend", function (event) {
+        onTouchEnd(event, collection.current);
+      });
+      stackWrapper.removeEventListener("touchcancel", function (event) {
         onTouchEnd(event, collection.current);
       });
     };
@@ -381,7 +405,6 @@ const onTouchMove = (event, el) => {
 
   if (!data.isMoved) {
     data.startTranslate = methods.getSwiperTranslate("x", el);
-    console.log("setTransition(0, el)");
     setTransition(0, el);
     // if (swiper.animating) {
     //   swiper.$wrapperEl.trigger("webkitTransitionEnd transitionend");
