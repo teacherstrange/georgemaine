@@ -3,18 +3,20 @@ import { getWindow } from "ssr-window";
 
 export const slideTo = (index = 0, el, speed) => {
   const params = el.params;
-  speed = el.params.speed;
   const snapGrid = el.snapGrid;
-  const previousIndex = params.previousIndex;
+  // const previousIndex = params.previousIndex;
   const activeIndex = params.activeIndex;
-  const rtl = params.rtlTranslate;
+  const rtl = params.rtl;
   let slideIndex = index;
   if (slideIndex < 0) slideIndex = 0;
 
-  const skip = Math.min(params.slidesPerGroupSkip, slideIndex);
-  let snapIndex =
-    skip + Math.floor((slideIndex - skip) / params.slidesPerGroup);
-  if (snapIndex >= snapGrid.length) snapIndex = snapGrid.length - 1;
+  const skip = Math.min(el.cardsPerGroupSkip, slideIndex);
+
+  let snapIndex = skip + Math.floor((slideIndex - skip) / el.cardsPerGroup);
+
+  if (snapIndex >= snapGrid.length) {
+    snapIndex = snapGrid.length - 1;
+  }
 
   // // if (
   // //   (activeIndex || params.initialSlide || 0) === (previousIndex || 0) &&
@@ -29,44 +31,26 @@ export const slideTo = (index = 0, el, speed) => {
   updateProgress(translate, el);
 
   // // Normalize slideIndex
-  if (params.normalizeSlideIndex) {
-    for (let i = 0; i < cardSizesGrid.length; i += 1) {
-      const normalizedTranslate = -Math.floor(translate * 100);
-      const normalizedGrid = Math.floor(cardSizesGrid[i] * 100);
-      const normalizedGridNext = Math.floor(cardSizesGrid[i + 1] * 100);
-      if (typeof cardSizesGrid[i + 1] !== "undefined") {
-        if (
-          normalizedTranslate >= normalizedGrid &&
-          normalizedTranslate <
-            normalizedGridNext - (normalizedGridNext - normalizedGrid) / 2
-        ) {
-          slideIndex = i;
-        } else if (
-          normalizedTranslate >= normalizedGrid &&
-          normalizedTranslate < normalizedGridNext
-        ) {
-          slideIndex = i + 1;
-        }
-      } else if (normalizedTranslate >= normalizedGrid) {
+  for (let i = 0; i < snapGrid.length; i += 1) {
+    const normalizedTranslate = -Math.floor(translate * 100);
+    const normalizedGrid = Math.floor(snapGrid[i] * 100);
+    const normalizedGridNext = Math.floor(snapGrid[i + 1] * 100);
+
+    if (typeof snapGrid[i + 1] !== "undefined") {
+      if (
+        normalizedTranslate >= normalizedGrid &&
+        normalizedTranslate <
+          normalizedGridNext - (normalizedGridNext - normalizedGrid) / 2
+      ) {
         slideIndex = i;
+      } else if (
+        normalizedTranslate >= normalizedGrid &&
+        normalizedTranslate < normalizedGridNext
+      ) {
+        slideIndex = i + 1;
       }
-    }
-  }
-  // // Directions locks
-  if (slideIndex !== activeIndex) {
-    if (
-      !params.allowSlideNext &&
-      translate < params.translate &&
-      translate < params.minTranslate
-    ) {
-      return false;
-    }
-    if (
-      !params.allowSlidePrev &&
-      translate > params.translate &&
-      translate > params.maxTranslate
-    ) {
-      if ((activeIndex || 0) !== slideIndex) return false;
+    } else if (normalizedTranslate >= normalizedGrid) {
+      slideIndex = i;
     }
   }
 
@@ -95,6 +79,7 @@ export const slideTo = (index = 0, el, speed) => {
     setTransition(0, el);
     setTranslate(translate, el);
     updateActiveIndex(el, slideIndex);
+    setCardEffectTranslate(el);
 
     // swiper.transitionStart(runCallbacks, direction);
     // swiper.transitionEnd(runCallbacks, direction);
@@ -102,6 +87,7 @@ export const slideTo = (index = 0, el, speed) => {
     setTransition(el.speed, el);
     setTranslate(translate, el);
     updateActiveIndex(el, slideIndex);
+    setCardEffectTranslate(el);
     // updateSlidesClasses();
     // emit("beforeTransitionStart", speed, internal);
     // transitionStart(runCallbacks, direction);
@@ -146,115 +132,6 @@ export const setTransition = (duration, el) => {
   el.cards.transition = duration;
   // FIXME: effectVirtualTransitionEnd
 };
-export const onTouchEnd = (event, el) => {
-  const data = el.touchEventsData;
-  const params = el.params;
-  const rtl = params.rtlTranslate;
-  const snapGrid = el.snapGrid;
-  let e = event;
-  if (e.originalEvent) e = e.originalEvent;
-  data.allowTouchCallbacks = false;
-
-  if (!data.isTouched) {
-    data.isMoved = false;
-    data.startMoving = false;
-    return;
-  }
-
-  // Time diff
-  const touchEndTime = now();
-  const timeDiff = touchEndTime - data.touchStartTime;
-
-  // FIXME: Tap, doubleTap, Click?
-  data.lastClickTime = now();
-  nextTick(() => {
-    if (!el.destroyed) params.allowClick = true;
-  });
-
-  if (
-    !data.isTouched ||
-    !data.isMoved ||
-    !params.swipeDirection ||
-    el.touches.diff === 0 ||
-    data.currentTranslate === data.startTranslate
-  ) {
-    data.isTouched = false;
-    data.isMoved = false;
-    data.startMoving = false;
-    return;
-  }
-  data.isTouched = false;
-  data.isMoved = false;
-  data.startMoving = false;
-
-  let currentPos;
-  currentPos = rtl ? params.translate : -params.translate;
-
-  // Find current card
-  let stopIndex = 0;
-  let groupSize = el.cardSizesGrid[0];
-  for (
-    let i = 0;
-    i < snapGrid.length;
-    i += i < params.cardsPerGroupSkip ? 1 : params.cardsPerGroup
-  ) {
-    const increment =
-      i < params.cardsPerGroupSkip - 1 ? 1 : params.cardsPerGroup;
-    if (typeof snapGrid[i + increment] !== "undefined") {
-      if (currentPos >= snapGrid[i] && currentPos < snapGrid[i + increment]) {
-        stopIndex = i;
-        groupSize = snapGrid[i + increment] - snapGrid[i];
-      }
-    } else if (currentPos >= snapGrid[i]) {
-      stopIndex = i;
-      groupSize = snapGrid[snapGrid.length - 1] - snapGrid[snapGrid.length - 2];
-    }
-  }
-
-  // Find current slide size
-  const ratio = (currentPos - snapGrid[stopIndex]) / groupSize;
-  const increment = stopIndex < el.cardsPerGroupSkip - 1 ? 1 : 1;
-
-  if (timeDiff > params.longSwipesMs) {
-    // Long touches
-    if (!params.longSwipes) {
-      slideTo(params.activeIndex, el, el.speed);
-      return;
-    }
-    if (params.swipeDirection === "next") {
-      if (ratio >= params.longSwipesRatio)
-        slideTo(stopIndex + increment, el, el.speed);
-      else slideTo(stopIndex, el, el.speed);
-    }
-    if (params.swipeDirection === "prev") {
-      if (ratio > 1 - params.longSwipesRatio)
-        slideTo(stopIndex + increment, el, el.speed);
-      else slideTo(stopIndex, el, el.speed);
-    }
-  } else {
-    // Short swipes
-
-    if (!params.shortSwipes) {
-      slideTo(params.activeIndex, el, el.speed);
-      return;
-    }
-    const isNavButtonTarget =
-      el.navigation &&
-      (e.target === el.navigation.nextEl || e.target === el.navigation.prevEl);
-    if (!isNavButtonTarget) {
-      if (params.swipeDirection === "next") {
-        slideTo(stopIndex + increment, el, el.speed);
-      }
-      if (params.swipeDirection === "prev") {
-        slideTo(stopIndex, el, el.speed);
-      }
-    } else if (e.target === el.navigation.nextEl) {
-      slideTo(stopIndex + increment, el, el.speed);
-    } else {
-      slideTo(stopIndex, el, el.speed);
-    }
-  }
-};
 
 export const updateActiveIndex = (el, newActiveIndex) => {
   const params = el.params;
@@ -285,13 +162,17 @@ export const updateActiveIndex = (el, newActiveIndex) => {
     // Normalize slideIndex
     if (activeIndex < 0 || typeof activeIndex === "undefined") activeIndex = 0;
   }
+
   if (snapGrid.indexOf(translate) >= 0) {
     snapIndex = snapGrid.indexOf(translate);
   } else {
-    const skip = Math.min(params.slidesPerGroupSkip, activeIndex);
-    snapIndex = skip + Math.floor((activeIndex - skip) / params.slidesPerGroup);
+    const skip = Math.min(el.cardsPerGroupSkip, activeIndex);
+    snapIndex = skip + Math.floor((activeIndex - skip) / el.cardsPerGroup);
   }
-  if (snapIndex >= snapGrid.length) snapIndex = snapGrid.length - 1;
+
+  if (snapIndex >= snapGrid.length) {
+    snapIndex = snapGrid.length - 1;
+  }
 
   if (activeIndex === previousIndex) {
     if (snapIndex !== previousSnapIndex) {
@@ -302,9 +183,9 @@ export const updateActiveIndex = (el, newActiveIndex) => {
 
   // Get real index
   const realIndex = parseInt(activeIndex, 10);
-
   Object.assign(el, {
     params: {
+      ...params,
       snapIndex,
       realIndex,
       previousIndex,
@@ -325,7 +206,9 @@ export const setCardEffectTranslate = (el) => {
     const cardProgress = card.progress;
 
     const progress = Math.min(Math.max(cardProgress, -4), 4);
-    let offset = card.swiperSlideOffset;
+
+    let offset = card.cardOffset;
+    console.log("progress:", progress);
 
     let tX = -offset;
     let tY = 0;
@@ -405,7 +288,6 @@ export const setTranslate = (translate, el) => {
   x = translate;
 
   params.previousTranslate = params.translate;
-
   params.translate = x;
 
   // Check if we need to update progress
@@ -425,45 +307,46 @@ export const updateCardOffset = (el) => {
   const cards = el.cards;
   // FIXME: realtime offsetLeft?
   for (let i = 0; i < cards.length; i += 1) {
-    cards[i].swiperSlideOffset = cards[i].offsetLeft;
+    cards[i].cardOffset = cards[i].offsetLeft;
   }
 };
 
-export const updateSlidesProgress = (translate = 0, el) => {
+export const updateCardsProgress = (translate = 0, el) => {
   const params = el.params;
-  const slides = el.cards;
+  const cards = el.cards;
   const rtl = el.params.rtl;
 
-  if (slides.length === 0) return;
-  if (typeof slides[0].swiperSlideOffset === "undefined") updateCardOffset(el);
+  if (cards.length === 0) return;
+  if (typeof cards[0].cardOffset === "undefined") updateCardOffset(el);
 
   let offsetCenter = -translate;
+
   if (rtl) offsetCenter = translate;
 
-  // Visible Slides
-  // slides.removeClass(params.slideVisibleClass);
+  // Visible cards
+  // cards.removeClass(params.slideVisibleClass);
 
-  for (let i = 0; i < slides.length; i += 1) {
-    const slide = slides[i];
-    let slideOffset = slide.swiperSlideOffset;
+  for (let i = 0; i < cards.length; i += 1) {
+    const card = cards[i];
+    let cardOffset = card.cardOffset;
 
-    const slideProgress = (offsetCenter + 0 - slideOffset) / slide.clientWidth;
+    const cardProgress = (offsetCenter + 0 - cardOffset) / card.clientWidth;
 
-    const slideBefore = -(offsetCenter - slideOffset);
-    const slideAfter = slideBefore + slide.clientWidth;
+    const cardBefore = -(offsetCenter - cardOffset);
+    const cardAfter = cardBefore + card.clientWidth;
     // FIXME: size, clientwidth are all the same ?
     const isVisible =
-      (slideBefore >= 0 && slideBefore < slide.clientWidth - 1) ||
-      (slideAfter > 1 && slideAfter <= slide.clientWidth) ||
-      (slideBefore <= 0 && slideAfter >= slide.clientWidth);
-    // FIXME: seems to deal with hiding of slides > 5 ||  < 5
+      (cardBefore >= 0 && cardBefore < card.clientWidth - 1) ||
+      (cardAfter > 1 && cardAfter <= card.clientWidth) ||
+      (cardBefore <= 0 && cardAfter >= card.clientWidth);
+    // FIXME: seems to deal with hiding of cards > 5 ||  < 5
     // if (isVisible) {
-    //   swiper.visibleSlides.push(slide);
-    //   swiper.visibleSlidesIndexes.push(i);
-    //   slides.eq(i).addClass(params.slideVisibleClass);
+    //   swiper.visiblecards.push(card);
+    //   swiper.visiblecardsIndexes.push(i);
+    //   cards.eq(i).addClass(params.cardVisibleClass);
     // }
 
-    slide.progress = rtl ? -slideProgress : slideProgress;
+    card.progress = rtl ? -cardProgress : cardProgress;
   }
 };
 
@@ -496,12 +379,15 @@ export const updateProgress = (translate, el) => {
   }
 
   Object.assign(el, {
-    progress,
-    isBeginning,
-    isEnd,
+    params: {
+      ...params,
+      progress,
+      isBeginning,
+      isEnd,
+    },
   });
 
-  updateSlidesProgress(translate, el);
+  updateCardsProgress(translate, el);
 
   // if (isBeginning && !wasBeginning) {
   //   swiper.emit("reachBeginning toEdge");

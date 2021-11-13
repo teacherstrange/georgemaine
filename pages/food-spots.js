@@ -4,93 +4,25 @@ import { FoodSpotCard, foodSpots } from "../components/FoodSpotCard";
 import { useEffect, useState } from "react";
 import {
   getRandomResult,
+  nextTick,
   now,
   setCardEffectTranslate,
   setTranslate,
+  slideTo,
   updateProgress,
   updateActiveIndex,
   setTransition,
-  onTouchEnd,
 } from "../components/utils";
 import { getWindow, getDocument } from "ssr-window";
-import translate from "../components/translate/index";
 import getSwiperTranslate from "../components/translate/getTranslate";
 import { useRef } from "react";
 
 const randomFoodSpots = getRandomResult(foodSpots, 2);
 
-const width = 256;
-
 export default function FoodSpots() {
   const stackRef = useRef();
+  const collection = useRef();
   const [cards, setCards] = useState(randomFoodSpots);
-  const [stack, setStack] = useState({
-    cards: cards,
-    cardsPerGroup: 1,
-    cardsPerGroupSkip: 0,
-    cardsPerGroupAuto: false,
-    speed: 300,
-    touchEventsData: {
-      isTouched: undefined,
-      isMoved: undefined,
-      allowTouchCallbacks: undefined,
-      touchStartTime: undefined,
-      isScrolling: undefined,
-      currentTranslate: undefined,
-      startTranslate: undefined,
-      allowThresholdMove: undefined,
-      // Form elements to match
-      // focusableElements: swiper.params.focusableElements,
-      // Last click time
-      lastClickTime: now(),
-      clickTimeout: undefined,
-      // Velocities
-      velocities: [],
-      allowMomentumBounce: undefined,
-      isTouchEvent: undefined,
-      startMoving: undefined,
-    },
-    params: {
-      animating: false,
-      allowClick: true,
-      activeIndex: 0,
-      allowSlidePrev: true,
-      allowSlideNext: true,
-      allowTouchMove: true,
-      isBeginning: true,
-      isEnd: false,
-      longSwipesMs: 300,
-      longSwipesRatio: 0.5,
-      shortSwipes: true,
-      minTranslate: -0,
-      maxTranslate: -width * cards.length - 1,
-      nested: false,
-      previousTranslate: 0,
-      progress: 0,
-      realIndex: 0,
-      snapIndex: undefined,
-      rtl: false,
-      rtlTranslate: false,
-      translate: 0,
-      swipeDirection: undefined,
-      resistance: true,
-      resistanceRatio: 0.85,
-      threshold: 0,
-      touchAngle: 45,
-      touchMoveStopPropagation: false,
-      touchStartPreventDefault: true,
-      velocity: 0,
-      virtualTranslate: true,
-    },
-    touches: {
-      startX: 0,
-      startY: 0,
-      currentX: 0,
-      currentY: 0,
-      diff: 0,
-    },
-    methods: { getSwiperTranslate },
-  });
 
   useEffect(() => {
     const stackWrapper = document.querySelector(".stack");
@@ -99,37 +31,102 @@ export default function FoodSpots() {
     const cardSizesGrid = [];
 
     stackChildren.forEach((element) => {
-      snapGrid.push(element.offsetLeft);
+      snapGrid.push(element.offsetLeft === 0 ? -0 : element.offsetLeft);
       cardSizesGrid.push(element.clientWidth);
     });
 
-    Object.assign(stack, {
+    collection.current = {
       cards: stackWrapper.children,
       cardSizesGrid: cardSizesGrid,
       snapGrid: snapGrid,
-    });
+      cardsPerGroup: 1,
+      cardsPerGroupSkip: 0,
+      cardsPerGroupAuto: false,
+      methods: { getSwiperTranslate },
+      params: {
+        animating: false,
+        allowClick: true,
+        activeIndex: 0,
+        allowSlidePrev: true,
+        allowSlideNext: true,
+        allowTouchMove: true,
+        isBeginning: true,
+        isEnd: false,
+        longSwipesMs: 300,
+        longSwipesRatio: 0.5,
+        shortSwipes: true,
+        minTranslate: -snapGrid[0],
+        maxTranslate: -snapGrid[snapGrid.length - 1],
+        nested: false,
+        previousTranslate: 0,
+        progress: 0,
+        realIndex: 0,
+        snapIndex: undefined,
+        rtl: false,
+        rtlTranslate: false,
+        translate: 0,
+        swipeDirection: undefined,
+        resistance: true,
+        resistanceRatio: 0.85,
+        threshold: 0,
+        touchAngle: 45,
+        touchMoveStopPropagation: false,
+        touchStartPreventDefault: true,
+        velocity: 0,
+        virtualTranslate: true,
+      },
+      speed: 300,
+      touchEventsData: {
+        isTouched: undefined,
+        isMoved: undefined,
+        allowTouchCallbacks: undefined,
+        touchStartTime: undefined,
+        isScrolling: undefined,
+        currentTranslate: undefined,
+        startTranslate: undefined,
+        allowThresholdMove: undefined,
+        lastClickTime: now(),
+        clickTimeout: undefined,
+        // Velocities
+        velocities: [],
+        allowMomentumBounce: undefined,
+        isTouchEvent: undefined,
+        startMoving: undefined,
+      },
+      touches: {
+        startX: 0,
+        startY: 0,
+        currentX: 0,
+        currentY: 0,
+        diff: 0,
+      },
+    };
+  }, []);
+
+  useEffect(() => {
+    const stackWrapper = document.querySelector(".stack");
 
     stackWrapper.addEventListener("mousedown", function (event) {
-      onTouchStart(event, stack);
+      onTouchStart(event, collection.current);
     });
     stackWrapper.addEventListener("mousemove", function (event) {
-      onTouchMove(event, stack);
+      onTouchMove(event, collection.current);
     });
     stackWrapper.addEventListener("mouseup", function (event) {
-      onTouchEnd(event, stack);
+      onTouchEnd(event, collection.current);
     });
     return () => {
       stackWrapper.removeEventListener("mousedown", function (event) {
-        onTouchStart(event, stack);
+        onTouchStart(event, collection.current);
       });
       stackWrapper.removeEventListener("mousemove", function (event) {
-        onTouchMove(event, stack);
+        onTouchMove(event, collection.current);
       });
       stackWrapper.removeEventListener("mouseup", function (event) {
-        onTouchEnd(event, stack);
+        onTouchEnd(event, collection.current);
       });
     };
-  }, [stack]);
+  }, []);
 
   return (
     <main>
@@ -202,6 +199,111 @@ export default function FoodSpots() {
     </main>
   );
 }
+
+const onTouchEnd = (event, el) => {
+  const data = el.touchEventsData;
+  const params = el.params;
+  const rtl = params.rtl;
+  const snapGrid = el.snapGrid;
+  let e = event;
+  if (e.originalEvent) e = e.originalEvent;
+  data.allowTouchCallbacks = false;
+
+  if (!data.isTouched) {
+    data.isMoved = false;
+    data.startMoving = false;
+    return;
+  }
+
+  // Time diff
+  const touchEndTime = now();
+
+  const timeDiff = touchEndTime - data.touchStartTime;
+
+  // FIXME: Tap, doubleTap, Click?
+  data.lastClickTime = now();
+  nextTick(() => {
+    if (!el.destroyed) params.allowClick = true;
+  });
+
+  if (
+    !data.isTouched ||
+    !data.isMoved ||
+    !params.swipeDirection ||
+    el.touches.diff === 0 ||
+    data.currentTranslate === data.startTranslate
+  ) {
+    data.isTouched = false;
+    data.isMoved = false;
+    data.startMoving = false;
+    return;
+  }
+  data.isTouched = false;
+  data.isMoved = false;
+  data.startMoving = false;
+
+  let currentPos;
+  currentPos = rtl ? params.translate : -params.translate;
+
+  // Find current card
+  let stopIndex = 0;
+  let groupSize = el.cardSizesGrid[0];
+  for (
+    let i = 0;
+    i < snapGrid.length;
+    i += i < el.cardsPerGroupSkip ? 1 : el.cardsPerGroup
+  ) {
+    const increment = i < el.cardsPerGroupSkip - 1 ? 1 : el.cardsPerGroup;
+    if (typeof snapGrid[i + increment] !== "undefined") {
+      if (currentPos >= snapGrid[i] && currentPos < snapGrid[i + increment]) {
+        stopIndex = i;
+        groupSize = snapGrid[i + increment] - snapGrid[i];
+      }
+    } else if (currentPos >= snapGrid[i]) {
+      stopIndex = i;
+      groupSize = snapGrid[snapGrid.length - 1] - snapGrid[snapGrid.length - 2];
+    }
+  }
+
+  // Find current slide size
+  const ratio = (currentPos - snapGrid[stopIndex]) / groupSize;
+  const increment = stopIndex < el.cardsPerGroupSkip - 1 ? 1 : el.cardsPerGroup;
+
+  if (timeDiff > params.longSwipesMs) {
+    // Long touches
+    if (params.swipeDirection === "next") {
+      if (ratio >= params.longSwipesRatio) {
+        slideTo(stopIndex + increment, el, el.speed);
+      } else {
+        slideTo(stopIndex, el, el.speed);
+      }
+    }
+    if (params.swipeDirection === "prev") {
+      if (ratio > 1 - params.longSwipesRatio) {
+        slideTo(stopIndex + increment, el, el.speed);
+      } else {
+        slideTo(stopIndex, el, el.speed);
+      }
+    }
+  } else {
+    // Short swipes
+    const isNavButtonTarget =
+      el.navigation &&
+      (e.target === el.navigation.nextEl || e.target === el.navigation.prevEl);
+    if (!isNavButtonTarget) {
+      if (params.swipeDirection === "next") {
+        slideTo(stopIndex + increment, el, el.speed);
+      }
+      if (params.swipeDirection === "prev") {
+        slideTo(stopIndex, el, el.speed);
+      }
+    } else if (e.target === el.navigation.nextEl) {
+      slideTo(stopIndex + increment, el, el.speed);
+    } else {
+      slideTo(stopIndex, el, el.speed);
+    }
+  }
+};
 
 const onTouchMove = (event, el) => {
   const document = getDocument();
@@ -325,15 +427,13 @@ const onTouchMove = (event, el) => {
   }
 
   // Directions locks
-  console.log("el", el);
-  console.log("params.swipeDirection", params.swipeDirection);
 
   // if (
   //   !params.allowSlideNext &&
   //   params.swipeDirection === "next" &&
   //   data.currentTranslate < data.startTranslate
   // ) {
-  //   console.log("triggered");
+  //
   //   data.currentTranslate = data.startTranslate;
   // }
 
@@ -393,17 +493,21 @@ const onTouchStart = (event, el) => {
   const startX = touches.currentX;
   const startY = touches.currentY;
 
-  Object.assign(data, {
-    isTouched: true,
-    isMoved: false,
-    allowTouchCallbacks: true,
-    isScrolling: undefined,
-    startMoving: undefined,
+  data.touchStartTime = now();
+  Object.assign(el, {
+    touchEventsData: {
+      ...data,
+      isTouched: true,
+      isMoved: false,
+      allowTouchCallbacks: true,
+      isScrolling: undefined,
+      startMoving: undefined,
+    },
   });
 
   touches.startX = startX;
   touches.startY = startY;
-  data.touchStartTime = now();
+
   params.allowClick = true;
   params.swipeDirection = undefined;
   if (params.threshold > 0) data.allowThresholdMove = false;
