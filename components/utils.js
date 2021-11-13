@@ -129,7 +129,14 @@ export const nextTick = (callback, delay = 0) => {
 };
 
 export const setTransition = (duration, el) => {
-  el.cards.transition = duration;
+  const cards = el.cards;
+  console.log("duration:", duration);
+  for (let i = 0; i < cards.length; i += 1) {
+    const card = cards[i];
+    card.style.transitionDuration = `${duration}ms`;
+    console.log("card.style.transitionDuration", card.style.transitionDuration);
+  }
+
   // FIXME: effectVirtualTransitionEnd
 };
 
@@ -208,7 +215,6 @@ export const setCardEffectTranslate = (el) => {
     const progress = Math.min(Math.max(cardProgress, -4), 4);
 
     let offset = card.cardOffset;
-    console.log("progress:", progress);
 
     let tX = -offset;
     let tY = 0;

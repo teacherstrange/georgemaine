@@ -381,6 +381,7 @@ const onTouchMove = (event, el) => {
 
   if (!data.isMoved) {
     data.startTranslate = methods.getSwiperTranslate("x", el);
+    console.log("setTransition(0, el)");
     setTransition(0, el);
     // if (swiper.animating) {
     //   swiper.$wrapperEl.trigger("webkitTransitionEnd transitionend");
@@ -470,7 +471,6 @@ const onTouchMove = (event, el) => {
   updateActiveIndex(el);
   updateProgress(data.currentTranslate, el);
   setTranslate(data.currentTranslate, el);
-  setTransition(300, el);
   setCardEffectTranslate(el);
 };
 
