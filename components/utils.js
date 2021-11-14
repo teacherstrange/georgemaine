@@ -18,10 +18,10 @@ export const slideTo = (index = 0, el, speed) => {
 
   const translate = -snapGrid[snapIndex];
 
-  // // Update progress
+  // Update progress
   updateProgress(translate, el);
 
-  // // Normalize slideIndex
+  // Normalize slideIndex
   for (let i = 0; i < snapGrid.length; i += 1) {
     const normalizedTranslate = -Math.floor(translate * 100);
     const normalizedGrid = Math.floor(snapGrid[i] * 100);
@@ -50,7 +50,7 @@ export const slideTo = (index = 0, el, speed) => {
   else if (slideIndex < activeIndex) direction = "prev";
   else direction = "reset";
 
-  // // Update Index
+  // Update Index
   if (
     (rtl && -translate === params.translate) ||
     (!rtl && translate === params.translate)
@@ -217,20 +217,6 @@ export const setCardEffectTranslate = (el) => {
       scale(${scaleString})
     `;
 
-    // FIXME: shadows
-    // if (params.slideShadows) {
-    //   // Set shadows
-    //   let $shadowEl = $slideEl.find(".swiper-slide-shadow");
-    //   if ($shadowEl.length === 0) {
-    //     $shadowEl = createShadow(params, $slideEl);
-    //   }
-    //   if ($shadowEl.length)
-    //     $shadowEl[0].style.opacity = Math.min(
-    //       Math.max((Math.abs(progress) - 0.5) / 0.5, 0),
-    //       1
-    //     );
-    // }
-
     card.style.zIndex = -Math.abs(Math.round(cardProgress)) + cards.length;
 
     card.style.transform = transform;
@@ -280,29 +266,13 @@ export const updateCardsProgress = (translate = 0, el) => {
 
   if (rtl) offsetCenter = translate;
 
-  // Visible cards
-  // cards.removeClass(params.slideVisibleClass);
-
   for (let i = 0; i < cards.length; i += 1) {
     const card = cards[i];
     let cardOffset = card.cardOffset;
 
     const cardProgress = (offsetCenter + 0 - cardOffset) / card.clientWidth;
 
-    const cardBefore = -(offsetCenter - cardOffset);
-    const cardAfter = cardBefore + card.clientWidth;
     // FIXME: size, clientwidth are all the same ?
-    const isVisible =
-      (cardBefore >= 0 && cardBefore < card.clientWidth - 1) ||
-      (cardAfter > 1 && cardAfter <= card.clientWidth) ||
-      (cardBefore <= 0 && cardAfter >= card.clientWidth);
-    // FIXME: seems to deal with hiding of cards > 5 ||  < 5
-    // if (isVisible) {
-    //   swiper.visiblecards.push(card);
-    //   swiper.visiblecardsIndexes.push(i);
-    //   cards.eq(i).addClass(params.cardVisibleClass);
-    // }
-
     card.progress = rtl ? -cardProgress : cardProgress;
   }
 };
@@ -321,9 +291,6 @@ export const updateProgress = (translate, el) => {
   }
 
   const translatesDiff = maxTranslate - minTranslate;
-
-  const wasBeginning = isBeginning;
-  const wasEnd = isEnd;
 
   if (translatesDiff === 0) {
     progress = 0;
@@ -345,18 +312,6 @@ export const updateProgress = (translate, el) => {
   });
 
   updateCardsProgress(translate, el);
-
-  // if (isBeginning && !wasBeginning) {
-  //   swiper.emit("reachBeginning toEdge");
-  // }
-  // if (isEnd && !wasEnd) {
-  //   swiper.emit("reachEnd toEdge");
-  // }
-  // if ((wasBeginning && !isBeginning) || (wasEnd && !isEnd)) {
-  //   swiper.emit("fromEdge");
-  // }
-
-  // swiper.emit("progress", progress);
 };
 
 export const now = () => {
@@ -484,4 +439,12 @@ export const transitionForProgressInRange = (
   endValue
 ) => {
   return startValue + progress * (endValue - startValue);
+};
+export const getStackTranslate = (el) => {
+  const params = el.params;
+  const translate = el.params.translate;
+
+  if (params.virtualTranslate) {
+    return params.rtlTranslate ? -translate : translate;
+  }
 };

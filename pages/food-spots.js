@@ -12,8 +12,8 @@ import {
   updateProgress,
   updateActiveIndex,
   setTransition,
+  getStackTranslate,
 } from "../components/utils";
-import getSwiperTranslate from "../components/translate/getTranslate";
 
 const randomFoodSpots = getRandomResult(foodSpots, 7);
 
@@ -40,7 +40,7 @@ export default function FoodSpots() {
       cardsPerGroup: 1,
       cardsPerGroupSkip: 0,
       cardsPerGroupAuto: false,
-      methods: { getSwiperTranslate },
+      methods: { getStackTranslate },
       params: {
         animating: false,
         allowClick: true,
@@ -419,11 +419,8 @@ const onTouchMove = (event, el) => {
   }
 
   if (!data.isMoved) {
-    data.startTranslate = methods.getSwiperTranslate("x", el);
+    data.startTranslate = methods.getStackTranslate(el);
     setTransition(0, el);
-    // if (swiper.animating) {
-    //   swiper.$wrapperEl.trigger("webkitTransitionEnd transitionend");
-    // }
     data.allowMomentumBounce = false;
   }
   data.isMoved = true;
@@ -464,30 +461,6 @@ const onTouchMove = (event, el) => {
   if (disableParentSwiper) {
     e.preventedByNestedSwiper = true;
   }
-
-  // Directions locks
-
-  // if (
-  //   !params.allowSlideNext &&
-  //   params.swipeDirection === "next" &&
-  //   data.currentTranslate < data.startTranslate
-  // ) {
-  //
-  //   data.currentTranslate = data.startTranslate;
-  // }
-
-  // if (
-  //   !params.allowSlidePrev &&
-  //   params.swipeDirection === "prev" &&
-  //   data.currentTranslate > data.startTranslate
-  // ) {
-  //   data.currentTranslate = data.startTranslate;
-  // }
-
-  // if (!params.allowSlidePrev && !params.allowSlideNext) {
-
-  //   data.currentTranslate = data.startTranslate;
-  // }
 
   // Threshold
   if (params.threshold > 0) {
