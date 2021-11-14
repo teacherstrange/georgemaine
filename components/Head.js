@@ -36,6 +36,10 @@ export default function Head({
       <meta property='twitter:description' content={description} />
       <meta property='twitter:creator' content='Georgemaine Lourens' />
       <meta property='twitter:image:src' content={image} />
+      <meta
+        name='viewport'
+        content='width=device-width, initial-scale=1, viewport-fit=cover'
+      />
     </NextHead>
   );
 }

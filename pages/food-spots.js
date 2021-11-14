@@ -189,7 +189,7 @@ export default function FoodSpots() {
       <button
         style={{
           position: "absolute",
-          bottom: "15vh",
+          bottom: "12vh",
           height: "3.6rem",
           font: "inherit",
           padding: ".6rem 1.8rem",
@@ -211,7 +211,11 @@ export default function FoodSpots() {
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 100vh;
+          position: fixed;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
         }
         .collection {
           overflow: visible;
