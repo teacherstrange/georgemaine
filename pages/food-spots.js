@@ -13,7 +13,6 @@ import {
   updateActiveIndex,
   setTransition,
 } from "../components/utils";
-import { getWindow, getDocument } from "ssr-window";
 import getSwiperTranslate from "../components/translate/getTranslate";
 import { useRef } from "react";
 
@@ -101,6 +100,7 @@ export default function FoodSpots() {
         diff: 0,
       },
     };
+    slideTo(0, collection.current, 0);
   }, []);
 
   useEffect(() => {
@@ -196,7 +196,7 @@ export default function FoodSpots() {
           width: "fit-content",
         }}
         onClick={() => {
-          setCards(getRandomResult(foodSpots, 9));
+          setCards(getRandomResult(foodSpots, 2));
         }}
       >
         Shuffle
@@ -241,7 +241,6 @@ const onTouchEnd = (event, el) => {
 
   // Time diff
   const touchEndTime = now();
-
   const timeDiff = touchEndTime - data.touchStartTime;
 
   // FIXME: Tap, doubleTap, Click?
@@ -330,8 +329,6 @@ const onTouchEnd = (event, el) => {
 };
 
 const onTouchMove = (event, el) => {
-  const document = getDocument();
-  const window = getWindow();
   const data = el.touchEventsData;
   const touches = el.touches;
   const params = el.params;
@@ -500,8 +497,6 @@ const onTouchMove = (event, el) => {
 };
 
 const onTouchStart = (event, el) => {
-  const document = getDocument();
-  const window = getWindow();
   const data = el.touchEventsData;
   const touches = el.touches;
   const params = el.params;

@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-import { getWindow } from "ssr-window";
 
 export const slideTo = (index = 0, el, speed) => {
   const params = el.params;
   const snapGrid = el.snapGrid;
-  // const previousIndex = params.previousIndex;
   const activeIndex = params.activeIndex;
   const rtl = params.rtl;
   let slideIndex = index;
@@ -17,13 +15,6 @@ export const slideTo = (index = 0, el, speed) => {
   if (snapIndex >= snapGrid.length) {
     snapIndex = snapGrid.length - 1;
   }
-
-  // // if (
-  // //   (activeIndex || params.initialSlide || 0) === (previousIndex || 0) &&
-  // //   runCallbacks
-  // // ) {
-  // //   swiper.emit("beforeSlideChangeStart");
-  // // }
 
   const translate = -snapGrid[snapIndex];
 
@@ -65,13 +56,8 @@ export const slideTo = (index = 0, el, speed) => {
     (!rtl && translate === params.translate)
   ) {
     updateActiveIndex(el, slideIndex);
-    // Update Height
     setTranslate(translate, el);
-
-    // if (direction !== "reset") {
-    //   swiper.transitionStart(runCallbacks, direction);
-    //   swiper.transitionEnd(runCallbacks, direction);
-    // }
+    setCardEffectTranslate(el);
     return false;
   }
 
@@ -80,44 +66,14 @@ export const slideTo = (index = 0, el, speed) => {
     setTranslate(translate, el);
     updateActiveIndex(el, slideIndex);
     setCardEffectTranslate(el);
-
-    // swiper.transitionStart(runCallbacks, direction);
-    // swiper.transitionEnd(runCallbacks, direction);
   } else {
     setTransition(el.speed, el);
     setTranslate(translate, el);
     updateActiveIndex(el, slideIndex);
     setCardEffectTranslate(el);
-    // updateSlidesClasses();
-    // emit("beforeTransitionStart", speed, internal);
-    // transitionStart(runCallbacks, direction);
+
     if (!params.animating) {
       params.animating = true;
-      // if (!params.onSlideToWrapperTransitionEnd) {
-      //   swiper.onSlideToWrapperTransitionEnd = function transitionEnd(e) {
-      //     if (!swiper || swiper.destroyed) return;
-      //     if (e.target !== this) return;
-      //     swiper.$wrapperEl[0].removeEventListener(
-      //       "transitionend",
-      //       swiper.onSlideToWrapperTransitionEnd
-      //     );
-      //     swiper.$wrapperEl[0].removeEventListener(
-      //       "webkitTransitionEnd",
-      //       swiper.onSlideToWrapperTransitionEnd
-      //     );
-      //     swiper.onSlideToWrapperTransitionEnd = null;
-      //     delete swiper.onSlideToWrapperTransitionEnd;
-      //     swiper.transitionEnd(runCallbacks, direction);
-      //   };
-      // }
-      // swiper.$wrapperEl[0].addEventListener(
-      //   "transitionend",
-      //   swiper.onSlideToWrapperTransitionEnd
-      // );
-      // swiper.$wrapperEl[0].addEventListener(
-      //   "webkitTransitionEnd",
-      //   swiper.onSlideToWrapperTransitionEnd
-      // );
     }
   }
 
@@ -135,17 +91,13 @@ export const setTransition = (duration, el) => {
     const card = cards[i];
     card.style.transitionDuration = `${duration}ms`;
   }
-
-  // FIXME: effectVirtualTransitionEnd
 };
 
 export const updateActiveIndex = (el, newActiveIndex) => {
   const params = el.params;
   const translate = params.rtlTranslate ? params.translate : -params.translate;
-  const cards = el.cards;
   const snapGrid = el.snapGrid;
   let previousIndex = params.activeIndex;
-  let previousRealIndex = params.realIndex;
   let previousSnapIndex = params.snapIndex;
   let activeIndex = newActiveIndex;
   let snapIndex;
@@ -406,59 +358,6 @@ export const updateProgress = (translate, el) => {
 
   // swiper.emit("progress", progress);
 };
-
-function getTranslate(el, axis = "x") {
-  const window = getWindow();
-  let matrix;
-  let curTransform;
-  let transformMatrix;
-
-  const curStyle = getComputedStyle(el, null);
-
-  if (window.WebKitCSSMatrix) {
-    curTransform = curStyle.transform || curStyle.webkitTransform;
-    if (curTransform.split(",").length > 6) {
-      curTransform = curTransform
-        .split(", ")
-        .map((a) => a.replace(",", "."))
-        .join(", ");
-    }
-    // Some old versions of Webkit choke when 'none' is passed; pass
-    // empty string instead in this case
-    transformMatrix = new window.WebKitCSSMatrix(
-      curTransform === "none" ? "" : curTransform
-    );
-  } else {
-    transformMatrix =
-      curStyle.MozTransform ||
-      curStyle.OTransform ||
-      curStyle.MsTransform ||
-      curStyle.msTransform ||
-      curStyle.transform ||
-      curStyle
-        .getPropertyValue("transform")
-        .replace("translate(", "matrix(1, 0, 0, 1,");
-    matrix = transformMatrix.toString().split(",");
-  }
-
-  if (axis === "x") {
-    // Latest Chrome and webkits Fix
-    if (window.WebKitCSSMatrix) curTransform = transformMatrix.m41;
-    // Crazy IE10 Matrix
-    else if (matrix.length === 16) curTransform = parseFloat(matrix[12]);
-    // Normal Browsers
-    else curTransform = parseFloat(matrix[4]);
-  }
-  if (axis === "y") {
-    // Latest Chrome and webkits Fix
-    if (window.WebKitCSSMatrix) curTransform = transformMatrix.m42;
-    // Crazy IE10 Matrix
-    else if (matrix.length === 16) curTransform = parseFloat(matrix[13]);
-    // Normal Browsers
-    else curTransform = parseFloat(matrix[5]);
-  }
-  return curTransform || 0;
-}
 
 export const now = () => {
   return Date.now();
