@@ -18,7 +18,6 @@ import {
 const randomFoodSpots = getRandomResult(foodSpots, 7);
 
 export default function FoodSpots() {
-  const stackRef = useRef();
   const collection = useRef();
   const [cards, setCards] = useState(randomFoodSpots);
 
@@ -163,7 +162,6 @@ export default function FoodSpots() {
       <GlobalNav />
       <div className='collection'>
         <div
-          ref={stackRef}
           className='stack'
           style={{
             position: "relative",
