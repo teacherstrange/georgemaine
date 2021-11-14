@@ -344,7 +344,9 @@ const onTouchMove = (event, el) => {
   }
 
   const targetTouch =
-    e.type === "touchmove" && e.targetTouches && e.changedTouches;
+    e.type === "touchmove" &&
+    e.targetTouches &&
+    (e.targetTouches[0] || e.changedTouches[0]);
 
   const pageX = e.type === "touchmove" ? targetTouch.pageX : e.pageX;
   const pageY = e.type === "touchmove" ? targetTouch.pageY : e.pageY;
@@ -503,7 +505,6 @@ const onTouchStart = (event, el) => {
   const data = el.touchEventsData;
   const touches = el.touches;
   const params = el.params;
-
   let e = event;
   if (e.originalEvent) e = e.originalEvent;
   let targetEl = e.target;
