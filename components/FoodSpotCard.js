@@ -13,7 +13,7 @@ export const FoodSpotCard = ({
   color,
 }) => {
   return (
-    <div
+    <article
       name={name}
       href={websiteUrl}
       style={style}
@@ -38,8 +38,9 @@ export const FoodSpotCard = ({
           Open · {openingTime} - {closingTime}
         </p>
       </div> */}
+      <div className='cardOverlay' />
       <style jsx>{`
-        .foodSpot {
+        article {
           background-color: ${color};
           width: 25.6rem;
           height: 36rem;
@@ -58,7 +59,7 @@ export const FoodSpotCard = ({
           transform-style: preserve-3d;
         }
 
-        .foodSpot:active {
+        article:active {
           cursor: grabbing;
         }
 
@@ -69,6 +70,18 @@ export const FoodSpotCard = ({
         h3 {
           user-select: none;
           user-drag: none;
+          pointer-events: none;
+        }
+
+        .cardOverlay {
+          border-radius: 2.1rem;
+          background-color: var(--dark-border);
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          z-index: 1;
         }
 
         .caption {
@@ -77,14 +90,18 @@ export const FoodSpotCard = ({
         }
 
         @media (min-width: 126rem) {
-          .foodSpot {
+          .foodSpot,
+          img {
             width: 30.6rem;
             height: 43rem;
+          }
+          .foodspot,
+          .cardOverlay {
             border-radius: 2.4rem;
           }
         }
       `}</style>
-    </div>
+    </article>
   );
 };
 

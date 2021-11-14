@@ -162,11 +162,12 @@ export const setCardEffectTranslate = (el) => {
   for (let i = 0; i < cards.length; i += 1) {
     const card = cards[i];
     const cardProgress = card.progress;
+    let cardOverlay = card.querySelector(".cardOverlay");
 
     const progress = Math.min(Math.max(cardProgress, -4), 4);
 
     let offset = card.cardOffset;
-
+    let boxShadowOpacity;
     let tX = -offset;
     let tY = 0;
     const tZ = -100 * Math.abs(progress);
@@ -200,11 +201,14 @@ export const setCardEffectTranslate = (el) => {
     if (progress < 0) {
       // next
       tX = `calc(${tX}px + (${tXAdd * Math.abs(progress)}%))`;
+      boxShadowOpacity = 0;
     } else if (progress > 0) {
       // prev
       tX = `calc(${tX}px + (-${tXAdd * Math.abs(progress)}%))`;
+      boxShadowOpacity = 0;
     } else {
       tX = `${tX}px`;
+      boxShadowOpacity = 0.09;
     }
 
     const scaleString =
@@ -217,8 +221,13 @@ export const setCardEffectTranslate = (el) => {
       scale(${scaleString})
     `;
 
-    card.style.zIndex = -Math.abs(Math.round(cardProgress)) + cards.length;
+    cardOverlay.style.opacity = Math.min(
+      Math.max((Math.abs(progress) - 0.5) / 0.5, 0),
+      1
+    );
 
+    card.style.boxShadow = `0rem 1.5rem 4.8rem .75rem rgba(0, 0, 0, ${boxShadowOpacity})`;
+    card.style.zIndex = -Math.abs(Math.round(cardProgress)) + cards.length;
     card.style.transform = transform;
   }
 };
