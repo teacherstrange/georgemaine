@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 export const FoodSpotCard = ({
   style,
   index,
@@ -13,13 +12,7 @@ export const FoodSpotCard = ({
   color,
 }) => {
   return (
-    <article
-      name={name}
-      href={websiteUrl}
-      style={style}
-      className='foodSpot'
-      onClick={onClick}
-    >
+    <article style={style} className='foodSpot' onClick={onClick}>
       {/* <picture>
         <source srcSet={"https://picsum.photos/256/360"} type='image/jpg' />
         <img
@@ -29,15 +22,15 @@ export const FoodSpotCard = ({
           alt='Food spot'
         />
       </picture> */}
-      {index}
-      {/* <div className='caption'>
-        <h3></h3>
+
+      <footer className='caption'>
+        <h3>{name}</h3>
         <p>
           {category} · {location}
           <br />
           Open · {openingTime} - {closingTime}
         </p>
-      </div> */}
+      </footer>
       <div className='cardOverlay' />
       <style jsx>{`
         article {
@@ -86,7 +79,18 @@ export const FoodSpotCard = ({
 
         .caption {
           text-align: center;
-          opacity: ${index === 0 ? 1 : 0};
+          display: flex;
+          width: 100%;
+          margin-top: auto;
+          flex-direction: column;
+          padding: 2.1rem;
+        }
+
+        h3,
+        p {
+          margin: 0;
+          padding: 0;
+          line-height: 1.35;
         }
 
         @media (min-width: 126rem) {
@@ -170,7 +174,7 @@ export const foodSpots = [
     name: "Entrepot",
     websiteUrl: "restaurantentrepot.nl",
     imageName: "entrepot",
-    category: "Restaurant and wine bar",
+    category: "Restaurant and wine",
     openingTime: "18:00",
     closingTime: "22:00",
     location: "Amsterdam",
@@ -180,7 +184,7 @@ export const foodSpots = [
     name: "Alba",
     websiteUrl: "alba-amsterdam.nl",
     imageName: "alba",
-    category: "Restaurant & wine bar",
+    category: "Restaurant & wine",
     openingTime: "17:30",
     closingTime: "00:00",
     location: "Amsterdam",

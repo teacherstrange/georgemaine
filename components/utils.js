@@ -208,7 +208,7 @@ export const setCardEffectTranslate = (el) => {
       boxShadowOpacity = 0;
     } else {
       tX = `${tX}px`;
-      boxShadowOpacity = 0.09;
+      boxShadowOpacity = 0.12;
     }
 
     const scaleString =

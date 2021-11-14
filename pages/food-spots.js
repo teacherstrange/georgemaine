@@ -173,14 +173,7 @@ export default function FoodSpots() {
           }}
         >
           {cards.map((value, i) => {
-            return (
-              <FoodSpotCard
-                key={i}
-                index={i}
-                name={value.name}
-                color={value.color}
-              />
-            );
+            return <FoodSpotCard key={i} index={i} {...value} />;
           })}
         </div>
       </div>
@@ -197,6 +190,7 @@ export default function FoodSpots() {
           marginLeft: "auto",
           marginRight: "auto",
           width: "fit-content",
+          border: "none",
         }}
         onClick={() => {
           setCards(getRandomResult(foodSpots, 7));
