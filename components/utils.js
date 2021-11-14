@@ -477,3 +477,11 @@ export const getRandomResult = (arr, n) => {
   }
   return randomResults;
 };
+
+export const transitionForProgressInRange = (
+  progress,
+  startValue,
+  endValue
+) => {
+  return startValue + progress * (endValue - startValue);
+};
