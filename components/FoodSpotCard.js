@@ -80,6 +80,7 @@ export const FoodSpotCard = ({
           .foodSpot {
             width: 30.6rem;
             height: 43rem;
+            border-radius: 2.4rem;
           }
         }
       `}</style>

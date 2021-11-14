@@ -15,7 +15,7 @@ import {
 } from "../components/utils";
 import getSwiperTranslate from "../components/translate/getTranslate";
 
-const randomFoodSpots = getRandomResult(foodSpots, 2);
+const randomFoodSpots = getRandomResult(foodSpots, 7);
 
 export default function FoodSpots() {
   const stackRef = useRef();
@@ -201,7 +201,7 @@ export default function FoodSpots() {
           width: "fit-content",
         }}
         onClick={() => {
-          setCards(getRandomResult(foodSpots, 2));
+          setCards(getRandomResult(foodSpots, 7));
         }}
       >
         Shuffle
