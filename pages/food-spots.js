@@ -1,7 +1,7 @@
 import GlobalNav from "../components/GlobalNav";
 import Head from "../components/Head";
 import { FoodSpotCard, foodSpots } from "../components/FoodSpotCard";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   getRandomResult,
   nextTick,
@@ -14,7 +14,6 @@ import {
   setTransition,
 } from "../components/utils";
 import getSwiperTranslate from "../components/translate/getTranslate";
-import { useRef } from "react";
 
 const randomFoodSpots = getRandomResult(foodSpots, 2);
 
@@ -127,6 +126,9 @@ export default function FoodSpots() {
     stackWrapper.addEventListener("touchcancel", function (event) {
       onTouchEnd(event, collection.current);
     });
+    stackWrapper.addEventListener("mouseleave", function (event) {
+      onTouchEnd(event, collection.current);
+    });
     return () => {
       stackWrapper.removeEventListener("mousedown", function (event) {
         onTouchStart(event, collection.current);
@@ -147,6 +149,9 @@ export default function FoodSpots() {
         onTouchEnd(event, collection.current);
       });
       stackWrapper.removeEventListener("touchcancel", function (event) {
+        onTouchEnd(event, collection.current);
+      });
+      stackWrapper.removeEventListener("mouseleave", function (event) {
         onTouchEnd(event, collection.current);
       });
     };
@@ -218,6 +223,13 @@ export default function FoodSpots() {
           height: 36rem;
           width: 25.6rem;
           transform-style: preserve-3d;
+        }
+
+        @media (min-width: 126rem) {
+          .collection {
+            width: 30.6rem;
+            height: 43rem;
+          }
         }
       `}</style>
     </main>

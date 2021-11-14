@@ -75,6 +75,13 @@ export const FoodSpotCard = ({
           text-align: center;
           opacity: ${index === 0 ? 1 : 0};
         }
+
+        @media (min-width: 126rem) {
+          .foodSpot {
+            width: 30.6rem;
+            height: 43rem;
+          }
+        }
       `}</style>
     </div>
   );
