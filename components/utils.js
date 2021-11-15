@@ -89,7 +89,11 @@ export const setTransition = (duration, el) => {
 
   for (let i = 0; i < cards.length; i += 1) {
     const card = cards[i];
+    const caption = card.querySelector(".caption");
+    const controls = card.querySelector(".controls");
     card.style.transitionDuration = `${duration}ms`;
+    caption.style.transitionDuration = `${duration}ms`;
+    controls.style.transitionDuration = `${duration}ms`;
   }
 };
 
@@ -169,8 +173,7 @@ export const setCardEffectTranslate = (el) => {
 
     let offset = card.cardOffset;
     let boxShadowOpacity;
-    let captionOpacity;
-    let controlsOpacity;
+    let opacity;
     let tX = -offset;
     let tY = 0;
     const tZ = -100 * Math.abs(progress);
@@ -205,19 +208,16 @@ export const setCardEffectTranslate = (el) => {
       // next
       tX = `calc(${tX}px + (${tXAdd * Math.abs(progress)}%))`;
       boxShadowOpacity = 0;
-      captionOpacity = 0;
-      controlsOpacity = 0;
+      opacity = 0;
     } else if (progress > 0) {
       // prev
       tX = `calc(${tX}px + (-${tXAdd * Math.abs(progress)}%))`;
       boxShadowOpacity = 0;
-      captionOpacity = 0;
-      controlsOpacity = 0;
+      opacity = 0;
     } else {
       tX = `${tX}px`;
       boxShadowOpacity = 0.12;
-      captionOpacity = 1;
-      controlsOpacity = 1;
+      opacity = 1;
     }
 
     const scaleString =
@@ -234,8 +234,8 @@ export const setCardEffectTranslate = (el) => {
       Math.max((Math.abs(progress) - 0.5) / 0.5, 0),
       1
     );
-    caption.style.opacity = captionOpacity;
-    controls.style.opacity = controlsOpacity;
+    caption.style.opacity = opacity;
+    controls.style.opacity = opacity;
     card.style.boxShadow = `0rem 1.5rem 4.8rem .75rem rgba(0, 0, 0, ${boxShadowOpacity})`;
     card.style.zIndex = -Math.abs(Math.round(cardProgress)) + cards.length;
     card.style.transform = transform;

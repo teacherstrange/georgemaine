@@ -149,6 +149,7 @@ export const FoodSpotCard = ({
         header {
           margin: 1.2rem 1.2rem auto auto;
         }
+
         picture,
         img,
         div,
