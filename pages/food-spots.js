@@ -172,9 +172,9 @@ export default function FoodSpots() {
             transformStyle: "preserve-3d",
           }}
         >
-          {cards.map((value, i) => {
-            return <FoodSpotCard key={i} index={i} {...value} />;
-          })}
+          {cards.map((value, i) => (
+            <FoodSpotCard key={i} index={i} {...value} />
+          ))}
         </div>
       </div>
       <button
@@ -183,7 +183,7 @@ export default function FoodSpots() {
           bottom: "12vh",
           height: "3.6rem",
           font: "inherit",
-          color: "#07a7f1",
+          color: "rgb(7, 167, 241)",
           padding: ".6rem 1.8rem",
           borderRadius: "30rem",
           backgroundColor: "rgb(233, 233, 234)",

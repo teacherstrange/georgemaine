@@ -1,4 +1,4 @@
-const LocationButton = () => {
+const LocationButton = ({ coordinates = "50.060915,19.948066" }) => {
   return (
     <button
       aria-label={"Location"}
@@ -6,9 +6,9 @@ const LocationButton = () => {
         const ua = navigator.userAgent.toLowerCase();
         const isAndroid = ua.indexOf("android") > -1;
         if (isAndroid) {
-          window.location = "geo:50.060915,19.948066";
+          window.location = `geo:${coordinates}`;
         } else {
-          window.location = "http://maps.apple.com/?ll=50.060915,19.948066";
+          window.location = `http://maps.apple.com/?ll=${coordinates}`;
         }
       }}
     >
@@ -97,11 +97,12 @@ export const FoodSpotCard = ({
   closingTime,
   location,
   color,
+  coordinates,
 }) => {
   return (
     <article style={style} className='foodSpot' onClick={onClick}>
       <header className='controls'>
-        <LocationButton />
+        <LocationButton coordinates={coordinates} />
         <ShareButton url={websiteUrl} title={name} text={name} />
       </header>
       {/* <picture>
@@ -133,9 +134,6 @@ export const FoodSpotCard = ({
           display: grid;
           place-items: center;
           flex-shrink: 0;
-          /* 
-          flex-direction: column;
-          justify-content: flex-end; */
           cursor: grab;
           user-select: initial;
           user-drag: none;
@@ -179,8 +177,6 @@ export const FoodSpotCard = ({
           margin-top: auto;
           flex-direction: column;
           padding: 2.1rem;
-          transition-duration: 200ms;
-          transition-timing-function: ease-out;
         }
 
         h3,
@@ -216,6 +212,7 @@ export const foodSpots = [
     closingTime: "18:00",
     location: "Amsterdam",
     color: "#334AC0",
+    coordinates: "52.367510, 4.872610",
   },
   {
     name: "Cafe Binnenvisser",
@@ -226,6 +223,7 @@ export const foodSpots = [
     closingTime: "03:00",
     location: "Amsterdam",
     color: "#70B1FF",
+    coordinates: "52.371520, 4.870400",
   },
   {
     name: "manamana",
@@ -236,6 +234,7 @@ export const foodSpots = [
     closingTime: "22:00",
     location: "Amsterdam",
     color: "#47CAD2",
+    coordinates: "52.354091, 4.890330",
   },
   {
     name: "Dutch dabbawala",
@@ -246,6 +245,7 @@ export const foodSpots = [
     closingTime: "22:00",
     location: "Amsterdam",
     color: "#269CA3",
+    coordinates: "52.369110, 4.878650",
   },
   {
     name: "Collins",
@@ -256,6 +256,7 @@ export const foodSpots = [
     closingTime: "15:00",
     location: "Amsterdam",
     color: "#6CE194",
+    coordinates: "52.355850, 4.898070",
   },
   {
     name: "Dumplings",
@@ -266,6 +267,7 @@ export const foodSpots = [
     closingTime: "22:00",
     location: "Amsterdam",
     color: "#FFD84E",
+    coordinates: "52.385450, 4.880990",
   },
   {
     name: "Entrepot",
@@ -276,6 +278,7 @@ export const foodSpots = [
     closingTime: "22:00",
     location: "Amsterdam",
     color: "#FFBB5C",
+    coordinates: "52.369660, 4.911910",
   },
   {
     name: "Alba",
@@ -286,6 +289,7 @@ export const foodSpots = [
     closingTime: "00:00",
     location: "Amsterdam",
     color: "#FE8AA7",
+    coordinates: "52.356040, 4.911880",
   },
   {
     name: "Restaurant de kas",
@@ -296,6 +300,7 @@ export const foodSpots = [
     closingTime: "22:00",
     location: "Amsterdam",
     color: "#FF7673",
+    coordinates: "52.352189, 4.930541",
   },
   {
     name: "Pacomer traiteur",
@@ -306,6 +311,7 @@ export const foodSpots = [
     closingTime: "18:00",
     location: "Amsterdam",
     color: "#AB6EF9",
+    coordinates: "52.355490, 4.891130",
   },
   // {
   //   name: "Alberto Pozzetto",
@@ -316,6 +322,7 @@ export const foodSpots = [
   //   closingTime: "18:00",
   //   location: "Amsterdam",
   //   color: "rgb(254, 134, 159)",
+  //   coordinates: "52.354860, 4.893610",
   // },
   // {
   //   name: "Jen’s Bing",
@@ -326,6 +333,7 @@ export const foodSpots = [
   //   closingTime: "18:00",
   //   location: "Amsterdam",
   //   color: "rgb(254, 134, 159)",
+  // coordinates: "52.367958, 4.865997",
   // },
   // {
   //   name: "Levain et le vin",
@@ -336,5 +344,6 @@ export const foodSpots = [
   //   closingTime: "17:00",
   //   location: "Amsterdam",
   //   color: "rgb(254, 134, 159)",
+  // coordinates: "52.361130, 4.864810",
   // },
 ];

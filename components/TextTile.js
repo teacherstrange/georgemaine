@@ -250,7 +250,7 @@ export const InlineLink = ({ href, text }) => {
       <style jsx>{`
         a {
           white-space: nowrap;
-          color: #07a7f1;
+          color: rgb(7, 167, 241);
         }
         a:hover {
           transition: 0.2s ease-out;
