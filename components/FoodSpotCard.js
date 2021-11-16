@@ -1,8 +1,16 @@
-const LocationButton = ({ coordinates = "50.060915,19.948066" }) => {
+const LocationButton = ({ coordinates, appleMapsUrl }) => {
   return (
     <button
       aria-label={"Location"}
-      onClick={() => window.open(`http://maps.apple.com/?q=${coordinates}`)}
+      onClick={() => {
+        const ua = navigator.userAgent.toLowerCase();
+        const isAndroid = ua.indexOf("android") > -1;
+        if (isAndroid) {
+          window.location = `geo:${coordinates}`;
+        } else {
+          window.location = appleMapsUrl;
+        }
+      }}
     >
       <LocationIcon />
       <style jsx>{`
@@ -79,7 +87,6 @@ const LocationIcon = () => (
 
 export const FoodSpotCard = ({
   style,
-  index,
   onClick,
   name,
   websiteUrl,
@@ -90,11 +97,12 @@ export const FoodSpotCard = ({
   location,
   color,
   coordinates,
+  appleMapsUrl,
 }) => {
   return (
     <article style={style} className='foodSpot' onClick={onClick}>
       <header className='controls'>
-        <LocationButton coordinates={coordinates} />
+        <LocationButton coordinates={coordinates} appleMapsUrl={appleMapsUrl} />
         <ShareButton url={websiteUrl} title={name} text={name} />
       </header>
       {/* <picture>
@@ -205,6 +213,8 @@ export const foodSpots = [
     location: "Amsterdam",
     color: "#334AC0",
     coordinates: "52.367510, 4.872610",
+    appleMapsUrl:
+      "https://maps.apple.com/?address=Kinkerstraat%2074A,%201053%20EA%20Amsterdam,%20Netherlands&auid=4073900982404076927&ll=52.367510,4.872610&lsp=9902&q=Oliver%20Green%20-%20Kinkerstraat&_ext=CisKBQgEELABCgQIBRADCgQIBhAUCgQIChAACgQIUhABCgQIVRAQCgQIWRADEiYpPI9AY3cuSkAx6gUgIAV2E0A5umRmv50vSkBBAkeB0xWFE0BQBA%3D%3D",
   },
   {
     name: "Cafe Binnenvisser",
@@ -216,6 +226,8 @@ export const foodSpots = [
     location: "Amsterdam",
     color: "#70B1FF",
     coordinates: "52.371520, 4.870400",
+    appleMapsUrl:
+      "https://maps.apple.com/?address=Bilderdijkstraat%2036,%201052%20NB%20Amsterdam,%20Netherlands&auid=17794993742627290052&ll=52.371520,4.870400&lsp=9902&q=Cafe%20Binnenvisser&_ext=CiwKBQgEELABCgQIBRADCgUIBhChAgoECAoQAAoECFIQAQoECFUQDwoECFkQAhImKVg9u8j6LkpAMfpTuJzBcxNAOdYS4SQhMEpAQd4tu6nSghNAUAQ%3D",
   },
   {
     name: "manamana",
@@ -227,6 +239,8 @@ export const foodSpots = [
     location: "Amsterdam",
     color: "#47CAD2",
     coordinates: "52.354091, 4.890330",
+    appleMapsUrl:
+      "https://maps.apple.com/?address=Eerste%20Jan%20Steenstraat%2085,%201072%20NE%20Amsterdam,%20Netherlands&auid=13884656007536624109&ll=52.354091,4.890330&lsp=9902&q=manamana&_ext=CisKBQgEELABCgQIBRADCgQIBhAUCgQIChAACgQIUhABCgQIVRAPCgQIWRACEiYp/9YE+L8sSkAxld25CSOIE0A5fawqVOYtSkBBMyqDkTKXE0BQBA%3D%3D",
   },
   {
     name: "Dutch dabbawala",
@@ -238,6 +252,8 @@ export const foodSpots = [
     location: "Amsterdam",
     color: "#269CA3",
     coordinates: "52.369110, 4.878650",
+    appleMapsUrl:
+      "https://maps.apple.com/?address=Elandsgracht%20140,%201016%20VC%20Amsterdam,%20Netherlands&auid=12944322373495361966&ll=52.369110,4.878650&lsp=9902&q=Dutch%20Dabbawala&_ext=CisKBQgEELABCgQIBRADCgQIBhAUCgQIChAACgQIUhABCgQIVRARCgQIWRAEEiYpdGUG0asuSkAx2m3IZzR8E0A58josLdIvSkBBNp3sPkWLE0BQBA%3D%3D",
   },
   {
     name: "Collins",
@@ -249,6 +265,8 @@ export const foodSpots = [
     location: "Amsterdam",
     color: "#6CE194",
     coordinates: "52.355850, 4.898070",
+    appleMapsUrl:
+      "https://maps.apple.com/?address=Elandsgracht%20140,%201016%20VC%20Amsterdam,%20Netherlands&auid=12944322373495361966&ll=52.369110,4.878650&lsp=9902&q=Dutch%20Dabbawala&_ext=CisKBQgEELABCgQIBRADCgQIBhAUCgQIChAACgQIUhABCgQIVRARCgQIWRAEEiYpdGUG0asuSkAx2m3IZzR8E0A58josLdIvSkBBNp3sPkWLE0BQBA%3D%3D",
   },
   {
     name: "Dumplings",
@@ -260,6 +278,8 @@ export const foodSpots = [
     location: "Amsterdam",
     color: "#FFD84E",
     coordinates: "52.385450, 4.880990",
+    appleMapsUrl:
+      "https://maps.apple.com/?address=Nassauplein%2060,%201052%20AH%20Amsterdam,%20Netherlands&auid=5272656909465088602&ll=52.385450,4.880990&lsp=9902&q=Dumplings-Chinese&_ext=CisKBQgEELABCgQIBRADCgQIBhAUCgQIChAACgQIUhABCgQIVRAPCgQIWRACEiYpYjThPsMwSkAx4VDSG5l+E0A54AkHm+kxSkBBJYJeYKuNE0BQBA%3D%3D",
   },
   {
     name: "Entrepot",
@@ -271,6 +291,8 @@ export const foodSpots = [
     location: "Amsterdam",
     color: "#FFBB5C",
     coordinates: "52.369660, 4.911910",
+    appleMapsUrl:
+      "https://maps.apple.com/?address=Entrepotdok%207,%201018%20AD%20Amsterdam,%20Netherlands&auid=18342859674901941754&ll=52.369660,4.911910&lsp=9902&q=Entrepot&_ext=CisKBQgEELABCgQIBRADCgQIBhAUCgQIChAACgQIUhABCgQIVRAPCgQIWRACEiYpILmQk38uSkAxtBf/DtijE0A5no6276UvSkBBCC32x+iyE0BQBA%3D%3D",
   },
   {
     name: "Alba",
@@ -282,6 +304,8 @@ export const foodSpots = [
     location: "Amsterdam",
     color: "#FE8AA7",
     coordinates: "52.356040, 4.911880",
+    appleMapsUrl:
+      "https://maps.apple.com/?address=Wibautstraat%20105,%201091%20GL%20Amsterdam,%20Netherlands&auid=6316978368221374287&ll=52.356040,4.911880&lsp=9902&q=Alba&_ext=CisKBQgEELABCgQIBRADCgQIBhAUCgQIChAACgQIUhABCgQIVRAQCgQIWRADEiYp8B3rif8sSkAxPf5YBTyeE0A5bvMQ5iUuSkBBywR2uEutE0BQBA%3D%3D",
   },
   {
     name: "Restaurant de kas",
@@ -293,6 +317,8 @@ export const foodSpots = [
     location: "Amsterdam",
     color: "#FF7673",
     coordinates: "52.352189, 4.930541",
+    appleMapsUrl:
+      "https://maps.apple.com/?address=Kamerlingh%20Onneslaan%203,%201097%20DE%20Amsterdam,%20Netherlands&auid=16408420672603052247&ll=52.352189,4.930541&lsp=9902&q=Restaurant%20De%20Kas&_ext=CisKBQgEELABCgQIBRADCgQIBhAUCgQIChAACgQIUhABCgQIVRANCgQIWRABEiYpTpMZYIEsSkAxDTpCHVexE0A5zGg/vKctSkBBh2ljembAE0BQBA%3D%3D",
   },
   {
     name: "Pacomer traiteur",
@@ -304,6 +330,8 @@ export const foodSpots = [
     location: "Amsterdam",
     color: "#AB6EF9",
     coordinates: "52.355490, 4.891130",
+    appleMapsUrl:
+      "https://maps.apple.com/?address=Gerard%20Doustraat%2066,%201072%20VV%20Amsterdam,%20Netherlands&auid=16412172694752059081&ll=52.355490,4.891130&lsp=9902&q=Pacomer%20Traiteur&_ext=CisKBQgEELABCgQIBRADCgQIBhAOCgQIChAACgQIUhABCgQIVRAQCgQIWRADEiYpTRwvhO0sSkAxJMWPjvyIE0A5y/FU4BMuSkBBFBtkNQyYE0BQBA%3D%3D",
   },
   // {
   //   name: "Alberto Pozzetto",
