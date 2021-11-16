@@ -2,15 +2,7 @@ const LocationButton = ({ coordinates = "50.060915,19.948066" }) => {
   return (
     <button
       aria-label={"Location"}
-      onClick={() => {
-        const ua = navigator.userAgent.toLowerCase();
-        const isAndroid = ua.indexOf("android") > -1;
-        if (isAndroid) {
-          window.location = `geo:${coordinates}`;
-        } else {
-          window.location = `http://maps.apple.com/?ll=${coordinates}`;
-        }
-      }}
+      onClick={() => window.open(`http://maps.apple.com/?q=${coordinates}`)}
     >
       <LocationIcon />
       <style jsx>{`
