@@ -172,7 +172,7 @@ export default function FoodSpots() {
       <button
         style={{
           position: "absolute",
-          bottom: "12vh",
+          top: "calc(50vh + 23.6rem)",
           height: "3.6rem",
           font: "inherit",
           color: "rgb(7, 167, 241)",
