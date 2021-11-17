@@ -71,10 +71,6 @@ export const slideTo = (index = 0, el, speed) => {
     setTranslate(translate, el);
     updateActiveIndex(el, slideIndex);
     setCardEffectTranslate(el);
-
-    if (!params.animating) {
-      params.animating = true;
-    }
   }
 
   return true;
@@ -90,10 +86,8 @@ export const setTransition = (duration, el) => {
   for (let i = 0; i < cards.length; i += 1) {
     const card = cards[i];
     const caption = card.querySelector(".caption");
-    const controls = card.querySelector(".controls");
     card.style.transitionDuration = `${duration}ms`;
     caption.style.transitionDuration = `${duration}ms`;
-    controls.style.transitionDuration = `${duration}ms`;
   }
 };
 
@@ -216,7 +210,7 @@ export const setCardEffectTranslate = (el) => {
       opacity = 0;
     } else {
       tX = `${tX}px`;
-      boxShadowOpacity = 0.12;
+      boxShadowOpacity = 0.09;
       opacity = 1;
     }
 
@@ -236,7 +230,7 @@ export const setCardEffectTranslate = (el) => {
     );
     caption.style.opacity = opacity;
     controls.style.opacity = opacity;
-    card.style.boxShadow = `0rem 1.5rem 4.8rem .75rem rgba(0, 0, 0, ${boxShadowOpacity})`;
+    card.style.boxShadow = `0rem 1.2rem 4.2rem .6rem rgba(0, 0, 0, ${boxShadowOpacity})`;
     card.style.zIndex = -Math.abs(Math.round(cardProgress)) + cards.length;
     card.style.transform = transform;
   }
@@ -463,7 +457,5 @@ export const getStackTranslate = (el) => {
   const params = el.params;
   const translate = el.params.translate;
 
-  if (params.virtualTranslate) {
-    return params.rtlTranslate ? -translate : translate;
-  }
+  return params.rtlTranslate ? -translate : translate;
 };
