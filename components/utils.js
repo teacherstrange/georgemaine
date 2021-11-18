@@ -162,7 +162,6 @@ export const setCardEffectTranslate = (el) => {
     const cardProgress = card.progress;
     let cardOverlay = card.querySelector(".cardOverlay");
     let caption = card.querySelector(".caption");
-    let controls = card.querySelector(".controls");
     const progress = Math.min(Math.max(cardProgress, -4), 4);
 
     let offset = card.cardOffset;
@@ -229,7 +228,7 @@ export const setCardEffectTranslate = (el) => {
       1
     );
     caption.style.opacity = opacity;
-    controls.style.opacity = opacity;
+
     card.style.boxShadow = `0rem 1.2rem 4.2rem .6rem rgba(0, 0, 0, ${boxShadowOpacity})`;
     card.style.zIndex = -Math.abs(Math.round(cardProgress)) + cards.length;
     card.style.transform = transform;

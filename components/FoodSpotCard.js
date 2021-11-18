@@ -1,109 +1,4 @@
-const LocationButton = ({ coordinates, appleMapsUrl }) => {
-  return (
-    <button
-      aria-label={"Location"}
-      onClick={() => {
-        const ua = navigator.userAgent.toLowerCase();
-        const isAndroid = ua.indexOf("android") > -1;
-        if (isAndroid) {
-          window.location = `geo:${coordinates}`;
-        } else {
-          window.location = appleMapsUrl;
-        }
-      }}
-    >
-      <LocationIcon />
-      <style jsx>{`
-        button {
-          width: 3rem;
-          height: 3rem;
-          padding: 0;
-          margin: 0.9rem 0.6rem 0;
-          border: 0;
-          background: transparent;
-          user-select: initial;
-          user-drag: initial;
-          pointer-events: initial;
-        }
-      `}</style>
-    </button>
-  );
-};
-const ShareButton = ({ url, title, text }) => {
-  const shareData = {
-    title: title,
-    text: text,
-    url: url,
-  };
-
-  return (
-    <button
-      aria-label={"Share"}
-      onClick={async () => {
-        try {
-          await navigator.share(shareData);
-        } catch (err) {}
-      }}
-    >
-      <ShareIcon />
-      <style jsx>{`
-        width: 3rem;
-        height: 3rem;
-        padding: 0;
-        margin: 0.9rem 0.6rem 0;
-        border: 0;
-        background: transparent;
-        user-select: initial;
-        user-drag: initial;
-        pointer-events: initial;
-      `}</style>
-    </button>
-  );
-};
-
-const ShareIcon = () => (
-  <svg
-    width='24'
-    height='24'
-    viewBox='0 0 24 24'
-    fill='none'
-    xmlns='http://www.w3.org/2000/svg'
-  >
-    <path
-      fillRule='evenodd'
-      clipRule='evenodd'
-      d='M11.5 5.89622C11.5 5.11328 12.359 4.63404 13.0253 5.04528L19.7942 9.22359C20.7437 9.80967 20.7437 11.1903 19.7942 11.7764L13.0253 15.9547C12.359 16.366 11.5 15.8867 11.5 15.1038V14.0012C8.86164 14.0872 6.92205 15.4615 6.54152 17.7872C6.47498 18.194 6.14717 18.4297 5.84542 18.4855C5.53268 18.5434 5.10105 18.4231 4.94847 17.9751C4.65766 17.1212 4.5 16.2053 4.5 15.2533C4.5 11.0725 7.53588 7.67713 11.5 7.06012V5.89622Z'
-      fill='var(--text-dark)'
-    />
-  </svg>
-);
-
-const LocationIcon = () => (
-  <svg
-    width='24'
-    height='24'
-    viewBox='0 0 24 24'
-    fill='none'
-    xmlns='http://www.w3.org/2000/svg'
-  >
-    <path
-      fillRule='evenodd'
-      clipRule='evenodd'
-      d='M5 11C5 6.67561 8.77471 4 12 4C15.2175 4 19 6.52803 19 11C19 13.1993 17.5092 15.4459 15.9924 17.0891C15.222 17.9238 14.4173 18.6326 13.7344 19.1367C13.3936 19.3882 13.0755 19.5944 12.8012 19.7403C12.6641 19.8132 12.5307 19.8749 12.4057 19.9195C12.2872 19.9617 12.1451 20 12 20C11.8549 20 11.7128 19.9617 11.5943 19.9195C11.4693 19.8749 11.3359 19.8132 11.1988 19.7403C10.9245 19.5944 10.6064 19.3882 10.2656 19.1367C9.58271 18.6326 8.77803 17.9238 8.0076 17.0891C6.49077 15.4459 5 13.1993 5 11ZM12 8C10.3431 8 9 9.34315 9 11C9 12.6569 10.3431 14 12 14C13.6569 14 15 12.6569 15 11C15 9.34315 13.6569 8 12 8Z'
-      fill='var(--text-dark)'
-    />
-  </svg>
-);
-
-export const FoodSpotCard = ({
-  name,
-  websiteUrl,
-  category,
-  location,
-  color,
-  coordinates,
-  appleMapsUrl,
-}) => {
+export const FoodSpotCard = ({ name, category, location, color }) => {
   return (
     <article className='foodSpot'>
       <footer className='caption'>
@@ -111,13 +6,6 @@ export const FoodSpotCard = ({
         <p>
           {category} · {location}
         </p>
-        <div className='controls'>
-          <LocationButton
-            coordinates={coordinates}
-            appleMapsUrl={appleMapsUrl}
-          />
-          <ShareButton url={websiteUrl} title={name} text={name} />
-        </div>
       </footer>
       <div className='cardOverlay' />
       <style jsx>{`
@@ -171,7 +59,7 @@ export const FoodSpotCard = ({
           width: 100%;
           margin-top: auto;
           flex-direction: column;
-          padding: 1.5rem;
+          padding: 2.1rem;
         }
 
         h3,
