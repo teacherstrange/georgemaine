@@ -594,6 +594,8 @@ const AppleMapsButton = ({ coordinates, appleMapsUrl }) => {
       <AppleIcon />
       <style jsx>{`
         button {
+          display: grid;
+          place-items: center;
           width: 3rem;
           height: 3rem;
           padding: 0;
@@ -614,6 +616,8 @@ const ShuffleCollectionButton = ({ onClick }) => (
     <ShuffleIcon />
     <style jsx>{`
       button {
+        display: grid;
+        place-items: center;
         width: 3rem;
         height: 3rem;
         padding: 0;
@@ -644,6 +648,8 @@ const GoogleMapsButton = ({}) => {
       <GoogleIcon />
       <style jsx>{`
         button {
+          display: grid;
+          place-items: center;
           width: 3rem;
           height: 3rem;
           padding: 0;
@@ -677,6 +683,8 @@ const SharePageButton = ({ url, title, text }) => {
     >
       <ShareIcon />
       <style jsx>{`
+        display: grid;
+        place-items: center;
         width: 3rem;
         height: 3rem;
         padding: 0;
@@ -707,12 +715,13 @@ const Controls = ({ shuffleCollectionButtonOnClick }) => {
           background: var(--white);
           border-radius: 3rem;
           position: absolute;
-          top: calc(50vh + 22.5rem);
+          transform: translateY(22.5rem);
+          display: flex;
         }
 
         @media (min-width: 126rem) {
           div {
-            top: calc(50vh + 26rem);
+            transform: translateY(26rem);
           }
         }
       `}</style>
