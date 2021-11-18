@@ -62,7 +62,7 @@ body {
 
 /* Colors */
 :root {
-  --white: var(--white);
+  --white: rgb(255, 255, 255);
   --black: rgb(0, 0, 0);
   --text-light: rgb(245, 245, 247);
   --text-dark: rgb(17, 17, 17);
