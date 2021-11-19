@@ -25,6 +25,7 @@ const shareData = {
 export default function FoodSpots() {
   const collection = useRef();
   const [cards, setCards] = useState(randomFoodSpots);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const stackWrapper = document.querySelector(".stack");
@@ -96,6 +97,7 @@ export default function FoodSpots() {
       },
     };
     slideTo(0, collection.current, 0);
+    setIndex(collection.current.params.activeIndex);
   }, []);
 
   useEffect(() => {
@@ -178,6 +180,7 @@ export default function FoodSpots() {
         shuffleCollectionButtonOnClick={() => {
           setCards(getRandomResult(foodSpots, 7));
         }}
+        activeCard={cards[index]}
         sharePageButtonOnClick={async () => {
           try {
             await navigator.share(shareData);
@@ -577,94 +580,6 @@ const ShareIcon = () => (
   </svg>
 );
 
-const AppleMapsButton = ({ coordinates, appleMapsUrl }) => {
-  return (
-    <button
-      aria-label={"Location"}
-      onClick={() => {
-        const ua = navigator.userAgent.toLowerCase();
-        const isAndroid = ua.indexOf("android") > -1;
-        if (isAndroid) {
-          window.location = `geo:${coordinates}`;
-        } else {
-          window.location = appleMapsUrl;
-        }
-      }}
-    >
-      <AppleIcon />
-      <style jsx>{`
-        button {
-          display: grid;
-          place-items: center;
-          width: 3rem;
-          height: 3rem;
-          padding: 0;
-          margin: 0 1.2rem;
-          border: 0;
-          background: transparent;
-          user-select: initial;
-          user-drag: initial;
-          pointer-events: initial;
-        }
-      `}</style>
-    </button>
-  );
-};
-
-const ShuffleCollectionButton = ({ onClick }) => (
-  <button aria-label={"Location"} onClick={onClick}>
-    <ShuffleIcon />
-    <style jsx>{`
-      button {
-        display: grid;
-        place-items: center;
-        width: 3rem;
-        height: 3rem;
-        padding: 0;
-        margin: 0 1.2rem;
-        border: 0;
-        background: transparent;
-        user-select: initial;
-        user-drag: initial;
-        pointer-events: initial;
-      }
-    `}</style>
-  </button>
-);
-const GoogleMapsButton = ({}) => {
-  return (
-    <button
-      aria-label={"Location"}
-      onClick={() => {
-        const ua = navigator.userAgent.toLowerCase();
-        const isAndroid = ua.indexOf("android") > -1;
-        if (isAndroid) {
-          window.location = `geo:${coordinates}`;
-        } else {
-          window.location = appleMapsUrl;
-        }
-      }}
-    >
-      <GoogleIcon />
-      <style jsx>{`
-        button {
-          display: grid;
-          place-items: center;
-          width: 3rem;
-          height: 3rem;
-          padding: 0;
-          margin: 0 1.2rem;
-          border: 0;
-          background: transparent;
-          user-select: initial;
-          user-drag: initial;
-          pointer-events: initial;
-        }
-      `}</style>
-    </button>
-  );
-};
-
 const SharePageButton = ({ url, title, text }) => {
   const shareData = {
     title: title,
@@ -673,56 +588,75 @@ const SharePageButton = ({ url, title, text }) => {
   };
 
   return (
-    <button
-      aria-label={"Share"}
-      onClick={async () => {
-        try {
-          await navigator.share(shareData);
-        } catch (err) {}
-      }}
-    >
+    <button aria-label={"Share"}>
       <ShareIcon />
-      <style jsx>{`
-        display: grid;
-        place-items: center;
-        width: 3rem;
-        height: 3rem;
-        padding: 0;
-        margin: 0 1.2rem;
-        border: 0;
-        background: transparent;
-        user-select: initial;
-        user-drag: initial;
-        pointer-events: initial;
-      `}</style>
     </button>
   );
 };
 
-const Controls = ({ shuffleCollectionButtonOnClick }) => {
-  const coordinates = 0;
-  const appleMapsUrl = 0;
-  const name = 0;
-  const websiteUrl = 0;
+const Controls = ({ shuffleCollectionButtonOnClick, activeCard }) => {
+  useEffect(() => {
+    console.log("activeCard", activeCard);
+  }, [activeCard]);
   return (
     <div>
-      <ShuffleCollectionButton onClick={shuffleCollectionButtonOnClick} />
-      <AppleMapsButton coordinates={coordinates} appleMapsUrl={appleMapsUrl} />
-      <GoogleMapsButton coordinates={coordinates} appleMapsUrl={appleMapsUrl} />
-      <SharePageButton url={websiteUrl} title={name} text={name} />
+      <button onClick={shuffleCollectionButtonOnClick}>
+        <ShuffleIcon />
+      </button>
+      <a href={activeCard.appleMapsUrl}>
+        <AppleIcon />
+      </a>
+      <a>
+        <GoogleIcon />
+      </a>
+      <button
+      // onClick={async () => {
+      //   try {
+      //     await navigator.share(shareData);
+      //   } catch (err) {}
+      // }}
+      >
+        <ShareIcon />
+      </button>
+
       <style jsx>{`
         div {
-          background: var(--white);
           border-radius: 3rem;
           position: absolute;
           transform: translateY(22.5rem);
           display: flex;
+          background-color: var(--white);
+          overflow: hidden;
         }
 
         @media (min-width: 126rem) {
           div {
             transform: translateY(26rem);
           }
+        }
+
+        button,
+        a {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0 1.2rem;
+          margin: 0;
+          height: 3rem;
+          background-color: var(--white);
+          border: none;
+          outline: none;
+          transition: 200ms;
+        }
+
+        button:active,
+        a:active {
+          background: rgba(7, 167, 241, 0.12);
+        }
+
+        button:hover,
+        a:hover {
+          background: rgba(7, 167, 241, 0.06);
         }
       `}</style>
     </div>
