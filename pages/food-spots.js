@@ -1,7 +1,7 @@
 import GlobalNav from "../components/GlobalNav";
 import Head from "../components/Head";
 import { FoodSpotCard, foodSpots } from "../components/FoodSpotCard";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useLayoutEffect } from "react";
 import {
   getRandomResult,
   nextTick,
@@ -18,7 +18,7 @@ import {
 const randomFoodSpots = getRandomResult(foodSpots, 7);
 const shareData = {
   title: "Food spots",
-  text: "In Amsterdam and not sure where to eat? Try one of these foodpots",
+  text: "In Amsterdam and not sure where to eat? Try these handpicked foodpots",
   url: "georgemaine.com/food-spots",
 };
 
@@ -26,7 +26,7 @@ export default function FoodSpots() {
   const collection = useRef();
   const [cards, setCards] = useState(randomFoodSpots);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const stackWrapper = document.querySelector(".stack");
     const stackChildren = [...stackWrapper.children];
     const snapGrid = [];
