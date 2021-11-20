@@ -25,7 +25,6 @@ const shareData = {
 export default function FoodSpots() {
   const collection = useRef();
   const [cards, setCards] = useState(randomFoodSpots);
-  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     const stackWrapper = document.querySelector(".stack");
@@ -97,7 +96,6 @@ export default function FoodSpots() {
       },
     };
     slideTo(0, collection.current, 0);
-    setActiveIndex(collection.current.params.activeIndex);
   }, [cards]);
 
   useEffect(() => {
@@ -181,10 +179,12 @@ export default function FoodSpots() {
           setCards(getRandomResult(foodSpots, 7));
         }}
         appleMapsButtonOnClick={() =>
-          (window.location = cards[activeIndex].appleMapsUrl)
+          (window.location =
+            cards[collection.current.params.activeIndex].appleMapsUrl)
         }
         googleMapsButtonOnClick={() =>
-          (window.location = cards[activeIndex].googleMapsUrl)
+          (window.location =
+            cards[collection.current.params.activeIndex].googleMapsUrl)
         }
         sharePageButtonOnClick={async () => {
           try {

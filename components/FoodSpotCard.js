@@ -250,7 +250,7 @@ export const foodSpots = [
     location: "Amsterdam",
     color: "rgb(162, 132, 94)",
     appleMapsUrl:
-      "https://maps.apple.com/?address=Gerard%20Doustraat%2066,%201072%20VV%20Amsterdam,%20Netherlands&auid=16412172694752059081&ll=52.355490,4.891130&lsp=9902&q=Pacomer%20Traiteur&_ext=CisKBQgEELABCgQIBRADCgQIBhAOCgQIChAACgQIUhABCgQIVRAQCgQIWRADEiYpTRwvhO0sSkAxJMWPjvyIE0A5y/FU4BMuSkBBFBtkNQyYE0BQBA%3D%3D",
+      "https://maps.apple.com/?address=Jan%20Hanzenstraat%2021A,%201053%20SK%20Amsterdam,%20Netherlands&auid=533841271534204172&ll=52.367958,4.865997&lsp=9902&q=Jen's%20Bing-Amsterdam&_ext=CiwKBQgEELABCgQIBRADCgUIBhDBAgoECAoQAAoECFIQAQoECFUQEAoECFkQAxImKedzSSGGLkpAMX4ZzFwrbxNAOWVJb32sL0pAQdyEOxo8fhNAUAQ%3D",
     googleMapsUrl: "https://goo.gl/maps/ikr3bq2jmuvmmNvaA",
   },
   {
