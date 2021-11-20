@@ -18,7 +18,7 @@ import {
 const randomFoodSpots = getRandomResult(foodSpots, 7);
 const shareData = {
   title: "Food spots",
-  text: "New to Amsterdam or just passing by? Grab something something to eat at any of these food spots",
+  text: "In Amsterdam and not sure where to eat? Try one of these foodpots",
   url: "georgemaine.com/food-spots",
 };
 
@@ -585,24 +585,11 @@ const ShareIcon = () => (
   </svg>
 );
 
-const SharePageButton = ({ url, title, text }) => {
-  const shareData = {
-    title: title,
-    text: text,
-    url: url,
-  };
-
-  return (
-    <button aria-label={"Share"}>
-      <ShareIcon />
-    </button>
-  );
-};
-
 const Controls = ({
   shuffleCollectionButtonOnClick,
   appleMapsButtonOnClick,
   googleMapsButtonOnClick,
+  sharePageButtonOnClick,
 }) => {
   return (
     <div>
@@ -615,13 +602,7 @@ const Controls = ({
       <button onClick={googleMapsButtonOnClick}>
         <GoogleIcon />
       </button>
-      <button
-      // onClick={async () => {
-      //   try {
-      //     await navigator.share(shareData);
-      //   } catch (err) {}
-      // }}
-      >
+      <button onClick={sharePageButtonOnClick}>
         <ShareIcon />
       </button>
 
