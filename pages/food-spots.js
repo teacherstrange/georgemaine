@@ -25,7 +25,7 @@ const shareData = {
 export default function FoodSpots() {
   const collection = useRef();
   const [cards, setCards] = useState(randomFoodSpots);
-  const [index, setIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     const stackWrapper = document.querySelector(".stack");
@@ -97,8 +97,8 @@ export default function FoodSpots() {
       },
     };
     slideTo(0, collection.current, 0);
-    setIndex(collection.current.params.activeIndex);
-  }, []);
+    setActiveIndex(collection.current.params.activeIndex);
+  }, [cards]);
 
   useEffect(() => {
     const stackWrapper = document.querySelector(".stack");
@@ -180,7 +180,12 @@ export default function FoodSpots() {
         shuffleCollectionButtonOnClick={() => {
           setCards(getRandomResult(foodSpots, 7));
         }}
-        activeCard={cards[index]}
+        appleMapsButtonOnClick={() =>
+          (window.location = cards[activeIndex].appleMapsUrl)
+        }
+        googleMapsButtonOnClick={() =>
+          (window.location = cards[activeIndex].googleMapsUrl)
+        }
         sharePageButtonOnClick={async () => {
           try {
             await navigator.share(shareData);
@@ -594,21 +599,22 @@ const SharePageButton = ({ url, title, text }) => {
   );
 };
 
-const Controls = ({ shuffleCollectionButtonOnClick, activeCard }) => {
-  useEffect(() => {
-    console.log("activeCard", activeCard);
-  }, [activeCard]);
+const Controls = ({
+  shuffleCollectionButtonOnClick,
+  appleMapsButtonOnClick,
+  googleMapsButtonOnClick,
+}) => {
   return (
     <div>
       <button onClick={shuffleCollectionButtonOnClick}>
         <ShuffleIcon />
       </button>
-      <a href={activeCard.appleMapsUrl}>
+      <button onClick={appleMapsButtonOnClick}>
         <AppleIcon />
-      </a>
-      <a>
+      </button>
+      <button onClick={googleMapsButtonOnClick}>
         <GoogleIcon />
-      </a>
+      </button>
       <button
       // onClick={async () => {
       //   try {
