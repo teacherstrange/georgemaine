@@ -173,7 +173,7 @@ export const foodSpots = [
   },
   {
     name: "Pacomer traiteur",
-    background: "url(media/pacomer-traiteur.jpg)",
+    background: "url(/media/pacomer-traiteur.jpg)",
     category: "Spanish delicacies",
     location: "Amsterdam",
     appleMapsUrl:
