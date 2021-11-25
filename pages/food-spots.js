@@ -1,7 +1,7 @@
 import GlobalNav from "../components/GlobalNav";
 import Head from "../components/Head";
 import { FoodSpotCard, foodSpots } from "../components/FoodSpotCard";
-import { useEffect, useState, useRef, useLayoutEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   getRandomResult,
   onTouchEnd,
@@ -13,18 +13,19 @@ import {
 } from "../components/utils";
 import { FoodSpotControls } from "../components/FoodSpotControls";
 
-const randomFoodSpots = getRandomResult(foodSpots, 7);
 const shareData = {
   title: "Food spots",
   text: "In Amsterdam and not sure where to eat? Try these handpicked foodpots",
   url: "georgemaine.com/food-spots",
 };
 
+const randomFoodSpots = getRandomResult(foodSpots, 7);
+
 export default function FoodSpots() {
   const collection = useRef();
   const [cards, setCards] = useState(randomFoodSpots);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const stackWrapper = document.querySelector(".stack");
     const stackChildren = [...stackWrapper.children];
     const snapGrid = [];
@@ -94,10 +95,6 @@ export default function FoodSpots() {
       },
     };
     slideTo(0, collection.current, 0);
-  }, [cards]);
-
-  useEffect(() => {
-    const stackWrapper = document.querySelector(".stack");
 
     stackWrapper.addEventListener("touchstart", function (event) {
       onTouchStart(event, collection.current);
@@ -167,9 +164,9 @@ export default function FoodSpots() {
             transformStyle: "preserve-3d",
           }}
         >
-          {cards.map((value, i) => (
-            <FoodSpotCard key={i} index={i} {...value} />
-          ))}
+          {cards.map((value, i) => {
+            return <FoodSpotCard key={i} {...value} />;
+          })}
         </div>
       </div>
       <FoodSpotControls
