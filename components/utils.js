@@ -160,7 +160,7 @@ export const setCardEffectTranslate = (el) => {
   for (let i = 0; i < cards.length; i += 1) {
     const card = cards[i];
     const cardProgress = card.progress;
-    let cardOverlay = card.querySelector(".cardOverlay");
+    let cardOverlay = card.querySelector(".card-overlay");
     let caption = card.querySelector(".caption");
     const progress = Math.min(Math.max(cardProgress, -4), 4);
 

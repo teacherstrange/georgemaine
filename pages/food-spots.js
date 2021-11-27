@@ -1,6 +1,10 @@
 import GlobalNav from "../components/GlobalNav";
 import Head from "../components/Head";
-import { FoodSpotCard, foodSpots } from "../components/FoodSpotCard";
+import {
+  FoodSpotCard,
+  foodSpotCatalog,
+  initialFoodspotCatalog,
+} from "../components/FoodSpotCard";
 import { useEffect, useState, useRef } from "react";
 import {
   getRandomResult,
@@ -19,15 +23,17 @@ const shareData = {
   url: "georgemaine.com/food-spots",
 };
 
-const randomFoodSpots = getRandomResult(foodSpots, 7);
-
 export default function FoodSpots() {
   const collection = useRef();
-  const [cards, setCards] = useState(randomFoodSpots);
+  const [foodspotCards, setfoodspotCards] = useState(initialFoodspotCatalog);
+  const setRandomFoodSpotCards = () => {
+    slideTo(0, collection.current, 0);
+    setfoodspotCards(getRandomResult(foodSpotCatalog, 7));
+  };
 
   useEffect(() => {
-    const stackWrapper = document.querySelector(".stack");
-    const stackChildren = [...stackWrapper.children];
+    const stack = document.querySelector(".foodspot-stack");
+    const stackChildren = [...stack.children];
     const snapGrid = [];
     const cardSizesGrid = [];
 
@@ -37,7 +43,7 @@ export default function FoodSpots() {
     });
 
     collection.current = {
-      cards: stackWrapper.children,
+      cards: stack.children,
       cardSizesGrid: cardSizesGrid,
       snapGrid: snapGrid,
       cardsPerGroup: 1,
@@ -96,53 +102,53 @@ export default function FoodSpots() {
     };
     slideTo(0, collection.current, 0);
 
-    stackWrapper.addEventListener("touchstart", function (event) {
+    stack.addEventListener("touchstart", function (event) {
       onTouchStart(event, collection.current);
     });
-    stackWrapper.addEventListener("mousedown", function (event) {
+    stack.addEventListener("mousedown", function (event) {
       onTouchStart(event, collection.current);
     });
-    stackWrapper.addEventListener("mousemove", function (event) {
+    stack.addEventListener("mousemove", function (event) {
       onTouchMove(event, collection.current);
     });
-    stackWrapper.addEventListener("touchmove", function (event) {
+    stack.addEventListener("touchmove", function (event) {
       onTouchMove(event, collection.current);
     });
-    stackWrapper.addEventListener("mouseup", function (event) {
+    stack.addEventListener("mouseup", function (event) {
       onTouchEnd(event, collection.current);
     });
-    stackWrapper.addEventListener("touchend", function (event) {
+    stack.addEventListener("touchend", function (event) {
       onTouchEnd(event, collection.current);
     });
-    stackWrapper.addEventListener("touchcancel", function (event) {
+    stack.addEventListener("touchcancel", function (event) {
       onTouchEnd(event, collection.current);
     });
-    stackWrapper.addEventListener("mouseleave", function (event) {
+    stack.addEventListener("mouseleave", function (event) {
       onTouchEnd(event, collection.current);
     });
     return () => {
-      stackWrapper.removeEventListener("mousedown", function (event) {
+      stack.removeEventListener("mousedown", function (event) {
         onTouchStart(event, collection.current);
       });
-      stackWrapper.removeEventListener("touchstart", function (event) {
+      stack.removeEventListener("touchstart", function (event) {
         onTouchStart(event, collection.current);
       });
-      stackWrapper.removeEventListener("mousemove", function (event) {
+      stack.removeEventListener("mousemove", function (event) {
         onTouchMove(event, collection.current);
       });
-      stackWrapper.removeEventListener("touchmove", function (event) {
+      stack.removeEventListener("touchmove", function (event) {
         onTouchMove(event, collection.current);
       });
-      stackWrapper.removeEventListener("mouseup", function (event) {
+      stack.removeEventListener("mouseup", function (event) {
         onTouchEnd(event, collection.current);
       });
-      stackWrapper.removeEventListener("touchend", function (event) {
+      stack.removeEventListener("touchend", function (event) {
         onTouchEnd(event, collection.current);
       });
-      stackWrapper.removeEventListener("touchcancel", function (event) {
+      stack.removeEventListener("touchcancel", function (event) {
         onTouchEnd(event, collection.current);
       });
-      stackWrapper.removeEventListener("mouseleave", function (event) {
+      stack.removeEventListener("mouseleave", function (event) {
         onTouchEnd(event, collection.current);
       });
     };
@@ -152,34 +158,22 @@ export default function FoodSpots() {
     <main>
       <Head />
       <GlobalNav />
-      <div className='collection'>
-        <div
-          className='stack'
-          style={{
-            position: "relative",
-            width: "100%",
-            height: "100%",
-            zIndex: 1,
-            display: "flex",
-            transformStyle: "preserve-3d",
-          }}
-        >
-          {cards.map((value, i) => {
+      <div className='foodspot-collection'>
+        <div className='foodspot-stack'>
+          {foodspotCards.map((value, i) => {
             return <FoodSpotCard key={i} {...value} />;
           })}
         </div>
       </div>
       <FoodSpotControls
-        shuffleCollectionButtonOnClick={() => {
-          setCards(getRandomResult(foodSpots, 7));
-        }}
+        shuffleButtonOnClick={() => setRandomFoodSpotCards()}
         appleMapsButtonOnClick={() =>
           (window.location =
-            cards[collection.current.params.activeIndex].appleMapsUrl)
+            foodspotCards[collection.current.params.activeIndex].appleMapsUrl)
         }
         googleMapsButtonOnClick={() =>
           (window.location =
-            cards[collection.current.params.activeIndex].googleMapsUrl)
+            foodspotCards[collection.current.params.activeIndex].googleMapsUrl)
         }
         sharePageButtonOnClick={async () => {
           try {
@@ -198,7 +192,15 @@ export default function FoodSpots() {
           bottom: 0;
           left: 0;
         }
-        .collection {
+        .foodspot-stack {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          z-index: 1;
+          display: flex;
+          transformstyle: preserve-3d;
+        }
+        .foodspot-collection {
           overflow: visible;
           perspective: 120rem;
           margin-left: auto;
@@ -211,7 +213,7 @@ export default function FoodSpots() {
         }
 
         @media (min-width: 126rem) {
-          .collection {
+          .foodspot-collection {
             width: 30.6rem;
             height: 43rem;
           }

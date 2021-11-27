@@ -63,23 +63,26 @@ const ShareIcon = () => (
 );
 
 export const FoodSpotControls = ({
-  shuffleCollectionButtonOnClick,
+  shuffleButtonOnClick,
   appleMapsButtonOnClick,
   googleMapsButtonOnClick,
   sharePageButtonOnClick,
 }) => {
   return (
     <div>
-      <button onClick={shuffleCollectionButtonOnClick}>
+      <button onClick={shuffleButtonOnClick} aria-label='Shuffle'>
         <ShuffleIcon />
       </button>
-      <button onClick={appleMapsButtonOnClick}>
+      <button onClick={appleMapsButtonOnClick} aria-label='Open in maps'>
         <AppleIcon />
       </button>
-      <button onClick={googleMapsButtonOnClick}>
+      <button
+        onClick={googleMapsButtonOnClick}
+        aria-label='Open in google maps'
+      >
         <GoogleIcon />
       </button>
-      <button onClick={sharePageButtonOnClick}>
+      <button onClick={sharePageButtonOnClick} aria-label='Share'>
         <ShareIcon />
       </button>
 
