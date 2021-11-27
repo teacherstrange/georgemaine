@@ -198,7 +198,7 @@ export default function FoodSpots() {
           height: 100%;
           z-index: 1;
           display: flex;
-          transformstyle: preserve-3d;
+          transform-style: preserve-3d;
         }
         .foodspot-collection {
           overflow: visible;
