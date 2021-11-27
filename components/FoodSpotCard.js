@@ -24,6 +24,7 @@ export const FoodSpotCard = ({ name, category, background, location }) => {
           cursor: grab;
           user-select: initial;
           user-drag: none;
+          transition-property: transform;
           transform-origin: center bottom;
           transform-style: preserve-3d;
         }
@@ -39,7 +40,8 @@ export const FoodSpotCard = ({ name, category, background, location }) => {
         img,
         div,
         p,
-        h3 {
+        h3,
+        footer {
           user-select: none;
           user-drag: none;
           pointer-events: none;
@@ -145,72 +147,6 @@ export const foodSpotCatalog = [
       "https://maps.apple.com/?address=Nassauplein%2060,%201052%20AH%20Amsterdam,%20Netherlands&auid=5272656909465088602&ll=52.385450,4.880990&lsp=9902&q=Dumplings-Chinese&_ext=CisKBQgEELABCgQIBRADCgQIBhAUCgQIChAACgQIUhABCgQIVRAPCgQIWRACEiYpYjThPsMwSkAx4VDSG5l+E0A54AkHm+kxSkBBJYJeYKuNE0BQBA%3D%3D",
     googleMapsUrl: "https://goo.gl/maps/2JgBtcfig1H3hpog8",
   },
-  {
-    name: "Entrepot",
-    category: "Restaurant & wine",
-    location: "Amsterdam",
-    background: "rgb(50, 173, 230)",
-    appleMapsUrl:
-      "https://maps.apple.com/?address=Entrepotdok%207,%201018%20AD%20Amsterdam,%20Netherlands&auid=18342859674901941754&ll=52.369660,4.911910&lsp=9902&q=Entrepot&_ext=CisKBQgEELABCgQIBRADCgQIBhAUCgQIChAACgQIUhABCgQIVRAPCgQIWRACEiYpILmQk38uSkAxtBf/DtijE0A5no6276UvSkBBCC32x+iyE0BQBA%3D%3D",
-    googleMapsUrl: "https://goo.gl/maps/xXP7hdXWjayd5fHP8",
-  },
-  {
-    name: "Alba",
-    category: "Restaurant & wine",
-    location: "Amsterdam",
-    background: "rgb(0,122,255)",
-    appleMapsUrl:
-      "https://maps.apple.com/?address=Wibautstraat%20105,%201091%20GL%20Amsterdam,%20Netherlands&auid=6316978368221374287&ll=52.356040,4.911880&lsp=9902&q=Alba&_ext=CisKBQgEELABCgQIBRADCgQIBhAUCgQIChAACgQIUhABCgQIVRAQCgQIWRADEiYp8B3rif8sSkAxPf5YBTyeE0A5bvMQ5iUuSkBBywR2uEutE0BQBA%3D%3D",
-    googleMapsUrl: "https://goo.gl/maps/FXKRAbweRYdbRbDf8",
-  },
-  {
-    name: "Restaurant de kas",
-    category: "Organic restaurant",
-    location: "Amsterdam",
-    background: "rgb(88, 86, 214)",
-    appleMapsUrl:
-      "https://maps.apple.com/?address=Kamerlingh%20Onneslaan%203,%201097%20DE%20Amsterdam,%20Netherlands&auid=16408420672603052247&ll=52.352189,4.930541&lsp=9902&q=Restaurant%20De%20Kas&_ext=CisKBQgEELABCgQIBRADCgQIBhAUCgQIChAACgQIUhABCgQIVRANCgQIWRABEiYpTpMZYIEsSkAxDTpCHVexE0A5zGg/vKctSkBBh2ljembAE0BQBA%3D%3D",
-    googleMapsUrl: "https://goo.gl/maps/dYS2H2AHPQqQaJ8R8",
-  },
-  {
-    name: "Pacomer traiteur",
-    background: "url(/media/pacomer-traiteur.jpg)",
-    category: "Spanish delicacies",
-    location: "Amsterdam",
-    appleMapsUrl:
-      "https://maps.apple.com/?address=Gerard%20Doustraat%2066,%201072%20VV%20Amsterdam,%20Netherlands&auid=16412172694752059081&ll=52.355490,4.891130&lsp=9902&q=Pacomer%20Traiteur&_ext=CisKBQgEELABCgQIBRADCgQIBhAOCgQIChAACgQIUhABCgQIVRAQCgQIWRADEiYpTRwvhO0sSkAxJMWPjvyIE0A5y/FU4BMuSkBBFBtkNQyYE0BQBA%3D%3D",
-    googleMapsUrl: "https://goo.gl/maps/eYizqgJnEj3qwizJA",
-  },
-  {
-    name: "Alberto Pozzetto",
-    category: "Italian delicacies",
-    location: "Amsterdam",
-    background: "rgb(255, 45, 85)",
-    appleMapsUrl:
-      "https://maps.apple.com/?address=Gerard%20Doustraat%2066,%201072%20VV%20Amsterdam,%20Netherlands&auid=16412172694752059081&ll=52.355490,4.891130&lsp=9902&q=Pacomer%20Traiteur&_ext=CisKBQgEELABCgQIBRADCgQIBhAOCgQIChAACgQIUhABCgQIVRAQCgQIWRADEiYpTRwvhO0sSkAxJMWPjvyIE0A5y/FU4BMuSkBBFBtkNQyYE0BQBA%3D%3D",
-    googleMapsUrl: "https://goo.gl/maps/nHXg1nbSBPLvgSxWA",
-  },
-  {
-    name: "Jen’s Bing",
-    category: "Taiwanese food",
-    location: "Amsterdam",
-    background: "rgb(162, 132, 94)",
-    appleMapsUrl:
-      "https://maps.apple.com/?address=Jan%20Hanzenstraat%2021A,%201053%20SK%20Amsterdam,%20Netherlands&auid=533841271534204172&ll=52.367958,4.865997&lsp=9902&q=Jen's%20Bing-Amsterdam&_ext=CiwKBQgEELABCgQIBRADCgUIBhDBAgoECAoQAAoECFIQAQoECFUQEAoECFkQAxImKedzSSGGLkpAMX4ZzFwrbxNAOWVJb32sL0pAQdyEOxo8fhNAUAQ%3D",
-    googleMapsUrl: "https://goo.gl/maps/ikr3bq2jmuvmmNvaA",
-  },
-  {
-    name: "Levain et le vin",
-    category: "Bakery & natural wine",
-    location: "Amsterdam",
-    background: "rgb(142, 142, 147)",
-    appleMapsUrl:
-      "https://maps.apple.com/?address=Gerard%20Doustraat%2066,%201072%20VV%20Amsterdam,%20Netherlands&auid=16412172694752059081&ll=52.355490,4.891130&lsp=9902&q=Pacomer%20Traiteur&_ext=CisKBQgEELABCgQIBRADCgQIBhAOCgQIChAACgQIUhABCgQIVRAQCgQIWRADEiYpTRwvhO0sSkAxJMWPjvyIE0A5y/FU4BMuSkBBFBtkNQyYE0BQBA%3D%3D",
-    googleMapsUrl: "https://goo.gl/maps/XdB5LRWYGqzYjiaA9",
-  },
-];
-
-export const initialFoodspotCatalog = [
   {
     name: "Entrepot",
     category: "Restaurant & wine",

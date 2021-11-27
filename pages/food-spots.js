@@ -1,10 +1,6 @@
 import GlobalNav from "../components/GlobalNav";
 import Head from "../components/Head";
-import {
-  FoodSpotCard,
-  foodSpotCatalog,
-  initialFoodspotCatalog,
-} from "../components/FoodSpotCard";
+import { FoodSpotCard, foodSpotCatalog } from "../components/FoodSpotCard";
 import { useEffect, useState, useRef } from "react";
 import {
   getRandomResult,
@@ -25,11 +21,9 @@ const shareData = {
 
 export default function FoodSpots() {
   const collection = useRef();
-  const [foodspotCards, setfoodspotCards] = useState(initialFoodspotCatalog);
-  const setRandomFoodSpotCards = () => {
-    slideTo(0, collection.current, 0);
-    setfoodspotCards(getRandomResult(foodSpotCatalog, 7));
-  };
+  const [foodspotCards, setfoodspotCards] = useState(
+    getRandomResult(foodSpotCatalog, 7)
+  );
 
   useEffect(() => {
     const stack = document.querySelector(".foodspot-stack");
@@ -100,6 +94,7 @@ export default function FoodSpots() {
         diff: 0,
       },
     };
+    setfoodspotCards(getRandomResult(foodSpotCatalog, 7));
     slideTo(0, collection.current, 0);
 
     stack.addEventListener("touchstart", function (event) {
@@ -166,7 +161,10 @@ export default function FoodSpots() {
         </div>
       </div>
       <FoodSpotControls
-        shuffleButtonOnClick={() => setRandomFoodSpotCards()}
+        shuffleButtonOnClick={() => (
+          setfoodspotCards(getRandomResult(foodSpotCatalog, 7)),
+          slideTo(0, collection.current, 300)
+        )}
         appleMapsButtonOnClick={() =>
           (window.location =
             foodspotCards[collection.current.params.activeIndex].appleMapsUrl)
