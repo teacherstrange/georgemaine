@@ -1,4 +1,10 @@
-export const FoodSpotCard = ({ name, category, background, location }) => {
+export const FoodSpotCard = ({
+  name,
+  category,
+  background,
+  location,
+  photo,
+}) => {
   return (
     <article>
       <footer className='caption'>
@@ -11,7 +17,7 @@ export const FoodSpotCard = ({ name, category, background, location }) => {
       <style jsx>{`
         article {
           background: ${background};
-          background-size: contain;
+          background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
           width: 25.6rem;
@@ -32,6 +38,7 @@ export const FoodSpotCard = ({ name, category, background, location }) => {
         article:active {
           cursor: grabbing;
         }
+
         header {
           margin: 1.2rem 1.2rem auto auto;
         }
@@ -65,6 +72,12 @@ export const FoodSpotCard = ({ name, category, background, location }) => {
           margin-top: auto;
           flex-direction: column;
           padding: 2.1rem;
+          background: ${photo &&
+          `linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0),
+            rgba(0, 0, 0, 0.38) 80%
+          )`};
         }
 
         h3,
@@ -73,6 +86,7 @@ export const FoodSpotCard = ({ name, category, background, location }) => {
           margin: 0;
           padding: 0;
           line-height: 1.35;
+          text-shadow: ${photo && `0 0.1rem 0.2rem var(--dark-border)`};
         }
 
         @media (min-width: 126rem) {
@@ -177,6 +191,7 @@ export const foodSpotCatalog = [
   {
     name: "Pacomer traiteur",
     background: "url(/media/pacomer-traiteur.jpg)",
+    photo: true,
     category: "Spanish delicacies",
     location: "Amsterdam",
     appleMapsUrl:
@@ -209,5 +224,15 @@ export const foodSpotCatalog = [
     appleMapsUrl:
       "https://maps.apple.com/?address=Gerard%20Doustraat%2066,%201072%20VV%20Amsterdam,%20Netherlands&auid=16412172694752059081&ll=52.355490,4.891130&lsp=9902&q=Pacomer%20Traiteur&_ext=CisKBQgEELABCgQIBRADCgQIBhAOCgQIChAACgQIUhABCgQIVRAQCgQIWRADEiYpTRwvhO0sSkAxJMWPjvyIE0A5y/FU4BMuSkBBFBtkNQyYE0BQBA%3D%3D",
     googleMapsUrl: "https://goo.gl/maps/XdB5LRWYGqzYjiaA9",
+  },
+  {
+    name: "Fort negen",
+    category: "Bakery",
+    location: "Amsterdam",
+    background: "url(/media/fort-negen.jpeg)",
+    photo: true,
+    appleMapsUrl:
+      "https://maps.apple.com/?address=Jan%20Evertsenstraat%2031,%201057%20BM%20Amsterdam,%20Netherlands&auid=4592046369127123297&ll=52.371100,4.857520&lsp=9902&q=Fort%20Negen&_ext=CiwKBQgEELABCgQIBRADCgUIBhCZAgoECAoQAAoECFIQAQoECFUQDwoECFkQAhImKRfbWgbtLkpAMZW/PjeRZhNAOZWwgGITMEpAQTmU3jqidRNAUAQ%3D",
+    googleMapsUrl: "https://goo.gl/maps/hooBCuSbBjWkUudE9",
   },
 ];
